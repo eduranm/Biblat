@@ -45,7 +45,7 @@
 | the active record class
 */
 
-$active_group = 'default';
+$active_group = 'develop';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
@@ -64,6 +64,21 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+$db['develop']['hostname'] = 'localhost';
+$db['develop']['username'] = 'website';
+$db['develop']['password'] = 'ws04#11';
+$db['develop']['database'] = 'claperinnodb';
+$db['develop']['dbdriver'] = 'mysql';
+$db['develop']['dbprefix'] = '';
+$db['develop']['pconnect'] = TRUE;
+$db['develop']['db_debug'] = TRUE;
+$db['develop']['cache_on'] = FALSE;
+$db['develop']['cachedir'] = '';
+$db['develop']['char_set'] = 'utf8';
+$db['develop']['dbcollat'] = 'utf8_general_ci';
+$db['develop']['swap_pre'] = '';
+$db['develop']['autoinit'] = TRUE;
+$db['develop']['stricton'] = FALSE;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
