@@ -1,0 +1,333 @@
+/* CSS Document */
+
+/*ESTILO MENU ---------------------------------------------------------*/
+
+#menu{
+	background-image:url(../img/fondomenu.jpg);
+	background-repeat:no-repeat;
+	height:35px;
+}
+
+#menu > li {
+        float:left;
+        position:relative;
+        padding-left:5px;
+        padding-right:10px;
+        padding-top:2px;
+        border-left: 1px solid #CCC;
+}
+
+#menu, #menu ul{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        font-family:Verdana, Geneva, sans-serif;
+        font-size:13px;
+        font-weight:bold;
+}
+
+#menu li a {
+       display:block;
+       padding:5px 12px; 
+       border-bottom: 1px solid #e7edf5;
+}
+
+#menu ul li a:hover{
+        color:#cc6600;
+}
+
+#menu li ul {
+        display:none;
+        position:absolute;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        font-family:Verdana, Geneva, sans-serif;
+        font-size:13px;
+        font-weight:bold;
+        background-color:#fff;
+
+}
+
+#menu li:hover > ul {
+      display:block;
+}
+
+#menu li ul li ul{
+        right: -305px;
+        top: 50px;
+
+}
+
+* html #menu a{
+	width: 100%;
+	
+}
+
+#menu a:link, #menu a:visited{
+        display: block;
+        text-decoration:none;
+        padding-left: 1em;
+        color:#2d486c;  
+}
+
+
+/*------- Estilos GENERALES -----------------*/
+
+a{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+}
+
+a:link {
+	color:#cc6600;
+}
+
+
+a:visited {
+	color:#cc6600;
+	text-align: right;
+}
+html {
+	background-image:url(../img/fondo.jpg);
+	background-position:top;
+	background-repeat:repeat-x;
+}
+
+/* ------------------ LAYOUT GENERAL------------------*/
+
+
+#submenu{
+	text-align:right;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+	padding-bottom:3px;
+	padding-top:2px;
+	margin-right:15px;
+}
+#submenu a{
+	color:#036;
+	text-decoration:none;
+}
+#submenu a:hover{
+	color:#cc6600;
+}
+
+#creditos{
+	text-align:right;
+	padding-right:10px;
+	
+}
+
+
+#footer {
+	background-image:url(../img/fondofooter.jpg);
+	background-repeat:repeat-x;
+	font: 0.7em Verdana, Geneva, sans-serif;
+	color: #fff;
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 5px;
+	width:990px;
+	bottom:0px;
+	background-color:#CCC;
+	margin-top: 3px;
+}
+#envolvente{
+	width:998px;
+	background-color:#FFFFFF;
+    margin-right: auto;
+	margin-left: auto;
+	border-right: 1px solid #999;
+	border-left: 1px solid #999	
+}
+
+/* ------------------ LAYOUT INDEX------------------*/
+
+#buscador{
+	border:1px dotted #036;
+	background-color:#fcfbed;
+}
+
+#titulobusq{
+	background-color:#3E3690;
+	color:#fff;
+	padding:5px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:15px;
+	font-weight:bold;
+	text-align:center
+}
+#form{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	padding:5px;
+	padding-left:20px;
+}
+
+
+#logos{
+	padding:2px;
+	padding-top:5px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:center;
+	border-bottom:1px dotted #036;
+}
+
+#alfabetico{
+	border:1px dotted #036;
+	background-image:url(../img/sombrita.png);
+	background-repeat:repeat-x;
+	padding:10px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:center;
+}
+#alfabetico a:hover {
+	color:#3e3690;
+}
+
+#bienvenida{
+	background-image:url(../img/sombrita.png);
+	background-repeat:repeat-x;
+	border:1px dotted #036;
+	border-left:0px;
+	padding:13px;
+	padding-top:15px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:justify;
+}
+
+.disponibles{
+	color:#990000;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:15px;
+	font-weight:bold;
+	
+}
+
+#disciplina{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:left;
+	padding:15px;
+}
+
+#disciplina a{
+        color:#666666;
+        text-decoration:none;
+}
+#disciplina a:hover{
+        color:#cc6600;
+}
+
+.disciplina1{
+	font-size:10px;
+}
+.disciplina2{
+	font-size:12px;
+}
+.disciplina3{
+	font-size:14px;
+}
+.disciplina4{
+	font-size:16px;
+}
+.disciplina5{
+	font-size:18px;
+}
+.disciplina6{
+	font-size:20px;
+}
+.disciplina7{
+	font-size:21px;
+}
+
+#disponibles{
+	border:1px dotted #036;
+}
+
+
+
+#pais{
+	border:1px dotted #036;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:center;
+	padding:8px;
+	background-image:url(../img/fondogde.jpg);
+}
+#accesos{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:center;
+	padding:8px;
+	
+}
+
+#buscadortabla{
+	text-align:center;
+	
+}
+
+
+
+
+
+/*------- Clases para contenidos -----------------*/
+p{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	
+}
+.titulo{
+	font-family:Verdana, Geneva, sans-serif;
+	font-weight:bold;
+        font-size:15px;
+	color:#cc6600;
+}
+
+.titulo a{
+	color:#036;
+	font-size:17px;	
+	font-family:GVerdana, Geneva, sans-serif;
+	font-weight:bold;
+}
+
+
+.texto {
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:justify;
+	}
+	
+
+/*------- Estilos TABLA -----------------*/
+#tabla{
+      table-layout: fixed;
+}
+
+.nube-html {
+border: 1px solid #333;
+margin: 10px 0 15px 0;
+overflow-x:hidden;
+line-height: 20px;
+text-align: left;
+max-width:100px;
+background-color:yellow;
+padding: 2px;
+padding-top: 10px;
+}
+#nube-html a{
+        color:#666666;
+        text-decoration:none;
+}
+#nube-html a:hover{
+        color:#cc6600;
+}
+
+
+
