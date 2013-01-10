@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class indice extends CI_Controller{
+class Indice extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		$language = $this->config->item('language');
@@ -11,5 +11,58 @@ class indice extends CI_Controller{
 	}
 	public function index(){
 
+	}
+
+	public function alfabetico($letra){
+		$data = array();
+		$data['header']['title'] = "Biblat - Indice alfabético \"{$letra}\"";
+		/*Consultas*/
+		$this->load->database();
+		$query = "SELECT e_222 AS revista, count(sistema) AS articulos FROM articulo WHERE e_222 LIKE '{$letra}%' GROUP BY e_222 ORDER BY e_222;";
+		$query = $this->db->query($query);
+		$data['alfabetico']['registrosTotalArticulos'] = 0;
+		foreach ($query->result_array() as $row):
+			if($row['revista'] == ""):
+				$row['revista'] = "[Título no definido]";
+			endif;
+			$data['alfabetico']['registros'][] = $row;
+			$data['alfabetico']['registrosTotalArticulos'] += $row['articulos'];
+		endforeach;
+		$query->free_result();
+		$this->db->close();
+		/*Vistas*/
+		$data['header']['content'] =  $this->load->view('indiceAlfabeticoHeader', $data['header'], TRUE);
+		$this->load->view('header', $data['header']);
+		$this->load->view('indice_alfabetico', $data['alfabetico']);
+		$this->load->view('footer');
+	}
+
+	public function disciplina($disciplina){
+		$data = array();
+		$data['header']['title'] = "Biblat - Indice por disciplina \"{$disciplina}\"";
+		/*Consultas*/
+		$this->load->database();
+		/*Obteniendo registro de disciplina a partir del slug*/
+		$query = "SELECT * FROM disciplinas WHERE slug='$disciplina' LIMIT 1";
+		$query = $this->db->query($query);
+		$data['disciplina']['registroDisciplina'] = $query->row_array();
+		$query->free_result();
+		/*Obteniendo registros*/
+		$query = "SELECT e_222 as revista, count(*) AS articulos FROM articulo WHERE id_disciplina = '{$data['disciplina']['registroDisciplina']['id_disciplina']}' GROUP BY e_222 ORDER BY articulos DESC";
+		$query = $this->db->query($query);
+		$data['disciplina']['registrosTotalArticulos'] = 0;
+		foreach ($query->result_array() as $row):
+			if($row['revista'] == ""):
+				$row['revista'] = "[Título no definido]";
+			endif;
+			$data['disciplina']['registros'][] = $row;
+			$data['disciplina']['registrosTotalArticulos'] += $row['articulos'];
+		endforeach;
+		$this->db->close();
+		/*Vistas*/
+		$data['header']['content'] =  $this->load->view('indiceDisciplinaHeader', $data['header'], TRUE);
+		$this->load->view('header', $data['header']);
+		$this->load->view('indice_disciplina', $data['disciplina']);
+		$this->load->view('footer');
 	}
 }

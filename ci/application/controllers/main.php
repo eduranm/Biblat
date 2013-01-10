@@ -12,7 +12,6 @@ class Main extends CI_Controller{
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
 	}
 	public function index(){
-		echo site_url('main');
 		$data = array();
 		$data['header']['title'] = "Biblat";
 		/*Sessiones*/
@@ -29,6 +28,10 @@ class Main extends CI_Controller{
 			$data['index']['disciplinas'][] = $row;
 		endforeach;
 		$query->free_result();
+		/*Actualizar slug de disciplinas*/
+		/*foreach ($data['index']['disciplinas'] as $disciplina):
+			$this->db->query("UPDATE disciplinas SET slug='".slug($disciplina['disciplina'])."' WHERE id_disciplina='{$disciplina['id_disciplina']}'");
+		endforeach;*/
 		/*Ontención de totales*/
 		$query = "SELECT count(*) AS documentos FROM articulo";
 		$query = $this->db->query($query);
@@ -48,8 +51,9 @@ class Main extends CI_Controller{
 		$query->free_result();
 		$this->db->close();
 		/*Vistas*/
-		$this->load->view('main_header', $data['header']);
+		$data['header']['content'] =  $this->load->view('main_header', $data['header'], TRUE);
+		$this->load->view('header', $data['header']);
 		$this->load->view('main_index', $data['index']);
-		$this->load->view('main_footer');
+		$this->load->view('footer');
 	}
 }

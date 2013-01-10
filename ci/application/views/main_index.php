@@ -145,7 +145,7 @@
 					<div id="alfabetico"><br />
 						Revistas por orden alfab&eacute;tico:<br /><br />	
 <?php foreach (range('A', 'Z') as $i):?>
-						<a href="ind_alfabetico.php?alfabeto=<?php echo $i;?>"><?php echo $i;?></a>
+						<a href="<?php echo site_url("indice/alfabetico/".strtolower($i));?>"><?php echo $i;?></a>
 <?php endforeach;?>
 					</div>
 			</td>
@@ -160,7 +160,8 @@
 							<p>Anything in here will be replaced on browsers that support the canvas element</p>
 							<ul>
 <?php foreach ($disciplinas as $disciplina):?>
-								<li><a href="rev_disciplinas.php?id_disciplina=<?php echo $disciplina['id_disciplina'];?>&area=<?php echo $disciplina['disciplina'];?>"><?php echo $disciplina['disciplina'];?></a></li>
+								<li>
+									<a href="<?php echo site_url("indice/disciplina/{$disciplina['slug']}");?>"><?php echo $disciplina['disciplina'];?></a></li>
 <?php endforeach;?>
 							</ul>
 					</canvas>

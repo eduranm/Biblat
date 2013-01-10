@@ -1,0 +1,361 @@
+<style type="text/css">
+/* CSS Document */
+
+/*ESTILO MENU ---------------------------------------------------------*/
+
+body {
+        padding-left: 11em;
+        font-family:Verdana, Geneva, sans-serif !important;;
+        font-size:12px !important;
+}
+
+#form{
+        font-family:Verdana, Geneva, sans-serif;
+        font-size:12px;
+        padding:5px;
+        padding-left:10px;
+}
+
+#menu{
+	background-image:url(../img/fondomenu.jpg);
+	background-repeat:no-repeat;
+	height:35px;
+}
+
+#menu, #menu ul{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:17px;
+	font-weight:bold;
+}
+
+#menu li {
+	float:left;
+	position:relative;
+	padding-left:5px;
+	padding-right:10px;
+	padding-top:8px;
+	border-left: 1px solid #CCC;
+	border-bottom: 5px solid #e7edf5;
+}
+
+
+#menu li:hover ul{
+	display: block;
+}
+
+
+#menu a:link, #menu a:visited{
+	display: block;
+	text-decoration:none;
+	padding-left: 1em;
+	color:#2d486c;	
+}
+
+* html #menu a{
+	width: 100%;
+	
+}
+
+#menu ul{
+	display:none;
+	position:absolute;
+	padding:0;
+	background-color:#fff;
+}
+
+
+
+#menu ul li{
+	font-size: 12px;
+}
+
+#menu ul li a:hover{
+	color:#cc6600;
+}
+
+a{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+}
+
+a:link {
+	color:#cc6600;
+}
+
+
+a:hover {
+	color:#3e3690;
+}
+
+
+
+/* ------------------ LAYOUT GENERAL------------------*/
+html {
+	background-image:url(../img/fondo.jpg);
+	background-position:top;
+	background-repeat:repeat-x;
+        padding-left: 1em;
+
+}
+
+#submenu{
+	text-align:right;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:11px;
+	padding-bottom:3px;
+	padding-top:2px;
+	margin-right:15px;
+}
+#submenu a{
+	color:#036;
+	text-decoration:none;
+}
+#submenu a:hover{
+	color:#cc6600;
+}
+
+#footer {
+        background-image:url(../img/fondofooter.jpg);
+        background-repeat:repeat-x;
+        font: 0.9em Verdana, Geneva, sans-serif;
+        color: #fff;
+        text-align: center;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 5px;
+        width:850px;
+        bottom:0px;
+        background-color:#CCC;
+        margin-top: 5px;
+}
+
+#envolvente{
+	width:998px;
+	background-color:#FFFFFF;
+        margin-right: auto;
+	margin-left: auto;
+	border-right: 1px solid #999;
+	border-left: 1px solid #999	
+}
+#sombrita{
+	background-image:url(../img/sombrita.png);
+	background-repeat:repeat-x;
+	height:10px;
+}
+/*------- Estilos CONTENIDO -----------------*/
+#contenido{
+	padding:20px;
+	padding-top:8px;
+	
+	
+}
+
+p{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:justify;
+	padding:15px;
+        width: 800px;
+	background-image:url(../img/fondogde.jpg);
+	border:1px solid #CCC;
+	
+}
+.titulo{
+	font-family:Verdana, Geneva, sans-serif;
+	font-weight:bold;
+        font-size:14px;
+        text-align:center;
+	color:#cc6600;
+	border:1px solid #cc6600;
+	padding:5px;
+	border-left:0px;
+	padding-left:90px;
+	padding-right:10px;
+	
+	-webkit-box-shadow: 1px 0 2px black;
+        -moz-box-shadow: 1px 0 2px black;
+        box-shadow: 2px 0 2px #999;	
+        border-radius: 10px;
+}
+
+.titulo a{
+	color:#036;
+	font-size:16px;	
+	font-family:Verdana, Geneva, sans-serif;
+	font-weight:bold;
+}
+
+
+.texto {
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:justify;
+
+}
+
+.imgnizquierda{
+    padding: 5px;
+	border: 1px dotted #904c4c;
+	padding: 3px;
+	margin: 8px;
+	float:left;
+}
+.imgnderecha{
+    padding: 5px;
+	border: 1px dotted #904c4c;
+	padding: 3px;
+	margin: 3px;
+	margin-left:8px;
+	float:right;
+}
+
+
+/*------- Estilos TABLA -----------------*/
+#tablaresultados{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+        border-bottom: 1px solid #ffffff;
+        border-collape:collapse;
+        width: 80%;
+	-webkit-box-shadow: 1px 0 2px black;
+        -moz-box-shadow: 1px 0 2px black;
+        box-shadow: 2px 0 2px #999;	
+        border-radius: 8px;
+}
+#tablaresultados td{
+	border-bottom:1px dotted #999;
+}
+
+#tablaresultados td:hover{
+	background-color:#cccccc;
+	border-bottom:1px dotted #CCC;
+}
+
+.acumuladas{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:right;	
+        color:#cc6600;
+        font-weight:bold;
+}
+
+.indicadores{
+        font-family:Verdana, Geneva, sans-serif;
+        font-size:12px;
+        text-align:center;
+}
+
+
+/*------- Estilos Nuevos -----------------*/
+
+.navegacion{
+        font-family:Verdana, Geneva, sans-serif;
+        font-size:12px;
+        text-align:justify;
+        color:#cc6600;
+        padding:8px;
+        border-left:0px;
+        padding-left:140px;
+        padding-right:10px;
+}
+
+.totalRight{
+        font-family:Verdana, Geneva, sans-serif;
+        font-size:10px;
+        text-align:right;
+}
+
+.totalRight2{
+        font-family:Verdana, Geneva, sans-serif;
+        font-size:12px;
+        text-align:right;
+}
+
+
+caption {
+        background: #CC6600;
+        font: 0.10em Arial, Geneva, sans-serif;
+        font-weight: normal;
+        color: #FFFFFF;
+        margin-top: 1em;
+        margin-right: 0em;
+        padding-top: 0.1em;
+        padding-right: 1em;
+
+}
+
+thead {
+        color: #cc6600;
+        font-size:16px;
+        margin-top: 1em;
+        margin-right: 1em;
+        padding-top: 0.1em;
+        padding-right: 2em;
+        font-weight:bold;
+}
+
+thead tr:hover{
+        background-color: #fff;
+}
+
+th {
+        font: 0.8em Tahoma, Geneva, sans-serif;
+        font-weight: normal;
+        text-align: left;
+        padding-top: 0.1em;
+        padding-right: 1em;
+        padding-left: 1em;
+
+}
+
+tr:hover {
+        background-color: #cccccc;
+        color: #cc6600;
+}
+
+
+td {
+        border-bottom: 1px dotted #CCC;                                                                          
+        border-top: 0px dotted #CCC;                                                                       
+        border-left: 0px dotted #CCC;                                                                 
+        border-right: 0px dotted #CCC;
+        padding-top: 0.1em;
+        padding-right: 1em;
+        padding-left: 1em;
+        font: 1em Tahoma, Geneva, sans-serif;
+        font-weight: normal;
+        color: #666; 
+        text-align: left;
+}
+
+td.totalRight {
+        padding-top: 0.1em;
+        padding-right: 1em;
+        padding-bottom: 0.1em;
+        padding-left: 1em;
+        text-align: right;
+}
+
+td.txtRight {
+        background-color: #C56917;
+        padding-top: 0.4em;
+        padding-right: 1em;
+        padding-bottom: 0.4em;
+        padding-left: 1em;
+        text-align: right;
+        color: #FFFFFF;
+}
+
+td.txtLeft {
+        background-color: #B8CBDD;
+        padding-top: 0.4em;
+        padding-right: 1em;
+        padding-bottom: 0.4em;
+        padding-left: 1em;
+        text-align: left;
+}
+
+</style>
