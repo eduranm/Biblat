@@ -1,0 +1,155 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Biblat\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-01-31 14:32-0600\n"
+"PO-Revision-Date: 2013-01-31 14:33-0600\n"
+"Last-Translator: Herz <achwazer@gmail.com>\n"
+"Language-Team: bummer <achwazer@gmail.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: /home/herz/Sites/biblat/public_html/ci\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: application\n"
+
+#: application/views/main_index.php:8
+msgid "¿Qué es Biblat?"
+msgstr "What is Biblat?"
+
+#: application/views/main_index.php:10
+msgid "Biblat"
+msgstr ""
+
+#: application/views/main_index.php:11
+msgid "Clase y Periódica"
+msgstr ""
+
+#: application/views/main_index.php:12
+msgid "Tutoriales"
+msgstr ""
+
+#: application/views/main_index.php:13
+msgid "Materiales de difusión"
+msgstr ""
+
+#: application/views/main_index.php:14
+msgid "Manual de indización"
+msgstr ""
+
+#: application/views/main_index.php:20
+msgid "Descripción"
+msgstr ""
+
+#: application/views/main_index.php:21
+msgid "Metodología"
+msgstr ""
+
+#: application/views/main_index.php:22
+msgid "Frecuencias"
+msgstr ""
+
+#: application/views/main_index.php:24
+msgid "Autor"
+msgstr ""
+
+#: application/views/main_index.php:25
+msgid "Institución"
+msgstr ""
+
+#: application/views/main_index.php:26
+msgid "País de la institución de afiliación del autor"
+msgstr ""
+
+#: application/views/main_index.php:27
+#: application/views/indice_alfabetico.php:16
+#: application/views/indice_disciplina.php:16
+msgid "Revista"
+msgstr ""
+
+#: application/views/main_index.php:28
+msgid "País de la revista"
+msgstr ""
+
+#: application/views/main_index.php:29
+msgid "Año de publicación"
+msgstr ""
+
+#: application/views/main_index.php:30
+msgid "Colaboración entre paises"
+msgstr ""
+
+#: application/views/main_index.php:31
+msgid "Colaboración interinstitucional"
+msgstr ""
+
+#: application/views/main_index.php:33
+msgid "Indicadores"
+msgstr ""
+
+#: application/views/main_index.php:38
+msgid "Postular una revista"
+msgstr ""
+
+#: application/views/main_index.php:40
+msgid "Criterios de selección de revistas"
+msgstr ""
+
+#: application/views/main_index.php:41
+msgid "Contacto"
+msgstr ""
+
+#: application/views/main_index.php:47
+msgid "Políticas de copyright"
+msgstr ""
+
+#: application/views/main_index.php:53
+msgid "Bibliografía"
+msgstr ""
+
+#: application/views/main_index.php:54
+msgid "Presentaciones PPT"
+msgstr ""
+
+#: application/views/main_index.php:55
+msgid "Archivos multimedia"
+msgstr ""
+
+#: application/views/indice_alfabetico.php:1
+#: application/views/indice_disciplina.php:1
+msgid "Inicio"
+msgstr ""
+
+#: application/views/indice_alfabetico.php:1
+#: application/views/indice_alfabetico.php:3
+msgid "Revistas por orden alfabético"
+msgstr ""
+
+#: application/views/indice_alfabetico.php:6
+msgid "Revistas en orden alfabético"
+msgstr ""
+
+#: application/views/indice_alfabetico.php:7
+#: application/views/indice_disciplina.php:7
+msgid "Revistas indizadas en CLASE y PERIÓDICA según orden alfabético y número de documentos de cada revista"
+msgstr ""
+
+#: application/views/indice_alfabetico.php:15
+#: application/views/indice_disciplina.php:15
+msgid "No."
+msgstr ""
+
+#: application/views/indice_alfabetico.php:17
+#: application/views/indice_disciplina.php:17
+msgid "Documentos"
+msgstr ""
+
+#: application/views/indice_disciplina.php:3
+#, php-format
+msgid "Revistas del área de \"%s\""
+msgstr ""
+

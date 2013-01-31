@@ -1,10 +1,10 @@
-<br class=navegacion><a href="<?php echo base_url();?>" target='_parent'>Inicio</a>  Revistas por orden alfab&eacute;tico
+<br class=navegacion><a href="<?php echo base_url();?>" target='_parent'><?php _e('Inicio');?></a>  <?php _e('Revistas por orden alfabético');?>
 <center>
-	<p class=titulo>Revistas por orden alfab&eacute;tico </p>
+	<p class=titulo><?php _e('Revistas por orden alfabético');?> </p>
 
 	<div id=tablaresultados>
-		<table border=0 cellpadding='0' cellspacing='0' summary='Revistas en orden alfab&eacute;tico'>
-			<caption title="Revistas indizadas en CLASE y PERIÓDICA según orden alfab&eacute;tico y número de documentos de cada revista"></caption>
+		<table border=0 cellpadding='0' cellspacing='0' summary='<?php _e('Revistas en orden alfabético');?>'>
+			<caption title="<?php _e('Revistas indizadas en CLASE y PERIÓDICA según orden alfabético y número de documentos de cada revista');?>"></caption>
 			<colgroup>
 			<col id='noCol' />
 			<col id='indbibCol' />
@@ -12,9 +12,9 @@
 		</colgroup>
 		<thead>
 			<tr>
-				<th scope='col'>No.</th>
-				<th scope='col'>Revista</th>
-				<th scope='col'>Documentos</th>
+				<th scope='col'><?php _e('No.');?>.</th>
+				<th scope='col'><?php _e('Revista');?></th>
+				<th scope='col'><?php _e('Documentos');?></th>
 			</tr>
 		</thead>
 		<tbody>

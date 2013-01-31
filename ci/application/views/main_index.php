@@ -5,54 +5,54 @@
 			<tr>
 				<td width="825">
 					<ul id="menu">
-						<li><a href="#">¿Qu&eacute; es Biblat?</a>
+						<li><a href="#"><?php _e('¿Qué es Biblat?');?></a>
 							<ul>
-								<li><a href="biblat.html">Biblat</a></li>
-								<li><a href="clase-periodica.html">Clase y Peri&oacute;dica</a></li>
-								<li><a href="tutoriales.html">Tutoriales</a></li>
-								<li><a href="difusion.html">Materiales de difusi&oacute;n</a></li>
-								<li><a target="_blank" href="http://bibliotecas.unam.mx/eventos/manual/manual17feb2012.pdf">Manual de indizaci&oacute;n</a></li>
+								<li><a href="biblat.html"><?php _e('Biblat');?></a></li>
+								<li><a href="clase-periodica.html"><?php _e('Clase y Periódica');?></a></li>
+								<li><a href="tutoriales.html"><?php _e('Tutoriales');?></a></li>
+								<li><a href="difusion.html"><?php _e('Materiales de difusión');?></a></li>
+								<li><a target="_blank" href="http://bibliotecas.unam.mx/eventos/manual/manual17feb2012.pdf"><?php _e('Manual de indización');?></a></li>
 							</ul>
 						</li>
 						<!--AQUI INICIA EL RUBRO DE SERVICIOS -->
 						<li><a href="#">Bibliometr&iacute;a</a>
 							<ul>
-								<li><a href="descripciÃ³n.html">Descripci&oacute;n</a></li>
-								<li><a href="metodologia.html">Metodolog&iacute;a</a></li>
-								<li><a href="#">Frecuencias</a>
+								<li><a href="descripciÃ³n.html"><?php _e('Descripción');?></a></li>
+								<li><a href="metodologia.html"><?php _e('Metodología');?></a></li>
+								<li><a href="#"><?php _e('Frecuencias');?></a>
 									<ul>
-										<li><a href="frecuencias/ind_autor.php">Autor</a></li>
-										<li><a href="frecuencias/ind_institucion.php">Instituci&oacute;n</a></li>
-										<li><a href="frecuencias/ind_paisins.php">Pa&iacute;s de la instituci&oacute;n de afiliaci&oacute;n del autor</a></li>
-										<li><a href="frecuencias/ind_revista.php">Revista</a></li>
-										<li><a href="frecuencias/ind_paisrev.php">Pa&iacute;s de la revista</a></li>
-										<li><a href="frecuencias/ind_fechapub.php">A&ntilde;o de publicaci&oacute;n</a></li>
-										<li><a href="frecuencias/ind_coautpais.php">Colaboraci&oacute;n entre pa&iacute;ses</a></li>
-										<li><a href="frecuencias/ind_coautinst.php">Colaboraci&oacute;n Interinstitucional</a></li>
+										<li><a href="frecuencias/ind_autor.php"><?php _e('Autor');?></a></li>
+										<li><a href="frecuencias/ind_institucion.php"><?php _e('Institución');?></a></li>
+										<li><a href="frecuencias/ind_paisins.php"><?php _e('País de la institución de afiliación del autor');?></a></li>
+										<li><a href="frecuencias/ind_revista.php"><?php _e('Revista');?></a></li>
+										<li><a href="frecuencias/ind_paisrev.php"><?php _e('País de la revista');?></a></li>
+										<li><a href="frecuencias/ind_fechapub.php"><?php _e('Año de publicación');?></a></li>
+										<li><a href="frecuencias/ind_coautpais.php"><?php _e('Colaboración entre paises');?></a></li>
+										<li><a href="frecuencias/ind_coautinst.php"><?php _e('Colaboración inter-institucional');?></a></li>
 									</ul>
-									<li><a href="bibliometria/form_bibliometria.html">Indicadores</a></li>
+									<li><a href="bibliometria/form_bibliometria.html"><?php _e('Indicadores');?></a></li>
 								</ul>
 							</li>
 							<!--AQUI TERMINA EL RUBRO DE SERVICIOS-->
 
-							<li><a href="#">Postular una revista</a>
+							<li><a href="#"><?php _e('Postular una revista');?></a>
 								<ul>
-									<li><a href="criterios.html">Criterios de selecci&oacute;n de revistas</a></li>
-									<li><a href="contacto.html">Contacto</a></li>
+									<li><a href="criterios.html"><?php _e('Criterios de selección de revistas');?></a></li>
+									<li><a href="contacto.html"><?php _e('Contacto');?></a></li>
 								</ul>
 							</li>
 
 							<!--AQUI TERMINA EL RUBRO DE SERVICIOS-->
 
-							<li><a href="politicas.html">Pol&iacute;ticas de copyright</a></li>
+							<li><a href="politicas.html"><?php _e('Políticas de copyright');?></a></li>
 
 							<!--AQUI TERMINA EL RUBRO DE SERVICIOS-->
 
 							<li><a href="#">Documentos</a>
 								<ul>
-									<li><a href="bibliografia.html">Bibliograf&iacutea</a></li>
-									<li><a href="presentaciones.html">Presentaciones PPT</a></li>
-									<li><a href="multimedia.html">Archivos multimedia</a></li>
+									<li><a href="bibliografia.html"><?php _e('Bibliografía');?></a></li>
+									<li><a href="presentaciones.html"><?php _e('Presentaciones PPT');?></a></li>
+									<li><a href="multimedia.html"><?php _e('Archivos multimedia');?></a></li>
 								</ul>
 							</li>
 
@@ -69,24 +69,24 @@
 							<a class="addthis_button_compact"></a>
 							<a class="addthis_counter addthis_bubble_style"></a>
 						</div>
-						<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+						<script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
 						<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50914e71704bc5f9"></script>
 					</div>
 				</td>
 			</tr>
 		</table>
 	</div>
-	<div id="submenu"> Espa&ntilde;ol / <a href="index-english.html">English</a> / <a href="index-portugues.html">Portugu&ecirc;s</a> / <a href="index-francais.html">Fran&ccedil;ais</a> | <img src="<?php echo base_url();?>img/ayuda.png" width="16" height="16" alt="ayuda" /> <a href="ayuda.html">Ayuda</a> | <img src="<?php echo base_url();?>img/mapasitio.gif" width="19" height="16" alt="mapa de sitio" /> <a href="ayuda.html">Mapa de sitio</a> |  <a href="ayuda.html">FAQ</a> | <img src="<?php echo base_url();?>img/contacto.gif" width="20" height="12" alt="contacto" /> <a href="contacto.html">Contacto</a></div>
+	<div id="submenu"> <?php _e('Español');?> / <a href="index-english.html"><?php _e('English');?></a> / <a href="index-portugues.html"><?php _e('Português');?></a> / <a href="index-francais.html"><?php _e('Français');?></a> | <img src="<?php echo base_url();?>img/ayuda.png" width="16" height="16" alt="ayuda" /> <a href="ayuda.html"><?php _e('Ayuda');?></a> | <img src="<?php echo base_url();?>img/mapasitio.gif" width="19" height="16" alt="mapa de sitio" /> <a href="ayuda.html"><?php _e('Mapa de sitio');?></a> |  <a href="ayuda.html"><?php _e('FAQ');?></a> | <img src="<?php echo base_url();?>img/contacto.gif" width="20" height="12" alt="contacto" /> <a href="contacto.html"><?php _e('Contacto')?></a></div>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td width="51%" valign="top">
 				<div id="buscador">
-					<div id="titulobusq">B&uacute;squeda:</div>
+					<div id="titulobusq"><?php _e('Búsqueda:');?></div>
 					<br />
 					<form name="findex" id="form" action="buscador.php">
 
 						<select name="jumpMenu" id="jumpMenu">
-							<option value='' selected>Seleccionar disciplina(obligatorio)</option>
+							<option value='' selected><?php _e('Seleccionar disciplina(obligatorio)');?></option>
 <?php foreach ($disciplinas as $disciplina):?>
 							<option value="<?php echo $disciplina['id_disciplina'];?>"><?php echo $disciplina['disciplina'];?></option>
 <?php	endforeach;?>
@@ -108,18 +108,12 @@
 							<td><input type="checkbox" name="textocompleto" id="textocompleto" /></td>
 						</tr>
 						<tr>
-							<td width="38" height="22">Tema
-
-
-								<label for="articulo"></label>
-								<label for="tema"></label>
-								<label for="autor"></label>
-								<label for="institucion"></label></td>
-								<td width="57">Art&iacute;culo</td>
-								<td width="36">Autor</td>
-								<td width="87">Instituci&oacute;n</td>
-								<td width="54">Revista</td>
-								<td width="200">S&oacute;lo texto completo      </td>
+							<td width="38" height="22"><?php _e('Tema');?></td>
+								<td width="57"><?php _e('Artículo');?></td>
+								<td width="36"><?php _e('Autor');?></td>
+								<td width="87"><?php _e('Institución');?></td>
+								<td width="54"><?php _e('Revista');?></td>
+								<td width="200"><?php _e('Sólo texto completo');?></td>
 							</tr>
 						</table>
 						<br />
@@ -128,22 +122,22 @@
 				</div>
 			</td>
 			<td width="49%" rowspan="2" valign="top"><div id="bienvenida">
-				<span class="titulo">Biblat</span> ofrece: referencias bibliogr&aacute;ficas de documentos publicados en revistas cient&iacute;ficas y acad&eacute;micas latinoamericanas indizadas en CLASE y Peri&oacute;dica, acceso al texto completo de revistas en acceso abierto, indicadores bibliom&eacute;tricos e informaci&oacute;n sobre los derechos de copyright de las revistas. <br /><br />
-				<span class="titulo">Disponibles</span>:<br />
+				<?php _e('<span class="titulo">Biblat</span> ofrece: referencias bibliográficas de documentos publicados en revistas científicas y académicas latinoamericanas indizadas en CLASE y Periódica, acceso al texto completo de revistas en acceso abierto, indicadores bibliométricos e información sobre los derechos de copyright de las revistas.');?> <br /><br />
+				<span class="titulo"><?php _e('Disponibles');?></span>:<br />
 				<br />
-				<span class="disponibles"><?php echo number_format($totales['revistas']); ?></span> revistas<br />
-				<span class="disponibles"><?php echo number_format($totales['documentos']); ?></span> documentos<br />
-				<span class="disponibles"><?php echo number_format($totales['enlaces']); ?></span> textos completos<br />
-				<span class="disponibles"><?php echo number_format($totales['hevila']); ?></span> art&iacute;culos en texto completo en repositorio HEVILA </div>
+				<span class="disponibles"><?php echo number_format($totales['revistas']); ?></span> <?php _e('revistas');?><br />
+				<span class="disponibles"><?php echo number_format($totales['documentos']); ?></span> <?php _e('documentos');?><br />
+				<span class="disponibles"><?php echo number_format($totales['enlaces']); ?></span> <?php _e('textos completos');?><br />
+				<span class="disponibles"><?php echo number_format($totales['hevila']); ?></span> <?php _e('artículos en texto completo en repositorio HEVILA');?> </div>
 				<div id="logos">
-					Enlace a las bases de datos  <br />
+					<?php _e('Enlace a las bases de datos');?>  <br />
 					<img src="<?php echo base_url();?>img/claseperiodica.gif" alt="clase y periodica" width="268" height="67" border="0" usemap="#Map" /></div>
 				</td>
 			</tr>
 			<tr>
 				<td height="42">
 					<div id="alfabetico"><br />
-						Revistas por orden alfab&eacute;tico:<br /><br />	
+						<?php _e('Revistas por orden alfabético');?><br /><br />	
 <?php foreach (range('A', 'Z') as $i):?>
 						<a href="<?php echo site_url("indice/alfabetico/".strtolower($i));?>"><?php echo $i;?></a>
 <?php endforeach;?>
@@ -154,10 +148,9 @@
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td width="39%" valign="top">
-				<div id="disciplina"><span class="titulo">Revistas por disciplina</span>:<br /><br />
+				<div id="disciplina"><span class="titulo"><?php _e('Revistas por disciplina');?></span>:<br /><br />
 					<div id="tagCloudContainer">
 						<canvas width="350" height="300" id="tagCloud">
-							<p>Anything in here will be replaced on browsers that support the canvas element</p>
 							<ul>
 <?php foreach ($disciplinas as $disciplina):?>
 								<li>
@@ -169,7 +162,7 @@
 			</div>
 		</td>
 		<td width="25%">
-			<div id="pais"><span class="titulo">Revistas por pa&iacute;s</span>:<br />
+			<div id="pais"><span class="titulo"><?php _e('Revistas por país');?></span>:<br />
 				<table width="10" border="0" align="center" cellpadding="0" cellspacing="6">
 					<tr>
 						<td><a href=ind_paisrev_rev.php?paisrev=Argentina><img src="<?php echo base_url();?>img/banderas/argentina.gif" title="Argentina" width="26" height="18" border="0" usemap="argentina"/></a></td>
@@ -215,10 +208,10 @@
 			</div>
 		</td>
 		<td width="36%" valign="top">
-			<div id="accesos"><span class="titulos"><span class="titulo">Estad&iacute;sticas</span>:<br /><br />
+			<div id="accesos"><span class="titulos"><span class="titulo"><?php _e('Estadísticas');?></span>:<br /><br />
 				<!--      <a href="http://statcounter.com/p5215750/summary/" target="_blank"><img src="<?php echo base_url();?>img/grafica.gif" width="340" height="114" alt="accesos" /></a>--> 
 
-				<a href="ind_topten.php"><img src="<?php echo base_url();?>img/estadisticas.jpg" width=350 heigth=350 border=0><br>Ver Top Ten</a>
+				<a href="ind_topten.php"><img src="<?php echo base_url();?>img/estadisticas.jpg" width=350 heigth=350 border=0><br><?php _e('Ver Top Ten');?></a>
 
 
 				<br /><br />
@@ -228,107 +221,6 @@
 </table>
 
 <div id="creditos">
-	<a href="creditos.html">Cr&eacute;ditos</a></div>
+	<a href="creditos.html"><?php _e('Créditos');?></a></div>
 
 </div><!---Aqui cierra el envolvente---->
-
-<map name="argentina" id="argentina">
-	<area shape="rect" coords="2,2,26,17" href="#" alt="argentina" />
-</map>
-
-<map name="barbados" id="barbados">
-	<area shape="rect" coords="-1,-1,26,18" href="#" alt="barbados" />
-</map>
-
-<map name="bolivia" id="bolivia">
-	<area shape="rect" coords="0,0,26,18" href="#" alt="bolivia" />
-</map>
-
-<map name="brasil" id="brasil">
-	<area shape="rect" coords="0,0,26,18" href="#" alt="brasil" />
-</map>
-
-<map name="chile" id="chile">
-	<area shape="rect" coords="0,0,26,18" href="#" alt="chile" />
-</map>
-
-<map name="colombia" id="colombia">
-	<area shape="rect" coords="1,0,26,18" href="#" alt="colombia" />
-</map>
-
-<map name="costarica" id="costarica">
-	<area shape="rect" coords="1,0,26,18" href="#" alt="costarica" />
-</map>
-
-<map name="cuba" id="cuba">
-	<area shape="rect" coords="1,1,27,18" href="#" alt="cuba" />
-</map>
-
-<map name="ecuador" id="ecuador">
-	<area shape="rect" coords="1,1,26,18" href="#" alt="ecuador" />
-</map>
-
-<map name="elsalvador" id="elsalvador">
-	<area shape="rect" coords="1,1,26,18" href="#" alt="elsalvador" />
-</map>
-
-<map name="guatemala" id="guatemala">
-	<area shape="rect" coords="1,1,25,17" href="#" alt="guatemala" />
-</map>
-
-<map name="haiti" id="haiti">
-	<area shape="rect" coords="0,0,48,29" href="#" alt="haiti" />
-</map>
-
-<map name="honduras" id="honduras">
-	<area shape="rect" coords="1,1,26,17" href="#" alt="honduras" />
-</map>
-
-<map name="jamaica" id="jamaica">
-	<area shape="rect" coords="1,1,25,17" href="#" alt="jamaica" />
-</map>
-
-<map name="mexico" id="mexico">
-	<area shape="rect" coords="1,1,25,17" href="#" alt="mexico" />
-</map>
-
-<map name="nicaragua" id="nicaragua">
-	<area shape="rect" coords="1,1,26,18" href="#" alt="nicaragua" />
-</map>
-
-<map name="internacionales" id="internacionales">
-	<area shape="rect" coords="1,1,25,17" href="#" alt="internacionales" />
-</map>
-
-<map name="panama" id="panama">
-	<area shape="rect" coords="1,1,26,17" href="#" alt="panama" />
-</map>
-
-<map name="paraguay" id="paraguay">
-	<area shape="rect" coords="1,1,25,17" href="#" alt="paraguay" />
-</map>
-
-<map name="peru" id="peru">
-	<area shape="rect" coords="1,1,25,17" href="#" alt="peru" />
-</map>
-
-<map name="puertorico" id="puertorico">
-	<area shape="rect" coords="1,1,26,17" href="#" alt="puertorico" />
-</map>
-
-<map name="repdominicana" id="repdominicana">
-	<area shape="rect" coords="1,1,25,17" href="#" alt="repdominicana" />
-</map>
-
-<map name="uruguay" id="uruguay">
-	<area shape="rect" coords="1,1,26,17" href="#" alt="uruguay" />
-</map>
-
-<map name="venezuela" id="venezuela">
-	<area shape="rect" coords="1,1,25,17" href="#" alt="venezuela" />
-</map>
-
-<map name="Map" id="Map">
-	<area shape="rect" coords="7,6,92,61" href="http://clase.unam.mx/" target="_blank" />
-	<area shape="rect" coords="139,5,262,60" href="http://periodica.unam.mx/" target="_blank" />
-</map>
