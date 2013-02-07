@@ -25,7 +25,7 @@
 			<td class="totalRight"><a class="enlace" href="detalle_bib.php?tipobus=indices&index=revista&revista=<?php echo str_replace(" ", "+", $registro['revista']);?>&articulos=<?php echo $registro['articulos'];?>" title="<?php echo $registro['revista'];?>"><?php echo number_format($registro['articulos']);?></a></td>
 		</tr>
 <?php endforeach;?>
-		<tr><td class='acumuladas' colspan=2>Total:</td><td class='acumuladas'><?php echo number_format($registrosTotalArticulos);?></td></tr>
+		<tr><td class='acumuladas' colspan=2><?php _e('Total:');?></td><td class='acumuladas'><?php echo number_format($registrosTotalArticulos);?></td></tr>
 	</tbody>
 </table>
 </div>

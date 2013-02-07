@@ -11,7 +11,19 @@
 			jQuery(document).bind("contextmenu",function(e){
 				return false;
 			});
-		}); 
+			jQuery('.setlang').click(function(){
+				langUrl = jQuery(this).attr('href')
+				jQuery.ajax({
+					type: "POST",
+					url: langUrl,
+					data: "ajax=TRUE"
+				}).done(function(msg) {
+					currentUrl = "<?php echo current_url();?>";
+					jQuery(location).attr('href',currentUrl);
+				});
+				return false;
+			});
+		});
 	</script>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];

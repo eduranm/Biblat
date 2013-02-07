@@ -6,7 +6,7 @@ class Indice extends CI_Controller{
 		if($this->session->userdata('language')):
 			$language = $this->session->userdata('language');
 		endif;
-		$this->lang->load('main', $language);
+		set_translation_language(get_cookie('lang'));
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
 	}
 	public function index(){
@@ -15,7 +15,7 @@ class Indice extends CI_Controller{
 
 	public function alfabetico($letra){
 		$data = array();
-		$data['header']['title'] = "Biblat - Indice alfabético \"{$letra}\"";
+		$data['header']['title'] = _sprintf('Biblat - Indice alfabético "%s"', $letra);
 		/*Consultas*/
 		$this->load->database();
 		$query = "SELECT e_222 AS revista, count(sistema) AS articulos FROM articulo WHERE e_222 LIKE '{$letra}%' GROUP BY e_222 ORDER BY e_222;";
@@ -39,7 +39,7 @@ class Indice extends CI_Controller{
 
 	public function disciplina($disciplina){
 		$data = array();
-		$data['header']['title'] = "Biblat - Indice por disciplina \"{$disciplina}\"";
+		$data['header']['title'] = _sprintf('Biblat - Indice por disciplina "%s"', $disciplina);
 		/*Consultas*/
 		$this->load->database();
 		/*Obteniendo registro de disciplina a partir del slug*/

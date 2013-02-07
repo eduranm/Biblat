@@ -15,9 +15,9 @@
 							</ul>
 						</li>
 						<!--AQUI INICIA EL RUBRO DE SERVICIOS -->
-						<li><a href="#">Bibliometr&iacute;a</a>
+						<li><a href="#"><?php _e('Bibliometría');?></a>
 							<ul>
-								<li><a href="descripciÃ³n.html"><?php _e('Descripción');?></a></li>
+								<li><a href="descripcion.html"><?php _e('Descripción');?></a></li>
 								<li><a href="metodologia.html"><?php _e('Metodología');?></a></li>
 								<li><a href="#"><?php _e('Frecuencias');?></a>
 									<ul>
@@ -48,7 +48,7 @@
 
 							<!--AQUI TERMINA EL RUBRO DE SERVICIOS-->
 
-							<li><a href="#">Documentos</a>
+							<li><a href="#"><?php _e('Documentos');?></a>
 								<ul>
 									<li><a href="bibliografia.html"><?php _e('Bibliografía');?></a></li>
 									<li><a href="presentaciones.html"><?php _e('Presentaciones PPT');?></a></li>
@@ -76,7 +76,7 @@
 			</tr>
 		</table>
 	</div>
-	<div id="submenu"> <?php _e('Español');?> / <a href="index-english.html"><?php _e('English');?></a> / <a href="index-portugues.html"><?php _e('Português');?></a> / <a href="index-francais.html"><?php _e('Français');?></a> | <img src="<?php echo base_url();?>img/ayuda.png" width="16" height="16" alt="ayuda" /> <a href="ayuda.html"><?php _e('Ayuda');?></a> | <img src="<?php echo base_url();?>img/mapasitio.gif" width="19" height="16" alt="mapa de sitio" /> <a href="ayuda.html"><?php _e('Mapa de sitio');?></a> |  <a href="ayuda.html"><?php _e('FAQ');?></a> | <img src="<?php echo base_url();?>img/contacto.gif" width="20" height="12" alt="contacto" /> <a href="contacto.html"><?php _e('Contacto')?></a></div>
+	<div id="submenu"> <a class="setlang" href="<?php echo site_url('setlang/es');?>"><?php _e('Español');?></a> / <a class="setlang" href="<?php echo site_url('setlang/en');?>"><?php _e('English');?></a> / <a class="setlang" href="<?php echo site_url('setlang/pt');?>"><?php _e('Português');?></a> / <a class="setlang" href="<?php echo site_url('setlang/fr');?>"><?php _e('Français');?></a> | <img src="<?php echo base_url();?>img/ayuda.png" width="16" height="16" alt="ayuda" /> <a href="ayuda.html"><?php _e('Ayuda');?></a> | <img src="<?php echo base_url();?>img/mapasitio.gif" width="19" height="16" alt="mapa de sitio" /> <a href="ayuda.html"><?php _e('Mapa de sitio');?></a> |  <a href="ayuda.html"><?php _e('FAQ');?></a> | <img src="<?php echo base_url();?>img/contacto.gif" width="20" height="12" alt="contacto" /> <a href="contacto.html"><?php _e('Contacto')?></a></div>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td width="51%" valign="top">

@@ -8,12 +8,12 @@ class Main extends CI_Controller{
 		if($this->session->userdata('language')):
 			$language = $this->session->userdata('language');
 		endif;
-		$this->lang->load('main', $language);
+		set_translation_language(get_cookie('lang'));
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
 	}
 	public function index(){
 		$data = array();
-		$data['header']['title'] = "Biblat";
+		$data['header']['title'] = _("Biblat");
 		/*Sessiones*/
 		$sessiondata["registros"]="";
 		$sessiondata["bd"]="";
