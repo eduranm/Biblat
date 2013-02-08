@@ -11,6 +11,7 @@
 			jQuery(document).bind("contextmenu",function(e){
 				return false;
 			});
+			
 			jQuery('.setlang').click(function(){
 				langUrl = jQuery(this).attr('href')
 				jQuery.ajax({
