@@ -93,7 +93,7 @@
 						</select>
 					<br /><br />
 					<input name="texto" type="text" id="texto" size="60" />
-					<input type="button" name="button" id="button" value="Buscar" onclick="validadatos()"/>
+					<input type="button" name="button" id="button" value="<?php _e('Buscar');?>" onclick="validadatos()"/>
 					<br />
 					<br />
 					<label for="textocompleto"></label>

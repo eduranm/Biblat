@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-07 16:48-0600\n"
-"PO-Revision-Date: 2013-02-07 17:00-0600\n"
+"POT-Creation-Date: 2013-02-08 11:30-0600\n"
+"PO-Revision-Date: 2013-02-08 11:30-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -168,6 +168,10 @@ msgstr "Search:"
 #: application/views/main_index.php:89
 msgid "Seleccionar disciplina(obligatorio)"
 msgstr "Select discipline (required)"
+
+#: application/views/main_index.php:96
+msgid "Buscar"
+msgstr "Search"
 
 #: application/views/main_index.php:111
 msgid "Tema"

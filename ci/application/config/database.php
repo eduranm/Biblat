@@ -45,7 +45,7 @@
 | the active record class
 */
 
-$active_group = 'develop';
+$active_group = 'devpsql';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
@@ -80,5 +80,20 @@ $db['develop']['swap_pre'] = '';
 $db['develop']['autoinit'] = TRUE;
 $db['develop']['stricton'] = FALSE;
 
+$db['devpsql']['hostname'] = 'localhost';
+$db['devpsql']['username'] = 'postgres';
+$db['devpsql']['password'] = '';
+$db['devpsql']['database'] = 'claper';
+$db['devpsql']['dbdriver'] = 'postgre';
+$db['devpsql']['dbprefix'] = '';
+$db['devpsql']['pconnect'] = TRUE;
+$db['devpsql']['db_debug'] = TRUE;
+$db['devpsql']['cache_on'] = FALSE;
+$db['devpsql']['cachedir'] = '';
+$db['devpsql']['char_set'] = 'utf8';
+$db['devpsql']['dbcollat'] = 'utf8_general_ci';
+$db['devpsql']['swap_pre'] = '';
+$db['devpsql']['autoinit'] = TRUE;
+$db['devpsql']['stricton'] = FALSE;
 /* End of file database.php */
 /* Location: ./application/config/database.php */
