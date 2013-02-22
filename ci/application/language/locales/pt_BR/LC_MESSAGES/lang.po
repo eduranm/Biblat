@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-08 11:30-0600\n"
-"PO-Revision-Date: 2013-02-21 16:18-0600\n"
+"POT-Creation-Date: 2013-02-21 16:23-0600\n"
+"PO-Revision-Date: 2013-02-22 10:21-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -12,14 +12,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;_sprintf;_printf\n"
 "X-Poedit-Basepath: /home/herz/Sites/biblat/public_html/ci\n"
-"X-Poedit-Language: English\n"
-"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: application\n"
 
 #: application/views/main_index.php:8
 msgid "¿Qué es Biblat?"
-msgstr "What is Biblat?"
+msgstr "Sobre Biblat"
 
 #: application/views/main_index.php:10
 msgid "Biblat"
@@ -27,111 +27,111 @@ msgstr "Biblat"
 
 #: application/views/main_index.php:11
 msgid "Clase y Periódica"
-msgstr "Clase y Periódica"
+msgstr ""
 
 #: application/views/main_index.php:12
 msgid "Tutoriales"
-msgstr "Manuals"
+msgstr ""
 
 #: application/views/main_index.php:13
 msgid "Materiales de difusión"
-msgstr "Diffusion Materials"
+msgstr ""
 
 #: application/views/main_index.php:14
 msgid "Manual de indización"
-msgstr "Indexing manual"
+msgstr ""
 
 #: application/views/main_index.php:18
 msgid "Bibliometría"
-msgstr "Bibliometrics"
+msgstr "Bibliometria"
 
 #: application/views/main_index.php:20
 msgid "Descripción"
-msgstr "Description"
+msgstr ""
 
 #: application/views/main_index.php:21
 msgid "Metodología"
-msgstr "Methodology"
+msgstr ""
 
 #: application/views/main_index.php:22
 msgid "Frecuencias"
-msgstr "Frequencies"
+msgstr ""
 
 #: application/views/main_index.php:24
 #: application/views/main_index.php:113
 msgid "Autor"
-msgstr "Author"
+msgstr ""
 
 #: application/views/main_index.php:25
 #: application/views/main_index.php:114
 msgid "Institución"
-msgstr "Institution"
+msgstr "Instituição"
 
 #: application/views/main_index.php:26
 msgid "País de la institución de afiliación del autor"
-msgstr "Institutional country to affiliation of author"
+msgstr ""
 
 #: application/views/main_index.php:27
 #: application/views/main_index.php:115
 #: application/views/indice_alfabetico.php:16
 #: application/views/indice_disciplina.php:16
 msgid "Revista"
-msgstr "Journal"
+msgstr "periódico"
 
 #: application/views/main_index.php:28
 msgid "País de la revista"
-msgstr "Country of the journal"
+msgstr ""
 
 #: application/views/main_index.php:29
 msgid "Año de publicación"
-msgstr "Publication year"
+msgstr ""
 
 #: application/views/main_index.php:30
 msgid "Colaboración entre paises"
-msgstr "Countries collaboration"
+msgstr ""
 
 #: application/views/main_index.php:31
 msgid "Colaboración inter-institucional"
-msgstr "Inter-institutional collaboration"
+msgstr ""
 
 #: application/views/main_index.php:33
 msgid "Indicadores"
-msgstr "Indicators"
+msgstr ""
 
 #: application/views/main_index.php:38
 msgid "Postular una revista"
-msgstr "Proffer journal"
+msgstr "Submeter um periódico"
 
 #: application/views/main_index.php:40
 msgid "Criterios de selección de revistas"
-msgstr "Criteria for selection of journals"
+msgstr ""
 
 #: application/views/main_index.php:41
 #: application/views/main_index.php:79
 msgid "Contacto"
-msgstr "Contact"
+msgstr "Contato"
 
 #: application/views/main_index.php:47
 msgid "Políticas de copyright"
-msgstr "Copyright policy"
+msgstr "Políticas de acesso"
 
 #: application/views/main_index.php:51
 #: application/views/indice_alfabetico.php:17
 #: application/views/indice_disciplina.php:17
 msgid "Documentos"
-msgstr "Documents"
+msgstr "Documentos"
 
 #: application/views/main_index.php:53
 msgid "Bibliografía"
-msgstr "Bibliography"
+msgstr ""
 
 #: application/views/main_index.php:54
 msgid "Presentaciones PPT"
-msgstr "PPT presentations"
+msgstr ""
 
 #: application/views/main_index.php:55
 msgid "Archivos multimedia"
-msgstr "Media files"
+msgstr ""
 
 #: application/views/main_index.php:79
 msgid "Español"
@@ -151,102 +151,102 @@ msgstr "Français"
 
 #: application/views/main_index.php:79
 msgid "Ayuda"
-msgstr "Help"
+msgstr "Ajuda"
 
 #: application/views/main_index.php:79
 msgid "Mapa de sitio"
-msgstr "Sitemap"
+msgstr "Mapa do site"
 
 #: application/views/main_index.php:79
 msgid "FAQ"
-msgstr "FAQ"
+msgstr ""
 
 #: application/views/main_index.php:84
 msgid "Búsqueda:"
-msgstr "Search:"
+msgstr "Pesquisa:"
 
 #: application/views/main_index.php:89
 msgid "Seleccionar disciplina(obligatorio)"
-msgstr "Select discipline (required)"
+msgstr "Selecionar disciplina (obrigatório)"
 
 #: application/views/main_index.php:96
 msgid "Buscar"
-msgstr "Search"
+msgstr ""
 
 #: application/views/main_index.php:111
 msgid "Tema"
-msgstr "Topic"
+msgstr "Assunto"
 
 #: application/views/main_index.php:112
 msgid "Artículo"
-msgstr "Article"
+msgstr "Artigo"
 
 #: application/views/main_index.php:116
 msgid "Sólo texto completo"
-msgstr "Full text only"
+msgstr "Somente texto completo"
 
 #: application/views/main_index.php:125
 msgid "<span class=\"titulo\">Biblat</span> ofrece: referencias bibliográficas de documentos publicados en revistas científicas y académicas latinoamericanas indizadas en CLASE y Periódica, acceso al texto completo de revistas en acceso abierto, indicadores bibliométricos e información sobre los derechos de copyright de las revistas."
-msgstr "<span class=\"titulo\">Biblat</span> offers: bibliographic references of documents published in scientific and academic Latin American journals indexed in CLASE and PERIODICA databases, access to the full text of Open Access journals, bibliometric indicators as well as information on policies of access."
+msgstr "<span class=\"titulo\">Biblat</span> oferece: referências bibliográficas de documentos publicados em periódicos científicos e acadêmicos latino-americanos indizados em CLASE e PERIÓDICA, acesso ao texto completo de periódicos em acesso aberto, indicadores bibliométricos e informação sobre as políticas de acesso."
 
 #: application/views/main_index.php:126
 msgid "Disponibles"
-msgstr "Collection"
+msgstr "Coleção"
 
 #: application/views/main_index.php:128
 msgid "revistas"
-msgstr "journals"
+msgstr "periódicos"
 
 #: application/views/main_index.php:129
 msgid "documentos"
-msgstr "documents"
+msgstr "documentos"
 
 #: application/views/main_index.php:130
 msgid "textos completos"
-msgstr "full texts"
+msgstr "textos completos"
 
 #: application/views/main_index.php:131
 msgid "artículos en texto completo en repositorio HEVILA"
-msgstr "full text articles in Hevila repository"
+msgstr "artigos em texto completo em repositório HEVILA"
 
 #: application/views/main_index.php:133
 msgid "Enlace a las bases de datos"
-msgstr "Link to databases"
+msgstr "Links às bases de dados "
 
 #: application/views/main_index.php:140
 #: application/views/indice_alfabetico.php:1
 #: application/views/indice_alfabetico.php:3
 msgid "Revistas por orden alfabético"
-msgstr "Journals in alphabetical order"
+msgstr "Periódicos em ordem alfabética"
 
 #: application/views/main_index.php:151
 msgid "Revistas por disciplina"
-msgstr "Journals by discipline"
+msgstr "Periódicos por assunto"
 
 #: application/views/main_index.php:165
 msgid "Revistas por país"
-msgstr "Journals by country"
+msgstr "Periódicos por país"
 
 #: application/views/main_index.php:211
 msgid "Estadísticas"
-msgstr "Statistics"
+msgstr ""
 
 #: application/views/main_index.php:214
 msgid "Ver Top Ten"
-msgstr "Show top-ten"
+msgstr ""
 
 #: application/views/main_index.php:224
 msgid "Créditos"
-msgstr "Credits"
+msgstr ""
 
 #: application/views/indice_alfabetico.php:1
 #: application/views/indice_disciplina.php:1
 msgid "Inicio"
-msgstr "Index"
+msgstr ""
 
 #: application/views/indice_alfabetico.php:6
 msgid "Revistas en orden alfabético"
-msgstr "Journals in alphabetical order"
+msgstr "Periódicos em ordem alfabética"
 
 #: application/views/indice_alfabetico.php:7
 #: application/views/indice_disciplina.php:7
@@ -256,29 +256,29 @@ msgstr ""
 #: application/views/indice_alfabetico.php:15
 #: application/views/indice_disciplina.php:15
 msgid "No."
-msgstr "No."
+msgstr ""
 
 #: application/views/indice_alfabetico.php:28
 #: application/views/indice_disciplina.php:28
 msgid "Total:"
-msgstr "Total:"
+msgstr ""
 
 #: application/views/indice_disciplina.php:3
 #, php-format
 msgid "Revistas del área de \"%s\""
-msgstr "Journals of \"%s\" area"
+msgstr ""
 
 #: application/views/footer.php:2
 msgid "® Derechos reservados. 2009 - 2012. Dirección General de Bibliotecas, Universidad Nacional Autónoma de México (UNAM). Esta página y sus contenidos pueden ser utilizados y reproducidos con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica. De otra forma, requiere permiso previo por escrito de la institución."
-msgstr "® All rights reserved 2009-2012. General Directorate for Libraries of the National Autonomous University of Mexico (UNAM). This page and its contents may be used and reproduced for non-profit purposes. Users must give credit citing the source and electronic address. Otherwise, it requires permission in writing from the institution."
+msgstr "® Direitos reservados 2009 – 2012. Direção Geral de Bibliotecas, Universidade Nacional Autônoma do México (UNAM). Esta página e seus conteúdos podem ser utilizados e reproduzidos com fins não lucrativos. O usuário deve citar a fonte completa e seu endereço eletrônico. Caso contrário requer permissão por escrito da instituição. "
 
-#: application/controllers/indice.php:18
+#: application/controllers/indice.php:14
 #, php-format
 msgid "Biblat - Indice alfabético \"%s\""
-msgstr "Biblat - Alphabetical index \"%s\""
+msgstr ""
 
-#: application/controllers/indice.php:42
+#: application/controllers/indice.php:38
 #, php-format
 msgid "Biblat - Indice por disciplina \"%s\""
-msgstr "Biblat - Discipline index \"%s\""
+msgstr ""
 
