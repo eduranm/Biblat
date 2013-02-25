@@ -42,6 +42,9 @@ $route['default_controller'] = "main";
 $route['404_override'] = '';
 
 $route['setlang/(.*)'] = 'setlang/index/$1';
+
+$route['buscar/(.*)'] = 'buscar/index/$1';
+
 $route['revista/hola'] = "revista/hola";
 $route['revista/hola/(.*)'] = "revista/hola/$1";
 $route['revista/(.*)'] = "revista/index/$1";

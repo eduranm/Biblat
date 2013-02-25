@@ -83,18 +83,19 @@
 				<div id="buscador">
 					<div id="titulobusq"><?php _e('Búsqueda:');?></div>
 					<br />
-					<form name="findex" id="form" action="buscador.php">
+					<form name="searchForm" id="form" method="POST" action="<?php echo site_url('buscar');?>">
 
-						<select name="jumpMenu" id="jumpMenu">
+						<select name="disciplina">
 							<option value='' selected><?php _e('Seleccionar disciplina(obligatorio)');?></option>
 <?php foreach ($disciplinas as $disciplina):?>
-							<option value="<?php echo $disciplina['id_disciplina'];?>"><?php echo $disciplina['disciplina'];?></option>
+							<option value="<?php echo $disciplina['slug'];?>"><?php echo $disciplina['disciplina'];?></option>
 <?php	endforeach;?>
 						</select>
 					<br /><br />
-					<input name="texto" type="text" id="texto" size="60" />
-					<input type="button" name="button" id="button" value="<?php _e('Buscar');?>" onclick="validadatos()"/>
-					<br />
+					<div class="search">
+						<input type="text" name="slug" id="slug"/>
+						<input type="submit" value="<?php _e('Buscar');?>"/>
+					</div>
 					<br />
 					<label for="textocompleto"></label>
 					<label for="revista"></label>
@@ -105,7 +106,7 @@
 							<td><input type="radio" name="indice" id="autor" value="autor" /></td>
 							<td><input type="radio" name="indice" id="institucion" value="institucion" /></td>
 							<td><input type="radio" name="indice" id="revista" value="revista" /></td>
-							<td><input type="checkbox" name="textocompleto" id="textocompleto" /></td>
+							<td><input type="checkbox" name="textoCompleto" id="textoCompleto" /></td>
 						</tr>
 						<tr>
 							<td width="38" height="22"><?php _e('Tema');?></td>

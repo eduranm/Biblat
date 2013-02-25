@@ -4,6 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title><?php echo $title;?></title>
 	<link rel="stylesheet" href="<?php echo base_url();?>css/estiloBiblat.css" type="text/css" />
+	<link rel="stylesheet" href="<?php echo base_url();?>css/default.css" type="text/css" />
 	<script type="text/javascript" src="<?php echo base_url();?>js/jquery.js"></script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function()
