@@ -57,7 +57,7 @@ class Buscar extends CI_Controller{
 					e_100a, 
 					e_100u 
 				FROM \"mvSearch\"  
-				WHERE id_disciplina='{$disciplina['id_disciplina']}' $whereTextoCompleto AND slug({$indiceArray[$indice]['sql']}) LIKE '%$slug%'
+				WHERE id_disciplina='{$disciplina['id_disciplina']}' $whereTextoCompleto AND {$indiceArray[$indice]['sql']} LIKE '%$slug%'
 				ORDER BY e_260b DESC";
 		
 		$queryCount = "SELECT count (*) as total FROM (${query}) as rows";
