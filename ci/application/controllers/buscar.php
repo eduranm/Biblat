@@ -8,8 +8,6 @@ class Buscar extends CI_Controller{
 	}
 	
 	public function index($disciplina="", $indice="", $slug="", $textoCompleto=""){
-		/*Variables para vistas*/
-		$data['main']="";
 		/*Si se hizo una consulta con POST redirigimos a una url correcta*/
 		if(isset($_POST['disciplina']) && isset($_POST['indice']) && isset($_POST['slug'])):
 			if(isset($_POST['textoCompleto'])):
@@ -21,14 +19,17 @@ class Buscar extends CI_Controller{
 		if($disciplina == "" || $indice == "" || $slug == ""):
 			 redirect(base_url(), 'refresh');
 		endif;
-
+		/*Variables para vistas*/
+		$data = array();
 		/*Arrego con descripcion y sql para cada indice*/
-		$indiceArray['tema'] = array('sql' => '"descPalabraClaveSlug"', 'descripcion' => _('Tema'));
-		$indiceArray['articulo'] = array('sql' => '"e245Slug"', 'descripcion' => _('Artículo'));
-		$indiceArray['autor'] = array('sql' => '"e_100aSlug"', 'descripcion' => _('Autor'));
-		$indiceArray['institucion'] = array('sql' => '"e_100uSlug"', 'descripcion' => _('Institución'));
-		$indiceArray['revista'] = array('sql' => '"e_222Slug"', 'descripcion' => _('Revista'));
+		$indiceArray['tema'] = array('sql' => '"palabrasClaveSlug"', 'descripcion' => _('Tema'));
+		$indiceArray['articulo'] = array('sql' => '"articuloSlug"', 'descripcion' => _('Artículo'));
+		$indiceArray['autor'] = array('sql' => '"autoresSlug"', 'descripcion' => _('Autor'));
+		$indiceArray['institucion'] = array('sql' => '"institucionesSlug"', 'descripcion' => _('Institución'));
+		$indiceArray['revista'] = array('sql' => '"revistaSlug"', 'descripcion' => _('Revista'));
 
+		/*Header title*/
+		$data['header']['title'] = _sprintf('Biblat - Búsqueda por %s: "%s"', strtolower($indiceArray[$indice]['descripcion']), slugClean($slug));
 		/*Consultas*/
 		$this->load->database();
 		/*Obteniendo id de la disciplina*/
@@ -42,20 +43,24 @@ class Buscar extends CI_Controller{
 			$whereTextoCompleto = "AND e_856u <> ''";
 		endif;
 
+
 		$query="SELECT 
 					DISTINCT sistema, 
 					iddatabase, 
-					e_245, 
-					e_222, 
-					e_008, 
-					e_260b, 
-					e_300a, 
-					e_300b, 
-					e_300c, 
-					e_300e, 
-					e_856u, 
-					e_100a, 
-					e_100u 
+					e_245 AS titulo, 
+					e_222 AS revista, 
+					e_008 AS pais, 
+					e_260b AS anio, 
+					e_300a AS volumen, 
+					e_300b AS numero, 
+					e_300c AS periodo, 
+					e_300e AS paginacion, 
+					e_856u AS url, 
+					\"autoresSec\",
+					\"autoresSecInstitucion\",
+					\"autoresJSON\",
+					\"institucionesSec\",
+					\"institucionesJSON\"
 				FROM \"mvSearch\"  
 				WHERE id_disciplina='{$disciplina['id_disciplina']}' $whereTextoCompleto AND {$indiceArray[$indice]['sql']} LIKE '%$slug%'
 				ORDER BY e_260b DESC";
@@ -81,8 +86,17 @@ class Buscar extends CI_Controller{
 		$config['total_rows'] = $totalRows;
 		$config['per_page'] = 20;
 		$config['use_page_numbers'] = true;
+		$config['first_link'] = _('Primera');
+		$config['last_link'] = _('Última');
 		$this->pagination->initialize($config);
+		
 		$data['main']['links'] = $this->pagination->create_links();
+
+		/*Datos de la busqueda*/
+		$data['main']['search']['indice'] = $indiceArray[$indice]['descripcion'];
+		$data['main']['search']['slug'] = slugClean($slug);
+		$data['main']['search']['disciplina'] = $disciplina['disciplina'];
+		$data['main']['search']['total'] = $totalRows;
 		/*Resultados de la página*/
 		$offset = (($this->pagination->cur_page - 1) * $config['per_page']);
 		if ($offset < 0 ):
@@ -90,8 +104,65 @@ class Buscar extends CI_Controller{
 		endif;
 		$query = "{$query} LIMIT {$config['per_page']} OFFSET {$offset}";
 		$query = $this->db->query($query);
-		print_r($query->result_array());
+		foreach ($query->result_array() as $row):
+			/*Generando arreglo de autores*/
+			if($row['autoresSec'] != NULL && $row['autoresJSON'] != NULL):
+				$row['autores'] = array_combine(json_decode($row['autoresSec']), json_decode($row['autoresJSON']));
+			endif;
+			/*Generando arreglo institucion de autores*/
+			if($row['autoresSec'] != NULL && $row['autoresSecInstitucion'] != NULL):
+				$row['autoresInstitucionSec'] = array_combine(json_decode($row['autoresSec']), json_decode($row['autoresSecInstitucion']));
+			endif;
+			unset($row['autoresSec'], $row['autoresJSON'], $row['autoresSecInstitucion']);
+			/*Generando arreglo de instituciones*/
+			if($row['institucionesSec'] != NULL && $row['institucionesJSON'] != NULL):
+				$row['instituciones'] = array_combine(json_decode($row['institucionesSec']), json_decode($row['institucionesJSON']));
+			endif;
+			unset($row['institucionesSec'], $row['institucionesJSON']);
+			/*Creando valores para el checkbox*/
+			$row['checkBoxValue'] = "{$row['iddatabase']}|{$row['sistema']}";
+			$row['checkBoxId'] = "cbox_{$row['checkBoxValue']}";
+			/*Creando link en caso de que exista texto completo*/
+			$row['articuloLink'] = $row['titulo'];
+			if( $row['url'] != NULL):
+				$row['articuloLink'] = "<a href=\"{$row['url']}\" target=\"_blank\">{$row['articuloLink']}</a>";
+			endif;
+			/*Creando lista de autores en html*/
+			$row['autoresHTML'] = "";
+			if(isset($row['autores'])):
+				$totalAutores = count($row['autores']);
+				$indexAutor = 1;
+				foreach ($row['autores'] as $key => $autor):
+					$row['autoresHTML'] .= "{$autor}<sup>{$row['autoresInstitucionSec'][$key]}</sup>";
+					if($indexAutor < $totalAutores):
+						$row['autoresHTML'] .= "., ";
+					endif;
+					$indexAutor++;
+				endforeach;
+			endif;
+			/*Creando lista de instituciones html*/
+			$row['institucionesHTML'] = "";
+			if(isset($row['instituciones'])):
+				$totalInstituciones = count($row['instituciones']);
+				$indexInstitucion = 1;
+				foreach ($row['instituciones'] as $key => $institucion):
+					$row['institucionesHTML'] .= "<sup>{$key}</sup>{$institucion}";
+					if($indexInstitucion < $totalInstituciones):
+						$row['institucionesHTML'] .= "., ";
+					endif;
+					$indexInstitucion++;
+				endforeach;
+			endif;
+			/*Creando el detalle de la revista*/
+			$row['detalleRevista'] = "[{$row['revista']}, {$row['pais']}, {$row['anio']} {$row['volumen']} {$row['numero']} {$row['periodo']}, {$row['paginacion']}]";
+
+			$data['main']['resultados'][++$offset] = $row;
+		endforeach;
+		$query->free_result();
 		/*Vistas*/
+		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);
+		$this->load->view('header', $data['header']);
 		$this->load->view('buscar_index', $data['main']);
+		$this->load->view('footer');
 	}
 }

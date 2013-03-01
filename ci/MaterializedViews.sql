@@ -88,9 +88,9 @@ CREATE OR REPLACE VIEW "vSearch" AS SELECT
     t.sistema, 
     t.iddatabase, 
     t.e_245,
-    slug(t.e_245) as "e245Slug",
+    slug(t.e_245) as "articuloSlug",
     t.e_222, 
-    slug(t.e_222) as "e_222Slug", 
+    slug(t.e_222) as "revistaSlug", 
     t.e_008, 
     t.e_260b, 
     t.e_300a, 
@@ -99,25 +99,60 @@ CREATE OR REPLACE VIEW "vSearch" AS SELECT
     t.e_300e, 
     t.e_856u, 
     t.id_disciplina,
-    a.e_100a, 
-    slug(a.e_100a) as "e_100aSlug", 
-    i.e_100u,
-    slug(i.e_100u) as "e_100uSlug", 
-    p.descpalabraclave,
-    slug(p.descpalabraclave) as "descPalabraClaveSlug"
-FROM articulo t 
-LEFT JOIN autor a ON (a.iddatabase=t.iddatabase AND a.sistema=t.sistema AND a.sec_autor='1')
-LEFT JOIN institucion i ON (a.iddatabase=i.iddatabase AND a.sistema=i.sistema AND a.sec_autor=i.sec_autor) 
-LEFT JOIN artidisciplina d ON (t.iddatabase=d.iddatabase AND t.sistema=d.sistema) 
-LEFT JOIN palabraclave p on (t.iddatabase=p.iddatabase AND t.sistema=p.sistema)
-GROUP BY t.iddatabase, t.sistema, a.e_100a, i.e_100u, p.descpalabraclave, "descPalabraClaveSlug";
+    a."autoresSec",
+    a."autoresSecInstitucion",
+    a."autoresJSON",
+    a."autoresSlug",
+    i."institucionesSec",
+    i."institucionesJSON",
+    i."institucionesSlug",
+    d."idDisciplinasJSON",
+    d."disciplinasJSON",
+    p."palabrasClaveJSON",
+    p."palabrasClaveSlug"
+FROM articulo t
+    LEFT JOIN (SELECT 
+            at.iddatabase, 
+            at.sistema, 
+            array_to_json(array_agg(at.sec_institucion ORDER BY at.sec_autor))::text AS "autoresSecInstitucion",
+            array_to_json(array_agg(at.sec_autor ORDER BY at.sec_autor))::text AS "autoresSec",
+            array_to_json(array_agg(at.e_100a ORDER BY at.sec_autor))::text AS "autoresJSON",
+            string_agg(slug(at.e_100a), '|' ORDER BY at.sec_autor) AS "autoresSlug"
+        FROM autor at
+        GROUP BY at.iddatabase, at.sistema) a 
+    ON (t.iddatabase=a.iddatabase AND t.sistema=a.sistema) 
+    LEFT JOIN (SELECT 
+            it.iddatabase, 
+            it.sistema, 
+            array_to_json(array_agg(it.sec_institucion ORDER BY it.sec_institucion))::text AS "institucionesSec",
+            array_to_json(array_agg(it.e_100u ORDER BY it.sec_institucion))::text AS "institucionesJSON",
+            string_agg(slug(it.e_100u), '|' ORDER BY it.sec_institucion) AS "institucionesSlug"
+        FROM institucion it
+        GROUP BY it.iddatabase, it.sistema) i 
+    ON (t.iddatabase=i.iddatabase AND t.sistema=i.sistema)
+    LEFT JOIN (SELECT 
+            dt.iddatabase, 
+            dt.sistema,
+            array_to_json(array_agg(dt.iddisciplina ORDER BY dt.iddisciplina))::text AS "idDisciplinasJSON",
+            array_to_json(array_agg(dt.disciplina ORDER BY dt.iddisciplina))::text AS "disciplinasJSON"
+        FROM artidisciplina dt
+        GROUP BY dt.iddatabase, dt.sistema) d 
+    ON (t.iddatabase=d.iddatabase AND t.sistema=d.sistema) 
+    LEFT JOIN (SELECT 
+        pt.iddatabase, 
+        pt.sistema, 
+        array_to_json(array_agg(pt.descpalabraclave ORDER BY pt.descpalabraclave))::text AS "palabrasClaveJSON", 
+        string_agg(slug(pt.descpalabraclave), '|' ORDER BY pt.descpalabraclave) AS "palabrasClaveSlug"
+        FROM palabraclave pt
+        GROUP BY pt.iddatabase, pt.sistema) p 
+    ON (t.iddatabase=p.iddatabase AND t.sistema=p.sistema);
 
 SELECT create_matview('"mvSearch"', '"vSearch"');
 
-CREATE INDEX "idDisciplina_idx" ON "mvSearch"(id_disciplina);
-CREATE INDEX "e_856u_idx" ON "mvSearch"(e_856u);
-CREATE INDEX "palabraClave_idx" ON "mvSearch"("descPalabraClaveSlug");
-CREATE INDEX "articulo_idx" ON "mvSearch"("e245Slug");
-CREATE INDEX "autor_idx" ON "mvSearch"("e_100aSlug");
-CREATE INDEX "institucion_idx" ON "mvSearch"("e_100uSlug");
-CREATE INDEX "revista_idx" ON "mvSearch"("e_222Slug");
+CREATE INDEX "searchIdDisciplina_idx" ON "mvSearch"(id_disciplina);
+CREATE INDEX "searchTextoCompleto_idx" ON "mvSearch"(e_856u);
+CREATE INDEX "searchPalabrasClaveSlug_idx" ON "mvSearch"("palabrasClaveSlug");
+CREATE INDEX "searchArticuloSlug_idx" ON "mvSearch"("articuloSlug");
+CREATE INDEX "searchAutoresSlug_idx" ON "mvSearch"("autoresSlug");
+CREATE INDEX "searchInstitucionesSlug_idx" ON "mvSearch"("institucionesSlug");
+CREATE INDEX "searchRevistaSlug_idx" ON "mvSearch"("revistaSlug");

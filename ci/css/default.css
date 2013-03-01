@@ -33,3 +33,9 @@
 	cursor: pointer;
 	cursor: hand;
 }
+
+.centrado
+{
+	margin: 0 auto;
+	text-align: center;
+}
