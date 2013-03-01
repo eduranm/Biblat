@@ -19,9 +19,3 @@
 		</table>
 	</div>
 </div>
-
-<pre>
-<?php
-print_r($resultados);
-?>
-</pre>
