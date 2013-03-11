@@ -1,4 +1,5 @@
 <div class="centrado">
+<?php if(isset($resultados)):?>
 	<p class="titulo centrado"><?php _printf('Resultados de la búsqueda por %s', strtolower($search['indice']));?></p><br/>
 	<p class="centrado"><?php _printf('<b>%s</b>: %s (%s documentos publicados en el área de <i><b>%s</b></i>)', $search['indice'], $search['slug'], $search['total'], $search['disciplina']);?></p><br/>
 	<div class="centrado"><?php _printf('Página: %s', $links);?></div><br/>
@@ -17,5 +18,9 @@
 				</tr>
 			<?php endforeach;?>
 		</table>
-	</div>
+	</div><br/>
+	<div class="centrado"><?php _printf('Página: %s', $links);?></div><br/>
+<?php else:?>
+	<p class="titulo centrado"><?php _printf('No se encontraron resultados para la búsqueda por %s: "%s"', strtolower($search['indice']), $search['slug']);?></p>
+<?php endif;?>
 </div>

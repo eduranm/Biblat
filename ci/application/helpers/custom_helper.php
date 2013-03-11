@@ -16,7 +16,12 @@ if ( ! function_exists('slug')):
 		);
 
 		$sname = strtr($sname, $table); // remplazamos los acentos, etc, por su correspondientes
-		$sname = preg_replace("/[^A-Za-z0-9-]+/", "", $sname); // eliminamos cualquier caracter que no sea de la a-z o 0 al 9 o -
+		$sname = preg_replace("/[^A-Za-z0-9-+]+/", "", $sname); // eliminamos cualquier caracter que no sea de la a-z o 0 al 9 o -
+		$sname = preg_replace("/-+/", "-", $sname);/*Eliminamos guiones dobles*/
+		$sname = preg_replace("/\++/", "-", $sname);/*Eliminamos signos + dobles*/
+		$sname = preg_replace("/\&+/", "-", $sname);/*Eliminamos signos & dobles*/
+		$sname = preg_replace("/(-\+-|\+-|-\+)/", "+", $sname);
+		$sname = preg_replace("/(-\&-|\&-|-\&)/", "&", $sname);
 
 		return $sname;
 	}
@@ -25,7 +30,77 @@ endif;
 if ( ! function_exists('slugClean')):
 	function slugClean($string){
 		$rstring = trim($string);
-		$rstring = preg_replace('/-/',' ',$rstring);
+		$rstring = preg_replace('/[-+&]/',' ', $rstring);
+		$rstring = preg_replace("/\s+/", ' ', $rstring);
+		return $rstring;
+	}
+endif;
+
+if ( ! function_exists('slugQuerySearch') ):
+	function slugQuerySearch($string){
+		$rstring['join'] = "";
+		$rstring['where'] = "";
+		$whereField = "generalSlug";
+		$operador = NULL;
+		if ( strrpos($string, "+") > 0):
+			$operador['char'] = "+";
+			$operador['query'] = " OR ";
+		endif;
+		if ( strrpos($string, "&") > 0):
+			$operador['char'] = "&";
+			$operador['query'] = " AND ";
+		endif;
+		if ( strrpos($string, "+") > 0 && strrpos($string, "&") > 0 && strrpos($string, "&") > strrpos($string, "+")):
+			$operador['char'] = "+";
+			$operador['query'] = " OR ";
+		endif;
+		if( $operador != NULL):
+			$astring = explode($operador['char'], $string);
+			foreach ($astring as $key => $value):
+				$astring[$key] = slugClean($value);
+				$astring[$key] = trim($astring[$key]);
+				$astring[$key] =explode(" ", $astring[$key]);
+				if(count($astring[$key]) > 1):
+					$rstring['join'] = "INNER JOIN \"mvSearchFields\" sf ON s.sistema=sf.sistema AND s.iddatabase=sf.iddatabase";
+					$whereField = "singleFields";
+				endif;
+			endforeach;
+
+			$totalIndex = count($astring);
+			$currentIndex = 1;
+			foreach ($astring as $words):
+				$rstring['where'] .= "\"{$whereField}\" ~~ '%";
+				foreach ($words as $word):
+					$rstring['where'] .="{$word}%";
+				endforeach;
+				$rstring['where'] .= "'";
+				if($currentIndex < $totalIndex):
+					$rstring['where'] .= $operador['query'];
+				endif;
+				$currentIndex++;
+			endforeach;
+		else:
+			$astring = slugClean($string);
+			$astring = trim($astring);
+			$astring = explode(" ", $astring);
+			if( count($astring) > 1 ):
+				$rstring['join'] = "INNER JOIN \"mvSearchFields\" sf ON s.sistema=sf.sistema AND s.iddatabase=sf.iddatabase";
+				$whereField = "singleFields";
+				$totalIndex = count($astring);
+				$currentIndex = 1;
+				$rstring['where'] .= "\"{$whereField}\" ~~ '%";
+				foreach ($astring as $word):
+					$rstring['where'] .= "{$word}";
+					if($currentIndex < $totalIndex):
+						$rstring['where'] .= "%";
+					endif;
+					$currentIndex++;
+				endforeach;
+				$rstring['where'] .= "%'";
+			else:
+				$rstring['where'] .= "\"{$whereField}\" ~~ '%{$astring[0]}%'";
+			endif;
+		endif;
 		return $rstring;
 	}
 endif;

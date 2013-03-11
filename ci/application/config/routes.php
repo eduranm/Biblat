@@ -43,7 +43,11 @@ $route['404_override'] = '';
 
 $route['setlang/(.*)'] = 'setlang/index/$1';
 
-$route['buscar/(.*)'] = 'buscar/index/$1';
+$route['buscar/(.*)/(.*)/(texto-completo)(.*)'] = 'buscar/index/$1/$2/$3$4';
+$route['buscar/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/$1/$2$3';
+$route['buscar/(.*)/([0-9]+)'] = 'buscar/index/null/$1/$2';
+$route['buscar/(.*)/(.*)'] = 'buscar/index/$1/$2';
+$route['buscar/(.*)'] = 'buscar/index/null/$1';
 
 $route['revista/hola'] = "revista/hola";
 $route['revista/hola/(.*)'] = "revista/hola/$1";

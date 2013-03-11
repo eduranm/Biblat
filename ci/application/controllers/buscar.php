@@ -7,17 +7,18 @@ class Buscar extends CI_Controller{
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
 	}
 	
-	public function index($disciplina="", $indice="", $slug="", $textoCompleto=""){
+	public function index($disciplina="", $slug="", $textoCompleto=""){
 		/*Si se hizo una consulta con POST redirigimos a una url correcta*/
-		if(isset($_POST['disciplina']) && isset($_POST['indice']) && isset($_POST['slug'])):
+		if(isset($_POST['disciplina']) && isset($_POST['slug'])):
 			if(isset($_POST['textoCompleto'])):
 				$textoCompleto="texto-completo";
 			endif;
-			redirect(site_url("buscar/{$_POST['disciplina']}/{$_POST['indice']}/".slug($_POST['slug'])."/{$textoCompleto}"), 'refresh');
+			$returnURL = site_url(preg_replace('%[/]+%', '/', "buscar/{$_POST['disciplina']}/".slug($_POST['slug'])."/{$textoCompleto}"));
+			redirect($returnURL, 'refresh');
 		endif;
 		/*Si no exite ningun dato redirigimos al index*/
-		if($disciplina == "" || $indice == "" || $slug == ""):
-			 redirect(base_url(), 'refresh');
+		if($disciplina == "" || $slug == ""):
+			redirect(base_url(), 'refresh');
 		endif;
 		/*Variables para vistas*/
 		$data = array();
@@ -32,38 +33,44 @@ class Buscar extends CI_Controller{
 		$data['header']['title'] = _sprintf('Biblat - Búsqueda por %s: "%s"', strtolower($indiceArray[$indice]['descripcion']), slugClean($slug));
 		/*Consultas*/
 		$this->load->database();
-		/*Obteniendo id de la disciplina*/
-		$query = "SELECT * from disciplinas WHERE slug='{$disciplina}'";
-		$query = $this->db->query($query);
-		$disciplina = $query->row_array();
-		$query->free_result();
 		/*Creando la consulta para los resultados*/
 		$whereTextoCompleto = "";
 		if ($textoCompleto == "texto-completo"):
-			$whereTextoCompleto = "AND e_856u <> ''";
+			$whereTextoCompleto = "AND url <> ''";
 		endif;
 
+		$whereDisciplina = "";
+		if ($disciplina != "null"):
+			/*Obteniendo id de la disciplina*/
+			$query = "SELECT * from disciplinas WHERE slug='{$disciplina}'";
+			$query = $this->db->query($query);
+			$disciplina = $query->row_array();
+			$query->free_result();
+			$whereDisciplina = "AND id_disciplina={$disciplina['id_disciplina']}";
+		endif;
 
+		$slugQuerySearch = slugQuerySearch($slug);
 		$query="SELECT 
-					DISTINCT sistema, 
-					iddatabase, 
-					e_245 AS titulo, 
-					e_222 AS revista, 
-					e_008 AS pais, 
-					e_260b AS anio, 
-					e_300a AS volumen, 
-					e_300b AS numero, 
-					e_300c AS periodo, 
-					e_300e AS paginacion, 
-					e_856u AS url, 
-					\"autoresSec\",
-					\"autoresSecInstitucion\",
+					DISTINCT s.sistema, 
+					s.iddatabase, 
+					articulo, 
+					revista, 
+					pais, 
+					anio, 
+					volumen, 
+					numero, 
+					periodo, 
+					paginacion, 
+					url, 
+					\"autoresSecJSON\",
+					\"autoresSecInstitucionJSON\",
 					\"autoresJSON\",
-					\"institucionesSec\",
+					\"institucionesSecJSON\",
 					\"institucionesJSON\"
-				FROM \"mvSearch\"  
-				WHERE id_disciplina='{$disciplina['id_disciplina']}' $whereTextoCompleto AND {$indiceArray[$indice]['sql']} LIKE '%$slug%'
-				ORDER BY e_260b DESC";
+				FROM \"mvSearch\" s 
+				{$slugQuerySearch[join]} 
+				WHERE  {$slugQuerySearch[where]} {$whereTextoCompleto} {$whereDisciplina}
+				ORDER BY anio DESC";
 		
 		$queryCount = "SELECT count (*) as total FROM (${query}) as rows";
 		if ( ! $this->session->userdata('query{'.md5($queryCount).'}')):
@@ -75,14 +82,16 @@ class Buscar extends CI_Controller{
 		$totalRows=(int)$this->session->userdata('query{'.md5($queryCount).'}');
 
 		/*Creando paginacion*/
+		if($disciplina == "null"):
+			$disciplina = "";
+		endif;
 		$this->load->library('pagination');
 		if ($textoCompleto == "texto-completo"):
-			$config['base_url'] = site_url("buscar/{$disciplina['slug']}/{$indice}/{$slug}/{$textoCompleto}");
-			$config['uri_segment'] = 6;
+			$config['base_url'] = site_url(preg_replace('%[/]+%', '/',"buscar/{$disciplina['slug']}/{$slug}/{$textoCompleto}"));
 		else:
-			$config['base_url'] = site_url("buscar/{$disciplina['slug']}/{$indice}/{$slug}");
-			$config['uri_segment'] = 5;
+			$config['base_url'] = site_url(preg_replace('%[/]+%', '/',"buscar/{$disciplina['slug']}/{$slug}"));
 		endif;
+		$config['uri_segment'] = $this->uri->total_segments();
 		$config['total_rows'] = $totalRows;
 		$config['per_page'] = 20;
 		$config['use_page_numbers'] = true;
@@ -106,24 +115,24 @@ class Buscar extends CI_Controller{
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row):
 			/*Generando arreglo de autores*/
-			if($row['autoresSec'] != NULL && $row['autoresJSON'] != NULL):
-				$row['autores'] = array_combine(json_decode($row['autoresSec']), json_decode($row['autoresJSON']));
+			if($row['autoresSecJSON'] != NULL && $row['autoresJSON'] != NULL):
+				$row['autores'] = array_combine(json_decode($row['autoresSecJSON']), json_decode($row['autoresJSON']));
 			endif;
 			/*Generando arreglo institucion de autores*/
-			if($row['autoresSec'] != NULL && $row['autoresSecInstitucion'] != NULL):
-				$row['autoresInstitucionSec'] = array_combine(json_decode($row['autoresSec']), json_decode($row['autoresSecInstitucion']));
+			if($row['autoresSecJSON'] != NULL && $row['autoresSecInstitucionJSON'] != NULL):
+				$row['autoresInstitucionSec'] = array_combine(json_decode($row['autoresSecJSON']), json_decode($row['autoresSecInstitucionJSON']));
 			endif;
-			unset($row['autoresSec'], $row['autoresJSON'], $row['autoresSecInstitucion']);
+			unset($row['autoresSecJSON'], $row['autoresJSON'], $row['autoresSecInstitucionJSON']);
 			/*Generando arreglo de instituciones*/
-			if($row['institucionesSec'] != NULL && $row['institucionesJSON'] != NULL):
-				$row['instituciones'] = array_combine(json_decode($row['institucionesSec']), json_decode($row['institucionesJSON']));
+			if($row['institucionesSecJSON'] != NULL && $row['institucionesJSON'] != NULL):
+				$row['instituciones'] = array_combine(json_decode($row['institucionesSecJSON']), json_decode($row['institucionesJSON']));
 			endif;
-			unset($row['institucionesSec'], $row['institucionesJSON']);
+			unset($row['institucionesSecJSON'], $row['institucionesJSON']);
 			/*Creando valores para el checkbox*/
 			$row['checkBoxValue'] = "{$row['iddatabase']}|{$row['sistema']}";
 			$row['checkBoxId'] = "cbox_{$row['checkBoxValue']}";
 			/*Creando link en caso de que exista texto completo*/
-			$row['articuloLink'] = $row['titulo'];
+			$row['articuloLink'] = $row['articulo'];
 			if( $row['url'] != NULL):
 				$row['articuloLink'] = "<a href=\"{$row['url']}\" target=\"_blank\">{$row['articuloLink']}</a>";
 			endif;
