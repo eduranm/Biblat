@@ -116,19 +116,7 @@ CREATE OR REPLACE VIEW "vSearch" AS SELECT
         COALESCE(slug_space(t.e_222) || ' | ', '') || 
         COALESCE(slug_space(t.e_008) || ' | ', '') || 
         COALESCE(i."institucionesSlug", '') || 
-        COALESCE(a."autoresSlug", ''))  AS "generalSlug",
-    unnest(
-        array_cat(    
-            array_cat(
-                array_append(
-                    array_append(p."palabrasClaveArray", slug_space(t.e_245)),
-                    slug_space(t.e_222)
-                ),
-                i."institucionesArray"
-            ),
-            a."autoresArray"
-        )
-    ) AS "singleFields"
+        COALESCE(a."autoresSlug", ''))  AS "generalSlug"
 FROM articulo t
     LEFT JOIN (SELECT 
             at.iddatabase, 
@@ -174,7 +162,7 @@ CREATE INDEX "searchIdDisciplina_idx" ON "mvSearch"(id_disciplina);
 CREATE INDEX "searchTextoCompleto_idx" ON "mvSearch"(url);
 CREATE INDEX "searchArticuloSlug_idx" ON "mvSearch"("articuloSlug");
 CREATE INDEX "searchRevistaSlug_idx" ON "mvSearch"("revistaSlug");
-CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin("generalSlug");
+CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin(("generalSlug"::tsvector));
 
 CREATE OR REPLACE VIEW "vSearchFields" AS SELECT 
     t.sistema, 

@@ -83,7 +83,9 @@ class Buscar extends CI_Controller{
 
 		/*Creando paginacion*/
 		if($disciplina == "null"):
-			$disciplina = "";
+			$disciplina = array();
+			$disciplina['slug'] = "";
+			$disciplina['disciplina'] = "";
 		endif;
 		$this->load->library('pagination');
 		if ($textoCompleto == "texto-completo"):
