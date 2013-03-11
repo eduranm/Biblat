@@ -86,11 +86,12 @@
 					<form name="searchForm" id="form" method="POST" action="<?php echo site_url('buscar');?>">
 
 						<select name="disciplina">
-							<option value='' selected><?php _e('Seleccionar disciplina(obligatorio)');?></option>
+							<option value='' selected><?php _e('Seleccionar disciplina');?></option>
 <?php foreach ($disciplinas as $disciplina):?>
 							<option value="<?php echo $disciplina['slug'];?>"><?php echo $disciplina['disciplina'];?></option>
 <?php	endforeach;?>
 						</select>
+						<?php _e('Sólo texto completo');?><input type="checkbox" name="textoCompleto" id="textoCompleto" />
 					<br /><br />
 					<div class="search">
 						<input type="text" name="slug" id="slug"/>
@@ -99,25 +100,6 @@
 					<br />
 					<label for="textocompleto"></label>
 					<label for="revista"></label>
-					<table id="buscadortabla" width="472" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td height="22"><input type="radio" name="indice" id="tema" value="tema" checked/></td>
-							<td><input type="radio" name="indice" id="articulo" value="articulo" /></td>
-							<td><input type="radio" name="indice" id="autor" value="autor" /></td>
-							<td><input type="radio" name="indice" id="institucion" value="institucion" /></td>
-							<td><input type="radio" name="indice" id="revista" value="revista" /></td>
-							<td><input type="checkbox" name="textoCompleto" id="textoCompleto" /></td>
-						</tr>
-						<tr>
-							<td width="38" height="22"><?php _e('Tema');?></td>
-								<td width="57"><?php _e('Artículo');?></td>
-								<td width="36"><?php _e('Autor');?></td>
-								<td width="87"><?php _e('Institución');?></td>
-								<td width="54"><?php _e('Revista');?></td>
-								<td width="200"><?php _e('Sólo texto completo');?></td>
-							</tr>
-						</table>
-						<br />
 					</form>
 					<br /><br />
 				</div>
