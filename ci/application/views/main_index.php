@@ -79,8 +79,7 @@
 	<div id="submenu"> <a class="setlang" href="<?php echo site_url('setlang/es');?>"><?php _e('Español');?></a> / <a class="setlang" href="<?php echo site_url('setlang/en');?>"><?php _e('English');?></a> / <a class="setlang" href="<?php echo site_url('setlang/pt');?>"><?php _e('Português');?></a> / <a class="setlang" href="<?php echo site_url('setlang/fr');?>"><?php _e('Français');?></a> | <img src="<?php echo base_url();?>img/ayuda.png" width="16" height="16" alt="ayuda" /> <a href="ayuda.html"><?php _e('Ayuda');?></a> | <img src="<?php echo base_url();?>img/mapasitio.gif" width="19" height="16" alt="mapa de sitio" /> <a href="ayuda.html"><?php _e('Mapa de sitio');?></a> |  <a href="ayuda.html"><?php _e('FAQ');?></a> | <img src="<?php echo base_url();?>img/contacto.gif" width="20" height="12" alt="contacto" /> <a href="contacto.html"><?php _e('Contacto')?></a></div>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
-			<td width="51%" valign="top">
-				<div id="buscador">
+			<td class="buscador" valign="top">
 					<div id="titulobusq"><?php _e('Búsqueda:');?></div>
 					<br />
 					<form name="searchForm" id="form" method="POST" action="<?php echo site_url('buscar');?>">
@@ -97,14 +96,9 @@
 						<input type="text" name="slug" id="slug"/>
 						<input type="submit" value="<?php _e('Buscar');?>"/>
 					</div>
-					<br />
-					<label for="textocompleto"></label>
-					<label for="revista"></label>
 					</form>
-					<br /><br />
-				</div>
 			</td>
-			<td width="49%" rowspan="2" valign="top"><div id="bienvenida">
+			<td valign="top"><div id="bienvenida">
 				<?php _e('<span class="titulo">Biblat</span> ofrece: referencias bibliográficas de documentos publicados en revistas científicas y académicas latinoamericanas indizadas en CLASE y Periódica, acceso al texto completo de revistas en acceso abierto, indicadores bibliométricos e información sobre los derechos de copyright de las revistas.');?> <br /><br />
 				<span class="titulo"><?php _e('Disponibles');?></span>:<br />
 				<br />
@@ -112,19 +106,22 @@
 				<span class="disponibles"><?php echo number_format($totales['documentos']); ?></span> <?php _e('documentos');?><br />
 				<span class="disponibles"><?php echo number_format($totales['enlaces']); ?></span> <?php _e('textos completos');?><br />
 				<span class="disponibles"><?php echo number_format($totales['hevila']); ?></span> <?php _e('artículos en texto completo en repositorio HEVILA');?> </div>
-				<div id="logos">
-					<?php _e('Enlace a las bases de datos');?>  <br />
-					<img src="<?php echo base_url();?>img/claseperiodica.gif" alt="clase y periodica" width="268" height="67" border="0" usemap="#Map" /></div>
 				</td>
 			</tr>
 			<tr>
-				<td height="42">
+				<td>
 					<div id="alfabetico"><br />
 						<?php _e('Revistas por orden alfabético');?><br /><br />	
 <?php foreach (range('A', 'Z') as $i):?>
 						<a href="<?php echo site_url("indice/alfabetico/".strtolower($i));?>"><?php echo $i;?></a>
 <?php endforeach;?>
 					</div>
+			</td>
+			<td>
+				<div id="logos">
+					<?php _e('Enlace a las bases de datos');?>  <br />
+					<img src="<?php echo base_url();?>img/claseperiodica.gif" alt="clase y periodica" width="268" height="67" border="0" usemap="#Map" />
+				</div>
 			</td>
 		</tr>
 	</table>

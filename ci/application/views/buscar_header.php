@@ -15,7 +15,7 @@
 					//alert( "Data Saved: " + msg );
 				});
 			});
-			jQuery(".registro").colorbox({rel:'registro', transition:"fade", iframe:true, width:"50%", height:"80%", current:"registro {current} de {total}" });
+			jQuery(".registro").colorbox({rel:'registro', transition:"fade", iframe:true, width:"50%", height:"90%", current:"registro {current} de {total}" });
 			jQuery(document).bind('cbox_complete', function(){
 				//jQuery.colorbox.resize();
 			});

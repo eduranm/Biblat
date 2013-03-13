@@ -13,7 +13,7 @@ class Buscar extends CI_Controller{
 			if(isset($_POST['textoCompleto'])):
 				$textoCompleto="texto-completo";
 			endif;
-			$returnURL = site_url(preg_replace('%[/]+%', '/', "buscar/{$_POST['disciplina']}/".slug($_POST['slug'])."/{$textoCompleto}"));
+			$returnURL = site_url(preg_replace('%[/]+%', '/', "buscar/{$_POST['disciplina']}/".slugSearch($_POST['slug'])."/{$textoCompleto}"));
 			redirect($returnURL, 'refresh');
 		endif;
 		/*Si no exite ningun dato redirigimos al index*/
@@ -50,9 +50,9 @@ class Buscar extends CI_Controller{
 		endif;
 
 		$slugQuerySearch = slugQuerySearch($slug);
-		$query="SELECT 
-					DISTINCT s.sistema, 
-					s.iddatabase, 
+		$queryFields="SELECT 
+					DISTINCT (s.sistema, 
+					s.iddatabase) as \"sitemaIdDatabase\", 
 					articulo, 
 					revista, 
 					pais, 
@@ -66,13 +66,16 @@ class Buscar extends CI_Controller{
 					\"autoresSecInstitucionJSON\",
 					\"autoresJSON\",
 					\"institucionesSecJSON\",
-					\"institucionesJSON\"
-				FROM \"mvSearch\" s 
+					\"institucionesJSON\"";
+		$queryFrom="FROM \"mvSearch\" s 
 				{$slugQuerySearch[join]} 
-				WHERE  {$slugQuerySearch[where]} {$whereTextoCompleto} {$whereDisciplina}
-				ORDER BY anio DESC";
+				WHERE  {$slugQuerySearch[where]} {$whereTextoCompleto} {$whereDisciplina}";
+		$query = "{$queryFields} 
+				{$queryFrom} 
+				ORDER BY anio DESC, articulo";
 		
-		$queryCount = "SELECT count (*) as total FROM (${query}) as rows";
+		$queryCount = "SELECT count (DISTINCT (s.sistema, 
+					s.iddatabase)) as total {$queryFrom}";
 		if ( ! $this->session->userdata('query{'.md5($queryCount).'}')):
 			$queryTotalRows = $this->db->query($queryCount);
 			$queryTotalRows = $queryTotalRows->row_array();
@@ -144,7 +147,10 @@ class Buscar extends CI_Controller{
 				$totalAutores = count($row['autores']);
 				$indexAutor = 1;
 				foreach ($row['autores'] as $key => $autor):
-					$row['autoresHTML'] .= "{$autor}<sup>{$row['autoresInstitucionSec'][$key]}</sup>";
+					$row['autoresHTML'] .= "{$autor}";
+					if ( isset($row['instituciones'][$row['autoresInstitucionSec'][$key]]) ):
+						$row['autoresHTML'] .= "<sup>{$row['autoresInstitucionSec'][$key]}</sup>";
+					endif;
 					if($indexAutor < $totalAutores):
 						$row['autoresHTML'] .= "., ";
 					endif;
@@ -170,6 +176,7 @@ class Buscar extends CI_Controller{
 			$data['main']['resultados'][++$offset] = $row;
 		endforeach;
 		$query->free_result();
+		$this->db->close();
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);

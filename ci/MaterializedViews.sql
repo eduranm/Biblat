@@ -93,12 +93,16 @@ CREATE OR REPLACE VIEW "vSearch" AS SELECT
     slug(t.e_222) AS "revistaSlug", 
     t.e_008 AS pais, 
     slug(t.e_008) AS "paisSlug", 
+    t.e_022 AS issn, 
+    t.e_041 AS idioma, 
     t.e_260b AS anio, 
     t.e_300a AS volumen, 
     t.e_300b AS numero, 
     t.e_300c AS periodo, 
     t.e_300e AS paginacion, 
     t.e_856u AS url, 
+    t.e_590a AS "tipoDocumento",
+    t.e_590b AS "enfoqueDocumento",
     t.id_disciplina,
     array_to_json(a."autoresSecArray")::text AS "autoresSecJSON",
     array_to_json(a."autoresSecInstitucionArray")::text AS "autoresSecInstitucionJSON",
@@ -154,15 +158,20 @@ FROM articulo t
         GROUP BY pt.iddatabase, pt.sistema) p 
     ON (t.iddatabase=p.iddatabase AND t.sistema=p.sistema);
 
+
 SELECT create_matview('"mvSearch"', '"vSearch"');
 
 CREATE INDEX "searchSistema_idx" ON "mvSearch"(sistema);
 CREATE INDEX "searchIdDatabase_idx" ON "mvSearch"(iddatabase);
+CREATE INDEX "searchSistemaIdDatabase_idx" ON "mvSearch"(sistema, iddatabase);
 CREATE INDEX "searchIdDisciplina_idx" ON "mvSearch"(id_disciplina);
 CREATE INDEX "searchTextoCompleto_idx" ON "mvSearch"(url);
 CREATE INDEX "searchArticuloSlug_idx" ON "mvSearch"("articuloSlug");
 CREATE INDEX "searchRevistaSlug_idx" ON "mvSearch"("revistaSlug");
-CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin(("generalSlug"::tsvector));
+CREATE INDEX "searchAlfabetico_idx" ON "mvSearch"(substring(LOWER(revista), 1, 1));
+CREATE INDEX "searchHevila_idx" ON "mvSearch" USING gin(url gin_trgm_ops);
+#CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin(("generalSlug"::tsvector));
+CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin("generalSlug" gin_trgm_ops);
 
 CREATE OR REPLACE VIEW "vSearchFields" AS SELECT 
     t.sistema, 
@@ -209,4 +218,6 @@ SELECT create_matview('"mvSearchFields"', '"vSearchFields"');
 
 CREATE INDEX "searchFieldSistema_idx" ON "mvSearchFields"(sistema);
 CREATE INDEX "searchFieldIdDatabase_idx" ON "mvSearchFields"(iddatabase);
-CREATE INDEX "searchSingleFields_idx" ON "mvSearchFields" USING gin(("singleFields"::tsvector));
+CREATE INDEX "searchFieldSistemaIdDatabase_idx" ON "mvSearchFields"(sistema, iddatabase);
+#CREATE INDEX "searchSingleFields_idx" ON "mvSearchFields" USING gin(("singleFields"::tsvector));
+CREATE INDEX "searchSingleFields_idx" ON "mvSearchFields" USING gin("singleFields" gin_trgm_ops);

@@ -14,7 +14,7 @@ class Indice extends CI_Controller{
 		$data['header']['title'] = _sprintf('Biblat - Indice alfabético "%s"', $letra);
 		/*Consultas*/
 		$this->load->database();
-		$query = "SELECT e_222 AS revista, count(sistema) AS articulos FROM articulo WHERE LOWER(e_222) LIKE '{$letra}%' GROUP BY e_222 ORDER BY e_222;";
+		$query = "SELECT e_222 AS revista, count(sistema) AS articulos FROM articulo WHERE SUBSTRING(LOWER(e_222), 1, 1)='{$letra}' GROUP BY e_222 ORDER BY e_222;";
 		$query = $this->db->query($query);
 		$data['alfabetico']['registrosTotalArticulos'] = 0;
 		foreach ($query->result_array() as $row):

@@ -1,5 +1,8 @@
 /* CSS Document */
 
+* {
+	font-family:Verdana, Geneva, sans-serif;
+}
 /*ESTILO MENU ---------------------------------------------------------*/
 
 #menu{
@@ -21,7 +24,6 @@
         padding: 0;
         margin: 0;
         list-style: none;
-        font-family:Verdana, Geneva, sans-serif;
         font-size:13px;
         font-weight:bold;
 }
@@ -41,9 +43,7 @@
         position:absolute;
         padding: 0;
         margin: 0;
-        list-style: none;
-        font-family:Verdana, Geneva, sans-serif;
-        font-size:13px;
+        list-style: none;        font-size:13px;
         font-weight:bold;
         background-color:#fff;
 
@@ -61,7 +61,6 @@
 
 * html #menu a{
 	width: 100%;
-	
 }
 
 #menu a:link, #menu a:visited{
@@ -70,20 +69,15 @@
         padding-left: 1em;
         color:#2d486c;  
 }
-
-
 /*------- Estilos GENERALES -----------------*/
 
 a{
-	font-family:Verdana, Geneva, sans-serif;
 	font-size:12px;
 }
 
 a:link {
 	color:#cc6600;
 }
-
-
 a:visited {
 	color:#cc6600;
 	text-align: right;
@@ -95,11 +89,8 @@ html {
 }
 
 /* ------------------ LAYOUT GENERAL------------------*/
-
-
 #submenu{
 	text-align:right;
-	font-family:Verdana, Geneva, sans-serif;
 	font-size:11px;
 	padding-bottom:3px;
 	padding-top:2px;
@@ -116,10 +107,7 @@ html {
 #creditos{
 	text-align:right;
 	padding-right:10px;
-	
 }
-
-
 #footer {
 	background-image:url(../img/fondofooter.jpg);
 	background-repeat:repeat-x;
@@ -145,7 +133,7 @@ html {
 
 /* ------------------ LAYOUT INDEX------------------*/
 
-#buscador{
+.buscador{
 	border:1px dotted #036;
 	background-color:#fcfbed;
 }
@@ -154,23 +142,18 @@ html {
 	background-color:#3E3690;
 	color:#fff;
 	padding:5px;
-	font-family:Verdana, Geneva, sans-serif;
 	font-size:15px;
 	font-weight:bold;
 	text-align:center
 }
 #form{
-	font-family:Verdana, Geneva, sans-serif;
 	font-size:12px;
 	padding:5px;
 	padding-left:20px;
 }
-
-
 #logos{
 	padding:2px;
 	padding-top:5px;
-	font-family:Verdana, Geneva, sans-serif;
 	font-size:12px;
 	text-align:center;
 	border-bottom:1px dotted #036;
@@ -180,8 +163,7 @@ html {
 	border:1px dotted #036;
 	background-image:url(../img/sombrita.png);
 	background-repeat:repeat-x;
-	padding:10px;
-	font-family:Verdana, Geneva, sans-serif;
+	padding:14px;
 	font-size:12px;
 	text-align:center;
 }
@@ -196,21 +178,17 @@ html {
 	border-left:0px;
 	padding:13px;
 	padding-top:15px;
-	font-family:Verdana, Geneva, sans-serif;
 	font-size:12px;
 	text-align:justify;
 }
 
 .disponibles{
 	color:#990000;
-	font-family:Verdana, Geneva, sans-serif;
 	font-size:15px;
 	font-weight:bold;
-	
 }
 
 #disciplina{
-	font-family:Verdana, Geneva, sans-serif;
 	font-size:12px;
 	text-align:left;
 	padding:15px;
@@ -250,41 +228,28 @@ html {
 	border:1px dotted #036;
 }
 
-
-
 #pais{
 	border:1px dotted #036;
-	font-family:Verdana, Geneva, sans-serif;
 	font-size:12px;
 	text-align:center;
 	padding:8px;
 	background-image:url(../img/fondogde.jpg);
 }
 #accesos{
-	font-family:Verdana, Geneva, sans-serif;
 	font-size:12px;
 	text-align:center;
 	padding:8px;
-	
 }
 
 #buscadortabla{
 	text-align:center;
-	
 }
-
-
-
-
 
 /*------- Clases para contenidos -----------------*/
 p{
-	font-family:Verdana, Geneva, sans-serif;
 	font-size:12px;
-	
 }
 .titulo{
-	font-family:Verdana, Geneva, sans-serif;
 	font-weight:bold;
         font-size:15px;
 	color:#cc6600;
@@ -296,14 +261,10 @@ p{
 	font-family:GVerdana, Geneva, sans-serif;
 	font-weight:bold;
 }
-
-
 .texto {
-	font-family:Verdana, Geneva, sans-serif;
 	font-size:12px;
 	text-align:justify;
 	}
-	
 
 /*------- Estilos TABLA -----------------*/
 #tabla{
@@ -328,6 +289,4 @@ padding-top: 10px;
 #nube-html a:hover{
         color:#cc6600;
 }
-
-
 

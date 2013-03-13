@@ -9,10 +9,13 @@
 				<tr>
 					<td>
 						<input type="checkbox" name="registros[]" id="<?php echo $resultado['checkBoxId']?>" value="<?php echo $resultado['checkBoxValue']?>">   <?php echo $key;?>.- <i><?php echo $resultado['articuloLink'];?></i><br/>
-							<?php echo $resultado['autoresHTML'];?><br/>
-							<?php echo $resultado['institucionesHTML'];?><br/>
-							<?php echo $resultado['detalleRevista'];?><br/>
-							<a target="_blank" title="<?php echo $resultado['titulo'];?>" class="registro cboxElement" href="">Ver registro completo </a>
+							<?php if ($resultado['autoresHTML'] != ""): echo $resultado['autoresHTML'];?><br/>
+							<?php endif;
+							if ($resultado['institucionesHTML'] != ""):  echo $resultado['institucionesHTML'];?><br/>
+							<?php endif;
+							if ($resultado['detalleRevista'] != ""): echo $resultado['detalleRevista'];?><br/>
+							<?php endif;?>
+							<a target="_blank" title="<?php echo $resultado['articulo'];?>" class="registro cboxElement" href="">Ver registro completo </a>
 							<a target="_blank" href="http://www.mendeley.com/import/?url=" title="Agregue este articulo a su biblioteca Mendeley"><img src="http://www.mendeley.com/graphics/mendeley.png"></a>
 					</td>
 				</tr>
