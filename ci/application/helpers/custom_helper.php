@@ -89,7 +89,7 @@ if ( ! function_exists('slugQuerySearch') ):
 			$currentIndex = 1;
 			foreach ($astring as $words):
 				$rstring['where'] .= "\"{$whereField}\" ~~ '%";
-				$totalIndexW = count($astring);
+				$totalIndexW = count($words);
 				$currentIndexW = 1;
 				foreach ($words as $word):
 					$rstring['where'] .="{$word}";
@@ -145,7 +145,7 @@ if ( ! function_exists('slugHighLight') ):
 		$sname = preg_replace("/s/", "[šs]", $sname);
 		$sname = preg_replace("/z/", "[žz]", $sname);
 		$sname = preg_replace("/b/", "[þÞßb]", $sname);
-		$sname = preg_replace("/-+/", "\\\\\\s+", $sname);
+		$sname = preg_replace("/-+/", "[\\\\\\s.,+&]+", $sname);
 
 		return $sname;
 	}
