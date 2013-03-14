@@ -6,7 +6,7 @@
 	<div class="centrado"><?php _printf('Página: %s', $links);?></div><br/>
 	<?php endif;?>
 	<div class="centrado" id="tablaresultados">
-		<table cellspacing="5" cellpadding="5" border="0" width="100%">
+		<table class="resultados" cellspacing="5" cellpadding="5" border="0" width="100%">
 			<?php foreach ($resultados as $key => $resultado):?>
 				<tr>
 					<td>

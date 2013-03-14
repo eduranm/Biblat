@@ -20,6 +20,6 @@
 			jQuery(document).bind('cbox_complete', function(){
 				//jQuery.colorbox.resize();
 			});
-			jQuery("body").highlight("rodr[iíìï]guez");
+			jQuery(".resultados").highlight([<?php echo $slugHighLight;?>]);
 		});
 	</script>

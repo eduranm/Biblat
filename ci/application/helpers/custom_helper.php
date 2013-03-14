@@ -123,3 +123,24 @@ if ( ! function_exists('slugQuerySearch') ):
 		return $rstring;
 	}
 endif;
+
+if ( ! function_exists('slugHighLight') ):
+	function slugHighLight($string){
+		$sname = sprintf("\"%s\"", trim($string));
+		$sname = preg_replace("/[&+]/", "\", \"", $sname);
+		$sname = preg_replace("/a/", "[aáàâãäåāăą]", $sname);
+		$sname = preg_replace("/e/", "[eéèêėēĕěę]", $sname);
+		$sname = preg_replace("/i/", "[iìíîïìĩīĭ]", $sname);
+		$sname = preg_replace("/o/", "[oóôõöōŏőø]", $sname);
+		$sname = preg_replace("/u/", "[uùùûüũūŭů]", $sname);
+		$sname = preg_replace("/c/", "[çc]", $sname);
+		$sname = preg_replace("/y/", "[ýÿy]", $sname);
+		$sname = preg_replace("/n/", "[ñn]", $sname);
+		$sname = preg_replace("/s/", "[šs]", $sname);
+		$sname = preg_replace("/z/", "[žz]", $sname);
+		$sname = preg_replace("/b/", "[þÞßb]", $sname);
+		$sname = preg_replace("/-+/", "\\\\\\s+", $sname);
+
+		return $sname;
+	}
+endif;

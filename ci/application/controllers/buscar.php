@@ -175,6 +175,7 @@ class Buscar extends CI_Controller{
 
 			$data['main']['resultados'][++$offset] = $row;
 		endforeach;
+		$data['header']['slugHighLight']=slugHighLight($slug);
 		$query->free_result();
 		$this->db->close();
 		/*Vistas*/
