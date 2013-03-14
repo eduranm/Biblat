@@ -90,7 +90,7 @@ jQuery.fn.highlight = function (words, options) {
       return word != '';
     });
     words = jQuery.map(words, function(word, i) {
-      return word.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+      return word.replace(/[-{}()*?.,^$|#\s]/g, "\\$&");
     });
     if (words.length == 0) { return this; };
 
@@ -100,7 +100,7 @@ jQuery.fn.highlight = function (words, options) {
         pattern = "\\b" + pattern + "\\b";
     }
     var re = new RegExp(pattern, flag);
-    
+
     return this.each(function () {
         jQuery.highlight(this, re, settings.element, settings.className);
     });
