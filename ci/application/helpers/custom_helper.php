@@ -89,10 +89,16 @@ if ( ! function_exists('slugQuerySearch') ):
 			$currentIndex = 1;
 			foreach ($astring as $words):
 				$rstring['where'] .= "\"{$whereField}\" ~~ '%";
+				$totalIndexW = count($astring);
+				$currentIndexW = 1;
 				foreach ($words as $word):
-					$rstring['where'] .="{$word}%";
+					$rstring['where'] .="{$word}";
+					if($currentIndexW < $totalIndexW):
+						$rstring['where'] .= "_";
+					endif;
+					$currentIndexW++;
 				endforeach;
-				$rstring['where'] .= "'";
+				$rstring['where'] .= "%'";
 				if($currentIndex < $totalIndex):
 					$rstring['where'] .= $operador['query'];
 				endif;
