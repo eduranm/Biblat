@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-27 14:24-0600\n"
-"PO-Revision-Date: 2013-02-27 14:26-0600\n"
+"POT-Creation-Date: 2013-03-14 16:14-0600\n"
+"PO-Revision-Date: 2013-03-14 16:14-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -17,20 +17,30 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: application\n"
 
-#: application/views/buscar_index.php:2
+#: application/views/buscar_index.php:3
 #, php-format
 msgid "Resultados de la búsqueda por %s"
 msgstr "Search results by %s"
 
-#: application/views/buscar_index.php:3
+#: application/views/buscar_index.php:4
 #, php-format
 msgid "<b>%s</b>: %s (%s documentos publicados en el área de <i><b>%s</b></i>)"
 msgstr ""
 
-#: application/views/buscar_index.php:4
+#: application/views/buscar_index.php:6
+#: application/views/buscar_index.php:28
 #, php-format
 msgid "Página: %s"
 msgstr "Page: %s"
+
+#: application/views/buscar_index.php:21
+msgid "Agregue este articulo a su biblioteca Mendeley"
+msgstr ""
+
+#: application/views/buscar_index.php:31
+#, fuzzy, php-format
+msgid "No se encontraron resultados para la búsqueda por %s: \"%s\""
+msgstr "Search results by %s"
 
 #: application/views/main_index.php:8
 msgid "¿Qué es Biblat?"
@@ -73,14 +83,12 @@ msgid "Frecuencias"
 msgstr "Frequencies"
 
 #: application/views/main_index.php:24
-#: application/views/main_index.php:114
-#: application/controllers/buscar.php:27
+#: application/controllers/buscar.php:28
 msgid "Autor"
 msgstr "Author"
 
 #: application/views/main_index.php:25
-#: application/views/main_index.php:115
-#: application/controllers/buscar.php:28
+#: application/controllers/buscar.php:29
 msgid "Institución"
 msgstr "Institution"
 
@@ -89,10 +97,9 @@ msgid "País de la institución de afiliación del autor"
 msgstr "Institutional country to affiliation of author"
 
 #: application/views/main_index.php:27
-#: application/views/main_index.php:116
 #: application/views/indice_alfabetico.php:16
 #: application/views/indice_disciplina.php:16
-#: application/controllers/buscar.php:29
+#: application/controllers/buscar.php:30
 msgid "Revista"
 msgstr "Journal"
 
@@ -179,83 +186,73 @@ msgstr "Sitemap"
 msgid "FAQ"
 msgstr "FAQ"
 
-#: application/views/main_index.php:84
+#: application/views/main_index.php:83
 msgid "Búsqueda:"
 msgstr "Search:"
 
-#: application/views/main_index.php:89
-msgid "Seleccionar disciplina(obligatorio)"
-msgstr "Select discipline (required)"
+#: application/views/main_index.php:88
+msgid "Seleccionar disciplina"
+msgstr "Select discipline"
+
+#: application/views/main_index.php:93
+msgid "Sólo texto completo"
+msgstr "Full text only"
 
 #: application/views/main_index.php:97
 msgid "Buscar"
 msgstr "Search"
 
-#: application/views/main_index.php:112
-#: application/controllers/buscar.php:25
-msgid "Tema"
-msgstr "Topic"
-
-#: application/views/main_index.php:113
-#: application/controllers/buscar.php:26
-msgid "Artículo"
-msgstr "Article"
-
-#: application/views/main_index.php:117
-msgid "Sólo texto completo"
-msgstr "Full text only"
-
-#: application/views/main_index.php:126
+#: application/views/main_index.php:102
 msgid "<span class=\"titulo\">Biblat</span> ofrece: referencias bibliográficas de documentos publicados en revistas científicas y académicas latinoamericanas indizadas en CLASE y Periódica, acceso al texto completo de revistas en acceso abierto, indicadores bibliométricos e información sobre los derechos de copyright de las revistas."
 msgstr "<span class=\"titulo\">Biblat</span> offers: bibliographic references of documents published in scientific and academic Latin American journals indexed in CLASE and PERIODICA databases, access to the full text of Open Access journals, bibliometric indicators as well as information on policies of access."
 
-#: application/views/main_index.php:127
+#: application/views/main_index.php:103
 msgid "Disponibles"
 msgstr "Collection"
 
-#: application/views/main_index.php:129
+#: application/views/main_index.php:105
 msgid "revistas"
 msgstr "journals"
 
-#: application/views/main_index.php:130
+#: application/views/main_index.php:106
 msgid "documentos"
 msgstr "documents"
 
-#: application/views/main_index.php:131
+#: application/views/main_index.php:107
 msgid "textos completos"
 msgstr "full texts"
 
-#: application/views/main_index.php:132
+#: application/views/main_index.php:108
 msgid "artículos en texto completo en repositorio HEVILA"
 msgstr "full text articles in Hevila repository"
 
-#: application/views/main_index.php:134
-msgid "Enlace a las bases de datos"
-msgstr "Link to databases"
-
-#: application/views/main_index.php:141
+#: application/views/main_index.php:114
 #: application/views/indice_alfabetico.php:1
 #: application/views/indice_alfabetico.php:3
 msgid "Revistas por orden alfabético"
 msgstr "Journals in alphabetical order"
 
-#: application/views/main_index.php:152
+#: application/views/main_index.php:122
+msgid "Enlace a las bases de datos"
+msgstr "Link to databases"
+
+#: application/views/main_index.php:131
 msgid "Revistas por disciplina"
 msgstr "Journals by discipline"
 
-#: application/views/main_index.php:166
+#: application/views/main_index.php:145
 msgid "Revistas por país"
 msgstr "Journals by country"
 
-#: application/views/main_index.php:212
+#: application/views/main_index.php:191
 msgid "Estadísticas"
 msgstr "Statistics"
 
-#: application/views/main_index.php:215
+#: application/views/main_index.php:194
 msgid "Ver Top Ten"
 msgstr "Show top-ten"
 
-#: application/views/main_index.php:225
+#: application/views/main_index.php:204
 msgid "Créditos"
 msgstr "Credits"
 
@@ -302,16 +299,24 @@ msgstr "Biblat - Alphabetical index \"%s\""
 msgid "Biblat - Indice por disciplina \"%s\""
 msgstr "Biblat - Discipline index \"%s\""
 
-#: application/controllers/buscar.php:32
+#: application/controllers/buscar.php:26
+msgid "Tema"
+msgstr "Topic"
+
+#: application/controllers/buscar.php:27
+msgid "Artículo"
+msgstr "Article"
+
+#: application/controllers/buscar.php:33
 #, php-format
 msgid "Biblat - Búsqueda por %s: \"%s\""
 msgstr "Biblat - Search by  %s: \"%s\""
 
-#: application/controllers/buscar.php:85
+#: application/controllers/buscar.php:103
 msgid "Primera"
 msgstr "First"
 
-#: application/controllers/buscar.php:86
+#: application/controllers/buscar.php:104
 msgid "Última"
 msgstr "Last"
 

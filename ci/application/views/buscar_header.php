@@ -1,6 +1,7 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>css/estiloBiblatresultados.css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>css/colorbox.css" />
 	<script type="text/javascript" src="<?php echo base_url();?>js/colorbox.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>js/jquery.highlight.js"></script>
 	<script type="text/javascript">
 		jQuery.noConflict();
 		jQuery(document).ready(function() {
@@ -19,5 +20,6 @@
 			jQuery(document).bind('cbox_complete', function(){
 				//jQuery.colorbox.resize();
 			});
+			jQuery("body").highlight("rodr[iíìï]guez");
 		});
 	</script>

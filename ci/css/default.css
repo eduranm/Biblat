@@ -39,3 +39,9 @@
 	margin: 0 auto;
 	text-align: center;
 }
+
+
+.highlight {
+	background-color: #FFFF88;
+	font-weight: bold;
+}
