@@ -68,21 +68,14 @@ class Buscar extends CI_Controller{
 					\"institucionesSecJSON\",
 					\"institucionesJSON\"";
 		$queryFrom="FROM \"mvSearch\" s 
-				{$slugQuerySearch[join]} 
 				WHERE  {$slugQuerySearch[where]} {$whereTextoCompleto} {$whereDisciplina}";
 		$query = "{$queryFields} 
 				{$queryFrom} 
 				ORDER BY anio DESC, articulo";
 		
+
 		$queryCount = "SELECT count (DISTINCT (s.sistema, 
 					s.iddatabase)) as total {$queryFrom}";
-		if ( ! $this->session->userdata('query{'.md5($queryCount).'}')):
-			$queryTotalRows = $this->db->query($queryCount);
-			$queryTotalRows = $queryTotalRows->row_array();
-			$this->session->set_userdata('query{'.md5($queryCount).'}', $queryTotalRows['total']);
-		endif;
-
-		$totalRows=(int)$this->session->userdata('query{'.md5($queryCount).'}');
 
 		/*Creando paginacion*/
 		if($disciplina == "null"):
@@ -90,93 +83,22 @@ class Buscar extends CI_Controller{
 			$disciplina['slug'] = "";
 			$disciplina['disciplina'] = "";
 		endif;
-		$this->load->library('pagination');
 		if ($textoCompleto == "texto-completo"):
-			$config['base_url'] = site_url(preg_replace('%[/]+%', '/',"buscar/{$disciplina['slug']}/{$slug}/{$textoCompleto}"));
+			$paginationURL = site_url(preg_replace('%[/]+%', '/',"buscar/{$disciplina['slug']}/{$slug}/{$textoCompleto}"));
 		else:
-			$config['base_url'] = site_url(preg_replace('%[/]+%', '/',"buscar/{$disciplina['slug']}/{$slug}"));
+			$paginationURL = site_url(preg_replace('%[/]+%', '/',"buscar/{$disciplina['slug']}/{$slug}"));
 		endif;
-		$config['uri_segment'] = $this->uri->total_segments();
-		$config['total_rows'] = $totalRows;
-		$config['per_page'] = 20;
-		$config['use_page_numbers'] = true;
-		$config['first_link'] = _('Primera');
-		$config['last_link'] = _('Última');
-		$this->pagination->initialize($config);
-		
-		$data['main']['links'] = $this->pagination->create_links();
+		$perPage = 20;
+		$articulosResultado = articulosResultado($query, $queryCount, $paginationURL, $perPage);
 
+		$data['main']['links'] = $articulosResultado['links'];
 		/*Datos de la busqueda*/
-		$data['main']['search']['indice'] = $indiceArray[$indice]['descripcion'];
-		$data['main']['search']['slug'] = slugClean($slug);
+		$data['main']['search']['slug'] = slugSearchClean($slug);
 		$data['main']['search']['disciplina'] = $disciplina['disciplina'];
-		$data['main']['search']['total'] = $totalRows;
-		/*Resultados de la página*/
-		$offset = (($this->pagination->cur_page - 1) * $config['per_page']);
-		if ($offset < 0 ):
-			$offset = 0;
-		endif;
-		$query = "{$query} LIMIT {$config['per_page']} OFFSET {$offset}";
-		$query = $this->db->query($query);
-		foreach ($query->result_array() as $row):
-			/*Generando arreglo de autores*/
-			if($row['autoresSecJSON'] != NULL && $row['autoresJSON'] != NULL):
-				$row['autores'] = array_combine(json_decode($row['autoresSecJSON']), json_decode($row['autoresJSON']));
-			endif;
-			/*Generando arreglo institucion de autores*/
-			if($row['autoresSecJSON'] != NULL && $row['autoresSecInstitucionJSON'] != NULL):
-				$row['autoresInstitucionSec'] = array_combine(json_decode($row['autoresSecJSON']), json_decode($row['autoresSecInstitucionJSON']));
-			endif;
-			unset($row['autoresSecJSON'], $row['autoresJSON'], $row['autoresSecInstitucionJSON']);
-			/*Generando arreglo de instituciones*/
-			if($row['institucionesSecJSON'] != NULL && $row['institucionesJSON'] != NULL):
-				$row['instituciones'] = array_combine(json_decode($row['institucionesSecJSON']), json_decode($row['institucionesJSON']));
-			endif;
-			unset($row['institucionesSecJSON'], $row['institucionesJSON']);
-			/*Creando valores para el checkbox*/
-			$row['checkBoxValue'] = "{$row['iddatabase']}|{$row['sistema']}";
-			$row['checkBoxId'] = "cbox_{$row['checkBoxValue']}";
-			/*Creando link en caso de que exista texto completo*/
-			$row['articuloLink'] = $row['articulo'];
-			if( $row['url'] != NULL):
-				$row['articuloLink'] = "<a href=\"{$row['url']}\" target=\"_blank\">{$row['articuloLink']}</a>";
-			endif;
-			/*Creando lista de autores en html*/
-			$row['autoresHTML'] = "";
-			if(isset($row['autores'])):
-				$totalAutores = count($row['autores']);
-				$indexAutor = 1;
-				foreach ($row['autores'] as $key => $autor):
-					$row['autoresHTML'] .= "{$autor}";
-					if ( isset($row['instituciones'][$row['autoresInstitucionSec'][$key]]) ):
-						$row['autoresHTML'] .= "<sup>{$row['autoresInstitucionSec'][$key]}</sup>";
-					endif;
-					if($indexAutor < $totalAutores):
-						$row['autoresHTML'] .= "., ";
-					endif;
-					$indexAutor++;
-				endforeach;
-			endif;
-			/*Creando lista de instituciones html*/
-			$row['institucionesHTML'] = "";
-			if(isset($row['instituciones'])):
-				$totalInstituciones = count($row['instituciones']);
-				$indexInstitucion = 1;
-				foreach ($row['instituciones'] as $key => $institucion):
-					$row['institucionesHTML'] .= "<sup>{$key}</sup>{$institucion}";
-					if($indexInstitucion < $totalInstituciones):
-						$row['institucionesHTML'] .= "., ";
-					endif;
-					$indexInstitucion++;
-				endforeach;
-			endif;
-			/*Creando el detalle de la revista*/
-			$row['detalleRevista'] = "[{$row['revista']}, {$row['pais']}, {$row['anio']} {$row['volumen']} {$row['numero']} {$row['periodo']}, {$row['paginacion']}]";
-
-			$data['main']['resultados'][++$offset] = $row;
-		endforeach;
+		$data['main']['search']['total'] = $articulosResultado['totalRows'];
 		$data['header']['slugHighLight']=slugHighLight($slug);
-		$query->free_result();
+		/*Resultados de la página*/
+		$data['main']['resultados']=$articulosResultado['articulos'];
 		$this->db->close();
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);

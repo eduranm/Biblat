@@ -108,20 +108,7 @@ html {
 	text-align:right;
 	padding-right:10px;
 }
-#footer {
-	background-image:url(../img/fondofooter.jpg);
-	background-repeat:repeat-x;
-	font: 0.7em Verdana, Geneva, sans-serif !important;
-	color: #fff;
-	text-align: center;
-	margin-right: auto;
-	margin-left: auto;
-	padding: 5px;
-	width:990px;
-	bottom:0px;
-	background-color:#CCC;
-	margin-top: 3px;
-}
+
 #envolvente{
 	width:998px;
 	background-color:#FFFFFF;

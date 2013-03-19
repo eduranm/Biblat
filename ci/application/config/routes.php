@@ -50,8 +50,6 @@ $route['buscar/(.*)/([0-9]+)'] = 'buscar/index/null/$1/$2';
 $route['buscar/(.*)/(.*)'] = 'buscar/index/$1/$2';
 $route['buscar/(.*)'] = 'buscar/index/null/$1';
 
-$route['revista/hola'] = "revista/hola";
-$route['revista/hola/(.*)'] = "revista/hola/$1";
 $route['revista/(.*)'] = "revista/index/$1";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

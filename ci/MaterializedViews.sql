@@ -173,6 +173,7 @@ CREATE INDEX "searchHevila_idx" ON "mvSearch" USING gin(url gin_trgm_ops);
 #CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin(("generalSlug"::tsvector));
 CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin("generalSlug" gin_trgm_ops);
 
+
 CREATE OR REPLACE VIEW "vSearchFields" AS SELECT 
     t.sistema, 
     t.iddatabase, 

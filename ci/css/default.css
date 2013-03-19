@@ -45,3 +45,15 @@
 	background-color: #FFFF88;
 	font-weight: bold;
 }
+
+.footer {
+	margin: 0 auto;
+	text-align: center;
+	background-image:url(../img/fondofooter.jpg);
+	background-repeat:repeat-x;
+	font: 0.7em Verdana, Geneva, sans-serif !important;
+	color: #FFFFFF;
+	padding: 5px;
+	width:75%;
+	background-color:#FA8F03;
+}

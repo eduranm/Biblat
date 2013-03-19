@@ -1,13 +1,8 @@
-<div class="centrado">
+<div class="centrado resultadosRevista">
 <?php if(isset($resultados)):?>
-	<p class="titulo centrado"><?php _printf('Resultados de la búsqueda por: %s', $search['slug']);?></p><br/>
-	<?php if ($search['disciplina'] != ""):?>
-	<p class="centrado"><?php _printf('<i>(%s documentos publicados en el área de <i><b>%s</b></i>)', $search['total'], $search['disciplina']);?></p><br/>
-	<?php else:?>
-	<p class="centrado"><?php _printf('<i>(%s documentos publicados</i>)', $search['total']);?></p><br/>
-	<?php endif;
-	if ($links != ""):?>
-	<div class="centrado"><?php _printf('Página: %s', $links);?></div><br/>
+	<div class="titulo centrado"><?php _printf('%s<br/>(%d artículos)', $revista, $search['total']);?></div><br/>
+	<?php if ($links != ""):?>
+	<div class="centrado links"><?php _printf('Página: %s', $links);?></div><br/>
 	<?php endif;?>
 	<div class="centrado" id="tablaresultados">
 		<table class="resultados" cellspacing="5" cellpadding="5" border="0" width="100%">
@@ -29,7 +24,7 @@
 		</table>
 	</div><br/>
 	<?php if ($links != ""):?>
-	<div class="centrado"><?php _printf('Página: %s', $links);?></div><br/>
+	<div class="centrado links"><?php _printf('Página: %s', $links);?></div><br/>
 	<?php endif;?>
 <?php else:?>
 	<p class="titulo centrado"><?php _printf('No se encontraron resultados para la búsqueda por %s: "%s"', strtolower($search['indice']), $search['slug']);?></p>

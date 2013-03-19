@@ -23,6 +23,15 @@ if ( ! function_exists('slug')):
 	}
 endif;
 
+if ( ! function_exists('slugClean')):
+	function slugClean($string){
+		$rstring = trim($string);
+		$rstring = preg_replace('/[-+&]/',' ', $rstring);
+		$rstring = preg_replace("/\s+/", ' ', $rstring);
+		return $rstring;
+	}
+endif;
+
 if ( ! function_exists('slugSearch')):
 	function slugSearch($name,$utf=false){
 
@@ -50,18 +59,19 @@ if ( ! function_exists('slugSearch')):
 	}
 endif;
 
-if ( ! function_exists('slugClean')):
-	function slugClean($string){
+if ( ! function_exists('slugSearchClean') ):
+	function slugSearchClean($string){
 		$rstring = trim($string);
-		$rstring = preg_replace('/[-+&]/',' ', $rstring);
-		$rstring = preg_replace("/\s+/", ' ', $rstring);
+		$rstring = preg_replace("/&+/", " & ", $rstring);
+		$rstring = preg_replace("/\++/", " + ", $rstring);
+		$rstring = preg_replace("/-+/", " ", $rstring);
+
 		return $rstring;
 	}
 endif;
 
 if ( ! function_exists('slugQuerySearch') ):
 	function slugQuerySearch($string){
-		$rstring['join'] = "";
 		$rstring['where'] = "";
 		$whereField = "generalSlug";
 		$operador = NULL;
@@ -109,15 +119,13 @@ if ( ! function_exists('slugQuerySearch') ):
 			$astring = trim($astring);
 			$astring = explode(" ", $astring);
 			if( count($astring) > 1 ):
-				$rstring['join'] = "INNER JOIN \"mvSearchFields\" sf ON s.sistema=sf.sistema AND s.iddatabase=sf.iddatabase";
-				$whereField = "singleFields";
 				$totalIndex = count($astring);
 				$currentIndex = 1;
 				$rstring['where'] .= "\"{$whereField}\" ~~ '%";
 				foreach ($astring as $word):
 					$rstring['where'] .= "{$word}";
 					if($currentIndex < $totalIndex):
-						$rstring['where'] .= "%";
+						$rstring['where'] .= "_";
 					endif;
 					$currentIndex++;
 				endforeach;
@@ -148,5 +156,106 @@ if ( ! function_exists('slugHighLight') ):
 		$sname = preg_replace("/-+/", "[\\\\\\s.,+&]+", $sname);
 
 		return $sname;
+	}
+endif;
+
+if ( ! function_exists('articulosResultado') ):
+	function articulosResultado($query, $queryCount, $paginationURL, $perPage){
+		/**/
+		$resultado = array();
+		/*Load libraries*/
+		$ci=& get_instance();
+		$ci->load->database();
+		$ci->load->library('session');
+		$ci->load->library('pagination');
+
+		if ( ! $ci->session->userdata('query{'.md5($queryCount).'}')):
+			$queryTotalRows = $ci->db->query($queryCount);
+			$queryTotalRows = $queryTotalRows->row_array();
+			$ci->session->set_userdata('query{'.md5($queryCount).'}', $queryTotalRows['total']);
+		endif;
+
+		$totalRows=(int)$ci->session->userdata('query{'.md5($queryCount).'}');
+
+		$config['base_url'] = $paginationURL;
+		$config['uri_segment'] = $ci->uri->total_segments();
+		$config['total_rows'] = $totalRows;
+		$config['per_page'] = $perPage;
+		$config['use_page_numbers'] = true;
+		$config['first_link'] = _('Primera');
+		$config['last_link'] = _('Última');
+		$ci->pagination->initialize($config);
+		
+		$resultado['links'] = $ci->pagination->create_links();
+		$resultado['totalRows'] = $totalRows;
+
+		$offset = (($ci->pagination->cur_page - 1) * $config['per_page']);
+		if ($offset < 0 ):
+			$offset = 0;
+		endif;
+		$query = "{$query} LIMIT {$config['per_page']} OFFSET {$offset}";
+		$query = $ci->db->query($query);
+		foreach ($query->result_array() as $row):
+			/*Generando arreglo de autores*/
+			if($row['autoresSecJSON'] != NULL && $row['autoresJSON'] != NULL):
+				$row['autores'] = array_combine(json_decode($row['autoresSecJSON']), json_decode($row['autoresJSON']));
+			endif;
+			/*Generando arreglo institucion de autores*/
+			if($row['autoresSecJSON'] != NULL && $row['autoresSecInstitucionJSON'] != NULL):
+				$row['autoresInstitucionSec'] = array_combine(json_decode($row['autoresSecJSON']), json_decode($row['autoresSecInstitucionJSON']));
+			endif;
+			unset($row['autoresSecJSON'], $row['autoresJSON'], $row['autoresSecInstitucionJSON']);
+			/*Generando arreglo de instituciones*/
+			if($row['institucionesSecJSON'] != NULL && $row['institucionesJSON'] != NULL):
+				$row['instituciones'] = array_combine(json_decode($row['institucionesSecJSON']), json_decode($row['institucionesJSON']));
+			endif;
+			unset($row['institucionesSecJSON'], $row['institucionesJSON']);
+			/*Creando valores para el checkbox*/
+			$row['checkBoxValue'] = "{$row['iddatabase']}|{$row['sistema']}";
+			$row['checkBoxId'] = "cbox_{$row['checkBoxValue']}";
+			/*Creando link en caso de que exista texto completo*/
+			$row['articuloLink'] = $row['articulo'];
+			if( $row['url'] != NULL):
+				$row['articuloLink'] = "<a href=\"{$row['url']}\" target=\"_blank\">{$row['articuloLink']}</a>";
+			endif;
+			/*Creando lista de autores en html*/
+			$row['autoresHTML'] = "";
+			if(isset($row['autores'])):
+				$totalAutores = count($row['autores']);
+				$indexAutor = 1;
+				foreach ($row['autores'] as $key => $autor):
+					$row['autoresHTML'] .= "{$autor}";
+					if ( isset($row['instituciones'][$row['autoresInstitucionSec'][$key]]) ):
+						$row['autoresHTML'] .= "<sup>{$row['autoresInstitucionSec'][$key]}</sup>";
+					endif;
+					if($indexAutor < $totalAutores):
+						$row['autoresHTML'] .= "., ";
+					endif;
+					$indexAutor++;
+				endforeach;
+			endif;
+			/*Creando lista de instituciones html*/
+			$row['institucionesHTML'] = "";
+			if(isset($row['instituciones'])):
+				$totalInstituciones = count($row['instituciones']);
+				$indexInstitucion = 1;
+				foreach ($row['instituciones'] as $key => $institucion):
+					$row['institucionesHTML'] .= "<sup>{$key}</sup>{$institucion}";
+					if($indexInstitucion < $totalInstituciones):
+						$row['institucionesHTML'] .= "., ";
+					endif;
+					$indexInstitucion++;
+				endforeach;
+			endif;
+			/*Creando el detalle de la revista*/
+			$row['detalleRevista'] = "[{$row['revista']}, {$row['pais']}, {$row['anio']} {$row['volumen']} {$row['numero']} {$row['periodo']}, {$row['paginacion']}]";
+
+			$resultado['articulos'][++$offset] = $row;
+		endforeach;
+		$query->free_result();
+		$ci->db->close();
+		//print_r($resultado);
+		//die();
+		return $resultado;
 	}
 endif;

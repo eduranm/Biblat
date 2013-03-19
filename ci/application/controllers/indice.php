@@ -14,7 +14,7 @@ class Indice extends CI_Controller{
 		$data['header']['title'] = _sprintf('Biblat - Indice alfabético "%s"', $letra);
 		/*Consultas*/
 		$this->load->database();
-		$query = "SELECT e_222 AS revista, count(sistema) AS articulos FROM articulo WHERE SUBSTRING(LOWER(e_222), 1, 1)='{$letra}' GROUP BY e_222 ORDER BY e_222;";
+		$query = "SELECT revista, \"revistaSlug\", count(revista) AS articulos FROM \"mvSearch\" WHERE SUBSTRING(LOWER(revista), 1, 1)='{$letra}' GROUP BY revista, \"revistaSlug\" ORDER BY revista;";
 		$query = $this->db->query($query);
 		$data['alfabetico']['registrosTotalArticulos'] = 0;
 		foreach ($query->result_array() as $row):
@@ -44,7 +44,7 @@ class Indice extends CI_Controller{
 		$data['disciplina']['registroDisciplina'] = $query->row_array();
 		$query->free_result();
 		/*Obteniendo registros*/
-		$query = "SELECT e_222 as revista, count(*) AS articulos FROM articulo WHERE id_disciplina = '{$data['disciplina']['registroDisciplina']['id_disciplina']}' GROUP BY e_222 ORDER BY articulos DESC";
+		$query = "SELECT revista, \"revistaSlug\", count(revista) AS articulos FROM \"mvSearch\" WHERE id_disciplina = '{$data['disciplina']['registroDisciplina']['id_disciplina']}' GROUP BY revista, \"revistaSlug\"	 ORDER BY articulos DESC";
 		$query = $this->db->query($query);
 		$data['disciplina']['registrosTotalArticulos'] = 0;
 		foreach ($query->result_array() as $row):

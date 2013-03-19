@@ -1,0 +1,30 @@
+/*Resultados revista*/
+html {
+	background: #FFFFFF;
+}
+
+.resultadosRevista {
+	border: 1px solid #C56917;
+}
+
+.titulo {
+	background: #C56917;
+	color: #FFFFFF;
+}
+
+.resultados {
+	font-size: 0.8em;
+	color: #666666;
+	width: 100%;
+}
+
+.resultados td{
+	text-align: left;
+	border-bottom: 1px dotted #999999;
+	width: 95%;
+}
+
+.links {
+	font-size: 0.8em;
+	color: #444444;
+}
