@@ -21,8 +21,8 @@
 							<?php endif;
 							if ($resultado['detalleRevista'] != ""): echo $resultado['detalleRevista'];?><br/>
 							<?php endif;?>
-							<a target="_blank" title="<?php echo $resultado['articulo'];?>" class="registro cboxElement" href="">Ver registro completo </a>
-							<a target="_blank" href="http://www.mendeley.com/import/?url=" title="<?php _e('Agregue este articulo a su biblioteca Mendeley');?>"><img src="http://www.mendeley.com/graphics/mendeley.png"></a>
+							<a target="_blank" title="<?php echo $resultado['articulo'];?>" class="registro cboxElement" href="<?php echo site_url("revista/{$resultado['revistaSlug']}/articulo/{$resultado['articuloSlug']}");?>"><?php _e('Ver registro completo');?> </a>
+							<a target="_blank" href="http://www.mendeley.com/import/?url=<?php echo urlencode(site_url("revista/{$resultado['revistaSlug']}/articulo/{$resultado['articuloSlug']}"));?>" title="<?php _e('Agregue este articulo a su biblioteca Mendeley');?>"><img src="http://www.mendeley.com/graphics/mendeley.png"></a>
 					</td>
 				</tr>
 			<?php endforeach;?>
@@ -32,6 +32,6 @@
 	<div class="centrado"><?php _printf('Página: %s', $links);?></div><br/>
 	<?php endif;?>
 <?php else:?>
-	<p class="titulo centrado"><?php _printf('No se encontraron resultados para la búsqueda por %s: "%s"', strtolower($search['indice']), $search['slug']);?></p>
+	<p class="titulo centrado"><?php _printf('No se encontraron resultados para la búsqueda por: "%s"', $search['slug']);?></p>
 <?php endif;?>
 </div>

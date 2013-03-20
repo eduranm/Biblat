@@ -1,0 +1,38 @@
+html {
+	background: #FFFFFF;
+}
+
+.articulo {
+	margin: 0 auto;
+	text-align: center;
+	font-size: 0.8em;
+	color: #666666;
+}
+
+.titulo {
+	background: #C56917;
+	color: #FFFFFF;
+	padding: 5px;
+}
+
+.addthis_toolbox{
+	width: 175px; 
+	display:block; 
+	margin:5px auto;
+}
+
+.articulo table{
+	margin: 0 auto;
+	border: 1px solid #C56917;
+	width: 95%;
+	max-width: 580px;
+}
+
+.articulo table td{
+	border-bottom: 1px dotted #999999;
+	text-align: left;
+}
+
+.attributo{
+	white-space: nowrap;
+}

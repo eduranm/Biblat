@@ -259,3 +259,34 @@ if ( ! function_exists('articulosResultado') ):
 		return $resultado;
 	}
 endif;
+
+if ( ! function_exists('getAbstract') ):
+	function getAbstract($sistema, $idDatabase){
+
+	}
+endif;
+
+if ( ! function_exists('remove_empty') ):
+	function remove_empty($array) {
+	  return array_filter($array, '_remove_empty_internal');
+	}
+endif;
+
+if ( ! function_exists('_remove_empty_internal') ):
+	function _remove_empty_internal($value) {
+	  return !empty($value) || $value === 0;
+	}
+endif;
+
+if ( ! function_exists('ucname') ):
+	function ucname($string) {
+		$string =ucwords(strtolower($string));
+
+		foreach (array('-', '\'') as $delimiter) :
+			if (strpos($string, $delimiter)!==false):
+			$string =implode($delimiter, array_map('ucfirst', explode($delimiter, $string)));
+			endif;
+		endforeach;
+		return $string;
+	}
+endif;
