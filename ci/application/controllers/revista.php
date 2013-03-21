@@ -38,7 +38,7 @@ class Revista extends CI_Controller{
 					iddatabase)) as total {$queryFrom}";
 		
 		/*Paginación y resultados*/
-		$paginationURL = site_url("/revista/{$revista}");
+		$paginationURL = site_url("/revista/{$revistaSlug}");
 		$perPage = 20;
 		$articulosResultado = articulosResultado($query, $queryCount, $paginationURL, $perPage);
 		/*Resultados de la página*/
@@ -59,7 +59,7 @@ class Revista extends CI_Controller{
 
 		/*Consultas*/
 		$this->load->database();
-		$query = "SElECT 
+		$query = "SELECT 
 				s.sistema, 
 				s.iddatabase, 
 				s.articulo, 
@@ -182,10 +182,13 @@ class Revista extends CI_Controller{
 
 		if (isset($articulo['paginacion'])):
 			$articulo['paginacion'] = preg_replace("/[pP]/", "", $articulo['paginacion']);
+			$articulo['paginacionFirst'] = preg_replace("/[-\s]+/", "", preg_replace('/(^\s*\d+\s*?-|^\s*\d+?\s*$).*/m', '\1', $articulo['paginacion']));
+			$articulo['paginacionLast'] = preg_replace("/[-\s]+/", "", preg_replace('/.*(-\s*\d+\s*?$|^\s*\d+?\s*$).*/m', '\1', $articulo['paginacion']));
 		endif;
 
 
 		$data['main']['articulo'] = remove_empty($articulo);
+		$data['header']['articulo'] = $data['main']['articulo'];
 
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('revistaArticulo_header', $data['header'], TRUE);

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-20 10:03-0600\n"
-"PO-Revision-Date: 2013-03-20 10:03-0600\n"
+"POT-Creation-Date: 2013-03-20 16:04-0600\n"
+"PO-Revision-Date: 2013-03-20 16:11-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -25,12 +25,12 @@ msgstr "Search results by %s"
 #: application/views/buscar_index.php:5
 #, php-format
 msgid "<i>(%s documentos publicados en el área de <i><b>%s</b></i>)"
-msgstr ""
+msgstr "<i>(%s documents published in the area <i><b>%s</b></i>)"
 
 #: application/views/buscar_index.php:7
 #, php-format
 msgid "<i>(%s documentos publicados</i>)"
-msgstr ""
+msgstr "<i>(%s published documents</i>)"
 
 #: application/views/buscar_index.php:10
 #: application/views/buscar_index.php:32
@@ -48,7 +48,7 @@ msgstr "Show full record"
 #: application/views/buscar_index.php:25
 #: application/views/revista_index.php:20
 msgid "Agregue este articulo a su biblioteca Mendeley"
-msgstr ""
+msgstr "Add this article to your Mendeley library"
 
 #: application/views/buscar_index.php:35
 #, php-format
@@ -266,6 +266,11 @@ msgstr "Show top-ten"
 msgid "Créditos"
 msgstr "Credits"
 
+#: application/views/buscar_header.php:20
+#, php-format
+msgid "Artículo %s de %s"
+msgstr "Article %s of %s"
+
 #: application/views/indice_alfabetico.php:1
 #: application/views/indice_disciplina.php:1
 msgid "Inicio"
@@ -278,7 +283,7 @@ msgstr "Journals in alphabetical order"
 #: application/views/indice_alfabetico.php:7
 #: application/views/indice_disciplina.php:7
 msgid "Revistas indizadas en CLASE y PERIÓDICA según orden alfabético y número de documentos de cada revista"
-msgstr ""
+msgstr "Indexed journal in CLASE & PERIÓDICA  in alphabetical order and number of documents"
 
 #: application/views/indice_alfabetico.php:15
 #: application/views/indice_disciplina.php:15
@@ -302,12 +307,68 @@ msgstr "® All rights reserved 2009-2012. General Directorate for Libraries of t
 #: application/views/revista_index.php:3
 #, php-format
 msgid "%s<br/>(%d artículos)"
-msgstr ""
+msgstr "%s<br/>(%d articles)"
 
 #: application/views/revista_index.php:30
 #, php-format
 msgid "No se encontraron resultados para la búsqueda por %s: \"%s\""
 msgstr "No found results ins search by  %s: \"%s\""
+
+#: application/views/revista_articulo.php:19
+msgid "Revista:"
+msgstr "Journal:"
+
+#: application/views/revista_articulo.php:25
+msgid "ISSN:"
+msgstr "ISSN:"
+
+#: application/views/revista_articulo.php:31
+msgid "Autores:"
+msgstr "Authors:"
+
+#: application/views/revista_articulo.php:37
+msgid "Instituciones:"
+msgstr "Institutions:"
+
+#: application/views/revista_articulo.php:43
+msgid "Año:"
+msgstr "Year:"
+
+#: application/views/revista_articulo.php:49
+msgid "Periodo:"
+msgstr "Period:"
+
+#: application/views/revista_articulo.php:55
+msgid "Volumen:"
+msgstr "Volume:"
+
+#: application/views/revista_articulo.php:61
+msgid "Número:"
+msgstr "Number:"
+
+#: application/views/revista_articulo.php:67
+msgid "Paginación:"
+msgstr "Pagination:"
+
+#: application/views/revista_articulo.php:73
+msgid "País:"
+msgstr "Country:"
+
+#: application/views/revista_articulo.php:79
+msgid "Idioma:"
+msgstr "Language:"
+
+#: application/views/revista_articulo.php:85
+msgid "Disciplinas:"
+msgstr "Disciplines:"
+
+#: application/views/revista_articulo.php:91
+msgid "Palabras clave:"
+msgstr "Keywords:"
+
+#: application/views/revista_articulo.php:97
+msgid "Texto completo:"
+msgstr "Full text:"
 
 #: application/controllers/indice.php:14
 #, php-format
