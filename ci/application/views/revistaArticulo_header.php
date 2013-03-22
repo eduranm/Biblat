@@ -3,19 +3,6 @@
 	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=herz"></script>
 <?php if (isset($articulo)):?>
 	<meta name="citation_title" content="<?php echo $articulo['articulo'];?>"/>
-<?php 
-	$autoresTotal = count($articulo['autores']);
-	$autorIndex = 1;
-	$citation_authors = "";
-	foreach ($articulo['autores'] as $autor):
-		$citation_authors .= "{$autor}";
-		if($autorIndex < $autoresTotal):
-			$citation_authors .= "; ";
-		endif;
-		$autorIndex++;
-	endforeach;
-?>
-	<meta name="citation_authors" content="<?php echo $citation_authors;?>"/>
 	<meta name="citation_journal_title" content="<?php echo $articulo['revista'];?>"/>
 	<meta name="citation_issn" content="<?php echo $articulo['issn'];?>"/>
 <?php 	if ( isset($articulo['numero']) ):?>
@@ -40,10 +27,22 @@
 	<meta name="dc.date" content="<?php echo $articulo['anio'];?>"/>
 <?php 	endif;?>
 	<meta name="eprints.title" content="<?php echo $articulo['articulo'];?>"/>
-<?php 	foreach ($articulo['autores'] as $autor):?>
+<?php 	if (isset($articulo['autores'])):
+			$autoresTotal = count($articulo['autores']);
+			$autorIndex = 1;
+			$citation_authors = "";
+			foreach ($articulo['autores'] as $autor):
+				$citation_authors .= "{$autor}";
+				if($autorIndex < $autoresTotal):
+					$citation_authors .= "; ";
+				endif;
+				$autorIndex++;
+?>
 	<meta name="eprints.creators_name" content="<?php echo $autor;?>"/>
-	<meta name="dc.creator" content="<?php echo $autor;?>">
-<?php 	endforeach;?>
+	<meta name="dc.creator" content="<?php echo $autor;?>"/>
+<?php 		endforeach;?>
+	<meta name="citation_authors" content="<?php echo $citation_authors;?>"/>
+<?php	endif;?>
 	<meta name="eprints.type" content="article"/>
 	<meta name="eprints.ispublished" content="pub"/>
 	<meta name="eprints.date_type" content="published"/>

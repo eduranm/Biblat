@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-20 16:04-0600\n"
-"PO-Revision-Date: 2013-03-20 16:11-0600\n"
+"POT-Creation-Date: 2013-03-22 16:04-0600\n"
+"PO-Revision-Date: 2013-03-22 16:04-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -54,6 +54,12 @@ msgstr "Add this article to your Mendeley library"
 #, php-format
 msgid "No se encontraron resultados para la búsqueda por: \"%s\""
 msgstr "No found results ins search by : \"%s\""
+
+#: application/views/indiceDisciplinaHeader.php:14
+#: application/views/indiceAlfabeticoHeader.php:14
+#, php-format
+msgid "Revista %s de %s"
+msgstr "Journal  %s of %s"
 
 #: application/views/main_index.php:8
 msgid "¿Qué es Biblat?"

@@ -49,6 +49,7 @@ class Revista extends CI_Controller{
 		$data['main']['revista'] = $data['main']['revista']['revista'];
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('revista_header', $data['header'], TRUE);
+		$data['header']['title'] = "Biblat - {$data['main']['revista']}";
 		$this->load->view('header', $data['header']);
 		$this->load->view('revista_index', $data['main']);
 		$this->load->view('footer');
@@ -114,6 +115,8 @@ class Revista extends CI_Controller{
 			$articulo['palabrasClave'] = json_decode($articulo['palabrasClaveJSON']);
 		endif;
 		unset($articulo['palabrasClaveJSON']);
+		/*Limpiando caracteres html*/
+		$articulo = htmlspecialchars_deep($articulo);
 		/*Creando lista de autores en html*/
 		$articulo['autoresHTML'] = "";
 		if(isset($articulo['autores'])):
@@ -186,9 +189,11 @@ class Revista extends CI_Controller{
 			$articulo['paginacionLast'] = preg_replace("/[-\s]+/", "", preg_replace('/.*(-\s*\d+\s*?$|^\s*\d+?\s*$).*/m', '\1', $articulo['paginacion']));
 		endif;
 
+		$articulo = remove_empty($articulo);
 
-		$data['main']['articulo'] = remove_empty($articulo);
+		$data['main']['articulo'] = $articulo;
 		$data['header']['articulo'] = $data['main']['articulo'];
+		$data['header']['title'] = "Biblat - {$articulo['revista']} - {$articulo['articulo']}";
 
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('revistaArticulo_header', $data['header'], TRUE);

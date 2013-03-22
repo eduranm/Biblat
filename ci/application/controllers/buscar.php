@@ -30,7 +30,7 @@ class Buscar extends CI_Controller{
 		$indiceArray['revista'] = array('sql' => '"revistaSlug"', 'descripcion' => _('Revista'));
 
 		/*Header title*/
-		$data['header']['title'] = _sprintf('Biblat - Búsqueda por %s: "%s"', strtolower($indiceArray[$indice]['descripcion']), slugClean($slug));
+		$data['header']['title'] = _sprintf('Biblat - Búsqueda por %s: "%s"', strtolower($indiceArray[$indice]['descripcion']), slugSearchClean($slug));
 		/*Consultas*/
 		$this->load->database();
 		/*Creando la consulta para los resultados*/

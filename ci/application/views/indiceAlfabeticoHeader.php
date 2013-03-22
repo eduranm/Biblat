@@ -11,7 +11,7 @@
 				iframe:true, 
 				width:"50%", 
 				height:"90%", 
-				current:"registro {current} de {total}",
+				current:"<?php _printf('Revista %s de %s', '{current}', '{total}');?>",
 				href: function(){
 					var url = jQuery(this).find("a.enlace").attr('href');
 					return url;

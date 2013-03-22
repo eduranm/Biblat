@@ -210,6 +210,8 @@ if ( ! function_exists('articulosResultado') ):
 				$row['instituciones'] = array_combine(json_decode($row['institucionesSecJSON']), json_decode($row['institucionesJSON']));
 			endif;
 			unset($row['institucionesSecJSON'], $row['institucionesJSON']);
+			/*Limpiando caracteres html*/
+			$row = htmlspecialchars_deep($row);
 			/*Creando valores para el checkbox*/
 			$row['checkBoxValue'] = "{$row['iddatabase']}|{$row['sistema']}";
 			$row['checkBoxId'] = "cbox_{$row['checkBoxValue']}";
@@ -289,4 +291,17 @@ if ( ! function_exists('ucname') ):
 		endforeach;
 		return $string;
 	}
+endif;
+
+if ( ! function_exists('htmlspecialchars_deep') ):
+	function htmlspecialchars_deep($mixed, $quote_style = ENT_QUOTES, $charset = 'UTF-8'){
+		if (is_array($mixed)):
+			foreach($mixed as $key => $value):
+				$mixed[$key] = htmlspecialchars_deep($value, $quote_style, $charset);
+			endforeach;
+		elseif (is_string($mixed)):
+			$mixed = htmlspecialchars(htmlspecialchars_decode($mixed, $quote_style), $quote_style, $charset);
+		endif;
+		return $mixed;
+	} 
 endif;
