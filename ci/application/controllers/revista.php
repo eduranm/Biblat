@@ -32,7 +32,7 @@ class Revista extends CI_Controller{
 		$queryFrom = "FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revistaSlug}'";
 		$query = "{$queryFields} 
 				{$queryFrom} 
-				ORDER BY anio DESC, articulo";
+				ORDER BY anio DESC, volumen DESC, numero DESC, articulo";
 		
 		$queryCount = "SELECT count (DISTINCT (sistema, 
 					iddatabase)) as total {$queryFrom}";
@@ -49,7 +49,7 @@ class Revista extends CI_Controller{
 		$data['main']['revista'] = $data['main']['revista']['revista'];
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('revista_header', $data['header'], TRUE);
-		$data['header']['title'] = "Biblat - {$data['main']['revista']}";
+		$data['header']['title'] = _sprintf('Biblat - Revista: %s', $data['main']['revista']);
 		$this->load->view('header', $data['header']);
 		$this->load->view('revista_index', $data['main']);
 		$this->load->view('footer');
@@ -65,6 +65,7 @@ class Revista extends CI_Controller{
 				s.iddatabase, 
 				s.articulo, 
 				s.revista, 
+				s.\"revistaSlug\", 
 				s.issn, 
 				s.anio, 
 				s.volumen, 
@@ -193,7 +194,7 @@ class Revista extends CI_Controller{
 
 		$data['main']['articulo'] = $articulo;
 		$data['header']['articulo'] = $data['main']['articulo'];
-		$data['header']['title'] = "Biblat - {$articulo['revista']} - {$articulo['articulo']}";
+		$data['header']['title'] = _sprintf('Biblat - Revista: %s - Artículo: %s', $articulo['revista'], $articulo['articulo']);
 
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('revistaArticulo_header', $data['header'], TRUE);

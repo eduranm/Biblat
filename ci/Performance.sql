@@ -2,6 +2,7 @@
 CREATE EXTENSION pg_trgm;
 
 /*Actualización de datos*/
+/*articulo*/
 UPDATE articulo SET e_008=NULL WHERE e_008='';
 UPDATE articulo SET e_022=NULL WHERE e_022='';
 UPDATE articulo SET e_041=NULL WHERE e_041='';
@@ -15,8 +16,20 @@ UPDATE articulo SET e_856u=NULL WHERE e_856u='';
 
 VACUUM (VERBOSE, FULL) articulo;
 
+/*autor*/
+UPDATE autor SET e_1006=NULL WHERE e_1006='';
+ALTER TABLE	autor ADD COLUMN slug varchar;
+UPDATE autor SET slug=slug(e_100a);
+
+CREATE INDEX "autorSlug_idx" ON autor(slug);
+CREATE INDEX "autorSlugE100a_idx" ON autor(slug, e_100a);
+
+VACUUM (VERBOSE, FULL) autor;
+
+/*disciplinas*/
 ALTER TABLE disciplinas ADD COLUMN slug varchar;
 UPDATE disciplinas SET slug=slug(disciplina);
+
 VACUUM (VERBOSE, FULL) disciplinas;
 
 /*Indices para optimizar las consultas*/

@@ -10,11 +10,6 @@ class Main extends CI_Controller{
 	public function index(){
 		$data = array();
 		$data['header']['title'] = _("Biblat");
-		/*Sessiones*/
-		$sessiondata["registros"]="";
-		$sessiondata["bd"]="";
-		$sessiondata["iddisciplina"]="";
-		$this->session->set_userdata($sessiondata);
 		/*Consultas*/
 		$this->load->database();
 		/*Disciplinas*/
@@ -24,10 +19,6 @@ class Main extends CI_Controller{
 			$data['index']['disciplinas'][] = $row;
 		endforeach;
 		$query->free_result();
-		/*Actualizar slug de disciplinas*/
-		/*foreach ($data['index']['disciplinas'] as $disciplina):
-			$this->db->query("UPDATE disciplinas SET slug='".slug($disciplina['disciplina'])."' WHERE id_disciplina='{$disciplina['id_disciplina']}'");
-		endforeach;*/
 		/*Ontención de totales*/
 		$query = "SELECT count(*) AS documentos FROM articulo";
 		$query = $this->db->query($query);

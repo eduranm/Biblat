@@ -17,7 +17,7 @@
 <?php 	if ( isset($articulo['revista']) ):?>
 				<tr>
 					<td class="attributo"><?php _e('Revista:');?></td>
-					<td><?php echo $articulo['revista']?></td>
+					<td><a href="<?php echo site_url("revista/{$articulo['revistaSlug']}")?>" title="<?php echo $articulo['revista']?>"><?php echo $articulo['revista']?></a></td>
 				</tr>
 <?php 	endif;?>
 <?php 	if ( isset($articulo['issn']) ):?>

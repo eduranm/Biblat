@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-22 16:04-0600\n"
-"PO-Revision-Date: 2013-03-22 16:04-0600\n"
+"POT-Creation-Date: 2013-03-22 16:32-0600\n"
+"PO-Revision-Date: 2013-03-22 16:32-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -398,6 +398,16 @@ msgstr "Article"
 #, php-format
 msgid "Biblat - Búsqueda por %s: \"%s\""
 msgstr "Biblat - Search by  %s: \"%s\""
+
+#: application/controllers/revista.php:52
+#, php-format
+msgid "Biblat - Revista: %s"
+msgstr "Biblat - Journal: %s"
+
+#: application/controllers/revista.php:196
+#, php-format
+msgid "Biblat - Revista: %s - Artículo: %s"
+msgstr "Biblat - Journal: %s - Article: %s"
 
 #: application/helpers/custom_helper.php:185
 msgid "Primera"
