@@ -40,6 +40,7 @@ class Main extends CI_Controller{
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('main_header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
+		$this->load->view('menu', $data['header']);
 		$this->load->view('main_index', $data['index']);
 		$this->load->view('footer');
 	}

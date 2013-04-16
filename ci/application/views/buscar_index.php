@@ -1,10 +1,28 @@
-<div class="centrado">
+<div class="contenido">
 <?php if(isset($resultados)):?>
-	<p class="titulo centrado"><?php _printf('Resultados de la búsqueda por: %s', $search['slug']);?></p><br/>
+	<div class="flagContainer">
+		<p class="flag">
+			<em>
+				<?php _printf('Resultados de la búsqueda por: %s', $search['slug']);?>
+			</em>
+		</p>
+	</div>
 <?php 	if ($search['disciplina'] != ""):?>
-	<p class="centrado"><?php _printf('<i>(%s documentos publicados en el área de <i><b>%s</b></i>)', $search['total'], $search['disciplina']);?></p><br/>
+	<div class="flagContainer">
+		<p class="flag">
+			<em>
+				<?php _printf('<i>(%s documentos publicados en el área de <i><b>%s</b>)</i>', $search['total'], $search['disciplina']);?>
+			</em>
+		</p>
+	</div>
 <?php 	else:?>
-	<p class="centrado"><?php _printf('<i>(%s documentos publicados</i>)', $search['total']);?></p><br/>
+	<div class="flagContainer">
+		<p class="flag">
+			<em>
+				<?php _printf('<i>(%s documentos publicados</i>)', $search['total']);?>
+			</em>
+		</p>
+	</div>
 <?php 	endif;
 		if ($links != ""):?>
 	<div class="centrado"><?php _printf('Página: %s', $links);?></div><br/>

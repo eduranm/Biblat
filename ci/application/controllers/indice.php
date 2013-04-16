@@ -29,6 +29,7 @@ class Indice extends CI_Controller{
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('indiceAlfabeticoHeader', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
+		$this->load->view('menu', $data['header']);
 		$this->load->view('indice_alfabetico', $data['alfabetico']);
 		$this->load->view('footer');
 	}
@@ -58,6 +59,7 @@ class Indice extends CI_Controller{
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('indiceDisciplinaHeader', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
+		$this->load->view('menu', $data['header']);
 		$this->load->view('indice_disciplina', $data['disciplina']);
 		$this->load->view('footer');
 	}

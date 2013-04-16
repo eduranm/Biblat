@@ -98,6 +98,7 @@ class Buscar extends CI_Controller{
 		$data['main']['search']['slug'] = slugSearchClean($slug);
 		$data['main']['search']['disciplina'] = $disciplina['disciplina'];
 		$data['main']['search']['total'] = $articulosResultado['totalRows'];
+		$data['header']['search'] = $data['main']['search'];
 		$data['header']['slugHighLight']=slugHighLight($slug);
 		/*Resultados de la página*/
 		$data['main']['resultados']=$articulosResultado['articulos'];
@@ -105,6 +106,7 @@ class Buscar extends CI_Controller{
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
+		$this->load->view('menu', $data['header']);
 		$this->load->view('buscar_index', $data['main']);
 		$this->load->view('footer');
 	}

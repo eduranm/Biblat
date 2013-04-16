@@ -1,5 +1,4 @@
 <div id="envolvente">
-	<div id="top"><img src="<?php echo base_url();?>img/top2.jpg" width="997" height="96" alt="cabecera" /></div>
 	<div menu>
 		<table width="998px" height="35px" border="0" cellspacing="0" cellpadding="0">
 			<tr>
@@ -134,7 +133,8 @@
 							<ul>
 <?php foreach ($disciplinas as $disciplina):?>
 								<li>
-									<a href="<?php echo site_url("indice/disciplina/{$disciplina['slug']}");?>"><?php echo $disciplina['disciplina'];?></a></li>
+									<a href="<?php echo site_url("indice/disciplina/{$disciplina['slug']}");?>"><?php echo $disciplina['disciplina'];?></a>
+								</li>
 <?php endforeach;?>
 							</ul>
 					</canvas>

@@ -97,8 +97,6 @@ html {
 	background-image:url(../img/fondo.jpg);
 	background-position:top;
 	background-repeat:repeat-x;
-        padding-left: 1em;
-
 }
 
 #submenu{
@@ -153,16 +151,6 @@ html {
 	
 }
 
-p{
-	font-family:Verdana, Geneva, sans-serif;
-	font-size:12px;
-	text-align:justify;
-	padding:15px;
-        width: 800px;
-	background-image:url(../img/fondogde.jpg);
-	border:1px solid #CCC;
-	
-}
 .titulo{
 	font-family:Verdana, Geneva, sans-serif;
 	font-weight:bold;
