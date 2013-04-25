@@ -2,6 +2,18 @@
 /*gettext helper function to lang*/
 if ( ! function_exists('set_translation_language')):
 	function set_translation_language($language){
+		if($language === "" || $language == NULL):
+			$cookie = array(
+				'name'   => 'lang',
+				'value'  => 'es_ES',
+				'expire' => time()+86500,
+				'domain' => $_SERVER['SERVER_NAME'],
+				'path'   => '/',
+				'prefix' => '',
+				'secure' => FALSE
+			);
+			set_cookie($cookie);
+		endif;
 		$lang_path = FCPATH.APPPATH.'language/locales';
 		putenv('LANG='.$language.'.UTF-8');
 		setlocale(LC_ALL, $language.'.UTF-8');

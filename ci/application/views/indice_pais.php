@@ -2,12 +2,12 @@
 	<div class="flagContainer">
 		<p class="flag">
 			<em>
-				<?php _printf('Revistas por orden alfabético: %s', strtoupper($letra));?>
+				<?php _printf('Revistas por país: "%s"', $current['pais']);?>
 			</em>
 		</p>
 	</div>
 	<div>
-		<table class="resultados centrado" border=0 cellpadding='0' cellspacing='0' summary='<?php _e('Revistas en orden alfabético');?>'>
+		<table border=0 cellpadding='0' cellspacing='0' class="resultados centrado">
 			<caption title="<?php _e('Revistas indizadas en CLASE y PERIÓDICA según orden alfabético y número de documentos de cada revista');?>"></caption>
 			<colgroup>
 				<col id='noCol' />

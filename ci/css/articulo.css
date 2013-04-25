@@ -7,6 +7,8 @@ html {
 	text-align: center;
 	font-size: 0.8em;
 	color: #666666;
+	position: relative;
+	z-index: 100;
 }
 
 .titulo {
@@ -26,6 +28,7 @@ html {
 	border: 1px solid #C56917;
 	width: 95%;
 	max-width: 580px;
+	background-color: #FEFEFE;
 }
 
 .articulo table td{

@@ -25,10 +25,12 @@
 	</div>
 <?php 	endif;
 		if ($links != ""):?>
-	<div class="centrado"><?php _printf('Página: %s', $links);?></div><br/>
+	<div class="pagination">
+		<?php _printf('Páginas: %s', $links);?>
+	</div>
 <?php 	endif;?>
-	<div class="centrado" id="tablaresultados">
-		<table class="resultados" cellspacing="5" cellpadding="5" border="0" width="100%">
+	<div class="centrado">
+		<table class="resultados centrado" cellspacing="5" cellpadding="5" border="0">
 <?php 	foreach ($resultados as $key => $resultado):?>
 				<tr>
 					<td>
@@ -47,7 +49,7 @@
 		</table>
 	</div><br/>
 <?php 	if ($links != ""):?>
-	<div class="centrado"><?php _printf('Página: %s', $links);?></div><br/>
+	<div class="pagination"><?php _printf('Páginas: %s', $links);?></div><br/>
 <?php 	endif;?>
 <?php else:?>
 	<p class="titulo centrado"><?php _printf('No se encontraron resultados para la búsqueda por: "%s"', $search['slug']);?></p>

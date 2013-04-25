@@ -182,8 +182,24 @@ if ( ! function_exists('articulosResultado') ):
 		$config['total_rows'] = $totalRows;
 		$config['per_page'] = $perPage;
 		$config['use_page_numbers'] = true;
-		$config['first_link'] = _('Primera');
-		$config['last_link'] = _('Última');
+		$config['first_link'] = "<img src=\"".base_url()."img/first.png\" border=\"0\"/>";
+		$config['last_link'] = "<img src=\"".base_url()."img/last.png\" border=\"0\"/>";
+		$config['next_link'] = "<img src=\"".base_url()."img/next.png\" border=\"0\"/>";
+		$config['prev_link'] = "<img src=\"".base_url()."img/prev.png\" border=\"0\"/>";
+		$config['cur_tag_open'] = '<span class="currentPage">';
+		$config['cur_tag_close'] = '</span>';
+		$config['num_tag_open'] = '<span class="page">';
+		$config['num_tag_close'] = '</span>';
+		$config['prev_tag_open'] = '<span>';
+		$config['prev_tag_close'] = '</span>';
+		$config['next_tag_open'] = '<span>';
+		$config['next_tag_close'] = '</span>';
+		$config['first_tag_open'] = '<span>';
+		$config['first_tag_close'] = '</span>';
+		$config['last_tag_open'] = '<span>';
+		$config['last_tag_close'] = '</span>';
+		$config['full_tag_open'] = '<div class="navbar">';
+		$config['full_tag_close'] = '</div>';
 		$ci->pagination->initialize($config);
 		
 		$resultado['links'] = $ci->pagination->create_links();

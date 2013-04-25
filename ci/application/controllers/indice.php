@@ -11,7 +11,7 @@ class Indice extends CI_Controller{
 
 	public function alfabetico($letra){
 		$data = array();
-		$data['header']['title'] = _sprintf('Biblat - Indice alfabético "%s"', $letra);
+		$data['header']['title'] = _sprintf('Biblat - Indice alfabético "%s"', strtoupper($letra));
 		/*Consultas*/
 		$this->load->database();
 		$query = "SELECT revista, \"revistaSlug\", count(revista) AS articulos FROM \"mvSearch\" WHERE SUBSTRING(LOWER(revista), 1, 1)='{$letra}' GROUP BY revista, \"revistaSlug\" ORDER BY revista;";
@@ -26,6 +26,7 @@ class Indice extends CI_Controller{
 		endforeach;
 		$query->free_result();
 		$this->db->close();
+		$data['alfabetico']['letra'] = $letra;
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('indiceAlfabeticoHeader', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
@@ -61,6 +62,39 @@ class Indice extends CI_Controller{
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
 		$this->load->view('indice_disciplina', $data['disciplina']);
+		$this->load->view('footer');
+	}
+
+	public function pais($pais){
+		$data = array();
+		/*Consultas*/
+		$this->load->database();
+		/*Obteniendo lista de paises*/
+		$query = "SELECT * FROM \"mvPais\"";
+		$query = $this->db->query($query);
+		foreach ($query->result_array() as $row):
+			$data['pais']['paises'][$row['paisSlug']] = $row;
+		endforeach;
+		$query->free_result();
+		$data['pais']['current'] = $data['pais']['paises'][$pais];
+		/*Obteniendo registros*/
+		$query = "SELECT revista, \"revistaSlug\", count(revista) AS articulos FROM \"mvSearch\" WHERE \"paisSlug\"='{$pais}' GROUP BY revista, \"revistaSlug\" ORDER BY articulos DESC";
+		$query = $this->db->query($query);
+		$data['pais']['registrosTotalArticulos'] = 0;
+		foreach ($query->result_array() as $row):
+			if($row['revista'] == ""):
+				$row['revista'] = "[Título no definido]";
+			endif;
+			$data['pais']['registros'][] = $row;
+			$data['pais']['registrosTotalArticulos'] += $row['articulos'];
+		endforeach;
+		$this->db->close();
+		/*Vistas*/
+		$data['header']['title'] = _sprintf('Biblat - Indice por país: "%s"', $data['pais']['paises'][$pais]['pais']);
+		$data['header']['content'] =  $this->load->view('indiceDisciplinaHeader', $data['header'], TRUE);
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu', $data['header']);
+		$this->load->view('indice_pais', $data['pais']);
 		$this->load->view('footer');
 	}
 }

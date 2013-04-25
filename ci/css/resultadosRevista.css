@@ -5,6 +5,9 @@ html {
 
 .resultadosRevista {
 	border: 1px solid #C56917;
+	position: relative;
+	z-index: 100;
+	background-color: #FEFEFE;
 }
 
 .titulo {
@@ -16,6 +19,8 @@ html {
 	font-size: 0.8em;
 	color: #666666;
 	width: 100%;
+	max-width: 85%;
+	margin: 0 auto;
 }
 
 .resultados td{
