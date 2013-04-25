@@ -36,3 +36,7 @@ VACUUM (VERBOSE, FULL) disciplinas;
 CREATE INDEX "articuloTextoCompleto_idx" ON articulo(e_856u);	
 CREATE INDEX "articuloAlfabetico_idx" ON articulo(substring(LOWER(e_222), 1, 1));
 CREATE INDEX "articuloHevila_idx" ON articulo USING gin(e_856u gin_trgm_ops);
+
+/*Normalizando paises*/
+
+UPDATE articulo SET e_008='México' WHERE e_008='Mexico' OR e_008='Mèxico';

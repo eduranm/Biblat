@@ -222,3 +222,24 @@ CREATE INDEX "searchFieldIdDatabase_idx" ON "mvSearchFields"(iddatabase);
 CREATE INDEX "searchFieldSistemaIdDatabase_idx" ON "mvSearchFields"(sistema, iddatabase);
 #CREATE INDEX "searchSingleFields_idx" ON "mvSearchFields" USING gin(("singleFields"::tsvector));
 CREATE INDEX "searchSingleFields_idx" ON "mvSearchFields" USING gin("singleFields" gin_trgm_ops);
+
+/*Vista para lista de paises*/
+CREATE OR REPLACE VIEW "vPais" AS SELECT
+  DISTINCT "paisSlug",
+  pais
+  FROM  "vSearch" WHERE "paisSlug" <> 'internacional'
+  ORDER BY "paisSlug";
+
+SELECT create_matview('"mvPais"', '"vPais"');
+
+/*Vista para disciplinas*/
+CREATE OR REPLACE VIEW "vDisciplina" AS
+SELECT DISTINCT 
+  a.id_disciplina, 
+  d.disciplina, 
+  d.slug, 
+  count(*) as total
+FROM articulo a INNER JOIN disciplinas d ON a.id_disciplina=d.id_disciplina
+GROUP BY a.id_disciplina, d.disciplina, d.slug ORDER BY d.disciplina;
+
+SELECT create_matview('"mvDisciplina"', '"vDisciplina"');
