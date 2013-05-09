@@ -626,3 +626,14 @@ p {
 	display: inline-block;
 	padding: 0 7px;
 }
+
+/*TagCloud*/
+.tagCloud text { cursor: pointer; }
+.tagCloud text:hover { opacity: .7 !important; }
+
+/*Selec2*/
+
+.select2-results{
+    font-size: 14px;
+    line-height: 20px;
+}

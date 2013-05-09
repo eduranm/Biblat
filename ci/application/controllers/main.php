@@ -22,7 +22,7 @@ class Main extends CI_Controller{
 		$query = "SELECT * FROM \"mvDisciplina\" WHERE id_disciplina <> '23'";
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row):
-			$row['size'] = round(($row['total']/ $data['index']['maxDisciplina']) * 20, 1);
+			$row['size'] = round(($row['total']/ $data['index']['maxDisciplina']) * 20);
 			$data['index']['disciplinas'][] = $row;
 		endforeach;
 		$query->free_result();
@@ -44,16 +44,18 @@ class Main extends CI_Controller{
 		$data['index']['totales'] = array_merge($data['index']['totales'], $query->row_array());
 		$query->free_result();
 		/*Obteniendo lista de paises*/
-		$query = "SELECT * FROM \"mvPais\"";
+		$query = "SELECT * FROM \"mvPais\" WHERE \"paisSlug\" <> 'internacional'";
 		$query = $this->db->query($query);
 		$data['index']['paises'] = $query->result_array();
 		$query->free_result();
 		$this->db->close();
 		/*Vistas*/
+		$data['header']['disciplinas'] = $data['index']['disciplinas'];
 		$data['header']['content'] =  $this->load->view('main_header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
 		$this->load->view('main_index', $data['index']);
 		$this->load->view('footer');
+		//$this->load->view('main_test');
 	}
 }

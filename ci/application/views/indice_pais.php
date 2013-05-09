@@ -2,7 +2,7 @@
 	<div class="flagContainer">
 		<p class="flag">
 			<em>
-				<?php _printf('Revistas por país: "%s"', $current['pais']);?>
+				<?php _printf('Revistas por país: "%s" (%d documentos)', $current['pais'], $current['total']);?>
 			</em>
 		</p>
 	</div>

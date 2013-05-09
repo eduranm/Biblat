@@ -2,7 +2,7 @@
 	<div class="flagContainer">
 		<p class="flag">
 			<em>
-				<?php _printf('Revistas del área de "%s"', $registroDisciplina['disciplina']);?>
+				<?php _printf('Revistas del área de "%s" (%d documentos)', $current['disciplina'], $current['total']);?>
 			</em>
 		</p>
 	</div>

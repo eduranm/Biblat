@@ -1,0 +1,3 @@
+[submodule "ci/js/select2"]
+	path = ci/js/select2
+	url = git://github.com/ivaynberg/select2.git

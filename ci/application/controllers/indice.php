@@ -37,16 +37,18 @@ class Indice extends CI_Controller{
 
 	public function disciplina($disciplina){
 		$data = array();
-		$data['header']['title'] = _sprintf('Biblat - Indice por disciplina "%s"', $disciplina);
 		/*Consultas*/
 		$this->load->database();
-		/*Obteniendo registro de disciplina a partir del slug*/
-		$query = "SELECT * FROM disciplinas WHERE slug='$disciplina' LIMIT 1";
+		/*Obteniendo lista de disciplinas*/
+		$query = "SELECT * FROM \"mvDisciplina\"";
 		$query = $this->db->query($query);
-		$data['disciplina']['registroDisciplina'] = $query->row_array();
+		foreach ($query->result_array() as $row):
+			$data['disciplina']['disciplinas'][$row['slug']] = $row;
+		endforeach;
 		$query->free_result();
+		$data['disciplina']['current'] = $data['disciplina']['disciplinas'][$disciplina];
 		/*Obteniendo registros*/
-		$query = "SELECT revista, \"revistaSlug\", count(revista) AS articulos FROM \"mvSearch\" WHERE id_disciplina = '{$data['disciplina']['registroDisciplina']['id_disciplina']}' GROUP BY revista, \"revistaSlug\"	 ORDER BY articulos DESC";
+		$query = "SELECT revista, \"revistaSlug\", count(revista) AS articulos FROM \"mvSearch\" WHERE id_disciplina = '{$data['disciplina']['current']['id_disciplina']}' GROUP BY revista, \"revistaSlug\" ORDER BY articulos DESC";
 		$query = $this->db->query($query);
 		$data['disciplina']['registrosTotalArticulos'] = 0;
 		foreach ($query->result_array() as $row):
@@ -58,6 +60,7 @@ class Indice extends CI_Controller{
 		endforeach;
 		$this->db->close();
 		/*Vistas*/
+		$data['header']['title'] = _sprintf('Biblat - Indice por disciplina "%s"', $data['disciplina']['current']['disciplina']);
 		$data['header']['content'] =  $this->load->view('indiceDisciplinaHeader', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);

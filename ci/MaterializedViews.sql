@@ -224,10 +224,13 @@ CREATE INDEX "searchFieldSistemaIdDatabase_idx" ON "mvSearchFields"(sistema, idd
 CREATE INDEX "searchSingleFields_idx" ON "mvSearchFields" USING gin("singleFields" gin_trgm_ops);
 
 /*Vista para lista de paises*/
-CREATE OR REPLACE VIEW "vPais" AS SELECT
-  DISTINCT "paisSlug",
-  pais
-  FROM  "vSearch" WHERE "paisSlug" <> 'internacional'
+CREATE OR REPLACE VIEW "vPais" AS 
+SELECT
+  "paisSlug",
+  pais,
+  count(*) as total
+  FROM  "vSearch"
+  GROUP BY "paisSlug", pais
   ORDER BY "paisSlug";
 
 SELECT create_matview('"mvPais"', '"vPais"');
@@ -240,6 +243,19 @@ SELECT DISTINCT
   d.slug, 
   count(*) as total
 FROM articulo a INNER JOIN disciplinas d ON a.id_disciplina=d.id_disciplina
-GROUP BY a.id_disciplina, d.disciplina, d.slug ORDER BY d.disciplina;
+GROUP BY a.id_disciplina, d.disciplina, d.slug 
+ORDER BY d.disciplina;
 
 SELECT create_matview('"mvDisciplina"', '"vDisciplina"');
+
+/*Vista para las revistas por disciplina*/
+CREATE OR REPLACE VIEW "vDisciplinaRevistas" AS
+SELECT 
+  e_222 as revista, 
+  id_disciplina, 
+  count(*) as documentos 
+FROM articulo 
+GROUP BY id_disciplina, e_222 
+ORDER BY id_disciplina;
+
+SELECT create_matview('"mvDisciplinaRevistas"', '"vDisciplinaRevistas"');

@@ -52,5 +52,7 @@ $route['buscar/(.*)'] = 'buscar/index/null/$1';
 
 $route['revista/(.+)/articulo/(.+)'] = "revista/articulo/revista/$1/articulo/$2";
 $route['revista/(.*)'] = "revista/index/$1";
+
+$route['indicadores/indice-coautoria(.*)'] = "indicadores/indiceCoautoria$1";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
