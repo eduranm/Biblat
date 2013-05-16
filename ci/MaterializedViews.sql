@@ -259,3 +259,78 @@ GROUP BY id_disciplina, e_222
 ORDER BY id_disciplina;
 
 SELECT create_matview('"mvDisciplinaRevistas"', '"vDisciplinaRevistas"');
+
+/*Indice de coautoria por revista*/
+CREATE OR REPLACE VIEW "vIndiceCoautoriaRevista" AS
+SELECT 
+  e_222 AS revista, 
+  slug(e_222) AS "revistaSlug", 
+  substr(e_260b, 1, 4) AS anio, 
+  count(*) as documentos, 
+  sum(autores) as autores, 
+  sum(autores) / count(*) as coautoria
+FROM articulo ar
+INNER JOIN (
+  SELECT 
+    a.iddatabase, 
+    a.sistema, 
+    count(*) AS autores,
+    max(e_100x) AS e_100x
+  FROM autor a
+  LEFT JOIN institucion i 
+  ON a.iddatabase=i.iddatabase 
+  AND a.sistema=i.sistema 
+  AND a.sec_autor=i.sec_autor
+  AND a.sec_institucion=i.sec_institucion
+  --AND i.e_100x IS NOT NULL
+  GROUP BY a.iddatabase, a.sistema 
+) AS au ON ar.iddatabase=au.iddatabase AND ar.sistema=au.sistema AND au.e_100x IS NOT NULL
+WHERE e_222='Revista mexicana de física' AND e_590a ~~ 'Artículo%' AND substr(e_260b, 1, 4) ~ '[0-9]{4}'
+GROUP BY revista, anio
+ORDER BY revista, anio;
+
+SELECT create_matview('"mvIndiceCoautoriaRevista"', '"vIndiceCoautoriaRevista"');
+CREATE INDEX "indiceCoautoriaRevista_resvistaSlug" ON "mvIndiceCoautoriaRevista"("revistaSlug");
+CREATE INDEX "indiceCoautoriaRevista_anio" ON "mvIndiceCoautoriaRevista"(anio);
+
+/*Indice de coautoria por país*/
+CREATE OR REPLACE VIEW "vIndiceCoautoriaPais" AS
+SELECT 
+  au.e_100x AS "paisAutor", 
+  slug(au.e_100x) AS "paisAutorSlug", 
+  id_disciplina, 
+  substr(e_260b, 1, 4) AS anio, 
+  count(*) as documentos, 
+  sum(autores) as autores, 
+  sum(autores) / count(*) as coautoria
+FROM articulo ar
+INNER JOIN 
+  (SELECT dp.iddatabase, dp.sistema, dp.e_100x, sum(ad.autores) as autores FROM 
+    (SELECT a.iddatabase, a.sistema, e_100x FROM autor a
+      INNER JOIN institucion i 
+      ON a.iddatabase=i.iddatabase 
+      AND a.sistema=i.sistema 
+      AND a.sec_autor=i.sec_autor
+      AND a.sec_institucion=i.sec_institucion
+    WHERE e_100x IS NOT NULL
+    GROUP BY a.iddatabase, a.sistema, e_100x) AS dp --dp => documento y pais de afiliacion
+  INNER JOIN 
+    (SELECT 
+        a.iddatabase, 
+        a.sistema, 
+        count(*) AS autores
+      FROM autor a
+      LEFT JOIN institucion i 
+      ON a.iddatabase=i.iddatabase 
+      AND a.sistema=i.sistema 
+      AND a.sec_autor=i.sec_autor
+      AND a.sec_institucion=i.sec_institucion
+      GROUP BY a.iddatabase, a.sistema) AS ad -- ad => autores por documento
+  ON dp.iddatabase=ad.iddatabase AND dp.sistema=ad.sistema
+  GROUP BY dp.iddatabase, dp.sistema, dp.e_100x) AS au 
+ON ar.iddatabase=au.iddatabase AND ar.sistema=au.sistema AND au.e_100x IS NOT NULL
+WHERE e_590a ~~ 'Artículo%' AND substr(e_260b, 1, 4) ~ '[0-9]{4}' AND ar.iddatabase=0
+GROUP BY "paisAutor", id_disciplina, anio
+ORDER BY "paisAutor", id_disciplina, anio;
+
+SELECT create_matview('"mvIndiceCoautoriaPais"', '"vIndiceCoautoriaPais"');

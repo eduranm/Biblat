@@ -75,13 +75,17 @@ UPDATE disciplinas SET slug=slug(disciplina);
 
 VACUUM (VERBOSE, FULL) disciplinas;
 
+/*Instituciones*/
+
+UPDATE institucion SET e_100x=NULL WHERE e_100x='';
+VACUUM (VERBOSE, FULL) institucion;
 
 
 EXPLAIN ANALYZE
 SELECT 
   e_222 AS revista, 
   slug(e_222) AS "revistaSlug", 
-  to_date(substr(e_260b, 1, 4), 'YYYY') AS anio, 
+  substr(e_260b, 1, 4) AS anio, 
   count(*) as documentos, 
   sum(autores) as autores, 
   sum(autores) / count(*) as coautoria
@@ -90,10 +94,17 @@ INNER JOIN (
   SELECT 
     a.iddatabase, 
     a.sistema, 
-    count(*) AS autores 
+    count(*) AS autores,
+    max(e_100x) AS e_100x
   FROM autor a
-  GROUP BY a.iddatabase, a.sistema
-) AS au ON ar.iddatabase=au.iddatabase AND ar.sistema=au.sistema
-WHERE e_590a ~~ 'Artículo%' AND e_260b ~ '[0-9]{4}'
+  LEFT JOIN institucion i 
+  ON a.iddatabase=i.iddatabase 
+  AND a.sistema=i.sistema 
+  AND a.sec_autor=i.sec_autor
+  AND a.sec_institucion=i.sec_institucion
+  --AND i.e_100x IS NOT NULL
+  GROUP BY a.iddatabase, a.sistema 
+) AS au ON ar.iddatabase=au.iddatabase AND ar.sistema=au.sistema AND au.e_100x IS NOT NULL
+WHERE e_590a ~~ 'Artículo%' AND substr(e_260b, 1, 4) ~ '[0-9]{4}'
 GROUP BY revista, anio
-ORDER BY revista, anio 
+ORDER BY revista, anio
