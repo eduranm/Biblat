@@ -13,7 +13,7 @@
 				<option value="<?php echo $disciplina['id_disciplina'];?>"><?php echo $disciplina['disciplina'];?></option>
 	<?php endforeach;?>
 			</select>
-			<select name="revista" id="revista" style="width:450px" tabindex="-1" disabled>
+			<select name="revista[]" id="revista" style="width:450px" tabindex="-1" disabled multiple>
 				<option></option>
 			</select>
 		</div>
@@ -28,4 +28,6 @@
 
 		</div>
 	</form>
+	<input type="button" id="disabler" "destroy"/>
+	<input type="button" id="enabler" "enable"/>
 </div>

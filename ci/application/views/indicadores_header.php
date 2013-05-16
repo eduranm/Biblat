@@ -70,21 +70,21 @@
 			});
 
 			jQuery("#revista").on("change", function(e){
+				jQuery("#periodo").select2("disable");
+				jQuery("#periodo").empty();
 				jQuery.ajax({
-					url: '<?php echo site_url("indicadores/getPeriodos");?>/' + jQuery("#indicador").val() + '/' + e.val,
+					url: '<?php echo site_url("indicadores/getPeriodos");?>',
 					type: 'POST',
 					dataType: 'json',
-					data: {ajax: 'true'},
+					data: jQuery("#generarIndicador").serialize(),
 					success: function(data) {
 						console.log(data);
 						if(data.result){
-							jQuery("#periodo").select2("disable");
-							jQuery("#periodo").empty();
 							jQuery.each(data.periodos, function(key, val) {
-								jQuery("#periodo").append('<option value="' + val.anio +'">' + val.anio + '</option>');
+								jQuery("#periodo").append('<option value="' + val +'">' + val + '</option>');
 							});
 							jQuery("#periodo").select2("enable");
-							jQuery("#periodo").select2("open");
+							jQuery("#periodo").val(data.base).trigger("change");
 							jQuery("#generate").prop('disabled', false);
 						}else{
 							jQuery("#periodo").select2("disable");
@@ -106,8 +106,7 @@
 				  data: jQuery(this).serialize(),
 				  success: function(data) {
 				  	console.log(data);
-					var dataStart = new google.visualization.DataTable(data.start);
-					var dataEnd = new google.visualization.DataTable(data.end);
+					var data = new google.visualization.DataTable(data);
 
 					var options = {
 						animation: {
@@ -129,13 +128,16 @@
 					if(chart == null || chart.At != 'line'){
 						chart = new google.visualization.LineChart(document.getElementById('chart'));
 						console.log(chart.At);
-						chart.draw(dataStart, options);
 					}
 					console.log(chart.At);
-					chart.draw(dataEnd, options);
+					chart.draw(data, options);
 				  }
 				});
 				return false;
+			});
+
+			jQuery("#disabler").on("click", function(e){
+				jQuery("#revista").select2("destroy");
 			});
 		});
 	</script>

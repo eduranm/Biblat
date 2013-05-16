@@ -334,3 +334,17 @@ GROUP BY "paisAutor", id_disciplina, anio
 ORDER BY "paisAutor", id_disciplina, anio;
 
 SELECT create_matview('"mvIndiceCoautoriaPais"', '"vIndiceCoautoriaPais"');
+
+/*Vista para revistans con años continuos mayores a 4*/
+CREATE OR REPLACE VIEW "vDisciplinaRevistasContinuos" AS
+SELECT dr.revista, dr."revistaSlug", dr.id_disciplina, dr.documentos, ac.anios_continuos FROM
+(SELECT 
+  "revistaSlug",  
+  anios_continuos(array_agg(anio)) 
+  FROM "vIndiceCoautoriaRevista" 
+  GROUP BY "revistaSlug") as ac --Años continuos por revista
+INNER JOIN "vDisciplinaRevistas" dr
+  ON ac."revistaSlug"=dr."revistaSlug"
+WHERE anios_continuos > 4
+
+SELECT create_matview('"mvDisciplinaRevistasContinuos"', '"vDisciplinaRevistasContinuos"');
