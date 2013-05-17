@@ -611,7 +611,7 @@ p {
 	padding-bottom: 15px;
 	margin-top: 2px;
 	margin-bottom: 2px;
-	float: left;
+	display: inline-block;
 }
 
 .paisesFlags {

@@ -35,6 +35,43 @@ $BODY$
 /*Otimizar consultas con LIKE*/
 CREATE EXTENSION pg_trgm;
 
+/*Funciones para contar los años continuos*/
+CREATE OR REPLACE FUNCTION array_sort (ANYARRAY)
+RETURNS ANYARRAY LANGUAGE SQL
+AS $$
+SELECT ARRAY(SELECT unnest($1) ORDER BY 1)
+$$
+
+
+CREATE OR REPLACE FUNCTION anios_continuos(in_array text[])
+  RETURNS integer AS
+$$
+DECLARE
+i integer;
+t text;
+continuos integer;
+maxcontinuo integer;
+BEGIN
+  continuos=1;
+  maxcontinuo=1;
+  in_array = array_sort(in_array);
+  FOR i IN SELECT generate_subscripts( in_array, 1 ) LOOP
+    IF in_array[ i + 1] IS NOT NULL
+    THEN  
+      IF in_array[ i + 1]::integer = in_array[i]::integer + 1
+      THEN
+        continuos=continuos + 1;
+      ELSE
+        continuos=1;
+      END IF;
+      maxcontinuo= GREATEST(maxcontinuo, continuos);
+    END IF;
+  END loop;
+  RETURN maxcontinuo;
+END;
+$$
+  LANGUAGE plpgsql;
+
 /*Actualización de datos*/
 /*articulo*/
 UPDATE articulo SET e_008=NULL WHERE e_008='';
@@ -78,33 +115,9 @@ VACUUM (VERBOSE, FULL) disciplinas;
 /*Instituciones*/
 
 UPDATE institucion SET e_100x=NULL WHERE e_100x='';
+UPDATE institucion SET e_100x='México' WHERE e_100x='Mëxico';
+
 VACUUM (VERBOSE, FULL) institucion;
 
 
-EXPLAIN ANALYZE
-SELECT 
-  e_222 AS revista, 
-  slug(e_222) AS "revistaSlug", 
-  substr(e_260b, 1, 4) AS anio, 
-  count(*) as documentos, 
-  sum(autores) as autores, 
-  sum(autores) / count(*) as coautoria
-FROM articulo ar
-INNER JOIN (
-  SELECT 
-    a.iddatabase, 
-    a.sistema, 
-    count(*) AS autores,
-    max(e_100x) AS e_100x
-  FROM autor a
-  LEFT JOIN institucion i 
-  ON a.iddatabase=i.iddatabase 
-  AND a.sistema=i.sistema 
-  AND a.sec_autor=i.sec_autor
-  AND a.sec_institucion=i.sec_institucion
-  --AND i.e_100x IS NOT NULL
-  GROUP BY a.iddatabase, a.sistema 
-) AS au ON ar.iddatabase=au.iddatabase AND ar.sistema=au.sistema AND au.e_100x IS NOT NULL
-WHERE e_590a ~~ 'Artículo%' AND substr(e_260b, 1, 4) ~ '[0-9]{4}'
-GROUP BY revista, anio
-ORDER BY revista, anio
+/**/

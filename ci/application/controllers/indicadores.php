@@ -56,41 +56,59 @@ class Indicadores extends CI_Controller {
 
 	public function indiceCoautoriaChart(){
 		$this->output->enable_profiler(false);
-		array_shift($_POST['revista']);
+
 		$data['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
 		$this->load->database();
 		/*Generamos el arreglo de periodos*/
 		$periodos = $this->getPeriodos($_POST);
 		/*Consulta de los indices de coautoria a partir del año inicial del periodo*/
-		$query = "SELECT revista, anio, coautoria FROM \"mvIndiceCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
-		$revistaOffset=1;
-		$revistaTotal= count($_POST['revista']);
-		foreach ($_POST['revista'] as $revista):
-			$query .= "'{$revista}'";
-			if($revistaOffset < $revistaTotal):
-				$query .=",";
-			endif;
-			$revistaOffset++;
-		endforeach;
-		$query .=") AND anio>='{$_POST['periodo']}'";
-
+		if (isset($_POST['revista'])):
+			$query = "SELECT revista as title, anio, coautoria FROM \"mvIndiceCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
+			$revistaOffset=1;
+			$revistaTotal= count($_POST['revista']);
+			foreach ($_POST['revista'] as $revista):
+				$query .= "'{$revista}'";
+				if($revistaOffset < $revistaTotal):
+					$query .=",";
+				endif;
+				$revistaOffset++;
+			endforeach;
+			$query .=") AND anio>='{$_POST['periodo']}'";
+		else:
+			$query = "SELECT \"paisAutor\" as title, anio, coautoria FROM \"mvIndiceCoautoriaPais\" WHERE \"paisAutorSlug\" IN (";
+			$paisOffset=1;
+			$paisTotal= count($_POST['pais']);
+			foreach ($_POST['pais'] as $pais):
+				$query .= "'{$pais}'";
+				if($paisOffset < $paisTotal):
+					$query .=",";
+				endif;
+				$paisOffset++;
+			endforeach;
+			$query .=") AND anio>='{$_POST['periodo']}' AND id_disciplina='{$_POST['disciplina']}'";
+		endif;
+		
 		$query = $this->db->query($query);
 		$indicadores = array();
 		foreach ($query->result_array() as $row ):
-			$indicadores[$row['revista']][$row['anio']] = round($row['coautoria'], 2);
+			$indicadores[$row['title']][$row['anio']] = round($row['coautoria'], 2);
 		endforeach;
 		/*Generando columnas*/
 		foreach ($indicadores as $kindicador => $vindicador):
 			$data['cols'][] = array('id' => slug($kindicador),'label' => $kindicador, 'type' => 'number');
+			$data['cols'][] = array('id' => slug($kindicador)."-tooltip",'label' => $kindicador, 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
 		endforeach;
 		foreach ($periodos as $periodo):
 			$c = array();
 			$c[] = array(
 					'v' => $periodo
 				);
-			foreach ($indicadores as $indicador):
+			foreach ($indicadores as $kindicador => $vindicador):
 				$c[] = array(
-					'v' => $indicador[$periodo]
+					'v' => $vindicador[$periodo]
+				);
+				$c[] = array(
+					'v' => _sprintf('<div class="centrado"><b>%s</b></div><div class="centrado">Año %d: %s</div>', $kindicador, $periodo, $vindicador[$periodo])
 				);
 			endforeach;
 			$data['rows'][]['c'] = $c;
@@ -98,7 +116,7 @@ class Indicadores extends CI_Controller {
 		echo json_encode($data, true);
 	}
 
-	public function getRevistas($idDisciplina){
+	public function getRevistasPaises($idDisciplina){
 		$this->output->enable_profiler(false);
 		$data = array();
 		/*Revistas en disciplina*/
@@ -108,40 +126,61 @@ class Indicadores extends CI_Controller {
 		foreach ($query->result_array() as $row ):
 			$revista = array(
 					'val' => $row['revistaSlug'],
-					'text' => $row['revista']
+					'text' => htmlspecialchars($row['revista'])
 				);
 			$data['revistas'][] = $revista;
 		endforeach;
+		$query = "SELECT \"paisAutor\", \"paisAutorSlug\" FROM \"mvDisciplinaPaisesContinuos\" WHERE id_disciplina='{$idDisciplina}'";
+		$query = $this->db->query($query);
+		foreach ($query->result_array() as $row ):
+			$revista = array(
+					'val' => $row['paisAutorSlug'],
+					'text' => htmlspecialchars($row['paisAutor'])
+				);
+			$data['paises'][] = $revista;
+		endforeach;
 		$this->db->close();
 
-		print_r(json_encode($data['revistas'], true));
+		print_r(json_encode($data, true));
 	}
 
 	public function getPeriodos($request=null){
 		$this->output->enable_profiler(false);
 		if($request != null):
 			$_POST=$request;
-		else:
-			array_shift($_POST['revista']);
 		endif;
-
+		
 		$data = array();
 		$this->load->database();
 		$query = "";
 		/*Periodos por revista*/
 		switch ($_POST['indicador']):
 			case 'indice-coautoria':
-						$query = "SELECT max(anio) as anio FROM \"mvIndiceCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
-						$revistaOffset=1;
-						$revistaTotal= count($_POST['revista']);
-						foreach ($_POST['revista'] as $revista):
-							$query .= "'{$revista}'";
-							if($revistaOffset < $revistaTotal):
-								$query .=",";
-							endif;
-							$revistaOffset++;
-						endforeach;
-						$query .= ") GROUP BY anio ORDER BY anio";
+				if (isset($_POST['revista'])):
+					$query = "SELECT max(anio) as anio FROM \"mvIndiceCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
+					$revistaOffset=1;
+					$revistaTotal= count($_POST['revista']);
+					foreach ($_POST['revista'] as $revista):
+						$query .= "'{$revista}'";
+						if($revistaOffset < $revistaTotal):
+							$query .=",";
+						endif;
+						$revistaOffset++;
+					endforeach;
+					$query .= ") GROUP BY anio ORDER BY anio";
+				elseif (isset($_POST['pais'])):
+					$query = "SELECT max(anio) as anio FROM \"mvIndiceCoautoriaPais\" WHERE \"paisAutorSlug\" IN (";
+					$paisOffset=1;
+					$paisTotal= count($_POST['pais']);
+					foreach ($_POST['pais'] as $pais):
+						$query .= "'{$pais}'";
+						if($paisOffset < $paisTotal):
+							$query .=",";
+						endif;
+						$paisOffset++;
+					endforeach;
+					$query .= ") GROUP BY anio ORDER BY anio";
+				endif;
 				break;
 			
 			default:

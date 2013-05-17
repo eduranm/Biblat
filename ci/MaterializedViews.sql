@@ -348,3 +348,18 @@ INNER JOIN "vDisciplinaRevistas" dr
 WHERE anios_continuos > 4
 
 SELECT create_matview('"mvDisciplinaRevistasContinuos"', '"vDisciplinaRevistasContinuos"');
+
+/*Vista para paises con años continuos mayores a 4*/
+CREATE OR REPLACE VIEW "vDisciplinaPaisesContinuos" AS
+SELECT * FROM
+(SELECT 
+  "paisAutor", 
+  "paisAutorSlug", 
+  id_disciplina, 
+  anios_continuos(array_agg(anio))
+  FROM "vIndiceCoautoriaPais" 
+  GROUP BY "paisAutorSlug", "paisAutor", id_disciplina
+  ORDER BY "paisAutorSlug", id_disciplina) AS ac --Años continuos por revista
+WHERE anios_continuos > 4;
+
+SELECT create_matview('"mvDisciplinaPaisesContinuos"', '"vDisciplinaPaisesContinuos"');
