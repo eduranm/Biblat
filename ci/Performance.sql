@@ -116,6 +116,8 @@ VACUUM (VERBOSE, FULL) disciplinas;
 
 UPDATE institucion SET e_100x=NULL WHERE e_100x='';
 UPDATE institucion SET e_100x='México' WHERE e_100x='Mëxico';
+UPDATE institucion SET e_100x='México' WHERE e_100x='Mëxico';
+UPDATE institucion SET e_100x='Japón' WHERE e_100x='Japòn';
 
 VACUUM (VERBOSE, FULL) institucion;
 

@@ -37,12 +37,14 @@
 					jQuery("#revista, #pais").select2("enable", false);
 				} else {
 					jQuery.ajax({
-						url: '<?php echo site_url("indicadores/getRevistasPaises");?>/' + e.val,
+						url: '<?php echo site_url("indicadores/getRevistasPaises");?>',
 						type: 'POST',
 						dataType: 'json',
-						data: {ajax: 'true'},
+						data: jQuery("#generarIndicador").serialize(),
 						success: function(data) {
 							jQuery("#revista, #pais").empty().append('<option></option>');
+							jQuery("#revista, #pais").select2("destroy");
+							jQuery("#revista, #pais").select2({allowClear: true});
 							jQuery("#revista, #pais").select2("enable", false);
 							jQuery.each(data.revistas, function(key, val) {
 								jQuery("#revista").append('<option value="' + val.val +'">' + val.text + '</option>');
@@ -51,7 +53,8 @@
 							jQuery.each(data.paises, function(key, val) {
 								jQuery("#pais").append('<option value="' + val.val +'">' + val.text + '</option>');
 							});
-							jQuery("#revista, #pais").select2("enable", true)
+							jQuery("#revista, #pais").select2("enable", true);
+							console.log(data);
 						}
 					});
 				}
@@ -132,38 +135,20 @@
 
 			jQuery("#generarIndicador").on("submit", function(e){
 				jQuery.ajax({
-				  url: '<?php echo site_url("indicadores/indiceCoautoriaChart");?>',
+				  url: '<?php echo site_url("indicadores/getChartData");?>',
 				  type: 'POST',
 				  dataType: 'json',
 				  data: jQuery(this).serialize(),
 				  success: function(data) {
 				  	console.log(data);
-					var data = new google.visualization.DataTable(data);
+					var chartData = new google.visualization.DataTable(data.data);
 
-					var options = {
-						animation: {
-							duration: 1500
-						},
-						hAxis: {
-							title: '<?php _e('Periodo')?>'
-						},
-						legend: {
-							position: 'right'
-						},
-						pointSize: 3,
-						tooltip: { isHtml: true },
-						vAxis: {
-							title: '<?php _e('Indice de coautoría')?>',
-							minValue: 0,
-							baseline: 0
-						}
-					};
 					if(chart == null || chart.At != 'line'){
 						chart = new google.visualization.LineChart(document.getElementById('chart'));
 						console.log(chart.At);
 					}
 					console.log(chart.At);
-					chart.draw(data, options);
+					chart.draw(chartData, data.options);
 				  }
 				});
 				return false;

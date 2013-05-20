@@ -606,7 +606,7 @@ p {
 	display: inline-block;
 }
 .leftColumn, .rightColumn {
-	width: 49%;
+	width: 48%;
 	height: 100%;
 	padding-bottom: 15px;
 	margin-top: 2px;
@@ -636,4 +636,8 @@ p {
 .select2-results{
     font-size: 14px;
     line-height: 20px;
+}
+
+.goog-tooltip{
+	z-index: 12;
 }

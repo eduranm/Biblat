@@ -36,14 +36,10 @@ class Indicadores extends CI_Controller {
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
 	}
 
-	public function index()
+	public function index($indicador="")
 	{
-		
-	}
-
-	public function indiceCoautoria(){
 		$data = array();
-		$data['main']['indicador'] = "indice-coautoria";
+		$data['main']['indicador'] = $indicador;
 
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('indicadores_header', $data['header'], TRUE);
@@ -54,16 +50,28 @@ class Indicadores extends CI_Controller {
 		$this->load->view('footer');
 	}
 
-	public function indiceCoautoriaChart(){
+	public function getChartData(){
 		$this->output->enable_profiler(false);
 
-		$data['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
+		$data['data']['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
 		$this->load->database();
 		/*Generamos el arreglo de periodos*/
 		$periodos = $this->getPeriodos($_POST);
-		/*Consulta de los indices de coautoria a partir del año inicial del periodo*/
+		/*Consulta para cada indicador*/
+		$indicadorQuery['indice-coautoria']['revista']="SELECT revista AS title, anio, coautoria AS valor FROM \"mvIndiceCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
+		$indicadorQuery['indice-coautoria']['pais']="SELECT \"paisAutor\" AS title, anio, coautoria AS valor FROM \"mvIndiceCoautoriaPais\" WHERE \"paisAutorSlug\" IN (";
+		$indicadorQuery['tasa-documentos-coautorados']['revista']="SELECT revista AS title, anio, \"tasaCoautoria\" AS valor FROM \"mvTasaCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
+		$indicadorQuery['tasa-documentos-coautorados']['pais']="SELECT \"paisAutor\" AS title, anio, \"tasaCoautoria\" AS valor FROM \"mvTasaCoautoriaPais\" WHERE \"paisAutorSlug\" IN (";
+		$indicadorQuery['grado-colaboracion']="";
+		$indicadorQuery['modelo-elitismo']="";
+		$indicadorQuery['indice-colaboracion']="";
+		$indicadorQuery['indice-densidad-documentos']="";
+		$indicadorQuery['indice-concentracion']="";
+		$indicadorQuery['modelo-bradford-revista']="";
+		$indicadorQuery['modelo-bradford-institucion']="";
+		$indicadorQuery['productividad-exogena']="";
 		if (isset($_POST['revista'])):
-			$query = "SELECT revista as title, anio, coautoria FROM \"mvIndiceCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
+			$query = $indicadorQuery[$_POST['indicador']]['revista'];
 			$revistaOffset=1;
 			$revistaTotal= count($_POST['revista']);
 			foreach ($_POST['revista'] as $revista):
@@ -75,7 +83,7 @@ class Indicadores extends CI_Controller {
 			endforeach;
 			$query .=") AND anio>='{$_POST['periodo']}'";
 		else:
-			$query = "SELECT \"paisAutor\" as title, anio, coautoria FROM \"mvIndiceCoautoriaPais\" WHERE \"paisAutorSlug\" IN (";
+			$query = $indicadorQuery[$_POST['indicador']]['pais'];
 			$paisOffset=1;
 			$paisTotal= count($_POST['pais']);
 			foreach ($_POST['pais'] as $pais):
@@ -87,16 +95,16 @@ class Indicadores extends CI_Controller {
 			endforeach;
 			$query .=") AND anio>='{$_POST['periodo']}' AND id_disciplina='{$_POST['disciplina']}'";
 		endif;
-		
+
 		$query = $this->db->query($query);
 		$indicadores = array();
 		foreach ($query->result_array() as $row ):
-			$indicadores[$row['title']][$row['anio']] = round($row['coautoria'], 2);
+			$indicadores[$row['title']][$row['anio']] = round($row['valor'], 2);
 		endforeach;
 		/*Generando columnas*/
 		foreach ($indicadores as $kindicador => $vindicador):
-			$data['cols'][] = array('id' => slug($kindicador),'label' => $kindicador, 'type' => 'number');
-			$data['cols'][] = array('id' => slug($kindicador)."-tooltip",'label' => $kindicador, 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
+			$data['data']['cols'][] = array('id' => slug($kindicador),'label' => $kindicador, 'type' => 'number');
+			$data['data']['cols'][] = array('id' => slug($kindicador)."-tooltip",'label' => $kindicador, 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
 		endforeach;
 		foreach ($periodos as $periodo):
 			$c = array();
@@ -111,17 +119,39 @@ class Indicadores extends CI_Controller {
 					'v' => _sprintf('<div class="centrado"><b>%s</b></div><div class="centrado">Año %d: %s</div>', $kindicador, $periodo, $vindicador[$periodo])
 				);
 			endforeach;
-			$data['rows'][]['c'] = $c;
+			$data['data']['rows'][]['c'] = $c;
 		endforeach;
+
+		/*Opciones de la gráfica*/
+		$data['options'] = array(
+						'animation' => array(
+								'duration' => 1000
+							), 
+						'hAxis' => array(
+								'title' => _('Periodo')
+							), 
+						'legend' => array(
+								'position' => 'right'
+							),
+						'pointSize' => 3,
+						'tooltip' => array(
+								'isHtml' => true
+							),
+						'vAxis' => array(
+								'title' => $this->indicadores[$_POST['indicador']],
+								'minValue' => 0
+							)
+						);
 		echo json_encode($data, true);
 	}
 
-	public function getRevistasPaises($idDisciplina){
+	public function getRevistasPaises(){
 		$this->output->enable_profiler(false);
 		$data = array();
+
 		/*Revistas en disciplina*/
 		$this->load->database();
-		$query = "SELECT revista, \"revistaSlug\" FROM \"mvDisciplinaRevistasContinuos\" WHERE id_disciplina='{$idDisciplina}'";
+		$query = "SELECT revista, \"revistaSlug\" FROM \"mvDisciplinaRevistasContinuos\" WHERE id_disciplina='{$_POST['disciplina']}'";
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row ):
 			$revista = array(
@@ -130,7 +160,7 @@ class Indicadores extends CI_Controller {
 				);
 			$data['revistas'][] = $revista;
 		endforeach;
-		$query = "SELECT \"paisAutor\", \"paisAutorSlug\" FROM \"mvDisciplinaPaisesContinuos\" WHERE id_disciplina='{$idDisciplina}'";
+		$query = "SELECT \"paisAutor\", \"paisAutorSlug\" FROM \"mvDisciplinaPaisesContinuos\" WHERE id_disciplina='{$_POST['disciplina']}'";
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row ):
 			$revista = array(
@@ -141,7 +171,7 @@ class Indicadores extends CI_Controller {
 		endforeach;
 		$this->db->close();
 
-		print_r(json_encode($data, true));
+		echo json_encode($data, true);
 	}
 
 	public function getPeriodos($request=null){
@@ -157,7 +187,7 @@ class Indicadores extends CI_Controller {
 		switch ($_POST['indicador']):
 			case 'indice-coautoria':
 				if (isset($_POST['revista'])):
-					$query = "SELECT max(anio) as anio FROM \"mvIndiceCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
+					$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"mvIndiceCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
 					$revistaOffset=1;
 					$revistaTotal= count($_POST['revista']);
 					foreach ($_POST['revista'] as $revista):
@@ -167,9 +197,9 @@ class Indicadores extends CI_Controller {
 						endif;
 						$revistaOffset++;
 					endforeach;
-					$query .= ") GROUP BY anio ORDER BY anio";
+					$query .= ")";
 				elseif (isset($_POST['pais'])):
-					$query = "SELECT max(anio) as anio FROM \"mvIndiceCoautoriaPais\" WHERE \"paisAutorSlug\" IN (";
+					$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"mvIndiceCoautoriaPais\" WHERE \"paisAutorSlug\" IN (";
 					$paisOffset=1;
 					$paisTotal= count($_POST['pais']);
 					foreach ($_POST['pais'] as $pais):
@@ -179,47 +209,57 @@ class Indicadores extends CI_Controller {
 						endif;
 						$paisOffset++;
 					endforeach;
-					$query .= ") GROUP BY anio ORDER BY anio";
+					$query .= ")";
 				endif;
 				break;
-			
+			case 'tasa-documentos-coautorados':
+				if (isset($_POST['revista'])):
+					$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"mvTasaCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
+					$revistaOffset=1;
+					$revistaTotal= count($_POST['revista']);
+					foreach ($_POST['revista'] as $revista):
+						$query .= "'{$revista}'";
+						if($revistaOffset < $revistaTotal):
+							$query .=",";
+						endif;
+						$revistaOffset++;
+					endforeach;
+					$query .= ")";
+				elseif (isset($_POST['pais'])):
+					$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"mvTasaCoautoriaPais\" WHERE \"paisAutorSlug\" IN (";
+					$paisOffset=1;
+					$paisTotal= count($_POST['pais']);
+					foreach ($_POST['pais'] as $pais):
+						$query .= "'{$pais}'";
+						if($paisOffset < $paisTotal):
+							$query .=",";
+						endif;
+						$paisOffset++;
+					endforeach;
+					$query .= ")";
+				endif;
+				break;
 			default:
 				break;
 		endswitch;
 
 		$query = $this->db->query($query);
-		$rango = $query->result_array();
+		$rango = $query->row_array();
 		$this->db->close();
-
-		$periodo=0;
-		$continuos=1;
-		$anioBase=0;
-		while ( $periodo < count($rango) && $continuos < 5):
-			if(($rango[$periodo + 1]['anio']) == ($rango[$periodo]['anio'] + 1)):
-				$continuos++;
-			else:
-				$continuos=1;
-			endif;
-			$periodo++;
-			$anioBase=$rango[($periodo + 1) - $continuos];
-		endwhile;
+		$anioBase = $rango['anioBase'];
 		if(isset($_POST['periodo'])):
-			$anioBase['anio']=$_POST['periodo'];
+			$anioBase = $_POST['periodo'];
 		endif;
-		$anioFinal = end($rango);	
+		$anioFinal = $rango['anioFinal'];	
 
-		if($continuos < 5):
-			$data['result'] = false;
-			$data['error'] = _('No hay información suficiente para generar el indicador');
-		else:
-			$data['result'] = true;
-			$data['periodos'] = range($anioBase['anio'], $anioFinal['anio']);
-			$data['base'] = $anioBase['anio'];
-		endif;
+		$data['result'] = true;
+		$data['periodos'] = range($anioBase, $anioFinal);
+		$data['base'] = $anioBase;
+
 		if($request != null):
 			return $data['periodos'];
 		else:
-			print_r(json_encode($data, true));
+			echo json_encode($data, true);
 		endif;
 	}
 

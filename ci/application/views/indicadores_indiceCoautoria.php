@@ -23,6 +23,7 @@
 				<select name="revista[]" id="revista" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione una revista');?>">
 					<option></option>
 				</select>
+				ó
 			</div>
 			<div class="rightColumn">
 				<select name="pais[]" id="pais" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione un país');?>">
