@@ -364,7 +364,7 @@ CREATE INDEX "indiceCoautoriaPricePais_anio" ON "mvIndiceCoautoriaPricePais"(ani
 CREATE INDEX "indiceCoautoriaPricePais_idDisciplina" ON "mvIndiceCoautoriaPricePais"(id_disciplina);
 
 --Vista para revistans con años continuos mayores a 4
-CREATE OR REPLACE VIEW "vDisciplinaRevistasContinuos" AS
+CREATE OR REPLACE VIEW "vPeriodosRevistaCoautoriaPriceZakutina" AS
 SELECT dr.revista,
        dr."revistaSlug",
        dr.id_disciplina,
@@ -378,11 +378,44 @@ FROM
 INNER JOIN "vDisciplinaRevistas" dr ON ac."revistaSlug"=dr."revistaSlug"
 WHERE anios_continuos > 4;
 
+SELECT create_matview('"vPeriodosRevistaCoautoriaPriceZakutina"', '"vPeriodosRevistaCoautoriaPriceZakutina"');
 
-SELECT create_matview('"mvDisciplinaRevistasContinuos"', '"vDisciplinaRevistasContinuos"');
+-- Vista para periodos en reivistas para los indicadores Tasa de coautoría e Indice Lawani
+CREATE OR REPLACE VIEW "vPeriodosRevistaTasaLawani" AS
+SELECT dr.revista,
+       dr."revistaSlug",
+       dr.id_disciplina,
+       dr.documentos,
+       ac.anios_continuos
+FROM
+  (SELECT "revistaSlug",
+          anios_continuos(array_agg(anio))
+   FROM "vTasaCoautoriaRevista"
+   GROUP BY "revistaSlug") AS ac --Años continuos por revista
+INNER JOIN "vDisciplinaRevistas" dr ON ac."revistaSlug"=dr."revistaSlug"
+WHERE anios_continuos > 4;
+
+SELECT create_matview('"mvPeriodosRevistaTasaLawani"', '"vPeriodosRevistaTasaLawani"');
+
+-- Vista para periodos en reivistas para en indicador subramayab
+CREATE OR REPLACE VIEW "vPeriodosRevistaSubramayan" AS
+SELECT dr.revista,
+       dr."revistaSlug",
+       dr.id_disciplina,
+       dr.documentos,
+       ac.anios_continuos
+FROM
+  (SELECT "revistaSlug",
+          anios_continuos(array_agg(anio))
+   FROM "vSubramayanRevista"
+   GROUP BY "revistaSlug") AS ac --Años continuos por revista
+INNER JOIN "vDisciplinaRevistas" dr ON ac."revistaSlug"=dr."revistaSlug"
+WHERE anios_continuos > 4;
+
+SELECT create_matview('"mvPeriodosRevistaSubramayan"', '"vPeriodosRevistaSubramayan"');
 
 --Vista para paises con años continuos mayores a 4
-CREATE OR REPLACE VIEW "vDisciplinaPaisesContinuos" AS
+CREATE OR REPLACE VIEW "vPeriodosPaisCoautoriaPriceZakutina" AS
 SELECT *
 FROM
   (SELECT "paisAutor",
@@ -398,7 +431,46 @@ FROM
 WHERE anios_continuos > 4;
 
 
-SELECT create_matview('"mvDisciplinaPaisesContinuos"', '"vDisciplinaPaisesContinuos"');
+SELECT create_matview('"mvPeriodosPaisCoautoriaPriceZakutina"', '"vPeriodosPaisCoautoriaPriceZakutina"');
+
+
+-- Vista para periodos en paises para los indicadores Tasa de coautoría e Indice Lawani
+CREATE OR REPLACE VIEW "vPeriodosPaisTasaLawani" AS
+SELECT *
+FROM
+  (SELECT "paisAutor",
+          "paisAutorSlug",
+          id_disciplina,
+          anios_continuos(array_agg(anio))
+   FROM "vTasaCoautoriaPais"
+   GROUP BY "paisAutorSlug",
+            "paisAutor",
+            id_disciplina
+   ORDER BY "paisAutorSlug",
+            id_disciplina) AS ac --Años continuos por revista
+WHERE anios_continuos > 4;
+
+
+SELECT create_matview('"mvPeriodosPaisTasaLawani"', '"vPeriodosPaisTasaLawani"');
+
+--Vista para periodos en paises para el indicador subramayan
+CREATE OR REPLACE VIEW "vPeriodosPaisSubramayan" AS
+SELECT *
+FROM
+  (SELECT "paisAutor",
+          "paisAutorSlug",
+          id_disciplina,
+          anios_continuos(array_agg(anio))
+   FROM "vSubramayanPais"
+   GROUP BY "paisAutorSlug",
+            "paisAutor",
+            id_disciplina
+   ORDER BY "paisAutorSlug",
+            id_disciplina) AS ac --Años continuos por revista
+WHERE anios_continuos > 4;
+
+
+SELECT create_matview('"mvPeriodosPaisSubramayan"', '"vPeriodosPaisSubramayan"');
 
 --Vista para tasa de coutoria por revista
 CREATE OR REPLACE VIEW "vTasaCoautoriaRevista" AS
@@ -548,6 +620,7 @@ SELECT
   am."paisAutor",
   am."paisAutorSlug",
   am.id_disciplina,
+  am.anio,
   am.documentos AS "documentosMultiple",
   au.documentos AS "documentosUnAutor",
   am.documentos::numeric/(au.documentos+am.documentos)::numeric AS subramayan

@@ -42,6 +42,7 @@
 						dataType: 'json',
 						data: jQuery("#generarIndicador").serialize(),
 						success: function(data) {
+							console.log(data);
 							jQuery("#revista, #pais").empty().append('<option></option>');
 							jQuery("#revista, #pais").select2("destroy");
 							jQuery("#revista, #pais").select2({allowClear: true});
@@ -54,7 +55,6 @@
 								jQuery("#pais").append('<option value="' + val.val +'">' + val.text + '</option>');
 							});
 							jQuery("#revista, #pais").select2("enable", true);
-							console.log(data);
 						}
 					});
 				}

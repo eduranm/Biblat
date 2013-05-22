@@ -148,9 +148,21 @@ class Indicadores extends CI_Controller {
 		$this->output->enable_profiler(false);
 		$data = array();
 
+
 		/*Revistas en disciplina*/
+		$indicadorTabla['indice-coautoria']="CoautoriaPriceZakutina";
+		$indicadorTabla['tasa-documentos-coautorados']="TasaLawani";
+		$indicadorTabla['grado-colaboracion']="Subramayan";
+		$indicadorTabla['modelo-elitismo']="CoautoriaPriceZakutina";
+		$indicadorTabla['indice-colaboracion']="TasaLawani";
+		$indicadorTabla['indice-densidad-documentos']="CoautoriaPriceZakutina";
+		$indicadorTabla['indice-concentracion']="";
+		$indicadorTabla['modelo-bradford-revista']="";
+		$indicadorTabla['modelo-bradford-institucion']="";
+		$indicadorTabla['productividad-exogena']="";
+
 		$this->load->database();
-		$query = "SELECT revista, \"revistaSlug\" FROM \"mvDisciplinaRevistasContinuos\" WHERE id_disciplina='{$_POST['disciplina']}'";
+		$query = "SELECT revista, \"revistaSlug\" FROM \"mvPeriodosRevista{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$_POST['disciplina']}'";
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row ):
 			$revista = array(
@@ -159,7 +171,7 @@ class Indicadores extends CI_Controller {
 				);
 			$data['revistas'][] = $revista;
 		endforeach;
-		$query = "SELECT \"paisAutor\", \"paisAutorSlug\" FROM \"mvDisciplinaPaisesContinuos\" WHERE id_disciplina='{$_POST['disciplina']}'";
+		$query = "SELECT \"paisAutor\", \"paisAutorSlug\" FROM \"mvPeriodosPais{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$_POST['disciplina']}'";
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row ):
 			$revista = array(
