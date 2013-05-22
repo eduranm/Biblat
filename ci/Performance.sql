@@ -84,6 +84,7 @@ UPDATE articulo SET e_300e=NULL WHERE e_300e='';
 UPDATE articulo SET e_504=NULL WHERE e_504='';
 UPDATE articulo SET e_546=NULL WHERE e_546='';
 UPDATE articulo SET e_856u=NULL WHERE e_856u='';
+UPDATE articulo SET id_disciplina=NULL WHERE id_disciplina<1;
 /*Normalizando paises*/
 
 UPDATE articulo SET e_008='México' WHERE e_008='Mexico' OR e_008='Mèxico';
@@ -116,10 +117,23 @@ VACUUM (VERBOSE, FULL) disciplinas;
 
 UPDATE institucion SET e_100x=NULL WHERE e_100x='';
 UPDATE institucion SET e_100x='México' WHERE e_100x='Mëxico';
-UPDATE institucion SET e_100x='México' WHERE e_100x='Mëxico';
 UPDATE institucion SET e_100x='Japón' WHERE e_100x='Japòn';
 
 VACUUM (VERBOSE, FULL) institucion;
 
 
 /**/
+
+SELECT sum(totalautores) AS totalautores
+FROM
+  (SELECT distinct(autores),
+          count(*) AS articulos,
+          count(*)*autores AS totalautores
+   FROM $tabla i
+   INNER JOIN articulo t ON (i.iddatabase=t.iddatabase
+                             AND i.sistema=t.sistema)
+   WHERE t.e_222 LIKE '$revista'
+     AND i.e_260b >'$ini'
+     AND i.e_260b <'$fin'
+     AND i.e_100x IS NOT NULL
+   GROUP BY autores) AS total

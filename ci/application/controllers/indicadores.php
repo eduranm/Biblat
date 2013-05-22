@@ -58,20 +58,19 @@ class Indicadores extends CI_Controller {
 		/*Generamos el arreglo de periodos*/
 		$periodos = $this->getPeriodos($_POST);
 		/*Consulta para cada indicador*/
-		$indicadorQuery['indice-coautoria']['revista']="SELECT revista AS title, anio, coautoria AS valor FROM \"mvIndiceCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
-		$indicadorQuery['indice-coautoria']['pais']="SELECT \"paisAutor\" AS title, anio, coautoria AS valor FROM \"mvIndiceCoautoriaPais\" WHERE \"paisAutorSlug\" IN (";
-		$indicadorQuery['tasa-documentos-coautorados']['revista']="SELECT revista AS title, anio, \"tasaCoautoria\" AS valor FROM \"mvTasaCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
-		$indicadorQuery['tasa-documentos-coautorados']['pais']="SELECT \"paisAutor\" AS title, anio, \"tasaCoautoria\" AS valor FROM \"mvTasaCoautoriaPais\" WHERE \"paisAutorSlug\" IN (";
-		$indicadorQuery['grado-colaboracion']="";
-		$indicadorQuery['modelo-elitismo']="";
-		$indicadorQuery['indice-colaboracion']="";
-		$indicadorQuery['indice-densidad-documentos']="";
-		$indicadorQuery['indice-concentracion']="";
-		$indicadorQuery['modelo-bradford-revista']="";
-		$indicadorQuery['modelo-bradford-institucion']="";
-		$indicadorQuery['productividad-exogena']="";
+		$indicadorCampoTabla['indice-coautoria']="coautoria AS valor FROM \"mvIndiceCoautoriaPrice";
+		$indicadorCampoTabla['tasa-documentos-coautorados']="\"tasaCoautoria\" AS valor FROM \"mvTasaCoautoria";
+		$indicadorCampoTabla['grado-colaboracion']="subramayan AS valor FROM \"mvSubramayan";
+		$indicadorCampoTabla['modelo-elitismo']="price AS valor FROM \"mvIndiceCoautoriaPrice";
+		$indicadorCampoTabla['indice-colaboracion']="lawani AS valor FROM \"mvLawani";
+		$indicadorCampoTabla['indice-densidad-documentos']="zakutina AS valor FROM \"mvZakutina";
+		$indicadorCampoTabla['indice-concentracion']="";
+		$indicadorCampoTabla['modelo-bradford-revista']="";
+		$indicadorCampoTabla['modelo-bradford-institucion']="";
+		$indicadorCampoTabla['productividad-exogena']="";
+
 		if (isset($_POST['revista'])):
-			$query = $indicadorQuery[$_POST['indicador']]['revista'];
+			$query = "SELECT revista AS title, anio, {$indicadorCampoTabla[$_POST['indicador']]}Revista\" WHERE \"revistaSlug\" IN (";
 			$revistaOffset=1;
 			$revistaTotal= count($_POST['revista']);
 			foreach ($_POST['revista'] as $revista):
@@ -83,7 +82,7 @@ class Indicadores extends CI_Controller {
 			endforeach;
 			$query .=") AND anio>='{$_POST['periodo']}'";
 		else:
-			$query = $indicadorQuery[$_POST['indicador']]['pais'];
+			$query = "SELECT \"paisAutor\" AS title, anio, {$indicadorCampoTabla[$_POST['indicador']]}Pais\" WHERE \"paisAutorSlug\" IN (";
 			$paisOffset=1;
 			$paisTotal= count($_POST['pais']);
 			foreach ($_POST['pais'] as $pais):
@@ -184,64 +183,44 @@ class Indicadores extends CI_Controller {
 		$this->load->database();
 		$query = "";
 		/*Periodos por revista*/
-		switch ($_POST['indicador']):
-			case 'indice-coautoria':
-				if (isset($_POST['revista'])):
-					$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"mvIndiceCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
-					$revistaOffset=1;
-					$revistaTotal= count($_POST['revista']);
-					foreach ($_POST['revista'] as $revista):
-						$query .= "'{$revista}'";
-						if($revistaOffset < $revistaTotal):
-							$query .=",";
-						endif;
-						$revistaOffset++;
-					endforeach;
-					$query .= ")";
-				elseif (isset($_POST['pais'])):
-					$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"mvIndiceCoautoriaPais\" WHERE \"paisAutorSlug\" IN (";
-					$paisOffset=1;
-					$paisTotal= count($_POST['pais']);
-					foreach ($_POST['pais'] as $pais):
-						$query .= "'{$pais}'";
-						if($paisOffset < $paisTotal):
-							$query .=",";
-						endif;
-						$paisOffset++;
-					endforeach;
-					$query .= ")";
+		/*Consulta para cada indicador*/
+		$indicadorTabla['indice-coautoria']="mvIndiceCoautoriaPrice";
+		$indicadorTabla['tasa-documentos-coautorados']="mvTasaCoautoria";
+		$indicadorTabla['grado-colaboracion']="mvSubramayan";
+		$indicadorTabla['modelo-elitismo']="mvIndiceCoautoriaPrice";
+		$indicadorTabla['indice-colaboracion']="mvLawani";
+		$indicadorTabla['indice-densidad-documentos']="mvZakutina";
+		$indicadorTabla['indice-concentracion']="";
+		$indicadorTabla['modelo-bradford-revista']="";
+		$indicadorTabla['modelo-bradford-institucion']="";
+		$indicadorTabla['productividad-exogena']="";
+
+
+		if (isset($_POST['revista'])):
+			$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"{$indicadorTabla[$_POST['indicador']]}Revista\" WHERE \"revistaSlug\" IN (";
+			$revistaOffset=1;
+			$revistaTotal= count($_POST['revista']);
+			foreach ($_POST['revista'] as $revista):
+				$query .= "'{$revista}'";
+				if($revistaOffset < $revistaTotal):
+					$query .=",";
 				endif;
-				break;
-			case 'tasa-documentos-coautorados':
-				if (isset($_POST['revista'])):
-					$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"mvTasaCoautoriaRevista\" WHERE \"revistaSlug\" IN (";
-					$revistaOffset=1;
-					$revistaTotal= count($_POST['revista']);
-					foreach ($_POST['revista'] as $revista):
-						$query .= "'{$revista}'";
-						if($revistaOffset < $revistaTotal):
-							$query .=",";
-						endif;
-						$revistaOffset++;
-					endforeach;
-					$query .= ")";
-				elseif (isset($_POST['pais'])):
-					$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"mvTasaCoautoriaPais\" WHERE \"paisAutorSlug\" IN (";
-					$paisOffset=1;
-					$paisTotal= count($_POST['pais']);
-					foreach ($_POST['pais'] as $pais):
-						$query .= "'{$pais}'";
-						if($paisOffset < $paisTotal):
-							$query .=",";
-						endif;
-						$paisOffset++;
-					endforeach;
-					$query .= ")";
+				$revistaOffset++;
+			endforeach;
+			$query .= ")";
+		elseif (isset($_POST['pais'])):
+			$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"{$indicadorTabla[$_POST['indicador']]}Pais\" WHERE \"paisAutorSlug\" IN (";
+			$paisOffset=1;
+			$paisTotal= count($_POST['pais']);
+			foreach ($_POST['pais'] as $pais):
+				$query .= "'{$pais}'";
+				if($paisOffset < $paisTotal):
+					$query .=",";
 				endif;
-				break;
-			default:
-				break;
-		endswitch;
+				$paisOffset++;
+			endforeach;
+			$query .= ")";
+		endif;
 
 		$query = $this->db->query($query);
 		$rango = $query->row_array();
