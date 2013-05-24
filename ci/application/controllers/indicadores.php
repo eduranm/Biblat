@@ -52,11 +52,13 @@ class Indicadores extends CI_Controller {
 
 	public function getChartData(){
 		$this->output->enable_profiler(false);
-
 		$data['data']['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
 		$this->load->database();
+		/*Convirtiendo el periodo en dos fechas*/
+		$_POST['periodo'] = explode(";", $_POST['periodo']);
 		/*Generamos el arreglo de periodos*/
 		$periodos = $this->getPeriodos($_POST);
+		
 		/*Consulta para cada indicador*/
 		$indicadorCampoTabla['indice-coautoria']="coautoria AS valor FROM \"mvIndiceCoautoriaPrice";
 		$indicadorCampoTabla['tasa-documentos-coautorados']="\"tasaCoautoria\" AS valor FROM \"mvTasaCoautoria";
@@ -80,7 +82,7 @@ class Indicadores extends CI_Controller {
 				endif;
 				$revistaOffset++;
 			endforeach;
-			$query .=") AND anio>='{$_POST['periodo']}'";
+			$query .=") AND anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}'";
 		else:
 			$query = "SELECT \"paisAutor\" AS title, anio, {$indicadorCampoTabla[$_POST['indicador']]}Pais\" WHERE \"paisAutorSlug\" IN (";
 			$paisOffset=1;
@@ -92,8 +94,9 @@ class Indicadores extends CI_Controller {
 				endif;
 				$paisOffset++;
 			endforeach;
-			$query .=") AND anio>='{$_POST['periodo']}' AND id_disciplina='{$_POST['disciplina']}'";
+			$query .=") AND anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}' AND id_disciplina='{$_POST['disciplina']}'";
 		endif;
+
 
 		$query = $this->db->query($query);
 		$indicadores = array();
@@ -148,7 +151,6 @@ class Indicadores extends CI_Controller {
 		$this->output->enable_profiler(false);
 		$data = array();
 
-
 		/*Revistas en disciplina*/
 		$indicadorTabla['indice-coautoria']="CoautoriaPriceZakutina";
 		$indicadorTabla['tasa-documentos-coautorados']="TasaLawani";
@@ -188,9 +190,10 @@ class Indicadores extends CI_Controller {
 	public function getPeriodos($request=null){
 		$this->output->enable_profiler(false);
 		if($request != null):
-			$_POST=$request;
+			$data['periodos'] = range($request['periodo'][0], $request['periodo'][1]);
+			return $data['periodos'];
 		endif;
-		
+
 		$data = array();
 		$this->load->database();
 		$query = "";
@@ -231,27 +234,36 @@ class Indicadores extends CI_Controller {
 				endif;
 				$paisOffset++;
 			endforeach;
-			$query .= ")";
+			$query .= ") AND id_disciplina='{$_POST['disciplina']}'";
 		endif;
 
 		$query = $this->db->query($query);
 		$rango = $query->row_array();
 		$this->db->close();
 		$anioBase = $rango['anioBase'];
-		if(isset($_POST['periodo'])):
-			$anioBase = $_POST['periodo'];
-		endif;
-		$anioFinal = $rango['anioFinal'];	
+		$anioFinal = $rango['anioFinal'];
 
 		$data['result'] = true;
-		$data['periodos'] = range($anioBase, $anioFinal);
-		$data['base'] = $anioBase;
+		$data['anioBase'] = (int)$anioBase;
+		$data['anioFinal'] = (int)$anioFinal;
 
-		if($request != null):
-			return $data['periodos'];
-		else:
-			echo json_encode($data, true);
-		endif;
+		/*Generando escala*/
+		$scale = array();
+		$scaleOffset = $data['anioBase'];
+		while ( $scaleOffset < $data['anioFinal']):	
+			$scale[] = $scaleOffset;
+			if($scaleOffset % 5 > 0):
+				$scaleOffset += (5 - $scaleOffset % 5);
+			else:
+				$scaleOffset += 5;
+				if($scaleOffset <= $data['anioFinal']):
+					$scale[] = "|";
+				endif;
+			endif;
+		endwhile;
+		$scale[] = $data['anioFinal'];
+		$data['scale'] = json_encode($scale, true);
+		echo json_encode($data, true);
 	}
 
 }

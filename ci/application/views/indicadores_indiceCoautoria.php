@@ -18,7 +18,7 @@
 				</select>
 			</div>
 		</div>
-		<div class="colums">
+		<div class="colums" id="paisRevista">
 			<div class="leftColumn">
 				<select name="revista[]" id="revista" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione una revista');?>">
 					<option></option>
@@ -31,9 +31,8 @@
 				</select>
 			</div>
 		</div>
-		<div id="periodos">
-			<select name="periodo" id="periodo" style="width:80px" disabled>
-			</select>
+		<div id="periodos" class="sliderPeriodo">
+			<input id="sliderPeriodo" type="slider" name="periodo" value="0;0" />
 		</div>
 		<div>
 			<input type="Submit" id="generate" value="<?php _e('Generar indicador');?>"/>
