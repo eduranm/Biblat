@@ -46,7 +46,7 @@ class Indicadores extends CI_Controller {
 		$data['header']['title'] = _sprintf('Biblat - Indicador: %s', $this->indicadores[$data['main']['indicador']]);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('indicadores_indiceCoautoria', $data['main']);
+		$this->load->view('indicadores_index', $data['main']);
 		$this->load->view('footer');
 	}
 

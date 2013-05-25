@@ -34,9 +34,6 @@
 		<div id="periodos" class="sliderPeriodo">
 			<input id="sliderPeriodo" type="slider" name="periodo" value="0;0" />
 		</div>
-		<div>
-			<input type="Submit" id="generate" value="<?php _e('Generar indicador');?>"/>
-		</div>
 		<div id="chart" style="width: 95%; height: 500px;">
 
 		</div>
