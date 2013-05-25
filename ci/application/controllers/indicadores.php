@@ -263,6 +263,16 @@ class Indicadores extends CI_Controller {
 		endwhile;
 		$scale[] = $data['anioFinal'];
 		$data['scale'] = json_encode($scale, true);
+		$heterogeneity = array();
+		$scales = count($scale) - 1;
+		foreach ($scale as $key => $value):
+			if($value != $data['anioFinal'] && $value != $data['anioBase'] && $value != "|" && is_numeric($value)):
+				$indice = $key;
+				$porcentaje = round((($indice/$scales) * 100), 1);
+				$heterogeneity[] = "{$porcentaje}/{$value}";
+			endif;
+		endforeach;
+		$data['heterogeneity'] = json_encode($heterogeneity, true);
 		echo json_encode($data, true);
 	}
 

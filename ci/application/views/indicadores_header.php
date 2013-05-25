@@ -17,14 +17,17 @@
 				if (e.val == "") {
 					jQuery("#disciplina, #revista, #pais").select2("enable", false);
 					jQuery("#revista, #pais").empty().append('<option></option>');
+					jQuery("#revista, #pais").select2("destroy");
 					jQuery("#disciplina, #paisRevista").hide();
 				}else if(jQuery.inArray(e.val, soloDisciplina) > -1){
 					jQuery("#revista, #pais").select2("enable", false);
 					jQuery("#revista, #pais").empty().append('<option></option>');
+					jQuery("#revista, #pais").select2("destroy");
 					jQuery("#paisRevista").hide();
 					jQuery("#disciplina").select2("enable", true);
 				}else{
 					jQuery("#paisRevista").show();
+					jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
 					jQuery("#disciplina").select2("enable", true);
 				}
 				console.log(e);
@@ -38,7 +41,7 @@
 				if (e.val == "") {
 					jQuery("#revista, #pais").empty().append('<option></option>');
 					jQuery("#revista, #pais").select2("destroy");
-					jQuery("#revista, #pais").select2({allowClear: true});
+					jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
 					jQuery("#revista, #pais").select2("enable", false);
 				} else if (jQuery.inArray(jQuery("#indicador").val(), soloDisciplina) > -1) {
 
@@ -52,7 +55,7 @@
 							console.log(data);
 							jQuery("#revista, #pais").empty().append('<option></option>');
 							jQuery("#revista, #pais").select2("destroy");
-							jQuery("#revista, #pais").select2({allowClear: true});
+							jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
 							jQuery("#revista, #pais").select2("enable", false);
 							jQuery.each(data.revistas, function(key, val) {
 								jQuery("#revista").append('<option value="' + val.val +'">' + val.text + '</option>');
@@ -69,10 +72,12 @@
 			});
 
 			jQuery("#revista").select2({
-				allowClear: true
+				allowClear: true,
+				closeOnSelect: true
 			});
 
-			jQuery("#revista").on("change", function(e){
+			jQuery("#revista")
+			.on("change", function(e){
 				jQuery("#sliderPeriodo").prop("disabled", true);
 				if (e.val != "") {
 					jQuery("#pais").select2("enable", false);
@@ -81,13 +86,18 @@
 					jQuery("#pais").select2("enable", true);
 				}
 				console.log(e);
+			})
+			.on("select2-blur", function(e){
+				jQuery("#generarIndicador").submit();
 			});
 
 			jQuery("#pais").select2({
-				allowClear: true
+				allowClear: true,
+				closeOnSelect: true
 			});
 
-			jQuery("#pais").on("change", function(e){
+			jQuery("#pais")
+			.on("change", function(e){
 				jQuery("#sliderPeriodo").prop("disabled", true);
 				if (e.val != "") {
 					jQuery("#revista").select2("enable", false);
@@ -96,7 +106,10 @@
 					jQuery("#revista").select2("enable", true);
 				}
 				console.log(e);
-			});
+			})
+			.on("select2-blur", function(e){
+				jQuery("#generarIndicador").submit();
+			});;
 			
 			jQuery("#sliderPeriodo").slider();
 
@@ -131,6 +144,7 @@
 				success: function(data) {
 					console.log(data);
 					console.log(jQuery.parseJSON(data.scale));
+					console.log(jQuery.parseJSON(data.heterogeneity));
 					if(data.result){
 						jQuery("#sliderPeriodo").prop('disabled', false);
 						jQuery("#generate").prop('disabled', false);
@@ -139,13 +153,17 @@
 						jQuery("#sliderPeriodo").slider({
 							from: data.anioBase, 
 							to: data.anioFinal, 
-							//heterogeneity: ['50/2010'], 
+							heterogeneity: jQuery.parseJSON(data.heterogeneity), 
 							scale: jQuery.parseJSON(data.scale),
 							format: { format: '####', locale: 'us' }, 
 							limits: false, 
 							step: 1, 
 							dimension: '', 
-							skin: "round_plastic" 
+							skin: "round_plastic",
+							callback: function(value){
+								console.log(jQuery("#sliderPeriodo").slider("prc")); 
+								jQuery("#generarIndicador").submit();
+							}
 						});
 					}else{
 						jQuery("#sliderPeriodo").prop('disabled', true);
