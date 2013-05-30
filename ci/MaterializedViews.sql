@@ -58,30 +58,45 @@ CREATE OR REPLACE FUNCTION create_matview(NAME, NAME)
      RETURN;
  END';
 
- CREATE OR REPLACE FUNCTION refresh_matview(name) RETURNS VOID
- SECURITY DEFINER
- LANGUAGE plpgsql AS '
+CREATE OR REPLACE FUNCTION refresh_matview(name)
+  RETURNS void AS $$
  DECLARE 
      matview ALIAS FOR $1;
      entry matviews%ROWTYPE;
+     indexes_matview RECORD;
+     i integer;
  BEGIN
- 
-     SELECT * INTO entry FROM matviews WHERE mv_name = matview;
- 
+    SELECT * INTO entry FROM matviews WHERE mv_name = matview;
+
     IF NOT FOUND THEN
-         RAISE EXCEPTION ''Materialized view % does not exist.'', matview;
+         RAISE EXCEPTION 'Materialized view % does not exist.', matview;
     END IF;
 
-    EXECUTE ''DELETE FROM '' || matview;
-    EXECUTE ''INSERT INTO '' || matview
-        || '' SELECT * FROM '' || entry.v_name;
+    SELECT array_agg(indexdef) AS definition, array_agg(indexname) AS name INTO indexes_matview FROM pg_indexes WHERE tablename=replace(matview, '"', '');
 
+    FOR i IN SELECT generate_subscripts( indexes_matview.name, 1 ) LOOP
+      RAISE NOTICE 'DROP INDEX: %', indexes_matview.name[i];
+      EXECUTE 'DROP INDEX "'||indexes_matview.name[i]||'"';
+    END LOOP;
+    
+    
+    EXECUTE 'DELETE FROM ' || matview;
+    EXECUTE 'INSERT INTO ' || matview
+        || ' SELECT * FROM ' || entry.v_name;
+
+    FOR i IN SELECT generate_subscripts( indexes_matview.definition, 1 ) LOOP
+      RAISE NOTICE 'INDEX definition: %', indexes_matview.definition[i];
+      EXECUTE indexes_matview.definition[i];
+    END LOOP;
+    
     UPDATE matviews
         SET last_refresh=CURRENT_TIMESTAMP
         WHERE mv_name=matview;
 
     RETURN;
-END';
+END
+$$
+LANGUAGE plpgsql;
 
 --Vista para busquedas
 CREATE OR REPLACE VIEW "vSearch" AS SELECT 
@@ -694,3 +709,56 @@ GROUP BY "paisAutorSlug", id_disciplina, anio) t --Titulos por pais al año
 ON td."paisAutorSlug"=t."paisAutorSlug" AND td.id_disciplina=t.id_disciplina AND td.anio=t.anio;
 
 SELECT create_matview('"mvZakutinaPais"', '"vZakutinaPais"');
+
+--Vista para indice Pratt
+CREATE OR REPLACE VIEW "vPratt" AS
+SELECT 
+  id_disciplina,
+  max(revista) AS revista,
+  "revistaSlug",
+  array_to_json(array_agg(descriptor)) AS "descriptoresJSON",
+  array_to_json(array_agg(frecuencia)) AS "frecuenciaDescriptorJSON",
+  --(count(*)::numeric + 0.5::numeric) AS "n+1/2",
+  --(sum(frecuencia*rango)::numeric/sum(frecuencia))::numeric AS "q",
+  --((count(*)::numeric + 0.5::numeric) - (sum(frecuencia*rango)::numeric/sum(frecuencia))::numeric) AS "(n+1/2)-q",
+  ((count(*)::numeric + 0.5::numeric) - (sum(frecuencia*rango)::numeric/sum(frecuencia))::numeric) / (count(*)-1)::numeric AS "pratt"
+FROM
+(SELECT 
+  ad.id_disciplina,
+  ad.revista,
+  ad."revistaSlug",
+  ad.articulos,
+  fd.descriptor,
+  fd.frecuencia,
+  row_number() OVER (PARTITION BY ad.id_disciplina, ad."revistaSlug" ORDER BY frecuencia DESC, descriptor) AS rango
+FROM
+(SELECT 
+  max(revista) AS revista, 
+  "revistaSlug", 
+  id_disciplina, 
+  count(*) AS articulos
+FROM
+"vAutoresDocumento" ad
+INNER JOIN 
+"vArticulos" a
+ON ad.iddatabase=a.iddatabase AND ad.sistema=a.sistema
+GROUP BY "revistaSlug", id_disciplina HAVING count(*) > 25) ad --Articulos por disciplina
+INNER JOIN
+(SELECT 
+  "revistaSlug", 
+  id_disciplina,
+  p.descpalabraclave as descriptor, 
+  count(*) AS frecuencia
+FROM
+"vAutoresDocumento" ad
+INNER JOIN 
+"vArticulos" a
+ON ad.iddatabase=a.iddatabase AND ad.sistema=a.sistema
+INNER JOIN palabraclave p
+ON ad.iddatabase=p.iddatabase AND ad.sistema=p.sistema
+WHERE p.sec_palcve < 3
+GROUP BY "revistaSlug", id_disciplina, p.descpalabraclave) fd --Frecuencia del descriptor
+ON ad."revistaSlug"=fd."revistaSlug" AND ad.id_disciplina=fd.id_disciplina) fdr
+GROUP BY id_disciplina, "revistaSlug";
+
+SELECT create_matview('"mvPratt"', '"vPratt"');

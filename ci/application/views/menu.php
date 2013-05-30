@@ -54,7 +54,7 @@ endif;
 						<li><a href="javascript:;" title="<?php _e('Descripción');?>"><?php _e('Descripción');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Metodología');?>"><?php _e('Metodología');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Frecuencias');?>"><?php _e('Frecuencias');?></a></li>
-						<li><a href="javascript:;" title="<?php _e('Indicadores');?>"><?php _e('Indicadores');?></a></li>
+						<li><a href="<?php echo site_url('indicadores');?>" title="<?php _e('Indicadores');?>"><?php _e('Indicadores');?></a></li>
 					</ul>
 				</li>
 				<li>
