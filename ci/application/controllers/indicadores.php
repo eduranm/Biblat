@@ -129,6 +129,7 @@ class Indicadores extends CI_Controller {
 						'animation' => array(
 								'duration' => 1000
 							), 
+						'height' => '500',
 						'hAxis' => array(
 								'title' => _('Periodo')
 							), 
@@ -142,8 +143,13 @@ class Indicadores extends CI_Controller {
 						'vAxis' => array(
 								'title' => $this->indicadores[$_POST['indicador']],
 								'minValue' => 0
-							)
+							),
+						'width' => '950'
 						);
+		$data['history'] = array(
+								'title' => _sprintf('Biblat - Indicador: %s', $this->indicadores[$_POST['indicador']]),
+								'url' => site_url("indicadores/{$_POST['indicador']}")
+							);
 		echo json_encode($data, true);
 	}
 

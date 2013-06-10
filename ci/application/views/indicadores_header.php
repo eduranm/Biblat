@@ -6,6 +6,7 @@
 	<script type="text/javascript">
 		google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});
 		var chart = null;
+		var charType = null;
 		var soloDisciplina = ['indice-concentracion', 'modelo-bradford-revista', 'modelo-bradford-institucion', 'productividad-exogena'];
 		jQuery(document).ready(function(){
 			jQuery("#indicador").select2({
@@ -13,7 +14,7 @@
 			});
 
 			jQuery("#indicador").on("change", function(e){
-				jQuery("#paisRevista, #periodos, #chart").hide();
+				jQuery("#paisRevista, #periodos, #chart").hide("slow");
 				jQuery("#disciplina").select2("val", "");
 				if (e.val == "") {
 					jQuery("#disciplina, #revista, #pais").select2("enable", false);
@@ -28,7 +29,16 @@
 					jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
 					jQuery("#disciplina").select2("enable", true);
 				}
+
+				if(typeof history.pushState === "function"){
+					console.log(jQuery("#generarIndicador").serializeArray());
+					history.pushState(jQuery("#generarIndicador").serializeArray(), null, '<?php site_url('indicadores')?>' + e.val);
+				}
 				console.log(e);
+			});
+
+			jQuery(window).bind('popstate',  function(event) {
+				console.log('pop: ' + event.state);
 			});
 
 			jQuery("#disciplina").select2({
@@ -37,7 +47,7 @@
 
 			jQuery("#disciplina").on("change", function(e){
 				if (e.val == "") {
-					jQuery("#paisRevista, #periodos, #chart").hide();
+					jQuery("#paisRevista, #periodos, #chart").hide("slow");
 					jQuery("#revista, #pais").empty().append('<option></option>');
 					jQuery("#revista, #pais").select2("destroy");
 					jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
@@ -45,7 +55,7 @@
 				} else if (jQuery.inArray(jQuery("#indicador").val(), soloDisciplina) > -1) {
 					
 				} else {
-					jQuery("#paisRevista").show();
+					jQuery("#paisRevista").show("slow");
 					jQuery.ajax({
 						url: '<?php echo site_url("indicadores/getRevistasPaises");?>',
 						type: 'POST',
@@ -82,7 +92,7 @@
 					jQuery("#pais").select2("enable", false);
 					setPeridos();
 				}else{
-					jQuery("#periodos, #chart").hide();
+					jQuery("#periodos, #chart").hide("slow");
 					jQuery("#pais").select2("enable", true);
 				}
 				console.log(e);
@@ -99,7 +109,7 @@
 					jQuery("#revista").select2("enable", false);
 					setPeridos();
 				}else{
-					jQuery("#periodos, #chart").hide();
+					jQuery("#periodos, #chart").hide("slow");
 					jQuery("#revista").select2("enable", true);
 				}
 				console.log(e);
@@ -114,16 +124,18 @@
 				  dataType: 'json',
 				  data: jQuery(this).serialize(),
 				  success: function(data) {
-				  	jQuery("#chart").show();
+				  	jQuery("#chart").show("slow");
 				  	console.log(data);
+				  	history.pushState(null, data.history.title, data.history.url);
 					var chartData = new google.visualization.DataTable(data.data);
 
-					if(chart == null || chart.At != 'line'){
+					if(chart == null || charType != 'line'){
+						charType = 'line';
 						chart = new google.visualization.LineChart(document.getElementById('chart'));
-						console.log(chart.At);
 					}
-					console.log(chart.At);
+					console.log(chart);
 					chart.draw(chartData, data.options);
+					
 				  }
 				});
 				return false;
@@ -131,7 +143,7 @@
 		});
 
 		setPeridos = function(){
-			jQuery("#periodos").show();
+			jQuery("#periodos").show("slow");
 			jQuery.ajax({
 				url: '<?php echo site_url("indicadores/getPeriodos");?>',
 				type: 'POST',

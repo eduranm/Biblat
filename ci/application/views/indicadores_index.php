@@ -21,12 +21,12 @@
 		<div class="colums" id="paisRevista" style="display:none;">
 			<div class="orColumn"><?php _e('ó');?></div>
 			<div class="leftColumn">
-				<select name="revista[]" id="revista" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione una revista');?>">
+				<select name="revista[]" id="revista" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione una o varias revistas');?>">
 					<option></option>
 				</select>
 			</div>
 			<div class="rightColumn">
-				<select name="pais[]" id="pais" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione un país');?>">
+				<select name="pais[]" id="pais" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione uno o varios países');?>">
 					<option></option>
 				</select>
 			</div>
@@ -34,7 +34,7 @@
 		<div id="periodos" class="sliderPeriodo" style="display:none;">
 			<input id="sliderPeriodo" type="slider" name="periodo" value="0;0" />
 		</div>
-		<div id="chart" style="width: 95%; height: 500px; display:none;" >
+		<div id="chart" style="width: 950px; height: 500px; display:none;" >
 
 		</div>
 	</form>

@@ -336,20 +336,17 @@ GROUP BY a.iddatabase, a.sistema) AS ad WHERE ad.e_100x IS NOT NULL;
 
 --Indice de coautoria por revista
 CREATE OR REPLACE VIEW "vIndiceCoautoriaPriceRevista" AS
-SELECT ar.e_222 AS revista,
-       slug(ar.e_222) AS "revistaSlug",
-       substr(ar.e_260b, 1, 4) AS anio,
+SELECT max(ar.revista) AS revista,
+       ar."revistaSlug",
+       ar.anio,
        count(*) AS documentos,
        sum(au.autores) AS autores,
        sum(au.autores) / count(*) AS coautoria,
        sqrt(sum(au.autores)) AS price
 FROM "vAutoresDocumento" au
-INNER JOIN articulo ar ON au.iddatabase=ar.iddatabase
-AND au.sistema=ar.sistema
-WHERE ar.e_590a ~~ 'Artículo%'
-  AND substr(ar.e_260b, 1, 4) ~ '[0-9]{4}'
-GROUP BY revista, anio
-ORDER BY revista, anio;
+INNER JOIN "vArticulos" ar ON au.iddatabase=ar.iddatabase AND au.sistema=ar.sistema
+GROUP BY ar."revistaSlug", ar.anio
+ORDER BY ar."revistaSlug", ar.anio;
 
 SELECT create_matview('"mvIndiceCoautoriaPriceRevista"', '"vIndiceCoautoriaPriceRevista"');
 CREATE INDEX "indiceCoautoriaPriceRevista_resvistaSlug" ON "mvIndiceCoautoriaPriceRevista"("revistaSlug");
