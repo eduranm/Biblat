@@ -656,3 +656,7 @@ p {
 	display: block !important;
 	margin: 0 auto !important;
 }
+
+#google-visualization-errors-all-1 {
+	display: none !important;
+}

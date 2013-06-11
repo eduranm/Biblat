@@ -15,6 +15,7 @@
 		var periodoPopState=false;
 		var rangoPeriodo="0-0";
 		var paisRevista="";
+		var asyncAjax=false;
 		var soloDisciplina = ['indice-concentracion', 'modelo-bradford-revista', 'modelo-bradford-institucion', 'productividad-exogena'];
 		jQuery(document).ready(function(){
 			jQuery("#indicador").select2({
@@ -78,6 +79,7 @@
 						type: 'POST',
 						dataType: 'json',
 						data: jQuery("#generarIndicador").serialize(),
+						async: asyncAjax,
 						success: function(data) {
 							console.log(data);
 							jQuery("#revista, #pais").empty().append('<option></option>');
@@ -184,6 +186,28 @@
 				});
 				return false;
 			});
+
+			urlData = {
+				indicador:"<?php echo preg_replace('%indicadores/(.+?)(/.*|$)%', '\1', uri_string());?>",
+				disciplina:"<?php echo preg_replace('%.*?/disciplina/(.+?)(/.*|$)%i', '\1', uri_string());?>",
+<?php if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%i', uri_string())):?>
+				revista:"<?php echo preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%i', '\1', uri_string());?>".split('/'),
+<?php endif;?>
+<?php if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%i', uri_string())):?>
+				pais:"<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%i', '\1', uri_string());?>".split('/'),
+<?php endif;?>
+<?php if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%i', uri_string())):?>
+				periodo:"<?php echo preg_replace('%.*?/([0-9]{4})-([0-9]{4})%i', '\1;\2', uri_string());?>"
+<?php endif;?>
+			}
+<?php if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%i', uri_string())):?>
+				paisRevista="/revista/<?php echo preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%i', '\1', uri_string());?>";
+<?php endif;?>
+<?php if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%i', uri_string())):?>
+				paisRevista="/pais/<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%i', '\1', uri_string());?>";
+<?php endif;?>
+			updateData(urlData);
+			asyncAjax=true;
 			/*Set previous value of form*/
 			//jQuery("#generarIndicador").data('pre', jQuery("#generarIndicador").serializeJSON());
 		});
@@ -195,6 +219,7 @@
 				type: 'POST',
 				dataType: 'json',
 				data: jQuery("#generarIndicador").serialize(),
+				async: asyncAjax,
 				success: function(data) {
 					console.log(data);
 					console.log(jQuery.parseJSON(data.scale));
@@ -216,8 +241,6 @@
 							step: 1, 
 							dimension: '', 
 							callback: function(value){
-								console.log('pre: ' + jQuery("#sliderPeriodo").data('pre'));
-								console.log(jQuery("#sliderPeriodo").val());
 								if(jQuery("#sliderPeriodo").data('pre') != jQuery("#sliderPeriodo").val()){
 									jQuery("#sliderPeriodo").data('pre', jQuery("#sliderPeriodo").val());
 									rango=jQuery("#sliderPeriodo").val().replace(';', '-');
@@ -286,7 +309,11 @@
 				paisPopState=true;
 				jQuery("#pais").val(data.pais).trigger("change");
 			}
-			if(typeof data.periodo !== "undefined" && data.periodo != actualForm.periodo){
+			console.log("rangoPeriodo: " + rangoPeriodo);
+			if(typeof data.periodo === "undefined"){
+				data.periodo = rangoPeriodo;
+			}
+			if(data.periodo != actualForm.periodo){
 				jQuery("#sliderPeriodo").slider("value", data.periodo.substring(0, 4), data.periodo.substring(5));
 				jQuery("#generarIndicador").submit();
 			}
