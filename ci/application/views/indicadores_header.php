@@ -8,11 +8,7 @@
 		google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});
 		var chart = null;
 		var charType = null;
-		var indicadorPopState=false;
-		var disciplinaPopState=false;
-		var revistaPopState=false;
-		var paisPopState=false;
-		var periodoPopState=false;
+		var popState = {indicador:false, disciplina:false, revista:false, pais:false};
 		var rangoPeriodo="0-0";
 		var paisRevista="";
 		var asyncAjax=false;
@@ -40,12 +36,12 @@
 					jQuery("#disciplina").select2("enable", true);
 				}
 
-				if(typeof history.pushState === "function" && !indicadorPopState){
+				if(typeof history.pushState === "function" && !popState.indicador){
 					console.log(jQuery("#generarIndicador").serializeJSON());
 					console.log('<?php echo site_url('indicadores')."/"?>' + value);
 					history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + value);
 				}
-				indicadorPopState=false;
+				popState.indicador=false;
 				console.log(e);
 			});
 
@@ -95,10 +91,10 @@
 						}
 					});
 				}
-				if(typeof history.pushState === "function" && !disciplinaPopState){
+				if(typeof history.pushState === "function" && !popState.disciplina){
 					history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + value);
 				}
-				disciplinaPopState=false;
+				popState.disciplina=false;
 				console.log(e);
 			});
 
@@ -120,14 +116,14 @@
 					jQuery("#pais").select2("enable", true);
 				}
 
-				if(typeof history.pushState === "function" && !revistaPopState){
+				if(typeof history.pushState === "function" && !popState.revista){
 					paisRevista="";
 					if(value != "" && value != null){
 						paisRevista='/revista/' + value.join('/');
 					}
 					history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista);
 				}
-				revistaPopState=false;
+				popState.revista=false;
 				console.log(e);
 			});
 
@@ -148,14 +144,14 @@
 					jQuery("#periodos, #chart").hide("slow");
 					jQuery("#revista").select2("enable", true);
 				}
-				if(typeof history.pushState === "function" && !paisPopState){
+				if(typeof history.pushState === "function" && !popState.pais){
 					paisRevista="";
 					if(value != "" && value != null){
 						paisRevista='/pais/' + value.join('/');
 					}
 					history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista);
 				}
-				paisPopState=false;
+				popState.pais=false;
 				console.log(e);
 			});
 			
@@ -209,6 +205,10 @@
 				paisRevista="/pais/<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
 <?php endif;?>
 			updateData(urlData);
+			if(typeof history.pushState === "function"){
+				history.replaceState(urlData, null);
+			}
+			delete urlData;
 			asyncAjax=true;
 		});
 
@@ -244,16 +244,17 @@
 								if(jQuery("#sliderPeriodo").data('pre') != jQuery("#sliderPeriodo").val()){
 									jQuery("#sliderPeriodo").data('pre', jQuery("#sliderPeriodo").val());
 									rango=jQuery("#sliderPeriodo").val().replace(';', '-');
-									if(typeof history.pushState === "function" && !periodoPopState){
+									if(typeof history.pushState === "function"){
 										history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista + '/' + rango);
 									}
-									periodoPopState=false;
 									jQuery("#revista, #pais").select2("close");
 									jQuery("#generarIndicador").submit();
 								}
 							}
 						});
-						jQuery("#generarIndicador").submit();
+						if(typeof urlData === "undefined"){
+							jQuery("#generarIndicador").submit();
+						}
 					}else{
 						jQuery("#sliderPeriodo").prop('disabled', true);
 						jQuery("#generate").prop('disabled', true);
@@ -267,11 +268,11 @@
 			console.log(data);
 			actualForm = jQuery("#generarIndicador").serializeJSON();
 			if(data.indicador != actualForm.indicador){
-				indicadorPopState=true;
+				popState.indicador=true;
 				jQuery("#indicador").val(data.indicador).trigger("change");
 			}
 			if(data.disciplina != actualForm.disciplina){
-				disciplinaPopState=true;
+				popState.disciplina=true;
 				jQuery("#disciplina").val(data.disciplina).trigger("change");
 			}
 
@@ -289,7 +290,7 @@
 			}
 			
 			if(data.revista !== "" &&  typeof data.revista !== "undefined" && data.revista.join('/') != actualForm.revista.join('/')){
-				revistaPopState=true;
+				popState.revista=true;
 				jQuery("#revista").val(data.revista).trigger("change");
 			}
 
@@ -306,10 +307,9 @@
 				jQuery("#revista").select2("enable", true);
 			}
 			if(data.pais !== "" &&  typeof data.pais !== "undefined" && data.pais.join('/') != actualForm.pais.join('/')){
-				paisPopState=true;
+				popState.pais=true;
 				jQuery("#pais").val(data.pais).trigger("change");
 			}
-			console.log("rangoPeriodo: " + rangoPeriodo);
 			if(typeof data.periodo === "undefined"){
 				data.periodo = rangoPeriodo;
 			}
