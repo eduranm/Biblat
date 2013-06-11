@@ -12,8 +12,8 @@
 			<div class="rightColumn">
 				<select name="disciplina" id="disciplina" style="width:90%" data-placeholder="<?php _e('Seleccione una disciplina');?>" <?php if($indicador == "") echo "disabled";?>>
 				<option></option>
-<?php foreach ($disciplinas as $disciplina):?>
-					<option value="<?php echo $disciplina['id_disciplina'];?>"><?php echo $disciplina['disciplina'];?></option>
+<?php foreach ($disciplinas as $kdisciplina => $disciplina):?>
+					<option value="<?php echo $kdisciplina;?>"><?php echo $disciplina['disciplina'];?></option>
 <?php endforeach;?>
 				</select>
 			</div>

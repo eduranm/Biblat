@@ -3,6 +3,7 @@
 class Indicadores extends CI_Controller {
 
 	public $indicadores = array();
+	public $disciplinas = array();
 
 	public function __construct()
 	{
@@ -25,9 +26,19 @@ class Indicadores extends CI_Controller {
 		$this->indicadores = $data['indicadores'];
 		/*Disciplinas*/
 		$this->load->database();
-		$query = "SELECT id_disciplina, disciplina FROM \"mvDisciplina\"";
-		$query = $this->db->query($query);
-		$data['disciplinas'] = $query->result_array();
+		$query = "SELECT id_disciplina, disciplina, slug FROM \"mvDisciplina\"";
+		if ( ! $this->session->userdata('query{'.md5($query).'}')):
+			$queryResult = $this->db->query($query);
+			$disciplina = array();
+			foreach ($queryResult->result_array() as $row):
+				$disciplina['disciplina'] = $row['disciplina'];
+				$disciplina['id_disciplina'] = $row['id_disciplina'];
+				$disciplinas[$row['slug']] = $disciplina;
+			endforeach;
+			$this->session->set_userdata('query{'.md5($query).'}', $disciplinas);
+		endif;
+		$this->disciplinas = $this->session->userdata('query{'.md5($query).'}');
+		$data['disciplinas'] = $this->disciplinas;
 		$this->db->close();
 
 		$this->load->vars($data);
@@ -83,7 +94,7 @@ class Indicadores extends CI_Controller {
 				$revistaOffset++;
 			endforeach;
 			$query .=") AND anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}'";
-		else:
+		elseif (isset($_POST['pais'])):
 			$query = "SELECT \"paisAutor\" AS title, anio, {$indicadorCampoTabla[$_POST['indicador']]}Pais\" WHERE \"paisAutorSlug\" IN (";
 			$paisOffset=1;
 			$paisTotal= count($_POST['pais']);
@@ -94,7 +105,7 @@ class Indicadores extends CI_Controller {
 				endif;
 				$paisOffset++;
 			endforeach;
-			$query .=") AND anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}' AND id_disciplina='{$_POST['disciplina']}'";
+			$query .=") AND anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}' AND id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
 		endif;
 
 
@@ -170,7 +181,7 @@ class Indicadores extends CI_Controller {
 		$indicadorTabla['productividad-exogena']="";
 
 		$this->load->database();
-		$query = "SELECT revista, \"revistaSlug\" FROM \"mvPeriodosRevista{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$_POST['disciplina']}'";
+		$query = "SELECT revista, \"revistaSlug\" FROM \"mvPeriodosRevista{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row ):
 			$revista = array(
@@ -179,7 +190,7 @@ class Indicadores extends CI_Controller {
 				);
 			$data['revistas'][] = $revista;
 		endforeach;
-		$query = "SELECT \"paisAutor\", \"paisAutorSlug\" FROM \"mvPeriodosPais{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$_POST['disciplina']}'";
+		$query = "SELECT \"paisAutor\", \"paisAutorSlug\" FROM \"mvPeriodosPais{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row ):
 			$revista = array(
@@ -240,7 +251,7 @@ class Indicadores extends CI_Controller {
 				endif;
 				$paisOffset++;
 			endforeach;
-			$query .= ") AND id_disciplina='{$_POST['disciplina']}'";
+			$query .= ") AND id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
 		endif;
 
 		$query = $this->db->query($query);
