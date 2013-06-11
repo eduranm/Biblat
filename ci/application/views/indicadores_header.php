@@ -23,7 +23,6 @@
 			});
 
 			jQuery("#indicador").on("change", function(e){
-				//console.log(jQuery("#generarIndicador").data('pre'));
 				value = jQuery(this).val();
 				jQuery("#paisRevista, #periodos, #chart").hide("slow");
 				jQuery("#disciplina").select2("val", "");
@@ -47,7 +46,6 @@
 					history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + value);
 				}
 				indicadorPopState=false;
-				//jQuery("#generarIndicador").data('pre', jQuery("#generarIndicador").serializeJSON());
 				console.log(e);
 			});
 
@@ -188,28 +186,30 @@
 			});
 
 			urlData = {
+<?php if (preg_match('%indicadores/(.+?)(/.*|$)%', uri_string())):?>
 				indicador:"<?php echo preg_replace('%indicadores/(.+?)(/.*|$)%', '\1', uri_string());?>",
-				disciplina:"<?php echo preg_replace('%.*?/disciplina/(.+?)(/.*|$)%i', '\1', uri_string());?>",
-<?php if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%i', uri_string())):?>
-				revista:"<?php echo preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%i', '\1', uri_string());?>".split('/'),
 <?php endif;?>
-<?php if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%i', uri_string())):?>
-				pais:"<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%i', '\1', uri_string());?>".split('/'),
+<?php if (preg_match('%.*?/disciplina/(.+?)(/.*|$)%', uri_string())):?>
+				disciplina:"<?php echo preg_replace('%.*?/disciplina/(.+?)(/.*|$)%', '\1', uri_string());?>",
 <?php endif;?>
-<?php if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%i', uri_string())):?>
-				periodo:"<?php echo preg_replace('%.*?/([0-9]{4})-([0-9]{4})%i', '\1;\2', uri_string());?>"
+<?php if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
+				revista:"<?php echo preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
+<?php endif;?>
+<?php if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
+				pais:"<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
+<?php endif;?>
+<?php if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%', uri_string())):?>
+				periodo:"<?php echo preg_replace('%.*?/([0-9]{4})-([0-9]{4})%', '\1;\2', uri_string());?>"
 <?php endif;?>
 			}
-<?php if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%i', uri_string())):?>
-				paisRevista="/revista/<?php echo preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%i', '\1', uri_string());?>";
+<?php if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
+				paisRevista="/revista/<?php echo preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
 <?php endif;?>
-<?php if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%i', uri_string())):?>
-				paisRevista="/pais/<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%i', '\1', uri_string());?>";
+<?php if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
+				paisRevista="/pais/<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
 <?php endif;?>
 			updateData(urlData);
 			asyncAjax=true;
-			/*Set previous value of form*/
-			//jQuery("#generarIndicador").data('pre', jQuery("#generarIndicador").serializeJSON());
 		});
 
 		setPeridos = function(){
