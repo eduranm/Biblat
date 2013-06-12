@@ -92,6 +92,7 @@
 					});
 				}
 				if(typeof history.pushState === "function" && !popState.disciplina){
+					disciplina="";
 					if(value != "" && value != null){
 						disciplina='/disciplina/' + value;
 					}
@@ -254,7 +255,6 @@
 								}
 							}
 						});
-						console.log("popState.periodo: " + popState.periodo);
 						if(!popState.periodo){
 							jQuery("#generarIndicador").submit();
 						}
@@ -278,10 +278,12 @@
 			if(data.indicador != actualForm.indicador){
 				popState.indicador=true;
 				jQuery("#indicador").val(data.indicador).trigger("change");
+				actualForm = jQuery("#generarIndicador").serializeJSON();
 			}
 			if(data.disciplina != actualForm.disciplina){
 				popState.disciplina=true;
 				jQuery("#disciplina").val(data.disciplina).trigger("change");
+				actualForm = jQuery("#generarIndicador").serializeJSON();
 			}
 
 			if(!actualForm.revista){
@@ -299,6 +301,7 @@
 			if(data.revista !== "" &&  typeof data.revista !== "undefined" && data.revista.join('/') != actualForm.revista.join('/')){
 				popState.revista=true;
 				jQuery("#revista").val(data.revista).trigger("change");
+				actualForm = jQuery("#generarIndicador").serializeJSON();
 			}
 
 			if(!actualForm.pais){
@@ -316,6 +319,7 @@
 			if(data.pais !== "" &&  typeof data.pais !== "undefined" && data.pais.join('/') != actualForm.pais.join('/')){
 				popState.pais=true;
 				jQuery("#pais").val(data.pais).trigger("change");
+				actualForm = jQuery("#generarIndicador").serializeJSON();
 			}
 			if(typeof data.periodo === "undefined"){
 				data.periodo = rangoPeriodo;
@@ -323,7 +327,6 @@
 			if(data.periodo != actualForm.periodo){
 				jQuery("#sliderPeriodo").prop("disabled", false);
 				jQuery("#sliderPeriodo").slider("value", data.periodo.substring(0, 4), data.periodo.substring(5));
-				console.log("submit updateData");
 				jQuery("#generarIndicador").submit();
 			}
 			asyncAjax=true;
