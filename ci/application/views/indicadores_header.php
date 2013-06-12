@@ -8,8 +8,9 @@
 		google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});
 		var chart = null;
 		var charType = null;
-		var popState = {indicador:false, disciplina:false, revista:false, pais:false};
+		var popState = {indicador:false, disciplina:false, revista:false, pais:false, periodo:false};
 		var rangoPeriodo="0-0";
+		var dataPeriodo="0-0";
 		var paisRevista="";
 		var asyncAjax=false;
 		var soloDisciplina = ['indice-concentracion', 'modelo-bradford-revista', 'modelo-bradford-institucion', 'productividad-exogena'];
@@ -37,8 +38,6 @@
 				}
 
 				if(typeof history.pushState === "function" && !popState.indicador){
-					console.log(jQuery("#generarIndicador").serializeJSON());
-					console.log('<?php echo site_url('indicadores')."/"?>' + value);
 					history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + value);
 				}
 				popState.indicador=false;
@@ -209,11 +208,10 @@
 			paisRevista="/pais/<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
 <?php endif;?>
 			updateData(urlData);
-			if(typeof history.pushState === "function"){
-				history.replaceState(urlData, null);
-			}
 			delete urlData;
-			asyncAjax=true;
+			if(typeof history.replaceState === "function"){
+				history.replaceState(jQuery("#generarIndicador").serializeJSON(), null);
+			}
 		});
 
 		setPeridos = function(){
@@ -256,9 +254,11 @@
 								}
 							}
 						});
-						if(typeof urlData === "undefined"){
+						console.log("popState.periodo: " + popState.periodo);
+						if(!popState.periodo){
 							jQuery("#generarIndicador").submit();
 						}
+						popState.periodo=false;
 					}else{
 						jQuery("#sliderPeriodo").prop('disabled', true);
 						jQuery("#generate").prop('disabled', true);
@@ -270,7 +270,11 @@
 
 		updateData = function(data){
 			console.log(data);
+			asyncAjax=false;
 			actualForm = jQuery("#generarIndicador").serializeJSON();
+			if(typeof data.periodo !== "undefined"){
+				popState.periodo = true;
+			}
 			if(data.indicador != actualForm.indicador){
 				popState.indicador=true;
 				jQuery("#indicador").val(data.indicador).trigger("change");
@@ -283,7 +287,6 @@
 			if(!actualForm.revista){
 				actualForm.revista = ["revista"];
 			}
-
 			if(data.revista === "" || typeof data.revista === "undefined" && typeof data.pais === "undefined"){
 				jQuery("#periodos, #chart").hide("slow");
 				jQuery("#revista").select2("val", null);
@@ -318,8 +321,11 @@
 				data.periodo = rangoPeriodo;
 			}
 			if(data.periodo != actualForm.periodo){
+				jQuery("#sliderPeriodo").prop("disabled", false);
 				jQuery("#sliderPeriodo").slider("value", data.periodo.substring(0, 4), data.periodo.substring(5));
+				console.log("submit updateData");
 				jQuery("#generarIndicador").submit();
 			}
+			asyncAjax=true;
 		};
 	</script>
