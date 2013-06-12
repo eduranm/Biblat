@@ -68,6 +68,7 @@
 					
 				} else {
 					jQuery("#paisRevista").show("slow");
+					jQuery("#periodos, #chart").hide("slow");
 					jQuery.ajax({
 						url: '<?php echo site_url("indicadores/getRevistasPaises");?>',
 						type: 'POST',
@@ -92,7 +93,10 @@
 					});
 				}
 				if(typeof history.pushState === "function" && !popState.disciplina){
-					history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + value);
+					if(value != "" && value != null){
+						disciplina='/disciplina/' + value;
+					}
+					history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + indicadorValue + disciplina);
 				}
 				popState.disciplina=false;
 				console.log(e);
@@ -199,10 +203,10 @@
 <?php endif;?>
 			}
 <?php if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-				paisRevista="/revista/<?php echo preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
+			paisRevista="/revista/<?php echo preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
 <?php endif;?>
 <?php if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-				paisRevista="/pais/<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
+			paisRevista="/pais/<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
 <?php endif;?>
 			updateData(urlData);
 			if(typeof history.pushState === "function"){
