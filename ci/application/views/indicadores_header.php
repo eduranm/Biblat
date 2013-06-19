@@ -64,7 +64,7 @@
 					jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
 					jQuery("#revista, #pais").select2("enable", false);
 				} else if (jQuery.inArray(indicadorValue, soloDisciplina) > -1) {
-					
+					jQuery("#generarIndicador").submit();
 				} else {
 					jQuery("#paisRevista").show("slow");
 					jQuery("#periodos, #chart").hide("slow");
@@ -162,23 +162,44 @@
 			jQuery("#sliderPeriodo").slider();
 
 			jQuery("#generarIndicador").on("submit", function(e){
+				indicadorValue = jQuery("#indicador").val();
+				urlRequest = '<?php echo site_url("indicadores/getChartData");?>';
+				switch(indicadorValue){
+					case "modelo-bradford-revista":
+					case "modelo-bradford-institucion":
+						urlRequest = '<?php echo site_url("indicadores/getChartDataBradford");?>';
+						break;
+					case "indice-concentracion":
+						break;
+					case "productividad-exogena":
+						break;
+				}
 				jQuery.ajax({
-				  url: '<?php echo site_url("indicadores/getChartData");?>',
+				  url: urlRequest,
 				  type: 'POST',
 				  dataType: 'json',
 				  data: jQuery(this).serialize(),
 				  success: function(data) {
-				  	jQuery("#chart").show("slow");
 				  	console.log(data);
-				  	//history.pushState(jQuery("#generarIndicador").serializeJSON(), data.history.title, data.history.url);
-					var chartData = new google.visualization.DataTable(data.data);
-
-					if(chart == null || charType != 'line'){
-						charType = 'line';
-						chart = new google.visualization.LineChart(document.getElementById('chart'));
+					switch(indicadorValue){
+						case "modelo-bradford-revista":
+						case "modelo-bradford-institucion":
+							break;
+						case "indice-concentracion":
+							break;
+						case "productividad-exogena":
+							break;
+						default:
+							jQuery("#chart").show("slow");
+							var chartData = new google.visualization.DataTable(data.data);
+							if(chart == null || charType != 'line'){
+								charType = 'line';
+								chart = new google.visualization.LineChart(document.getElementById('chart'));
+							}
+							console.log(chart);
+							chart.draw(chartData, data.options);
+							break;
 					}
-					console.log(chart);
-					chart.draw(chartData, data.options);
 					
 				  }
 				});
@@ -208,7 +229,10 @@
 <?php if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
 			paisRevista="/pais/<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
 <?php endif;?>
-			updateData(urlData);
+			if(typeof urlData.indicador !== "undefined"){
+				updateData(urlData);
+			}
+			
 			delete urlData;
 			if(typeof history.replaceState === "function"){
 				history.replaceState(jQuery("#generarIndicador").serializeJSON(), null);
@@ -275,12 +299,12 @@
 			if(typeof data.periodo !== "undefined"){
 				popState.periodo = true;
 			}
-			if(data.indicador != actualForm.indicador){
+			if(typeof data.indicador !== "undefined" && data.indicador != actualForm.indicador){
 				popState.indicador=true;
 				jQuery("#indicador").val(data.indicador).trigger("change");
 				actualForm = jQuery("#generarIndicador").serializeJSON();
 			}
-			if(data.disciplina != actualForm.disciplina){
+			if(typeof data.disciplina !== "undefined" && data.disciplina != actualForm.disciplina){
 				popState.disciplina=true;
 				jQuery("#disciplina").val(data.disciplina).trigger("change");
 				actualForm = jQuery("#generarIndicador").serializeJSON();
@@ -321,10 +345,10 @@
 				jQuery("#pais").val(data.pais).trigger("change");
 				actualForm = jQuery("#generarIndicador").serializeJSON();
 			}
-			if(typeof data.periodo === "undefined"){
+			if(typeof data.periodo === "undefined" && (typeof data.revista !== "undefined" || typeof data.pais !== "undefined")){
 				data.periodo = rangoPeriodo;
 			}
-			if(data.periodo != actualForm.periodo){
+			if(typeof data.periodo !== "undefined" && data.periodo != actualForm.periodo){
 				jQuery("#sliderPeriodo").prop("disabled", false);
 				jQuery("#sliderPeriodo").slider("value", data.periodo.substring(0, 4), data.periodo.substring(5));
 				jQuery("#generarIndicador").submit();

@@ -155,13 +155,17 @@ class Indicadores extends CI_Controller {
 								'title' => $this->indicadores[$_POST['indicador']],
 								'minValue' => 0
 							),
-						'width' => '950'
+						'width' => '1000'
 						);
 		$data['history'] = array(
 								'title' => _sprintf('Biblat - Indicador: %s', $this->indicadores[$_POST['indicador']]),
 								'url' => site_url("indicadores/{$_POST['indicador']}")
 							);
 		echo json_encode($data, true);
+	}
+
+	public function getChartDataBradford(){
+		$this->output->enable_profiler(false);
 	}
 
 	public function getRevistasPaises(){

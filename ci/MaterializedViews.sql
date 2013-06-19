@@ -289,6 +289,20 @@ SELECT
   substr(e_260b, 1, 4) AS anio
 FROM articulo WHERE e_590a ~~ 'Artículo%' AND substr(e_260b, 1, 4) ~ '[0-9]{4}';
 
+--Autores por documento
+CREATE OR REPLACE VIEW "vAutoresDocumento" AS
+SELECT * FROM
+(SELECT a.iddatabase,
+       a.sistema,
+       count(*) AS autores,
+       max(i.e_100x) AS e_100x
+FROM autor a
+LEFT JOIN institucion i ON a.iddatabase=i.iddatabase
+AND a.sistema=i.sistema
+AND a.sec_autor=i.sec_autor
+AND a.sec_institucion=i.sec_institucion
+GROUP BY a.iddatabase, a.sistema) AS ad WHERE ad.e_100x IS NOT NULL;
+
 --Autores por documento y pais de aficialción
 CREATE OR REPLACE VIEW "vAutoresDocumentoPais" AS
 SELECT dp.iddatabase,
@@ -320,19 +334,6 @@ ON dp.iddatabase=ad.iddatabase
 AND dp.sistema=ad.sistema
 GROUP BY dp.iddatabase, dp.sistema, dp.e_100x;
 
-  --Autores por documento
-CREATE OR REPLACE VIEW "vAutoresDocumento" AS
-SELECT * FROM
-(SELECT a.iddatabase,
-       a.sistema,
-       count(*) AS autores,
-       max(i.e_100x) AS e_100x
-FROM autor a
-LEFT JOIN institucion i ON a.iddatabase=i.iddatabase
-AND a.sistema=i.sistema
-AND a.sec_autor=i.sec_autor
-AND a.sec_institucion=i.sec_institucion
-GROUP BY a.iddatabase, a.sistema) AS ad WHERE ad.e_100x IS NOT NULL;
 
 --Indice de coautoria por revista
 CREATE OR REPLACE VIEW "vIndiceCoautoriaPriceRevista" AS
@@ -345,8 +346,8 @@ SELECT max(ar.revista) AS revista,
        sqrt(sum(au.autores)) AS price
 FROM "vAutoresDocumento" au
 INNER JOIN "vArticulos" ar ON au.iddatabase=ar.iddatabase AND au.sistema=ar.sistema
-GROUP BY ar."revistaSlug", ar.anio
-ORDER BY ar."revistaSlug", ar.anio;
+GROUP BY "revistaSlug", anio
+ORDER BY "revistaSlug", anio;
 
 SELECT create_matview('"mvIndiceCoautoriaPriceRevista"', '"vIndiceCoautoriaPriceRevista"');
 CREATE INDEX "indiceCoautoriaPriceRevista_resvistaSlug" ON "mvIndiceCoautoriaPriceRevista"("revistaSlug");
@@ -358,15 +359,14 @@ SELECT
   au.e_100x AS "paisAutor", 
   slug(au.e_100x) AS "paisAutorSlug", 
   id_disciplina, 
-  substr(ar.e_260b, 1, 4) AS anio, 
+  ar.anio, 
   count(*) as documentos, 
   sum(au.autores) as autores, 
   sum(au.autores) / count(*) AS coautoria,
   sqrt(sum(au.autores)) AS price
 FROM "vAutoresDocumentoPais" au
-INNER JOIN  articulo ar 
+INNER JOIN  "vArticulos" ar 
 ON au.iddatabase=ar.iddatabase AND au.sistema=ar.sistema
-WHERE ar.e_590a ~~ 'Artículo%' AND substr(ar.e_260b, 1, 4) ~ '[0-9]{4}'
 GROUP BY "paisAutor", id_disciplina, anio
 ORDER BY "paisAutor", id_disciplina, anio;
 
@@ -759,3 +759,72 @@ ON ad."revistaSlug"=fd."revistaSlug" AND ad.id_disciplina=fd.id_disciplina) fdr
 GROUP BY id_disciplina, "revistaSlug";
 
 SELECT create_matview('"mvPratt"', '"vPratt"');
+
+--Bradford
+CREATE OR REPLACE VIEW "vArticulosDisciplinaRevista" AS
+SELECT 
+    a.id_disciplina, 
+    a."revistaSlug", 
+    max(a.revista) AS revista, 
+    count(*) AS articulos
+ FROM "vAutoresDocumento" ad
+  INNER JOIN "vArticulos" a
+    ON ad.iddatabase=a.iddatabase AND ad.sistema=a.sistema
+  GROUP BY a.id_disciplina, a."revistaSlug"
+  ORDER BY a.id_disciplina, articulos DESC;
+
+SELECT create_matview('"mvArticulosDisciplinaRevista"', '"vArticulosDisciplinaRevista"');
+
+SELECT 
+  * ,
+  log("frecuenciaAcumulado") as "logFrecuenciaAcumulado"
+FROM
+(SELECT 
+  id_disciplina, 
+  articulos, 
+  sum(articulos) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "articulosAcumulado",
+  count(*) AS frecuencia,
+  sum(count(*)) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "frecuenciaAcumulado",
+  articulos * count(*) AS "articulosXfrecuencia",
+  sum(articulos * count(*)) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "articulosXfrecuenciaAcumulado"
+FROM "vArticulosDisciplinaRevista"
+GROUP BY id_disciplina, articulos) adrc --Articulos por disciplina, revista, acumulados
+
+--Bradford institucion
+CREATE OR REPLACE VIEW "vArticulosDisciplinaInstitucion" AS
+SELECT 
+      id_disciplina,
+      max(institucion) AS institucion,
+      "institucionSlug",
+      count(*) AS articulos
+    FROM
+      (SELECT 
+        i.iddatabase, 
+        i.sistema, 
+        a.id_disciplina,
+        max(i.e_100u) AS institucion,
+        slug(i.e_100u) as "institucionSlug"
+      FROM  "vArticulos" a
+      INNER JOIN institucion i
+        ON a.iddatabase=i.iddatabase AND a.sistema=i.sistema
+      WHERE i.e_100x IS NOT NULL AND i.e_100u IS NOT NULL
+      GROUP BY i.iddatabase, i.sistema, a.id_disciplina, "institucionSlug") ai --Articulo institucion
+    GROUP BY id_disciplina, "institucionSlug"
+    ORDER BY id_disciplina, articulos DESC;
+
+SELECT create_matview('"mvArticulosDisciplinaInstitucion"', '"vArticulosDisciplinaInstitucion"');
+
+SELECT 
+  * ,
+  log("frecuenciaAcumulado") as "logFrecuenciaAcumulado"
+FROM
+  (SELECT 
+    id_disciplina, 
+    articulos, 
+    sum(articulos) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "articulosAcumulado",
+    count(*) AS frecuencia,
+    sum(count(*)) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "frecuenciaAcumulado",
+    articulos * count(*) AS "articulosXfrecuencia",
+    sum(articulos * count(*)) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "articulosXfrecuenciaAcumulado"
+  FROM "mvArticulosDisciplinaInstitucion"
+  GROUP BY id_disciplina, articulos) adic --Articulos por disciplina, revista, acumulados

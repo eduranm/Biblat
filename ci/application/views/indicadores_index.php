@@ -34,7 +34,7 @@
 		<div id="periodos" class="sliderPeriodo" style="display:none;">
 			<input id="sliderPeriodo" type="slider" name="periodo" value="0;0" />
 		</div>
-		<div id="chart" style="width: 950px; height: 500px; display:none;" >
+		<div id="chart" style="width: 1000px; height: 500px; display:none;" >
 
 		</div>
 	</form>
