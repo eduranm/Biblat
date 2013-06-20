@@ -184,6 +184,14 @@
 					switch(indicadorValue){
 						case "modelo-bradford-revista":
 						case "modelo-bradford-institucion":
+							jQuery("#chart").show("slow");
+							var chartData = new google.visualization.DataTable(data.chart.bradford);
+							if(chart == null || charType != 'line'){
+								charType = 'line';
+								chart = new google.visualization.LineChart(document.getElementById('chart'));
+							}
+							chart.draw(chartData, data.chart.options);
+							break;
 							break;
 						case "indice-concentracion":
 							break;

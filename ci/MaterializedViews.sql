@@ -775,6 +775,7 @@ SELECT
 
 SELECT create_matview('"mvArticulosDisciplinaRevista"', '"vArticulosDisciplinaRevista"');
 
+CREATE OR REPLACE VIEW "vBradfordRevista" AS
 SELECT 
   * ,
   log("frecuenciaAcumulado") as "logFrecuenciaAcumulado"
@@ -782,12 +783,12 @@ FROM
 (SELECT 
   id_disciplina, 
   articulos, 
-  sum(articulos) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "articulosAcumulado",
+  --sum(articulos) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "articulosAcumulado",
   count(*) AS frecuencia,
   sum(count(*)) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "frecuenciaAcumulado",
-  articulos * count(*) AS "articulosXfrecuencia",
+  --articulos * count(*) AS "articulosXfrecuencia",
   sum(articulos * count(*)) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "articulosXfrecuenciaAcumulado"
-FROM "vArticulosDisciplinaRevista"
+FROM "mvArticulosDisciplinaRevista"
 GROUP BY id_disciplina, articulos) adrc --Articulos por disciplina, revista, acumulados
 
 --Bradford institucion
@@ -814,6 +815,8 @@ SELECT
 
 SELECT create_matview('"mvArticulosDisciplinaInstitucion"', '"vArticulosDisciplinaInstitucion"');
 
+
+CREATE OR REPLACE VIEW "vBradfordInstitucion" AS
 SELECT 
   * ,
   log("frecuenciaAcumulado") as "logFrecuenciaAcumulado"
@@ -821,10 +824,10 @@ FROM
   (SELECT 
     id_disciplina, 
     articulos, 
-    sum(articulos) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "articulosAcumulado",
+    --sum(articulos) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "articulosAcumulado",
     count(*) AS frecuencia,
     sum(count(*)) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "frecuenciaAcumulado",
-    articulos * count(*) AS "articulosXfrecuencia",
+    --articulos * count(*) AS "articulosXfrecuencia",
     sum(articulos * count(*)) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "articulosXfrecuenciaAcumulado"
   FROM "mvArticulosDisciplinaInstitucion"
   GROUP BY id_disciplina, articulos) adic --Articulos por disciplina, revista, acumulados

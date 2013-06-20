@@ -119,6 +119,7 @@ class Indicadores extends CI_Controller {
 			$data['data']['cols'][] = array('id' => slug($kindicador),'label' => $kindicador, 'type' => 'number');
 			$data['data']['cols'][] = array('id' => slug($kindicador)."-tooltip",'label' => $kindicador, 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
 		endforeach;
+		/*Generando filas*/
 		foreach ($periodos as $periodo):
 			$c = array();
 			$c[] = array(
@@ -155,7 +156,13 @@ class Indicadores extends CI_Controller {
 								'title' => $this->indicadores[$_POST['indicador']],
 								'minValue' => 0
 							),
-						'width' => '1000'
+						'width' => '950',
+						'chartArea' => array(
+							'left' => 100,
+							'top' => 50,
+							'width' => 700,
+							'height' => "80%"
+							)
 						);
 		$data['history'] = array(
 								'title' => _sprintf('Biblat - Indicador: %s', $this->indicadores[$_POST['indicador']]),
@@ -166,6 +173,61 @@ class Indicadores extends CI_Controller {
 
 	public function getChartDataBradford(){
 		$this->output->enable_profiler(false);
+		$sufix['modelo-bradford-revista']="Revista";
+		$sufix['modelo-bradford-institucion']="Institucion";
+		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
+		$query = "SELECT articulos, frecuencia, \"articulosXfrecuenciaAcumulado\", \"logFrecuenciaAcumulado\" FROM \"vBradford{$sufix[$_POST['indicador']]}\" WHERE id_disciplina={$idDisciplina}";
+		$query = $this->db->query($query);
+		$result = array();
+		$result['chart']['bradford'] = array();
+		/*Columnas*/
+		$result['chart']['bradford']['cols'][] = array('id' => '','label' => _('log(fx)'),'type' => 'number');
+		$result['chart']['bradford']['cols'][] = array('id' => '','label' => _('Bradford'),'type' => 'number');
+		/*Generando filas*/
+		foreach ($query->result_array() as $row):
+			$c = array();
+			$c[] = array(
+					'v' => round($row['logFrecuenciaAcumulado'], 4)
+				);
+			$c[] = array(
+					'v' => (int)$row['articulosXfrecuenciaAcumulado']
+				);
+			/*$c[] = array(
+				'v' => _sprintf('<div class="centrado"><b>%s</b></div><div class="centrado">Año %d: %s</div>', $kindicador, $periodo, $vindicador[$periodo])
+			);*/
+			$result['chart']['bradford']['rows'][]['c'] = $c;
+		endforeach;
+		/*Opciones de la gráfica*/
+		$result['chart']['options'] = array(
+						'animation' => array(
+								'duration' => 1000
+							), 
+						'curveType' => 'function', 
+						'height' => '500',
+						'hAxis' => array(
+								'title' => _('log(fx)')
+							), 
+						'legend' => array(
+								'position' => 'right'
+							),
+						'pointSize' => 1, 
+						'title' => $this->indicadores[$_POST['indicador']],
+						'tooltip' => array(
+								'isHtml' => true
+							),
+						'vAxis' => array(
+								'title' => _('Revistas'),
+								'minValue' => 0
+							),
+						'width' => '950',
+						'chartArea' => array(
+							'left' => 120,
+							'top' => 50,
+							'width' => 700,
+							'height' => "80%"
+							)
+						);
+		echo json_encode($result, true);
 	}
 
 	public function getRevistasPaises(){
