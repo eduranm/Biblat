@@ -246,31 +246,32 @@ class Indicadores extends CI_Controller {
 							)
 						);
 		/*Creando lista de revistas con su tatal de articulos agrupoados según los límites calculados anteriormente*/
-		$query = "SELECT revista, articulos FROM \"mvArticulosDisciplina{$sufix[$_POST['indicador']]}\" WHERE id_disciplina={$idDisciplina}";
+		$column = strtolower($sufix[$_POST['indicador']]);
+		$query = "SELECT {$column}, articulos FROM \"mvArticulosDisciplina{$sufix[$_POST['indicador']]}\" WHERE id_disciplina={$idDisciplina}";
 		$query = $this->db->query($query);
 		$acumuladoArticulos = 0;
-		$revistas = array();
+		$revistaInstitucion = array();
 		foreach ($query->result_array() as $row) :
 			$acumulado += $row['articulos'];
 			if ($acumulado <= $grupos['1']['limite']):
-				$revistas['1'][$row['revista']] = $row['articulos'];
+				$revistaInstitucion['1'][$row[$column]] = $row['articulos'];
 			elseif ($acumulado <= $grupos['2']['limite']):
-				$revistas['2'][$row['revista']] = $row['articulos'];
+				$revistaInstitucion['2'][$row[$column]] = $row['articulos'];
 			else:
-				$revistas['3'][$row['revista']] = $row['articulos'];
+				$revistaInstitucion['3'][$row[$column]] = $row['articulos'];
 			endif;
 		endforeach;
 		/*Ordenando grupos alfabeticamnete*/
-		ksort($revistas['1']);
-		ksort($revistas['2']);
-		ksort($revistas['3']);
+		ksort($revistaInstitucion['1']);
+		ksort($revistaInstitucion['2']);
+		ksort($revistaInstitucion['3']);
 		/*Datos para la gráfica del grupo1*/
 		$result['chart']['group1']['cols'][] = array('id' => '','label' => _('Títulos de revista'),'type' => 'string');
 		$c = array();
 		$c[] = array('v' => '');
 		/*Agregado filas y columnas*/
-		foreach ($revistas['1'] as $revista => $articulos):
-			$result['chart']['group1']['cols'][] = array('id' => '','label' => $revista,'type' => 'number');
+		foreach ($revistaInstitucion['1'] as $label => $articulos):
+			$result['chart']['group1']['cols'][] = array('id' => '','label' => $label,'type' => 'number');
 			$c[] = array(
 					'v' => (int)$articulos
 				);
@@ -281,7 +282,7 @@ class Indicadores extends CI_Controller {
 		$c = array();
 		$c[] = array('v' => '');
 		/*Agregado filas y columnas*/
-		foreach ($revistas['2'] as $revista => $articulos):
+		foreach ($revistaInstitucion['2'] as $revista => $articulos):
 			$result['chart']['group2']['cols'][] = array('id' => '','label' => $revista,'type' => 'number');
 			$c[] = array(
 					'v' => (int)$articulos
@@ -323,7 +324,7 @@ class Indicadores extends CI_Controller {
 
 		$result['last'] = $last;
 		$result['grupos'] = $grupos;
-		$result['revistas'] = $revistas;
+		$result['revistaInstitucion'] = $revistaInstitucion;
 		echo json_encode($result, true);
 	}
 
