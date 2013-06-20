@@ -178,6 +178,11 @@ class Indicadores extends CI_Controller {
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
 		$query = "SELECT articulos, frecuencia, \"articulosXfrecuenciaAcumulado\", \"logFrecuenciaAcumulado\" FROM \"vBradford{$sufix[$_POST['indicador']]}\" WHERE id_disciplina={$idDisciplina}";
 		$query = $this->db->query($query);
+		/*Ultimo valor del arreglo*/
+		$last = current(array_slice($query->result_array(), -1));
+		$promedio = $last['articulosXfrecuenciaAcumulado']/3;
+		$grupos = array();
+		/*Variables para las gráficas*/
 		$result = array();
 		$result['chart']['bradford'] = array();
 		/*Columnas*/
@@ -185,20 +190,33 @@ class Indicadores extends CI_Controller {
 		$result['chart']['bradford']['cols'][] = array('id' => '','label' => _('Bradford'),'type' => 'number');
 		/*Generando filas*/
 		foreach ($query->result_array() as $row):
+			$articulosXfrecuenciaAcumulado = (int)$row['articulosXfrecuenciaAcumulado'];
+			$articuloXfrecuencia = $row['articulos'] * $row['frecuencia'];
+			/*Segmentando grupos*/
+			if ($articulosXfrecuenciaAcumulado < $promedio):
+				$grupos['1']['limite'] = $articulosXfrecuenciaAcumulado;
+			elseif ($articulosXfrecuenciaAcumulado > $promedio && ($articulosXfrecuenciaAcumulado - $promedio) < ($articuloXfrecuencia / 2)):
+				$grupos['1']['limite'] = $articulosXfrecuenciaAcumulado;
+			elseif ($articulosXfrecuenciaAcumulado < ($promedio * 2)):
+				$grupos['2']['limite'] = $articulosXfrecuenciaAcumulado;
+			elseif ($articulosXfrecuenciaAcumulado > ($promedio * 2) && ($articulosXfrecuenciaAcumulado - ($promedio * 2)) < ($articuloXfrecuencia / 2)):
+				$grupos['2']['limite'] = $articulosXfrecuenciaAcumulado;
+			endif;
+			/*Agregado columnas a la fila*/
 			$c = array();
 			$c[] = array(
 					'v' => round($row['logFrecuenciaAcumulado'], 4)
 				);
 			$c[] = array(
-					'v' => (int)$row['articulosXfrecuenciaAcumulado']
+					'v' => $articulosXfrecuenciaAcumulado
 				);
 			/*$c[] = array(
 				'v' => _sprintf('<div class="centrado"><b>%s</b></div><div class="centrado">Año %d: %s</div>', $kindicador, $periodo, $vindicador[$periodo])
 			);*/
 			$result['chart']['bradford']['rows'][]['c'] = $c;
 		endforeach;
-		/*Opciones de la gráfica*/
-		$result['chart']['options'] = array(
+		/*Opciones de la gráfica de bradford*/
+		$result['options']['bradford'] = array(
 						'animation' => array(
 								'duration' => 1000
 							), 
@@ -227,6 +245,85 @@ class Indicadores extends CI_Controller {
 							'height' => "80%"
 							)
 						);
+		/*Creando lista de revistas con su tatal de articulos agrupoados según los límites calculados anteriormente*/
+		$query = "SELECT revista, articulos FROM \"mvArticulosDisciplina{$sufix[$_POST['indicador']]}\" WHERE id_disciplina={$idDisciplina}";
+		$query = $this->db->query($query);
+		$acumuladoArticulos = 0;
+		$revistas = array();
+		foreach ($query->result_array() as $row) :
+			$acumulado += $row['articulos'];
+			if ($acumulado <= $grupos['1']['limite']):
+				$revistas['1'][$row['revista']] = $row['articulos'];
+			elseif ($acumulado <= $grupos['2']['limite']):
+				$revistas['2'][$row['revista']] = $row['articulos'];
+			else:
+				$revistas['3'][$row['revista']] = $row['articulos'];
+			endif;
+		endforeach;
+		/*Ordenando grupos alfabeticamnete*/
+		ksort($revistas['1']);
+		ksort($revistas['2']);
+		ksort($revistas['3']);
+		/*Datos para la gráfica del grupo1*/
+		$result['chart']['group1']['cols'][] = array('id' => '','label' => _('Títulos de revista'),'type' => 'string');
+		$c = array();
+		$c[] = array('v' => '');
+		/*Agregado filas y columnas*/
+		foreach ($revistas['1'] as $revista => $articulos):
+			$result['chart']['group1']['cols'][] = array('id' => '','label' => $revista,'type' => 'number');
+			$c[] = array(
+					'v' => (int)$articulos
+				);
+		endforeach;
+		$result['chart']['group1']['rows'][]['c'] = $c;
+		/*Datos para la gráfica del grupo2*/
+		$result['chart']['group2']['cols'][] = array('id' => '','label' => _('Títulos de revista'),'type' => 'string');
+		$c = array();
+		$c[] = array('v' => '');
+		/*Agregado filas y columnas*/
+		foreach ($revistas['2'] as $revista => $articulos):
+			$result['chart']['group2']['cols'][] = array('id' => '','label' => $revista,'type' => 'number');
+			$c[] = array(
+					'v' => (int)$articulos
+				);
+		endforeach;
+		$result['chart']['group2']['rows'][]['c'] = $c;
+		/*Opciones de la gráfica de los grupos*/
+		$result['options']['groups'] = array(
+						'animation' => array(
+								'duration' => 1000
+							),
+						'bar' => array(
+								'groupWidth' => '85%'
+							),
+						'height' => '500',
+						'hAxis' => array(
+								'title' => _('Títulos de revista')
+							), 
+						'legend' => array(
+								'position' => 'right'
+							),
+						'pointSize' => 1, 
+						'title' => _('Fecuencia de artículos por título de revista'),
+						'tooltip' => array(
+								'isHtml' => true
+							),
+						'vAxis' => array(
+								'title' => _('Artículos'),
+								'minValue' => 0
+							),
+						'width' => '950',
+						'chartArea' => array(
+							'left' => 120,
+							'top' => 50,
+							'width' => 700,
+							'height' => "80%"
+							)
+						);
+
+		$result['last'] = $last;
+		$result['grupos'] = $grupos;
+		$result['revistas'] = $revistas;
 		echo json_encode($result, true);
 	}
 

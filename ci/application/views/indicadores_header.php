@@ -184,13 +184,23 @@
 					switch(indicadorValue){
 						case "modelo-bradford-revista":
 						case "modelo-bradford-institucion":
-							jQuery("#chart").show("slow");
+							jQuery("#chart").show();
 							var chartData = new google.visualization.DataTable(data.chart.bradford);
 							if(chart == null || charType != 'line'){
 								charType = 'line';
 								chart = new google.visualization.LineChart(document.getElementById('chart'));
 							}
-							chart.draw(chartData, data.chart.options);
+							chart.draw(chartData, data.options.bradford);
+
+							var chartData = new google.visualization.DataTable(data.chart.group1);
+							jQuery("#chartGroup1").show();
+							var charGroup1 = new google.visualization.ColumnChart(document.getElementById('chartGroup1'));
+							charGroup1.draw(chartData, data.options.groups);
+
+							var chartData = new google.visualization.DataTable(data.chart.group2);
+							jQuery("#chartGroup2").show();
+							var charGroup2 = new google.visualization.ColumnChart(document.getElementById('chartGroup2'));
+							charGroup2.draw(chartData, data.options.groups);
 							break;
 							break;
 						case "indice-concentracion":
