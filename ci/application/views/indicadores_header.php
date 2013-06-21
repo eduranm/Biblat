@@ -26,6 +26,7 @@
 			jQuery("#indicador").on("change", function(e){
 				value = jQuery(this).val();
 				jQuery("#paisRevista, #periodos, #chart, #bradfodContainer").hide("slow");
+				jQuery("#bradfordSlide").anythingSlider(1);
 				jQuery("#disciplina").select2("val", "");
 				if (value == "") {
 					jQuery("#disciplina, #revista, #pais").select2("enable", false);
