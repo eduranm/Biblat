@@ -660,3 +660,8 @@ p {
 #google-visualization-errors-all-1 {
 	display: none !important;
 }
+
+.blockMsg {
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}

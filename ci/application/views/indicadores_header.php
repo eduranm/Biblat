@@ -3,6 +3,7 @@
 	<script src="<?php echo base_url();?>js/select2/select2.js"></script>
 	<script src="<?php echo base_url();?>js/jquery.slider.min.js"></script>
 	<script src="<?php echo base_url();?>js/jquery.serializeJSON.min.js"></script>
+	<script src="<?php echo base_url();?>js/jquery.blockUI.js"></script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript">
 		google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});
@@ -66,6 +67,7 @@
 				} else if (jQuery.inArray(indicadorValue, soloDisciplina) > -1) {
 					jQuery("#generarIndicador").submit();
 				} else {
+					loading.start();
 					jQuery("#paisRevista").show("slow");
 					jQuery("#periodos, #chart").hide("slow");
 					jQuery.ajax({
@@ -88,6 +90,7 @@
 								jQuery("#pais").append('<option value="' + val.val +'">' + val.text + '</option>');
 							});
 							jQuery("#revista, #pais").select2("enable", true);
+							loading.end();
 						}
 					});
 				}
@@ -162,6 +165,7 @@
 			jQuery("#sliderPeriodo").slider();
 
 			jQuery("#generarIndicador").on("submit", function(e){
+				loading.start();
 				indicadorValue = jQuery("#indicador").val();
 				urlRequest = '<?php echo site_url("indicadores/getChartData");?>';
 				switch(indicadorValue){
@@ -184,7 +188,7 @@
 					switch(indicadorValue){
 						case "modelo-bradford-revista":
 						case "modelo-bradford-institucion":
-							jQuery("#chart").show();
+							jQuery("#chart").slideDown("slow");
 							var chartData = new google.visualization.DataTable(data.chart.bradford);
 							if(chart == null || charType != 'line'){
 								charType = 'line';
@@ -193,15 +197,14 @@
 							chart.draw(chartData, data.options.bradford);
 
 							var chartData = new google.visualization.DataTable(data.chart.group1);
-							jQuery("#chartGroup1").show();
+							jQuery("#chartGroup1").slideDown("slow");
 							var charGroup1 = new google.visualization.ColumnChart(document.getElementById('chartGroup1'));
 							charGroup1.draw(chartData, data.options.groups);
 
 							var chartData = new google.visualization.DataTable(data.chart.group2);
-							jQuery("#chartGroup2").show();
+							jQuery("#chartGroup2").slideDown("slow");
 							var charGroup2 = new google.visualization.ColumnChart(document.getElementById('chartGroup2'));
 							charGroup2.draw(chartData, data.options.groups);
-							break;
 							break;
 						case "indice-concentracion":
 							break;
@@ -218,7 +221,7 @@
 							chart.draw(chartData, data.options);
 							break;
 					}
-					
+					loading.end();
 				  }
 				});
 				return false;
@@ -258,6 +261,7 @@
 		});
 
 		setPeridos = function(){
+			loading.start();
 			jQuery("#periodos").slideDown("slow");
 			jQuery.ajax({
 				url: '<?php echo site_url("indicadores/getPeriodos");?>',
@@ -306,6 +310,7 @@
 						jQuery("#generate").prop('disabled', true);
 						console.log(data.error);
 					}
+					//loading.end();
 				}
 			});
 		};
@@ -373,4 +378,24 @@
 			}
 			asyncAjax=true;
 		};
+
+		loading = {
+			start: function(){
+				jQuery.blockUI({ 
+					message: '<h2><img src="<?php echo base_url();?>img/loading.gif" /><br /><?php _e('Espere un momento...');?></h2>',
+					css: { 
+					color: '#000', 
+					border: 'none', 
+					backgroundColor:'#FBFCEF', 
+					opacity: 0.6, 
+					border: '2px solid #114D66',
+					cursor: 'wait'
+					}, 
+				});
+			},
+			end: function(){
+				jQuery.unblockUI();
+			}
+		}; 
+		
 	</script>
