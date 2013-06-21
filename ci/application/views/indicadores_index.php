@@ -35,7 +35,18 @@
 			<input id="sliderPeriodo" type="slider" name="periodo" value="0;0" />
 		</div>
 		<div id="chart" style="width: 1000px; height: 500px; display:none;"></div>
-		<div id="chartGroup1" style="width: 1000px; height: 500px; display:none;"></div>
-		<div id="chartGroup2" style="width: 1000px; height: 500px; display:none;"></div>
+		<div id="bradfodContainer" style="display:none;">
+			<ul id="bradfordSlide">
+				<li>
+					<div id="chartBradford"></div>
+				</li>
+				<li>
+					<div id="chartGroup1"></div>
+				</li>
+				<li>
+					<div id="chartGroup2"></div>
+				</li>
+			</ul>
+		</div>
 	</form>
 </div>

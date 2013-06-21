@@ -665,3 +665,10 @@ p {
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 }
+
+#bradfodContainer {
+	left: -23px;
+	position: relative;
+	width: 1046px; 
+	height: 510px; 
+}

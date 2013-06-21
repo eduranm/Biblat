@@ -1,13 +1,16 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>js/select2/select2.css" />
+	<link rel="stylesheet" href="<?php echo base_url();?>js/anythingslider/css/anythingslider.css" />
+	<link rel="stylesheet" href="<?php echo base_url();?>js/anythingslider/css/theme-metallic.css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>css/jquery.slider.min.css" />
 	<script src="<?php echo base_url();?>js/select2/select2.js"></script>
 	<script src="<?php echo base_url();?>js/jquery.slider.min.js"></script>
 	<script src="<?php echo base_url();?>js/jquery.serializeJSON.min.js"></script>
 	<script src="<?php echo base_url();?>js/jquery.blockUI.js"></script>
+	<script src="<?php echo base_url();?>js/anythingslider/js/jquery.anythingslider.min.js"></script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript">
 		google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});
-		var chart = null;
+		var charts = {normal: null, bradford:null, group1:null, group2:null};
 		var charType = null;
 		var popState = {indicador:false, disciplina:false, revista:false, pais:false, periodo:false};
 		var rangoPeriodo="0-0";
@@ -22,7 +25,7 @@
 
 			jQuery("#indicador").on("change", function(e){
 				value = jQuery(this).val();
-				jQuery("#paisRevista, #periodos, #chart").hide("slow");
+				jQuery("#paisRevista, #periodos, #chart", "#bradfodContainer").hide("slow");
 				jQuery("#disciplina").select2("val", "");
 				if (value == "") {
 					jQuery("#disciplina, #revista, #pais").select2("enable", false);
@@ -59,7 +62,7 @@
 				value = jQuery(this).val();
 				indicadorValue = jQuery("#indicador").val();
 				if (value == "") {
-					jQuery("#paisRevista, #periodos, #chart").hide("slow");
+					jQuery("#paisRevista, #periodos, #chart", "#bradfodContainer").hide("slow");
 					jQuery("#revista, #pais").empty().append('<option></option>');
 					jQuery("#revista, #pais").select2("destroy");
 					jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
@@ -69,7 +72,7 @@
 				} else {
 					loading.start();
 					jQuery("#paisRevista").show("slow");
-					jQuery("#periodos, #chart").hide("slow");
+					jQuery("#periodos, #chart", "#bradfodContainer").hide("slow");
 					jQuery.ajax({
 						url: '<?php echo site_url("indicadores/getRevistasPaises");?>',
 						type: 'POST',
@@ -164,6 +167,13 @@
 			
 			jQuery("#sliderPeriodo").slider();
 
+			jQuery("#bradfordSlide").anythingSlider({
+						theme: 'metallic',
+						expand: true,
+						buildNavigation: false,
+						buildStartStop: false
+					});
+
 			jQuery("#generarIndicador").on("submit", function(e){
 				loading.start();
 				indicadorValue = jQuery("#indicador").val();
@@ -188,23 +198,25 @@
 					switch(indicadorValue){
 						case "modelo-bradford-revista":
 						case "modelo-bradford-institucion":
-							jQuery("#chart").slideDown("slow");
+							jQuery("#bradfodContainer").slideDown("slow");
+
 							var chartData = new google.visualization.DataTable(data.chart.bradford);
-							if(chart == null || charType != 'line'){
-								charType = 'line';
-								chart = new google.visualization.LineChart(document.getElementById('chart'));
+							if(chart.bradford == null){
+								chart.bradford = new google.visualization.LineChart(document.getElementById('chartBradford'));
 							}
-							chart.draw(chartData, data.options.bradford);
+							chart.bradford.draw(chartData, data.options.bradford);
 
 							var chartData = new google.visualization.DataTable(data.chart.group1);
-							jQuery("#chartGroup1").slideDown("slow");
-							var charGroup1 = new google.visualization.ColumnChart(document.getElementById('chartGroup1'));
-							charGroup1.draw(chartData, data.options.groups);
+							if(chart.group1 == null){
+								chart.group1 = new google.visualization.ColumnChart(document.getElementById('chartGroup1'));
+							}
+							chart.group1.draw(chartData, data.options.groups);
 
 							var chartData = new google.visualization.DataTable(data.chart.group2);
-							jQuery("#chartGroup2").slideDown("slow");
-							var charGroup2 = new google.visualization.ColumnChart(document.getElementById('chartGroup2'));
-							charGroup2.draw(chartData, data.options.groups);
+							if(chart.group2 == null){
+								chart.group2 = new google.visualization.ColumnChart(document.getElementById('chartGroup2'));
+							}
+							chart.group2.draw(chartData, data.options.groups);
 							break;
 						case "indice-concentracion":
 							break;
@@ -213,7 +225,7 @@
 						default:
 							jQuery("#chart").show("slow");
 							var chartData = new google.visualization.DataTable(data.data);
-							if(chart == null || charType != 'line'){
+							if(chart.normal == null || charType != 'line'){
 								charType = 'line';
 								chart = new google.visualization.LineChart(document.getElementById('chart'));
 							}
@@ -337,7 +349,7 @@
 				actualForm.revista = ["revista"];
 			}
 			if(data.revista === "" || typeof data.revista === "undefined" && typeof data.pais === "undefined"){
-				jQuery("#periodos, #chart").hide("slow");
+				jQuery("#periodos, #chart", "#bradfodContainer").hide("slow");
 				jQuery("#revista").select2("val", null);
 				jQuery('#revista option').first().prop('selected', false);
 				jQuery("#revista").select2("destroy");
@@ -356,7 +368,7 @@
 			}
 
 			if(data.pais === "" || typeof data.pais === "undefined" && typeof data.revista === "undefined"){
-				jQuery("#periodos, #chart").hide("slow");
+				jQuery("#periodos, #chart", "#bradfodContainer").hide("slow");
 				jQuery("#pais").select2("val", null);
 				jQuery('#pais option').first().prop('selected', false);
 				jQuery("#pais").select2("destroy");
@@ -371,7 +383,7 @@
 			if(typeof data.periodo === "undefined" && (typeof data.revista !== "undefined" || typeof data.pais !== "undefined")){
 				data.periodo = rangoPeriodo;
 			}
-			if(typeof data.periodo !== "undefined" && data.periodo != actualForm.periodo){
+			if(typeof data.periodo !== "undefined"){
 				jQuery("#sliderPeriodo").prop("disabled", false);
 				jQuery("#sliderPeriodo").slider("value", data.periodo.substring(0, 4), data.periodo.substring(5));
 				jQuery("#generarIndicador").submit();
