@@ -1,6 +1,6 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>js/select2/select2.css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>js/anythingslider/css/anythingslider.css" />
-	<link rel="stylesheet" href="<?php echo base_url();?>js/anythingslider/css/theme-metallic.css" />
+	<link rel="stylesheet" href="<?php echo base_url();?>css/theme-anythingslider-scielo.css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>css/jquery.slider.min.css" />
 	<script src="<?php echo base_url();?>js/select2/select2.js"></script>
 	<script src="<?php echo base_url();?>js/jquery.slider.min.js"></script>
@@ -169,7 +169,7 @@
 			jQuery("#sliderPeriodo").slider();
 
 			jQuery("#bradfordSlide").anythingSlider({
-						theme: 'metallic',
+						theme: 'scielo',
 						expand: true,
 						buildNavigation: false,
 						buildStartStop: false,
