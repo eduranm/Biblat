@@ -328,6 +328,71 @@ class Indicadores extends CI_Controller {
 		echo json_encode($result, true);
 	}
 
+	public function getChartDataPratt($limit=20){
+		$this->output->enable_profiler(false);
+		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
+		$query = "SELECT revista, \"revistaSlug\", pratt FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina}";
+		$query = $this->db->query($query);
+		$offset = 0;
+		$grupo = 0;
+		$c = array();
+		$result['chart'] = array();
+		$totalRows = $query->num_rows();
+		foreach ($query->result_array() as $row):
+			if(!isset($result['chart'][$grupo])):
+				$result['chart'][$grupo]['cols'][] = array('id' => '','label' => _('Títulos de revista'),'type' => 'string');
+				$c = array();
+				$c[] = array('v' => '');
+			endif;
+
+			$result['chart'][$grupo]['cols'][] = array('id' => '','label' => $row['revista'],'type' => 'number');
+			$c[] = array(
+					'v' => round($row['pratt'], 4)
+				);
+			$offset++;
+			if($offset == $limit || $offset == $totalRows):
+				$result['chart'][$grupo]['rows'][]['c'] = $c;
+				$offset = 0;
+				$totalRows -= $limit;
+				$grupo++;
+			endif;
+		endforeach;
+		/*Opciones de la gráfica*/
+		$result['options'] = array(
+						'animation' => array(
+								'duration' => 1000
+							),
+						'bar' => array(
+								'groupWidth' => '85%'
+							),
+						'height' => '500',
+						'hAxis' => array(
+								'title' => _('Títulos de revista')
+							), 
+						'legend' => array(
+								'position' => 'right'
+							),
+						'pointSize' => 1, 
+						'title' => _('Fecuencia de artículos por título de revista'),
+						'tooltip' => array(
+								'isHtml' => true
+							),
+						'vAxis' => array(
+								'title' => _('Artículos'),
+								'minValue' => 0
+							),
+						'width' => '950',
+						'chartArea' => array(
+							'left' => 120,
+							'top' => 50,
+							'width' => 700,
+							'height' => "80%"
+							)
+						);
+		echo json_encode($result, true);
+
+	}
+
 	public function getRevistasPaises(){
 		$this->output->enable_profiler(false);
 		$data = array();

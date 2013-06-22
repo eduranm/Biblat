@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript">
 		google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});
-		var charts = {normal: null, bradford:null, group1:null, group2:null};
+		var charts = {normal: null, bradford:null, group1:null, group2:null, pratt:null};
 		var charType = null;
 		var popState = {indicador:false, disciplina:false, revista:false, pais:false, periodo:false};
 		var rangoPeriodo="0-0";
@@ -168,7 +168,7 @@
 			
 			jQuery("#sliderPeriodo").slider();
 
-			jQuery("#bradfordSlide").anythingSlider({
+			jQuery("#bradfordSlide, #prattSlide").anythingSlider({
 						theme: 'scielo',
 						mode: 'fade',
 						expand: true,
@@ -189,8 +189,7 @@
 						urlRequest = '<?php echo site_url("indicadores/getChartDataBradford");?>';
 						break;
 					case "indice-concentracion":
-							loading.end();
-							return false;
+						urlRequest = '<?php echo site_url("indicadores/getChartDataPratt");?>';
 						break;
 					case "productividad-exogena":
 							loading.end();
@@ -228,6 +227,18 @@
 							chart.group2.draw(chartData, data.options.groups);
 							break;
 						case "indice-concentracion":
+							jQuery("#prattContainer").slideDown("slow");
+							jQuery("#prattSlide").empty();
+							jQuery.each(data.chart, function(key, grupo) {
+								if(typeof chart.pratt === "undefined"){
+									chart.pratt = new Array();
+								}
+								//console.log(typeof jQuery("#prattSlide").find("#chartPratt" + key));
+								jQuery("#prattSlide").append('<li><div id="chartPratt' + key +'"></div></li>').anythingSlider();
+								var chartData = new google.visualization.DataTable(grupo);
+								chart.pratt[key] = new google.visualization.ColumnChart(document.getElementById('chartPratt' + key));
+								chart.pratt[key].draw(chartData, data.options);
+							});
 							break;
 						case "productividad-exogena":
 							break;

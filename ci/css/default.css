@@ -666,7 +666,7 @@ p {
 	border-radius: 10px;
 }
 
-#bradfodContainer {
+#bradfodContainer, #prattContainer {
 	left: -23px;
 	position: relative;
 	width: 1046px; 
