@@ -175,6 +175,10 @@ class Indicadores extends CI_Controller {
 		$this->output->enable_profiler(false);
 		$sufix['modelo-bradford-revista']="Revista";
 		$sufix['modelo-bradford-institucion']="Institucion";
+		$hAxisTitleGroup['modelo-bradford-revista']=_('Títulos de revista');
+		$hAxisTitleGroup['modelo-bradford-institucion']=_('País de afilicación del autor');
+		$titleGroup['modelo-bradford-revista']=_('Fecuencia de artículos por título de revista');
+		$titleGroup['modelo-bradford-institucion']=_('Fecuencia de artículos por institución de afilicación del autor');
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
 		$query = "SELECT articulos, frecuencia, \"articulosXfrecuenciaAcumulado\", \"logFrecuenciaAcumulado\" FROM \"vBradford{$sufix[$_POST['indicador']]}\" WHERE id_disciplina={$idDisciplina}";
 		$query = $this->db->query($query);
@@ -234,7 +238,7 @@ class Indicadores extends CI_Controller {
 								'isHtml' => true
 							),
 						'vAxis' => array(
-								'title' => _('Revistas'),
+								'title' => _('Artículos'),
 								'minValue' => 0
 							),
 						'width' => '950',
@@ -299,13 +303,13 @@ class Indicadores extends CI_Controller {
 							),
 						'height' => '500',
 						'hAxis' => array(
-								'title' => _('Títulos de revista')
+								'title' => $hAxisTitleGroup[$_POST['indicador']],
 							), 
 						'legend' => array(
 								'position' => 'right'
 							),
 						'pointSize' => 1, 
-						'title' => _('Fecuencia de artículos por título de revista'),
+						'title' => $titleGroup[$_POST['indicador']],
 						'tooltip' => array(
 								'isHtml' => true
 							),
@@ -373,12 +377,11 @@ class Indicadores extends CI_Controller {
 								'position' => 'right'
 							),
 						'pointSize' => 1, 
-						'title' => _('Fecuencia de artículos por título de revista'),
 						'tooltip' => array(
 								'isHtml' => true
 							),
 						'vAxis' => array(
-								'title' => _('Artículos'),
+								'title' => $this->indicadores[$_POST['indicador']],
 								'minValue' => 0
 							),
 						'width' => '950',

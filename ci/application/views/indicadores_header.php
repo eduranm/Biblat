@@ -25,7 +25,7 @@
 
 			jQuery("#indicador").on("change", function(e){
 				value = jQuery(this).val();
-				jQuery("#paisRevista, #periodos, #chart, #bradfodContainer").hide("slow");
+				jQuery("#paisRevista, #periodos, #chart, #bradfodContainer, #prattContainer").hide("slow");
 				jQuery("#bradfordSlide").anythingSlider(1);
 				jQuery("#disciplina").select2("val", "");
 				if (value == "") {
@@ -63,7 +63,7 @@
 				value = jQuery(this).val();
 				indicadorValue = jQuery("#indicador").val();
 				if (value == "") {
-					jQuery("#paisRevista, #periodos, #chart, #bradfodContainer").hide("slow");
+					jQuery("#paisRevista, #periodos, #chart, #bradfodContainer, #prattContainer").hide("slow");
 					jQuery("#revista, #pais").empty().append('<option></option>');
 					jQuery("#revista, #pais").select2("destroy");
 					jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
@@ -73,7 +73,7 @@
 				} else {
 					loading.start();
 					jQuery("#paisRevista").show("slow");
-					jQuery("#periodos, #chart, #bradfodContainer").hide("slow");
+					jQuery("#periodos, #chart, #bradfodContainer, #prattContainer").hide("slow");
 					jQuery.ajax({
 						url: '<?php echo site_url("indicadores/getRevistasPaises");?>',
 						type: 'POST',
@@ -369,7 +369,7 @@
 				actualForm.revista = ["revista"];
 			}
 			if(data.revista === "" || typeof data.revista === "undefined" && typeof data.pais === "undefined"){
-				jQuery("#periodos, #chart, #bradfodContainer").hide("slow");
+				jQuery("#periodos, #chart, #bradfodContainer, #prattContainer").hide("slow");
 				jQuery("#revista").select2("val", null);
 				jQuery('#revista option').first().prop('selected', false);
 				jQuery("#revista").select2("destroy");
@@ -388,7 +388,7 @@
 			}
 
 			if(data.pais === "" || typeof data.pais === "undefined" && typeof data.revista === "undefined"){
-				jQuery("#periodos, #chart, #bradfodContainer").hide("slow");
+				jQuery("#periodos, #chart, #bradfodContainer, #prattContainer").hide("slow");
 				jQuery("#pais").select2("val", null);
 				jQuery('#pais option').first().prop('selected', false);
 				jQuery("#pais").select2("destroy");
