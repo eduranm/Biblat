@@ -29,6 +29,41 @@
 	padding: 0 23px;
 }
 
+/* Navigation buttons + start/stop button, default state */
+.anythingSlider-scielo .anythingControls a {
+	background: #FBFCEF;
+	color: #000;
+	border: #000 1px solid;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+/* Navigation current button, default state */
+.anythingSlider-scielo .anythingControls a.cur,
+.anythingSlider-scielo .anythingControls a:hover {
+	background: #FBFCEF;
+	color: #000;
+}
+/*
+ =================================
+ Active State (has keyboard focus)
+ =================================
+*/
+/* slider window - top & bottom borders, active state */
+.anythingSlider-scielo.activeSlider .anythingWindow {
+	border-color: #0355a3;
+}
+
+/* Navigation buttons, active state */
+.anythingSlider-scielo.activeSlider .anythingControls a {
+	background-color: transparent;
+}
+/* Navigation current button, active state */
+.anythingSlider-scielo.activeSlider .anythingControls a.cur,
+.anythingSlider-scielo.activeSlider .anythingControls a:hover {
+	background-color: #FAA94D;
+}
 /************************
   NAVIGATION POSITIONING
  ************************/
@@ -60,7 +95,59 @@
 .anythingSlider-scielo .forward a { background-position: right bottom; }
 .anythingSlider-scielo .forward a:hover,
 .anythingSlider-scielo .forward a.hover { background-position: right top; }
+/* Navigation Links */
+.anythingSlider-scielo .anythingControls {
+	height: 15px; /* limit height, needed for IE9 of all things */
+	outline: 0;
+	display: none;
+	float: right;
+	position: absolute;
+	bottom: 5px;
+	right: 20px;
+	margin: 0 45px;
+	z-index: 100;
+	opacity: 0.90;
+	filter: alpha(opacity=90);
+}
+.anythingSlider-scielo .anythingControls ul {
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+.anythingSlider-scielo .anythingControls ul li {
+	list-style: none;
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+.anythingSlider-scielo .anythingControls ul a {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 3px;
+	padding: 0;
+	text-decoration: none;
+	text-align: center;
+	outline: 0;
+}
+.anythingSlider-scielo .anythingControls span {
+	display: block;
+	visibility: hidden;
+}
 
+/* navigationSize window */
+.anythingSlider-scielo .anythingControls .anythingNavWindow {
+	overflow: hidden;
+	float: left;
+}
+/* navigationSize nav arrow positioning */
+.anythingSlider-scielo .anythingControls li.prev a span,
+.anythingSlider-scielo .anythingControls li.next a span {
+	visibility: visible;
+	position: relative;
+	top: -6px; /* bring navigationSize text arrows into view */
+	color: #fff;
+}
 /***********************
 IE8 AND OLDER STYLING
 ***********************/

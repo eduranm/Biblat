@@ -173,7 +173,7 @@
 						mode: 'fade',
 						expand: true,
 						easing: "linear",
-						buildNavigation: false,
+						buildNavigation: true,
 						buildStartStop: false,
 						hashTags: false,
 						animationTime: 1200
@@ -233,7 +233,6 @@
 								if(typeof chart.pratt === "undefined"){
 									chart.pratt = new Array();
 								}
-								//console.log(typeof jQuery("#prattSlide").find("#chartPratt" + key));
 								jQuery("#prattSlide").append('<li><div id="chartPratt' + key +'"></div></li>').anythingSlider();
 								var chartData = new google.visualization.DataTable(grupo);
 								chart.pratt[key] = new google.visualization.ColumnChart(document.getElementById('chartPratt' + key));
