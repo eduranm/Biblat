@@ -170,10 +170,13 @@
 
 			jQuery("#bradfordSlide").anythingSlider({
 						theme: 'scielo',
+						mode: 'fade',
 						expand: true,
+						easing: "linear",
 						buildNavigation: false,
 						buildStartStop: false,
-						hashTags: false 
+						hashTags: false,
+						animationTime: 1200
 					});
 
 			jQuery("#generarIndicador").on("submit", function(e){
