@@ -246,10 +246,10 @@
 							var chartData = new google.visualization.DataTable(data.data);
 							if(chart.normal == null || charType != 'line'){
 								charType = 'line';
-								chart = new google.visualization.LineChart(document.getElementById('chart'));
+								chart.normal = new google.visualization.LineChart(document.getElementById('chart'));
 							}
 							console.log(chart);
-							chart.draw(chartData, data.options);
+							chart.normal.draw(chartData, data.options);
 							break;
 					}
 					loading.end();
