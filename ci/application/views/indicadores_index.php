@@ -34,22 +34,33 @@
 		<div id="periodos" class="sliderPeriodo" style="display:none;">
 			<input id="sliderPeriodo" type="slider" name="periodo" value="0;0" />
 		</div>
-		<div id="chart" style="width: 1000px; height: 500px; display:none;"></div>
-		<div id="bradfodContainer" style="display:none;">
-			<ul id="bradfordSlide">
-				<li>
-					<div id="chartBradford"></div>
-				</li>
-				<li>
-					<div id="chartGroup1"></div>
-				</li>
-				<li>
-					<div id="chartGroup2"></div>
-				</li>
+		<div id="tabs" style="display:none;">
+			 <ul>
+				<li class="chartTab"><a href="#charts"></a></li>
+				<li class="gridTab"><a href="#grid"></a></li>
+				<li class="infoTab"><a href="#info"></a></li>
 			</ul>
-		</div>
-		<div id="prattContainer" style="display:none;">
-			<ul id="prattSlide"></ul>
+			<div id="charts">
+				<div id="chart" style="width: 1000px; height: 500px; display:none;"></div>
+				<div id="bradfodContainer" style="display:none;">
+					<ul id="bradfordSlide">
+						<li>
+							<div id="chartBradford"></div>
+						</li>
+						<li>
+							<div id="chartGroup1"></div>
+						</li>
+						<li>
+							<div id="chartGroup2"></div>
+						</li>
+					</ul>
+				</div>
+				<div id="prattContainer" style="display:none;">
+					<ul id="prattSlide"></ul>
+				</div>
+			</div>
+			<div id="grid">Grid</div>
+			<div id="info">Info</div>
 		</div>
 	</form>
 </div>

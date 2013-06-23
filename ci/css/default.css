@@ -22,7 +22,7 @@ body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	margin: 0 auto -194px;
+	margin: 0 auto -134px;
 	background-color: #FBFCEF;
 	min-width: 1000px;
 }
@@ -378,15 +378,9 @@ body {
 	font-size: 16px;
 }
 
-.footerLeft {
-	display: block;
-	float: left;
-	height: 134px;
-	width: 50%;
-	background-color: #FAA94D;
-}
-
 .footerRight {
+	position: absolute;
+	left: 50%;
 	display: block;
 	float: right;
 	height: 134px;
@@ -401,14 +395,18 @@ body {
 	width: 1000px;
 	margin: 0 auto;
 	background-image: url(../img/footer.png);
+	color: #114D66;
+	text-align: center;
+	font-weight: bold;
 }
 
 .copyright {
 	margin: 0 auto;
 	text-align: center;
 	font-weight: bold;
-	padding: 10px;
-	width:75%;
+	padding: 45px;
+	width:80%;
+	opacity: 50%;
 	max-width: 950px;
 }
 
@@ -675,3 +673,5 @@ p {
 	width: 1000px; 
 	height: 510px; 
 }
+
+

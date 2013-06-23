@@ -2,11 +2,13 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>js/anythingslider/css/anythingslider.css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>css/theme-anythingslider-scielo.css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>css/jquery.slider.min.css" />
+	<link rel="stylesheet" href="<?php echo base_url();?>css/tabsIndicadores.css" />
 	<script src="<?php echo base_url();?>js/select2/select2.js"></script>
 	<script src="<?php echo base_url();?>js/jquery.slider.min.js"></script>
 	<script src="<?php echo base_url();?>js/jquery.serializeJSON.min.js"></script>
 	<script src="<?php echo base_url();?>js/jquery.blockUI.js"></script>
 	<script src="<?php echo base_url();?>js/anythingslider/js/jquery.anythingslider.min.js"></script>
+	<script src="<?php echo base_url();?>js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript">
 		google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});
@@ -25,7 +27,7 @@
 
 			jQuery("#indicador").on("change", function(e){
 				value = jQuery(this).val();
-				jQuery("#paisRevista, #periodos, #chart, #bradfodContainer, #prattContainer").hide("slow");
+				jQuery("#paisRevista, #periodos, #tabs, #chart, #bradfodContainer, #prattContainer").hide("slow");
 				jQuery("#bradfordSlide").anythingSlider(1);
 				jQuery("#disciplina").select2("val", "");
 				if (value == "") {
@@ -63,7 +65,7 @@
 				value = jQuery(this).val();
 				indicadorValue = jQuery("#indicador").val();
 				if (value == "") {
-					jQuery("#paisRevista, #periodos, #chart, #bradfodContainer, #prattContainer").hide("slow");
+					jQuery("#paisRevista, #periodos, #tabs, #chart, #bradfodContainer, #prattContainer").hide("slow");
 					jQuery("#revista, #pais").empty().append('<option></option>');
 					jQuery("#revista, #pais").select2("destroy");
 					jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
@@ -73,7 +75,7 @@
 				} else {
 					loading.start();
 					jQuery("#paisRevista").show("slow");
-					jQuery("#periodos, #chart, #bradfodContainer, #prattContainer").hide("slow");
+					jQuery("#periodos, #tabs, #chart, #bradfodContainer, #prattContainer").hide("slow");
 					jQuery.ajax({
 						url: '<?php echo site_url("indicadores/getRevistasPaises");?>',
 						type: 'POST',
@@ -123,7 +125,7 @@
 					jQuery("#pais").select2("enable", false);
 					setPeridos();
 				}else{
-					jQuery("#periodos, #chart").hide("slow");
+					jQuery("#periodos, #tabs, #chart").hide("slow");
 					jQuery("#pais").select2("enable", true);
 				}
 
@@ -152,7 +154,7 @@
 					jQuery("#revista").select2("enable", false);
 					setPeridos();
 				}else{
-					jQuery("#periodos, #chart").hide("slow");
+					jQuery("#periodos, #tabs, #chart").hide("slow");
 					jQuery("#revista").select2("enable", true);
 				}
 				if(typeof history.pushState === "function" && !popState.pais){
@@ -178,7 +180,10 @@
 						hashTags: false,
 						animationTime: 1200
 					});
-
+			jQuery(function(){
+				jQuery("#tabs").tabs();
+			});
+			
 			jQuery("#generarIndicador").on("submit", function(e){
 				loading.start();
 				indicadorValue = jQuery("#indicador").val();
@@ -206,7 +211,7 @@
 					switch(indicadorValue){
 						case "modelo-bradford-revista":
 						case "modelo-bradford-institucion":
-							jQuery("#bradfodContainer").slideDown("slow");
+							jQuery("#tabs, #bradfodContainer").slideDown("slow");
 
 							var chartData = new google.visualization.DataTable(data.chart.bradford);
 							if(chart.bradford == null){
@@ -227,7 +232,7 @@
 							chart.group2.draw(chartData, data.options.groups);
 							break;
 						case "indice-concentracion":
-							jQuery("#prattContainer").slideDown("slow");
+							jQuery("#tabs, #prattContainer").slideDown("slow");
 							jQuery("#prattSlide").empty();
 							jQuery.each(data.chart, function(key, grupo) {
 								if(typeof chart.pratt === "undefined"){
@@ -242,7 +247,7 @@
 						case "productividad-exogena":
 							break;
 						default:
-							jQuery("#chart").show("slow");
+							jQuery("#tabs, #chart").show("slow");
 							var chartData = new google.visualization.DataTable(data.data);
 							if(chart.normal == null || charType != 'line'){
 								charType = 'line';
@@ -368,7 +373,7 @@
 				actualForm.revista = ["revista"];
 			}
 			if(data.revista === "" || typeof data.revista === "undefined" && typeof data.pais === "undefined"){
-				jQuery("#periodos, #chart, #bradfodContainer, #prattContainer").hide("slow");
+				jQuery("#periodos, #tabs, #chart, #bradfodContainer, #prattContainer").hide("slow");
 				jQuery("#revista").select2("val", null);
 				jQuery('#revista option').first().prop('selected', false);
 				jQuery("#revista").select2("destroy");
@@ -387,7 +392,7 @@
 			}
 
 			if(data.pais === "" || typeof data.pais === "undefined" && typeof data.revista === "undefined"){
-				jQuery("#periodos, #chart, #bradfodContainer, #prattContainer").hide("slow");
+				jQuery("#periodos, #tabs, #chart, #bradfodContainer, #prattContainer").hide("slow");
 				jQuery("#pais").select2("val", null);
 				jQuery('#pais option').first().prop('selected', false);
 				jQuery("#pais").select2("destroy");
