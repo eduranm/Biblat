@@ -181,7 +181,7 @@
 						animationTime: 1200
 					});
 			jQuery(function(){
-				jQuery("#tabs").tabs();
+				jQuery("#tabs").tabs({ show: { effect: "fade", duration: 800 } });
 			});
 			
 			jQuery("#generarIndicador").on("submit", function(e){
