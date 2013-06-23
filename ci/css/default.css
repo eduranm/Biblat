@@ -513,7 +513,7 @@ body {
 
 .flagRight, .flagRight em {
     background-image: -moz-linear-gradient(left center , #FAA84D, #FDCF9C);
-    background-image: -webkit-gradient(linear, left center, right center, from(##FAA84D), to(#FDCF9C));
+    background-image: -webkit-gradient(linear, left center, right center, from(#FAA84D), to(#FDCF9C));
 }
 
 .flagRight em {

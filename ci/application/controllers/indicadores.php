@@ -8,6 +8,7 @@ class Indicadores extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->driver('minify');
 		/*Variables globles*/
 		$data = array();
 		/*Lista de indicadores*/
@@ -53,7 +54,10 @@ class Indicadores extends CI_Controller {
 		$data['main']['indicador'] = $indicador;
 
 		/*Vistas*/
+		$js = $this->load->view('indicadores_index_js', $data['header'], TRUE);
+		$data['header']['js'] = $this->minify->js->min($js);
 		$data['header']['content'] =  $this->load->view('indicadores_header', $data['header'], TRUE);
+		unset($data['header']['js']);
 		$data['header']['title'] = _sprintf('Biblat - Indicador: %s', $this->indicadores[$data['main']['indicador']]);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
