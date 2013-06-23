@@ -413,7 +413,7 @@
 		loading = {
 			start: function(){
 				jQuery.blockUI({ 
-					message: '<h2><img src="<?php echo base_url();?>img/loading.gif" /><br /><?php _e('Espere un momento...');?></h2>',
+					message: '<h2 style="white-space:nowrap;"><img src="<?php echo base_url();?>img/loading.gif" /><br /><?php _e('Espere un momento...');?></h2>',
 					css: { 
 					color: '#000', 
 					border: 'none', 

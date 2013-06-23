@@ -83,6 +83,7 @@ body {
 	font: 0.7em Verdana, Geneva, sans-serif !important;
 	color: #FFFFFF;
 	background-color:#FAA94D;
+	min-width: 1000px;
 }
 
 .bannerLeft {
@@ -445,7 +446,7 @@ body {
     color: #3D1F12;
     font-size: 14px;
     font-weight: bold;
-    left: -5px;
+    left: -7px;
     margin: 0;
     position: relative;
     float: left;
@@ -506,7 +507,7 @@ body {
 .flagRight {
 	position: relative;
 	float: right;
-	left: 4px;
+	left: 5px;
 	right: -5px;
 	transform: skew(10deg, 0deg);
     -webkit-transform: skew(10deg, 0deg);;
