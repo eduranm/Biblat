@@ -156,11 +156,11 @@ class Indicadores extends CI_Controller {
 								'title' => $this->indicadores[$_POST['indicador']],
 								'minValue' => 0
 							),
-						'width' => '950',
+						'width' => '925',
 						'chartArea' => array(
 							'left' => 100,
 							'top' => 50,
-							'width' => 700,
+							'width' => 675,
 							'height' => "80%"
 							)
 						);
@@ -241,11 +241,11 @@ class Indicadores extends CI_Controller {
 								'title' => _('Artículos'),
 								'minValue' => 0
 							),
-						'width' => '950',
+						'width' => '925',
 						'chartArea' => array(
 							'left' => 120,
 							'top' => 50,
-							'width' => 700,
+							'width' => 675,
 							'height' => "80%"
 							)
 						);
@@ -317,11 +317,11 @@ class Indicadores extends CI_Controller {
 								'title' => _('Artículos'),
 								'minValue' => 0
 							),
-						'width' => '950',
+						'width' => '925',
 						'chartArea' => array(
 							'left' => 120,
 							'top' => 50,
-							'width' => 700,
+							'width' => 675,
 							'height' => "80%"
 							)
 						);
@@ -384,11 +384,11 @@ class Indicadores extends CI_Controller {
 								'title' => $this->indicadores[$_POST['indicador']],
 								'minValue' => 0
 							),
-						'width' => '950',
+						'width' => '925',
 						'chartArea' => array(
 							'left' => 120,
 							'top' => 50,
-							'width' => 700,
+							'width' => 675,
 							'height' => "80%"
 							)
 						);
