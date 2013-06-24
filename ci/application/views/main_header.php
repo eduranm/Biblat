@@ -13,7 +13,7 @@
 					$totalDisciplinas = count($disciplinas);
 					$indexOfDisciplina = 1;
 					foreach ($disciplinas as $disciplina):?>
-					{text: "<?php echo strtolower($disciplina['disciplina']);?>", size: "<?php echo (11 + ($disciplina['size'] * 1.8));?>", link: "<?php echo site_url("indice/disciplina/{$disciplina['slug']}");?>"}<?php 
+					{text: "<?php echo strtolower($disciplina['disciplina']);?>", size: "<?php echo number_format((11 + ($disciplina['size'] * 1.8)), '2', '.', '');?>", link: "<?php echo site_url("indice/disciplina/{$disciplina['slug']}");?>"}<?php 
 					if($indexOfDisciplina < $totalDisciplinas):
 					echo ",\n";
 					endif;
