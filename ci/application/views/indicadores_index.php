@@ -59,7 +59,7 @@
 					<ul id="prattSlide"></ul>
 				</div>
 			</div>
-			<div id="grid">Grid</div>
+			<div id="grid"><ul id="tableSlide"></ul></div>
 			<div id="info">Info</div>
 		</div>
 	</form>

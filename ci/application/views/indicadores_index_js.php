@@ -1,5 +1,6 @@
-google.load("visualization", "1", {packages:["corechart"], 'language': 'en'});
+google.load("visualization", "1", {packages:["corechart", "table"], 'language': 'en'});
 var charts = {normal: null, bradford:null, group1:null, group2:null, pratt:null};
+var tables = {visualization:null, data:null};
 var charType = null;
 var popState = {indicador:false, disciplina:false, revista:false, pais:false, periodo:false};
 var rangoPeriodo="0-0";
@@ -157,7 +158,7 @@ jQuery(document).ready(function(){
 	
 	jQuery("#sliderPeriodo").slider();
 
-	jQuery("#bradfordSlide, #prattSlide").anythingSlider({
+	jQuery("#bradfordSlide, #prattSlide, #tableSlide").anythingSlider({
 				theme: 'scielo',
 				mode: 'fade',
 				expand: true,
@@ -172,6 +173,7 @@ jQuery(document).ready(function(){
 	});
 	
 	jQuery("#generarIndicador").on("submit", function(e){
+		console.log(e);
 		loading.start();
 		indicadorValue = jQuery("#indicador").val();
 		urlRequest = '<?php echo site_url("indicadores/getChartData");?>';
@@ -240,8 +242,12 @@ jQuery(document).ready(function(){
 						charType = 'line';
 						chart.normal = new google.visualization.LineChart(document.getElementById('chart'));
 					}
-					console.log(chart);
 					chart.normal.draw(chartData, data.options);
+					jQuery("#tableSlide").empty();
+					jQuery("#tableSlide").append('<li><div class="dataTable" id="table0"></div></li>').anythingSlider();
+					tables.visualization = new Array();
+					tables.visualization[0] = new google.visualization.Table(document.getElementById('table0'));
+					tables.visualization[0].draw(chartData, data.tableOptions);
 					break;
 			}
 			loading.end();
@@ -302,8 +308,7 @@ setPeridos = function(){
 				rangoPeriodo=data.anioBase + ";" + data.anioFinal;
 				jQuery("#sliderPeriodo").val(rangoPeriodo);
 				jQuery("#sliderPeriodo").data('pre', jQuery("#sliderPeriodo").val());
-				jQuery("#sliderPeriodo").slider().destroy();
-				jQuery("#sliderPeriodo").slider({
+				jQuery("#sliderPeriodo").slider("redraw", {
 					from: data.anioBase, 
 					to: data.anioFinal, 
 					heterogeneity: jQuery.parseJSON(data.heterogeneity), 
@@ -311,11 +316,10 @@ setPeridos = function(){
 					format: { format: '####', locale: 'us' }, 
 					limits: false, 
 					step: 1, 
-					dimension: '', 
 					callback: function(value){
-						if(jQuery("#sliderPeriodo").data('pre') != jQuery("#sliderPeriodo").val()){
-							jQuery("#sliderPeriodo").data('pre', jQuery("#sliderPeriodo").val());
-							rango=jQuery("#sliderPeriodo").val().replace(';', '-');
+						if(jQuery("#sliderPeriodo").data('pre') != value){
+							jQuery("#sliderPeriodo").data('pre', value);
+							rango=value.replace(';', '-');
 							if(typeof history.pushState === "function"){
 								history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista + '/' + rango);
 							}
@@ -390,9 +394,6 @@ updateData = function(data){
 		popState.pais=true;
 		jQuery("#pais").val(data.pais).trigger("change");
 		actualForm = jQuery("#generarIndicador").serializeJSON();
-	}
-	if(typeof data.periodo === "undefined" && (typeof data.revista !== "undefined" || typeof data.pais !== "undefined")){
-		data.periodo = rangoPeriodo;
 	}
 	if(typeof data.periodo !== "undefined"){
 		jQuery("#sliderPeriodo").prop("disabled", false);

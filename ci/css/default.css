@@ -667,11 +667,14 @@ p {
 	border-radius: 10px;
 }
 
-#bradfodContainer, #prattContainer {
+#bradfodContainer, #prattContainer, #grid {
 	left: -25px;
 	position: relative;
 	width: 1000px; 
 	height: 510px; 
 }
-
+.dataTable{
+	width: 910px !important;
+	padding: 21px; 
+}
 

@@ -55,7 +55,8 @@ class Indicadores extends CI_Controller {
 
 		/*Vistas*/
 		$js = $this->load->view('indicadores_index_js', $data['header'], TRUE);
-		$data['header']['js'] = $this->minify->js->min($js);
+		//$data['header']['js'] = $this->minify->js->min($js);
+		$data['header']['js'] = $js;
 		$data['header']['content'] =  $this->load->view('indicadores_header', $data['header'], TRUE);
 		unset($data['header']['js']);
 		$data['header']['title'] = _sprintf('Biblat - Indicador: %s', $this->indicadores[$data['main']['indicador']]);
@@ -168,6 +169,11 @@ class Indicadores extends CI_Controller {
 							'height' => "80%"
 							)
 						);
+		/*Datos para la tabla*/
+		$data['tableOptions'] = array(
+				'allowHtml' => true,
+				'showRowNumber' => true
+			);
 		$data['history'] = array(
 								'title' => _sprintf('Biblat - Indicador: %s', $this->indicadores[$_POST['indicador']]),
 								'url' => site_url("indicadores/{$_POST['indicador']}")
@@ -521,7 +527,7 @@ class Indicadores extends CI_Controller {
 		foreach ($scale as $key => $value):
 			if($value != $data['anioFinal'] && $value != $data['anioBase'] && $value != "|" && is_numeric($value)):
 				$indice = $key;
-				$porcentaje = round((($indice/$scales) * 100), 1);
+				$porcentaje = number_format((($indice/$scales) * 100), 1, '.', '');
 				$heterogeneity[] = "{$porcentaje}/{$value}";
 			endif;
 		endforeach;
