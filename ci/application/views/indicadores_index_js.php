@@ -197,6 +197,7 @@ jQuery(document).ready(function(){
 		  data: jQuery(this).serialize(),
 		  success: function(data) {
 		  	console.log(data);
+		  	jQuery("#tabs").tabs("option", "active", 0);
 			switch(indicadorValue){
 				case "modelo-bradford-revista":
 				case "modelo-bradford-institucion":
