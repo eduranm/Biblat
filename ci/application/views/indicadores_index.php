@@ -32,7 +32,7 @@
 			</div>
 		</div>
 		<div id="periodos" class="sliderPeriodo" style="display:none;">
-			<input id="sliderPeriodo" type="slider" name="periodo" value="0;0" />
+			<input id="sliderPeriodo" type="slider" name="periodo" value="0;0" disabled/>
 		</div>
 		<div id="tabs" style="display:none;">
 			 <ul>

@@ -18,6 +18,7 @@ jQuery(document).ready(function(){
 		jQuery("#paisRevista, #periodos, #tabs, #chart, #bradfodContainer, #prattContainer").hide("slow");
 		jQuery("#bradfordSlide").anythingSlider(1);
 		jQuery("#disciplina").select2("val", "");
+		jQuery("#sliderPeriodo").prop('disabled', true);
 		if (value == "") {
 			jQuery("#disciplina, #revista, #pais").select2("enable", false);
 			jQuery("#revista, #pais").empty().append('<option></option>');
@@ -52,6 +53,7 @@ jQuery(document).ready(function(){
 	jQuery("#disciplina").on("change", function(e){
 		value = jQuery(this).val();
 		indicadorValue = jQuery("#indicador").val();
+		jQuery("#sliderPeriodo").prop('disabled', true);
 		if (value == "") {
 			jQuery("#paisRevista, #periodos, #tabs, #chart, #bradfodContainer, #prattContainer").hide("slow");
 			jQuery("#revista, #pais").empty().append('<option></option>');
@@ -169,7 +171,19 @@ jQuery(document).ready(function(){
 				animationTime: 1200
 			});
 	jQuery(function(){
-		jQuery("#tabs").tabs({ show: { effect: "fade", duration: 800 } });
+		jQuery("#tabs").tabs({ 
+			show: { effect: "fade", duration: 800 },
+			activate: function(){
+				console.log(jQuery("#tabs").tabs( "option", "active" ));
+				if(jQuery("#tabs").tabs("option", "active") == 1){
+					console.log(jQuery("#table0 .google-visualization-table-table").height());
+					jQuery("#grid").height(jQuery("#table0 .google-visualization-table-table").height() + 50);
+				}
+				jQuery('html, body').animate({
+                    scrollTop: jQuery("#tabs").offset().top
+                }, 700);
+			}
+		});
 	});
 	
 	jQuery("#generarIndicador").on("submit", function(e){
