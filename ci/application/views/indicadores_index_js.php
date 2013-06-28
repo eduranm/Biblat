@@ -428,17 +428,18 @@ loading = {
 		jQuery.blockUI({ 
 			message: '<h2 style="white-space:nowrap;"><img src="<?php echo base_url();?>img/loading.gif" /><br /><?php _e('Espere un momento...');?></h2>',
 			css: { 
-			color: '#000', 
-			backgroundColor:'#FBFCEF', 
-			opacity: 0.6, 
-			border: '2px solid #114D66',
-			cursor: 'wait',
+				color: '#000', 
+				backgroundColor:'#FBFCEF', 
+				opacity: 0.6, 
+				border: '2px solid #114D66',
+				cursor: 'wait'
+			},
 			onBlock: function(){
 				loading.status=true;
 			},
-			onUnblock: function(){}
+			onUnblock: function(){
 				loading.status=false;
-			}, 
+			}
 		});
 	},
 	end: function(){
