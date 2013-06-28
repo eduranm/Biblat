@@ -318,12 +318,13 @@ setPeridos = function(){
 			console.log(jQuery.parseJSON(data.scale));
 			console.log(jQuery.parseJSON(data.heterogeneity));
 			if(data.result){
+				jQuery("#sliderPeriodo").destroy();
 				jQuery("#sliderPeriodo").prop('disabled', false);
 				jQuery("#generate").prop('disabled', false);
 				rangoPeriodo=data.anioBase + ";" + data.anioFinal;
 				jQuery("#sliderPeriodo").val(rangoPeriodo);
 				jQuery("#sliderPeriodo").data('pre', jQuery("#sliderPeriodo").val());
-				jQuery("#sliderPeriodo").slider("redraw", {
+				jQuery("#sliderPeriodo").slider({
 					from: data.anioBase, 
 					to: data.anioFinal, 
 					heterogeneity: jQuery.parseJSON(data.heterogeneity), 
@@ -424,7 +425,6 @@ loading = {
 			message: '<h2 style="white-space:nowrap;"><img src="<?php echo base_url();?>img/loading.gif" /><br /><?php _e('Espere un momento...');?></h2>',
 			css: { 
 			color: '#000', 
-			border: 'none', 
 			backgroundColor:'#FBFCEF', 
 			opacity: 0.6, 
 			border: '2px solid #114D66',

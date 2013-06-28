@@ -55,8 +55,8 @@ class Indicadores extends CI_Controller {
 
 		/*Vistas*/
 		$js = $this->load->view('indicadores_index_js', $data['header'], TRUE);
-		//$data['header']['js'] = $this->minify->js->min($js);
-		$data['header']['js'] = $js;
+		$data['header']['js'] = $this->minify->js->min($js);
+		//$data['header']['js'] = $js;
 		$data['header']['content'] =  $this->load->view('indicadores_header', $data['header'], TRUE);
 		unset($data['header']['js']);
 		$data['header']['title'] = _sprintf('Biblat - Indicador: %s', $this->indicadores[$data['main']['indicador']]);
@@ -406,6 +406,10 @@ class Indicadores extends CI_Controller {
 
 	}
 
+	public function getTableData(){
+
+	}
+	
 	public function getRevistasPaises(){
 		$this->output->enable_profiler(false);
 		$data = array();

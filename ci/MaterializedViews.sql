@@ -286,7 +286,9 @@ SELECT
   slug(e_222) AS "revistaSlug",
   e_300a,
   e_300b,
-  substr(e_260b, 1, 4) AS anio
+  substr(e_260b, 1, 4) AS anio,
+  e_008 AS "paisRevista",
+  slug(e_008) AS "paisRevistaSlug"
 FROM articulo WHERE e_590a ~~ 'Artículo%' AND substr(e_260b, 1, 4) ~ '[0-9]{4}';
 
 --Autores por documento
