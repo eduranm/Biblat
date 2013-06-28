@@ -318,7 +318,7 @@ setPeridos = function(){
 			console.log(jQuery.parseJSON(data.scale));
 			console.log(jQuery.parseJSON(data.heterogeneity));
 			if(data.result){
-				jQuery("#sliderPeriodo").destroy();
+				jQuery("#sliderPeriodo").slider().destroy();
 				jQuery("#sliderPeriodo").prop('disabled', false);
 				jQuery("#generate").prop('disabled', false);
 				rangoPeriodo=data.anioBase + ";" + data.anioFinal;
