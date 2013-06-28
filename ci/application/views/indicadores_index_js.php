@@ -63,7 +63,9 @@ jQuery(document).ready(function(){
 		} else if (jQuery.inArray(indicadorValue, soloDisciplina) > -1) {
 			jQuery("#generarIndicador").submit();
 		} else {
-			loading.start();
+			if(!loading.status){
+				loading.start();
+			}
 			jQuery("#paisRevista").show("slow");
 			jQuery("#periodos, #tabs, #chart, #bradfodContainer, #prattContainer").hide("slow");
 			jQuery.ajax({
@@ -305,7 +307,9 @@ jQuery(document).ready(function(){
 });
 
 setPeridos = function(){
-	loading.start();
+	if(!loading.status){
+		loading.start();
+	}
 	jQuery("#periodos").slideDown("slow");
 	jQuery.ajax({
 		url: '<?php echo site_url("indicadores/getPeriodos");?>',
@@ -428,11 +432,17 @@ loading = {
 			backgroundColor:'#FBFCEF', 
 			opacity: 0.6, 
 			border: '2px solid #114D66',
-			cursor: 'wait'
+			cursor: 'wait',
+			onBlock: function(){
+				loading.status=true;
+			},
+			onUnblock: function(){}
+				loading.status=false;
 			}, 
 		});
 	},
 	end: function(){
 		jQuery.unblockUI();
-	}
+	},
+	status: false
 }; 
