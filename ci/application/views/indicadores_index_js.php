@@ -190,7 +190,9 @@ jQuery(document).ready(function(){
 	
 	jQuery("#generarIndicador").on("submit", function(e){
 		console.log(e);
-		loading.start();
+		if(!loading.status){
+			loading.start();
+		}
 		indicadorValue = jQuery("#indicador").val();
 		urlRequest = '<?php echo site_url("indicadores/getChartData");?>';
 		switch(indicadorValue){
