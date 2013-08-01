@@ -678,3 +678,72 @@ p {
 	padding: 21px; 
 }
 
+.infoBox{
+	border: 0px solid #CCC;
+	width: 910px;
+	margin: 0 auto;
+	font-family: Verdana,Geneva,sans-serif;
+	font-size: 14px;
+	color: #666666;
+}
+.infoBox pre { 
+	white-space: -moz-pre-wrap; /* Mozilla, supported since 1999 */
+	white-space: -pre-wrap; /* Opera */
+	white-space: -o-pre-wrap; /* Opera */
+	white-space: pre-wrap; /* CSS3 - Text module (Candidate Recommendation) http://www.w3.org/TR/css3-text/#white-space */
+	word-wrap: break-word; /* IE 5.5+ */ 
+}
+/*Formulas*/
+.formula{
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.fraction {
+	display: inline-block;
+	position: relative;
+	vertical-align: middle; 
+	letter-spacing: 0.01em;
+	text-align: center;
+	}
+.fraction > span { 
+	display: block; 
+	padding: 0.2em; 
+	}
+.fraction span.fdn {border-top: thin solid black;}
+.fraction span.bar {display: none;}
+
+.n-root {
+	position: relative;
+	top: -1.3em;
+	left: 1.9ex;
+	font-size: 45%;
+	}
+.radical {
+	font-size: 1.7em;
+	vertical-align: middle;
+	}
+.radicand { 
+	padding: 0.5ex;
+	border-top: thin black solid;
+	}
+
+.intsuma {
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	text-align: center;
+	margin-bottom: 0.5ex;
+	}
+.intsuma .lim, .intsuma .lim-up {
+	display: block;
+	font-size: 75%;
+	text-align: center;
+	}
+.intsuma .lim-up {
+	margin-bottom: 0;
+	margin-left: 0.8ex;
+	}
+.intsuma .lim {margin-bottom: -0.6ex;}
+.intsuma .sum {font-size: 1.2em;}
+.intsuma .sum-frac {font-size: 2em;}

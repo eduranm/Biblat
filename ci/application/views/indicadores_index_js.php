@@ -28,9 +28,11 @@ jQuery(document).ready(function(){
 			jQuery("#revista, #pais").empty().append('<option></option>');
 			jQuery("#revista, #pais").select2("destroy");
 			jQuery("#disciplina").select2("enable", true);
+			updateInfo(value);
 		}else{
 			jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
 			jQuery("#disciplina").select2("enable", true);
+			updateInfo(value);
 		}
 
 		if(typeof history.pushState === "function" && !popState.indicador){
@@ -364,12 +366,20 @@ setPeridos = function(){
 	});
 };
 
+updateInfo = function(indicador){
+	jQuery("#info").children(".infoBox").hide();
+	jQuery("#info-" + indicador).show();
+}
+
 updateData = function(data){
 	console.log(data);
 	asyncAjax=false;
 	actualForm = jQuery("#generarIndicador").serializeJSON();
 	if(typeof data.periodo !== "undefined"){
 		popState.periodo = true;
+	}
+	if(typeof data.indicador !== "undefined"){
+		updateInfo(data.indicador);
 	}
 	if(typeof data.indicador !== "undefined" && data.indicador != actualForm.indicador){
 		popState.indicador=true;
@@ -394,7 +404,7 @@ updateData = function(data){
 		jQuery("#pais").select2("enable", true);
 	}
 	
-	if(data.revista !== "" &&  typeof data.revista !== "undefined" && data.revista.join('/') != actualForm.revista.join('/')){
+	if(data.revista !== "" && typeof data.revista !== "undefined" && data.revista.join('/') != actualForm.revista.join('/')){
 		popState.revista=true;
 		jQuery("#revista").val(data.revista).trigger("change");
 		actualForm = jQuery("#generarIndicador").serializeJSON();

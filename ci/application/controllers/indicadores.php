@@ -100,7 +100,7 @@ class Indicadores extends CI_Controller {
 			endforeach;
 			$query .=") AND anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}'";
 		elseif (isset($_POST['pais'])):
-			$query = "SELECT \"paisAutor\" AS title, anio, {$indicadorCampoTabla[$_POST['indicador']]}Pais\" WHERE \"paisAutorSlug\" IN (";
+			$query = "SELECT \"paisRevista\" AS title, anio, {$indicadorCampoTabla[$_POST['indicador']]}Pais\" WHERE \"paisRevistaSlug\" IN (";
 			$paisOffset=1;
 			$paisTotal= count($_POST['pais']);
 			foreach ($_POST['pais'] as $pais):
@@ -187,8 +187,8 @@ class Indicadores extends CI_Controller {
 		$sufix['modelo-bradford-institucion']="Institucion";
 		$hAxisTitleGroup['modelo-bradford-revista']=_('Títulos de revista');
 		$hAxisTitleGroup['modelo-bradford-institucion']=_('País de afilicación del autor');
-		$titleGroup['modelo-bradford-revista']=_('Fecuencia de artículos por título de revista');
-		$titleGroup['modelo-bradford-institucion']=_('Fecuencia de artículos por institución de afilicación del autor');
+		$titleGroup['modelo-bradford-revista']=_('Frecuencia de artículos por título de revista');
+		$titleGroup['modelo-bradford-institucion']=_('Frecuencia de artículos por institución de afilicación del autor');
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
 		$query = "SELECT articulos, frecuencia, \"articulosXfrecuenciaAcumulado\", \"logFrecuenciaAcumulado\" FROM \"vBradford{$sufix[$_POST['indicador']]}\" WHERE id_disciplina={$idDisciplina}";
 		$query = $this->db->query($query);
@@ -436,12 +436,12 @@ class Indicadores extends CI_Controller {
 				);
 			$data['revistas'][] = $revista;
 		endforeach;
-		$query = "SELECT \"paisAutor\", \"paisAutorSlug\" FROM \"mvPeriodosPais{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
+		$query = "SELECT \"paisRevista\", \"paisRevistaSlug\" FROM \"mvPeriodosPais{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row ):
 			$revista = array(
-					'val' => $row['paisAutorSlug'],
-					'text' => htmlspecialchars($row['paisAutor'])
+					'val' => $row['paisRevistaSlug'],
+					'text' => htmlspecialchars($row['paisRevista'])
 				);
 			$data['paises'][] = $revista;
 		endforeach;
@@ -487,7 +487,7 @@ class Indicadores extends CI_Controller {
 			endforeach;
 			$query .= ")";
 		elseif (isset($_POST['pais'])):
-			$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"{$indicadorTabla[$_POST['indicador']]}Pais\" WHERE \"paisAutorSlug\" IN (";
+			$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"{$indicadorTabla[$_POST['indicador']]}Pais\" WHERE \"paisRevistaSlug\" IN (";
 			$paisOffset=1;
 			$paisTotal= count($_POST['pais']);
 			foreach ($_POST['pais'] as $pais):
