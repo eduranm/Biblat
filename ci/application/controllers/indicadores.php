@@ -149,7 +149,7 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Índice de densidad'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Cantidad de documentos por año: %s'),
+					'revista' => _('Cantidad de documentos por revista: %s'),
 				)
 			);
 		$indicadorCampoTabla['productividad-exogena']="";

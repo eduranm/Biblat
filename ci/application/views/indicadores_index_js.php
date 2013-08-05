@@ -68,6 +68,8 @@ jQuery(document).ready(function(){
 			if(!loading.status){
 				loading.start();
 			}
+			jQuery()
+			jQuery("#orPaisRevistaColumn").show();
 			jQuery("#paisRevista").show("slow");
 			jQuery("#periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
 			jQuery.ajax({
@@ -90,6 +92,10 @@ jQuery(document).ready(function(){
 						jQuery("#pais").append('<option value="' + val.val +'">' + val.text + '</option>');
 					});
 					jQuery("#revista, #pais").select2("enable", true);
+					if(indicadorValue === "indice-densidad-documentos"){
+						jQuery("#pais").select2("destroy");
+						jQuery("#pais, #orPaisRevistaColumn").hide();
+					}
 					loading.end();
 				}
 			});
@@ -418,7 +424,7 @@ updateData = function(data){
 		actualForm.pais = ["pais"];
 	}
 
-	if(data.pais === "" || typeof data.pais === "undefined" && typeof data.revista === "undefined"){
+	if(data.pais === "" || typeof data.pais === "undefined" && typeof data.revista === "undefined" && data.indicador != "indice-densidad-documentos"){
 		jQuery("#periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
 		jQuery("#pais").select2("val", null);
 		jQuery('#pais option').first().prop('selected', false);
