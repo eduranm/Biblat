@@ -26,7 +26,7 @@
 				</select>
 			</div>
 			<div class="rightColumn">
-				<select name="pais[]" id="pais" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione uno o varios países');?>">
+				<select name="pais[]" id="pais" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione uno o varios países de la revista');?>">
 					<option></option>
 				</select>
 			</div>
@@ -41,16 +41,22 @@
 				<li class="infoTab"><a href="#info"></a></li>
 			</ul>
 			<div id="charts">
-				<div id="chart" style="width: 1000px; height: 500px; display:none;"></div>
+				<div id="chartContainer">
+					<div id="chartTitle"></div>
+					<div id="chart" style="width: 1000px; height: 500px;"></div>
+				</div>
 				<div id="bradfodContainer" style="display:none;">
 					<ul id="bradfordSlide">
 						<li>
-							<div id="chartBradford"></div>
+							<div id="bradfordTitle"></div>
+							<div id="chartBradford"></div> 
 						</li>
 						<li>
+							<div id="group1Title"></div>
 							<div id="chartGroup1"></div>
 						</li>
 						<li>
+							<div id="group2Title"></div>
 							<div id="chartGroup2"></div>
 						</li>
 					</ul>
@@ -158,7 +164,7 @@ El valor numérico representa el nivel de concentración temática basándose en
 Se muestra la frecuencia de descriptores.
 	La formulación matemática es:
 <div class="formula">
-		<i>C</i> = <div class="fraction"><span class="fup">2[(<i>n</i>+1/2)-<i>q</i>]</span><span class="bar">/</span><span class="fdn"><i>n</i>-1</span></div>
+		<i>C</i> = <div class="fraction"><span class="fup">2{[(<i>n</i>+1)/2]-<i>q</i>}</span><span class="bar">/</span><span class="fdn"><i>n</i>-1</span></div>
 </div>					
 	Donde:
 	<i>C</i> = Índice de concentración de Pratt.

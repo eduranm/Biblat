@@ -667,11 +667,23 @@ p {
 	border-radius: 10px;
 }
 
-#bradfodContainer, #prattContainer, #grid {
+#chartContainer, #bradfodContainer, #prattContainer, #grid {
 	left: -25px;
 	position: relative;
 	width: 1000px; 
-	height: 510px; 
+	height: 550px; 
+}
+#chartContainer {
+	left: 0px;
+}
+
+#chartTitle, #prattTitle, #bradfodTitle, #group1Title, #group2Title {
+	width: 950px;
+}
+.chartTootip {
+	margin: 0 auto;
+	text-align: center;
+	padding: 2px 5px;
 }
 .dataTable{
 	width: 910px !important;

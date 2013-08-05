@@ -637,15 +637,16 @@ SELECT create_matview('"mvPeriodosRevistaSubramayan"', '"vPeriodosRevistaSubrama
 CREATE OR REPLACE VIEW "vPeriodosPaisSubramayan" AS
 SELECT *
 FROM
-  (SELECT id_disciplina,
-    "paisRevista",
-          "paisRevistaSlug",
+  (SELECT "paisAutor",
+          "paisAutorSlug",
+          id_disciplina,
           anios_continuos(array_agg(anio))
    FROM "vSubramayanPais"
-   GROUP BY id_disciplina,
-      "paisRevistaSlug",
-            "paisRevista"
-   ORDER BY id_disciplina, "paisRevistaSlug") AS ac --Años continuos por pais
+   GROUP BY "paisAutorSlug",
+            "paisAutor",
+            id_disciplina
+   ORDER BY "paisAutorSlug",
+            id_disciplina) AS ac --Años continuos por revista
 WHERE anios_continuos > 4;
 
 
@@ -721,7 +722,7 @@ SELECT
   --(count(*)::numeric + 0.5::numeric) AS "n+1/2",
   --(sum(frecuencia*rango)::numeric/sum(frecuencia))::numeric AS "q",
   --((count(*)::numeric + 0.5::numeric) - (sum(frecuencia*rango)::numeric/sum(frecuencia))::numeric) AS "(n+1/2)-q",
-  ((count(*)::numeric + 0.5::numeric) - (sum(frecuencia*rango)::numeric/sum(frecuencia))::numeric) / (count(*)-1)::numeric AS "pratt"
+  2 * (((count(*)::numeric + 1) / 2) - (sum(frecuencia*rango)::numeric/sum(frecuencia))::numeric) / (count(*)-1)::numeric AS "pratt"
 FROM
 (SELECT 
   ad.id_disciplina,
