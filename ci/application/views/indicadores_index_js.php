@@ -1,7 +1,9 @@
+
 google.load("visualization", "1", {packages:["corechart", "table"], 'language': 'en'});
-var charts = {normal: null, bradford:null, group1:null, group2:null, pratt:null};
+var chart = {normal: null, bradford:null, group1:null, group2:null, pratt:null, data:null};
+chart.data = {normal: null, bradford:null, group1:null, group2:null, pratt:null, prattJ:null};
 var tables = {visualization:null, data:null};
-var charType = null;
+var brfLim = null;
 var popState = {indicador:false, disciplina:false, revista:false, pais:false, periodo:false};
 var rangoPeriodo="0-0";
 var dataPeriodo="0-0";
@@ -228,48 +230,51 @@ jQuery(document).ready(function(){
 				case "modelo-bradford-revista":
 				case "modelo-bradford-institucion":
 					jQuery("#tabs, #bradfodContainer").slideDown("slow");
-
-					var chartData = new google.visualization.DataTable(data.chart.bradford);
+					brfLim = data.grupos;
+					chart.data.bradford = new google.visualization.DataTable(data.chart.bradford);
 					if(chart.bradford == null){
 						chart.bradford = new google.visualization.ComboChart(document.getElementById('chartBradford'));
 					}
-					chart.bradford.draw(chartData, data.options.bradford);
+					chart.bradford.draw(chart.data.bradford, data.options.bradford);
+					google.visualization.events.addListener(chart.bradford, 'select', chooseZone);
+
 					jQuery("#bradfordTitle").html(data.title.bradford);
 
-					var chartData = new google.visualization.DataTable(data.chart.group1);
+					chart.data.group1 = new google.visualization.DataTable(data.chart.group1);
 					if(chart.group1 == null){
 						chart.group1 = new google.visualization.ColumnChart(document.getElementById('chartGroup1'));
 					}
-					chart.group1.draw(chartData, data.options.groups);
+					chart.group1.draw(chart.data.group1, data.options.groups);
 					jQuery("#group1Title").html(data.title.group1);
 
-					var chartData = new google.visualization.DataTable(data.chart.group2);
+					chart.data.group2 = new google.visualization.DataTable(data.chart.group2);
 					if(chart.group2 == null){
 						chart.group2 = new google.visualization.ColumnChart(document.getElementById('chartGroup2'));
 					}
-					chart.group2.draw(chartData, data.options.groups);
+					chart.group2.draw(chart.data.group2, data.options.groups);
 					jQuery("#group2Title").html(data.title.group2);
 					break;
 				case "indice-concentracion":
 					jQuery("#tabs, #prattContainer").slideDown("slow");
 					jQuery("#prattSlide").empty();
+					chart.pratt = new Array();
+					chart.data.pratt = new Array();
+					chart.data.prattJ = data.journal; 
 					jQuery.each(data.chart, function(key, grupo) {
-						if(typeof chart.pratt === "undefined"){
-							chart.pratt = new Array();
-						}
 						jQuery("#prattSlide").append('<li>' + data.prattTitle + ' <div id="chartPratt' + key +'"></div></li>').anythingSlider();
-						var chartData = new google.visualization.DataTable(grupo);
+						chart.data.pratt[key] = new google.visualization.DataTable(grupo);
 						chart.pratt[key] = new google.visualization.ColumnChart(document.getElementById('chartPratt' + key));
-						chart.pratt[key].draw(chartData, data.options);
+						chart.pratt[key].draw(chart.data.pratt[key], data.options);
+						google.visualization.events.addListener(chart.pratt[key], 'select', function(){descriptoresPratt(key)});
 					});
+					console.log(chart);	
 					break;
 				case "productividad-exogena":
 					break;
 				default:
 					jQuery("#tabs, #chartContainer").show("slow");
 					var chartData = new google.visualization.DataTable(data.data);
-					if(chart.normal == null || charType != 'line'){
-						charType = 'line';
+					if(chart.normal == null){
 						chart.normal = new google.visualization.LineChart(document.getElementById('chart'));
 					}
 					chart.normal.draw(chartData, data.options);
@@ -279,6 +284,7 @@ jQuery(document).ready(function(){
 					tables.visualization = new Array();
 					tables.visualization[0] = new google.visualization.Table(document.getElementById('table0'));
 					tables.visualization[0].draw(chartData, data.tableOptions);
+
 					break;
 			}
 			loading.end();
@@ -469,3 +475,23 @@ loading = {
 	},
 	status: false
 }; 
+
+chooseZone = function () {
+	var selection = chart.bradford.getSelection();
+	if (selection[0] != null && selection[0].row != null){
+		var value = chart.data.bradford.getFormattedValue(selection[0].row, 0);
+		if (value <= brfLim[1].lim.x){
+			jQuery("#bradfordSlide").anythingSlider(2);
+		}
+		else if (value > brfLim[1].lim.x && value <= brfLim[2].lim.x) {
+			jQuery("#bradfordSlide").anythingSlider(3);
+		}
+	}
+}
+
+descriptoresPratt = function (key) {
+	var selection = chart.pratt[key].getSelection();
+	if (selection[0] != null && selection[0].column != null){
+		console.log(chart.data.prattJ[key][(selection[0].column+1)/2 -1])
+	}
+}

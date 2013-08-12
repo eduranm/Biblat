@@ -68,160 +68,206 @@
 			<div id="grid"><ul id="tableSlide"></ul></div>
 			<div id="info">
 				<div id="info-indice-coautoria" class="infoBox">
-					<pre>
-
-Este indicador muestra el número medio de autores por artículo.
-El valor numérico indica el promedio de autores por documento.
-	La formulación matemática es:
-<div class="formula">
-		<i>Ic</i> = <div class="fraction"><span class="fup"><i>Caf</i></span><span class="bar">/</span><span class="fdn"><i>Cd</i></span></div>
-</div>					
-	Donde:
-	<i>Caf</i> = Cantidad de autores firmantes
-	<i>Cd</i> = Cantidad de documentos
-					</pre>
+					<p class="textoL">
+						Este indicador muestra el número medio de autores por artículo.<br/>
+						El valor numérico indica el promedio de autores por documento.
+					</p>
+					<p class="textoL ident1">La formulación matemática es:</p>
+					<div class="textoL ident2 formula">
+						<span><i>Ic</i> = </span>
+						<div class="fraction">
+							<span class="fup"><i>Caf</i></span>
+							<span class="bar">/</span>
+							<span class="fdn"><i>Cd</i></span>
+						</div>
+					</div>
+					<p class="textoL ident1">
+						Donde:<br/>
+						<i>Caf</i> = Cantidad de autores firmantes<br/>
+						<i>Cd</i> = Cantidad de documentos
+					</p>
 				</div>
+
 				<div id="info-tasa-documentos-coautorados" class="infoBox">
-					<pre>
-
-Indicador que determina el promedio de artículos conautoría múltiple.
-El valor numérico indica el promedio de artículos en coautoría.
-	La formulación matemática es:
-<div class="formula">
-		<i>Tdc</i> = <div class="fraction"><span class="fup"><i>Cta</i></span><span class="bar">/</span><span class="fdn"><i>Ctd</i></span></div>
-</div>					
-	Donde:
-	<i>Cta</i> = Cantidad total de documentos con autoría multiple
-	<i>Ctd</i> = Cantidad total de documentos
-					</pre>
+					<p class="textoL">
+						Indicador que determina el promedio de artículos conautoría múltiple.<br/>
+						El valor numérico indica el promedio de artículos en coautoría.
+					</p>
+					<p class="textoL ident1">La formulación matemática es:</p>
+					<div class="textoL ident2 formula">
+							<i>Tdc</i> = 
+							<div class="fraction">
+								<span class="fup"><i>Cta</i></span>
+								<span class="bar">/</span>
+								<span class="fdn"><i>Ctd</i></span>
+							</div>
+					</div>
+					<p class="textoL ident1">
+						Donde:<br/>
+						<i>Cta</i> = Cantidad total de documentos con autoría multiple<br/>
+						<i>Ctd</i> = Cantidad total de documentos
+					</p>
 				</div>
-				<div id="info-grado-colaboracion" class="infoBox">
-					<pre>
 
-Indica el promedio de artículos con autoría múltiple.
-El valor numérico indica el promedio de artículos con autoría múltiple.
-	La formulación matemática es:
-<div class="formula">
-		<i>GC</i> = <div class="fraction"><span class="fup"><i>N<sub>m</sub></i></span><span class="bar">/</span><span class="fdn"><i>N<sub>m</sub> + N<sub>s</sub></i></span></div>
-</div>					
-	Donde:
-	<i>N<sub>m</sub></i> = Total de documentos con autoría múltiple.
-	<i>N<sub>s</sub></i> = =  Total de documentos escritos por un solo autor.
-					</pre>
+				<div id="info-grado-colaboracion" class="infoBox">
+					<p class="textoL">
+						Indica el promedio de artículos con autoría múltiple.<br/>
+						El valor numérico indica el promedio de artículos con autoría múltiple.
+					</p>
+					<p class="textoL ident1">La formulación matemática es:</p>
+					<div class="textoL formula ident2">
+							<i>GC</i> = 
+							<div class="fraction">
+								<span class="fup"><i>N<sub>m</sub></i></span>
+								<span class="bar">/</span>
+								<span class="fdn"><i>N<sub>m</sub> + N<sub>s</sub></i></span>
+							</div>
+					</div>
+					<p class="textoL ident2">
+						Donde:<br/>
+						<i>N<sub>m</sub></i> = Total de documentos con autoría múltiple.<br/>
+						<i>N<sub>s</sub></i> = =  Total de documentos escritos por un solo autor.
+					</p>
 				</div>
 
 				<div id="info-modelo-elitismo" class="infoBox">
-					<pre>
-
-Identifica la cantidad de autores que integran la elite de los más productivos.
-El valor numérico representa la cantidad de los autores que integran dicha elite.
-	La formulación matemática es:
-<div class="formula">
-		<i>E</i> = <span class="radical">&radic;</span><span class="radicand"><i>N</i></span>
-</div>					
-	Donde:
-	<i>E</i> = Elite de autores que publican el 50% de los trabajos.
-	<i>N</i> = Población total de autores.
-					</pre>
+					<p class="textoL">
+						Identifica la cantidad de autores que integran la elite de los más productivos.<br/>
+						El valor numérico representa la cantidad de los autores que integran dicha elite.
+					</p>
+					<p class="textoL ident1">La formulación matemática es:</p>
+					<div class="textoL ident2 formula">
+							<i>E</i> = 
+							<span class="radical">&radic;</span><span class="radicand"><i>N</i></span>
+					</div>
+					<p class="textoL ident1">
+						Donde:<br/>
+						<i>E</i> = Elite de autores que publican el 50% de los trabajos.<br/>
+						<i>N</i> = Población total de autores.
+					</p>					
 				</div>
 
 				<div id="info-indice-colaboracion" class="infoBox">
-					<pre>
-
-Proporciona el peso promedio del número de autores por artículo.
-El valor numérico representa el promedio de coautores por artículo. Además de  visualizar la frecuencia del número de autores por artículo.
-	La formulación matemática es:
-<div class="formula">
-		<i>IC</i> = <span class="intsuma"><span class="lim">N</span><span class="sum-frac">&sum;</span><span class="lim"><i>i</i>=1</span></span><div class="fraction"><span class="fup"><i>j<sub>i</sub> n<sub>j</sub></i></span><span class="bar">/</span><span class="fdn"><i>N</i></span></div>
-</div>					
-	Donde:
-	<i>N</i> = Total de documentos.
-	<i>j<sub>i</sub></i> = Número de firmas (autores) por documentos.
-	<i>n<sub>i</sub></i> =  Cantidad de documentos con autoría múltiple.
-					</pre>
+					<p class="textoL">
+						Proporciona el peso promedio del número de autores por artículo.<br/>
+						El valor numérico representa el promedio de coautores por artículo.<br/>
+						Además de  visualizar la frecuencia del número de autores por artículo.
+					</p>
+					<p class="textoL ident1">La formulación matemática es:</p>
+					<div class="textoL ident2 formula">
+							<i>IC</i> = 
+							<span class="intsuma">
+								<span class="lim">N</span>
+								<span class="sum-frac">&sum;</span>
+								<span class="lim"><i>i</i>=1</span>
+							</span>
+							<div class="fraction">
+								<span class="fup"><i>j<sub>i</sub> n<sub>j</sub></i></span>
+								<span class="bar">/</span>
+								<span class="fdn"><i>N</i></span>
+							</div>
+					</div>
+					<p class="textoL ident1">
+						Donde:<br/>
+						<i>N</i> = Total de documentos.<br/>
+						<i>j<sub>i</sub></i> = Número de firmas (autores) por documentos.<br/>
+						<i>n<sub>i</sub></i> =  Cantidad de documentos con autoría múltiple.
+					</p>				
 				</div>
 
 				<div id="info-indice-densidad-documentos" class="infoBox">
-					<pre>
-
-Índice que identifica los títulos con mayor cantidad de artículos.
-El valor numérico proporciona la cantidad de artículos por revista o por año.
-	La formulación matemática es:
-<div class="formula">
-		<i>p</i> = <div class="fraction"><span class="fup"><i>Rn</i></span><span class="bar">/</span><span class="fdn"><i>N</i></span></div>
-</div>					
-	Donde:
-	<i>Rn</i> = &sum; Artículos.
-	<i>N</i> = &sum; Títulos de revistas.
-					</pre>
+					<p class="textoL">
+						Índice que identifica los títulos con mayor cantidad de artículos.<br/>
+						El valor numérico proporciona la cantidad de artículos por revista o por año.
+					</p>
+					<p class="textoL ident1">La formulación matemática es:</p>
+					<div class="textoL ident2 formula">
+							<i>p</i> = 
+							<div class="fraction">
+								<span class="fup"><i>Rn</i></span>
+								<span class="bar">/</span>
+								<span class="fdn"><i>N</i></span>
+							</div>
+					</div>
+					<p class="textoL ident1">
+						Donde:<br/>
+						<i>Rn</i> = &sum; Artículos.<br/>
+						<i>N</i> = &sum; Títulos de revistas.
+					</p>
 				</div>
 
 				<div id="info-indice-concentracion" class="infoBox">
-					<pre>
-
-Indica el grado de especialización de las revistas.
-El valor numérico representa el nivel de concentración temática basándose en sus descriptores. 
-Se muestra la frecuencia de descriptores.
-	La formulación matemática es:
-<div class="formula">
-		<i>C</i> = <div class="fraction"><span class="fup">2{[(<i>n</i>+1)/2]-<i>q</i>}</span><span class="bar">/</span><span class="fdn"><i>n</i>-1</span></div>
-</div>					
-	Donde:
-	<i>C</i> = Índice de concentración de Pratt.
-	<i>n</i> = Número de categorías.
-	<i>q</i> = &sum; del producto del rango por la frecuencia de una categoría dada, 
-              dividido por la cantidad de ítems en todas las categorías.
-					</pre>
+					<p class="textoL">
+						Indica el grado de especialización de las revistas.<br/>El valor numérico representa el nivel de concentración temática basándose en sus descriptores.<br/>
+						Se muestra la frecuencia de descriptores.
+					</p>
+					<p class="textoL ident1">La formulación matemática es:</p>
+					<div class="textoL ident2 formula">
+							<i>C</i> = 
+							<div class="fraction">
+								<span class="fup">2{[(<i>n</i>+1)/2]-<i>q</i>}</span>
+								<span class="bar">/</span>
+								<span class="fdn"><i>n</i>-1</span>
+							</div>
+					</div>
+					<p class="textoL ident1">
+						Donde:<br/>
+						<i>C</i> = Índice de concentración de Pratt.<br/>
+						<i>n</i> = Número de categorías.<br/>
+						<i>q</i> = &sum; del producto del rango por la frecuencia de una categoría dada, <br/>dividido por la cantidad de ítems en todas las categorías.
+					</p>				
 				</div>
 
 				<div id="info-modelo-bradford-revista" class="infoBox">
-					<pre>
-
-Modelo matemático que identifica el núcleo de revistas más productivas por temática.
-Se identifican tres zonas según su nivel de productividad para la disciplina: 
-	La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han publicado. 
-Se muestra la frecuencia de descriptores.
-	La formulación matemática es:
-<div class="formula">
-		<i>p</i>:<i>p</i><sub>1</sub>:<i>p</i><sub>2</sub>:1:<i>n</i><sub>1</sub>:<i>n</i><sub>2</sub>
-</div>					
-	Donde:
-	<i>p</i> = Cantidad de títulos por disciplinas del conocimiento y países.
-	<i>n</i> = Multiplicador o factor de proporcionalidad detítulos entre las disciplinas.
-					</pre>
+					<p class="textoL">
+						Modelo matemático que identifica el núcleo de revistas más productivas por temática.<br/>
+						Se identifican tres zonas según su nivel de productividad para la disciplina:<br/>
+						La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han publicado.<br/>
+						Se muestra la frecuencia de descriptores.
+					</p>
+					<p class="textoL ident1">La formulación matemática es:</p>
+					<div class="textoL ident2 formula">
+							<i>p</i>:<i>p</i><sub>1</sub>:<i>p</i><sub>2</sub>:1:<i>n</i><sub>1</sub>:<i>n</i><sub>2</sub>
+					</div>
+					<p class="textoL ident1">
+						Donde:<br/>
+						<i>p</i> = Cantidad de títulos por disciplinas del conocimiento y países.<br/>
+						<i>n</i> = Multiplicador o factor de proporcionalidad detítulos entre las disciplinas.
+					</p>
 				</div>
 
 				<div id="info-modelo-bradford-institucion" class="infoBox">
-					<pre>
-
-Modelo matemático que proporciona el núcleo de instituciones más productivas.
-Se identifican tres zonas según su nivel de productividad para la disciplina: 
-	La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han publicado. 
-Se muestra la frecuencia de descriptores.
-	La formulación matemática es:
-<div class="formula">
-		<i>p</i>:<i>p</i><sub>1</sub>:<i>p</i><sub>2</sub>:1:<i>n</i><sub>1</sub>:<i>n</i><sub>2</sub>
-</div>					
-	Donde:
-	<i>p</i> = Cantidad de títulos por disciplinas del conocimiento y países.
-	<i>n</i> = Multiplicador o factor de proporcionalidad detítulos entre las disciplinas.
-					</pre>
+					<p class="textoL">
+						Modelo matemático que proporciona el núcleo de instituciones más productivas.<br/>
+						Se identifican tres zonas según su nivel de productividad para la disciplina:<br/>
+						La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han publicado.<br/>
+						Se muestra la frecuencia de descriptores.
+					</p>
+					<p class="textoL ident1">La formulación matemática es:</p>
+					<div class="textoL ident2 formula">
+							<i>p</i>:<i>p</i><sub>1</sub>:<i>p</i><sub>2</sub>:1:<i>n</i><sub>1</sub>:<i>n</i><sub>2</sub>
+					</div>
+					<p class="textoL ident1">
+						Donde:<br/>
+						<i>p</i> = Cantidad de títulos por disciplinas del conocimiento y países.<br/>
+						<i>n</i> = Multiplicador o factor de proporcionalidad detítulos entre las disciplinas.
+					</p>
 				</div>
 
 				<div id="info-productividad-exogena" class="infoBox">
-					<pre>
-
-Indicador que mide el grado de internacionalización de las revistas.
-El valor numérico indica la proporción de autores extranjeros que han publicado en la revista.
-Se muestra la frecuencia de descriptores.
-	La formulación matemática es:
-<div class="formula">
-		<i>PEx</i>:
-</div>					
-	Donde:
-					</pre>
+					<p class="textoL">
+						Indicador que mide el grado de internacionalización de las revistas.<br/>
+						El valor numérico indica la proporción de autores extranjeros que han publicado en la revista.<br/>
+						Se muestra la frecuencia de descriptores.
+					</p>
+					<p class="textoL ident1">La formulación matemática es:</p>
+					<div class="formula">
+							<i>PEx</i>:
+					</div>
+					<p class="textoL ident1">Donde:</p>
 				</div>
 			</div>
 		</div>
 	</form>
 </div>
+<div id="floatTable"></div>

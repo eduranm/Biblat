@@ -49,7 +49,7 @@ endif;
 					</ul>
 				</li>
 				<li>
-					<a href="javascript:;" title="<?php _e('Bibliometría');?>"><?php _e('Bibliometría');?>
+					<a href="javascript:;" title="<?php _e('Bibliometría');?>"><?php _e('Bibliometría');?></a>
 					<ul>
 						<li><a href="javascript:;" title="<?php _e('Descripción');?>"><?php _e('Descripción');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Metodología');?>"><?php _e('Metodología');?></a></li>

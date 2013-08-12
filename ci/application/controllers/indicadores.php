@@ -36,9 +36,9 @@ class Indicadores extends CI_Controller {
 				$disciplina['id_disciplina'] = $row['id_disciplina'];
 				$disciplinas[$row['slug']] = $disciplina;
 			endforeach;
-			$this->session->set_userdata('query{'.md5($query).'}', $disciplinas);
+			$this->session->set_userdata('query{'.md5($query).'}', json_encode($disciplinas));
 		endif;
-		$this->disciplinas = $this->session->userdata('query{'.md5($query).'}');
+		$this->disciplinas = json_decode($this->session->userdata('query{'.md5($query).'}'), true);
 		$data['disciplinas'] = $this->disciplinas;
 		$this->db->close();
 
@@ -292,21 +292,22 @@ class Indicadores extends CI_Controller {
 			/*Agregado columnas a la fila*/
 			$c = array();
 			if ($articulosXfrecuenciaAcumulado < $promedio):
-				$grupos['1']['limite'] = $articulosXfrecuenciaAcumulado;
+				$grupos['1']['lim']['y'] = $articulosXfrecuenciaAcumulado;
 			elseif ($articulosXfrecuenciaAcumulado > $promedio && ($articulosXfrecuenciaAcumulado - $promedio) < ($articuloXfrecuencia / 2)):
-				$grupos['1']['limite'] = $articulosXfrecuenciaAcumulado;
+				$grupos['1']['lim']['y'] = $articulosXfrecuenciaAcumulado;
 			elseif ($articulosXfrecuenciaAcumulado < ($promedio * 2)):
-				$grupos['2']['limite'] = $articulosXfrecuenciaAcumulado;
+				$grupos['2']['lim']['y'] = $articulosXfrecuenciaAcumulado;
 			elseif ($articulosXfrecuenciaAcumulado > ($promedio * 2) && ($articulosXfrecuenciaAcumulado - ($promedio * 2)) < ($articuloXfrecuencia / 2)):
-				$grupos['2']['limite'] = $articulosXfrecuenciaAcumulado;
+				$grupos['2']['lim']['y'] = $articulosXfrecuenciaAcumulado;
 			endif;
 			$c[] = array('v' => round($row['logFrecuenciaAcumulado'], 4));
-			if($articulosXfrecuenciaAcumulado <= $grupos['1']['limite']):
+			if($articulosXfrecuenciaAcumulado <= $grupos['1']['lim']['y']):
 				$c[] = array('v' => _('<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>Zona núcleo</div>'));
 				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
 				$c[] = array('v' => null);
 				$c[] = array('v' => null);
-			elseif ($articulosXfrecuenciaAcumulado <= $grupos['2']['limite']):
+				$grupos['1']['lim']['x'] = $c[0]['v'];
+			elseif ($articulosXfrecuenciaAcumulado <= $grupos['2']['lim']['y']):
 				if(!$firstGroup['2']):
 					$prev = $result['chart']['bradford']['rows'][$rowNumber-1]['c'];
 					$cc = array();
@@ -323,6 +324,7 @@ class Indicadores extends CI_Controller {
 				$c[] = array('v' => null);
 				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
 				$c[] = array('v' => null);
+				$grupos['2']['lim']['x'] = $c[0]['v'];
 			else:
 				if(!$firstGroup['3']):
 					$prev = $result['chart']['bradford']['rows'][$rowNumber-1]['c'];
@@ -393,13 +395,12 @@ class Indicadores extends CI_Controller {
 		$column = strtolower($indicador[$_POST['indicador']]['sufix']);
 		$query = "SELECT {$column}, articulos FROM \"mvArticulosDisciplina{$indicador[$_POST['indicador']]['sufix']}\" WHERE id_disciplina={$idDisciplina}";
 		$query = $this->db->query($query);
-		$acumuladoArticulos = 0;
 		$revistaInstitucion = array();
 		foreach ($query->result_array() as $row) :
 			$acumulado += $row['articulos'];
-			if ($acumulado <= $grupos['1']['limite']):
+			if ($acumulado <= $grupos['1']['lim']['y']):
 				$revistaInstitucion['1'][$row[$column]] = $row['articulos'];
-			elseif ($acumulado <= $grupos['2']['limite']):
+			elseif ($acumulado <= $grupos['2']['lim']['y']):
 				$revistaInstitucion['2'][$row[$column]] = $row['articulos'];
 			else:
 				$revistaInstitucion['3'][$row[$column]] = $row['articulos'];
@@ -495,6 +496,7 @@ class Indicadores extends CI_Controller {
 		$grupo = 0;
 		$c = array();
 		$result['chart'] = array();
+		$result['journal'] = array();
 		$totalRows = $query->num_rows();
 		$first = current(array_slice($query->result_array(), 1));
 		$vAxisMax = round($first['pratt'], 1) + 1/10;
@@ -506,8 +508,9 @@ class Indicadores extends CI_Controller {
 				$result['chart'][$grupo]['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'string');
 				$c = array();
 				$c[] = array('v' => '');
+				$result['journal'][$grupo]=array();
 			endif;
-
+			$result['journal'][$grupo][] = $row['revistaSlug'];
 			$result['chart'][$grupo]['cols'][] = array('id' => '','label' => $row['revista'],'type' => 'number');
 			$result['chart'][$grupo]['cols'][] = array('id' => '','label' => $row['revista'].'-tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
 			$c[] = array(

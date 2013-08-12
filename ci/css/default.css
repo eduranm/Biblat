@@ -8,6 +8,26 @@ body {
 	background-color: #FAA94D;
 }
 
+.textoL{
+	font-family: Verdana,Geneva,sans-serif;
+	font-size: 14px;
+	color: #666666;
+}
+
+.ident1{
+	margin-left: 1em;
+}
+
+.ident2{
+	margin-left: 2em;
+}
+.ident3{
+	margin-left: 3em;
+}
+.ident4{
+	margin-left: 4em;
+}
+
 @font-face {
   font-family: 'FontAwesome';
   src: url('fonts/fontawesome-webfont.eot');
