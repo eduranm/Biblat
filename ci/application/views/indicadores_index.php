@@ -269,5 +269,5 @@
 			</div>
 		</div>
 	</form>
+	<div id="floatTableContainer"><div id="floatTable"></div><div id="toolbar_div"></div></div>
 </div>
-<div id="floatTable"></div>

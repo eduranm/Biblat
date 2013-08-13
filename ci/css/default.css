@@ -779,3 +779,16 @@ p {
 .intsuma .lim {margin-bottom: -0.6ex;}
 .intsuma .sum {font-size: 1.2em;}
 .intsuma .sum-frac {font-size: 2em;}
+
+/*Table styles*/
+.google-visualization-table-table td {
+	text-align: center;
+}
+
+.google-visualization-table-table td:first-child {
+	text-align: left;
+}
+
+#floatTableContainer {
+	display: none;
+}

@@ -182,20 +182,18 @@ jQuery(document).ready(function(){
 				hashTags: false,
 				animationTime: 1200
 			});
-	jQuery(function(){
-		jQuery("#tabs").tabs({ 
-			show: { effect: "fade", duration: 800 },
-			activate: function(){
-				console.log(jQuery("#tabs").tabs( "option", "active" ));
-				if(jQuery("#tabs").tabs("option", "active") == 1){
-					console.log(jQuery("#table0 .google-visualization-table-table").height());
-					jQuery("#grid").height(jQuery("#table0 .google-visualization-table-table").height() + 50);
-				}
-				jQuery('html, body').animate({
-                    scrollTop: jQuery("#tabs").offset().top
-                }, 700);
+	jQuery("#tabs").tabs({ 
+		show: { effect: "fade", duration: 800 },
+		activate: function(){
+			console.log(jQuery("#tabs").tabs( "option", "active" ));
+			if(jQuery("#tabs").tabs("option", "active") == 1){
+				console.log(jQuery("#table0 .google-visualization-table-table").height());
+				jQuery("#grid").height(jQuery("#table0 .google-visualization-table-table").height() + 50);
 			}
-		});
+			jQuery('html, body').animate({
+				scrollTop: jQuery("#tabs").offset().top
+			}, 700);
+		}
 	});
 	
 	jQuery("#generarIndicador").on("submit", function(e){
@@ -267,6 +265,13 @@ jQuery(document).ready(function(){
 						chart.pratt[key].draw(chart.data.pratt[key], data.options);
 						google.visualization.events.addListener(chart.pratt[key], 'select', function(){descriptoresPratt(key)});
 					});
+
+					var tableData = new google.visualization.DataTable(data.table);
+					jQuery("#tableSlide").empty();
+					jQuery("#tableSlide").append('<li><div class="dataTable" id="table0"></div></li>').anythingSlider();
+					tables.visualization = new Array();
+					tables.visualization[0] = new google.visualization.Table(document.getElementById('table0'));
+					tables.visualization[0].draw(tableData, data.tableOptions);
 					console.log(chart);	
 					break;
 				case "productividad-exogena":
@@ -279,11 +284,13 @@ jQuery(document).ready(function(){
 					}
 					chart.normal.draw(chartData, data.options);
 					jQuery("#chartTitle").html(data.chartTitle);
+
+					var tableData = new google.visualization.DataTable(data.dataTable);
 					jQuery("#tableSlide").empty();
 					jQuery("#tableSlide").append('<li><div class="dataTable" id="table0"></div></li>').anythingSlider();
 					tables.visualization = new Array();
 					tables.visualization[0] = new google.visualization.Table(document.getElementById('table0'));
-					tables.visualization[0].draw(chartData, data.tableOptions);
+					tables.visualization[0].draw(tableData, data.tableOptions);
 
 					break;
 			}
@@ -492,6 +499,21 @@ chooseZone = function () {
 descriptoresPratt = function (key) {
 	var selection = chart.pratt[key].getSelection();
 	if (selection[0] != null && selection[0].column != null){
-		console.log(chart.data.prattJ[key][(selection[0].column+1)/2 -1])
+		disciplina=jQuery('#disciplina').val();
+		revista=chart.data.prattJ[key][(selection[0].column+1)/2 -1];
+		jQuery.ajax({
+			url: '<?php echo site_url("indicadores/getDescriptoresPratt");?>/'+ disciplina + '/' + revista,
+			type: 'POST',
+			dataType: 'json',
+			success: function(data){
+				console.log(data);
+				var tableData = new google.visualization.DataTable(data.table);
+				var table = new google.visualization.Table(document.getElementById('floatTable'));
+				table.draw(tableData, data.tableOptions);
+				jQuery.colorbox({inline: true, href: jQuery('#floatTable'), height:"90%",});
+			}
+		});
+		
+		console.log(revista)
 	}
 }

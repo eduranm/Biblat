@@ -156,6 +156,7 @@ class Indicadores extends CI_Controller {
 
 		$selection = 'revista'; 
 		if (isset($_POST['revista'])):
+			$data['dataTable']['cols'][] = array('id' => '', 'label' => _('Revista/Año'), 'type' => 'string');
 			$query = "SELECT revista AS title, anio, {$indicador[$_POST['indicador']]['campoTabla']}Revista\" WHERE \"revistaSlug\" IN (";
 			$revistaOffset=1;
 			$revistaTotal= count($_POST['revista']);
@@ -168,6 +169,7 @@ class Indicadores extends CI_Controller {
 			endforeach;
 			$query .=") AND anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}'";
 		elseif (isset($_POST['pais'])):
+			$data['dataTable']['cols'][] = array('id' => '', 'label' => _('País/Año'), 'type' => 'string');
 			$selection = 'pais';
 			$query = "SELECT \"paisRevista\" AS title, anio, {$indicador[$_POST['indicador']]['campoTabla']}Pais\" WHERE \"paisRevistaSlug\" IN (";
 			$paisOffset=1;
@@ -193,8 +195,10 @@ class Indicadores extends CI_Controller {
 			$data['data']['cols'][] = array('id' => slug($kindicador),'label' => $kindicador, 'type' => 'number');
 			$data['data']['cols'][] = array('id' => slug($kindicador)."-tooltip",'label' => $kindicador, 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
 		endforeach;
-		/*Generando filas*/
+		/*Generando filas para gráfica y columnas para la tabla*/
+		$setDataTableRows = false;
 		foreach ($periodos as $periodo):
+			$data['dataTable']['cols'][] = array('id' => '','label' => $periodo, 'type' => 'string');
 			$c = array();
 			$c[] = array(
 					'v' => $periodo
@@ -206,7 +210,21 @@ class Indicadores extends CI_Controller {
 				$c[] = array(
 					'v' => _sprintf("<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">{$indicador[$_POST['indicador']]['tooltip'][$selection]}</div>", $kindicador, $vindicador[$periodo])
 				);
+				/*dataTable rows*/
+				if( ! $setDataTableRows ):
+					$cc = array();
+					$cc[] = array(
+						'v' => $kindicador
+					);
+					foreach ($periodos as $periodoDT):
+						$cc[] = array(
+							'v' => $vindicador[$periodoDT] != null ? number_format($vindicador[$periodoDT], 2, '.', '') : null
+						);
+					endforeach;
+					$data['dataTable']['rows'][]['c'] = $cc;
+				endif;
 			endforeach;
+			$setDataTableRows = true;
 			$data['data']['rows'][]['c'] = $c;
 		endforeach;
 
@@ -238,10 +256,10 @@ class Indicadores extends CI_Controller {
 							'height' => "80%"
 							)
 						);
-		/*Datos para la tabla*/
+		/*Opciones para la tabla*/
 		$data['tableOptions'] = array(
 				'allowHtml' => true,
-				'showRowNumber' => true
+				'showRowNumber' => false
 			);
 		/*Titulo de la gráfica*/
 		$data['chartTitle'] = $indicador[$_POST['indicador']]['title'][$selection];
@@ -503,6 +521,8 @@ class Indicadores extends CI_Controller {
 		if ($vAxisMax > 1):
 			$vAxisMax = 1;
 		endif;
+		$result['table']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'string');
+		$result['table']['cols'][] = array('id' => '','label' => _('Índice de concentración temática'),'type' => 'number');
 		foreach ($query->result_array() as $row):
 			if(!isset($result['chart'][$grupo])):
 				$result['chart'][$grupo]['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'string');
@@ -520,6 +540,11 @@ class Indicadores extends CI_Controller {
 					'v' => _sprintf("<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">Nivel de especialización de la revista: %s</div>", $row['revista'], round($row['pratt'], 4))
 				);
 			$offset++;
+			/*Filas de la tabla*/
+			$cc = array();
+			$cc[] = array('v' => $row['revista']);
+			$cc[] = array('v' => number_format($row['pratt'], 4, '.', ''));
+			$result['table']['rows'][]['c'] = $cc;
 			if($offset == $limit || $offset == $totalRows):
 				$result['chart'][$grupo]['rows'][]['c'] = $c;
 				$offset = 0;
@@ -559,9 +584,39 @@ class Indicadores extends CI_Controller {
 							'height' => "80%"
 							)
 						);
-			$result['prattTitle'] = _('<div id="prattTitle"><div class="centrado"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de por especialización temática</div></div>');
+		/*Opciones para la tabla*/
+		$data['tableOptions'] = array(
+				'allowHtml' => true,
+				'showRowNumber' => false
+			);
+		$result['prattTitle'] = _('<div id="prattTitle"><div class="centrado"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de por especialización temática</div></div>');
 		echo json_encode($result, true);
 
+	}
+
+	public function getDescriptoresPratt($disciplina, $revista){
+		$this->output->enable_profiler(false);
+		$idDisciplina = $this->disciplinas[$disciplina]['id_disciplina'];
+		$query = "SELECT \"descriptoresJSON\", \"frecuenciaDescriptorJSON\" FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina} AND \"revistaSlug\"='{$revista}'";
+		$query = $this->db->query($query);
+		$row = $query->row_array();
+		$descriptores = json_decode($row['descriptoresJSON']);
+		$frecuencias = json_decode($row['frecuenciaDescriptorJSON']);
+		$result = array();
+		$result['table']['cols'][] = array('id' => '','label' => _('Descriptor'),'type' => 'string');
+		$result['table']['cols'][] = array('id' => '','label' => _('Frecuencia'),'type' => 'number');
+		foreach ($descriptores as $key => $value):
+			$c = array();
+			$c[] = array('v' => $value);
+			$c[] = array('v' => $frecuencias[$key]);
+			$result['table']['rows'][]['c'] = $c;
+		endforeach;
+		/*Opciones para la tabla*/
+		$data['tableOptions'] = array(
+				'allowHtml' => true,
+				'showRowNumber' => false
+			);
+		echo json_encode($result, true);
 	}
 
 	public function getTableData(){
