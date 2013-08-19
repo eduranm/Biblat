@@ -303,24 +303,39 @@ class Indicadores extends CI_Controller {
 				'3' => false
 			);
 		$rowNumber=0;
+		/*Segmentando grupos*/
 		foreach ($query->result_array() as $row):
 			$articulosXfrecuenciaAcumulado = (int)$row['articulosXfrecuenciaAcumulado'];
 			$articuloXfrecuencia = $row['articulos'] * $row['frecuencia'];
-			/*Segmentando grupos*/
-			/*Agregado columnas a la fila*/
-			$c = array();
 			if ($articulosXfrecuenciaAcumulado < $promedio):
 				$grupos['1']['lim']['y'] = $articulosXfrecuenciaAcumulado;
+				$grupos['1']['titulos']++;
+				$grupos['1']['articulos'] = $articulosXfrecuenciaAcumulado;
 			elseif ($articulosXfrecuenciaAcumulado > $promedio && ($articulosXfrecuenciaAcumulado - $promedio) < ($articuloXfrecuencia / 2)):
 				$grupos['1']['lim']['y'] = $articulosXfrecuenciaAcumulado;
+				$grupos['1']['titulos']++;
+				$grupos['1']['articulos'] = $articulosXfrecuenciaAcumulado;
 			elseif ($articulosXfrecuenciaAcumulado < ($promedio * 2)):
 				$grupos['2']['lim']['y'] = $articulosXfrecuenciaAcumulado;
+				$grupos['2']['titulos']++;
+				$grupos['2']['articulos'] = $articulosXfrecuenciaAcumulado - $grupos['1']['lim']['y'];
 			elseif ($articulosXfrecuenciaAcumulado > ($promedio * 2) && ($articulosXfrecuenciaAcumulado - ($promedio * 2)) < ($articuloXfrecuencia / 2)):
 				$grupos['2']['lim']['y'] = $articulosXfrecuenciaAcumulado;
+				$grupos['2']['titulos']++;
+				$grupos['2']['articulos'] = $articulosXfrecuenciaAcumulado - $grupos['1']['lim']['y'];
+			else:
+				$grupos['3']['lim']['y'] = $articulosXfrecuenciaAcumulado;
+				$grupos['3']['titulos']++;
+				$grupos['3']['articulos'] = $articulosXfrecuenciaAcumulado - $grupos['2']['lim']['y'];
 			endif;
+		endforeach;
+		/*Agregado columnas a la fila*/
+		foreach ($query->result_array() as $row):
+			$articulosXfrecuenciaAcumulado = (int)$row['articulosXfrecuenciaAcumulado'];
+			$c = array();
 			$c[] = array('v' => round($row['logFrecuenciaAcumulado'], 4));
 			if($articulosXfrecuenciaAcumulado <= $grupos['1']['lim']['y']):
-				$c[] = array('v' => _('<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>Zona núcleo</div>'));
+				$c[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['1']['articulos'], $grupos['1']['titulos'] ));
 				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
 				$c[] = array('v' => null);
 				$c[] = array('v' => null);
@@ -330,7 +345,7 @@ class Indicadores extends CI_Controller {
 					$prev = $result['chart']['bradford']['rows'][$rowNumber-1]['c'];
 					$cc = array();
 					$cc[] = array('v' => $prev[0]['v']);
-					$cc[] = array('v' => _('<div class="chartTootip"><span style="color:#dc3912;">&#9632; </span>Zona 2</div>'));
+					$cc[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#dc3912;">&#9632; </span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['2']['articulos'], $grupos['2']['titulos'] ));
 					$cc[] = array('v' => null);
 					$cc[] = array('v' => $prev[2]['v']);
 					$cc[] = array('v' => null);
@@ -338,7 +353,7 @@ class Indicadores extends CI_Controller {
 					$firstGroup['2'] = true;
 					$rowNumber++;
 				endif;
-				$c[] = array('v' => _('<div class="chartTootip"><span style="color:#dc3912;">&#9632; </span>Zona 2</div>'));
+				$c[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#dc3912;">&#9632; </span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['2']['articulos'], $grupos['2']['titulos'] ));
 				$c[] = array('v' => null);
 				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
 				$c[] = array('v' => null);
@@ -348,7 +363,7 @@ class Indicadores extends CI_Controller {
 					$prev = $result['chart']['bradford']['rows'][$rowNumber-1]['c'];
 					$cc = array();
 					$cc[] = array('v' => $prev[0]['v']);
-					$cc[] = array('v' => _('<div class="chartTootip"><span style="color:#ff9900;">&#9632; </span>Zona 3</div>'));
+					$cc[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#ff9900;">&#9632; </span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['3']['articulos'], $grupos['3']['titulos'] ));
 					$cc[] = array('v' => null);
 					$cc[] = array('v' => null);
 					$cc[] = array('v' => $prev[3]['v']);
@@ -356,10 +371,11 @@ class Indicadores extends CI_Controller {
 					$firstGroup['3'] = true;
 					$rowNumber++;
 				endif;
-				$c[] = array('v' => _('<div class="chartTootip"><span style="color:#ff9900;">&#9632; </span>Zona 3</div>'));
+				$c[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#ff9900;">&#9632; </span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['3']['articulos'], $grupos['3']['titulos'] ));
 				$c[] = array('v' => null);
 				$c[] = array('v' => null);
 				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
+				$grupos['3']['lim']['x'] = $c[0]['v'];
 			endif;
 			$result['chart']['bradford']['rows'][]['c'] = $c;
 			$rowNumber++;
