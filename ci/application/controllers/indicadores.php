@@ -342,12 +342,11 @@ class Indicadores extends CI_Controller {
 				$grupos['1']['lim']['x'] = $c[0]['v'];
 			elseif ($articulosXfrecuenciaAcumulado <= $grupos['2']['lim']['y']):
 				if(!$firstGroup['2']):
-					$prev = $result['chart']['bradford']['rows'][$rowNumber-1]['c'];
 					$cc = array();
-					$cc[] = array('v' => $prev[0]['v']);
-					$cc[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#dc3912;">&#9632; </span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['2']['articulos'], $grupos['2']['titulos'] ));
+					$cc[] = array('v' => round($row['logFrecuenciaAcumulado'], 4));
+					$cc[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#3366cc;">&#3366cc; </span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['1']['articulos'], $grupos['1']['titulos'] ));
+					$cc[] = array('v' => $articulosXfrecuenciaAcumulado);
 					$cc[] = array('v' => null);
-					$cc[] = array('v' => $prev[2]['v']);
 					$cc[] = array('v' => null);
 					$result['chart']['bradford']['rows'][]['c'] = $cc;
 					$firstGroup['2'] = true;
@@ -360,13 +359,12 @@ class Indicadores extends CI_Controller {
 				$grupos['2']['lim']['x'] = $c[0]['v'];
 			else:
 				if(!$firstGroup['3']):
-					$prev = $result['chart']['bradford']['rows'][$rowNumber-1]['c'];
 					$cc = array();
-					$cc[] = array('v' => $prev[0]['v']);
-					$cc[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#ff9900;">&#9632; </span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['3']['articulos'], $grupos['3']['titulos'] ));
+					$cc[] = array('v' => round($row['logFrecuenciaAcumulado'], 4));
+					$cc[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#dc3912;">&#9632; </span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['2']['articulos'], $grupos['2']['titulos'] ));
 					$cc[] = array('v' => null);
+					$cc[] = array('v' => $articulosXfrecuenciaAcumulado);
 					$cc[] = array('v' => null);
-					$cc[] = array('v' => $prev[3]['v']);
 					$result['chart']['bradford']['rows'][]['c'] = $cc;
 					$firstGroup['3'] = true;
 					$rowNumber++;
