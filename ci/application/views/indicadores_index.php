@@ -232,7 +232,7 @@
 					<p class="textoL ident1">
 						Donde:<br/>
 						<i>p</i> = Cantidad de títulos por disciplinas del conocimiento y países.<br/>
-						<i>n</i> = Multiplicador o factor de proporcionalidad detítulos entre las disciplinas.
+						<i>n</i> = Multiplicador o factor de proporcionalidad de títulos entre las disciplinas.
 					</p>
 				</div>
 

@@ -85,8 +85,8 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Índice de Coautoría'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Promedio de autores por artículo: %s'),
-					'pais' => _('Promedio de autores por articulo en las revistas del país: %s')
+					'revista' => _('Promedio de autores por artículo en el año %s: %s'),
+					'pais' => _('Promedio de autores por artículo en las revistas del país en el año %s: %s')
 				)
 			);
 		$indicador['tasa-documentos-coautorados'] = array(
@@ -98,8 +98,8 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Tasa de documentos'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Promedio de artículos en coautoría: %s'),
-					'pais' => _('Promedio de artículos en coautoría en las revistas del país: %s')
+					'revista' => _('Promedio de artículos en coautoría en el año %s: %s'),
+					'pais' => _('Promedio de artículos en coautoría en las revistas del país en el año %s: %s')
 				)
 			);
 		$indicador['grado-colaboracion'] = array(
@@ -111,8 +111,8 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Grado de Colaboración'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Promedio de artículos con autoría múltiple: %s'),
-					'pais' => _('Promedio de artículos con autoría múltiple en las revistas del país: %s')
+					'revista' => _('Promedio de artículos con autoría múltiple en el año %s: %s'),
+					'pais' => _('Promedio de artículos con autoría múltiple en las revistas del país en el año %s: %s')
 				)
 			);
 		$indicador['modelo-elitismo'] = array(
@@ -124,8 +124,8 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Cantidad de autores'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Cantidad de autores que conforman la elite: %s'),
-					'pais' => _('Cantidad de autores que conforman la elite: %s')
+					'revista' => _('Cantidad de autores que conforman la elite en el año %s: %s'),
+					'pais' => _('Cantidad de autores que conforman la elite en el año %s: %s')
 				)
 			);
 		$indicador['indice-colaboracion'] = array(
@@ -137,8 +137,8 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Índice de Colaboración'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Promedio de coautores por artículo: %s'),
-					'pais' => _('Promedio de coautores por articulo en las revistas del país: %s')
+					'revista' => _('Promedio de coautores por artículo en el año %s: %s'),
+					'pais' => _('Promedio de coautores por articulo en las revistas del país en el año %s: %s')
 				)
 			);
 		$indicador['indice-densidad-documentos'] = array(
@@ -149,7 +149,7 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Índice de densidad'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Cantidad de documentos por revista: %s'),
+					'revista' => _('Cantidad de documentos por revista en el año %s: %s'),
 				)
 			);
 		$indicadorCampoTabla['productividad-exogena']="";
@@ -208,7 +208,7 @@ class Indicadores extends CI_Controller {
 					'v' => $vindicador[$periodo]
 				);
 				$c[] = array(
-					'v' => _sprintf("<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">{$indicador[$_POST['indicador']]['tooltip'][$selection]}</div>", $kindicador, $vindicador[$periodo])
+					'v' => _sprintf("<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">{$indicador[$_POST['indicador']]['tooltip'][$selection]}</div>", $kindicador, $periodo, $vindicador[$periodo])
 				);
 				/*dataTable rows*/
 				if( ! $setDataTableRows ):
@@ -589,7 +589,7 @@ class Indicadores extends CI_Controller {
 				'allowHtml' => true,
 				'showRowNumber' => false
 			);
-		$result['prattTitle'] = _('<div id="prattTitle"><div class="centrado"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de por especialización temática</div></div>');
+		$result['prattTitle'] = _('<div id="prattTitle"><div class="centrado"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de especialización temática</div></div>');
 		echo json_encode($result, true);
 
 	}
