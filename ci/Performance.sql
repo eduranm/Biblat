@@ -85,6 +85,30 @@ UPDATE articulo SET e_504=NULL WHERE e_504='';
 UPDATE articulo SET e_546=NULL WHERE e_546='';
 UPDATE articulo SET e_856u=NULL WHERE e_856u='';
 UPDATE articulo SET id_disciplina=NULL WHERE id_disciplina<1;
+UPDATE articulo SET e_222='Bioquimia' WHERE e_222='Bioquimía';
+UPDATE articulo SET e_222='Anales del Instituto de Biología. UNAM. Serie zoología' WHERE e_222='Anales del Instituto de Biología. UNAM. Serie Zoología';
+UPDATE articulo SET e_222='Civitas. Revista de ciencias sociais' WHERE e_222='Civitas. Revista de ciencias sociais,';
+UPDATE articulo SET e_222='Cognitio. Revista de filosofia' WHERE e_222='Cognitio. Revista de Filosofia';
+UPDATE articulo SET e_222='Conjuntura economica (Rio de Janeiro)' WHERE e_222='Conjuntura económica (Rio de Janeiro)';
+UPDATE articulo SET e_222='Enseñanza e investigación en psicología' WHERE e_222='Enseñanza e investigación en Psicología';
+UPDATE articulo SET e_222='Estudios - Instituto Tecnológico Autónomo de México' WHERE e_222='Estudios - Instituto Tecnológico Autónomo de México,';
+UPDATE articulo SET e_222='Estudos de psicologia (Natal)' WHERE e_222='Estudos de Psicologia (Natal)';
+UPDATE articulo SET e_222='GénEros' WHERE e_222='Géneros';
+UPDATE articulo SET e_222='Journal of Eastern Caribbean studies' WHERE e_222='Journal of eastern caribbean studies';
+UPDATE articulo SET e_222='Novos estudos - CEBRAP' WHERE e_222='Novos Estudos - CEBRAP';
+UPDATE articulo SET e_222='Psicologia: reflexao e critica' WHERE e_222 in ('Psicologia: Reflexao e critica', 'Psicologia: Reflexão e Crítica');
+UPDATE articulo SET e_222='Revista brasileira de educacao' WHERE e_222='Revista Brasileira de Educação';
+UPDATE articulo SET e_222='Revista brasileira de reumatologia' WHERE e_222='Revista Brasileira de Reumatologia';
+UPDATE articulo SET e_222='Revista de economía política' WHERE e_222='Revista de economia politica';
+UPDATE articulo SET e_222='Revista de extensión cultural - Universidad Nacional de Colombia' WHERE e_222='Revista de Extensión Cultural - Universidad Nacional de Colombia';
+UPDATE articulo SET e_222='Revista de la Facultad de Farmacia de la Universidad de los Andes' WHERE e_222='Revista de la Facultad de Farmacia de la Universidad de Los Andes';
+UPDATE articulo SET e_222='Revista médica del Instituto Mexicano del Seguro Social' WHERE e_222='Revista médica del Instituto Mexicano del Seguro Social,';
+UPDATE articulo SET e_222='Revista mexicana de orientación educativa' WHERE e_222='Revista Mexicana de Orientación Educativa';
+UPDATE articulo SET e_222='Sao Paulo em perspectiva' WHERE e_222='São Paulo em Perspectiva';
+UPDATE articulo SET e_222='Sociedade e estado' WHERE e_222='Sociedade e Estado';
+UPDATE articulo SET e_222='Symposium - Universidade Catolica de Pernambuco' WHERE e_222='Symposium - Universidade Católica de Pernambuco';
+UPDATE articulo SET e_222='Utopía y praxis latinoamericana' WHERE e_222='Utopía y Praxis Latinoamericana';
+
 /*Normalizando paises*/
 
 UPDATE articulo SET e_008='México' WHERE e_008='Mexico' OR e_008='Mèxico';
