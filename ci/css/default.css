@@ -730,7 +730,7 @@ p {
 }
 .dataTable{
 	width: 910px !important;
-	padding: 21px; 
+	padding: 20px !important; 
 }
 
 .infoBox{
@@ -808,7 +808,8 @@ p {
 	text-align: center;
 }
 
-.google-visualization-table-table td:first-child {
+.google-visualization-table-table td:first-child,
+.groupTable .google-visualization-table-table td:nth-child(2) {
 	text-align: left;
 }
 

@@ -283,24 +283,23 @@ jQuery(document).ready(function(){
 
 					var tableData = new google.visualization.DataTable(data.table.group1);
 					jQuery("#gridContainer").append(data.table.title.group1);
-					jQuery("#gridContainer").append('<div class="dataTable" id="table1"></div>');
+					jQuery("#gridContainer").append('<div class="dataTable groupTable" id="table1"></div>');
 					tables.group1 = new google.visualization.Table(document.getElementById('table1'));
-					tables.group1.draw(tableData, data.tableOptions);
+					tables.group1.draw(tableData, data.tblGrpOpt);
 
 					var tableData = new google.visualization.DataTable(data.table.group2);
 					jQuery("#gridContainer").append(data.table.title.group2);
-					jQuery("#gridContainer").append('<div class="dataTable" id="table2"></div>');
+					jQuery("#gridContainer").append('<div class="dataTable groupTable" id="table2"></div>');
 					tables.group2 = new google.visualization.Table(document.getElementById('table2'));
-					tables.group2.draw(tableData, data.tableOptions);
+					tables.group2.draw(tableData, data.tblGrpOpt);
 
 					var tableData = new google.visualization.DataTable(data.table.group3);
 					jQuery("#gridContainer").append(data.table.title.group3);
-					jQuery("#gridContainer").append('<div class="dataTable" id="table3"></div>');
+					jQuery("#gridContainer").append('<div class="dataTable groupTable" id="table3"></div>');
 					tables.group3 = new google.visualization.Table(document.getElementById('table3'));
-					tables.group3.draw(tableData, data.tableOptions);
-					console.log("height" + jQuery("#table0 .google-visualization-table-table").height());
+					tables.group3.draw(tableData, data.tblGrpOpt);
+
 					jQuery("#gridContainer").accordion( "refresh" );
-					//jQuery("#table0, #table1, #table2, #table3").show();
 					break;
 				case "indice-concentracion":
 					jQuery("#tabs, #prattContainer").slideDown("slow");

@@ -563,6 +563,10 @@ class Indicadores extends CI_Controller {
 				'allowHtml' => true,
 				'showRowNumber' => false
 			);
+		$result['tblGrpOpt'] = array(
+				'allowHtml' => true,
+				'showRowNumber' => true
+			);
 		echo json_encode($result, true);
 	}
 
