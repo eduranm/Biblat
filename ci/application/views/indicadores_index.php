@@ -65,9 +65,10 @@
 					<ul id="prattSlide"></ul>
 				</div>
 			</div>
-			<div id="grid"><ul id="tableSlide"></ul></div>
+			<div id="grid"><div id="gridContainer"></div></div>
 			<div id="info">
 				<div id="info-indice-coautoria" class="infoBox">
+					<p class="textoTitulo centrado">Índice de Coautoría</p>
 					<p class="textoL">
 						Este indicador muestra el número medio de autores por artículo.<br/>
 						El valor numérico indica el promedio de autores por documento.
@@ -89,6 +90,7 @@
 				</div>
 
 				<div id="info-tasa-documentos-coautorados" class="infoBox">
+					<p class="textoTitulo centrado">Tasa de Documentos Coautorados</p>
 					<p class="textoL">
 						Indicador que determina el promedio de artículos conautoría múltiple.<br/>
 						El valor numérico indica el promedio de artículos en coautoría.
@@ -110,6 +112,7 @@
 				</div>
 
 				<div id="info-grado-colaboracion" class="infoBox">
+					<p class="textoTitulo centrado">Grado de Colaboración (Índice de Subramayan)</p>
 					<p class="textoL">
 						Indica el promedio de artículos con autoría múltiple.<br/>
 						El valor numérico indica el promedio de artículos con autoría múltiple.
@@ -131,6 +134,7 @@
 				</div>
 
 				<div id="info-modelo-elitismo" class="infoBox">
+					<p class="textoTitulo centrado">Modelo de Elitismo (Price)</p>
 					<p class="textoL">
 						Identifica la cantidad de autores que integran la elite de los más productivos.<br/>
 						El valor numérico representa la cantidad de los autores que integran dicha elite.
@@ -148,6 +152,7 @@
 				</div>
 
 				<div id="info-indice-colaboracion" class="infoBox">
+					<p class="textoTitulo centrado">Índice de Colaboración (Índice de Lawani)</p>
 					<p class="textoL">
 						Proporciona el peso promedio del número de autores por artículo.<br/>
 						El valor numérico representa el promedio de coautores por artículo.<br/>
@@ -176,6 +181,7 @@
 				</div>
 
 				<div id="info-indice-densidad-documentos" class="infoBox">
+					<p class="textoTitulo centrado">Índice de Densidad de Documentos Zakutina y Priyenikova</p>
 					<p class="textoL">
 						Índice que identifica los títulos con mayor cantidad de artículos.<br/>
 						El valor numérico proporciona la cantidad de artículos por revista o por año.
@@ -197,8 +203,9 @@
 				</div>
 
 				<div id="info-indice-concentracion" class="infoBox">
+					<p class="textoTitulo centrado">Índice de concentración (Índice de Pratt)</p>
 					<p class="textoL">
-						Indica el grado de especialización de las revistas.<br/>El valor numérico representa el nivel de concentración temática basándose en sus descriptores.<br/>
+						Indica el grado de especialización de las revistas.<br/>El valor numérico representa el nivel de concentración temática basándose<br/>en sus descriptores.<br/>
 						Se muestra la frecuencia de descriptores.
 					</p>
 					<p class="textoL ident1">La formulación matemática es:</p>
@@ -219,6 +226,7 @@
 				</div>
 
 				<div id="info-modelo-bradford-revista" class="infoBox">
+					<p class="textoTitulo centrado">Modelo matemático de Bradford</p>
 					<p class="textoL">
 						Modelo matemático que identifica el núcleo de revistas más productivas por temática.<br/>
 						Se identifican tres zonas según su nivel de productividad para la disciplina:<br/>
@@ -237,6 +245,7 @@
 				</div>
 
 				<div id="info-modelo-bradford-institucion" class="infoBox">
+					<p class="textoTitulo centrado">Modelo matemático de Bradford por institución (afiliación del autor)</p>
 					<p class="textoL">
 						Modelo matemático que proporciona el núcleo de instituciones más productivas.<br/>
 						Se identifican tres zonas según su nivel de productividad para la disciplina:<br/>

@@ -2,7 +2,7 @@
 google.load("visualization", "1", {packages:["corechart", "table"], 'language': 'en'});
 var chart = {normal: null, bradford:null, group1:null, group2:null, pratt:null, data:null};
 chart.data = {normal: null, bradford:null, group1:null, group2:null, pratt:null, prattJ:null};
-var tables = {visualization:null, data:null};
+var tables = {normal: null, bradford:null, group1:null, group2:null, group3:null, pratt:null};
 var brfLim = null;
 var popState = {indicador:false, disciplina:false, revista:false, pais:false, periodo:false};
 var rangoPeriodo="0-0";
@@ -18,7 +18,6 @@ jQuery(document).ready(function(){
 	jQuery("#indicador").on("change", function(e){
 		value = jQuery(this).val();
 		jQuery("#paisRevista, #periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
-		jQuery("#bradfordSlide").anythingSlider(1);
 		jQuery("#disciplina").select2("val", "");
 		jQuery("#sliderPeriodo").prop('disabled', true);
 		if (value == "") {
@@ -170,9 +169,9 @@ jQuery(document).ready(function(){
 		console.log(e);
 	});
 	
-	jQuery("#sliderPeriodo").slider();
+	jQuery("#sliderPeriodo").jslider();
 
-	jQuery("#bradfordSlide, #prattSlide, #tableSlide").anythingSlider({
+	jQuery("#prattSlide").anythingSlider({
 				theme: 'scielo',
 				mode: 'fade',
 				expand: true,
@@ -180,15 +179,30 @@ jQuery(document).ready(function(){
 				buildNavigation: true,
 				buildStartStop: false,
 				hashTags: false,
-				animationTime: 1200
+				animationTime: 1200,
+				navigationFormatter : function(index, panel){
+					return "<?php _e('Gráfica ')?>" + index;
+				}
+			});
+	jQuery("#bradfordSlide").anythingSlider({
+				theme: 'scielo',
+				mode: 'fade',
+				expand: true,
+				easing: "linear",
+				buildNavigation: true,
+				buildStartStop: false,
+				hashTags: false,
+				animationTime: 1200,
+				navigationFormatter : function(index, panel){
+					return ['<?php _e("Modelo matemático de Bradford")?>', '<?php _e("Zona núcleo de revistas más productivas")?>', '<?php _e("Zona 2 de revistas más productivas")?>'][index - 1];
+				}
 			});
 	jQuery("#tabs").tabs({ 
 		show: { effect: "fade", duration: 800 },
 		activate: function(){
-			console.log(jQuery("#tabs").tabs( "option", "active" ));
 			if(jQuery("#tabs").tabs("option", "active") == 1){
-				console.log(jQuery("#table0 .google-visualization-table-table").height());
-				jQuery("#grid").height(jQuery("#table0 .google-visualization-table-table").height() + 50);
+				if(jQuery("#indicador").val() == "modelo-bradford-revista" || jQuery("#indicador").val() == "modelo-bradford-institucion"){
+				}
 			}
 			jQuery('html, body').animate({
 				scrollTop: jQuery("#tabs").offset().top
@@ -227,6 +241,7 @@ jQuery(document).ready(function(){
 			switch(indicadorValue){
 				case "modelo-bradford-revista":
 				case "modelo-bradford-institucion":
+					jQuery("#bradfordSlide").anythingSlider(1);
 					jQuery("#tabs, #bradfodContainer").slideDown("slow");
 					brfLim = data.grupos;
 					chart.data.bradford = new google.visualization.DataTable(data.chart.bradford);
@@ -251,6 +266,42 @@ jQuery(document).ready(function(){
 					}
 					chart.group2.draw(chart.data.group2, data.options.groups);
 					jQuery("#group2Title").html(data.title.group2);
+					var tableData = new google.visualization.DataTable(data.table.bradford);
+					jQuery("#gridContainer").empty();
+					jQuery("#gridContainer").append(data.table.title.bradford);
+					jQuery("#gridContainer").append('<div class="dataTable" id="table0"></div>');
+					tables.bradford = new google.visualization.Table(document.getElementById('table0'));
+					tables.bradford.draw(tableData, data.tableOptions);
+
+					var tableData = new google.visualization.DataTable(data.table.group1);
+					jQuery("#gridContainer").append(data.table.title.group1);
+					jQuery("#gridContainer").append('<div class="dataTable" id="table1"></div>');
+					tables.group1 = new google.visualization.Table(document.getElementById('table1'));
+					tables.group1.draw(tableData, data.tableOptions);
+
+					var tableData = new google.visualization.DataTable(data.table.group2);
+					jQuery("#gridContainer").append(data.table.title.group2);
+					jQuery("#gridContainer").append('<div class="dataTable" id="table2"></div>');
+					tables.group2 = new google.visualization.Table(document.getElementById('table2'));
+					tables.group2.draw(tableData, data.tableOptions);
+
+					var tableData = new google.visualization.DataTable(data.table.group3);
+					jQuery("#gridContainer").append(data.table.title.group3);
+					jQuery("#gridContainer").append('<div class="dataTable" id="table3"></div>');
+					tables.group3 = new google.visualization.Table(document.getElementById('table3'));
+					tables.group3.draw(tableData, data.tableOptions);
+					console.log("height" + jQuery("#table0 .google-visualization-table-table").height());
+					jQuery("#gridContainer").accordion({
+						heightStyle: "content",
+						collapsible: true,
+						active: false,
+						activate: function( event, ui ) {
+							jQuery('html, body').animate({
+								scrollTop: jQuery("#tabs").offset().top
+							}, 700);
+						}
+					});
+					//jQuery("#table0, #table1, #table2, #table3").show();
 					break;
 				case "indice-concentracion":
 					jQuery("#tabs, #prattContainer").slideDown("slow");
@@ -267,11 +318,11 @@ jQuery(document).ready(function(){
 					});
 
 					var tableData = new google.visualization.DataTable(data.table);
-					jQuery("#tableSlide").empty();
-					jQuery("#tableSlide").append('<li><div class="dataTable" id="table0"></div></li>').anythingSlider();
-					tables.visualization = new Array();
-					tables.visualization[0] = new google.visualization.Table(document.getElementById('table0'));
-					tables.visualization[0].draw(tableData, data.tableOptions);
+					jQuery("#gridContainer").empty();
+					jQuery("#gridContainer").append(data.tableTitle);
+					jQuery("#gridContainer").append('<div class="dataTable" id="table0"></div>');
+					tables.pratt = new google.visualization.Table(document.getElementById('table0'));
+					tables.pratt.draw(tableData, data.tableOptions);
 					console.log(chart);	
 					break;
 				case "productividad-exogena":
@@ -286,11 +337,11 @@ jQuery(document).ready(function(){
 					jQuery("#chartTitle").html(data.chartTitle);
 
 					var tableData = new google.visualization.DataTable(data.dataTable);
-					jQuery("#tableSlide").empty();
-					jQuery("#tableSlide").append('<li><div class="dataTable" id="table0"></div></li>').anythingSlider();
-					tables.visualization = new Array();
-					tables.visualization[0] = new google.visualization.Table(document.getElementById('table0'));
-					tables.visualization[0].draw(tableData, data.tableOptions);
+					jQuery("#gridContainer").empty();
+					jQuery("#gridContainer").append(data.tableTitle);
+					jQuery("#gridContainer").append('<div class="dataTable" id="table0"></div>');
+					tables.normal = new google.visualization.Table(document.getElementById('table0'));
+					tables.normal.draw(tableData, data.tableOptions);
 
 					break;
 			}
@@ -349,13 +400,13 @@ setPeridos = function(){
 			console.log(jQuery.parseJSON(data.scale));
 			console.log(jQuery.parseJSON(data.heterogeneity));
 			if(data.result){
-				jQuery("#sliderPeriodo").slider().destroy();
+				jQuery("#sliderPeriodo").jslider().destroy();
 				jQuery("#sliderPeriodo").prop('disabled', false);
 				jQuery("#generate").prop('disabled', false);
 				rangoPeriodo=data.anioBase + ";" + data.anioFinal;
 				jQuery("#sliderPeriodo").val(rangoPeriodo);
 				jQuery("#sliderPeriodo").data('pre', jQuery("#sliderPeriodo").val());
-				jQuery("#sliderPeriodo").slider({
+				jQuery("#sliderPeriodo").jslider({
 					from: data.anioBase, 
 					to: data.anioFinal, 
 					heterogeneity: jQuery.parseJSON(data.heterogeneity), 
@@ -452,7 +503,7 @@ updateData = function(data){
 	}
 	if(typeof data.periodo !== "undefined"){
 		jQuery("#sliderPeriodo").prop("disabled", false);
-		jQuery("#sliderPeriodo").slider("value", data.periodo.substring(0, 4), data.periodo.substring(5));
+		jQuery("#sliderPeriodo").jslider("value", data.periodo.substring(0, 4), data.periodo.substring(5));
 		jQuery("#generarIndicador").submit();
 	}
 	asyncAjax=true;
@@ -492,6 +543,9 @@ chooseZone = function () {
 		}
 		else if (value > brfLim[1].lim.x && value <= brfLim[2].lim.x) {
 			jQuery("#bradfordSlide").anythingSlider(3);
+		}else{
+			jQuery("#tabs").tabs("option", "active", 1);
+			jQuery("#gridContainer").accordion("option", "active", 3);
 		}
 	}
 }

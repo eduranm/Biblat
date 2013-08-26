@@ -263,6 +263,7 @@ class Indicadores extends CI_Controller {
 			);
 		/*Titulo de la gráfica*/
 		$data['chartTitle'] = $indicador[$_POST['indicador']]['title'][$selection];
+		$data['tableTitle'] = "<div class=\"textoTitulo centrado\">{$this->indicadores[$_POST['indicador']]}</div>";
 
 		echo json_encode($data, true);
 	}
@@ -272,14 +273,18 @@ class Indicadores extends CI_Controller {
 		$indicador['modelo-bradford-revista'] = array(
 				'sufix' => "Revista",
 				'title' => _('<div class="centrado"><b>Modelo matemático de Bradford</b></div>'),
+				'tableTitle' => _('<h3>Modelo matemático de Bradford</h3>'),
 				'hAxisTitleGroup' => _('Títulos de revista'),
-				'titleGroup' => _('<div class="centrado"><b>Modelo matemático de Bradford</b><br/>Zona %s de revistas más productivas</div>')
+				'titleGroup' => _('<div class="centrado"><b>Modelo matemático de Bradford</b><br/>Zona %s de revistas más productivas</div>'),
+				'tableTitleGroup' => _('<h3>Zona %s de revistas más productivas</h3>')
 			);
 		$indicador['modelo-bradford-institucion'] = array(
 				'sufix' => "Institucion",
 				'title' => _('<div class="centrado"><b>Modelo matemático de Bradford por institución (afiliación del autor)</b></div>'),
+				'tableTitle' => _('<h3>Modelo matemático de Bradford por institución (afiliación del autor)</h3>'),
 				'hAxisTitleGroup' => _('Institución'),
-				'titleGroup' => _('<div class="centrado"><b>Modelo matemático de Bradford por institución (afiliación del autor)</b><br/>Zona %s de instituciones más productivas por disciplina</div>')
+				'titleGroup' => _('<div class="centrado"><b>Modelo matemático de Bradford por institución (afiliación del autor)</b><br/>Zona %s de instituciones más productivas por disciplina</div>'),
+				'tableTitleGroup' => _('<h3>Zona %s de instituciones más productivas por disciplina</h3>')
 			);
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
 		$query = "SELECT articulos, frecuencia, \"articulosXfrecuenciaAcumulado\", \"logFrecuenciaAcumulado\" FROM \"vBradford{$indicador[$_POST['indicador']]['sufix']}\" WHERE id_disciplina={$idDisciplina}";
@@ -297,6 +302,9 @@ class Indicadores extends CI_Controller {
 		$result['chart']['bradford']['cols'][] = array('id' => '','label' => _('Zona núcleo'),'type' => 'number');
 		$result['chart']['bradford']['cols'][] = array('id' => '','label' => _('Zona 2'),'type' => 'number');
 		$result['chart']['bradford']['cols'][] = array('id' => '','label' => _('Zona 3'),'type' => 'number');
+		/*Columnas de la tabla de bradford*/
+		$result['table']['bradford']['cols'][] = array('id' => '','label' => _('Logaritmo de la cantidad acumulada de títulos de revista'),'type' => 'number');
+		$result['table']['bradford']['cols'][] = array('id' => '','label' => _('Cantidad acumulada de artículos'),'type' => 'number');
 		/*Generando filas*/
 		$firstGroup = array(
 				'2' => false,
@@ -334,6 +342,9 @@ class Indicadores extends CI_Controller {
 			$articulosXfrecuenciaAcumulado = (int)$row['articulosXfrecuenciaAcumulado'];
 			$c = array();
 			$c[] = array('v' => round($row['logFrecuenciaAcumulado'], 4));
+			$ct = array();
+			$ct[] = array('v' => number_format($row['logFrecuenciaAcumulado'], 4, '.', ''));
+			$ct[] = array('v' => $articulosXfrecuenciaAcumulado);
 			if($articulosXfrecuenciaAcumulado <= $grupos['1']['lim']['y']):
 				$c[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['1']['articulos'], $grupos['1']['titulos'] ));
 				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
@@ -344,7 +355,7 @@ class Indicadores extends CI_Controller {
 				if(!$firstGroup['2']):
 					$cc = array();
 					$cc[] = array('v' => round($row['logFrecuenciaAcumulado'], 4));
-					$cc[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#3366cc;">&#3366cc; </span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['1']['articulos'], $grupos['1']['titulos'] ));
+					$cc[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['1']['articulos'], $grupos['1']['titulos'] ));
 					$cc[] = array('v' => $articulosXfrecuenciaAcumulado);
 					$cc[] = array('v' => null);
 					$cc[] = array('v' => null);
@@ -376,6 +387,7 @@ class Indicadores extends CI_Controller {
 				$grupos['3']['lim']['x'] = $c[0]['v'];
 			endif;
 			$result['chart']['bradford']['rows'][]['c'] = $c;
+			$result['table']['bradford']['rows'][]['c'] = $ct;
 			$rowNumber++;
 		endforeach;
 		/*Opciones de la gráfica de bradford*/
@@ -439,13 +451,16 @@ class Indicadores extends CI_Controller {
 			endif;
 		endforeach;
 		/*Ordenando grupos alfabeticamnete*/
-		ksort($revistaInstitucion['1']);
-		ksort($revistaInstitucion['2']);
-		ksort($revistaInstitucion['3']);
+		//ksort($revistaInstitucion['1']);
+		//ksort($revistaInstitucion['2']);
+		//ksort($revistaInstitucion['3']);
 		/*Datos para la gráfica del grupo1*/
 		$result['chart']['group1']['cols'][] = array('id' => '','label' => _('Títulos de revista'),'type' => 'string');
 		$c = array();
 		$c[] = array('v' => '');
+		/*Columnas de la tabla del grupo1*/
+		$result['table']['group1']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
+		$result['table']['group1']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
 		foreach ($revistaInstitucion['1'] as $label => $articulos):
 			$result['chart']['group1']['cols'][] = array('id' => '','label' => $label,'type' => 'number');
@@ -456,12 +471,20 @@ class Indicadores extends CI_Controller {
 			$c[] = array(
 					'v' => _sprintf('<div class="chartTootip"><b>%s</b><br/>Cantidad de artículos: %s</div>', $label, $articulos)
 				);
+			/*Agregando filas a la tabla*/
+			$ct = array();
+			$ct[] = array('v' => $label);
+			$ct[] = array('v' => (int)$articulos);
+			$result['table']['group1']['rows'][]['c'] = $ct;
 		endforeach;
 		$result['chart']['group1']['rows'][]['c'] = $c;
 		/*Datos para la gráfica del grupo2*/
 		$result['chart']['group2']['cols'][] = array('id' => '','label' => _('Títulos de revista'),'type' => 'string');
 		$c = array();
 		$c[] = array('v' => '');
+		/*Columnas de la tabla del grupo2*/
+		$result['table']['group2']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
+		$result['table']['group2']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
 		foreach ($revistaInstitucion['2'] as $revista => $articulos):
 			$result['chart']['group2']['cols'][] = array('id' => '','label' => $revista,'type' => 'number');
@@ -470,10 +493,26 @@ class Indicadores extends CI_Controller {
 					'v' => (int)$articulos
 				);
 			$c[] = array(
-					'v' => _sprintf('<div class="chartTootip"><b>%s</b><br/>Cantidad de artículos: %s</div>', $label, $articulos)
+					'v' => _sprintf('<div class="chartTootip"><b>%s</b><br/>Cantidad de artículos: %s</div>', $revista, $articulos)
 				);
+			/*Agregando filas a la tabla*/
+			$ct = array();
+			$ct[] = array('v' => $revista);
+			$ct[] = array('v' => (int)$articulos);
+			$result['table']['group2']['rows'][]['c'] = $ct;
 		endforeach;
 		$result['chart']['group2']['rows'][]['c'] = $c;
+		/*Columnas de la tabla del grupo3*/
+		$result['table']['group3']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
+		$result['table']['group3']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
+		/*Agregado filas y columnas*/
+		foreach ($revistaInstitucion['3'] as $revista => $articulos):
+			/*Agregando filas a la tabla*/
+			$ct = array();
+			$ct[] = array('v' => $revista);
+			$ct[] = array('v' => (int)$articulos);
+			$result['table']['group3']['rows'][]['c'] = $ct;
+		endforeach;
 		/*Opciones de la gráfica de los grupos*/
 		$result['options']['groups'] = array(
 						'animation' => array(
@@ -515,6 +554,15 @@ class Indicadores extends CI_Controller {
 		$result['title']['bradford'] = $indicador[$_POST['indicador']]['title'];
 		$result['title']['group1'] = _sprintf($indicador[$_POST['indicador']]['titleGroup'], "núcleo");
 		$result['title']['group2'] = _sprintf($indicador[$_POST['indicador']]['titleGroup'], "2");
+		$result['table']['title']['bradford'] = $indicador[$_POST['indicador']]['tableTitle'];
+		$result['table']['title']['group1'] = _sprintf($indicador[$_POST['indicador']]['tableTitleGroup'], "núcleo");
+		$result['table']['title']['group2'] = _sprintf($indicador[$_POST['indicador']]['tableTitleGroup'], "2");
+		$result['table']['title']['group3'] = _sprintf($indicador[$_POST['indicador']]['tableTitleGroup'], "3");
+		/*Opciones para la tabla*/
+		$result['tableOptions'] = array(
+				'allowHtml' => true,
+				'showRowNumber' => false
+			);
 		echo json_encode($result, true);
 	}
 
@@ -604,6 +652,7 @@ class Indicadores extends CI_Controller {
 				'showRowNumber' => false
 			);
 		$result['prattTitle'] = _('<div id="prattTitle"><div class="centrado"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de especialización temática</div></div>');
+		$result['tableTitle'] = "<div class=\"textoTitulo centrado\">{$this->indicadores[$_POST['indicador']]}</div>";	
 		echo json_encode($result, true);
 
 	}
