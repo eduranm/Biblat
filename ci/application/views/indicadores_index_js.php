@@ -200,10 +200,17 @@ jQuery(document).ready(function(){
 	jQuery("#tabs").tabs({ 
 		show: { effect: "fade", duration: 800 },
 		activate: function(){
-			if(jQuery("#tabs").tabs("option", "active") == 1){
-				if(jQuery("#indicador").val() == "modelo-bradford-revista" || jQuery("#indicador").val() == "modelo-bradford-institucion"){
-				}
-			}
+			jQuery('html, body').animate({
+				scrollTop: jQuery("#tabs").offset().top
+			}, 700);
+		}
+	});
+
+	jQuery("#gridContainer").accordion({
+		heightStyle: "content",
+		collapsible: true,
+		active: false,
+		activate: function( event, ui ) {
 			jQuery('html, body').animate({
 				scrollTop: jQuery("#tabs").offset().top
 			}, 700);
@@ -241,6 +248,7 @@ jQuery(document).ready(function(){
 			switch(indicadorValue){
 				case "modelo-bradford-revista":
 				case "modelo-bradford-institucion":
+					//jQuery("#gridContainer").accordion("destroy");
 					jQuery("#bradfordSlide").anythingSlider(1);
 					jQuery("#tabs, #bradfodContainer").slideDown("slow");
 					brfLim = data.grupos;
@@ -291,16 +299,7 @@ jQuery(document).ready(function(){
 					tables.group3 = new google.visualization.Table(document.getElementById('table3'));
 					tables.group3.draw(tableData, data.tableOptions);
 					console.log("height" + jQuery("#table0 .google-visualization-table-table").height());
-					jQuery("#gridContainer").accordion({
-						heightStyle: "content",
-						collapsible: true,
-						active: false,
-						activate: function( event, ui ) {
-							jQuery('html, body').animate({
-								scrollTop: jQuery("#tabs").offset().top
-							}, 700);
-						}
-					});
+					jQuery("#gridContainer").accordion( "refresh" );
 					//jQuery("#table0, #table1, #table2, #table3").show();
 					break;
 				case "indice-concentracion":
