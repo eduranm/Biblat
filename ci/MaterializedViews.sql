@@ -98,6 +98,23 @@ END
 $$
 LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION refresh_matviews()
+  RETURNS void AS $$
+DECLARE 
+  matview RECORD;
+  sql text;
+BEGIN
+  FOR matview IN SELECT mv_name FROM matviews LOOP
+    sql :='SELECT refresh_matview('''||matview.mv_name||''')';
+    RAISE NOTICE 'EXECUTE: %', sql;
+    EXECUTE sql;
+  END LOOP;
+RETURN;
+END
+$$
+LANGUAGE plpgsql;
+
+
 --Vista para busquedas
 CREATE OR REPLACE VIEW "vSearch" AS SELECT 
     t.sistema, 
