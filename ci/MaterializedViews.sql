@@ -783,7 +783,8 @@ SELECT create_matview('"mvPratt"', '"vPratt"');
 
 --Bradford
 CREATE OR REPLACE VIEW "vArticulosDisciplinaRevista" AS
-SELECT 
+SELECT * FROM
+(SELECT 
     a.id_disciplina, 
     a."revistaSlug", 
     max(a.revista) AS revista, 
@@ -791,8 +792,7 @@ SELECT
  FROM "vAutoresDocumento" ad
   INNER JOIN "vArticulos" a
     ON ad.iddatabase=a.iddatabase AND ad.sistema=a.sistema
-  GROUP BY a.id_disciplina, a."revistaSlug"
-  ORDER BY a.id_disciplina, articulos DESC;
+  GROUP BY a.id_disciplina, a."revistaSlug") adr ORDER BY id_disciplina, articulos DESC;
 
 SELECT create_matview('"mvArticulosDisciplinaRevista"', '"vArticulosDisciplinaRevista"');
 
@@ -814,7 +814,8 @@ GROUP BY id_disciplina, articulos) adrc; --Articulos por disciplina, revista, ac
 
 --Bradford institucion
 CREATE OR REPLACE VIEW "vArticulosDisciplinaInstitucion" AS
-SELECT 
+SELECT * FROM
+(SELECT 
       id_disciplina,
       max(institucion) AS institucion,
       "institucionSlug",
@@ -831,8 +832,7 @@ SELECT
         ON a.iddatabase=i.iddatabase AND a.sistema=i.sistema
       WHERE i.e_100x IS NOT NULL AND i.e_100u IS NOT NULL
       GROUP BY i.iddatabase, i.sistema, a.id_disciplina, "institucionSlug") ai --Articulo institucion
-    GROUP BY id_disciplina, "institucionSlug"
-    ORDER BY id_disciplina, articulos DESC;
+    GROUP BY id_disciplina, "institucionSlug") adi ORDER BY id_disciplina, articulos DESC;
 
 SELECT create_matview('"mvArticulosDisciplinaInstitucion"', '"vArticulosDisciplinaInstitucion"');
 

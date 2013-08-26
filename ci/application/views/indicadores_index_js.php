@@ -200,6 +200,11 @@ jQuery(document).ready(function(){
 	jQuery("#tabs").tabs({ 
 		show: { effect: "fade", duration: 800 },
 		activate: function(){
+			if(jQuery("#tabs").tabs("option", "active") != 1){
+				if(jQuery("#indicador").val() == "modelo-bradford-revista" || jQuery("#indicador").val() == "modelo-bradford-institucion"){
+					jQuery("#gridContainer").accordion("option", "active", false);
+				}
+			}
 			jQuery('html, body').animate({
 				scrollTop: jQuery("#tabs").offset().top
 			}, 700);
