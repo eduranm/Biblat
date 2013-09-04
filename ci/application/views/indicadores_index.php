@@ -264,6 +264,7 @@
 				</div>
 
 				<div id="info-productividad-exogena" class="infoBox">
+					<p class="textoTitulo centrado">Productividad exógena</p>
 					<p class="textoL">
 						Indicador que mide el grado de internacionalización de las revistas.<br/>
 						El valor numérico indica la proporción de autores extranjeros que han publicado en la revista.<br/>
