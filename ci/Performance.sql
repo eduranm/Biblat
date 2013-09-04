@@ -109,6 +109,43 @@ UPDATE articulo SET e_222='Sociedade e estado' WHERE e_222='Sociedade e Estado';
 UPDATE articulo SET e_222='Symposium - Universidade Catolica de Pernambuco' WHERE e_222='Symposium - Universidade Católica de Pernambuco';
 UPDATE articulo SET e_222='Utopía y praxis latinoamericana' WHERE e_222='Utopía y Praxis Latinoamericana';
 
+UPDATE articulo SET e_008='Colombia' WHERE e_222='Academia. Revista latinoamericana de administración';
+UPDATE articulo SET e_008='Argentina' WHERE e_222='Andes (Salta)';
+UPDATE articulo SET e_008='Venezuela' WHERE e_222='Antropológica (Caracas)';
+UPDATE articulo SET e_008='Bolivia' WHERE e_222='Anuario de estudios bolivarianos';
+UPDATE articulo SET e_008='Brasil' WHERE e_222='BAR. Brazilian administration review';
+UPDATE articulo SET e_008='Colombia' WHERE e_222='Boletín de ciencias de la tierra';
+UPDATE articulo SET e_008='Brasil' WHERE e_222='Cadernos da FUCAMP';
+UPDATE articulo SET e_008='México' WHERE e_222='Ciencia UANL';
+UPDATE articulo SET e_008='Argentina' WHERE e_222='Cuadernos del CISH. Sociohistórica';
+UPDATE articulo SET e_008='México' WHERE e_222='Cuadernos universitarios (La Paz, B.C.S.)';
+UPDATE articulo SET e_008='Venezuela' WHERE e_222='Entre lenguas';
+UPDATE articulo SET e_008='Venezuela' WHERE e_222='Episteme NS';
+UPDATE articulo SET e_008='Brasil' WHERE e_222='Estudos economicos - Instituto de Pesquisas Economicas';
+UPDATE articulo SET e_008='Colombia' WHERE e_222='Fronteras de la historia';
+UPDATE articulo SET e_008='México' WHERE e_222='Gaceta médica de México';
+UPDATE articulo SET e_008='Costa Rica' WHERE e_222='Humanitas. Revista de investigación';
+UPDATE articulo SET e_008='Venezuela' WHERE e_222='Interciencia';
+UPDATE articulo SET e_008='Brasil' WHERE e_222='Jornal de psicanalise';
+UPDATE articulo SET e_008='Barbados' WHERE e_222='Journal of Eastern Caribbean studies';
+UPDATE articulo SET e_008='Colombia' WHERE e_222='Lecturas de economía';
+UPDATE articulo SET e_008='Brasil' WHERE e_222='Natureza & conservacao';
+UPDATE articulo SET e_008='México' WHERE e_222='Nuestra América. Serie';
+UPDATE articulo SET e_008='Venezuela' WHERE e_222='Nueva sociedad';
+UPDATE articulo SET e_008='Colombia' WHERE e_222='Palobra (Cartagena)';
+UPDATE articulo SET e_008='Brasil' WHERE e_222='Papeis avulsos de zoologia';
+UPDATE articulo SET e_008='Venezuela' WHERE e_222='Revista de ciencias sociales - Universidad del Zulia';
+UPDATE articulo SET e_008='Colombia' WHERE e_222='Revista de ingeniería. Universidad de los Andes';
+UPDATE articulo SET e_008='Venezuela' WHERE e_222='Revista del CLAD Reforma y democracia';
+UPDATE articulo SET e_008='Argentina' WHERE e_222='Revista de nefrología, diálisis y transplante';
+UPDATE articulo SET e_008='Colombia' WHERE e_222='Revista educación en ingeniería';
+UPDATE articulo SET e_008='Colombia' WHERE e_222='Revista latinoamericana de ciencias sociales, niñez y juventud';
+UPDATE articulo SET e_008='Venezuela' WHERE e_222='Revista latinoamericana de hipertensión';
+UPDATE articulo SET e_008='Brasil' WHERE e_222='Transinformacao';
+
+UPDATE articulo SET e_008='México' WHERE e_222='Revista geográfica (México, D.F.)';
+UPDATE articulo SET e_008='Internacional' WHERE e_222='Revista interamericana de psicología';
+
 /*Normalizando paises*/
 
 UPDATE articulo SET e_008='México' WHERE e_008='Mexico' OR e_008='Mèxico';
