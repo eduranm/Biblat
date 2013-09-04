@@ -855,7 +855,7 @@ FROM
 
 --Autores por revista, pais
 CREATE OR REPLACE VIEW "vAutoresRevistaPais" AS
-(SELECT 
+SELECT 
   max(ar.revista) AS revista,
   ar."revistaSlug",
   max("paisAutor") AS "paisAutor",
@@ -872,7 +872,9 @@ FROM autor a
 WHERE i.e_100x IS NOT NULL
 GROUP BY a.iddatabase, a.sistema, slug(i.e_100x)) adp --Autores por documento y país
 INNER JOIN "vArticulos" ar ON adp.iddatabase=ar.iddatabase AND adp.sistema=ar.sistema
-GROUP BY ar."revistaSlug", adp."paisAutorSlug") arp --Autores por revista, país
+GROUP BY ar."revistaSlug", adp."paisAutorSlug";
+
+SELECT create_matview('"mvAutoresRevistaPais"', '"vAutoresRevistaPais"');
 
 --Productividad exogena
 CREATE OR REPLACE VIEW "vProductividadExogena" AS
