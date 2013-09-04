@@ -852,3 +852,50 @@ FROM
     sum(articulos * count(*)) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "articulosXfrecuenciaAcumulado"
   FROM "mvArticulosDisciplinaInstitucion"
   GROUP BY id_disciplina, articulos) adic --Articulos por disciplina, revista, acumulados
+
+--Autores por revista, pais
+CREATE OR REPLACE VIEW "vAutoresRevistaPais" AS
+(SELECT 
+  max(ar.revista) AS revista,
+  ar."revistaSlug",
+  max("paisAutor") AS "paisAutor",
+  adp."paisAutorSlug",
+  sum(autores) AS autores
+FROM
+(SELECT 
+  a.iddatabase, 
+  a.sistema, max(i.e_100x) AS "paisAutor", 
+  slug(i.e_100x) AS "paisAutorSlug", 
+  count(*) AS autores
+FROM autor a
+     INNER JOIN institucion i ON a.iddatabase = i.iddatabase AND a.sistema=i.sistema AND a.sec_autor = i.sec_autor AND a.sec_institucion = i.sec_institucion
+WHERE i.e_100x IS NOT NULL
+GROUP BY a.iddatabase, a.sistema, slug(i.e_100x)) adp --Autores por documento y país
+INNER JOIN "vArticulos" ar ON adp.iddatabase=ar.iddatabase AND adp.sistema=ar.sistema
+GROUP BY ar."revistaSlug", adp."paisAutorSlug") arp --Autores por revista, país
+
+--Productividad exogena
+CREATE OR REPLACE VIEW "vProductividadExogena" AS
+SELECT 
+  dr.id_disciplina,
+  max(dr.revista) AS revista,
+  dr."revistaSlug",
+  documentos,
+  sum(autores) AS autores,
+  sum(autores)/documentos AS exogena
+FROM 
+  (SELECT ar.id_disciplina,
+    max(ar.revista) AS revista,
+         ar."revistaSlug",
+         count(*) AS documentos,
+         max("paisRevistaSlug") AS "paisRevistaSlug"
+  FROM "vAutoresDocumento" au
+  INNER JOIN "vArticulos" ar ON au.iddatabase=ar.iddatabase AND au.sistema=ar.sistema
+  GROUP BY ar.id_disciplina, "revistaSlug" HAVING count(*) > 25
+  ORDER BY "revistaSlug") dr --Documentos por revista
+INNER JOIN 
+  "vAutoresRevistaPais" arp ON dr."revistaSlug"=arp."revistaSlug" AND dr."paisRevistaSlug"!=arp."paisAutorSlug"
+GROUP BY dr.id_disciplina, dr."revistaSlug", documentos
+ORDER BY dr.id_disciplina, dr."revistaSlug";
+
+SELECT create_matview('"mvProductividadExogena"', '"vProductividadExogena"');

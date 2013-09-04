@@ -235,11 +235,8 @@ jQuery(document).ready(function(){
 				urlRequest = '<?php echo site_url("indicadores/getChartDataBradford");?>';
 				break;
 			case "indice-concentracion":
-				urlRequest = '<?php echo site_url("indicadores/getChartDataPratt");?>';
-				break;
 			case "productividad-exogena":
-					loading.end();
-					return false;
+				urlRequest = '<?php echo site_url("indicadores/getChartDataPrattExogena");?>';
 				break;
 		}
 		jQuery.ajax({
@@ -307,13 +304,14 @@ jQuery(document).ready(function(){
 					jQuery("#gridContainer").accordion( "refresh" );
 					break;
 				case "indice-concentracion":
+				case "productividad-exogena":
 					jQuery("#tabs, #prattContainer").slideDown("slow");
 					jQuery("#prattSlide").empty();
 					chart.pratt = new Array();
 					chart.data.pratt = new Array();
 					chart.data.prattJ = data.journal; 
 					jQuery.each(data.chart, function(key, grupo) {
-						jQuery("#prattSlide").append('<li>' + data.prattTitle + ' <div id="chartPratt' + key +'"></div></li>').anythingSlider();
+						jQuery("#prattSlide").append('<li>' + data.chartTitle + ' <div id="chartPratt' + key +'"></div></li>').anythingSlider();
 						chart.data.pratt[key] = new google.visualization.DataTable(grupo);
 						chart.pratt[key] = new google.visualization.ColumnChart(document.getElementById('chartPratt' + key));
 						chart.pratt[key].draw(chart.data.pratt[key], data.options);
@@ -327,8 +325,6 @@ jQuery(document).ready(function(){
 					tables.pratt = new google.visualization.Table(document.getElementById('table0'));
 					tables.pratt.draw(tableData, data.tableOptions);
 					console.log(chart);	
-					break;
-				case "productividad-exogena":
 					break;
 				default:
 					jQuery("#tabs, #chartContainer").show("slow");

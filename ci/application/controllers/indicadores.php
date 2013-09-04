@@ -570,11 +570,23 @@ class Indicadores extends CI_Controller {
 		echo json_encode($result, true);
 	}
 
-	public function getChartDataPratt($limit=10){
+	public function getChartDataPrattExogena($limit=10){
 		//$limit *= 2;
 		$this->output->enable_profiler(false);
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
-		$query = "SELECT revista, \"revistaSlug\", pratt FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina} ORDER BY pratt DESC";
+		$indicador['indice-concentracion'] = array(
+				'sql' => "SELECT revista, \"revistaSlug\", pratt AS indicador FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
+				'title' => _('Índice de concentración temática'), 
+				'chartTitle' => _('<div id="chartTitle"><div class="centrado"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de especialización temática</div></div>'),
+				'tooltip' => "<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">Nivel de especialización de la revista: %s</div>"
+			);
+		$indicador['productividad-exogena'] = array(
+				'sql' => "SELECT revista, \"revistaSlug\", exogena AS indicador FROM \"mvProductividadExogena\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
+				'title' => _('Productividad exógena'), 
+				'chartTitle' => _('<div id="chartTitle"><div class="centrado"><b>Productividad exógena</b><br/>Grado de internacionalización de las revistas</div></div>'),
+				'tooltip' => "<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">Grado de internacionalización de la revista: %s</div>"
+			);
+		$query = $indicador[$_POST['indicador']]['sql'];
 		$query = $this->db->query($query);
 		$offset = 0;
 		$grupo = 0;
@@ -582,13 +594,10 @@ class Indicadores extends CI_Controller {
 		$result['chart'] = array();
 		$result['journal'] = array();
 		$totalRows = $query->num_rows();
-		$first = current(array_slice($query->result_array(), 1));
-		$vAxisMax = round($first['pratt'], 1) + 1/10;
-		if ($vAxisMax > 1):
-			$vAxisMax = 1;
-		endif;
+		$first = current(array_slice($query->result_array(), 0));
+		$vAxisMax = round($first['indicador'], 1) + 1/10;
 		$result['table']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'string');
-		$result['table']['cols'][] = array('id' => '','label' => _('Índice de concentración temática'),'type' => 'number');
+		$result['table']['cols'][] = array('id' => '','label' => $indicador[$_POST['indicador']]['title'],'type' => 'number');
 		foreach ($query->result_array() as $row):
 			if(!isset($result['chart'][$grupo])):
 				$result['chart'][$grupo]['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'string');
@@ -600,16 +609,16 @@ class Indicadores extends CI_Controller {
 			$result['chart'][$grupo]['cols'][] = array('id' => '','label' => $row['revista'],'type' => 'number');
 			$result['chart'][$grupo]['cols'][] = array('id' => '','label' => $row['revista'].'-tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
 			$c[] = array(
-					'v' => round($row['pratt'], 4)
+					'v' => round($row['indicador'], 4)
 				);
 			$c[] = array(
-					'v' => _sprintf("<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">Nivel de especialización de la revista: %s</div>", $row['revista'], round($row['pratt'], 4))
+					'v' => _sprintf($indicador[$_POST['indicador']]['tooltip'], $row['revista'], round($row['indicador'], 4))
 				);
 			$offset++;
 			/*Filas de la tabla*/
 			$cc = array();
 			$cc[] = array('v' => $row['revista']);
-			$cc[] = array('v' => number_format($row['pratt'], 4, '.', ''));
+			$cc[] = array('v' => number_format($row['indicador'], 4, '.', ''));
 			$result['table']['rows'][]['c'] = $cc;
 			if($offset == $limit || $offset == $totalRows):
 				$result['chart'][$grupo]['rows'][]['c'] = $c;
@@ -638,7 +647,7 @@ class Indicadores extends CI_Controller {
 								'isHtml' => true
 							),
 						'vAxis' => array(
-								'title' => _('Índice de concentración temática'),
+								'title' => $indicador[$_POST['indicador']]['title'],
 								'viewWindow' => array('max' => $vAxisMax),
 								'minValue' => 0
 							),
@@ -655,7 +664,7 @@ class Indicadores extends CI_Controller {
 				'allowHtml' => true,
 				'showRowNumber' => false
 			);
-		$result['prattTitle'] = _('<div id="prattTitle"><div class="centrado"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de especialización temática</div></div>');
+		$result['chartTitle'] = $indicador[$_POST['indicador']]['chartTitle'];
 		$result['tableTitle'] = "<div class=\"textoTitulo centrado\">{$this->indicadores[$_POST['indicador']]}</div>";	
 		echo json_encode($result, true);
 
