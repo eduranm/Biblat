@@ -315,7 +315,7 @@ jQuery(document).ready(function(){
 						chart.data.pratt[key] = new google.visualization.DataTable(grupo);
 						chart.pratt[key] = new google.visualization.ColumnChart(document.getElementById('chartPratt' + key));
 						chart.pratt[key].draw(chart.data.pratt[key], data.options);
-						google.visualization.events.addListener(chart.pratt[key], 'select', function(){descriptoresPratt(key)});
+						google.visualization.events.addListener(chart.pratt[key], 'select', function(){getFrecuencias(key)});
 					});
 
 					var tableData = new google.visualization.DataTable(data.table);
@@ -549,15 +549,16 @@ chooseZone = function () {
 	}
 }
 
-descriptoresPratt = function (key) {
+getFrecuencias = function (key) {
 	var selection = chart.pratt[key].getSelection();
 	if (selection[0] != null && selection[0].column != null){
 		disciplina=jQuery('#disciplina').val();
 		revista=chart.data.prattJ[key][(selection[0].column+1)/2 -1];
 		jQuery.ajax({
-			url: '<?php echo site_url("indicadores/getDescriptoresPratt");?>/'+ disciplina + '/' + revista,
+			url: '<?php echo site_url("indicadores/getFrecuencias");?>/'+ revista,
 			type: 'POST',
 			dataType: 'json',
+			data: jQuery("#generarIndicador").serialize(),
 			success: function(data){
 				console.log(data);
 				var tableData = new google.visualization.DataTable(data.table);

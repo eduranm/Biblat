@@ -670,23 +670,42 @@ class Indicadores extends CI_Controller {
 
 	}
 
-	public function getDescriptoresPratt($disciplina, $revista){
+	public function getFrecuencias($revista){
 		$this->output->enable_profiler(false);
-		$idDisciplina = $this->disciplinas[$disciplina]['id_disciplina'];
-		$query = "SELECT \"descriptoresJSON\", \"frecuenciaDescriptorJSON\" FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina} AND \"revistaSlug\"='{$revista}'";
-		$query = $this->db->query($query);
-		$row = $query->row_array();
-		$descriptores = json_decode($row['descriptoresJSON']);
-		$frecuencias = json_decode($row['frecuenciaDescriptorJSON']);
-		$result = array();
-		$result['table']['cols'][] = array('id' => '','label' => _('Descriptor'),'type' => 'string');
-		$result['table']['cols'][] = array('id' => '','label' => _('Frecuencia'),'type' => 'number');
-		foreach ($descriptores as $key => $value):
-			$c = array();
-			$c[] = array('v' => $value);
-			$c[] = array('v' => $frecuencias[$key]);
-			$result['table']['rows'][]['c'] = $c;
-		endforeach;
+		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
+		switch ($_POST['indicador']):
+			case 'indice-concentracion':
+				$query = "SELECT \"descriptoresJSON\", \"frecuenciaDescriptorJSON\" FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina} AND \"revistaSlug\"='{$revista}'";
+				$query = $this->db->query($query);
+				$row = $query->row_array();
+				$descriptores = json_decode($row['descriptoresJSON']);
+				$frecuencias = json_decode($row['frecuenciaDescriptorJSON']);
+				$result = array();
+				$result['table']['cols'][] = array('id' => '','label' => _('Descriptor'),'type' => 'string');
+				$result['table']['cols'][] = array('id' => '','label' => _('Frecuencia'),'type' => 'number');
+				foreach ($descriptores as $key => $value):
+					$c = array();
+					$c[] = array('v' => $value);
+					$c[] = array('v' => $frecuencias[$key]);
+					$result['table']['rows'][]['c'] = $c;
+				endforeach;
+				break;
+			
+			case 'productividad-exogena':
+				$query = "SELECT \"paisAutor\", \"autores\" FROM \"mvAutoresRevistaPais\" WHERE \"revistaSlug\"='{$revista}' ORDER BY autores DESC";
+				$query = $this->db->query($query);
+				$row = $query->row_array();
+				$result = array();
+				$result['table']['cols'][] = array('id' => '','label' => _('País'),'type' => 'string');
+				$result['table']['cols'][] = array('id' => '','label' => _('Frecuencia'),'type' => 'number');
+				foreach ($query->result_array() as $row ):
+					$c = array();
+					$c[] = array('v' => $row['paisAutor']);
+					$c[] = array('v' => $row['autores']);
+					$result['table']['rows'][]['c'] = $c;
+				endforeach;
+				break;
+		endswitch;
 		/*Opciones para la tabla*/
 		$data['tableOptions'] = array(
 				'allowHtml' => true,
