@@ -204,6 +204,7 @@ CREATE INDEX "searchAlfabetico_idx" ON "mvSearch"(substring(LOWER(revista), 1, 1
 CREATE INDEX "searchHevila_idx" ON "mvSearch" USING gin(url gin_trgm_ops);
 #CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin(("generalSlug"::tsvector));
 CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin("generalSlug" gin_trgm_ops);
+CREATE INDEX "searchAutoresSlug_idx" ON "mvSearch" USING gin("autoresSlug" gin_trgm_ops);
 
 
 CREATE OR REPLACE VIEW "vSearchFields" AS SELECT 
@@ -295,18 +296,37 @@ SELECT create_matview('"mvDisciplinaRevistas"', '"vDisciplinaRevistas"');
 
 --Vista para mostrar solo los documentos que sean artículos y mostrando el año en una cadena de 4 digitos
 CREATE OR REPLACE VIEW "vArticulos" AS
+WITH articulos AS
+  (SELECT 
+    iddatabase,
+    sistema,
+    id_disciplina,
+    e_222 AS revista,
+    slug(e_222) AS "revistaSlug",
+    e_300a,
+    e_300b,
+    substr(e_260b, 1, 4) AS anio,
+    e_008 AS "paisRevista",
+    slug(e_008) AS "paisRevistaSlug"
+  FROM articulo WHERE 
+    e_590a ~~ 'Artículo%' 
+    AND substr(e_260b, 1, 4) ~ '[0-9]{4}' 
+    AND slug(e_222)::varchar != ALL((SELECT array_agg("revistaSlug")::varchar[] FROM "revistasBacklist")::varchar[]))
+
 SELECT 
-  iddatabase,
-  sistema,
-  id_disciplina,
-  e_222 AS revista,
-  slug(e_222) AS "revistaSlug",
-  e_300a,
-  e_300b,
-  substr(e_260b, 1, 4) AS anio,
-  e_008 AS "paisRevista",
-  slug(e_008) AS "paisRevistaSlug"
-FROM articulo WHERE e_590a ~~ 'Artículo%' AND substr(e_260b, 1, 4) ~ '[0-9]{4}' AND slug(e_222)::varchar != ALL((SELECT array_agg("revistaSlug")::varchar[] FROM "revistasBacklist")::varchar[]);
+  a.* 
+FROM 
+  articulos a
+INNER JOIN 
+  (SELECT "revistaSlug", anios_continuos(array_agg(anio)) AS anios_continuos
+  FROM 
+    (SELECT 
+      "revistaSlug", 
+      anio, 
+      count(*) AS articulos 
+    FROM articulos GROUP BY "revistaSlug", anio HAVING count(*) > 4) title --Titulos de revista con más de 4 articulos al año 
+  GROUP BY "revistaSlug" HAVING  anios_continuos(array_agg(anio)) > 4) tc --Titlos de revista con más de 4 periodos consecutivos;
+  ON a."revistaSlug"=tc."revistaSlug";
 
 --Autores por documento
 CREATE OR REPLACE VIEW "vAutoresDocumento" AS

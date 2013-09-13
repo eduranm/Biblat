@@ -199,3 +199,14 @@ FROM
      AND i.e_260b <'$fin'
      AND i.e_100x IS NOT NULL
    GROUP BY autores) AS total
+
+--Lista blanca de revistas con 5 años consutivos y al menos 5 articulos
+SELECT * FROM 
+(SELECT "revistaSlug", anios_continuos(array_agg(anio)) AS anios_continuos
+FROM 
+(SELECT 
+"revistaSlug", 
+anio, 
+count(*) AS articulos 
+FROM "vArticulos" GROUP BY "revistaSlug", anio HAVING count(*) > 4) tb1 
+GROUP BY "revistaSlug") tb2 WHERE anios_continuos > 4

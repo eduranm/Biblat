@@ -692,7 +692,7 @@ class Indicadores extends CI_Controller {
 				break;
 			
 			case 'productividad-exogena':
-				$query = "SELECT \"paisAutor\", \"autores\" FROM \"mvAutoresRevistaPais\" WHERE \"revistaSlug\"='{$revista}' ORDER BY autores DESC";
+				$query = "SELECT \"paisAutor\", \"autores\" FROM \"mvAutoresRevistaPais\" WHERE \"revistaSlug\"='{$revista}' ORDER BY autores DESC, \"paisAutor\"";
 				$query = $this->db->query($query);
 				$row = $query->row_array();
 				$result = array();
