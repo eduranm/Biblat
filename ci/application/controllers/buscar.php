@@ -7,12 +7,13 @@ class Buscar extends CI_Controller{
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
 	}
 	
-	public function index($disciplina="", $slug="", $textoCompleto=""){
+	public function index($filtro="", $disciplina="", $slug="", $textoCompleto=""){
 		/*Si se hizo una consulta con POST redirigimos a una url correcta*/
 		if(isset($_POST['disciplina']) && isset($_POST['slug'])):
 			if(isset($_POST['textoCompleto'])):
 				$textoCompleto="texto-completo";
 			endif;
+			//print_r($_POST); die();
 			$returnURL = site_url(preg_replace('%[/]+%', '/', "buscar/{$_POST['disciplina']}/".slugSearch($_POST['slug'])."/{$textoCompleto}"));
 			redirect($returnURL, 'refresh');
 		endif;
@@ -23,14 +24,16 @@ class Buscar extends CI_Controller{
 		/*Variables para vistas*/
 		$data = array();
 		/*Arrego con descripcion y sql para cada indice*/
-		$indiceArray['tema'] = array('sql' => '"palabrasClaveSlug"', 'descripcion' => _('Tema'));
-		$indiceArray['articulo'] = array('sql' => '"articuloSlug"', 'descripcion' => _('Artículo'));
-		$indiceArray['autor'] = array('sql' => '"autoresSlug"', 'descripcion' => _('Autor'));
-		$indiceArray['institucion'] = array('sql' => '"institucionesSlug"', 'descripcion' => _('Institución'));
-		$indiceArray['revista'] = array('sql' => '"revistaSlug"', 'descripcion' => _('Revista'));
+		$indiceArray['tema'] = array('sql' => 'palabrasClaveSlug', 'descripcion' => _('Tema'));
+		$indiceArray['articulo'] = array('sql' => 'articuloSlug', 'descripcion' => _('Artículo'));
+		$indiceArray['autor'] = array('sql' => 'autoresSlug', 'descripcion' => _('Autor'));
+		$indiceArray['institucion'] = array('sql' => 'institucionesSlug', 'descripcion' => _('Institución'));
+		$indiceArray['revista'] = array('sql' => 'revistaSlug', 'descripcion' => _('Revista'));
 
 		/*Header title*/
-		$data['header']['title'] = _sprintf('Biblat - Búsqueda por %s: "%s"', strtolower($indiceArray[$indice]['descripcion']), slugSearchClean($slug));
+		$data['header']['title'] = _sprintf('Biblat - Búsqueda %s: "%s"', strtolower($indiceArray[$indice]['descripcion']), slugSearchClean($slug));
+		/*Result title*/
+		$data['main']['title'] = _sprintf('Resultados de la búsqueda: %s', slugSearchClean($slug));
 		/*Consultas*/
 		$this->load->database();
 		/*Creando la consulta para los resultados*/
@@ -50,6 +53,12 @@ class Buscar extends CI_Controller{
 		endif;
 
 		$slugQuerySearch = slugQuerySearch($slug);
+		if( $filtro != "null"):
+			$slugQuerySearch = slugQuerySearch($slug, $indiceArray[$filtro]['sql']);
+			$data['header']['title'] = _sprintf('Biblat - Búsqueda por %s: "%s"', strtolower($indiceArray[$filtro]['descripcion']), slugSearchClean($slug));
+			$data['main']['title'] = _sprintf('Resultados de la búsqueda por %s: %s', strtolower($indiceArray[$filtro]['descripcion']), slugSearchClean($slug));
+		endif;
+
 		$queryFields="SELECT 
 					DISTINCT (s.sistema, 
 					s.iddatabase) as \"sitemaIdDatabase\", 
@@ -86,9 +95,9 @@ class Buscar extends CI_Controller{
 			$disciplina['disciplina'] = "";
 		endif;
 		if ($textoCompleto == "texto-completo"):
-			$paginationURL = site_url(preg_replace('%[/]+%', '/',"buscar/{$disciplina['slug']}/{$slug}/{$textoCompleto}"));
+			$paginationURL = site_url(preg_replace('%[/]+%', '/',"buscar/{$filtro}/{$disciplina['slug']}/{$slug}/{$textoCompleto}"));
 		else:
-			$paginationURL = site_url(preg_replace('%[/]+%', '/',"buscar/{$disciplina['slug']}/{$slug}"));
+			$paginationURL = site_url(preg_replace('%[/]+%', '/',"buscar/{$filtro}/{$disciplina['slug']}/{$slug}"));
 		endif;
 		$perPage = 20;
 		$articulosResultado = articulosResultado($query, $queryCount, $paginationURL, $perPage);

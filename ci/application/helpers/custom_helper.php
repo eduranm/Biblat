@@ -71,9 +71,8 @@ if ( ! function_exists('slugSearchClean') ):
 endif;
 
 if ( ! function_exists('slugQuerySearch') ):
-	function slugQuerySearch($string){
+	function slugQuerySearch($string, $whereField="generalSlug"){
 		$rstring['where'] = "";
-		$whereField = "generalSlug";
 		$operador = NULL;
 		if ( strrpos($string, "+") > 0):
 			$operador['char'] = "+";

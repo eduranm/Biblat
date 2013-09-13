@@ -103,6 +103,7 @@ endif;
 		<form action="<?php echo site_url('buscar');?>" class="searchform" method="post">
 			<button class="icon-search" type="submit"><span class="visuallyhidden">buscar</span></button>
 			<input type="hidden" name="disciplina" value=""/>
+			<input type="hidden" name="filtro" value=""/>
 			<label>
 				<span class="visuallyhidden">Buscar en Biblat</span>
 <?php if (isset($search['slug'])) :?>

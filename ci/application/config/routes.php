@@ -43,12 +43,15 @@ $route['404_override'] = '';
 
 $route['setlang/(.*)'] = 'setlang/index/$1';
 
-$route['buscar/(.*)/(.*)/(texto-completo)(.*)'] = 'buscar/index/$1/$2/$3$4';
-$route['buscar/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/$1/$2$3';
-$route['buscar/(.*)/(.*)/([0-9]+)'] = 'buscar/index/$1/$2/$3';
-$route['buscar/(.*)/([0-9]+)'] = 'buscar/index/null/$1/$2';
-$route['buscar/(.*)/(.*)'] = 'buscar/index/$1/$2';
-$route['buscar/(.*)'] = 'buscar/index/null/$1';
+$route['buscar/(autor|articulo|institucion|revista|tema)/(.*)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';
+$route['buscar/(.*)/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/$1/$2/$3$4';
+$route['buscar/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/null/$1/$2$3';
+$route['buscar/(autor|articulo|institucion|revista|tema)/(.*)/([0-9]+)'] = 'buscar/index/$1/null/$2/$3';
+$route['buscar/(.*)/(.*)/([0-9]+)'] = 'buscar/index/null/$1/$2/$3';
+$route['buscar/(.*)/([0-9]+)'] = 'buscar/index/null/null/$1/$2';
+$route['buscar/(autor|articulo|institucion|revista|tema)/(.*)'] = 'buscar/index/$1/null/$2';
+$route['buscar/(.*)/(.*)'] = 'buscar/index/null/$1/$2';
+$route['buscar/(.*)'] = 'buscar/index/null/null/$1';
 
 $route['revista/(.+)/articulo/(.+)'] = "revista/articulo/revista/$1/articulo/$2";
 $route['revista/(.*)'] = "revista/index/$1";

@@ -3,7 +3,7 @@
 	<div class="flagContainer">
 		<p class="flag">
 			<em>
-				<?php _printf('Resultados de la búsqueda por: %s', $search['slug']);?>
+				<?php echo $title;?>
 			</em>
 		</p>
 	</div>
