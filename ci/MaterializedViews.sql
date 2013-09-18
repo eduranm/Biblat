@@ -205,7 +205,10 @@ CREATE INDEX "searchHevila_idx" ON "mvSearch" USING gin(url gin_trgm_ops);
 #CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin(("generalSlug"::tsvector));
 CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin("generalSlug" gin_trgm_ops);
 CREATE INDEX "searchAutoresSlug_idx" ON "mvSearch" USING gin("autoresSlug" gin_trgm_ops);
-
+CREATE INDEX "searchArticuloSlugGin_idx" ON "mvSearch" USING gin("articuloSlug" gin_trgm_ops);
+CREATE INDEX "searchRevistaSlugGin_idx" ON "mvSearch" USING gin("revistaSlug" gin_trgm_ops);
+CREATE INDEX "searchPaisSlug_idx" ON "mvSearch" USING gin("paisSlug" gin_trgm_ops);
+CREATE INDEX "searchInstitucionesSlug_idx" ON "mvSearch" USING gin("institucionesSlug" gin_trgm_ops);
 
 CREATE OR REPLACE VIEW "vSearchFields" AS SELECT 
     t.sistema, 

@@ -107,7 +107,7 @@ endif;
 			<label>
 				<span class="visuallyhidden">Buscar en Biblat</span>
 <?php if (isset($search['slug'])) :?>
-				<input type="text" placeholder="Buscar en Biblat" value="<?php echo $search['slug'];?>" name="slug">
+				<input type="text" placeholder="Buscar en Biblat" value='<?php echo $search['slug'];?>' name="slug">
 <?php else:?>
 				<input type="text" placeholder="Buscar en Biblat" value="" name="slug">
 <?php endif;?>

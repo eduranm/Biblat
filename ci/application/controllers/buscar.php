@@ -94,6 +94,9 @@ class Buscar extends CI_Controller{
 			$disciplina['slug'] = "";
 			$disciplina['disciplina'] = "";
 		endif;
+		if($filtro == "null"):
+			$filtro = "";
+		endif;
 		if ($textoCompleto == "texto-completo"):
 			$paginationURL = site_url(preg_replace('%[/]+%', '/',"buscar/{$filtro}/{$disciplina['slug']}/{$slug}/{$textoCompleto}"));
 		else:
