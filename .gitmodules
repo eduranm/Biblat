@@ -1,3 +1,6 @@
 [submodule "ci/js/select2"]
 	path = ci/js/select2
 	url = git://github.com/ivaynberg/select2.git
+[submodule "ci/js/anythingslider"]
+	path = ci/js/anythingslider
+	url = https://github.com/CSS-Tricks/AnythingSlider.git
