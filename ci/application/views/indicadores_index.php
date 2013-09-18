@@ -92,8 +92,8 @@
 				<div id="info-tasa-documentos-coautorados" class="infoBox">
 					<p class="textoTitulo centrado">Tasa de Documentos Coautorados</p>
 					<p class="textoL">
-						Indicador que determina el promedio de artículos conautoría múltiple.<br/>
-						El valor numérico indica el promedio de artículos en coautoría.
+						Indicador que determina el promedio de artículos con autoría múltiple.<br/>
+						El valor numérico indica la proporción de artículos con autoría múltiple.
 					</p>
 					<p class="textoL ident1">La formulación matemática es:</p>
 					<div class="textoL ident2 formula">
@@ -115,7 +115,7 @@
 					<p class="textoTitulo centrado">Grado de Colaboración (Índice de Subramayan)</p>
 					<p class="textoL">
 						Indica el promedio de artículos con autoría múltiple.<br/>
-						El valor numérico indica el promedio de artículos con autoría múltiple.
+						El valor numérico indica la proporción de artículos con autoría múltiple.
 					</p>
 					<p class="textoL ident1">La formulación matemática es:</p>
 					<div class="textoL formula ident2">
@@ -136,7 +136,7 @@
 				<div id="info-modelo-elitismo" class="infoBox">
 					<p class="textoTitulo centrado">Modelo de Elitismo (Price)</p>
 					<p class="textoL">
-						Identifica la cantidad de autores que integran la elite de los más productivos.<br/>
+						Identifica la cantidad de autores que integran la elite de los más productivos por revista.<br/>
 						El valor numérico representa la cantidad de los autores que integran dicha elite.
 					</p>
 					<p class="textoL ident1">La formulación matemática es:</p>
@@ -155,7 +155,7 @@
 					<p class="textoTitulo centrado">Índice de Colaboración (Índice de Lawani)</p>
 					<p class="textoL">
 						Proporciona el peso promedio del número de autores por artículo.<br/>
-						El valor numérico representa el promedio de coautores por artículo.<br/>
+						El valor numérico representa el promedio de autores por artículo.<br/>
 						Además de  visualizar la frecuencia del número de autores por artículo.
 					</p>
 					<p class="textoL ident1">La formulación matemática es:</p>
@@ -183,7 +183,7 @@
 				<div id="info-indice-densidad-documentos" class="infoBox">
 					<p class="textoTitulo centrado">Índice de Densidad de Documentos Zakutina y Priyenikova</p>
 					<p class="textoL">
-						Índice que identifica los títulos con mayor cantidad de artículos.<br/>
+						Índice que identifica los títulos con mayor densidad de información.<br/>
 						El valor numérico proporciona la cantidad de artículos por revista o por año.
 					</p>
 					<p class="textoL ident1">La formulación matemática es:</p>
@@ -205,7 +205,7 @@
 				<div id="info-indice-concentracion" class="infoBox">
 					<p class="textoTitulo centrado">Índice de concentración (Índice de Pratt)</p>
 					<p class="textoL">
-						Indica el grado de especialización de las revistas.<br/>El valor numérico representa el nivel de concentración temática basándose<br/>en sus descriptores.<br/>
+						Indica el grado de concentración temática de las revistas.<br/>El valor numérico representa el nivel de concentración temática basándose<br/>en sus descriptores.<br/>
 						Se muestra la frecuencia de descriptores.
 					</p>
 					<p class="textoL ident1">La formulación matemática es:</p>
@@ -226,12 +226,12 @@
 				</div>
 
 				<div id="info-modelo-bradford-revista" class="infoBox">
-					<p class="textoTitulo centrado">Modelo matemático de Bradford</p>
+					<p class="textoTitulo centrado"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por revista</p>
 					<p class="textoL">
-						Modelo matemático que identifica el núcleo de revistas más productivas por temática.<br/>
-						Se identifican tres zonas según su nivel de productividad para la disciplina:<br/>
+						Modelo matemático que identifica el núcleo de revistas con mayor densidad de información por temática.<br/>
+						Se identifican tres zonas según la cantidad de artículos por revista en la  disciplina:<br/>
 						La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han publicado.<br/>
-						Se muestra la frecuencia de descriptores.
+						Se muestra la frecuencia de artículos por revista de la disciplina. 
 					</p>
 					<p class="textoL ident1">La formulación matemática es:</p>
 					<div class="textoL ident2 formula">
@@ -239,18 +239,18 @@
 					</div>
 					<p class="textoL ident1">
 						Donde:<br/>
-						<i>p</i> = Cantidad de títulos por disciplinas del conocimiento y países.<br/>
-						<i>n</i> = Multiplicador o factor de proporcionalidad de títulos entre las disciplinas.
+						<i>p</i> = Cantidad de títulos por zona.<br/>
+						<i>n</i> = Multiplicador o factor de proporcionalidad de títulos por zona.
 					</p>
 				</div>
 
 				<div id="info-modelo-bradford-institucion" class="infoBox">
-					<p class="textoTitulo centrado">Modelo matemático de Bradford por institución (afiliación del autor)</p>
+					<p class="textoTitulo centrado"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por instituciones.</p>
 					<p class="textoL">
-						Modelo matemático que proporciona el núcleo de instituciones más productivas.<br/>
-						Se identifican tres zonas según su nivel de productividad para la disciplina:<br/>
-						La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han publicado.<br/>
-						Se muestra la frecuencia de descriptores.
+						Modelo matemático que identifica el núcleo de instituciones con mayor densidad de información por temática.<br/>
+						Se identifican tres zonas según la cantidad de artículos por institución en la  disciplina:<br/>
+						La zona Núcleo, la 2° y 3°, las instituciones y la cantidad artículos que han publicado.<br/>
+						Se muestra la frecuencia de artículos por institución en disciplina.
 					</p>
 					<p class="textoL ident1">La formulación matemática es:</p>
 					<div class="textoL ident2 formula">
@@ -258,23 +258,32 @@
 					</div>
 					<p class="textoL ident1">
 						Donde:<br/>
-						<i>p</i> = Cantidad de títulos por disciplinas del conocimiento y países.<br/>
-						<i>n</i> = Multiplicador o factor de proporcionalidad detítulos entre las disciplinas.
+						<i>p</i> = Cantidad de instituciones por zona.<br/>
+						<i>n</i> = Multiplicador o factor de proporcionalidad de instituciones por zona.
 					</p>
 				</div>
 
 				<div id="info-productividad-exogena" class="infoBox">
-					<p class="textoTitulo centrado">Productividad exógena</p>
+					<p class="textoTitulo centrado">Tasa de autoría exógena</p>
 					<p class="textoL">
-						Indicador que mide el grado de internacionalización de las revistas.<br/>
+						Indicador que mide la proporción de autoría endógena de la revista.<br/>
 						El valor numérico indica la proporción de autores extranjeros que han publicado en la revista.<br/>
-						Se muestra la frecuencia de descriptores.
 					</p>
 					<p class="textoL ident1">La formulación matemática es:</p>
-					<div class="formula">
-							<i>PEx</i>:
+					<div class="formula ident2">
+							<i>TAE</i> =
+							<div class="fraction">
+								<span class="fup">&sum;ae</span>
+								<span class="bar">/</span>
+								<span class="fdn">&sum;d</span>
+							</div>
 					</div>
 					<p class="textoL ident1">Donde:</p>
+					<p class="textoL ident2">
+						TAE = Tasa de autoría exógena<br/>
+						ae	= Autores extranjeros<br/>
+						d	= Total de documentos
+					</p>
 				</div>
 			</div>
 		</div>

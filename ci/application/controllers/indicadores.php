@@ -22,7 +22,7 @@ class Indicadores extends CI_Controller {
 								'indice-concentracion' => _('Índice de concentración (Índice Pratt)'),
 								'modelo-bradford-revista' => _('Modelo de Bradford por revista'),
 								'modelo-bradford-institucion' => _('Modelo de Bradford por institución (Afiliación del autor)'),
-								'productividad-exogena' => _('Productividad exógena') 
+								'productividad-exogena' => _('Tasa de autoría exógena') 
 							);
 		$this->indicadores = $data['indicadores'];
 		/*Disciplinas*/
@@ -131,7 +131,7 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-colaboracion'] = array(
 			'campoTabla' => "lawani AS valor FROM \"mvLawani",
 			'title' => array(
-					'revista' => _('<div class="centrado"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio del número de autores por artículo</div>'),
+					'revista' => _('<div class="centrado"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio de autores por artículo.</div>'),
 					'pais' => _('<div class="centrado"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio del número de autores por artículo en las revistas del país</div>'),
 				),
 			'vTitle' => _('Índice de Colaboración'),
@@ -264,7 +264,7 @@ class Indicadores extends CI_Controller {
 		/*Titulo de la gráfica*/
 		$data['chartTitle'] = $indicador[$_POST['indicador']]['title'][$selection];
 		$data['tableTitle'] = "<div class=\"textoTitulo centrado\">{$this->indicadores[$_POST['indicador']]}</div>";
-
+		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}
 
@@ -272,16 +272,18 @@ class Indicadores extends CI_Controller {
 		$this->output->enable_profiler(false);
 		$indicador['modelo-bradford-revista'] = array(
 				'sufix' => "Revista",
-				'title' => _('<div class="centrado"><b>Modelo matemático de Bradford</b></div>'),
+				'title' => _('<div class="centrado"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por revista</div>'),
 				'tableTitle' => _('<h3>Modelo matemático de Bradford</h3>'),
+				'hAxisTitle' => _('Logaritmo de la cantidad acumulada de títulos de revista'),
 				'hAxisTitleGroup' => _('Títulos de revista'),
 				'titleGroup' => _('<div class="centrado"><b>Modelo matemático de Bradford</b><br/>Zona %s de revistas más productivas</div>'),
 				'tableTitleGroup' => _('<h3>Zona %s de revistas más productivas</h3>')
 			);
 		$indicador['modelo-bradford-institucion'] = array(
 				'sufix' => "Institucion",
-				'title' => _('<div class="centrado"><b>Modelo matemático de Bradford por institución (afiliación del autor)</b></div>'),
+				'title' => _('<div class="centrado"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por instituciones.</div>'),
 				'tableTitle' => _('<h3>Modelo matemático de Bradford por institución (afiliación del autor)</h3>'),
+				'hAxisTitle' => _('Logaritmo de la cantidad acumulada de instituciones'),
 				'hAxisTitleGroup' => _('Institución'),
 				'titleGroup' => _('<div class="centrado"><b>Modelo matemático de Bradford por institución (afiliación del autor)</b><br/>Zona %s de instituciones más productivas por disciplina</div>'),
 				'tableTitleGroup' => _('<h3>Zona %s de instituciones más productivas por disciplina</h3>')
@@ -399,7 +401,7 @@ class Indicadores extends CI_Controller {
 						'focusTarget' => 'category',
 						'height' => '500',
 						'hAxis' => array(
-								'title' => _('Logaritmo de la cantidad acumulada de títulos de revista')
+								'title' => $indicador[$_POST['indicador']]['hAxisTitle'],
 							), 
 						'legend' => array(
 								'position' => 'right'
@@ -567,6 +569,7 @@ class Indicadores extends CI_Controller {
 				'allowHtml' => true,
 				'showRowNumber' => true
 			);
+		header('Content-Type: application/json');
 		echo json_encode($result, true);
 	}
 
@@ -577,14 +580,14 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-concentracion'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", pratt AS indicador FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
 				'title' => _('Índice de concentración temática'), 
-				'chartTitle' => _('<div id="chartTitle"><div class="centrado"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de especialización temática</div></div>'),
+				'chartTitle' => _('<div id="chartTitle"><div class="centrado"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de concentración temática</div></div>'),
 				'tooltip' => "<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">Nivel de especialización de la revista: %s</div>"
 			);
 		$indicador['productividad-exogena'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", exogena AS indicador FROM \"mvProductividadExogena\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
-				'title' => _('Productividad exógena'), 
-				'chartTitle' => _('<div id="chartTitle"><div class="centrado"><b>Productividad exógena</b><br/>Grado de internacionalización de las revistas</div></div>'),
-				'tooltip' => "<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">Grado de internacionalización de la revista: %s</div>"
+				'title' => _('Proporción de autoría exógena'), 
+				'chartTitle' => _('<div id="chartTitle" class="centrado"><b>Tasa de autoría exógena</b><br/>Distribución decreciente de las revistas considerando la proporción de autoría exógena</div>'),
+				'tooltip' => "<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">Proporción de autores extranjeros: %s</div>"
 			);
 		$query = $indicador[$_POST['indicador']]['sql'];
 		$query = $this->db->query($query);
@@ -665,7 +668,8 @@ class Indicadores extends CI_Controller {
 				'showRowNumber' => false
 			);
 		$result['chartTitle'] = $indicador[$_POST['indicador']]['chartTitle'];
-		$result['tableTitle'] = "<div class=\"textoTitulo centrado\">{$this->indicadores[$_POST['indicador']]}</div>";	
+		$result['tableTitle'] = "<div class=\"textoTitulo centrado\">{$this->indicadores[$_POST['indicador']]}</div>";
+		header('Content-Type: application/json');	
 		echo json_encode($result, true);
 
 	}
@@ -711,11 +715,8 @@ class Indicadores extends CI_Controller {
 				'allowHtml' => true,
 				'showRowNumber' => false
 			);
+		header('Content-Type: application/json');
 		echo json_encode($result, true);
-	}
-
-	public function getTableData(){
-
 	}
 	
 	public function getRevistasPaises(){
@@ -754,7 +755,7 @@ class Indicadores extends CI_Controller {
 			$data['paises'][] = $revista;
 		endforeach;
 		$this->db->close();
-
+		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}
 
@@ -844,6 +845,7 @@ class Indicadores extends CI_Controller {
 			endif;
 		endforeach;
 		$data['heterogeneity'] = json_encode($heterogeneity, true);
+		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}
 
