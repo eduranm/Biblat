@@ -48,7 +48,7 @@ if ( ! function_exists('slugSearch')):
 		);
 
 		$sname = strtr($sname, $table); // remplazamos los acentos, etc, por su correspondientes
-		$sname = preg_replace("/[^A-Za-z0-9-+&]+/", "", $sname); // eliminamos cualquier caracter que no sea de la a-z o 0 al 9 o -
+		$sname = preg_replace("/[^A-Za-z0-9-+&\"]+/", "", $sname); // eliminamos cualquier caracter que no sea de la a-z o 0 al 9 o -
 		$sname = preg_replace("/-+/", "-", $sname);/*Eliminamos guiones dobles*/
 		$sname = preg_replace("/\++/", "+", $sname);/*Eliminamos signos + dobles*/
 		$sname = preg_replace("/\&+/", "&", $sname);/*Eliminamos signos & dobles*/
@@ -62,6 +62,7 @@ endif;
 if ( ! function_exists('slugSearchClean') ):
 	function slugSearchClean($string){
 		$rstring = trim($string);
+		$rstring = urldecode($rstring);
 		$rstring = preg_replace("/&+/", " & ", $rstring);
 		$rstring = preg_replace("/\++/", " + ", $rstring);
 		$rstring = preg_replace("/-+/", " ", $rstring);
@@ -133,6 +134,7 @@ if ( ! function_exists('slugQuerySearch') ):
 				$rstring['where'] .= "\"{$whereField}\" ~~ '%{$astring[0]}%'";
 			endif;
 		endif;
+		$rstring = str_replace("%22", " ", $rstring);
 		return $rstring;
 	}
 endif;
@@ -153,7 +155,7 @@ if ( ! function_exists('slugHighLight') ):
 		$sname = preg_replace("/z/", "[žz]", $sname);
 		$sname = preg_replace("/b/", "[þÞßb]", $sname);
 		$sname = preg_replace("/-+/", "[\\\\\\s.,+&]+", $sname);
-
+		$sname = str_replace("%22", "\\\\b", $sname);
 		return $sname;
 	}
 endif;
