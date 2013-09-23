@@ -248,7 +248,7 @@ if ( ! function_exists('articulosResultado') ):
 						$row['autoresHTML'] .= "<sup>{$row['autoresInstitucionSec'][$key]}</sup>";
 					endif;
 					if($indexAutor < $totalAutores):
-						$row['autoresHTML'] .= "., ";
+						$row['autoresHTML'] .= "; ";
 					endif;
 					$indexAutor++;
 				endforeach;
