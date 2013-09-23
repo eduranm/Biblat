@@ -4,3 +4,6 @@
 [submodule "ci/js/anythingslider"]
 	path = ci/js/anythingslider
 	url = https://github.com/CSS-Tricks/AnythingSlider.git
+[submodule "ci/js/pqgrid"]
+	path = ci/js/pqgrid
+	url = git@github.com:swarzesherz/grid.git
