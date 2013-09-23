@@ -57,5 +57,8 @@ $route['revista/(.+)/articulo/(.+)'] = "revista/articulo/revista/$1/articulo/$2"
 $route['revista/(.*)'] = "revista/index/$1";
 
 $route['indicadores/(indice-coautoria|tasa-documentos-coautorados|grado-colaboracion|modelo-elitismo|indice-colaboracion|indice-densidad-documentos|indice-concentracion|modelo-bradford-revista|modelo-bradford-institucion|productividad-exogena)(.*)'] = "indicadores/index/$1";
+
+$route['frecuencias/autor/([^/]+)'] = "frecuencias/autorArticulos/$1";
+$route['frecuencias/autor/([^/]+)/([0-9]+)'] = "frecuencias/autorArticulos/$1/$2";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

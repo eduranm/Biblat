@@ -924,3 +924,16 @@ GROUP BY dr.id_disciplina, dr."revistaSlug", documentos
 ORDER BY dr.id_disciplina, dr."revistaSlug";
 
 SELECT create_matview('"mvProductividadExogena"', '"vProductividadExogena"');
+
+--Frecuencias--
+CREATE OR REPLACE VIEW "vFrecuenciaAutorDocumentos" AS
+SELECT 
+  max(e_100a) AS autor, 
+  slug as "autorSlug", 
+  count(*) AS documentos 
+FROM autor GROUP BY slug ORDER BY documentos DESC, "autorSlug";
+
+SELECT create_matview('"mvFrecuenciaAutorDocumentos"', '"vFrecuenciaAutorDocumentos"');
+
+CREATE INDEX "recuencuaAutorDocumentos_autor" ON "mvFrecuenciaAutorDocumentos"(autor);
+CREATE INDEX "recuencuaAutorDocumentos_documentos" ON "mvFrecuenciaAutorDocumentos"(documentos);

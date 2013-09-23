@@ -510,6 +510,15 @@ body {
     -webkit-transform: skew(10deg, 0deg);
 }
 
+.flag em a {
+	color: #3D1F12;
+	font-size: 14px!important;
+	font-weight: bold;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	font-style: normal;
+	text-decoration: underline;
+}
+
 .flag:after {
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
@@ -815,4 +824,8 @@ p {
 
 #floatTableContainer {
 	display: none;
+}
+
+#gridTable {
+	margin: 0 auto;
 }
