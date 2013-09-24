@@ -926,6 +926,7 @@ ORDER BY dr.id_disciplina, dr."revistaSlug";
 SELECT create_matview('"mvProductividadExogena"', '"vProductividadExogena"');
 
 --Frecuencias--
+--Documentos por autor
 CREATE OR REPLACE VIEW "vFrecuenciaAutorDocumentos" AS
 SELECT 
   max(e_100a) AS autor, 
@@ -935,5 +936,80 @@ FROM autor GROUP BY slug ORDER BY documentos DESC, "autorSlug";
 
 SELECT create_matview('"mvFrecuenciaAutorDocumentos"', '"vFrecuenciaAutorDocumentos"');
 
-CREATE INDEX "recuencuaAutorDocumentos_autor" ON "mvFrecuenciaAutorDocumentos"(autor);
-CREATE INDEX "recuencuaAutorDocumentos_documentos" ON "mvFrecuenciaAutorDocumentos"(documentos);
+CREATE INDEX "frecuencuaAutorDocumentos_autor" ON "mvFrecuenciaAutorDocumentos"(autor);
+CREATE INDEX "frecuencuaAutorDocumentos_documentos" ON "mvFrecuenciaAutorDocumentos"(documentos);
+
+--Paises donde publica la institucion
+CREATE OR REPLACE VIEW "vInstitucionPais" AS
+SELECT 
+  max(i.e_100u) AS insticuion,
+  i.slug AS "institucionSlug",
+  max(pais) AS pais,
+  "paisSlug"
+FROM institucion i
+INNER JOIN "mvSearch" s 
+  ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema
+GROUP BY "institucionSlug", "paisSlug";
+
+--Revistas donde publica la institucion
+CREATE OR REPLACE VIEW "vInstitucionRevistas" AS
+SELECT 
+  max(i.e_100u) AS insticuion,
+  i.slug AS "institucionSlug",
+  max(revista) AS revista,
+  "revistaSlug"
+FROM institucion i
+INNER JOIN "mvSearch" s 
+  ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema
+GROUP BY "institucionSlug", "revistaSlug";
+
+--Autores de la institucion
+CREATE OR REPLACE VIEW "vInstitucionAutor" AS
+SELECT 
+  max(i.e_100u) AS insticuion,
+  i.slug AS "institucionSlug",
+  max(e_100a) AS autor,
+  a.slug AS "autorSlug"
+FROM institucion i
+INNER JOIN "autor" a 
+  ON i.iddatabase=a.iddatabase AND a.sistema=a.sistema AND i.sec_autor=a.sec_autor AND i.sec_institucion=a.sec_institucion
+GROUP BY "institucionSlug", "autorSlug";
+
+--Autores, documentos, revistas y paises por institucion
+CREATE OR REPLACE VIEW "vFrecuenciaInstitucionDARP" AS
+SELECT
+  id.institucion,
+  id."institucionSlug",
+  id.documentos,
+  ia.autores,
+  ir.revistas,
+  ip.paises
+FROM
+  (SELECT 
+    max(e_100u) AS institucion, 
+    slug AS "institucionSlug", 
+    count(*) AS documentos 
+  FROM institucion GROUP BY slug ORDER BY documentos DESC, "institucionSlug") id --Institucion documentos
+INNER JOIN 
+  (SELECT 
+    "institucionSlug",
+    count(*) AS revistas
+  FROM "vInstitucionRevistas" GROUP BY "institucionSlug") ir --Institucion revistas
+  ON id."institucionSlug"=ir."institucionSlug"
+INNER JOIN 
+  (SELECT 
+    "institucionSlug",
+    count(*) AS autores
+  FROM "vInstitucionAutor" GROUP BY "institucionSlug") ia --Institucion autores
+  ON id."institucionSlug"=ia."institucionSlug"
+INNER JOIN 
+  (SELECT 
+    "institucionSlug",
+    count(*) AS paises
+  FROM "vInstitucionPais" GROUP BY "institucionSlug") ip --Institucion paises
+  ON id."institucionSlug"=ip."institucionSlug"
+ORDER BY id.documentos DESC, id."institucionSlug";
+
+SELECT create_matview('"mvFrecuenciaInstitucionDARP"', '"vFrecuenciaInstitucionDARP"');
+
+CREATE INDEX "idx_fInstitucionDARPInstitucion" ON "mvFrecuenciaInstitucionDARP"(autor);
