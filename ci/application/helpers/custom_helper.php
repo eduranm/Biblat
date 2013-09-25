@@ -154,7 +154,7 @@ if ( ! function_exists('slugHighLight') ):
 		$sname = preg_replace("/s/", "[šs]", $sname);
 		$sname = preg_replace("/z/", "[žz]", $sname);
 		$sname = preg_replace("/b/", "[þÞßb]", $sname);
-		$sname = preg_replace("/-+/", "[\\\\\\s.,+&]+", $sname);
+		$sname = preg_replace("/-+/", "[\\\\\\s.,+&-]+", $sname);
 		$sname = str_replace("%22", "\\\\b", $sname);
 		return $sname;
 	}
@@ -321,4 +321,17 @@ if ( ! function_exists('htmlspecialchars_deep') ):
 		endif;
 		return $mixed;
 	} 
+endif;
+
+if ( ! function_exists('pqgrid_args') ):
+	function pqgrid_args($args){
+		if( !empty($args) ):
+			return $args;
+		endif;
+		$args = array(
+				'pagina' => 1,
+				'resultados' => 20
+			);
+		return $args;
+	}
 endif;

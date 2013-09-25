@@ -165,6 +165,7 @@ UPDATE autor SET slug=slug(e_100a);
 
 CREATE INDEX "autorSlug_idx" ON autor(slug);
 CREATE INDEX "autorSlugE100a_idx" ON autor(slug, e_100a);
+CREATE INDEX "idx_autorDSAI" ON autor(iddatabase, sistema, sec_autor, sec_institucion);
 
 VACUUM (VERBOSE, FULL) autor;
 
@@ -180,6 +181,11 @@ UPDATE institucion SET e_100x=NULL WHERE e_100x='';
 UPDATE institucion SET e_100u=NULL WHERE e_100u='';
 UPDATE institucion SET e_100x='México' WHERE e_100x='Mëxico';
 UPDATE institucion SET e_100x='Japón' WHERE e_100x='Japòn';
+
+ALTER TABLE institucion ADD COLUMN slug varchar;
+UPDATE institucion SET slug=slug(e_100u);
+
+CREATE INDEX "idx_institucionDSAI" ON institucion(iddatabase, sistema, sec_autor, sec_institucion);
 
 VACUUM (VERBOSE, FULL) institucion;
 

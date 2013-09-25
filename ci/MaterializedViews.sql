@@ -977,39 +977,36 @@ GROUP BY "institucionSlug", "autorSlug";
 
 --Autores, documentos, revistas y paises por institucion
 CREATE OR REPLACE VIEW "vFrecuenciaInstitucionDARP" AS
-SELECT
-  id.institucion,
-  id."institucionSlug",
-  id.documentos,
-  ia.autores,
-  ir.revistas,
-  ip.paises
+SELECT 
+  irpd.institucion, 
+  irpd."institucionSlug", 
+  irpd.revistas,
+  irpd.paises,
+  irpd.documentos,
+  ia.autores
 FROM
   (SELECT 
     max(e_100u) AS institucion, 
-    slug AS "institucionSlug", 
-    count(*) AS documentos 
-  FROM institucion GROUP BY slug ORDER BY documentos DESC, "institucionSlug") id --Institucion documentos
+    i.slug AS "institucionSlug", 
+    count(DISTINCT s."revistaSlug") AS revistas,
+    count(DISTINCT s."paisSlug") AS paises,
+    count(*) AS documentos
+     FROM institucion i
+     JOIN "mvSearch" s ON i.iddatabase = s.iddatabase AND i.sistema=s.sistema
+    GROUP BY i.slug) irpd --Institucion revistas, documentos, paises
 INNER JOIN 
-  (SELECT 
-    "institucionSlug",
-    count(*) AS revistas
-  FROM "vInstitucionRevistas" GROUP BY "institucionSlug") ir --Institucion revistas
-  ON id."institucionSlug"=ir."institucionSlug"
-INNER JOIN 
-  (SELECT 
-    "institucionSlug",
-    count(*) AS autores
-  FROM "vInstitucionAutor" GROUP BY "institucionSlug") ia --Institucion autores
-  ON id."institucionSlug"=ia."institucionSlug"
-INNER JOIN 
-  (SELECT 
-    "institucionSlug",
-    count(*) AS paises
-  FROM "vInstitucionPais" GROUP BY "institucionSlug") ip --Institucion paises
-  ON id."institucionSlug"=ip."institucionSlug"
-ORDER BY id.documentos DESC, id."institucionSlug";
+  (SELECT
+    i.slug AS "institucionSlug",
+    count(DISTINCT a.slug) as autores
+  FROM institucion i
+  LEFT JOIN autor a ON
+    i.iddatabase=a.iddatabase AND
+    i.sistema=a.sistema AND
+    i.sec_autor=a.sec_autor
+  GROUP BY i.slug) ia --Institucion autores
+ON irpd."institucionSlug"=ia."institucionSlug";
 
 SELECT create_matview('"mvFrecuenciaInstitucionDARP"', '"vFrecuenciaInstitucionDARP"');
 
-CREATE INDEX "idx_fInstitucionDARPInstitucion" ON "mvFrecuenciaInstitucionDARP"(autor);
+CREATE INDEX "idx_fInstitucionDARPInstitucion" ON "mvFrecuenciaInstitucionDARP"(institucion);
+CREATE INDEX "idx_fInstitucionDARPDocumentos" ON "mvFrecuenciaInstitucionDARP"(documentos);

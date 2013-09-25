@@ -13,16 +13,16 @@
 				paging: "remote",
 				dataType: "JSON",
 				method: "POST",
-				curPage: 1,
-				rPP: 20,
-				sortIndx: 2,
-				sortDir: "down",
-				rPPOptions: [1, 10, 20, 30, 40, 50, 100],
+				curPage: <?php echo $args['pagina'];?>,
+				rPP: <?php echo $args['resultados'];?>,
+				sortIndx: <?php echo $sortIndx;?>,
+				sortDir: "up",
+				rPPOptions: [10, 20, 30, 40, 50, 100],
 				getUrl: function () {
-					var sortDir = (this.sortDir == "up") ? "asc" : "desc";
+					var sortDir = (this.sortDir == "down") ? "asc" : "desc";
 					var sort = <?php echo $sortBy?>;
 					return { 
-							url: "<?php echo site_url("frecuencias/autor");?>/ordenar/" + sort[this.sortIndx] + "-" + sortDir + "/resultados/" + this.rPP + "/pagina/" + this.curPage, 
+							url: "<?php echo current_url(1);?>/ordenar/" + sort[this.sortIndx] + "-" + sortDir + "/resultados/" + this.rPP + "/pagina/" + this.curPage, 
 							data: "ajax=true"};
 				},
 				getData: function (dataJSON) {            
