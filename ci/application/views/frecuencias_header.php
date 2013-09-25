@@ -33,7 +33,7 @@
 			grid = jQuery("div#gridTable").pqGrid({ width: 900, height: 400,
 				dataModel: dataModel,
 				colModel: colM,
-				title: "Frecuencia de documentos por autor",
+				title: "<?php echo $gridTitle;?>",
 				resizable: false,           
 				columnBorders: true,
 				freezeCols: 2,

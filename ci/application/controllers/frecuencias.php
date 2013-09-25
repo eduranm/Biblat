@@ -23,6 +23,7 @@ class Frecuencias extends CI_Controller {
 		$args = $this->uri->uri_to_assoc();
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por autor');
+		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor');
 		$order = "documentos";
 		$orderDir = "DESC";
 		if (isset($_POST['ajax'])):
@@ -47,7 +48,6 @@ class Frecuencias extends CI_Controller {
 			$rowNumber=1;
 			foreach ($query->result_array() as $row):
 				$rowResult = array();
-				//$rowResult[]=$rowNumber + $offset;
 				$rowResult[]=$row['autor'];
 				$rowResult[]=$row['autorSlug'];
 				$rowResult[]=$row['documentos'];
@@ -60,10 +60,6 @@ class Frecuencias extends CI_Controller {
 			return 0;
 		endif;
 		/*Columnas de la tabla*/
-		/*$colModel[] = array(
-				'title' => '#',
-				'width' => 50
-			);*/
 		$colModel[] = array(
 				'editable' => false,
 				'title' => _('Autor'),
@@ -86,10 +82,11 @@ class Frecuencias extends CI_Controller {
 		$data['header']['sortBy'] = json_encode($sortBy, true);
 		$data['header']['sortIndx'] = array_search($order, $sortBy);
 		$data['header']['args'] = pqgrid_args($args);
-		$data['header']['content'] =  $this->load->view('frecuencias_autor_header', $data['header'], TRUE);
+		$data['header']['content'] =  $this->load->view('frecuencias_header', $data['header'], TRUE);
+		$data['main']['breadcum'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Autor'));
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('frecuencias_autor', $data['main']);
+		$this->load->view('frecuencias_common', $data['main']);
 		$this->load->view('footer');
 	}
 
@@ -125,7 +122,8 @@ class Frecuencias extends CI_Controller {
 	public function institucion(){
 		$args = $this->uri->uri_to_assoc();
 		$data = array();
-		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institucion');
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución');
+		$data['header']['gridTitle'] = _sprintf('Frecuencia de países, revistas, autores y documentos por institución');
 		$order = "documentos";
 		$orderDir = "DESC";
 		if (isset($_POST['ajax'])):
@@ -150,7 +148,6 @@ class Frecuencias extends CI_Controller {
 			$rowNumber=1;
 			foreach ($query->result_array() as $row):
 				$rowResult = array();
-				//$rowResult[]=$rowNumber + $offset;
 				$rowResult[]=$row['institucion'];
 				$rowResult[]=$row['institucionSlug'];
 				$rowResult[]=$row['paises'];
@@ -166,10 +163,6 @@ class Frecuencias extends CI_Controller {
 			return 0;
 		endif;
 		/*Columnas de la tabla*/
-		/*$colModel[] = array(
-				'title' => '#',
-				'width' => 50
-			);*/
 		$colModel[] = array(
 				'editable' => false,
 				'title' => _('Institución'),
@@ -210,10 +203,11 @@ class Frecuencias extends CI_Controller {
 		$data['header']['sortBy'] = json_encode($sortBy, true);
 		$data['header']['sortIndx'] = array_search($order, $sortBy);
 		$data['header']['args'] = pqgrid_args($args);
-		$data['header']['content'] =  $this->load->view('frecuencias_autor_header', $data['header'], TRUE);
+		$data['header']['content'] =  $this->load->view('frecuencias_header', $data['header'], TRUE);
+		$data['main']['breadcum'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Institución'));
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('frecuencias_autor', $data['main']);
+		$this->load->view('frecuencias_common', $data['main']);
 		$this->load->view('footer');
 	}
 

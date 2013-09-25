@@ -2,7 +2,7 @@
 	<div class="flagContainer">
 		<p class="flag">
 			<em>
-				<a href="<?php echo site_url('frecuencias')?>"><?php _e('Frecuencias');?></a> > Autor
+				<?php echo $breadcum;?>
 			</em>
 		</p>
 	</div>
