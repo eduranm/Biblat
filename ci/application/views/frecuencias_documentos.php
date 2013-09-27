@@ -2,7 +2,7 @@
 	<div class="flagContainer">
 		<p class="flag">
 			<em>
-				<a href="<?php echo site_url('frecuencias')?>"><?php _e('Frecuencias');?></a> > <a href="<?php echo site_url('frecuencias/autor')?>"><?php _e('Autor');?></a> > <?php _printf('%s (%s documentos)', $autor, $total)?>
+				<?php echo $breadcrumb;?>
 			</em>
 		</p>
 	</div>

@@ -33,7 +33,7 @@
 			grid = jQuery("div#gridTable").pqGrid({ width: 900, height: 400,
 				dataModel: dataModel,
 				colModel: colM,
-				title: "<?php echo $gridTitle;?>",
+				title: '<?php echo $gridTitle;?>',
 				resizable: false,           
 				columnBorders: true,
 				freezeCols: 2,
@@ -43,9 +43,22 @@
 			grid.pqGrid("option", $.paramquery.pqGrid.regional['es']);
 			grid.find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['es']);
 
+<?php switch($this->uri->rsegment(2)):
+		case 'autor':
+?>
+
 			jQuery("div#gridTable").on( "pqgridrowclick", function( event, ui ) {
 				autorSlug=ui.dataModel.data[ui.rowIndxPage][1];
 				window.location.href = "<?php echo site_url('frecuencias/autor')?>" + "/" + autorSlug;
 			});
+<?php 	break;
+		case 'institucion':?>
+			jQuery("div#gridTable").on( "pqgridcellclick", function( event, ui ) {
+				section = <?php echo $section?>;
+				institucionSlug=ui.dataModel.data[ui.rowIndxPage][1];
+				window.location.href = "<?php echo site_url('frecuencias/institucion')?>" + "/" + institucionSlug + section[ui.colIndx];
+			});
+<?php 	break;
+		endswitch;?>
 		});
 	</script>

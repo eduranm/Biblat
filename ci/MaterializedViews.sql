@@ -931,25 +931,13 @@ CREATE OR REPLACE VIEW "vFrecuenciaAutorDocumentos" AS
 SELECT 
   max(e_100a) AS autor, 
   slug as "autorSlug", 
-  count(*) AS documentos 
+  count(DISTINCT (iddatabase, sistema)) AS documentos 
 FROM autor GROUP BY slug ORDER BY documentos DESC, "autorSlug";
 
 SELECT create_matview('"mvFrecuenciaAutorDocumentos"', '"vFrecuenciaAutorDocumentos"');
 
 CREATE INDEX "frecuencuaAutorDocumentos_autor" ON "mvFrecuenciaAutorDocumentos"(autor);
 CREATE INDEX "frecuencuaAutorDocumentos_documentos" ON "mvFrecuenciaAutorDocumentos"(documentos);
-
---Paises donde publica la institucion
-CREATE OR REPLACE VIEW "vInstitucionPais" AS
-SELECT 
-  max(i.e_100u) AS insticuion,
-  i.slug AS "institucionSlug",
-  max(pais) AS pais,
-  "paisSlug"
-FROM institucion i
-INNER JOIN "mvSearch" s 
-  ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema
-GROUP BY "institucionSlug", "paisSlug";
 
 --Revistas donde publica la institucion
 CREATE OR REPLACE VIEW "vInstitucionRevistas" AS
@@ -990,7 +978,7 @@ FROM
     i.slug AS "institucionSlug", 
     count(DISTINCT s."revistaSlug") AS revistas,
     count(DISTINCT s."paisSlug") AS paises,
-    count(*) AS documentos
+    count(DISTINCT (s.iddatabase, s.sistema)) AS documentos
      FROM institucion i
      JOIN "mvSearch" s ON i.iddatabase = s.iddatabase AND i.sistema=s.sistema
     GROUP BY i.slug) irpd --Institucion revistas, documentos, paises
@@ -1010,3 +998,92 @@ SELECT create_matview('"mvFrecuenciaInstitucionDARP"', '"vFrecuenciaInstitucionD
 
 CREATE INDEX "idx_fInstitucionDARPInstitucion" ON "mvFrecuenciaInstitucionDARP"(institucion);
 CREATE INDEX "idx_fInstitucionDARPDocumentos" ON "mvFrecuenciaInstitucionDARP"(documentos);
+
+--Documentos por institucion -> país de publicación
+CREATE OR REPLACE VIEW "vFrecuenciaInstitucionPais" AS
+SELECT 
+  max(i.e_100u) AS institucion,
+  i.slug AS "institucionSlug",
+  max(pais) AS pais,
+  "paisSlug",
+  count(DISTINCT (s.iddatabase, s.sistema)) AS documentos
+FROM institucion i
+INNER JOIN "mvSearch" s 
+  ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema
+GROUP BY "institucionSlug", "paisSlug";
+
+SELECT create_matview('"mvFrecuenciaInstitucionPais"', '"vFrecuenciaInstitucionPais"');
+
+--Documentos por institucion -> revista
+CREATE OR REPLACE VIEW "vFrecuenciaInstitucionRevista" AS
+SELECT 
+  max(i.e_100u) AS institucion,
+  i.slug AS "institucionSlug",
+  max(revista) AS revista,
+  "revistaSlug",
+  count(DISTINCT (s.iddatabase, s.sistema)) AS documentos
+FROM institucion i
+INNER JOIN "mvSearch" s 
+  ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema
+GROUP BY "institucionSlug", "revistaSlug";
+
+SELECT create_matview('"mvFrecuenciaInstitucionRevista"', '"vFrecuenciaInstitucionRevista"');
+
+--Documentos por institucion -> autor
+CREATE OR REPLACE VIEW "vFrecuenciaInstitucionAutor" AS
+SELECT
+    max(i.e_100u) AS institucion,
+    i.slug AS "institucionSlug",
+    max(a.e_100a) AS autor,
+    a.slug as "autorSlug",
+    count(DISTINCT (i.iddatabase, i.sistema)) AS documentos
+  FROM institucion i
+  INNER JOIN autor a ON
+    i.iddatabase=a.iddatabase AND
+    i.sistema=a.sistema AND
+    i.sec_autor=a.sec_autor
+  GROUP BY i.slug, a.slug;
+
+SELECT create_matview('"mvFrecuenciaInstitucionAutor"', '"vFrecuenciaInstitucionAutor"');
+
+--Institucion documentos
+CREATE OR REPLACE VIEW "vInstucionDocumentos" AS
+SELECT 
+  s.sistema,
+  s.iddatabase,
+  articulo, 
+  "articuloSlug", 
+  revista, 
+  "revistaSlug", 
+  pais, 
+  anio, 
+  volumen, 
+  numero, 
+  periodo, 
+  paginacion, 
+  url, 
+  i.slug as "institucionSlug",
+  "autoresSecJSON",
+  "autoresSecInstitucionJSON",
+  "autoresJSON",
+  "institucionesSecJSON",
+  "institucionesJSON" 
+FROM institucion i 
+INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema;
+
+SELECT create_matview('"mvInstucionDocumentos"', '"vInstucionDocumentos"');
+
+CREATE INDEX "idx_institucionDocumentos" ON "mvInstucionDocumentos"(iddatabase, sistema);
+CREATE INDEX "idx_institucionDocumentosinstitucionSlug" ON "mvInstucionDocumentos"("institucionSlug");
+
+
+SELECT slug, array_to_json(array_agg(institucion)) AS instituciones, array_to_json(array_agg(documentos)) AS documentos
+FROM
+  (SELECT 
+  slug, 
+  e_100u AS institucion, 
+  count(*) AS documentos 
+  FROM institucion 
+  GROUP BY slug, e_100u
+  ORDER BY slug, documentos DESC) tb
+GROUP BY slug HAVING count(*) > 1

@@ -513,7 +513,7 @@ body {
 .flag em a {
 	color: #3D1F12;
 	font-size: 14px!important;
-	font-weight: bold;
+	font-weight: normal;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	font-style: normal;
 	text-decoration: underline;
@@ -829,4 +829,8 @@ p {
 #gridTable {
 	margin: 0 auto;
 	text-shadow: none;
+}
+
+div.pq-grid-title{
+	text-align: center;
 }

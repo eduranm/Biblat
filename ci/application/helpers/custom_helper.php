@@ -325,7 +325,7 @@ endif;
 
 if ( ! function_exists('pqgrid_args') ):
 	function pqgrid_args($args){
-		if( !empty($args) ):
+		if( !empty($args['pagina']) ):
 			return $args;
 		endif;
 		$args = array(

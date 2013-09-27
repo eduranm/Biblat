@@ -58,7 +58,15 @@ $route['revista/(.*)'] = "revista/index/$1";
 
 $route['indicadores/(indice-coautoria|tasa-documentos-coautorados|grado-colaboracion|modelo-elitismo|indice-colaboracion|indice-densidad-documentos|indice-concentracion|modelo-bradford-revista|modelo-bradford-institucion|productividad-exogena)(.*)'] = "indicadores/index/$1";
 
-$route['frecuencias/autor/([^/]+)'] = "frecuencias/autorArticulos/$1";
-$route['frecuencias/autor/([^/]+)/([0-9]+)'] = "frecuencias/autorArticulos/$1/$2";
+$route['frecuencias/institucion/([^/]+)'] = "frecuencias/institucion/slug/$1";
+$route['frecuencias/institucion/([^/]+)/(ordenar/.*)'] = "frecuencias/institucion/slug/$1/$2";
+$route['frecuencias/autor/([^/]+)'] = "frecuencias/autorDocumentos/$1";
+$route['frecuencias/autor/([^/]+)/([0-9]+)'] = "frecuencias/autorDocumentos/$1/$2";
+
+$route['frecuencias/institucion/([^/]+)/documento'] = "frecuencias/institucionDocumentos/$1";
+$route['frecuencias/institucion/([^/]+)/documento/([0-9]+)'] = "frecuencias/institucionDocumentos/$1/$2";
+$route['frecuencias/institucion/(.+?)/\bpais\b(.*)'] = "frecuencias/institucionPais/institucionSlug/$1$2";
+$route['frecuencias/institucion/(.+?)/\brevista\b(.*)'] = "frecuencias/institucionRevista/institucionSlug/$1$2";
+$route['frecuencias/institucion/(.+?)/\bautor\b(.*)'] = "frecuencias/institucionAutor/institucionSlug/$1$2";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
