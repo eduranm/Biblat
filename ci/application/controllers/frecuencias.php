@@ -354,6 +354,82 @@ class Frecuencias extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	private function _excel($xls){
+		@set_time_limit(3000);
+		//phpinfo(); die();
+		$this->load->library('excel');
+		$this->load->database();
+		$cacheMethod = PHPExcel_CachedObjectStorageFactory::cache_to_phpTemp;
+		$cacheSettings = array( 'memoryCacheSize' => '128MB');
+		PHPExcel_Settings::setCacheStorageMethod($cacheMethod, $cacheSettings);
+		/*Sheets*/
+		$query = $this->db->query($xls['queryTotal']);
+		$query = $query->row_array();
+		//$sheetLimit = 65535;
+		$sheetLimit = 1048576;
+		$sheets = ceil($query['total'] / $sheetLimit);
+		for ($i=0; $i < $sheets; $i++) :
+			$this->excel->setActiveSheetIndex($i);
+			$data = array();
+			$data[] = $xls['cols'];
+			$offset = $i * $sheetLimit;
+			$query = $this->db->query("{$xls['query']} LIMIT {$sheetLimit} OFFSET {$offset}");
+			$rowNumber = 1;
+			header('Content-Type: application/vnd.ms-excel');
+			header('Content-Disposition: attachment;filename="'.$xls['fileName'].'"'); 
+			header('Cache-Control: max-age=0');
+			echo "\"Autor\", \"Documentos\"\n";
+			foreach ($query->result_array() as $row):
+				/*$dataRow = array();
+				foreach ($row as $key => $value):
+					$dataRow[] = $value;
+				endforeach;
+				$data[] = $dataRow;*/
+				/*$this->excel->getActiveSheet()->setCellValue("A{$rowNumber}", $row['autor']);
+				$this->excel->getActiveSheet()->setCellValue("B{$rowNumber}", $row['documentos']);
+				$rowNumber++;*/
+				echo "\"{$row['autor']}\", \"{$row['documentos']}\"\n";
+			endforeach;
+			$query->free_result();
+			exit();
+			/*$this->excel->getActiveSheet()->fromArray(
+				$data,	// The data to set
+				NULL,		// Array values with this value will not be set
+				'A1'		// Top left coordinate of the worksheet range where
+							// 	we want to set these values (default is A1)
+			);
+			unset($data);*/
+			if($i < ($sheets - 1)):
+				$this->excel->createSheet();
+			endif;
+		endfor;
+		/*Ontenido datos*/
+		
+		//$this->excel->getActiveSheet()->setTitle($xls['sheetTitle']);
+
+		$this->db->close();
+
+		//print_r($data); die();
+		
+		 
+		//header('Content-Type: application/vnd.ms-excel'); //mime type
+		//header('Content-Disposition: attachment;filename="'.$xls['fileName'].'"'); //tell browser what's the file name
+		//header('Cache-Control: max-age=0'); //no cache
+		             
+		$objWriter = new PHPExcel_Writer_Excel2007($this->excel); 
+		 $objWriter->setOffice2003Compatibility(true);
+		//$objWriter->save('php://output');
+		$objWriter->save("/tmp/{$xls['fileTitle']}");
+		/*if(file_exists("/tmp/{$xls['fileTitle']}")):
+			//header('Content-Type: application/vnd.ms-excel');
+			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+			header('Content-Disposition: attachment;filename="'.$xls['fileName'].'x"'); 
+			header('Cache-Control: max-age=0');
+			readfile("/tmp/{$xls['fileTitle']}");
+			exit();
+		endif;*/
+	}
+
 }
 
 /* End of file frecuencias.php */

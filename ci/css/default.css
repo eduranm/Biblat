@@ -834,3 +834,12 @@ p {
 div.pq-grid-title{
 	text-align: center;
 }
+
+.context-menu-list [class^="icon-"],
+.context-menu-list [class*=" icon-"] {
+  display: block;
+}
+
+.context-menu-list [class^="icon-"]:before, [class*=" icon-"]:before {
+    display: block;
+}

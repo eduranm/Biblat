@@ -1,9 +1,14 @@
 	<link rel="stylesheet" href="<?php echo site_url("css/jquery-ui.min.css");?>" />
 	<link rel="stylesheet" href="<?php echo site_url("js/pqgrid/pqgrid.dev.css");?>" />
 	<link rel="stylesheet" href="<?php echo site_url("js/pqgrid/themes/Office/pqgrid.css");?>" />
+	<link rel="stylesheet" href="<?php echo site_url("css/jquery.contextMenu.css");?>" />
+	<link rel="stylesheet" href="<?php echo site_url("js/prettify/prettify.sunburst.css");?>" />
 	<script type="text/javascript" src="<?php echo site_url("js/jquery-ui.min.js")?>"></script>
 	<script type="text/javascript" src="<?php echo site_url("js/pqgrid/pqgrid.dev.js")?>"></script>
 	<script type="text/javascript" src="<?php echo site_url("js/pqgrid/localize/pq-localize-es.js")?>"></script>
+	<script type="text/javascript" src="<?php echo site_url("js/jquery-ui.min.js")?>"></script>
+	<script type="text/javascript" src="<?php echo site_url("js/jquery.contextMenu.js")?>"></script>
+	<script type="text/javascript" src="<?php echo site_url("js/prettify/prettify.js")?>"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function(){
 			var colM = <?php echo $colModel?>;
@@ -39,6 +44,8 @@
 				freezeCols: 2,
 				flexHeight:true,
 				flexWidth: true,
+				selectionModel: { type: 'cell'}, 
+				hoverMode:'cell'
 			});
 			grid.pqGrid("option", $.paramquery.pqGrid.regional['es']);
 			grid.find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['es']);
@@ -60,5 +67,16 @@
 			});
 <?php 	break;
 		endswitch;?>
+			jQuery.contextMenu({
+				selector: 'div#gridTable', 
+				callback: function(key, options) {
+					window.location.href = "<?php echo current_url(1);?>/export/excel"
+					//var m = "clicked: " + key;
+					//window.console && console.log(m) || alert(m); 
+				},
+				items: {
+					"excel": {name: "<?php _e('Exportar a excel');?>", icon: "excel"},
+				}
+			});
 		});
 	</script>
