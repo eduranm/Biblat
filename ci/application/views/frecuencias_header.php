@@ -49,11 +49,9 @@
 			});
 			grid.pqGrid("option", $.paramquery.pqGrid.regional['es']);
 			grid.find(".pq-pager").pqPager("option", $.paramquery.pqPager.regional['es']);
-
 <?php switch($this->uri->rsegment(2)):
 		case 'autor':
 ?>
-
 			jQuery("div#gridTable").on( "pqgridrowclick", function( event, ui ) {
 				autorSlug=ui.dataModel.data[ui.rowIndxPage][1];
 				window.location.href = "<?php echo site_url('frecuencias/autor')?>" + "/" + autorSlug;
@@ -65,6 +63,14 @@
 				institucionSlug=ui.dataModel.data[ui.rowIndxPage][1];
 				window.location.href = "<?php echo site_url('frecuencias/institucion')?>" + "/" + institucionSlug + section[ui.colIndx];
 			});
+<?php 	break;
+	case 'institucionPais':
+	case 'institucionRevista':
+	case 'institucionAutor':?>	
+			jQuery("div#gridTable").on( "pqgridrowclick", function( event, ui ) {
+				paisSlug=ui.dataModel.data[ui.rowIndxPage][1];
+				window.location.href = "<?php echo current_url()?>" + "/" + paisSlug;
+			});	
 <?php 	break;
 		endswitch;?>
 			jQuery.contextMenu({

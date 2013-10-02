@@ -65,8 +65,14 @@ $route['frecuencias/autor/([^/]+)/([0-9]+)'] = "frecuencias/autorDocumentos/$1/$
 
 $route['frecuencias/institucion/([^/]+)/documento'] = "frecuencias/institucionDocumentos/$1";
 $route['frecuencias/institucion/([^/]+)/documento/([0-9]+)'] = "frecuencias/institucionDocumentos/$1/$2";
+$route['frecuencias/institucion/(.+?)/\bpais\b/([^/]+)$'] = "frecuencias/institucionPaisDocumentos/$1/$2";
+$route['frecuencias/institucion/(.+?)/\bpais\b/([^/]+)/[0-9^/]$'] = "frecuencias/institucionPaisDocumentos/$1/$2/$3";
 $route['frecuencias/institucion/(.+?)/\bpais\b(.*)'] = "frecuencias/institucionPais/institucionSlug/$1$2";
+$route['frecuencias/institucion/(.+?)/\brevista\b/([^/]+)$'] = "frecuencias/institucionRevistaDocumentos/$1/$2";
+$route['frecuencias/institucion/(.+?)/\brevista\b/([^/]+)/[0-9^/]$'] = "frecuencias/institucionRevistaDocumentos/$1/$2/$3";
 $route['frecuencias/institucion/(.+?)/\brevista\b(.*)'] = "frecuencias/institucionRevista/institucionSlug/$1$2";
+$route['frecuencias/institucion/(.+?)/\bautor\b/([^/]+)$'] = "frecuencias/institucionAutorDocumentos/$1/$2";
+$route['frecuencias/institucion/(.+?)/\bautor\b/([^/]+)/[0-9^/]$'] = "frecuencias/institucionAutorDocumentos/$1/$2/$3";
 $route['frecuencias/institucion/(.+?)/\bautor\b(.*)'] = "frecuencias/institucionAutor/institucionSlug/$1$2";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

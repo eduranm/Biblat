@@ -189,8 +189,36 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", países de publicación', $institucion);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por país de publicación en la institución:<br/> %s', $institucion);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s (País)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/País', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
 		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function institucionPaisDocumentos($institucion, $pais){
+		$args['slug'] = $pais;
+		$args['query'] = "SELECT DISTINCT ON (sistema, iddatabase) * FROM \"mvInstucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"paisSlug\"='$pais'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvInstucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"paisSlug\"='{$pais}'";
+		$args['paginationURL'] = site_url("frecuencias/institucion/{$institucion}/pais/{$pais}");
+		/*Datos de la institucion*/
+		$this->load->database();
+		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$institucion = array(
+				'slug' => $institucion,
+				'institucion' => $query['institucion']
+			);
+		/*Datos del país*/
+		$query = "SELECT pais FROM \"mvSearch\" WHERE \"paisSlug\"='{$pais}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$pais = array(
+				'slug' => $pais,
+				'pais' => $query['pais']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s > %s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), anchor("frecuencias/institucion/{$institucion['slug']}/pais", _sprintf('%s/País', $institucion['institucion']), _("title= \"{$institucion['institucion']}/País\"")), $pais['pais']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $institucion['institucion']);
+		return $this->_renderDocuments($args);
 	}
 
 	public function institucionRevista(){
@@ -227,8 +255,36 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", revistas de publicación', $institucion);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por revista de publicación en la institución: <br/>%s', $institucion);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s (Revista)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Revista', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
 		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function institucionRevistaDocumentos($institucion, $revista){
+		$args['slug'] = $revista;
+		$args['query'] = "SELECT DISTINCT ON (sistema, iddatabase) * FROM \"mvInstucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"revistaSlug\"='$revista'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvInstucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"revistaSlug\"='{$revista}'";
+		$args['paginationURL'] = site_url("frecuencias/institucion/{$institucion}/revista/{$revista}");
+		/*Datos de la institucion*/
+		$this->load->database();
+		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$institucion = array(
+				'slug' => $institucion,
+				'institucion' => $query['institucion']
+			);
+		/*Datos del país*/
+		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$revista = array(
+				'slug' => $revista,
+				'revista' => $query['revista']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s > %s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), anchor("frecuencias/institucion/{$institucion['slug']}/revista", _sprintf('%s/Revista', $institucion['institucion']), _("title= \"{$institucion['institucion']}/Revista\"")), $revista['revista']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $institucion['institucion']);
+		return $this->_renderDocuments($args);
 	}
 
 	public function institucionAutor(){
@@ -265,9 +321,38 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", autor', $institucion);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en la institución: <br/>%s', $institucion);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s (Autor)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
 		return $this->_renderFrecuency($args, $data);
 	}
+
+	public function institucionAutorDocumentos($institucion, $autor){
+		$args['slug'] = $autor;
+		$args['query'] = "SELECT DISTINCT ON (sistema, iddatabase) * FROM \"mvInstucionAutorDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"autorSlug\"='$autor'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvInstucionAutorDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"autorSlug\"='{$autor}'";
+		$args['paginationURL'] = site_url("frecuencias/institucion/{$institucion}/autor/{$autor}");
+		/*Datos de la institucion*/
+		$this->load->database();
+		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$institucion = array(
+				'slug' => $institucion,
+				'institucion' => $query['institucion']
+			);
+		/*Datos del país*/
+		$query = "SELECT e_100a AS autor FROM autor WHERE slug='{$autor}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$autor = array(
+				'slug' => $autor,
+				'autor' => $query['autor']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s > %s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), anchor("frecuencias/institucion/{$institucion['slug']}/autor", _sprintf('%s/Autor', $institucion['institucion']), _("title= \"{$institucion['institucion']}/Autor\"")), $autor['autor']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $institucion['institucion']);
+		return $this->_renderDocuments($args);
+	}
+
 
 	private function _renderFrecuency($args, $data){
 		if ($args['export'] == "excel"):

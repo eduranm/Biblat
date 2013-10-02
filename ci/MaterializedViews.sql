@@ -207,7 +207,8 @@ CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin("generalSlug" gin_t
 CREATE INDEX "searchAutoresSlug_idx" ON "mvSearch" USING gin("autoresSlug" gin_trgm_ops);
 CREATE INDEX "searchArticuloSlugGin_idx" ON "mvSearch" USING gin("articuloSlug" gin_trgm_ops);
 CREATE INDEX "searchRevistaSlugGin_idx" ON "mvSearch" USING gin("revistaSlug" gin_trgm_ops);
-CREATE INDEX "searchPaisSlug_idx" ON "mvSearch" USING gin("paisSlug" gin_trgm_ops);
+CREATE INDEX "searchPaisSlugGin_idx" ON "mvSearch" USING gin("paisSlug" gin_trgm_ops);
+CREATE INDEX "searchPaisSlug_idx" ON "mvSearch"("paisSlug");
 CREATE INDEX "searchInstitucionesSlug_idx" ON "mvSearch" USING gin("institucionesSlug" gin_trgm_ops);
 
 CREATE OR REPLACE VIEW "vSearchFields" AS SELECT 
@@ -1076,6 +1077,38 @@ SELECT create_matview('"mvInstucionDocumentos"', '"vInstucionDocumentos"');
 CREATE INDEX "idx_institucionDocumentos" ON "mvInstucionDocumentos"(iddatabase, sistema);
 CREATE INDEX "idx_institucionDocumentosinstitucionSlug" ON "mvInstucionDocumentos"("institucionSlug");
 
+--Institucion->autor documentos--
+CREATE OR REPLACE VIEW "vInstucionAutorDocumentos" AS
+SELECT
+  s.sistema,
+  s.iddatabase,
+  articulo, 
+  "articuloSlug", 
+  revista, 
+  "revistaSlug", 
+  pais, 
+  anio, 
+  volumen, 
+  numero, 
+  periodo, 
+  paginacion, 
+  url, 
+  i.slug as "institucionSlug",
+  "autoresSecJSON",
+  "autoresSecInstitucionJSON",
+  "autoresJSON",
+  "institucionesSecJSON",
+  "institucionesJSON" 
+  autor,
+  a.slug as "autorSlug"
+  FROM institucion i
+  INNER JOIN autor a ON
+    i.iddatabase=a.iddatabase AND
+    i.sistema=a.sistema AND
+    i.sec_autor=a.sec_autor
+  INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema;
+
+SELECT create_matview('"mvInstucionAutorDocumentos"', '"vInstucionAutorDocumentos"');
 
 SELECT slug, array_to_json(array_agg(institucion)) AS instituciones, array_to_json(array_agg(documentos)) AS documentos
 FROM
