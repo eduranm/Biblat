@@ -39,73 +39,33 @@ class Frecuencias extends CI_Controller {
 
 	public function autor(){
 		$args = $this->uri->uri_to_assoc();
-		$data = array();
-		$data['header']['title'] = _sprintf('Biblat - Frecuencias por autor');
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor');
-		$order = "documentos";
-		$orderDir = "DESC";
-		if (isset($_POST['ajax'])):
-			$this->load->database();
-			/*Obtniendo el total de registros*/
-			$query = "SELECT count(*) AS total FROM \"mvFrecuenciaAutorDocumentos\"";
-			$query = $this->db->query($query);
-			$query = $query->row_array();
-			$data['main']['total'] = $query['total'];
-			/*Filas de la tabla*/
-			$sort = explode("-", $args['ordenar']);
-			$order = $sort[0];
-			$orderDir = strtoupper($sort[1]);
-			$offset = $args['resultados'] * ($args['pagina']-1);
-			$query = "SELECT * FROM \"mvFrecuenciaAutorDocumentos\" ORDER BY {$order} {$orderDir} LIMIT {$args['resultados']} OFFSET {$offset}";
-			$query = $this->db->query($query);
-			$this->db->close();
-			$result = array();
-			$result['totalRecords']=$data['main']['total'];
-			$result['curPage']=$_POST['page'];
-			$result['data']=array();
-			$rowNumber=1;
-			foreach ($query->result_array() as $row):
-				$rowResult = array();
-				$rowResult[]=$row['autor'];
-				$rowResult[]=$row['autorSlug'];
-				$rowResult[]=$row['documentos'];
-				$result['data'][]=$rowResult;
-				$rowNumber++;
-			endforeach;
-			$this->output->enable_profiler(false);
-			header('Content-Type: application/json');
-			echo json_encode($result, true);
-			return 0;
-		endif;
-		/*Columnas de la tabla*/
-		$colModel[] = array(
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaAutorDocumentos\"";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaAutorDocumentos\"";
+		$args['cols'][] = array(
 				'editable' => false,
 				'title' => _('Autor'),
 				'width' => 200
 			);
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'editable' => false,
 				'hidden' => true,
 				'title' => _('AutorSlug'),
 				'width' => 200
 			);
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
 			);
-		$sortBy = array('autor', 'autorSlug', 'documentos');
-		$data['header']['colModel'] = json_encode($colModel, true);
-		$data['header']['sortBy'] = json_encode($sortBy, true);
-		$data['header']['sortIndx'] = array_search($order, $sortBy);
-		$data['header']['args'] = pqgrid_args($args);
-		$data['header']['content'] =  $this->load->view('frecuencias_header', $data['header'], TRUE);
+		$args['sortBy'] = array('autor', 'autorSlug', 'documentos');
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por autor');
+		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor');
 		$data['main']['breadcrumb'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Autor'));
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('frecuencias_common', $data['main']);
-		$this->load->view('footer');
+		return $this->_renderFrecuency($args, $data);
 	}
 
 	public function autorDocumentos($slug){
@@ -137,107 +97,57 @@ class Frecuencias extends CI_Controller {
 
 	public function institucion(){
 		$args = $this->uri->ruri_to_assoc();
-		$data = array();
-		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución');
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de países, revistas, autores y documentos por institución');
-		$data['main']['breadcrumb'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Institución'));
-		$where = "";
-		if(isset($args['slug'])):
-			$this->load->database();
-			$query = "SELECT institucion FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['slug']}' LIMIT 1";
-			$query = $this->db->query($query);
-			$query = $query->row_array();
-			$institucion = $query['institucion'];
-			$this->db->close();
-			$where = "WHERE \"institucionSlug\"='{$args['slug']}'";
-			$data['main']['breadcrumb'] = sprintf('%s > %s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
-		endif;
-		$order = "documentos";
-		$orderDir = "DESC";
-		if (isset($_POST['ajax'])):
-			$this->load->database();
-			/*Obtniendo el total de registros*/
-			$query = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionDARP\" {$where}";
-			$query = $this->db->query($query);
-			$query = $query->row_array();
-			$data['main']['total'] = $query['total'];
-			/*Filas de la tabla*/
-			$sort = explode("-", $args['ordenar']);
-			$order = $sort[0];
-			$orderDir = strtoupper($sort[1]);
-			$offset = $args['resultados'] * ($args['pagina']-1);
-			$query = "SELECT * FROM \"mvFrecuenciaInstitucionDARP\" {$where} ORDER BY {$order} {$orderDir} LIMIT {$args['resultados']} OFFSET {$offset}";
-			$query = $this->db->query($query);
-			$this->db->close();
-			$result = array();
-			$result['totalRecords']=$data['main']['total'];
-			$result['curPage']=$_POST['page'];
-			$result['data']=array();
-			$rowNumber=1;
-			foreach ($query->result_array() as $row):
-				$rowResult = array();
-				$rowResult[]=$row['institucion'];
-				$rowResult[]=$row['institucionSlug'];
-				$rowResult[]=$row['paises'];
-				$rowResult[]=$row['revistas'];
-				$rowResult[]=$row['autores'];
-				$rowResult[]=$row['documentos'];
-				$result['data'][]=$rowResult;
-				$rowNumber++;
-			endforeach;
-			$this->output->enable_profiler(false);
-			header('Content-Type: application/json');
-			echo json_encode($result, true);
-			return 0;
-		endif;
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('institucion', 'institucionSlug', 'paises', 'revistas', 'autores', 'documentos');
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionDARP\" {$where}";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionDARP\"";
+		$args['querySlug'] = $query = "SELECT institucion AS unslug FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['slug']}' LIMIT 1";
+		$args['where'] = "WHERE \"institucionSlug\"='{$args['slug']}'";
+		$args['breadcrumbSlug'] = sprintf('%s > %s > %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')));
 		/*Columnas de la tabla*/
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'editable' => false,
 				'title' => _('Institución'),
 				'width' => 200
 			);
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'editable' => false,
 				'hidden' => true,
 				'title' => 'institucionSlug',
 				'width' => 200
 			);
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Países'),
 				'width' => 100,
 			);
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Revistas'),
 				'width' => 100,
 			);
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Autores'),
 				'width' => 100,
 			);
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
 			);
-		$sortBy = array('institucion', 'institucionSlug', 'paises', 'revistas', 'autores', 'documentos');
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución');
+		$data['header']['gridTitle'] = _sprintf('Frecuencia de países, revistas, autores y documentos por institución');
+		$data['main']['breadcrumb'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Institución'));
 		$section = array('', '', '/pais', '/revista', '/autor', '/documento');
-		$data['header']['colModel'] = json_encode($colModel, true);
-		$data['header']['sortBy'] = json_encode($sortBy, true);
 		$data['header']['section'] = json_encode($section, true);
-		$data['header']['sortIndx'] = array_search($order, $sortBy);
-		$data['header']['args'] = pqgrid_args($args);
-		$data['header']['content'] =  $this->load->view('frecuencias_header', $data['header'], TRUE);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('frecuencias_common', $data['main']);
-		$this->load->view('footer');
+		return $this->_renderFrecuency($args, $data);
 	}
 
 	public function institucionDocumentos($slug){
@@ -269,178 +179,140 @@ class Frecuencias extends CI_Controller {
 
 	public function institucionPais(){
 		$args = $this->uri->ruri_to_assoc();
-		$data = array();
-		$order = "documentos";
-		$orderDir = "DESC";
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('pais', 'paisSlug', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('País'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'paisSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$this->load->database();
 		$query = "SELECT institucion FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = $query['institucion'];
 		$this->db->close();
-		if (isset($_POST['ajax'])):
-			$this->load->database();
-			/*Obtniendo el total de registros*/
-			$query = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
-			$query = $this->db->query($query);
-			$query = $query->row_array();
-			$data['main']['total'] = $query['total'];
-			/*Filas de la tabla*/
-			$sort = explode("-", $args['ordenar']);
-			$order = $sort[0];
-			$orderDir = strtoupper($sort[1]);
-			$offset = $args['resultados'] * ($args['pagina']-1);
-			$query = "SELECT * FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY {$order} {$orderDir} LIMIT {$args['resultados']} OFFSET {$offset}";
-			$query = $this->db->query($query);
-			$this->db->close();
-			$result = array();
-			$result['totalRecords']=$data['main']['total'];
-			$result['curPage']=$_POST['page'];
-			$result['data']=array();
-			$rowNumber=1;
-			foreach ($query->result_array() as $row):
-				$rowResult = array();
-				$rowResult[]=$row['pais'];
-				$rowResult[]=$row['paisSlug'];
-				$rowResult[]=$row['documentos'];
-				$result['data'][]=$rowResult;
-				$rowNumber++;
-			endforeach;
-			$this->output->enable_profiler(false);
-			header('Content-Type: application/json');
-			echo json_encode($result, true);
-			return 0;
-		endif;
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", países de publicación', $institucion);
+		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por país de publicación en la institución:<br/> %s', $institucion);
+		$data['main']['breadcrumb'] = sprintf('%s > %s > %s (País)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function institucionRevista(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('revista', 'revistaSlug', 'documentos');
 		/*Columnas de la tabla*/
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'editable' => false,
-				'title' => _('País'),
+				'title' => _('Revista'),
 				'width' => 320
 			);
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'editable' => false,
 				'hidden' => true,
-				'title' => 'paisSlug',
+				'title' => 'revistaSlug',
 				'width' => 200
 			);
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
 			);
-		$sortBy = array('pais', 'paisSlug', 'documentos');
-		/*Datos pra las vistas*/
-		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", países de publicación', $institucion);
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por país de publicación en la institución:<br/> %s', $institucion);
-		$data['header']['colModel'] = json_encode($colModel, true);
-		$data['header']['sortBy'] = json_encode($sortBy, true);
-		$data['header']['sortIndx'] = array_search($order, $sortBy);
-		$data['header']['args'] = pqgrid_args($args);
-		$data['header']['content'] =  $this->load->view('frecuencias_header', $data['header'], TRUE);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s (País)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
-		/*Vistas*/
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('frecuencias_common', $data['main']);
-		$this->load->view('footer');
-	}
-
-	public function institucionRevista(){
-		$args = $this->uri->ruri_to_assoc();
-		$data = array();
-		$order = "documentos";
-		$orderDir = "DESC";
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$this->load->database();
 		$query = "SELECT institucion FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = $query['institucion'];
 		$this->db->close();
-		if (isset($_POST['ajax'])):
-			$this->load->database();
-			/*Obtniendo el total de registros*/
-			$query = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
-			$query = $this->db->query($query);
-			$query = $query->row_array();
-			$data['main']['total'] = $query['total'];
-			/*Filas de la tabla*/
-			$sort = explode("-", $args['ordenar']);
-			$order = $sort[0];
-			$orderDir = strtoupper($sort[1]);
-			$offset = $args['resultados'] * ($args['pagina']-1);
-			$query = "SELECT * FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY {$order} {$orderDir} LIMIT {$args['resultados']} OFFSET {$offset}";
-			$query = $this->db->query($query);
-			$this->db->close();
-			$result = array();
-			$result['totalRecords']=$data['main']['total'];
-			$result['curPage']=$_POST['page'];
-			$result['data']=array();
-			$rowNumber=1;
-			foreach ($query->result_array() as $row):
-				$rowResult = array();
-				$rowResult[]=$row['revista'];
-				$rowResult[]=$row['revistaSlug'];
-				$rowResult[]=$row['documentos'];
-				$result['data'][]=$rowResult;
-				$rowNumber++;
-			endforeach;
-			$this->output->enable_profiler(false);
-			header('Content-Type: application/json');
-			echo json_encode($result, true);
-			return 0;
-		endif;
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", revistas de publicación', $institucion);
+		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por revista de publicación en la institución: <br/>%s', $institucion);
+		$data['main']['breadcrumb'] = sprintf('%s > %s > %s (Revista)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function institucionAutor(){
+				$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('autor', 'autorSlug', 'documentos');
 		/*Columnas de la tabla*/
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'editable' => false,
-				'title' => _('Revista'),
+				'title' => _('Autor'),
 				'width' => 320
 			);
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'editable' => false,
 				'hidden' => true,
-				'title' => 'revistaSlug',
+				'title' => 'autorSlug',
 				'width' => 200
 			);
-		$colModel[] = array(
+		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
 			);
-		$sortBy = array('pais', 'paisSlug', 'documentos');
-		/*Datos pra las vistas*/
-		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", revistas de publicación', $institucion);
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por revista de publicación en la institución: <br/>%s', $institucion);
-		$data['header']['colModel'] = json_encode($colModel, true);
-		$data['header']['sortBy'] = json_encode($sortBy, true);
-		$data['header']['sortIndx'] = array_search($order, $sortBy);
-		$data['header']['args'] = pqgrid_args($args);
-		$data['header']['content'] =  $this->load->view('frecuencias_header', $data['header'], TRUE);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s (Revista)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
-		/*Vistas*/
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('frecuencias_common', $data['main']);
-		$this->load->view('footer');
-	}
-
-	public function institucionAutor(){
-		$args = $this->uri->ruri_to_assoc();
-		$data = array();
-		$order = "documentos";
-		$orderDir = "DESC";
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$this->load->database();
 		$query = "SELECT institucion FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = $query['institucion'];
 		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", autor', $institucion);
+		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en la institución: <br/>%s', $institucion);
+		$data['main']['breadcrumb'] = sprintf('%s > %s > %s (Autor)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	private function _renderFrecuency($args, $data){
+		if ($args['export'] == "excel"):
+			$xls['cols'] = array( _('Autor'), _('Documentos') );
+			$xls['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaAutorDocumentos\" ORDER BY documentos DESC, autor";
+			$xls['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaAutorDocumentos\"";
+			$xls['fileName'] = "Frecuencia-Institucion.xls";
+			$xls['sheetTitle'] = "Frecuencia-> Institución";
+			return $this->_excel($xls);
+		endif;
+		$where = "";
+		if(isset($args['slug'])):
+			$this->load->database();
+			$query = $this->db->query($args['querySlug']);
+			$query = $query->row_array();
+			$this->db->close();
+			$where = $args['where'];
+			$data['main']['breadcrumb'] = sprintf($args['breadcrumbSlug'], $query['unslug']);
+		endif;
 		if (isset($_POST['ajax'])):
 			$this->load->database();
 			/*Obtniendo el total de registros*/
-			$query = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
-			$query = $this->db->query($query);
+			$query = $this->db->query($args['queryTotal']);
 			$query = $query->row_array();
 			$data['main']['total'] = $query['total'];
 			/*Filas de la tabla*/
@@ -448,9 +320,8 @@ class Frecuencias extends CI_Controller {
 			$order = $sort[0];
 			$orderDir = strtoupper($sort[1]);
 			$offset = $args['resultados'] * ($args['pagina']-1);
-			$query = "SELECT * FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY {$order} {$orderDir} LIMIT {$args['resultados']} OFFSET {$offset}";
+			$query = "{$args['query']} {$where} ORDER BY {$order} {$orderDir} LIMIT {$args['resultados']} OFFSET {$offset}";
 			$query = $this->db->query($query);
-			$this->db->close();
 			$result = array();
 			$result['totalRecords']=$data['main']['total'];
 			$result['curPage']=$_POST['page'];
@@ -458,46 +329,25 @@ class Frecuencias extends CI_Controller {
 			$rowNumber=1;
 			foreach ($query->result_array() as $row):
 				$rowResult = array();
-				$rowResult[]=$row['autor'];
-				$rowResult[]=$row['autorSlug'];
-				$rowResult[]=$row['documentos'];
+				foreach ($args['sortBy'] as $col):
+					$rowResult[]=$row[$col];
+				endforeach;
 				$result['data'][]=$rowResult;
 				$rowNumber++;
 			endforeach;
+			$query->free_result();
+			$this->db->close();
 			$this->output->enable_profiler(false);
 			header('Content-Type: application/json');
 			echo json_encode($result, true);
 			return 0;
 		endif;
-		/*Columnas de la tabla*/
-		$colModel[] = array(
-				'editable' => false,
-				'title' => _('Autor'),
-				'width' => 320
-			);
-		$colModel[] = array(
-				'editable' => false,
-				'hidden' => true,
-				'title' => 'autorSlug',
-				'width' => 200
-			);
-		$colModel[] = array(
-				'align' => 'center',
-				'editable' => false,
-				'title' => _('Documentos'),
-				'width' => 100,
-			);
-		$sortBy = array('autor', 'autorSlug', 'documentos');
-		/*Datos pra las vistas*/
-		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", autor', $institucion);
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en la institución: <br/>%s', $institucion);
-		$data['header']['colModel'] = json_encode($colModel, true);
-		$data['header']['sortBy'] = json_encode($sortBy, true);
-		$data['header']['sortIndx'] = array_search($order, $sortBy);
+		/*Vistas*/
+		$data['header']['colModel'] = json_encode($args['cols'], true);
+		$data['header']['sortBy'] = json_encode($args['sortBy'], true);
+		$data['header']['sortIndx'] = array_search($args['defaultOrder'], $args['sortBy']);
 		$data['header']['args'] = pqgrid_args($args);
 		$data['header']['content'] =  $this->load->view('frecuencias_header', $data['header'], TRUE);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s (Autor)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
-		/*Vistas*/
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
 		$this->load->view('frecuencias_common', $data['main']);
