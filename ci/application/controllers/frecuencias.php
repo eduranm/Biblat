@@ -69,30 +69,19 @@ class Frecuencias extends CI_Controller {
 	}
 
 	public function autorDocumentos($slug){
-		$data = array();
-		/*Obtniendo los registros con paginación*/
-		$query = "SELECT {$this->queryFields} FROM autor a INNER JOIN \"mvSearch\" s ON a.iddatabase=s.iddatabase AND a.sistema=s.sistema WHERE a.slug='{$slug}'";
-		$queryCount = "SELECT count(DISTINCT (a.iddatabase, a.sistema)) AS total FROM autor a INNER JOIN \"mvSearch\" s ON a.iddatabase=s.iddatabase AND a.sistema=s.sistema WHERE a.slug='{$slug}'";
-		$perPage = 20;
-		$paginationURL = site_url("frecuencias/autor/{$slug}");
-		$articulosResultado = articulosResultado($query, $queryCount, $paginationURL, $perPage);
+		$args['slug'] = $slug;
+		$args['query'] = "SELECT {$this->queryFields} FROM autor a INNER JOIN \"mvSearch\" s ON a.iddatabase=s.iddatabase AND a.sistema=s.sistema WHERE a.slug='{$slug}'";
+		$args['queryCount'] = "SELECT count(DISTINCT (a.iddatabase, a.sistema)) AS total FROM autor a INNER JOIN \"mvSearch\" s ON a.iddatabase=s.iddatabase AND a.sistema=s.sistema WHERE a.slug='{$slug}'";
+		$args['paginationURL'] = site_url("frecuencias/autor/{$slug}");
 		/*Datos del autor*/
 		$this->load->database();
 		$queryAutor = "SELECT e_100a AS autor FROM autor WHERE slug='{$slug}' LIMIT 1";
 		$queryAutor = $this->db->query($queryAutor);
 		$this->db->close();
 		$queryAutor = $queryAutor->row_array();
-		/*Vistas*/
-		$data['main']['links'] = $articulosResultado['links'];
-		$data['main']['resultados']=$articulosResultado['articulos'];
-		$data['header']['title'] = _sprintf('Biblat - %s (%d documentos)', $data['main']['autor'], $data['main']['total']);
-		$data['header']['slugHighLight']=slugHighLight($slug);
-		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s (%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/autor', _('Autor'), _('title="Autor"')), $queryAutor['autor'], $articulosResultado['totalRows']);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('frecuencias_documentos', $data['main']);
-		$this->load->view('footer');
+		$args['breadcrumb'] = sprintf('%s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/autor', _('Autor'), _('title="Autor"')), $queryAutor['autor']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $queryAutor['autor']);
+		return $this->_renderDocuments($args);
 	}
 
 	public function institucion(){
@@ -151,30 +140,19 @@ class Frecuencias extends CI_Controller {
 	}
 
 	public function institucionDocumentos($slug){
-		$data = array();
-		/*Obtniendo los registros con paginación*/
-		$query = "SELECT DISTINCT ON (sistema, iddatabase) * FROM \"mvInstucionDocumentos\" WHERE \"institucionSlug\"='{$slug}'";
-		$queryCount = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvInstucionDocumentos\" WHERE \"institucionSlug\"='{$slug}'";
-		$perPage = 20;
-		$paginationURL = site_url("frecuencias/institucion/{$slug}/documento");
-		$articulosResultado = articulosResultado($query, $queryCount, $paginationURL, $perPage);
-		/*Datos del autor*/
+		$args['slug'] = $slug;
+		$args['query'] = "SELECT DISTINCT ON (sistema, iddatabase) * FROM \"mvInstucionDocumentos\" WHERE \"institucionSlug\"='{$slug}'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvInstucionDocumentos\" WHERE \"institucionSlug\"='{$slug}'";
+		$args['paginationURL'] = site_url("frecuencias/institucion/{$slug}/documento");
+		/*Datos de la institucion*/
 		$this->load->database();
 		$queryInstitucion = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$slug}' LIMIT 1";
 		$queryInstitucion = $this->db->query($queryInstitucion);
 		$this->db->close();
 		$queryInstitucion = $queryInstitucion->row_array();
-		/*Vistas*/
-		$data['main']['links'] = $articulosResultado['links'];
-		$data['main']['resultados']=$articulosResultado['articulos'];
-		$data['header']['title'] = _sprintf('Biblat - %s (%s documentos)', $queryInstitucion['institucion'], $articulosResultado['totalRows']);
-		$data['header']['slugHighLight']=slugHighLight($slug);
-		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s (%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $queryInstitucion['institucion'], $articulosResultado['totalRows']);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('frecuencias_documentos', $data['main']);
-		$this->load->view('footer');
+		$args['breadcrumb'] = sprintf('%s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $queryInstitucion['institucion']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $queryInstitucion['institucion']);
+		return $this->_renderDocuments($args);
 	}
 
 	public function institucionPais(){
@@ -254,7 +232,7 @@ class Frecuencias extends CI_Controller {
 	}
 
 	public function institucionAutor(){
-				$args = $this->uri->ruri_to_assoc();
+		$args = $this->uri->ruri_to_assoc();
 		$args['defaultOrder'] = "documentos";
 		$args['orderDir'] = "DESC";
 		$args['sortBy'] = array('autor', 'autorSlug', 'documentos');
@@ -354,6 +332,22 @@ class Frecuencias extends CI_Controller {
 		$this->load->view('footer');
 	}
 
+	private function _renderDocuments($args){
+		/*Obtniendo los registros con paginación*/
+		$articulosResultado = articulosResultado($args['query'], $args['queryCount'], $args['paginationURL'], $resultados=20);
+		/*Vistas*/
+		$data = array();
+		$data['main']['links'] = $articulosResultado['links'];
+		$data['main']['resultados']=$articulosResultado['articulos'];
+		$data['header']['title'] = sprintf($args['title'], $articulosResultado['totalRows']);
+		$data['header']['slugHighLight']=slugHighLight($args['slug']);
+		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);
+		$data['main']['breadcrumb'] = sprintf($args['breadcrumb'], $articulosResultado['totalRows']);
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu', $data['header']);
+		$this->load->view('frecuencias_documentos', $data['main']);
+		$this->load->view('footer');
+	}
 	private function _excel($xls){
 		@set_time_limit(3000);
 		//phpinfo(); die();
