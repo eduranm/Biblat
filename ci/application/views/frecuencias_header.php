@@ -57,19 +57,22 @@
 				window.location.href = "<?php echo site_url('frecuencias/autor')?>" + "/" + autorSlug;
 			});
 <?php 	break;
-		case 'institucion':?>
+		case 'institucion':
+		case 'paisAfiliacion':?>
 			jQuery("div#gridTable").on( "pqgridcellclick", function( event, ui ) {
 				section = <?php echo $section?>;
-				institucionSlug=ui.dataModel.data[ui.rowIndxPage][1];
-				window.location.href = "<?php echo site_url('frecuencias/institucion')?>" + "/" + institucionSlug + section[ui.colIndx];
+				slug=ui.dataModel.data[ui.rowIndxPage][1];
+				window.location.href = "<?php echo site_url($this->uri->segment(1).'/'.$this->uri->segment(2))?>" + "/" + slug + section[ui.colIndx];
 			});
 <?php 	break;
 	case 'institucionPais':
 	case 'institucionRevista':
-	case 'institucionAutor':?>	
+	case 'institucionAutor':
+	case 'paisAfiliacionInstitucion':
+	case 'paisAfiliacionAutor':?>	
 			jQuery("div#gridTable").on( "pqgridrowclick", function( event, ui ) {
-				paisSlug=ui.dataModel.data[ui.rowIndxPage][1];
-				window.location.href = "<?php echo current_url()?>" + "/" + paisSlug;
+				slug=ui.dataModel.data[ui.rowIndxPage][1];
+				window.location.href = "<?php echo current_url()?>" + "/" + slug;
 			});	
 <?php 	break;
 		endswitch;?>
@@ -77,8 +80,6 @@
 				selector: 'div#gridTable', 
 				callback: function(key, options) {
 					window.location.href = "<?php echo current_url(1);?>/export/excel"
-					//var m = "clicked: " + key;
-					//window.console && console.log(m) || alert(m); 
 				},
 				items: {
 					"excel": {name: "<?php _e('Exportar a excel');?>", icon: "excel"},

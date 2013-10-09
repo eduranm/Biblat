@@ -185,6 +185,9 @@ UPDATE institucion SET e_100x='Japón' WHERE e_100x='Japòn';
 ALTER TABLE institucion ADD COLUMN slug varchar;
 UPDATE institucion SET slug=slug(e_100u);
 
+ALTER TABLE institucion ADD COLUMN "paisInstitucionSlug" varchar;
+UPDATE institucion SET "paisInstitucionSlug"=slug(e_100x);
+
 CREATE INDEX "idx_institucionDSAI" ON institucion(iddatabase, sistema, sec_autor, sec_institucion);
 
 VACUUM (VERBOSE, FULL) institucion;

@@ -246,7 +246,7 @@ body {
 	border-radius: 5px 5px 0 0;
 }
 
-.menu ul li:hover ul {
+.menu ul li:hover > ul {
     display: block;
     opacity: 1;
     visibility: visible;
@@ -281,6 +281,17 @@ body {
     float: none;
     border-bottom: 1px solid #FFFFFF;
     border-radius: 0 0 5px 5px;
+}
+
+.menu ul ul ul {
+  left: 100%;
+  top: 0;
+  box-shadow: 4px 8px 5px rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.menu ul ul li:hover > ul{
+	display: block;
 }
 
 .searchContainer {

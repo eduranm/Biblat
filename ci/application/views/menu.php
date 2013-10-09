@@ -53,7 +53,14 @@ endif;
 					<ul>
 						<li><a href="javascript:;" title="<?php _e('Descripción');?>"><?php _e('Descripción');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Metodología');?>"><?php _e('Metodología');?></a></li>
-						<li><a href="javascript:;" title="<?php _e('Frecuencias');?>"><?php _e('Frecuencias');?></a></li>
+						<li>
+							<a href="javascript:;" title="<?php _e('Frecuencias');?>"><?php _e('Frecuencias');?></a>
+							<ul>
+								<li><a href="<?php echo site_url('frecuencias/autor');?>" title="<?php _e('Autor');?>"><?php _e('Autor');?></a></li>
+								<li><a href="<?php echo site_url('frecuencias/institucion');?>" title="<?php _e('Institución');?>"><?php _e('Institución');?></a></li>
+								<li><a href="<?php echo site_url('frecuencias/pais-afiliacion');?>" title="<?php _e('País de afiliación del autor');?>"><?php _e('País de afiliación');?></a></li>
+							</ul>
+						</li>
 						<li><a href="<?php echo site_url('indicadores');?>" title="<?php _e('Indicadores');?>"><?php _e('Indicadores');?></a></li>
 					</ul>
 				</li>

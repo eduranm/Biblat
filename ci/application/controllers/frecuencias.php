@@ -353,6 +353,200 @@ class Frecuencias extends CI_Controller {
 		return $this->_renderDocuments($args);
 	}
 
+	public function paisAfiliacion(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('paisInstitucion', 'paisInstitucionSlug', 'instituciones', 'autores', 'documentos');
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaPaisAfiliacion\" {$where}";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaPaisAfiliacion\"";
+		$args['querySlug'] = $query = "SELECT \"paisInstitucion\" AS unslug FROM \"mvFrecuenciaPaisAfiliacion\" WHERE \"paisInstitucionSlug\"='{$args['slug']}' LIMIT 1";
+		$args['where'] = "WHERE \"paisInstitucionSlug\"='{$args['slug']}'";
+		$args['breadcrumbSlug'] = sprintf('%s > %s > %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')));
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('País de afiliación'),
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'institucionSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Instituciones'),
+				'width' => 100,
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Autores'),
+				'width' => 100,
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+			);
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución');
+		$data['header']['gridTitle'] = _sprintf('Frecuencia de instituciones, autores y documentos por país de afiliación del autor');
+		$data['main']['breadcrumb'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="País de afiliación del autor"')), _('País de afiliación'));
+		$section = array('', '', '/institucion', '/autor', '/documento');
+		$data['header']['section'] = json_encode($section, true);
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function paisAfiliacionDocumentos($slug){
+		$args['slug'] = $slug;
+		$args['query'] = "SELECT DISTINCT ON (sistema, iddatabase) * FROM \"mvPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$slug}'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$slug}'";
+		$args['paginationURL'] = site_url("frecuencias/pais-afiliacion/{$slug}/documento");
+		/*Datos del país de afiliacion*/
+		$this->load->database();
+		$query = "SELECT e_100x AS \"paisInstitucion\" FROM institucion WHERE \"paisInstitucionSlug\"='{$slug}' LIMIT 1";
+		$query = $this->db->query($query);
+		$this->db->close();
+		$query = $query->row_array();
+		$args['breadcrumb'] = sprintf('%s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
+		$args['title'] = _sprintf('Biblat - País de afiliación: %s (%%d documentos)', $query['paisInstitucion']);
+		return $this->_renderDocuments($args);
+	}
+
+	public function paisAfiliacionInstitucion(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('institucion', 'institucionSlug', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('Institución'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'institucionSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaPaisAfiliacionInstitucion\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaPaisAfiliacionInstitucion\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
+		$this->load->database();
+		$query = "SELECT \"paisInstitucion\" FROM \"mvFrecuenciaPaisAfiliacionInstitucion\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por país de afiliación "%s", instituciones', $query['paisInstitucion']);
+		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por institución en en el país de afiliación del autor:<br/> %s', $query['paisInstitucion']);
+		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Institución', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function paisAfiliacionInstitucionDocumentos($pais, $institucion){
+		$args['slug'] = $institucion;
+		$args['query'] = "SELECT DISTINCT ON (sistema, iddatabase) * FROM \"mvPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"institucionSlug\"='{$institucion}'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"institucionSlug\"='{$institucion}'";
+		$args['paginationURL'] = site_url("frecuencias/pais-afiliacion/{$pais}/institucion/{$institucion}");
+		/*Datos de la institucion*/
+		$this->load->database();
+		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$institucion = array(
+				'slug' => $institucion,
+				'institucion' => $query['institucion']
+			);
+		/*Datos del país*/
+		$query = "SELECT e_100x AS pais FROM institucion WHERE \"paisInstitucionSlug\"='{$pais}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$pais = array(
+				'slug' => $pais,
+				'pais' => $query['pais']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s > %s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), anchor("frecuencias/pais-afiliacion/{$pais['slug']}/institucion", _sprintf('%s/Institución', $pais['pais']), _("title= \"{$institucion['institucion']}/Institución\"")), $institucion['institucion']);
+		$args['title'] = _sprintf('Biblat - País de afiliación: %s/%s (%%d documentos)', $pais['pais'], $institucion['institucion']);
+		return $this->_renderDocuments($args);
+	}
+
+	public function paisAfiliacionAutor(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('autor', 'autorSlug', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('Autor'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'autorSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaPaisAfiliacionAutor\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaPaisAfiliacionAutor\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
+		$this->load->database();
+		$query = "SELECT \"paisInstitucion\" FROM \"mvFrecuenciaPaisAfiliacionAutor\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias país de afiliación "%s", autores', $query['paisInstitucion']);
+		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en el país de afiliación:<br/> %s', $query['paisInstitucion']);
+		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function paisAfiliacionAutorDocumentos($pais, $autor){
+		$args['slug'] = $autor;
+		$args['query'] = "SELECT DISTINCT ON (sistema, iddatabase) * FROM \"mvPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"autorSlug\"='{$autor}'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"autorSlug\"='{$autor}'";
+		$args['paginationURL'] = site_url("frecuencias/pais-afiliacion/{$pais}/autor/{$autor}");
+		/*Datos del autor*/
+		$this->load->database();
+		$query = "SELECT e_100a AS autor FROM autor WHERE slug='{$autor}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$autor = array(
+				'slug' => $autor,
+				'autor' => $query['autor']
+			);
+		/*Datos del país*/
+		$query = "SELECT e_100x AS pais FROM institucion WHERE \"paisInstitucionSlug\"='{$pais}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$pais = array(
+				'slug' => $pais,
+				'pais' => $query['pais']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s > %s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), anchor("frecuencias/pais-afiliacion/{$pais['slug']}/autor", _sprintf('%s/Autor', $pais['pais']), _("title= \"{$autor['autor']}/Institución\"")), $autor['autor']);
+		$args['title'] = _sprintf('Biblat - País de afiliación: %s/%s (%%d documentos)', $pais['pais'], $autor['autor']);
+		return $this->_renderDocuments($args);
+	}
 
 	private function _renderFrecuency($args, $data){
 		if ($args['export'] == "excel"):

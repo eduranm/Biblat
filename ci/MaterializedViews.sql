@@ -1110,6 +1110,91 @@ SELECT
 
 SELECT create_matview('"mvInstucionAutorDocumentos"', '"vInstucionAutorDocumentos"');
 
+
+--Frecuencia Pais de afiliacion del autor, total de documentos, autores, instituciones
+CREATE OR REPLACE VIEW "vFrecuenciaPaisAfiliacion" AS
+SELECT 
+  max(e_100x) AS "paisInstitucion", 
+  "paisInstitucionSlug", 
+  count(DISTINCT i.slug) AS instituciones,
+  count(DISTINCT a.slug) AS autores,
+  count(DISTINCT (i.iddatabase, i.sistema)) AS documentos
+FROM institucion i
+LEFT JOIN autor a ON
+  i.iddatabase=a.iddatabase AND
+  i.sistema=a.sistema AND
+  i.sec_autor=a.sec_autor
+WHERE i.slug IS NOT NULL GROUP BY "paisInstitucionSlug";
+
+SELECT create_matview('"mvFrecuenciaPaisAfiliacion"', '"vFrecuenciaPaisAfiliacion"'); 
+
+
+--Frecuencia de documentos por: País de afiliacion -> intitucion
+CREATE OR REPLACE VIEW "vFrecuenciaPaisAfiliacionInstitucion" AS
+SELECT 
+  max(e_100x) AS "paisInstitucion", 
+  "paisInstitucionSlug", 
+  max(e_100u) AS institucion,
+  i.slug AS "institucionSlug",
+  count(DISTINCT (i.iddatabase, i.sistema)) AS documentos
+FROM institucion i
+WHERE i.slug IS NOT NULL GROUP BY "paisInstitucionSlug", i.slug;
+
+SELECT create_matview('"mvFrecuenciaPaisAfiliacionInstitucion"', '"vFrecuenciaPaisAfiliacionInstitucion"');
+
+--Frecuencia de documentos por: País de afiliacion -> autor
+CREATE OR REPLACE VIEW "vFrecuenciaPaisAfiliacionAutor" AS
+SELECT 
+  max(e_100x) AS "paisInstitucion", 
+  "paisInstitucionSlug", 
+  max(e_100a) AS autor,
+  a.slug AS "autorSlug",
+  count(DISTINCT (i.iddatabase, i.sistema)) AS documentos
+FROM institucion i
+INNER JOIN autor a ON
+  i.iddatabase=a.iddatabase AND
+  i.sistema=a.sistema AND
+  i.sec_autor=a.sec_autor
+WHERE i.slug IS NOT NULL GROUP BY "paisInstitucionSlug", a.slug;
+
+SELECT create_matview('"mvFrecuenciaPaisAfiliacionAutor"', '"vFrecuenciaPaisAfiliacionAutor"');
+
+--Pais de afiliacion documentos
+CREATE OR REPLACE VIEW "vPaisAfiliacionDocumentos" AS
+SELECT 
+  s.sistema,
+  s.iddatabase,
+  articulo, 
+  "articuloSlug", 
+  revista, 
+  "revistaSlug", 
+  pais, 
+  anio, 
+  volumen, 
+  numero, 
+  periodo, 
+  paginacion, 
+  url, 
+  i."paisInstitucionSlug",
+  i.slug AS "institucionSlug",
+  a.slug AS "autorSlug",
+  "autoresSecJSON",
+  "autoresSecInstitucionJSON",
+  "autoresJSON",
+  "institucionesSecJSON",
+  "institucionesJSON" 
+FROM institucion i
+LEFT JOIN autor a ON
+  i.iddatabase=a.iddatabase AND
+  i.sistema=a.sistema AND
+  i.sec_autor=a.sec_autor AND
+  a.slug IS NOT NULL
+INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema WHERE i.slug IS NOT NULL;
+
+SELECT create_matview('"mvPaisAfiliacionDocumentos"', '"vPaisAfiliacionDocumentos"');
+
+
+
 SELECT slug, array_to_json(array_agg(institucion)) AS instituciones, array_to_json(array_agg(documentos)) AS documentos
 FROM
   (SELECT 
