@@ -59,6 +59,7 @@ endif;
 								<li><a href="<?php echo site_url('frecuencias/autor');?>" title="<?php _e('Autor');?>"><?php _e('Autor');?></a></li>
 								<li><a href="<?php echo site_url('frecuencias/institucion');?>" title="<?php _e('Institución');?>"><?php _e('Institución');?></a></li>
 								<li><a href="<?php echo site_url('frecuencias/pais-afiliacion');?>" title="<?php _e('País de afiliación del autor');?>"><?php _e('País de afiliación');?></a></li>
+								<li><a href="<?php echo site_url('frecuencias/revista');?>" title="<?php _e('Revista');?>"><?php _e('Revista');?></a></li>
 							</ul>
 						</li>
 						<li><a href="<?php echo site_url('indicadores');?>" title="<?php _e('Indicadores');?>"><?php _e('Indicadores');?></a></li>

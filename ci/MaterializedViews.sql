@@ -940,6 +940,32 @@ SELECT create_matview('"mvFrecuenciaAutorDocumentos"', '"vFrecuenciaAutorDocumen
 CREATE INDEX "frecuencuaAutorDocumentos_autor" ON "mvFrecuenciaAutorDocumentos"(autor);
 CREATE INDEX "frecuencuaAutorDocumentos_documentos" ON "mvFrecuenciaAutorDocumentos"(documentos);
 
+--Autor documentos
+CREATE OR REPLACE VIEW "vAutorDocumentos" AS
+SELECT   
+  s.sistema,
+  s.iddatabase,
+  articulo, 
+  "articuloSlug", 
+  revista, 
+  "revistaSlug", 
+  pais, 
+  anio, 
+  volumen, 
+  numero, 
+  periodo, 
+  paginacion, 
+  url,
+  a.slug AS "autorSlug",
+  "autoresSecJSON",
+  "autoresSecInstitucionJSON",
+  "autoresJSON",
+  "institucionesSecJSON",
+  "institucionesJSON" 
+FROM autor a 
+INNER JOIN "mvSearch" s ON 
+a.iddatabase=s.iddatabase AND a.sistema=s.sistema;
+
 --Revistas donde publica la institucion
 CREATE OR REPLACE VIEW "vInstitucionRevistas" AS
 SELECT 
@@ -1093,14 +1119,13 @@ SELECT
   periodo, 
   paginacion, 
   url, 
-  i.slug as "institucionSlug",
+  i.slug AS "institucionSlug",
   "autoresSecJSON",
   "autoresSecInstitucionJSON",
   "autoresJSON",
   "institucionesSecJSON",
-  "institucionesJSON" 
-  autor,
-  a.slug as "autorSlug"
+  "institucionesJSON",
+  a.slug AS "autorSlug"
   FROM institucion i
   INNER JOIN autor a ON
     i.iddatabase=a.iddatabase AND
@@ -1192,6 +1217,64 @@ LEFT JOIN autor a ON
 INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema WHERE i.slug IS NOT NULL;
 
 SELECT create_matview('"mvPaisAfiliacionDocumentos"', '"vPaisAfiliacionDocumentos"');
+
+--Frecuencia de documentos, autores por revista
+CREATE OR REPLACE VIEW "vFrecuenciaRevista" AS
+SELECT 
+  max(revista) AS revista,
+  "revistaSlug",
+  count(DISTINCT a.slug) AS autores,
+  count(DISTINCT(s.sistema, s.iddatabase)) AS documentos
+FROM "mvSearch" s LEFT JOIN autor a ON s.sistema=a.sistema AND s.iddatabase=a.iddatabase
+WHERE "revistaSlug" IS NOT NULL GROUP BY "revistaSlug";
+
+SELECT create_matview('"mvFrecuenciaRevista"', '"vFrecuenciaRevista"');
+
+--Frecuencia de documentos, autores por revista
+CREATE OR REPLACE VIEW "vFrecuenciaRevistaAutor" AS
+SELECT 
+  "revistaSlug",
+  max(a.e_100a) AS autor,
+  a.slug AS "autorSlug",
+  count(DISTINCT(s.sistema, s.iddatabase)) AS documentos
+FROM "mvSearch" s INNER JOIN autor a ON s.sistema=a.sistema AND s.iddatabase=a.iddatabase AND a.slug IS NOT NULL
+WHERE "revistaSlug" IS NOT NULL GROUP BY "revistaSlug", "autorSlug";
+
+SELECT create_matview('"mvFrecuenciaRevistaAutor"', '"vFrecuenciaRevistaAutor"');
+
+--Revista documentos
+CREATE OR REPLACE VIEW "vRevistaDocumentos" AS
+SELECT 
+  s.sistema,
+  s.iddatabase,
+  articulo, 
+  "articuloSlug", 
+  revista, 
+  "revistaSlug", 
+  pais, 
+  anio, 
+  volumen, 
+  numero, 
+  periodo, 
+  paginacion, 
+  url,
+  a.slug AS "autorSlug",
+  "autoresSecJSON",
+  "autoresSecInstitucionJSON",
+  "autoresJSON",
+  "institucionesSecJSON",
+  "institucionesJSON" 
+FROM "mvSearch" s
+LEFT JOIN autor a ON 
+  s.sistema=a.sistema AND
+  s.iddatabase=a.iddatabase AND
+  a.slug IS NOT NULL 
+WHERE s.revista IS NOT NULL;
+
+SELECT create_matview('"mvRevistaDocumentos"', '"vRevistaDocumentos"');
+
+CREATE INDEX "idx_revistaDocumentos" ON "mvRevistaDocumentos"("revistaSlug");
+
 
 
 

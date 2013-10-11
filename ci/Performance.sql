@@ -13,7 +13,7 @@ BEGIN
 	
     result := regexp_replace(result, '-+', '-', 'g');
     result := regexp_replace(result, '-$', '', 'g');
-    RETURN result;
+    RETURN NULLIF(result, '');
 END;
 $BODY$
   LANGUAGE plpgsql IMMUTABLE
@@ -27,7 +27,7 @@ DECLARE
 BEGIN
     result := slug(texto);
     result := regexp_replace(result, '-', ' ', 'g');
-    RETURN result;
+    RETURN NULLIF(result, '');
 END;
 $BODY$
   LANGUAGE plpgsql IMMUTABLE
@@ -84,6 +84,7 @@ UPDATE articulo SET e_300e=NULL WHERE e_300e='';
 UPDATE articulo SET e_504=NULL WHERE e_504='';
 UPDATE articulo SET e_546=NULL WHERE e_546='';
 UPDATE articulo SET e_856u=NULL WHERE e_856u='';
+UPDATE articulo SET e_222=NULL WHERE e_222='';
 UPDATE articulo SET id_disciplina=NULL WHERE id_disciplina<1;
 UPDATE articulo SET e_222='Bioquimia' WHERE e_222='Bioquimía';
 UPDATE articulo SET e_222='Anales del Instituto de Biología. UNAM. Serie zoología' WHERE e_222='Anales del Instituto de Biología. UNAM. Serie Zoología';
@@ -160,6 +161,7 @@ VACUUM (VERBOSE, FULL) articulo;
 
 /*autor*/
 UPDATE autor SET e_1006=NULL WHERE e_1006='';
+UPDATE autor SET e_100a=NULL WHERE e_100a='';
 ALTER TABLE	autor ADD COLUMN slug varchar;
 UPDATE autor SET slug=slug(e_100a);
 

@@ -154,7 +154,7 @@ if ( ! function_exists('slugHighLight') ):
 		$sname = preg_replace("/s/", "[šs]", $sname);
 		$sname = preg_replace("/z/", "[žz]", $sname);
 		$sname = preg_replace("/b/", "[þÞßb]", $sname);
-		$sname = preg_replace("/-+/", "[\\\\\\s.,+&-\\\\\"]+", $sname);
+		$sname = preg_replace("/-+/", "[\\\\\\s.,+&-()\\\\\"]+", $sname);
 		$sname = str_replace("%22", "\\\\b", $sname);
 		
 		return $sname;

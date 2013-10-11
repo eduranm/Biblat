@@ -58,7 +58,8 @@
 			});
 <?php 	break;
 		case 'institucion':
-		case 'paisAfiliacion':?>
+		case 'paisAfiliacion':
+		case 'revista':?>
 			jQuery("div#gridTable").on( "pqgridcellclick", function( event, ui ) {
 				section = <?php echo $section?>;
 				slug=ui.dataModel.data[ui.rowIndxPage][1];
@@ -69,7 +70,8 @@
 	case 'institucionRevista':
 	case 'institucionAutor':
 	case 'paisAfiliacionInstitucion':
-	case 'paisAfiliacionAutor':?>	
+	case 'paisAfiliacionAutor':
+	case 'revistaAutor':?>	
 			jQuery("div#gridTable").on( "pqgridrowclick", function( event, ui ) {
 				slug=ui.dataModel.data[ui.rowIndxPage][1];
 				window.location.href = "<?php echo current_url()?>" + "/" + slug;
