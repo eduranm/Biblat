@@ -128,10 +128,10 @@ CREATE OR REPLACE VIEW "vSearch" AS SELECT
     t.e_022 AS issn, 
     t.e_041 AS idioma, 
     t.e_260b AS anio, 
-    t.e_300a AS volumen, 
-    t.e_300b AS numero, 
-    t.e_300c AS periodo, 
-    t.e_300e AS paginacion, 
+    regexp_replace(t.e_300a, '.*?([0-9]+)', '\1')::varchar AS volumen, 
+    regexp_replace(t.e_300b, '.*?([0-9]+)', '\1')::varchar AS numero, 
+    initcap(t.e_300c)::varchar AS periodo, 
+    regexp_replace(t.e_300e, '^.*?([0-9]+.*)', '\1')::varchar AS paginacion, 
     t.e_856u AS url, 
     t.e_590a AS "tipoDocumento",
     t.e_590b AS "enfoqueDocumento",
@@ -974,7 +974,7 @@ SELECT
   max(revista) AS revista,
   "revistaSlug"
 FROM institucion i
-INNER JOIN "mvSearch" s 
+INNER JOIN "vSearch" s 
   ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema
 GROUP BY "institucionSlug", "revistaSlug";
 
@@ -1007,7 +1007,7 @@ FROM
     count(DISTINCT s."paisSlug") AS paises,
     count(DISTINCT (s.iddatabase, s.sistema)) AS documentos
      FROM institucion i
-     JOIN "mvSearch" s ON i.iddatabase = s.iddatabase AND i.sistema=s.sistema
+     JOIN "vSearch" s ON i.iddatabase = s.iddatabase AND i.sistema=s.sistema
     GROUP BY i.slug) irpd --Institucion revistas, documentos, paises
 INNER JOIN 
   (SELECT
@@ -1035,7 +1035,7 @@ SELECT
   "paisSlug",
   count(DISTINCT (s.iddatabase, s.sistema)) AS documentos
 FROM institucion i
-INNER JOIN "mvSearch" s 
+INNER JOIN "vSearch" s 
   ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema
 GROUP BY "institucionSlug", "paisSlug";
 
@@ -1050,7 +1050,7 @@ SELECT
   "revistaSlug",
   count(DISTINCT (s.iddatabase, s.sistema)) AS documentos
 FROM institucion i
-INNER JOIN "mvSearch" s 
+INNER JOIN "vSearch" s 
   ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema
 GROUP BY "institucionSlug", "revistaSlug";
 
@@ -1083,20 +1083,21 @@ SELECT
   revista, 
   "revistaSlug", 
   pais, 
+  "paisSlug",
   anio, 
   volumen, 
   numero, 
   periodo, 
   paginacion, 
   url, 
-  i.slug as "institucionSlug",
+  i.slug AS "institucionSlug",
   "autoresSecJSON",
   "autoresSecInstitucionJSON",
   "autoresJSON",
   "institucionesSecJSON",
   "institucionesJSON" 
 FROM institucion i 
-INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema;
+INNER JOIN "vSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema;
 
 SELECT create_matview('"mvInstucionDocumentos"', '"vInstucionDocumentos"');
 
@@ -1131,7 +1132,7 @@ SELECT
     i.iddatabase=a.iddatabase AND
     i.sistema=a.sistema AND
     i.sec_autor=a.sec_autor
-  INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema;
+  INNER JOIN "vSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema;
 
 SELECT create_matview('"mvInstucionAutorDocumentos"', '"vInstucionAutorDocumentos"');
 
@@ -1214,7 +1215,7 @@ LEFT JOIN autor a ON
   i.sistema=a.sistema AND
   i.sec_autor=a.sec_autor AND
   a.slug IS NOT NULL
-INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema WHERE i.slug IS NOT NULL;
+INNER JOIN "vSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema WHERE i.slug IS NOT NULL;
 
 SELECT create_matview('"mvPaisAfiliacionDocumentos"', '"vPaisAfiliacionDocumentos"');
 
@@ -1225,7 +1226,7 @@ SELECT
   "revistaSlug",
   count(DISTINCT a.slug) AS autores,
   count(DISTINCT(s.sistema, s.iddatabase)) AS documentos
-FROM "mvSearch" s LEFT JOIN autor a ON s.sistema=a.sistema AND s.iddatabase=a.iddatabase
+FROM "vSearch" s LEFT JOIN autor a ON s.sistema=a.sistema AND s.iddatabase=a.iddatabase
 WHERE "revistaSlug" IS NOT NULL GROUP BY "revistaSlug";
 
 SELECT create_matview('"mvFrecuenciaRevista"', '"vFrecuenciaRevista"');
@@ -1237,7 +1238,7 @@ SELECT
   max(a.e_100a) AS autor,
   a.slug AS "autorSlug",
   count(DISTINCT(s.sistema, s.iddatabase)) AS documentos
-FROM "mvSearch" s INNER JOIN autor a ON s.sistema=a.sistema AND s.iddatabase=a.iddatabase AND a.slug IS NOT NULL
+FROM "vSearch" s INNER JOIN autor a ON s.sistema=a.sistema AND s.iddatabase=a.iddatabase AND a.slug IS NOT NULL
 WHERE "revistaSlug" IS NOT NULL GROUP BY "revistaSlug", "autorSlug";
 
 SELECT create_matview('"mvFrecuenciaRevistaAutor"', '"vFrecuenciaRevistaAutor"');
@@ -1264,7 +1265,7 @@ SELECT
   "autoresJSON",
   "institucionesSecJSON",
   "institucionesJSON" 
-FROM "mvSearch" s
+FROM "vSearch" s
 LEFT JOIN autor a ON 
   s.sistema=a.sistema AND
   s.iddatabase=a.iddatabase AND

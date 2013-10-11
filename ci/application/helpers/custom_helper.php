@@ -268,6 +268,18 @@ if ( ! function_exists('articulosResultado') ):
 				endforeach;
 			endif;
 			/*Creando el detalle de la revista*/
+			if(!empty($row['volumen'])):
+				$row['volumen'] = _sprintf('Vól. %s', $row['volumen']);
+			endif;
+			if(!empty($row['numero'])):
+				$row['numero'] = _sprintf('Núm. %s', $row['numero']);
+			endif;
+			if(!empty($row['periodo'])):
+				$row['periodo'] = ucname($row['periodo']);
+			endif;
+			if(!empty($row['paginacion'])):
+				$row['paginacion'] = _sprintf('Pág. %s', $row['paginacion']);
+			endif;
 			$row['detalleRevista'] = "[{$row['revista']}, {$row['pais']}, {$row['anio']} {$row['volumen']} {$row['numero']} {$row['periodo']}, {$row['paginacion']}]";
 
 			$resultado['articulos'][++$offset] = $row;

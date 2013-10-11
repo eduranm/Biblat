@@ -176,16 +176,7 @@ class Revista extends CI_Controller{
 			endforeach;
 		endif;
 
-		if (isset($articulo['volumen'])):
-			$articulo['volumen'] = preg_replace("/[vV]/", "", $articulo['volumen']);
-		endif;
-
-		if (isset($articulo['numero'])):
-			$articulo['numero'] = preg_replace("/[nN]/", "", $articulo['numero']);
-		endif;
-
 		if (isset($articulo['paginacion'])):
-			$articulo['paginacion'] = preg_replace("/[pP]/", "", $articulo['paginacion']);
 			$articulo['paginacionFirst'] = preg_replace("/[-\s]+/", "", preg_replace('/(^\s*\d+\s*?-|^\s*\d+?\s*$).*/m', '\1', $articulo['paginacion']));
 			$articulo['paginacionLast'] = preg_replace("/[-\s]+/", "", preg_replace('/.*(-\s*\d+\s*?$|^\s*\d+?\s*$).*/m', '\1', $articulo['paginacion']));
 		endif;
