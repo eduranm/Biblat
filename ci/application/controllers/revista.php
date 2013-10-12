@@ -64,6 +64,7 @@ class Revista extends CI_Controller{
 				s.sistema, 
 				s.iddatabase, 
 				s.articulo, 
+				s.\"articuloSlug\",
 				s.revista, 
 				s.\"revistaSlug\", 
 				s.issn, 
@@ -186,8 +187,14 @@ class Revista extends CI_Controller{
 		$data['main']['articulo'] = $articulo;
 		$data['header']['articulo'] = $data['main']['articulo'];
 		$data['header']['title'] = _sprintf('Biblat - Revista: %s - Artículo: %s', $articulo['revista'], $articulo['articulo']);
+		$data['main']['title'] = $data['header']['title'];
 
 		/*Vistas*/
+		if(isset($_POST['ajax'])):
+			$this->output->enable_profiler(FALSE);
+			$this->load->view('revista_articulo', $data['main']);
+			return;
+		endif;
 		$data['header']['content'] =  $this->load->view('revistaArticulo_header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
 		$this->load->view('revista_articulo', $data['main']);

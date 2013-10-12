@@ -234,10 +234,16 @@ if ( ! function_exists('articulosResultado') ):
 			$row['checkBoxValue'] = "{$row['iddatabase']}|{$row['sistema']}";
 			$row['checkBoxId'] = "cbox_{$row['checkBoxValue']}";
 			/*Creando link en caso de que exista texto completo*/
-			$row['articuloLink'] = $row['articulo'];
+			$row['articuloLink'] = anchor("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}", $row['articulo'], "title=\"{$row['articulo']}\" class=\"registro\"");
 			if( $row['url'] != NULL):
-				$row['articuloLink'] = "<a href=\"{$row['url']}\" target=\"_blank\">{$row['articuloLink']}</a>";
+				$img = "<img src=\"".base_url("img/html.png")."\"/>";
+				if(preg_match('/.*pdf.*/', $row['url'])):
+					$img = "<img src=\"".base_url("img/pdf.png")."\"/>";
+				endif;
+				$row['downloadLink'] = "<a href=\"{$row['url']}\" target=\"_blank\" title=\""._('Mostrar artículo en texto completo')."\">{$img}</a>";
 			endif;
+			$row['mendeleyLink'] = "<a target=\"_blank\" href=\"http://www.mendeley.com/import/?url=".urlencode(site_url("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}"))."\" title=\""._('Agregue este articulo a su biblioteca Mendeley')."\"><img src=\"http://www.mendeley.com/graphics/mendeley.png\"></a>";
+
 			/*Creando lista de autores en html*/
 			$row['autoresHTML'] = "";
 			if(isset($row['autores'])):
