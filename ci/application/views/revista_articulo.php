@@ -1,9 +1,9 @@
 <div class="articulo">
 <?php if (isset($articulo)):?>
 	<table>
-		<caption class="titulo centrado"> 
+		<caption class="centrado"> 
 			<?php echo $articulo['articulo'];?>
-			<div class="addthis_toolbox addthis_default_style">
+			<div class="addthis_toolbox addthis_default_style" addthis:url="<?php echo site_url("revista/{$articulo['revistaSlug']}/articulo/{$articulo['articuloSlug']}")?>" addthis:title="<?php echo $title;?>">
 				<a class="addthis_button_mendeley" style="cursor:pointer"></a>
 				<a class="addthis_button_facebook" style="cursor:pointer"></a>
 				<a class="addthis_button_twitter" style="cursor:pointer"></a>

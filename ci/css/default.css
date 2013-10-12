@@ -104,7 +104,6 @@ body {
 
 .highlight {
 	background-color: #FFFF88;
-	font-weight: bold;
 }
 
 .footer {
@@ -853,4 +852,50 @@ div.pq-grid-title{
 
 .context-menu-list [class^="icon-"]:before, [class*=" icon-"]:before {
     display: block;
+}
+
+/*Articulo*/
+.articulo {
+	margin: 0 auto;
+	text-align: center;
+	font-size: 0.8em;
+	color: #666666;
+	position: relative;
+	z-index: 100;
+}
+
+.articulo caption {
+	background: #C56917;
+	color: #FFFFFF;
+	padding: 5px;
+	font-size: 15px;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+.addthis_toolbox{
+	width: 175px; 
+	display:block; 
+	margin:5px auto;
+}
+
+.articulo table{
+	margin: 0 auto;
+	border: 1px solid #C56917;
+	width: 95%;
+	min-width: 580px;
+	background-color: #FEFEFE;
+}
+
+.articulo table td{
+	border-bottom: 1px dotted #999999;
+	text-align: left;
+}
+
+.attributo{
+	white-space: nowrap;
+}
+
+.at-quickshare{
+	z-index: 10000 !important;
 }

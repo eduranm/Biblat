@@ -11,10 +11,12 @@ html {
 	z-index: 100;
 }
 
-.titulo {
+.articulo caption {
 	background: #C56917;
 	color: #FFFFFF;
 	padding: 5px;
+	font-size: 15px;
+	font-weight: bold;
 }
 
 .addthis_toolbox{
@@ -26,8 +28,8 @@ html {
 .articulo table{
 	margin: 0 auto;
 	border: 1px solid #C56917;
-	width: 95%;
-	max-width: 580px;
+	width: 580px;
+	min-width: 580px;
 	background-color: #FEFEFE;
 }
 

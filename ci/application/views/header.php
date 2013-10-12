@@ -7,6 +7,12 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>css/estiloBiblat.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>css/default.css" type="text/css" />
 	<script type="text/javascript" src="<?php echo base_url();?>js/jquery.js"></script>
+	<script type="text/javascript">
+		var addthis_config = addthis_config||{};
+		addthis_config.data_track_addressbar = false;
+		addthis_config.data_track_clickback = false;
+	</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=herz"></script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function()
 		{

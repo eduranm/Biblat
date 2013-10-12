@@ -17,9 +17,16 @@
 					//alert( "Data Saved: " + msg );
 				});
 			});
-			jQuery(".registro").colorbox({rel:'registro', transition:"fade", iframe:true, width:"50%", height:"90%", current:"<?php _printf('Artículo %s de %s', '{current}', '{total}');?>" });
+			jQuery(".registro").colorbox({
+				rel:'registro', 
+				transition:"fade", 
+				data: {ajax:true}, 
+				height:"90%", 
+				current:"<?php _printf('Artículo %s de %s', '{current}', '{total}');?>",
+
+			});
 			jQuery(document).bind('cbox_complete', function(){
-				//jQuery.colorbox.resize();
+				addthis.toolbox('.addthis_toolbox');
 			});
 			jQuery(".resultados").highlight([<?php echo $slugHighLight;?>]);
 		});
