@@ -710,8 +710,8 @@ class Frecuencias extends CI_Controller {
 
 	public function revistaAutorDocumentos($revista, $autor){
 		$args['slug'] = $autor;
-		$args['query'] = "SELECT {$this->queryFields} FROM \"vRevistaDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND \"autorSlug\"='$autor'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vRevistaDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND \"autorSlug\"='{$autor}'";
+		$args['query'] = "SELECT {$this->queryFields} FROM \"mvRevistaDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND \"autorSlug\"='$autor'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvRevistaDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND \"autorSlug\"='{$autor}'";
 		$args['paginationURL'] = site_url("frecuencias/revista/{$revista}/autor/{$autor}");
 		/*Datos de la revista*/
 		$this->load->database();
