@@ -860,8 +860,8 @@ div.pq-grid-title{
 	text-align: center;
 	font-size: 0.8em;
 	color: #666666;
-	position: relative;
 	z-index: 100;
+	padding: 10px 18px;
 }
 
 .articulo caption {
@@ -870,7 +870,6 @@ div.pq-grid-title{
 	padding: 5px;
 	font-size: 15px;
 	font-weight: bold;
-	white-space: nowrap;
 }
 
 .addthis_toolbox{
@@ -882,8 +881,7 @@ div.pq-grid-title{
 .articulo table{
 	margin: 0 auto;
 	border: 1px solid #C56917;
-	width: 95%;
-	min-width: 580px;
+	width: 600px;
 	background-color: #FEFEFE;
 }
 
@@ -899,3 +897,4 @@ div.pq-grid-title{
 .at-quickshare{
 	z-index: 10000 !important;
 }
+

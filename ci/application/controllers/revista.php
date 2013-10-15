@@ -48,9 +48,12 @@ class Revista extends CI_Controller{
 		$data['main']['revista'] = current($articulosResultado['articulos']);
 		$data['main']['revista'] = $data['main']['revista']['revista'];
 		/*Vistas*/
-		$data['header']['content'] =  $this->load->view('revista_header', $data['header'], TRUE);
+		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);
 		$data['header']['title'] = _sprintf('Biblat - Revista: %s', $data['main']['revista']);
+		$breadcrumb = sprintf('%s > %s (%%d documentos)', anchor('revista', _('Revistas'), _('title="Revistas"')), $data['main']['revista']);
+		$data['main']['breadcrumb'] = sprintf($breadcrumb, $articulosResultado['totalRows']);
 		$this->load->view('header', $data['header']);
+		$this->load->view('menu', $data['header']);
 		$this->load->view('revista_index', $data['main']);
 		$this->load->view('footer');
 	}
@@ -197,7 +200,9 @@ class Revista extends CI_Controller{
 		endif;
 		$data['header']['content'] =  $this->load->view('revistaArticulo_header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
-		$this->load->view('revista_articulo', $data['main']);
+		$this->load->view('menu', $data['header']);
+		$data['main']['content'] = $this->load->view('revista_articulo', $data['header'], TRUE);
+		$this->load->view('revista_articulo_content', $data['main']);
 		$this->load->view('footer');
 	}
 }
