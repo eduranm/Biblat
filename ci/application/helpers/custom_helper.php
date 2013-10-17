@@ -268,7 +268,7 @@ if ( ! function_exists('articulosResultado') ):
 				foreach ($row['instituciones'] as $key => $institucion):
 					$row['institucionesHTML'] .= "<sup>{$key}</sup>{$institucion}";
 					if($indexInstitucion < $totalInstituciones):
-						$row['institucionesHTML'] .= "., ";
+						$row['institucionesHTML'] .= "; ";
 					endif;
 					$indexInstitucion++;
 				endforeach;
