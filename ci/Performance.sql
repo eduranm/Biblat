@@ -150,6 +150,10 @@ UPDATE articulo SET e_008='Internacional' WHERE e_222='Revista interamericana de
 /*Normalizando paises*/
 
 UPDATE articulo SET e_008='México' WHERE e_008='Mexico' OR e_008='Mèxico';
+ALTER TABLE articulo ADD COLUMN "revistaSlug" varchar;
+UPDATE articulo SET "revistaSlug"=slug(e_222);
+UPDATE articulo a SET id_disciplina=r.id_disciplina 
+FROM rev_disciplinas r WHERE a."revistaSlug"=r."revistaSlug";
 /*Indices para optimizar las consultas*/
 CREATE INDEX "articuloTextoCompleto_idx" ON articulo(e_856u);	
 CREATE INDEX "articuloAlfabetico_idx" ON articulo(substring(LOWER(e_222), 1, 1));
@@ -183,6 +187,7 @@ UPDATE institucion SET e_100x=NULL WHERE e_100x='';
 UPDATE institucion SET e_100u=NULL WHERE e_100u='';
 UPDATE institucion SET e_100x='México' WHERE e_100x='Mëxico';
 UPDATE institucion SET e_100x='Japón' WHERE e_100x='Japòn';
+UPDATE institucion SET e_100u=regexp_replace(e_100u, '(.+?)(,$|$)', '\1');
 
 ALTER TABLE institucion ADD COLUMN slug varchar;
 UPDATE institucion SET slug=slug(e_100u);
@@ -194,6 +199,9 @@ CREATE INDEX "idx_institucionDSAI" ON institucion(iddatabase, sistema, sec_autor
 
 VACUUM (VERBOSE, FULL) institucion;
 
+--Revidisciplinas
+ALTER TABLE rev_disciplinas ADD COLUMN "revistaSlug" varchar;
+UPDATE rev_disciplinas SET "revistaSlug"=slug(revista);
 
 /**/
 

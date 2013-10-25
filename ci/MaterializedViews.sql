@@ -122,7 +122,7 @@ CREATE OR REPLACE VIEW "vSearch" AS SELECT
     t.e_245 AS articulo,
     slug(t.e_245) AS "articuloSlug",
     t.e_222 AS revista, 
-    slug(t.e_222) AS "revistaSlug", 
+    t."revistaSlug", 
     t.e_008 AS pais, 
     slug(t.e_008) AS "paisSlug", 
     t.e_022 AS issn, 
@@ -202,7 +202,7 @@ CREATE INDEX "searchArticuloSlug_idx" ON "mvSearch"("articuloSlug");
 CREATE INDEX "searchRevistaSlug_idx" ON "mvSearch"("revistaSlug");
 CREATE INDEX "searchAlfabetico_idx" ON "mvSearch"(substring(LOWER(revista), 1, 1));
 CREATE INDEX "searchHevila_idx" ON "mvSearch" USING gin(url gin_trgm_ops);
-#CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin(("generalSlug"::tsvector));
+--CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin(("generalSlug"::tsvector));
 CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin("generalSlug" gin_trgm_ops);
 CREATE INDEX "searchAutoresSlug_idx" ON "mvSearch" USING gin("autoresSlug" gin_trgm_ops);
 CREATE INDEX "searchArticuloSlugGin_idx" ON "mvSearch" USING gin("articuloSlug" gin_trgm_ops);
