@@ -1,4 +1,11 @@
 <div class="contenido">
+	<div class="flagContainer">
+		<p class="flag">
+			<em>
+				<?php _e('Indicadores bibliométricos');?>
+			</em>
+		</p>
+	</div>
 	<form name="generarIndicador" id="generarIndicador" method="POST">
 		<div class="colums">
 			<div class="leftColumn">
