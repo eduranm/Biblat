@@ -875,6 +875,13 @@ div.pq-grid-title{
 	margin:5px auto;
 }
 
+.menuRight .addthis_toolbox{
+	width: 65px; 
+	display:block; 
+	margin:0px auto;
+	text-align: center;
+}
+
 .articulo table{
 	margin: 0 auto;
 	border: 1px solid #C56917;

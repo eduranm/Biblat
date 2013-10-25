@@ -86,6 +86,13 @@ endif;
 		<div class="menu menuRight">
 			<ul>
 				<li>
+					<div class="addthis_toolbox addthis_default_style">
+						<a class="addthis_button_facebook" style="cursor:pointer"></a>
+						<a class="addthis_button_twitter" style="cursor:pointer"></a>
+						<a class="addthis_button_compact"></a>
+					</div>
+				</li>
+				<li>
 					<a href="javascript:;" title="<?php _e('Mapa del sitio');?>"><img border="0" src="<?php echo base_url();?>img/sitemap.png" height="16px" alt="Sitemap"/></a>
 				</li>
 				<li>
