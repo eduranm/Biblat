@@ -49,9 +49,7 @@
 			</p>
 		</div>
 	</div>
-	<div class="cboth"/>
-	<div id="creditos">
+	<div id="creditos" class="cboth">
 		<a href="creditos.html"><?php _e('Créditos');?></a>
 	</div>
-
 </div>
