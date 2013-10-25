@@ -21,7 +21,8 @@
 		<p class="flag">
 			<em>
 				<?php _printf('<i>%s documentos publicados</i>', $search['total']);?>
-<?php if(!$textoCompleto && $search['totalCompleto']) > 0): echo ", ".anchor("{$paginationURL}/texto-completo", _sprintf('<b>mostrar "%s" resultados en texto completo</b>', $search['totalCompleto']), 'title="'._sprintf('mostrar %s resultados en texto completo', $search['totalCompleto']).'"'); else:?>
+<?php if(!$textoCompleto && $search['totalCompleto'] > 0): echo ", ".anchor("{$paginationURL}/texto-completo", _sprintf('<b>mostrar "%s" resultados en texto completo</b>', $search['totalCompleto']), 'title="'._sprintf('mostrar %s resultados en texto completo', $search['totalCompleto']).'"'); endif;?>
+<?php if($textoCompleto):?>	
 				en texto completo
 				<?php endif;?>
 			</em>
