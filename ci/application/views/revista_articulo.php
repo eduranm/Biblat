@@ -95,7 +95,7 @@
 <?php 	if ( isset($articulo['url']) ):?>
 				<tr>
 					<td class="attributo"><?php _e('Texto completo:');?></td>
-					<td><a href="<?php echo $articulo['url']?>"><?php echo $articulo['url']?></a></td>
+					<td><a href="<?php echo $articulo['url']?>" target="_blank"><?php echo $articulo['url']?></a></td>
 				</tr>
 <?php 	endif;?>
 		</tbody>
