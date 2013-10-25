@@ -7,7 +7,9 @@ html, body {
 body {
 	background-color: #FAA94D;
 }
-
+.cboth{
+	clear:both;
+}
 .textoL{
 	font-family: Verdana,Geneva,sans-serif;
 	font-size: 14px;
@@ -490,7 +492,7 @@ body {
     top: 0;
     transform: skew(-10deg, 0deg);
     -webkit-transform: skew(-10deg, 0deg);;
-    margin-top: 0px;
+    margin: 0 0 15px 0;
 }
 
 .flag, .flag em {
@@ -644,22 +646,17 @@ p {
 	max-width: 85%;
 }
 
-#tagCloud {
-	width: 450;
-	height: 400;
-	margin: 0 auto;
-}
-
-.columns {
-	display: inline-block;
-}
 .leftColumn, .rightColumn {
 	width: 472px;
-	height: 100%;
 	padding-bottom: 15px;
 	margin-top: 2px;
 	margin-bottom: 2px;
 	display: inline-block;
+}
+
+.main .leftColumn, .main .rightColumn {
+	display: block;
+	float: left;
 }
 
 .orColumn{

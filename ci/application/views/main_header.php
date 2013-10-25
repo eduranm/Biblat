@@ -5,7 +5,7 @@
 		{
 			var w = 480,
 			h = 300;
-			var fill = d3.scale.category20();
+			var fill = d3.scale.category20c();
 			var fontSize = d3.scale.log().range([10, 100]);
 			d3.layout.cloud().size([w, h])
 				.words([
@@ -20,7 +20,7 @@
 					$indexOfDisciplina++;
 					endforeach;
 ?>])
-				.rotate(function(d) { return ~~(Math.random() * 5) * 30 - 70; })
+				.rotate(function(d) { return 0; })
 				.font("Impact")
 				.fontSize(function(d) { console.log(d); return d.size; })
 				.on("end", draw)
@@ -37,7 +37,7 @@
 					.enter().append("text")
 					.style("font-size", function(d) { return d.size + "px"; })
 					.style("font-family", "Impact")
-					.style("fill", function(d, i) { return fill(i); })
+					.style("fill", "#333333")
 					.on("click", function(d) {window.location = d.link;})
 					.attr("text-anchor", "middle")
 					.attr("transform", function(d) { return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; })
