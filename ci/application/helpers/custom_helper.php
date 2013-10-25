@@ -162,7 +162,7 @@ if ( ! function_exists('slugHighLight') ):
 endif;
 
 if ( ! function_exists('articulosResultado') ):
-	function articulosResultado($query, $queryCount, $paginationURL, $perPage){
+	function articulosResultado($query, $queryCount, $paginationURL, $perPage, $countCompleto=FALSE){
 		/**/
 		$resultado = array();
 		/*Load libraries*/
@@ -175,6 +175,16 @@ if ( ! function_exists('articulosResultado') ):
 			$queryTotalRows = $ci->db->query($queryCount);
 			$queryTotalRows = $queryTotalRows->row_array();
 			$ci->session->set_userdata('query{'.md5($queryCount).'}', $queryTotalRows['total']);
+		endif;
+		if($countCompleto):
+			$queryCountCompleto = "{$queryCount} AND url <> ''";
+			if ( ! $ci->session->userdata('query{'.md5($queryCountCompleto).'}')):
+				$queryTotalCompleto = $ci->db->query($queryCountCompleto);
+				$queryTotalCompleto = $queryTotalCompleto->row_array();
+				$ci->session->set_userdata('query{'.md5($queryCountCompleto).'}', $queryTotalCompleto['total']);
+			endif;
+			$totalCompleto=(int)$ci->session->userdata('query{'.md5($queryCountCompleto).'}');
+			$resultado['totalCompleto'] = $totalCompleto;
 		endif;
 
 		$totalRows=(int)$ci->session->userdata('query{'.md5($queryCount).'}');

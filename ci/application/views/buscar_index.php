@@ -11,7 +11,8 @@
 	<div class="flagContainer">
 		<p class="flag">
 			<em>
-				<?php _printf('<i>(%s documentos publicados en el área de <i><b>%s</b>)</i>', $search['total'], $search['disciplina']);?>
+				<?php _printf('<i>(%s documentos publicados en el área de <b>%s</b>)</i>', $search['total'], $search['disciplina']);?>
+				
 			</em>
 		</p>
 	</div>
@@ -19,7 +20,8 @@
 	<div class="flagContainer">
 		<p class="flag">
 			<em>
-				<?php _printf('<i>(%s documentos publicados</i>)', $search['total']);?>
+				<?php _printf('<i>%s documentos publicados</i>', $search['total']);?>
+				<?php if(!$textoCompleto) echo anchor("{$paginationURL}/texto-completo", _sprintf(', <b>mostrar "%s" resultados en texto completo</b>', $search['totalCompleto']), 'title="'._sprintf('mostrar %s resultados en texto completo', $search['totalCompleto']).'"');?>
 			</em>
 		</p>
 	</div>

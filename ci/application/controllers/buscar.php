@@ -38,8 +38,10 @@ class Buscar extends CI_Controller{
 		$this->load->database();
 		/*Creando la consulta para los resultados*/
 		$whereTextoCompleto = "";
+		$data['main']['textoCompleto'] = FALSE;
 		if ($textoCompleto == "texto-completo"):
 			$whereTextoCompleto = "AND url <> ''";
+			$data['main']['textoCompleto'] = TRUE;
 		endif;
 
 		$whereDisciplina = "";
@@ -87,7 +89,7 @@ class Buscar extends CI_Controller{
 
 		$queryCount = "SELECT count (DISTINCT (s.sistema, 
 					s.iddatabase)) as total {$queryFrom}";
-
+		
 		/*Creando paginacion*/
 		if($disciplina == "null"):
 			$disciplina = array();
@@ -101,15 +103,17 @@ class Buscar extends CI_Controller{
 			$paginationURL = site_url(preg_replace('%[/]+%', '/',"buscar/{$filtro}/{$disciplina['slug']}/{$slug}/{$textoCompleto}"));
 		else:
 			$paginationURL = site_url(preg_replace('%[/]+%', '/',"buscar/{$filtro}/{$disciplina['slug']}/{$slug}"));
+			$data['main']['paginationURL'] = $paginationURL;
 		endif;
 		$perPage = 20;
-		$articulosResultado = articulosResultado($query, $queryCount, $paginationURL, $perPage);
+		$articulosResultado = articulosResultado($query, $queryCount, $paginationURL, $perPage, $countCompleto=TRUE);
 
 		$data['main']['links'] = $articulosResultado['links'];
 		/*Datos de la busqueda*/
 		$data['main']['search']['slug'] = slugSearchClean($slug);
 		$data['main']['search']['disciplina'] = $disciplina['disciplina'];
 		$data['main']['search']['total'] = $articulosResultado['totalRows'];
+		$data['main']['search']['totalCompleto'] = $articulosResultado['totalCompleto'];
 		$data['header']['search'] = $data['main']['search'];
 		$data['header']['slugHighLight']=slugHighLight($slug);
 		/*Resultados de la página*/
