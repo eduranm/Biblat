@@ -248,6 +248,8 @@ body {
 }
 
 .menu ul li:hover > ul {
+	margin-top: -2px;
+	margin-left: 1px;
     display: block;
     opacity: 1;
     visibility: visible;
