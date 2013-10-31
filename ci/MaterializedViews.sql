@@ -1150,9 +1150,10 @@ LEFT JOIN autor a ON
   i.iddatabase=a.iddatabase AND
   i.sistema=a.sistema AND
   i.sec_autor=a.sec_autor
-WHERE i.slug IS NOT NULL GROUP BY "paisInstitucionSlug";
+WHERE i.slug IS NOT NULL AND i.e_100x IS NOT NULL GROUP BY "paisInstitucionSlug";
 
 SELECT create_matview('"mvFrecuenciaPaisAfiliacion"', '"vFrecuenciaPaisAfiliacion"'); 
+
 
 
 --Frecuencia de documentos por: País de afiliacion -> intitucion
@@ -1219,6 +1220,8 @@ INNER JOIN "vSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema WHER
 
 SELECT create_matview('"mvPaisAfiliacionDocumentos"', '"vPaisAfiliacionDocumentos"');
 
+CREATE INDEX ON "mvPaisAfiliacionDocumentos"("paisInstitucionSlug");
+CREATE INDEX ON "mvPaisAfiliacionDocumentos"(iddatabase, sistema);
 --Frecuencia de documentos, autores por revista
 CREATE OR REPLACE VIEW "vFrecuenciaRevista" AS
 SELECT 

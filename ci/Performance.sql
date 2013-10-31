@@ -188,6 +188,7 @@ UPDATE institucion SET e_100u=NULL WHERE e_100u='';
 UPDATE institucion SET e_100x='México' WHERE e_100x='Mëxico';
 UPDATE institucion SET e_100x='Japón' WHERE e_100x='Japòn';
 UPDATE institucion SET e_100u=regexp_replace(e_100u, '(.+?)(,$|$)', '\1');
+UPDATE institucion SET e_100x=regexp_replace(e_100x, '(.+?)(,$|\.$|$)', '\1');
 
 ALTER TABLE institucion ADD COLUMN slug varchar;
 UPDATE institucion SET slug=slug(e_100u);
