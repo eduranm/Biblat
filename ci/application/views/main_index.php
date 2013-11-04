@@ -45,7 +45,7 @@
 				<span class="disponibles"><?php echo number_format($totales['revistas']); ?></span> <?php _e('revistas');?><br />
 				<span class="disponibles"><?php echo number_format($totales['documentos']); ?></span> <?php _e('documentos');?><br />
 				<span class="disponibles"><?php echo number_format($totales['enlaces']); ?></span> <?php _e('textos completos');?><br />
-				<span class="disponibles"><?php echo number_format($totales['hevila']); ?></span> <?php _e('artículos en texto completo en repositorio HEVILA');?>
+				<span class="disponibles"><?php echo number_format($totales['hevila']); ?></span> <?php _e('documentos en texto completo en repositorio HEVILA');?>
 			</p>
 		</div>
 	</div>

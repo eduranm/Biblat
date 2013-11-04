@@ -136,7 +136,7 @@
 					<p class="textoL ident2">
 						Donde:<br/>
 						<i>N<sub>m</sub></i> = Total de documentos con autoría múltiple.<br/>
-						<i>N<sub>s</sub></i> = =  Total de documentos escritos por un solo autor.
+						<i>N<sub>s</sub></i> = Total de documentos escritos por un solo autor.
 					</p>
 				</div>
 
@@ -191,7 +191,7 @@
 					<p class="textoTitulo centrado">Índice de Densidad de Documentos Zakutina y Priyenikova</p>
 					<p class="textoL">
 						Índice que identifica los títulos con mayor densidad de información.<br/>
-						El valor numérico proporciona la cantidad de artículos por revista o por año.
+						El valor numérico proporciona la cantidad de artículos por revista.
 					</p>
 					<p class="textoL ident1">La formulación matemática es:</p>
 					<div class="textoL ident2 formula">
@@ -235,7 +235,7 @@
 				<div id="info-modelo-bradford-revista" class="infoBox">
 					<p class="textoTitulo centrado"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por revista</p>
 					<p class="textoL">
-						Modelo matemático que identifica el núcleo de revistas con mayor densidad de información por temática.<br/>
+						Modelo matemático que identifica el núcleo de revistas con mayor cantidad de información por temática.<br/>
 						Se identifican tres zonas según la cantidad de artículos por revista en la  disciplina:<br/>
 						La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han publicado.<br/>
 						Se muestra la frecuencia de artículos por revista de la disciplina. 
@@ -254,7 +254,7 @@
 				<div id="info-modelo-bradford-institucion" class="infoBox">
 					<p class="textoTitulo centrado"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por instituciones.</p>
 					<p class="textoL">
-						Modelo matemático que identifica el núcleo de instituciones con mayor densidad de información por temática.<br/>
+						Modelo matemático que identifica el núcleo de instituciones con mayor cantidad de información por temática.<br/>
 						Se identifican tres zonas según la cantidad de artículos por institución en la  disciplina:<br/>
 						La zona Núcleo, la 2° y 3°, las instituciones y la cantidad artículos que han publicado.<br/>
 						Se muestra la frecuencia de artículos por institución en disciplina.
@@ -272,8 +272,8 @@
 
 				<div id="info-productividad-exogena" class="infoBox">
 					<p class="textoTitulo centrado">Tasa de autoría exógena</p>
-					<p class="textoL">
-						Indicador que mide la proporción de autoría endógena de la revista.<br/>
+					<p class="textoJ">
+						Indicador que mide el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta al de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores.<br/>
 						El valor numérico indica la proporción de autores extranjeros que han publicado en la revista.<br/>
 					</p>
 					<p class="textoL ident1">La formulación matemática es:</p>

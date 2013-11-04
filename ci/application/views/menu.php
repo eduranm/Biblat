@@ -72,7 +72,7 @@ endif;
 						<li><a href="javascript:;" title="<?php _e('Contacto');?>"><?php _e('Contacto');?></a></li>
 					</ul>
 				</li>
-				<li><a href="javascript:;" title="<?php _e('Políticas de copyright');?>"><?php _e('Políticas de copyright');?></a></li>
+				<li><a href="javascript:;" title="<?php _e('Políticas de acceso');?>"><?php _e('Políticas de acceso');?></a></li>
 				<li>
 					<a href="javascript:;" title="<?php _e('Documentos');?>"><?php _e('Documentos');?></a>
 					<ul>

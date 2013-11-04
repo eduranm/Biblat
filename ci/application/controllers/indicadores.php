@@ -439,7 +439,7 @@ class Indicadores extends CI_Controller {
 						);
 		/*Creando lista de revistas con su total de articulos agrupados según los límites calculados anteriormente*/
 		$column = strtolower($indicador[$_POST['indicador']]['sufix']);
-		$query = "SELECT {$column}, articulos FROM \"mvArticulosDisciplina{$indicador[$_POST['indicador']]['sufix']}\" WHERE id_disciplina={$idDisciplina}";
+		$query = "SELECT {$column}, articulos FROM \"mvArticulosDisciplina{$indicador[$_POST['indicador']]['sufix']}\" WHERE id_disciplina={$idDisciplina} ORDER BY articulos DESC";
 		$query = $this->db->query($query);
 		$revistaInstitucion = array();
 		foreach ($query->result_array() as $row) :
