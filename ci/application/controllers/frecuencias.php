@@ -52,7 +52,7 @@ class Frecuencias extends CI_Controller {
 		$args['cols'][] = array(
 				'editable' => false,
 				'hidden' => true,
-				'title' => _('AutorSlug'),
+				'title' => 'AutorSlug',
 				'width' => 200
 			);
 		$args['cols'][] = array(
