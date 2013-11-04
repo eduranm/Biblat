@@ -58,4 +58,13 @@ class Main extends CI_Controller{
 		$this->load->view('footer');
 		//$this->load->view('main_test');
 	}
+
+	public function creditos(){
+		$data = array();
+		$data['header']['title'] = _("Biblat - Créditos");
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu');
+		$this->load->view('main_creditos');
+		$this->load->view('footer');
+	}
 }

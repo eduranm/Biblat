@@ -50,6 +50,6 @@
 		</div>
 	</div>
 	<div id="creditos" class="cboth">
-		<a href="creditos.html"><?php _e('Créditos');?></a>
+		<a href="<?php echo site_url('creditos');?>"><?php _e('Créditos');?></a>
 	</div>
 </div>

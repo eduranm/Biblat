@@ -43,6 +43,8 @@ $route['404_override'] = '';
 
 $route['setlang/(.*)'] = 'setlang/index/$1';
 
+$route['creditos'] = 'main/creditos';
+
 $route['buscar/(autor|articulo|institucion|revista|tema)/(.*)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';
 $route['buscar/(.*)/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/$1/$2/$3$4';
 $route['buscar/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/null/$1/$2$3';
