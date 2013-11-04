@@ -304,6 +304,7 @@ body {
 
 .menu ul ul li:hover > ul{
 	display: block;
+	margin-left: 0px;
 }
 
 .searchContainer {
