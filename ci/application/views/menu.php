@@ -62,7 +62,21 @@ endif;
 								<li><a href="<?php echo site_url('frecuencias/revista');?>" title="<?php _e('Revista');?>"><?php _e('Revista');?></a></li>
 							</ul>
 						</li>
-						<li><a href="<?php echo site_url('indicadores');?>" title="<?php _e('Indicadores');?>"><?php _e('Indicadores');?></a></li>
+						<li>
+							<a href="<?php echo site_url('indicadores');?>" title="<?php _e('Indicadores');?>"><?php _e('Indicadores');?></a>
+							<ul>
+								<li><a href="<?php echo site_url('indicadores/indice-coautoria');?>" title="<?php _e('Índice de coautoría');?>"><?php _e('Índice de coautoría');?></a></li>
+								<li><a href="<?php echo site_url('indicadores/tasa-documentos-coautorados');?>" title="<?php _e('Tasa de documentos coautorados');?>"><?php _e('Tasa de documentos coautorados');?></a></li>
+								<li><a href="<?php echo site_url('indicadores/grado-colaboracion');?>" title="<?php _e('Grado de colaboración (Índice Subramayan)');?>"><?php _e('Grado de colaboración');?></a></li>
+								<li><a href="<?php echo site_url('indicadores/modelo-elitismo');?>" title="<?php _e('Modelo de elitismo (Price)');?>"><?php _e('Modelo de elitismo');?></a></li>
+								<li><a href="<?php echo site_url('indicadores/indice-colaboracion');?>" title="<?php _e('Índice de colaboración (Índice de Lawani)');?>"><?php _e('Índice de colaboración');?></a></li>
+								<li><a href="<?php echo site_url('indicadores/indice-densidad-documentos');?>" title="<?php _e('Índice de densidad de documentos Zakutina y Priyenikova');?>"><?php _e('Índice de densidad de documentos');?></a></li>
+								<li><a href="<?php echo site_url('indicadores/indice-concentracion');?>" title="<?php _e('Índice de concentración (Índice Pratt)');?>"><?php _e('Índice de concentración');?></a></li>
+								<li><a href="<?php echo site_url('indicadores/modelo-bradford-revista');?>" title="<?php _e('Modelo de Bradford por revista');?>"><?php _e('Modelo de Bradford por revista');?></a></li>
+								<li><a href="<?php echo site_url('indicadores/modelo-bradford-institucion');?>" title="<?php _e('Modelo de Bradford por institución (Afiliación del autor)');?>"><?php _e('Modelo de Bradford por institución');?></a></li>
+								<li><a href="<?php echo site_url('indicadores/productividad-exogena');?>" title="<?php _e('Tasa de autoría exógena');?>"><?php _e('Tasa de autoría exógena');?></a></li>
+							</ul>
+						</li>
 					</ul>
 				</li>
 				<li>
