@@ -29,6 +29,7 @@
 		Dr. Antonio Sánchez Pereyra<br/><br/>
 
 		<b>Diseño gráfico:</b><br/>
+		D.G. Estephanía García López<br/>
 		Ing. Arturo Rendón Cruz<br/>             
 		Mtra. Andrea Sánchez Islas<br/><br/>
 
