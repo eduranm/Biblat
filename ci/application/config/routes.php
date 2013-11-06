@@ -64,7 +64,7 @@ $route['frecuencias/autor/([^/]+)'] = "frecuencias/autorDocumentos/$1";
 $route['frecuencias/autor/([^/]+)/([0-9]+)'] = "frecuencias/autorDocumentos/$1/$2";
 
 $route['frecuencias/institucion/([^/]+)'] = "frecuencias/institucion/slug/$1";
-$route['frecuencias/institucion/([^/]+)/(ordenar/.*)'] = "frecuencias/institucion/slug/$1/$2";
+$route['frecuencias/institucion/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/institucion/slug/$1/$2";
 
 $route['frecuencias/institucion/([^/]+)/documento'] = "frecuencias/institucionDocumentos/$1";
 $route['frecuencias/institucion/([^/]+)/documento/([0-9]+)'] = "frecuencias/institucionDocumentos/$1/$2";
@@ -84,7 +84,7 @@ $route['frecuencias/institucion/(.+?)/\bautor\b(.*)'] = "frecuencias/institucion
 $route['frecuencias/pais-afiliacion'] = "frecuencias/paisAfiliacion";
 $route['frecuencias/pais-afiliacion/(ordenar/.*|export/excel$)'] = "frecuencias/paisAfiliacion/$1";
 $route['frecuencias/pais-afiliacion/([^/]+)'] = "frecuencias/paisAfiliacion/slug/$1";
-$route['frecuencias/pais-afiliacion/([^/]+)/(ordenar/.*)'] = "frecuencias/paisAfiliacion/slug/$1/$2";
+$route['frecuencias/pais-afiliacion/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/paisAfiliacion/slug/$1/$2";
 
 $route['frecuencias/pais-afiliacion/([^/]+)/documento'] = "frecuencias/paisAfiliacionDocumentos/$1";
 $route['frecuencias/pais-afiliacion/([^/]+)/documento/([0-9]+)'] = "frecuencias/paisAfiliacionDocumentos/$1/$2";
@@ -98,7 +98,7 @@ $route['frecuencias/pais-afiliacion/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecu
 $route['frecuencias/pais-afiliacion/(.+?)/\bautor\b(.*)'] = "frecuencias/paisAfiliacionAutor/paisInstitucionSlug/$1$2";
 
 $route['frecuencias/revista/([^/]+)'] = "frecuencias/revista/slug/$1";
-$route['frecuencias/revista/([^/]+)/(ordenar/.*)'] = "frecuencias/revista/slug/$1/$2";
+$route['frecuencias/revista/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/revista/slug/$1/$2";
 
 $route['frecuencias/revista/([^/]+)/documento'] = "frecuencias/revistaDocumentos/$1";
 $route['frecuencias/revista/([^/]+)/documento/([0-9]+)'] = "frecuencias/revistaDocumentos/$1/$2";
