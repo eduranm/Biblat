@@ -918,3 +918,6 @@ div.pq-grid-title{
 	z-index: 10000 !important;
 }
 
+.pq-link .pq-td-div{
+	text-decoration: underline;
+}

@@ -60,6 +60,7 @@ class Frecuencias extends CI_Controller {
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['sortBy'] = array('autor', 'autorSlug', 'documentos');
 		$data = array();
@@ -116,24 +117,28 @@ class Frecuencias extends CI_Controller {
 				'editable' => false,
 				'title' => _('Países'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Revistas'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Autores'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('Institución'), _('Países'), _('Revistas'), _('Autores'), _('Documentos'));
@@ -144,6 +149,7 @@ class Frecuencias extends CI_Controller {
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de países, revistas, autores y documentos por institución');
 		$data['main']['breadcrumb'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Institución'));
 		$section = array('', '', '/pais', '/revista', '/autor', '/documento');
+		$data['header']['section'] = json_encode($section, true);
 		return $this->_renderFrecuency($args, $data);
 	}
 
@@ -185,6 +191,7 @@ class Frecuencias extends CI_Controller {
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
@@ -255,6 +262,7 @@ class Frecuencias extends CI_Controller {
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
@@ -325,6 +333,7 @@ class Frecuencias extends CI_Controller {
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
@@ -404,18 +413,21 @@ class Frecuencias extends CI_Controller {
 				'editable' => false,
 				'title' => _('Instituciones'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Autores'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución');
@@ -464,6 +476,7 @@ class Frecuencias extends CI_Controller {
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaPaisAfiliacionInstitucion\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaPaisAfiliacionInstitucion\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
@@ -533,6 +546,7 @@ class Frecuencias extends CI_Controller {
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaPaisAfiliacionAutor\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaPaisAfiliacionAutor\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
@@ -666,12 +680,14 @@ class Frecuencias extends CI_Controller {
 				'editable' => false,
 				'title' => _('Autores'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por revista');
@@ -724,6 +740,7 @@ class Frecuencias extends CI_Controller {
 				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
+				'className' => 'pq-link'
 			);
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaRevistaAutor\" WHERE \"revistaSlug\"='{$args['revistaSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaRevistaAutor\" WHERE \"revistaSlug\"='{$args['revistaSlug']}'";
