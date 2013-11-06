@@ -66,6 +66,10 @@ class Frecuencias extends CI_Controller {
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por autor');
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor');
 		$data['main']['breadcrumb'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Autor'));
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Autor'), _('Documentos') );
+		$args['xls']['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaAutorDocumentos\" ORDER BY documentos DESC, autor";
+		$args['xls']['fileName'] = "Frecuencia-Autor.xls";
 		return $this->_renderFrecuency($args, $data);
 	}
 
@@ -131,12 +135,15 @@ class Frecuencias extends CI_Controller {
 				'title' => _('Documentos'),
 				'width' => 100,
 			);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Institución'), _('Países'), _('Revistas'), _('Autores'), _('Documentos'));
+		$args['xls']['query'] = "SELECT institucion, paises, revistas, autores, documentos FROM \"mvFrecuenciaInstitucionDARP\" ORDER BY documentos DESC, institucion";
+		$args['xls']['fileName'] = "Frecuencia-Institucion.xls";
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución');
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de países, revistas, autores y documentos por institución');
 		$data['main']['breadcrumb'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Institución'));
 		$section = array('', '', '/pais', '/revista', '/autor', '/documento');
-		$data['header']['section'] = json_encode($section, true);
 		return $this->_renderFrecuency($args, $data);
 	}
 
@@ -191,6 +198,10 @@ class Frecuencias extends CI_Controller {
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", países de publicación', $institucion);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por país de publicación en la institución:<br/> %s', $institucion);
 		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/País', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('País'), _('Documentos'));
+		$args['xls']['query'] = "SELECT pais, documentos FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY documentos DESC, pais";
+		$args['xls']['fileName'] = "Frecuencia-{$institucion}-Paises.xls";
 		return $this->_renderFrecuency($args, $data);
 	}
 
@@ -257,6 +268,10 @@ class Frecuencias extends CI_Controller {
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", revistas de publicación', $institucion);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por revista de publicación en la institución: <br/>%s', $institucion);
 		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Revista', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Revista'), _('Documentos'));
+		$args['xls']['query'] = "SELECT revista, documentos FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY documentos DESC, revista";
+		$args['xls']['fileName'] = "Frecuencia-{$institucion}-Revistas.xls";
 		return $this->_renderFrecuency($args, $data);
 	}
 
@@ -323,6 +338,10 @@ class Frecuencias extends CI_Controller {
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", autor', $institucion);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en la institución: <br/>%s', $institucion);
 		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Autor'), _('Documentos'));
+		$args['xls']['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY documentos DESC, autor";
+		$args['xls']['fileName'] = "Frecuencia-{$institucion}-Autores.xls";
 		return $this->_renderFrecuency($args, $data);
 	}
 
@@ -364,6 +383,10 @@ class Frecuencias extends CI_Controller {
 		$args['querySlug'] = $query = "SELECT e_100x AS unslug FROM institucion WHERE \"paisInstitucionSlug\"='{$args['slug']}' LIMIT 1";
 		$args['where'] = "WHERE \"paisInstitucionSlug\"='{$args['slug']}'";
 		$args['breadcrumbSlug'] = sprintf('%s > %s > %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')));
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('País de afiliación'), _('Instituciones'), _('Autores'), _('Documentos') );
+		$args['xls']['query'] = "SELECT \"paisInstitucion\", instituciones, autores, documentos FROM \"mvFrecuenciaPaisAfiliacion\" ORDER BY documentos DESC, \"paisInstitucion\"";
+		$args['xls']['fileName'] = "Frecuencia-PaisAfiliacion.xls";
 		/*Columnas de la tabla*/
 		$args['cols'][] = array(
 				'editable' => false,
@@ -453,6 +476,10 @@ class Frecuencias extends CI_Controller {
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por país de afiliación "%s", instituciones', $query['paisInstitucion']);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por institución en en el país de afiliación del autor:<br/> %s', $query['paisInstitucion']);
 		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Institución', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Institución'), _('Documentos'));
+		$args['xls']['query'] = "SELECT institucion, documentos FROM \"mvFrecuenciaPaisAfiliacionInstitucion\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' ORDER BY documentos DESC, institucion";
+		$args['xls']['fileName'] = "Frecuencia-{$query['paisInstitucion']}-Instituciones.xls";
 		return $this->_renderFrecuency($args, $data);
 	}
 
@@ -518,6 +545,10 @@ class Frecuencias extends CI_Controller {
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias país de afiliación "%s", autores', $query['paisInstitucion']);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en el país de afiliación:<br/> %s', $query['paisInstitucion']);
 		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Autor'), _('Documentos') );
+		$args['xls']['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaPaisAfiliacionAutor\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' ORDER BY documentos DESC, autor";
+		$args['xls']['fileName'] = "Frecuencia-{$query['paisInstitucion']}-Autores.xls";
 		return $this->_renderFrecuency($args, $data);
 	}
 
@@ -551,12 +582,8 @@ class Frecuencias extends CI_Controller {
 
 	private function _renderFrecuency($args, $data){
 		if ($args['export'] == "excel"):
-			$xls['cols'] = array( _('Autor'), _('Documentos') );
-			$xls['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaAutorDocumentos\" ORDER BY documentos DESC, autor";
-			$xls['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaAutorDocumentos\"";
-			$xls['fileName'] = "Frecuencia-Institucion.xls";
-			$xls['sheetTitle'] = "Frecuencia-> Institución";
-			return $this->_excel($xls);
+			$args['xls']['queryTotal'] = $args['queryTotal'];
+			return $this->_excel($args['xls']);
 		endif;
 		$where = "";
 		if(isset($args['slug'])):
@@ -652,6 +679,10 @@ class Frecuencias extends CI_Controller {
 		$data['main']['breadcrumb'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Revista'));
 		$section = array('', '', '/autor', '/documento');
 		$data['header']['section'] = json_encode($section, true);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Revista'), _('Autores'), _('Documentos') );
+		$args['xls']['query'] = "SELECT revista, autores, documentos FROM \"mvFrecuenciaRevista\" ORDER BY documentos DESC, revista";
+		$args['xls']['fileName'] = "Frecuencia-Revista.xls";
 		return $this->_renderFrecuency($args, $data);
 	}
 
@@ -705,6 +736,10 @@ class Frecuencias extends CI_Controller {
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por revista: %s, autores', $query['revista']);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en la revista:<br/> %s', $query['revista']);
 		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), $query['revista']);
+		/*XML vars*/
+		$args['xls']['cols'] = array( ('Autor'), _('Documentos') );
+		$args['xls']['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaRevistaAutor\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' ORDER BY documentos DESC, autor";
+		$args['xls']['fileName'] = "Frecuencia-{$query['revista']}-Autores.xls";
 		return $this->_renderFrecuency($args, $data);
 	}
 
@@ -777,17 +812,27 @@ class Frecuencias extends CI_Controller {
 			header('Content-Type: application/vnd.ms-excel');
 			header('Content-Disposition: attachment;filename="'.$xls['fileName'].'"'); 
 			header('Cache-Control: max-age=0');
-			echo "\"Autor\", \"Documentos\"\n";
+			$colsTotal=1;
+			foreach ($xls['cols'] as $col):
+				echo "\"{$col}\"";
+				if($colsTotal < count($xls['cols'])):
+					echo ", ";
+				else:
+					echo "\n";
+				endif;
+				$colsTotal++;
+			endforeach;
 			foreach ($query->result_array() as $row):
-				/*$dataRow = array();
-				foreach ($row as $key => $value):
-					$dataRow[] = $value;
-				endforeach;
-				$data[] = $dataRow;*/
-				/*$this->excel->getActiveSheet()->setCellValue("A{$rowNumber}", $row['autor']);
-				$this->excel->getActiveSheet()->setCellValue("B{$rowNumber}", $row['documentos']);
-				$rowNumber++;*/
-				echo "\"{$row['autor']}\", \"{$row['documentos']}\"\n";
+				$colsTotal=1;
+				foreach ($row as $col):
+					echo "\"{$col}\"";
+					if($colsTotal < count($xls['cols'])):
+						echo ", ";
+					else:
+						echo "\n";
+					endif;
+					$colsTotal++;
+				endforeach;	
 			endforeach;
 			$query->free_result();
 			exit();

@@ -82,7 +82,7 @@ $route['frecuencias/institucion/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecuenci
 $route['frecuencias/institucion/(.+?)/\bautor\b(.*)'] = "frecuencias/institucionAutor/institucionSlug/$1$2";
 
 $route['frecuencias/pais-afiliacion'] = "frecuencias/paisAfiliacion";
-$route['frecuencias/pais-afiliacion/(ordenar/.*)'] = "frecuencias/paisAfiliacion/$1";
+$route['frecuencias/pais-afiliacion/(ordenar/.*|export/excel$)'] = "frecuencias/paisAfiliacion/$1";
 $route['frecuencias/pais-afiliacion/([^/]+)'] = "frecuencias/paisAfiliacion/slug/$1";
 $route['frecuencias/pais-afiliacion/([^/]+)/(ordenar/.*)'] = "frecuencias/paisAfiliacion/slug/$1/$2";
 
