@@ -75,12 +75,12 @@
 			<div id="grid"><div id="gridContainer"></div></div>
 			<div id="info">
 				<div id="info-indice-coautoria" class="infoBox">
-					<p class="textoTitulo centrado">Índice de Coautoría</p>
+					<p class="textoTitulo centrado"><?php _e('Índice de Coautoría');?></p>
 					<p class="textoL">
-						Este indicador muestra el número medio de autores por artículo.<br/>
-						El valor numérico indica el promedio de autores por documento.
+						<?php _e('Este indicador muestra el número medio de autores por artículo.');?><br/>
+						<?php _e('El valor numérico indica el promedio de autores por documento.');?>
 					</p>
-					<p class="textoL ident1">La formulación matemática es:</p>
+					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 					<div class="textoL ident2 formula">
 						<span><i>Ic</i> = </span>
 						<div class="fraction">
@@ -90,19 +90,19 @@
 						</div>
 					</div>
 					<p class="textoL ident1">
-						Donde:<br/>
-						<i>Caf</i> = Cantidad de autores firmantes<br/>
-						<i>Cd</i> = Cantidad de documentos
+						<?php _e('Donde:');?><br/>
+						<i>Caf</i> = <?php _e('Cantidad de autores firmantes');?><br/>
+						<i>Cd</i> = <?php _e('Cantidad de documentos');?>
 					</p>
 				</div>
 
 				<div id="info-tasa-documentos-coautorados" class="infoBox">
-					<p class="textoTitulo centrado">Tasa de Documentos Coautorados</p>
+					<p class="textoTitulo centrado"><?php _e('Tasa de Documentos Coautorados');?></p>
 					<p class="textoL">
-						Indicador que determina el promedio de artículos con autoría múltiple.<br/>
-						El valor numérico indica la proporción de artículos con autoría múltiple.
+						<?php _e('Indicador que determina el promedio de artículos con autoría múltiple.');?><br/>
+						<?php _e('El valor numérico indica la proporción de artículos con autoría múltiple.');?>
 					</p>
-					<p class="textoL ident1">La formulación matemática es:</p>
+					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 					<div class="textoL ident2 formula">
 							<i>Tdc</i> = 
 							<div class="fraction">
@@ -112,19 +112,19 @@
 							</div>
 					</div>
 					<p class="textoL ident1">
-						Donde:<br/>
-						<i>Cta</i> = Cantidad total de documentos con autoría multiple<br/>
-						<i>Ctd</i> = Cantidad total de documentos
+						<?php _e('Donde:');?><br/>
+						<i>Cta</i> = <?php _e('Cantidad total de documentos con autoría multiple');?><br/>
+						<i>Ctd</i> = <?php _e('Cantidad total de documentos');?>
 					</p>
 				</div>
 
 				<div id="info-grado-colaboracion" class="infoBox">
-					<p class="textoTitulo centrado">Grado de Colaboración (Índice de Subramayan)</p>
+					<p class="textoTitulo centrado"><?php _e('Grado de Colaboración (Índice de Subramayan)');?></p>
 					<p class="textoL">
-						Indica el promedio de artículos con autoría múltiple.<br/>
-						El valor numérico indica la proporción de artículos con autoría múltiple.
+						<?php _e('Indica el promedio de artículos con autoría múltiple.');?><br/>
+						<?php _e('El valor numérico indica la proporción de artículos con autoría múltiple.');?>
 					</p>
-					<p class="textoL ident1">La formulación matemática es:</p>
+					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 					<div class="textoL formula ident2">
 							<i>GC</i> = 
 							<div class="fraction">
@@ -134,38 +134,38 @@
 							</div>
 					</div>
 					<p class="textoL ident2">
-						Donde:<br/>
-						<i>N<sub>m</sub></i> = Total de documentos con autoría múltiple.<br/>
-						<i>N<sub>s</sub></i> = Total de documentos escritos por un solo autor.
+						<?php _e('Donde:');?><br/>
+						<i>N<sub>m</sub></i> = <?php _e('Total de documentos con autoría múltiple.');?><br/>
+						<i>N<sub>s</sub></i> = <?php _e('Total de documentos escritos por un solo autor.');?>
 					</p>
 				</div>
 
 				<div id="info-modelo-elitismo" class="infoBox">
-					<p class="textoTitulo centrado">Modelo de Elitismo (Price)</p>
+					<p class="textoTitulo centrado"><?php _e('Modelo de Elitismo (Price)');?></p>
 					<p class="textoL">
-						Identifica la cantidad de autores que integran la elite de los más productivos por revista.<br/>
-						El valor numérico representa la cantidad de los autores que integran dicha elite.
+						<?php _e('Identifica la cantidad de autores que integran la elite de los más productivos por revista.');?><br/>
+						<?php _e('El valor numérico representa la cantidad de los autores que integran dicha elite.');?>
 					</p>
-					<p class="textoL ident1">La formulación matemática es:</p>
+					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 					<div class="textoL ident2 formula">
 							<i>E</i> = 
 							<span class="radical">&radic;</span><span class="radicand"><i>N</i></span>
 					</div>
 					<p class="textoL ident1">
-						Donde:<br/>
-						<i>E</i> = Elite de autores que publican el 50% de los trabajos.<br/>
-						<i>N</i> = Población total de autores.
+						<?php _e('Donde:');?><br/>
+						<i>E</i> = <?php _e('Elite de autores que publican el 50% de los trabajos.');?><br/>
+						<i>N</i> = <?php _e('Población total de autores.');?>
 					</p>					
 				</div>
 
 				<div id="info-indice-colaboracion" class="infoBox">
-					<p class="textoTitulo centrado">Índice de Colaboración (Índice de Lawani)</p>
+					<p class="textoTitulo centrado"><?php _e('Índice de Colaboración (Índice de Lawani)');?></p>
 					<p class="textoL">
-						Proporciona el peso promedio del número de autores por artículo.<br/>
-						El valor numérico representa el promedio de autores por artículo.<br/>
-						Además de  visualizar la frecuencia del número de autores por artículo.
+						<?php _e('Proporciona el peso promedio del número de autores por artículo.');?><br/>
+						<?php _e('El valor numérico representa el promedio de autores por artículo.');?><br/>
+						<?php _e('Además de  visualizar la frecuencia del número de autores por artículo.');?>
 					</p>
-					<p class="textoL ident1">La formulación matemática es:</p>
+					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 					<div class="textoL ident2 formula">
 							<i>IC</i> = 
 							<span class="intsuma">
@@ -180,20 +180,20 @@
 							</div>
 					</div>
 					<p class="textoL ident1">
-						Donde:<br/>
-						<i>N</i> = Total de documentos.<br/>
-						<i>j<sub>i</sub></i> = Número de firmas (autores) por documentos.<br/>
-						<i>n<sub>i</sub></i> =  Cantidad de documentos con autoría múltiple.
+						<?php _e('Donde:');?><br/>
+						<i>N</i> = <?php _e('Total de documentos.');?><br/>
+						<i>j<sub>i</sub></i> = <?php _e('Número de firmas (autores) por documentos.');?><br/>
+						<i>n<sub>i</sub></i> =  <?php _e('Cantidad de documentos con autoría múltiple.');?>
 					</p>				
 				</div>
 
 				<div id="info-indice-densidad-documentos" class="infoBox">
-					<p class="textoTitulo centrado">Índice de Densidad de Documentos Zakutina y Priyenikova</p>
+					<p class="textoTitulo centrado"><?php _e('Índice de Densidad de Documentos Zakutina y Priyenikova');?></p>
 					<p class="textoL">
-						Índice que identifica los títulos con mayor densidad de información.<br/>
-						El valor numérico proporciona la cantidad de artículos por revista.
+						<?php _e('Índice que identifica los títulos con mayor densidad de información.');?><br/>
+						<?php _e('El valor numérico proporciona la cantidad de artículos por revista.');?>
 					</p>
-					<p class="textoL ident1">La formulación matemática es:</p>
+					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 					<div class="textoL ident2 formula">
 							<i>p</i> = 
 							<div class="fraction">
@@ -203,19 +203,20 @@
 							</div>
 					</div>
 					<p class="textoL ident1">
-						Donde:<br/>
-						<i>Rn</i> = &sum; Artículos.<br/>
-						<i>N</i> = &sum; Títulos de revistas.
+						<?php _e('Donde');?>:<br/>
+						<i>Rn</i> = &sum; <?php _e('Artículos');?>.<br/>
+						<i>N</i> = &sum; <?php _e('Títulos de revistas');?>.
 					</p>
 				</div>
 
 				<div id="info-indice-concentracion" class="infoBox">
-					<p class="textoTitulo centrado">Índice de concentración (Índice de Pratt)</p>
-					<p class="textoL">
-						Indica el grado de concentración temática de las revistas.<br/>El valor numérico representa el nivel de concentración temática basándose<br/>en sus descriptores.<br/>
-						Se muestra la frecuencia de descriptores.
+					<p class="textoTitulo centrado"><?php _e('Índice de concentración (Índice de Pratt)');?></p>
+					<p class="textoJ">
+						<?php _e('Indica el grado de concentración temática de las revistas.');?><br/>
+						<?php _e('El valor numérico representa el nivel de concentración temática basándose en sus descriptores.');?><br/>
+						<?php _e('Se muestra la frecuencia de descriptores.');?>
 					</p>
-					<p class="textoL ident1">La formulación matemática es:</p>
+					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 					<div class="textoL ident2 formula">
 							<i>C</i> = 
 							<div class="fraction">
@@ -225,58 +226,58 @@
 							</div>
 					</div>
 					<p class="textoL ident1">
-						Donde:<br/>
-						<i>C</i> = Índice de concentración de Pratt.<br/>
-						<i>n</i> = Número de categorías.<br/>
-						<i>q</i> = &sum; del producto del rango por la frecuencia de una categoría dada, <br/>dividido por la cantidad de ítems en todas las categorías.
+						<?php _e('Donde:');?><br/>
+						<i>C</i> = <?php _e('Índice de concentración de Pratt.');?><br/>
+						<i>n</i> = <?php _e('Número de categorías.');?><br/>
+						<i>q</i> = <?php _e('&sum; del producto del rango por la frecuencia de una categoría dada, dividido por la cantidad de ítems en todas las categorías.');?>
 					</p>				
 				</div>
 
 				<div id="info-modelo-bradford-revista" class="infoBox">
-					<p class="textoTitulo centrado"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por revista</p>
+					<p class="textoTitulo centrado"><b><?php _e('Modelo matemático de Bradford');?></b><br/><?php _e('Distribución de artículos por revista');?></p>
 					<p class="textoL">
-						Modelo matemático que identifica el núcleo de revistas con mayor cantidad de información por temática.<br/>
-						Se identifican tres zonas según la cantidad de artículos por revista en la  disciplina:<br/>
-						La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han publicado.<br/>
-						Se muestra la frecuencia de artículos por revista de la disciplina. 
+						<?php _e('Modelo matemático que identifica el núcleo de revistas con mayor cantidad de información por temática.');?><br/>
+						<?php _e('Se identifican tres zonas según la cantidad de artículos por revista en la  disciplina:');?><br/>
+						<?php _e('La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han publicado.');?><br/>
+						<?php _e('Se muestra la frecuencia de artículos por revista de la disciplina.');?> 
 					</p>
-					<p class="textoL ident1">La formulación matemática es:</p>
+					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 					<div class="textoL ident2 formula">
 							<i>p</i>:<i>p</i><sub>1</sub>:<i>p</i><sub>2</sub>:1:<i>n</i><sub>1</sub>:<i>n</i><sub>2</sub>
 					</div>
 					<p class="textoL ident1">
-						Donde:<br/>
-						<i>p</i> = Cantidad de títulos por zona.<br/>
-						<i>n</i> = Multiplicador o factor de proporcionalidad de títulos por zona.
+						<?php _e('Donde:');?><br/>
+						<i>p</i> = <?php _e('Cantidad de títulos por zona.');?><br/>
+						<i>n</i> = <?php _e('Multiplicador o factor de proporcionalidad de títulos por zona.');?>
 					</p>
 				</div>
 
 				<div id="info-modelo-bradford-institucion" class="infoBox">
-					<p class="textoTitulo centrado"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por instituciones.</p>
+					<p class="textoTitulo centrado"><b><?php _e('Modelo matemático de Bradford');?></b><br/><?php _e('Distribución de artículos por instituciones.');?></p>
 					<p class="textoL">
-						Modelo matemático que identifica el núcleo de instituciones con mayor cantidad de información por temática.<br/>
-						Se identifican tres zonas según la cantidad de artículos por institución en la  disciplina:<br/>
-						La zona Núcleo, la 2° y 3°, las instituciones y la cantidad artículos que han publicado.<br/>
-						Se muestra la frecuencia de artículos por institución en disciplina.
+						<?php _e('Modelo matemático que identifica el núcleo de instituciones con mayor cantidad de información por temática.');?><br/>
+						<?php _e('Se identifican tres zonas según la cantidad de artículos por institución en la  disciplina:');?><br/>
+						<?php _e('La zona Núcleo, la 2° y 3°, las instituciones y la cantidad artículos que han publicado.');?><br/>
+						<?php _e('Se muestra la frecuencia de artículos por institución en disciplina.');?>
 					</p>
-					<p class="textoL ident1">La formulación matemática es:</p>
+					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 					<div class="textoL ident2 formula">
 							<i>p</i>:<i>p</i><sub>1</sub>:<i>p</i><sub>2</sub>:1:<i>n</i><sub>1</sub>:<i>n</i><sub>2</sub>
 					</div>
 					<p class="textoL ident1">
-						Donde:<br/>
-						<i>p</i> = Cantidad de instituciones por zona.<br/>
-						<i>n</i> = Multiplicador o factor de proporcionalidad de instituciones por zona.
+						<?php _e('Donde:');?><br/>
+						<i>p</i> = <?php _e('Cantidad de instituciones por zona.');?><br/>
+						<i>n</i> = <?php _e('Multiplicador o factor de proporcionalidad de instituciones por zona.');?>
 					</p>
 				</div>
 
 				<div id="info-productividad-exogena" class="infoBox">
-					<p class="textoTitulo centrado">Tasa de autoría exógena</p>
+					<p class="textoTitulo centrado"><?php _e('Tasa de autoría exógena');?></p>
 					<p class="textoJ">
-						Indicador que mide el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta al de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores.<br/>
-						El valor numérico indica la proporción de autores extranjeros que han publicado en la revista.<br/>
+						<?php _e('Indicador que mide el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta al de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores.');?><br/>
+						<?php _e('El valor numérico indica la proporción de autores extranjeros que han publicado en la revista.');?><br/>
 					</p>
-					<p class="textoL ident1">La formulación matemática es:</p>
+					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 					<div class="formula ident2">
 							<i>TAE</i> =
 							<div class="fraction">
@@ -285,11 +286,11 @@
 								<span class="fdn">&sum;d</span>
 							</div>
 					</div>
-					<p class="textoL ident1">Donde:</p>
+					<p class="textoL ident1"><?php _e('Donde:');?></p>
 					<p class="textoL ident2">
-						TAE = Tasa de autoría exógena<br/>
-						ae	= Autores extranjeros<br/>
-						d	= Total de documentos
+						TAE = <?php _e('Tasa de autoría exógena');?><br/>
+						ae	= <?php _e('Autores extranjeros');?><br/>
+						d	= <?php _e('Total de documentos');?>
 					</p>
 				</div>
 			</div>
