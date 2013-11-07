@@ -134,11 +134,11 @@ endif;
 			<input type="hidden" name="disciplina" value=""/>
 			<input type="hidden" name="filtro" value=""/>
 			<label>
-				<span class="visuallyhidden">Buscar en Biblat</span>
+				<span class="visuallyhidden"><?php _e('Buscar en Biblat');?></span>
 <?php if (isset($search['slug'])) :?>
-				<input type="text" placeholder="Buscar en Biblat" value='<?php echo $search['slug'];?>' name="slug">
+				<input type="text" placeholder="<?php _e('Buscar en Biblat');?>" value='<?php echo $search['slug'];?>' name="slug">
 <?php else:?>
-				<input type="text" placeholder="Buscar en Biblat" value="" name="slug">
+				<input type="text" placeholder="<?php _e('Buscar en Biblat');?>" value="" name="slug">
 <?php endif;?>
 			</label>
 		</form>
