@@ -79,8 +79,8 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-coautoria'] = array(
 			'campoTabla' => "coautoria AS valor FROM \"mvIndiceCoautoriaPrice",
 			'title' => array(
-					'revista' => _('<div class="centrado"><b>Índice de Coautoría</b><br/>Media de autores por artículo en la revista</div>'),
-					'pais' => _('<div class="centrado"><b>Índice de Coautoría</b><br/>Media de autores por articulo en las revistas del país</div>'),
+					'revista' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Media de autores por artículo en la revista').'</div>',
+					'pais' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Media de autores por articulo en las revistas del país').'</div>',
 				),
 			'vTitle' => _('Índice de Coautoría'),
 			'hTitle' => _('Año'),
@@ -92,8 +92,8 @@ class Indicadores extends CI_Controller {
 		$indicador['tasa-documentos-coautorados'] = array(
 			'campoTabla' => "\"tasaCoautoria\" AS valor FROM \"mvTasaCoautoria",
 			'title' => array(
-					'revista' => _('<div class="centrado"><b>Tasa de Documentos Coautorados</b><br/>Media de documentos con autoría múltiple por revista</div>'),
-					'pais' => _('<div class="centrado"><b>Tasa de Documentos Coautorados</b><br/>Media de documentos con autoría múltiple en las revistas del país</div>'),
+					'revista' => '<div class="centrado"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple por revista').'</div>',
+					'pais' => '<div class="centrado"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple en las revistas del país').'</div>',
 				),
 			'vTitle' => _('Tasa de documentos'),
 			'hTitle' => _('Año'),
@@ -105,8 +105,8 @@ class Indicadores extends CI_Controller {
 		$indicador['grado-colaboracion'] = array(
 			'campoTabla' => "subramayan AS valor FROM \"mvSubramayan",
 			'title' => array(
-					'revista' => _('<div class="centrado"><b>Grado de Colaboración (Índice de Subramayan)</b><br/>Proporción de artículos con autoría múltiple</div>'),
-					'pais' => _('<div class="centrado"><b>Grado de Colaboración (Índice de Subramayan)</b><br/>Proporción de artículos con autoría múltiple en las revistas del país</div>'),
+					'revista' => '<div class="centrado"><b>'._('Grado de Colaboración (Índice de Subramayan)').'</b><br/>'._('Proporción de artículos con autoría múltiple').'</div>',
+					'pais' => '<div class="centrado"><b>'._('Grado de Colaboración (Índice de Subramayan)').'</b><br/>'._('Proporción de artículos con autoría múltiple en las revistas del país').'</div>',
 				),
 			'vTitle' => _('Grado de Colaboración'),
 			'hTitle' => _('Año'),
@@ -118,8 +118,8 @@ class Indicadores extends CI_Controller {
 		$indicador['modelo-elitismo'] = array(
 			'campoTabla' => "price AS valor FROM \"mvIndiceCoautoriaPrice",
 			'title' => array(
-					'revista' => _('<div class="centrado"><b>Modelo de Elitismo (Price)</b><br/>Grupo de autores más productivos por revista</div>'),
-					'pais' => _('<div class="centrado"><b>Modelo de Elitismo (Price)</b><br/>Grupo de autores más productivos por revista</div>'),
+					'revista' => '<div class="centrado"><b>'._('Modelo de Elitismo (Price)').'</b><br/>'._('Grupo de autores más productivos por revista').'</div>',
+					'pais' => '<div class="centrado"><b>Modelo de Elitismo (Price)</b><br/>Grupo de autores más productivos por revista</div>',
 				),
 			'vTitle' => _('Cantidad de autores'),
 			'hTitle' => _('Año'),
@@ -131,8 +131,8 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-colaboracion'] = array(
 			'campoTabla' => "lawani AS valor FROM \"mvLawani",
 			'title' => array(
-					'revista' => _('<div class="centrado"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio de autores por artículo.</div>'),
-					'pais' => _('<div class="centrado"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio del número de autores por artículo en las revistas del país</div>'),
+					'revista' => '<div class="centrado"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio de autores por artículo.').'</div>',
+					'pais' => '<div class="centrado"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio del número de autores por artículo en las revistas del país').'</div>',
 				),
 			'vTitle' => _('Índice de Colaboración'),
 			'hTitle' => _('Año'),
@@ -144,7 +144,7 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-densidad-documentos'] = array(
 			'campoTabla' => "zakutina AS valor FROM \"mvZakutina",
 			'title' => array(
-					'revista' => _('<div class="centrado"><b>Índice de Densidad de Documentos Zakutina y Priyenikova</b><br/>Títulos con mayor cantidad de artículos</div>')
+					'revista' => '<div class="centrado"><b>'._('Índice de Densidad de Documentos Zakutina y Priyenikova').'</b><br/>'._('Títulos con mayor cantidad de artículos').'</div>'
 				),
 			'vTitle' => _('Índice de densidad'),
 			'hTitle' => _('Año'),
@@ -272,21 +272,21 @@ class Indicadores extends CI_Controller {
 		$this->output->enable_profiler(false);
 		$indicador['modelo-bradford-revista'] = array(
 				'sufix' => "Revista",
-				'title' => _('<div class="centrado"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por revista</div>'),
-				'tableTitle' => _('<h3>Modelo matemático de Bradford</h3>'),
+				'title' => '<div class="centrado"><b>'._('Modelo matemático de Bradford').'</b><br/>'._('Distribución de artículos por revista').'</div>',
+				'tableTitle' => '<h3>'._('Modelo matemático de Bradford').'</h3>',
 				'hAxisTitle' => _('Logaritmo de la cantidad acumulada de títulos de revista'),
 				'hAxisTitleGroup' => _('Títulos de revista'),
-				'titleGroup' => _('<div class="centrado"><b>Modelo matemático de Bradford</b><br/>Zona %s de revistas más productivas</div>'),
-				'tableTitleGroup' => _('<h3>Zona %s de revistas más productivas</h3>')
+				'titleGroup' => '<div class="centrado"><b>'._('Modelo matemático de Bradford').'</b><br/>'._('Zona %s de revistas más productivas').'</div>',
+				'tableTitleGroup' => '<h3>'._('Zona %s de revistas más productivas').'</h3>'
 			);
 		$indicador['modelo-bradford-institucion'] = array(
 				'sufix' => "Institucion",
-				'title' => _('<div class="centrado"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por instituciones.</div>'),
-				'tableTitle' => _('<h3>Modelo matemático de Bradford por institución (afiliación del autor)</h3>'),
+				'title' => '<div class="centrado"><b>'._('Modelo matemático de Bradford').'</b><br/>'._('Distribución de artículos por instituciones.').'</div>',
+				'tableTitle' => '<h3>'._('Modelo matemático de Bradford por institución (afiliación del autor)').'</h3>',
 				'hAxisTitle' => _('Logaritmo de la cantidad acumulada de instituciones'),
 				'hAxisTitleGroup' => _('Institución'),
-				'titleGroup' => _('<div class="centrado"><b>Modelo matemático de Bradford por institución (afiliación del autor)</b><br/>Zona %s de instituciones más productivas por disciplina</div>'),
-				'tableTitleGroup' => _('<h3>Zona %s de instituciones más productivas por disciplina</h3>')
+				'titleGroup' => '<div class="centrado"><b>'._('Modelo matemático de Bradford por institución (afiliación del autor)').'</b><br/>'._('Zona %s de instituciones más productivas por disciplina').'</div>',
+				'tableTitleGroup' => '<h3>'._('Zona %s de instituciones más productivas por disciplina').'</h3>'
 			);
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
 		$query = "SELECT articulos, frecuencia, \"articulosXfrecuenciaAcumulado\", \"logFrecuenciaAcumulado\" FROM \"vBradford{$indicador[$_POST['indicador']]['sufix']}\" WHERE id_disciplina={$idDisciplina}";
@@ -348,7 +348,7 @@ class Indicadores extends CI_Controller {
 			$ct[] = array('v' => number_format($row['logFrecuenciaAcumulado'], 4, '.', ''));
 			$ct[] = array('v' => $articulosXfrecuenciaAcumulado);
 			if($articulosXfrecuenciaAcumulado <= $grupos['1']['lim']['y']):
-				$c[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['1']['articulos'], $grupos['1']['titulos'] ));
+				$c[] = array('v' => '<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>'._('Zona núcleo').'<br/>'._sprintf('Artículos: %s', $grupos['1']['articulos']).'<br/>'._sprintf('Títulos de revista: %s', $grupos['1']['titulos']).' </div>');
 				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
 				$c[] = array('v' => null);
 				$c[] = array('v' => null);
@@ -357,7 +357,7 @@ class Indicadores extends CI_Controller {
 				if(!$firstGroup['2']):
 					$cc = array();
 					$cc[] = array('v' => round($row['logFrecuenciaAcumulado'], 4));
-					$cc[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['1']['articulos'], $grupos['1']['titulos'] ));
+					$cc[] = array('v' => '<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>'._('Zona núcleo').'<br/>'._sprintf('Artículos: %s', $grupos['1']['articulos']).'<br/>'._sprintf('Títulos de revista: %s', $grupos['1']['titulos']).' </div>');
 					$cc[] = array('v' => $articulosXfrecuenciaAcumulado);
 					$cc[] = array('v' => null);
 					$cc[] = array('v' => null);
@@ -365,7 +365,7 @@ class Indicadores extends CI_Controller {
 					$firstGroup['2'] = true;
 					$rowNumber++;
 				endif;
-				$c[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#dc3912;">&#9632; </span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['2']['articulos'], $grupos['2']['titulos'] ));
+				$c[] = array('v' => '<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>'._('Zona 2').'<br/>'._sprintf('Artículos: %s', $grupos['2']['articulos']).'<br/>'._sprintf('Títulos de revista: %s', $grupos['2']['titulos']).' </div>');
 				$c[] = array('v' => null);
 				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
 				$c[] = array('v' => null);
@@ -374,7 +374,7 @@ class Indicadores extends CI_Controller {
 				if(!$firstGroup['3']):
 					$cc = array();
 					$cc[] = array('v' => round($row['logFrecuenciaAcumulado'], 4));
-					$cc[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#dc3912;">&#9632; </span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['2']['articulos'], $grupos['2']['titulos'] ));
+					$cc[] = array('v' => '<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>'._('Zona 2').'<br/>'._sprintf('Artículos: %s', $grupos['2']['articulos']).'<br/>'._sprintf('Títulos de revista: %s', $grupos['2']['titulos']).' </div>');
 					$cc[] = array('v' => null);
 					$cc[] = array('v' => $articulosXfrecuenciaAcumulado);
 					$cc[] = array('v' => null);
@@ -382,7 +382,7 @@ class Indicadores extends CI_Controller {
 					$firstGroup['3'] = true;
 					$rowNumber++;
 				endif;
-				$c[] = array('v' => _sprintf('<div class="chartTootip"><span style="color:#ff9900;">&#9632; </span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>', $grupos['3']['articulos'], $grupos['3']['titulos'] ));
+				$c[] = array('v' => '<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>'._('Zona 3').'<br/>'._sprintf('Artículos: %s', $grupos['3']['articulos']).'<br/>'._sprintf('Títulos de revista: %s', $grupos['3']['titulos']).' </div>');
 				$c[] = array('v' => null);
 				$c[] = array('v' => null);
 				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
@@ -471,7 +471,7 @@ class Indicadores extends CI_Controller {
 					'v' => (int)$articulos
 				);
 			$c[] = array(
-					'v' => _sprintf('<div class="chartTootip"><b>%s</b><br/>Cantidad de artículos: %s</div>', $label, $articulos)
+					'v' =>  sprintf('<div class="chartTootip"><b>%s</b><br/>', $label)._sprintf('Cantidad de artículos: %s', $articulos).'</div>'
 				);
 			/*Agregando filas a la tabla*/
 			$ct = array();
@@ -495,7 +495,7 @@ class Indicadores extends CI_Controller {
 					'v' => (int)$articulos
 				);
 			$c[] = array(
-					'v' => _sprintf('<div class="chartTootip"><b>%s</b><br/>Cantidad de artículos: %s</div>', $revista, $articulos)
+					'v' => printf('<div class="chartTootip"><b>%s</b><br/>', $revista)._sprintf('Cantidad de artículos: %s', $articulos).'</div>'
 				);
 			/*Agregando filas a la tabla*/
 			$ct = array();
@@ -580,13 +580,13 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-concentracion'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", pratt AS indicador FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
 				'title' => _('Índice de concentración temática'), 
-				'chartTitle' => _('<div id="chartTitle"><div class="centrado"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de concentración temática</div></div>'),
+				'chartTitle' => '<div id="chartTitle"><div class="centrado"><b>'._('Índice de concentración (Índice de Pratt)').'</b><br/>'._('Distribución decreciente de las revistas considerando su grado de concentración temática').'</div></div>',
 				'tooltip' => "<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">Nivel de especialización de la revista: %s</div>"
 			);
 		$indicador['productividad-exogena'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", exogena AS indicador FROM \"mvProductividadExogena\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
 				'title' => _('Proporción de autoría exógena'), 
-				'chartTitle' => _('<div id="chartTitle" class="centrado"><b>Tasa de autoría exógena</b><br/>Distribución decreciente de las revistas considerando la proporción de autoría exógena</div>'),
+				'chartTitle' => '<div id="chartTitle" class="centrado"><b>'._('Tasa de autoría exógena').'</b><br/>'._('Distribución decreciente de las revistas considerando la proporción de autoría exógena').'</div>',
 				'tooltip' => "<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">Proporción de autores extranjeros: %s</div>"
 			);
 		$query = $indicador[$_POST['indicador']]['sql'];

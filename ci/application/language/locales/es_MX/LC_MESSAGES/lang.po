@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-07 16:03-0600\n"
-"PO-Revision-Date: 2013-11-07 16:04-0600\n"
+"POT-Creation-Date: 2013-11-07 16:46-0600\n"
+"PO-Revision-Date: 2013-11-07 16:46-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -260,6 +260,12 @@ msgstr "Mapa del sitio"
 #: application/views/menu.php:113
 msgid "Ayuda"
 msgstr "Ayuda"
+
+#: application/views/menu.php:137
+#: application/views/menu.php:139
+#: application/views/menu.php:141
+msgid "Buscar en Biblat"
+msgstr "Buscar en Biblat"
 
 #: application/views/indicadores_index.php:5
 msgid "Indicadores bibliométricos"
@@ -668,6 +674,42 @@ msgstr "Palabras clave:"
 msgid "Texto completo:"
 msgstr "Texto completo:"
 
+#: application/views/main_creditos.php:10
+msgid "Director General"
+msgstr "<i>(%s documentos publicados en el área de <b>%s</b>)</i>"
+
+#: application/views/main_creditos.php:13
+msgid "Subdirectora de Servicios de Información Especializada"
+msgstr "Subdirectora de Servicios de Información Especializada"
+
+#: application/views/main_creditos.php:16
+msgid "Subdirector de Informática"
+msgstr "Subdirector de Informática"
+
+#: application/views/main_creditos.php:19
+msgid "Secretario Técnico de Informática y Telecomunicaciones"
+msgstr "Secretario Técnico de Informática y Telecomunicaciones"
+
+#: application/views/main_creditos.php:22
+msgid "Departamento de Bibliografía Latinoamericana"
+msgstr "Departamento de Bibliografía Latinoamericana"
+
+#: application/views/main_creditos.php:25
+msgid "Diseño y programación de frecuencias e indicadores bibliométricos"
+msgstr "Diseño y programación de frecuencias e indicadores bibliométricos"
+
+#: application/views/main_creditos.php:31
+msgid "Diseño gráfico"
+msgstr "Diseño gráfico"
+
+#: application/views/main_creditos.php:36
+msgid "Traducción de textos"
+msgstr "Traducción de textos"
+
+#: application/views/main_creditos.php:40
+msgid "Responsable de la sección Políticas de acceso"
+msgstr "Responsable de la sección Políticas de acceso"
+
 #: application/controllers/indice.php:14
 #, php-format
 msgid "Biblat - Indice alfabético \"%s\""
@@ -727,12 +769,12 @@ msgid "Año"
 msgstr "Año"
 
 #: application/controllers/indicadores.php:82
-msgid "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por artículo en la revista</div>"
-msgstr "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por artículo en la revista</div>"
+msgid "Media de autores por artículo en la revista"
+msgstr "Media de autores por artículo en la revista"
 
 #: application/controllers/indicadores.php:83
-msgid "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por articulo en las revistas del país</div>"
-msgstr "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por articulo en las revistas del país</div>"
+msgid "Media de autores por articulo en las revistas del país"
+msgstr "Media de autores por articulo en las revistas del país"
 
 #: application/controllers/indicadores.php:88
 #, php-format
@@ -745,12 +787,12 @@ msgid "Promedio de autores por artículo en las revistas del país en el año %s
 msgstr "Promedio de autores por artículo en las revistas del país en el año %s: %s"
 
 #: application/controllers/indicadores.php:95
-msgid "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de documentos con autoría múltiple por revista</div>"
-msgstr "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de documentos con autoría múltiple por revista</div>"
+msgid "Media de documentos con autoría múltiple por revista"
+msgstr "Media de documentos con autoría múltiple por revista"
 
 #: application/controllers/indicadores.php:96
-msgid "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de documentos con autoría múltiple en las revistas del país</div>"
-msgstr "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de documentos con autoría múltiple en las revistas del país</div>"
+msgid "Media de documentos con autoría múltiple en las revistas del país"
+msgstr "Media de documentos con autoría múltiple en las revistas del país"
 
 #: application/controllers/indicadores.php:98
 msgid "Tasa de documentos"
@@ -767,12 +809,12 @@ msgid "Promedio de artículos en coautoría en las revistas del país en el año
 msgstr "Promedio de artículos en coautoría en las revistas del país en el año %s: %s"
 
 #: application/controllers/indicadores.php:108
-msgid "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</b><br/>Proporción de artículos con autoría múltiple</div>"
-msgstr "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</b><br/>Proporción de artículos con autoría múltiple</div>"
+msgid "Proporción de artículos con autoría múltiple"
+msgstr "Proporción de artículos con autoría múltiple"
 
 #: application/controllers/indicadores.php:109
-msgid "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</b><br/>Proporción de artículos con autoría múltiple en las revistas del país</div>"
-msgstr "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</b><br/>Proporción de artículos con autoría múltiple en las revistas del país</div>"
+msgid "Proporción de artículos con autoría múltiple en las revistas del país"
+msgstr "Proporción de artículos con autoría múltiple en las revistas del país"
 
 #: application/controllers/indicadores.php:111
 msgid "Grado de Colaboración"
@@ -789,9 +831,8 @@ msgid "Promedio de artículos con autoría múltiple en las revistas del país e
 msgstr "Promedio de artículos con autoría múltiple en las revistas del país en el año %s: %s"
 
 #: application/controllers/indicadores.php:121
-#: application/controllers/indicadores.php:122
-msgid "<div class=\"centrado\"><b>Modelo de Elitismo (Price)</b><br/>Grupo de autores más productivos por revista</div>"
-msgstr "<div class=\"centrado\"><b>Modelo de Elitismo (Price)</b><br/>Grupo de autores más productivos por revista</div>"
+msgid "Grupo de autores más productivos por revista"
+msgstr "Grupo de autores más productivos por revista"
 
 #: application/controllers/indicadores.php:124
 msgid "Cantidad de autores"
@@ -804,12 +845,12 @@ msgid "Cantidad de autores que conforman la elite en el año %s: %s"
 msgstr "Cantidad de autores que conforman la elite en el año %s: %s"
 
 #: application/controllers/indicadores.php:134
-msgid "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio de autores por artículo.</div>"
-msgstr "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio de autores por artículo.</div>"
+msgid "Peso promedio de autores por artículo."
+msgstr "Peso promedio de autores por artículo."
 
 #: application/controllers/indicadores.php:135
-msgid "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio del número de autores por artículo en las revistas del país</div>"
-msgstr "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio del número de autores por artículo en las revistas del país</div>"
+msgid "Peso promedio del número de autores por artículo en las revistas del país"
+msgstr "Peso promedio del número de autores por artículo en las revistas del país"
 
 #: application/controllers/indicadores.php:137
 msgid "Índice de Colaboración"
@@ -826,8 +867,8 @@ msgid "Promedio de coautores por articulo en las revistas del país en el año %
 msgstr "Promedio de coautores por articulo en las revistas del país en el año %s: %s"
 
 #: application/controllers/indicadores.php:147
-msgid "<div class=\"centrado\"><b>Índice de Densidad de Documentos Zakutina y Priyenikova</b><br/>Títulos con mayor cantidad de artículos</div>"
-msgstr "<div class=\"centrado\"><b>Índice de Densidad de Documentos Zakutina y Priyenikova</b><br/>Títulos con mayor cantidad de artículos</div>"
+msgid "Títulos con mayor cantidad de artículos"
+msgstr "Títulos con mayor cantidad de artículos"
 
 #: application/controllers/indicadores.php:149
 msgid "Índice de densidad"
@@ -846,14 +887,6 @@ msgstr "Revista/Año"
 msgid "País/Año"
 msgstr "País/Año"
 
-#: application/controllers/indicadores.php:275
-msgid "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por revista</div>"
-msgstr "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por revista</div>"
-
-#: application/controllers/indicadores.php:276
-msgid "<h3>Modelo matemático de Bradford</h3>"
-msgstr "<h3>Modelo matemático de Bradford</h3>"
-
 #: application/controllers/indicadores.php:277
 #: application/controllers/indicadores.php:308
 msgid "Logaritmo de la cantidad acumulada de títulos de revista"
@@ -866,50 +899,44 @@ msgid "Títulos de revista"
 msgstr "Títulos de revista"
 
 #: application/controllers/indicadores.php:279
-#, php-format
-msgid "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Zona %s de revistas más productivas</div>"
-msgstr "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Zona %s de revistas más productivas</div>"
-
 #: application/controllers/indicadores.php:280
 #, php-format
-msgid "<h3>Zona %s de revistas más productivas</h3>"
-msgstr "<h3>Zona %s de revistas más productivas</h3>"
-
-#: application/controllers/indicadores.php:284
-msgid "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por instituciones.</div>"
-msgstr "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por instituciones.</div>"
+msgid "Zona %s de revistas más productivas"
+msgstr "Zona %s de revistas más productivas"
 
 #: application/controllers/indicadores.php:285
-msgid "<h3>Modelo matemático de Bradford por institución (afiliación del autor)</h3>"
-msgstr "<h3>Modelo matemático de Bradford por institución (afiliación del autor)</h3>"
+#: application/controllers/indicadores.php:288
+msgid "Modelo matemático de Bradford por institución (afiliación del autor)"
+msgstr "Modelo matemático de Bradford por institución (afiliación del autor)"
 
 #: application/controllers/indicadores.php:286
 msgid "Logaritmo de la cantidad acumulada de instituciones"
 msgstr "Logaritmo de la cantidad acumulada de instituciones"
 
 #: application/controllers/indicadores.php:288
-#, php-format
-msgid "<div class=\"centrado\"><b>Modelo matemático de Bradford por institución (afiliación del autor)</b><br/>Zona %s de instituciones más productivas por disciplina</div>"
-msgstr "<div class=\"centrado\"><b>Modelo matemático de Bradford por institución (afiliación del autor)</b><br/>Zona %s de instituciones más productivas por disciplina</div>"
-
 #: application/controllers/indicadores.php:289
 #, php-format
-msgid "<h3>Zona %s de instituciones más productivas por disciplina</h3>"
-msgstr "<h3>Zona %s de instituciones más productivas por disciplina</h3>"
+msgid "Zona %s de instituciones más productivas por disciplina"
+msgstr "Zona %s de instituciones más productivas por disciplina"
 
 #: application/controllers/indicadores.php:302
 msgid "log(fx)"
 msgstr "log(fx)"
 
 #: application/controllers/indicadores.php:304
+#: application/controllers/indicadores.php:351
+#: application/controllers/indicadores.php:360
 msgid "Zona núcleo"
 msgstr "Zona núcleo"
 
 #: application/controllers/indicadores.php:305
+#: application/controllers/indicadores.php:368
+#: application/controllers/indicadores.php:377
 msgid "Zona 2"
 msgstr "Zona 2"
 
 #: application/controllers/indicadores.php:306
+#: application/controllers/indicadores.php:385
 msgid "Zona 3"
 msgstr "Zona 3"
 
@@ -920,20 +947,21 @@ msgstr "Cantidad acumulada de artículos"
 
 #: application/controllers/indicadores.php:351
 #: application/controllers/indicadores.php:360
-#, php-format
-msgid "<div class=\"chartTootip\"><span style=\"color:#3366cc;\">&#9632; </span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
-msgstr "<div class=\"chartTootip\"><span style=\"color:#3366cc;\">&#9632; </span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
-
 #: application/controllers/indicadores.php:368
 #: application/controllers/indicadores.php:377
-#, php-format
-msgid "<div class=\"chartTootip\"><span style=\"color:#dc3912;\">&#9632; </span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
-msgstr "<div class=\"chartTootip\"><span style=\"color:#dc3912;\">&#9632; </span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
-
 #: application/controllers/indicadores.php:385
 #, php-format
-msgid "<div class=\"chartTootip\"><span style=\"color:#ff9900;\">&#9632; </span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
-msgstr "<div class=\"chartTootip\"><span style=\"color:#ff9900;\">&#9632; </span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+msgid "Artículos: %s"
+msgstr "Artículos: %s"
+
+#: application/controllers/indicadores.php:351
+#: application/controllers/indicadores.php:360
+#: application/controllers/indicadores.php:368
+#: application/controllers/indicadores.php:377
+#: application/controllers/indicadores.php:385
+#, php-format
+msgid "Títulos de revista: %s"
+msgstr "Títulos de revista: %s"
 
 #: application/controllers/indicadores.php:464
 #: application/controllers/indicadores.php:488
@@ -952,6 +980,10 @@ msgid "Cantidad de artículos"
 msgstr "Cantidad de artículos"
 
 #: application/controllers/indicadores.php:474
+#, php-format
+msgid "Cantidad de artículos: %s"
+msgstr "Cantidad de artículos: %s"
+
 #: application/controllers/indicadores.php:498
 #, php-format
 msgid "<div class=\"chartTootip\"><b>%s</b><br/>Cantidad de artículos: %s</div>"
@@ -970,8 +1002,8 @@ msgid "Proporción de autoría exógena"
 msgstr "Proporción de autoría exógena"
 
 #: application/controllers/indicadores.php:589
-msgid "<div id=\"chartTitle\" class=\"centrado\"><b>Tasa de autoría exógena</b><br/>Distribución decreciente de las revistas considerando la proporción de autoría exógena</div>"
-msgstr "<div id=\"chartTitle\" class=\"centrado\"><b>Tasa de autoría exógena</b><br/>Distribución decreciente de las revistas considerando la proporción de autoría exógena</div>"
+msgid "Distribución decreciente de las revistas considerando la proporción de autoría exógena"
+msgstr "Distribución decreciente de las revistas considerando la proporción de autoría exógena"
 
 #: application/controllers/indicadores.php:688
 msgid "Descriptor"
@@ -1255,6 +1287,137 @@ msgstr "Núm. %s"
 #, php-format
 msgid "Pág. %s"
 msgstr "Pág. %s"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/"
+#~ ">Distribución de artículos por revista</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/"
+#~ ">Distribución de artículos por revista</div>"
+
+#~ msgid "<h3>Modelo matemático de Bradford</h3>"
+#~ msgstr "<h3>Modelo matemático de Bradford</h3>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Zona %s "
+#~ "de revistas más productivas</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Zona %s "
+#~ "de revistas más productivas</div>"
+
+#~ msgid "<h3>Zona %s de revistas más productivas</h3>"
+#~ msgstr "<h3>Zona %s de revistas más productivas</h3>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/"
+#~ ">Distribución de artículos por instituciones.</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/"
+#~ ">Distribución de artículos por instituciones.</div>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford por institución "
+#~ "(afiliación del autor)</b><br/>Zona %s de instituciones más productivas "
+#~ "por disciplina</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford por institución "
+#~ "(afiliación del autor)</b><br/>Zona %s de instituciones más productivas "
+#~ "por disciplina</div>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Índice de Densidad de Documentos Zakutina y "
+#~ "Priyenikova</b><br/>Títulos con mayor cantidad de artículos</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Índice de Densidad de Documentos Zakutina y "
+#~ "Priyenikova</b><br/>Títulos con mayor cantidad de artículos</div>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores "
+#~ "por artículo en la revista</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores "
+#~ "por artículo en la revista</div>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores "
+#~ "por articulo en las revistas del país</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores "
+#~ "por articulo en las revistas del país</div>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media "
+#~ "de documentos con autoría múltiple por revista</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media "
+#~ "de documentos con autoría múltiple por revista</div>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media "
+#~ "de documentos con autoría múltiple en las revistas del país</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media "
+#~ "de documentos con autoría múltiple en las revistas del país</div>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</"
+#~ "b><br/>Proporción de artículos con autoría múltiple</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</"
+#~ "b><br/>Proporción de artículos con autoría múltiple</div>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</"
+#~ "b><br/>Proporción de artículos con autoría múltiple en las revistas del "
+#~ "país</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</"
+#~ "b><br/>Proporción de artículos con autoría múltiple en las revistas del "
+#~ "país</div>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Modelo de Elitismo (Price)</b><br/>Grupo de "
+#~ "autores más productivos por revista</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Modelo de Elitismo (Price)</b><br/>Grupo de "
+#~ "autores más productivos por revista</div>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</"
+#~ "b><br/>Peso promedio de autores por artículo.</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</"
+#~ "b><br/>Peso promedio de autores por artículo.</div>"
+
+#~ msgid ""
+#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</"
+#~ "b><br/>Peso promedio del número de autores por artículo en las revistas "
+#~ "del país</div>"
+#~ msgstr ""
+#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</"
+#~ "b><br/>Peso promedio del número de autores por artículo en las revistas "
+#~ "del país</div>"
+
+#~ msgid ""
+#~ "<div class=\"chartTootip\"><span style=\"color:#3366cc;\">&#9632; </"
+#~ "span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ msgstr ""
+#~ "<div class=\"chartTootip\"><span style=\"color:#3366cc;\">&#9632; </"
+#~ "span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+
+#~ msgid ""
+#~ "<div class=\"chartTootip\"><span style=\"color:#dc3912;\">&#9632; </"
+#~ "span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ msgstr ""
+#~ "<div class=\"chartTootip\"><span style=\"color:#dc3912;\">&#9632; </"
+#~ "span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+
+#~ msgid ""
+#~ "<div class=\"chartTootip\"><span style=\"color:#ff9900;\">&#9632; </"
+#~ "span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ msgstr ""
+#~ "<div class=\"chartTootip\"><span style=\"color:#ff9900;\">&#9632; </"
+#~ "span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
 
 #, fuzzy
 #~ msgid "AutorSlug"
