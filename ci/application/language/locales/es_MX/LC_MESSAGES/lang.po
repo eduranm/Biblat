@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-07 16:46-0600\n"
-"PO-Revision-Date: 2013-11-07 16:46-0600\n"
+"POT-Creation-Date: 2013-11-08 13:07-0600\n"
+"PO-Revision-Date: 2013-11-08 13:07-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -51,7 +51,7 @@ msgid "No se encontraron resultados para la búsqueda por: \"%s\""
 msgstr "No se encontraron resultados para la búsqueda por: \"%s\""
 
 #: application/views/frecuencias_index.php:5
-#: application/views/menu.php:57
+#: application/views/menu.php:54
 msgid "Frecuencias"
 msgstr "Frecuencias"
 
@@ -96,174 +96,174 @@ msgstr "documentos en texto completo en repositorio HEVILA"
 msgid "Créditos"
 msgstr "Créditos"
 
-#: application/views/menu.php:42
+#: application/views/menu.php:39
 msgid "¿Qué es Biblat?"
 msgstr "¿Qué es Biblat?"
 
-#: application/views/menu.php:44
+#: application/views/menu.php:41
 msgid "Biblat"
 msgstr "Biblat"
 
-#: application/views/menu.php:45
+#: application/views/menu.php:42
 msgid "Clase y Periódica"
 msgstr "Clase y Periódica"
 
-#: application/views/menu.php:46
+#: application/views/menu.php:43
 msgid "Tutoriales"
 msgstr "Tutoriales"
 
-#: application/views/menu.php:47
+#: application/views/menu.php:44
 msgid "Materiales de difusión"
 msgstr "Materiales de difusión"
 
-#: application/views/menu.php:48
+#: application/views/menu.php:45
 msgid "Manual de indización"
 msgstr "Manual de indización"
 
-#: application/views/menu.php:52
+#: application/views/menu.php:49
 msgid "Bibliometría"
 msgstr "Bibliometría"
 
-#: application/views/menu.php:54
+#: application/views/menu.php:51
 msgid "Descripción"
 msgstr "Descripción"
 
-#: application/views/menu.php:55
+#: application/views/menu.php:52
 msgid "Metodología"
 msgstr "Metodología"
 
-#: application/views/menu.php:59
+#: application/views/menu.php:56
 msgid "Autor"
 msgstr "Autor"
 
-#: application/views/menu.php:60
+#: application/views/menu.php:57
 msgid "Institución"
 msgstr "Institución"
 
-#: application/views/menu.php:61
+#: application/views/menu.php:58
 msgid "País de afiliación del autor"
 msgstr "País de afiliación del autor"
 
-#: application/views/menu.php:61
+#: application/views/menu.php:58
 msgid "País de afiliación"
 msgstr "País de afiliación"
 
-#: application/views/menu.php:62
+#: application/views/menu.php:59
 msgid "Revista"
 msgstr "Revista"
 
-#: application/views/menu.php:66
+#: application/views/menu.php:63
 msgid "Indicadores"
 msgstr "Indicadores"
 
-#: application/views/menu.php:68
+#: application/views/menu.php:65
 msgid "Índice de coautoría"
 msgstr "Índice de coautoría"
 
-#: application/views/menu.php:69
+#: application/views/menu.php:66
 msgid "Tasa de documentos coautorados"
 msgstr "Tasa de documentos coautorados"
 
-#: application/views/menu.php:70
+#: application/views/menu.php:67
 msgid "Grado de colaboración (Índice Subramayan)"
 msgstr "Grado de colaboración (Índice Subramayan)"
 
-#: application/views/menu.php:70
+#: application/views/menu.php:67
 msgid "Grado de colaboración"
 msgstr "Grado de colaboración"
 
-#: application/views/menu.php:71
+#: application/views/menu.php:68
 msgid "Modelo de elitismo (Price)"
 msgstr "Modelo de elitismo (Price)"
 
-#: application/views/menu.php:71
+#: application/views/menu.php:68
 msgid "Modelo de elitismo"
 msgstr "Modelo de elitismo"
 
-#: application/views/menu.php:72
+#: application/views/menu.php:69
 msgid "Índice de colaboración (Índice de Lawani)"
 msgstr "Índice de colaboración (Índice de Lawani)"
 
-#: application/views/menu.php:72
+#: application/views/menu.php:69
 msgid "Índice de colaboración"
 msgstr "Índice de colaboración"
 
-#: application/views/menu.php:73
+#: application/views/menu.php:70
 msgid "Índice de densidad de documentos Zakutina y Priyenikova"
 msgstr "Índice de densidad de documentos Zakutina y Priyenikova"
 
-#: application/views/menu.php:73
+#: application/views/menu.php:70
 msgid "Índice de densidad de documentos"
 msgstr "Índice de densidad de documentos"
 
-#: application/views/menu.php:74
+#: application/views/menu.php:71
 msgid "Índice de concentración (Índice Pratt)"
 msgstr "Índice de concentración (Índice Pratt)"
 
-#: application/views/menu.php:74
+#: application/views/menu.php:71
 msgid "Índice de concentración"
 msgstr "Índice de concentración"
 
-#: application/views/menu.php:75
+#: application/views/menu.php:72
 msgid "Modelo de Bradford por revista"
 msgstr "Modelo de Bradford por revista"
 
-#: application/views/menu.php:76
+#: application/views/menu.php:73
 msgid "Modelo de Bradford por institución (Afiliación del autor)"
 msgstr "Modelo de Bradford por institución (Afiliación del autor)"
 
-#: application/views/menu.php:76
+#: application/views/menu.php:73
 msgid "Modelo de Bradford por institución"
 msgstr "Modelo de Bradford por institución"
 
-#: application/views/menu.php:77
+#: application/views/menu.php:74
 msgid "Tasa de autoría exógena"
 msgstr "Tasa de autoría exógena"
 
-#: application/views/menu.php:83
+#: application/views/menu.php:80
 msgid "Postular una revista"
 msgstr "Postular una revista"
 
-#: application/views/menu.php:85
+#: application/views/menu.php:82
 msgid "Criterios de selección de revistas"
 msgstr "Criterios de selección de revistas"
 
-#: application/views/menu.php:86
-#: application/views/menu.php:116
+#: application/views/menu.php:83
+#: application/views/menu.php:113
 msgid "Contacto"
 msgstr "Contacto"
 
-#: application/views/menu.php:89
+#: application/views/menu.php:86
 msgid "Políticas de acceso"
 msgstr "Políticas de acceso"
 
-#: application/views/menu.php:91
+#: application/views/menu.php:88
 msgid "Documentos"
 msgstr "Documentos"
 
-#: application/views/menu.php:93
+#: application/views/menu.php:90
 msgid "Bibliografía"
 msgstr "Bibliografía"
 
-#: application/views/menu.php:94
+#: application/views/menu.php:91
 msgid "Presentaciones PPT"
 msgstr "Presentaciones PPT"
 
-#: application/views/menu.php:95
+#: application/views/menu.php:92
 msgid "Archivos multimedia"
 msgstr "Archivos multimedia"
 
-#: application/views/menu.php:110
+#: application/views/menu.php:107
 msgid "Mapa del sitio"
 msgstr "Mapa del sitio"
 
-#: application/views/menu.php:113
+#: application/views/menu.php:110
 msgid "Ayuda"
 msgstr "Ayuda"
 
-#: application/views/menu.php:137
-#: application/views/menu.php:139
-#: application/views/menu.php:141
+#: application/views/menu.php:134
+#: application/views/menu.php:136
+#: application/views/menu.php:138
 msgid "Buscar en Biblat"
 msgstr "Buscar en Biblat"
 
@@ -710,558 +710,554 @@ msgstr "Traducción de textos"
 msgid "Responsable de la sección Políticas de acceso"
 msgstr "Responsable de la sección Políticas de acceso"
 
-#: application/controllers/indice.php:14
+#: application/controllers/indice.php:13
 #, php-format
 msgid "Biblat - Indice alfabético \"%s\""
 msgstr "Biblat - Indice alfabético \"%s\""
 
-#: application/controllers/indice.php:63
+#: application/controllers/indice.php:62
 #, php-format
 msgid "Biblat - Indice por disciplina \"%s\""
 msgstr "Biblat - Indice por disciplina \"%s\""
 
-#: application/controllers/indice.php:96
+#: application/controllers/indice.php:95
 #, php-format
 msgid "Biblat - Indice por país: \"%s\""
 msgstr "Biblat - Indice por país: \"%s\""
 
-#: application/controllers/buscar.php:27
+#: application/controllers/buscar.php:26
 msgid "Tema"
 msgstr "Tema"
 
-#: application/controllers/buscar.php:28
+#: application/controllers/buscar.php:27
 msgid "Artículo"
 msgstr "Artículo"
 
-#: application/controllers/buscar.php:34
+#: application/controllers/buscar.php:33
 #, php-format
 msgid "Biblat - Búsqueda %s: \"%s\""
 msgstr "Biblat - Búsqueda %s: \"%s\""
 
-#: application/controllers/buscar.php:36
+#: application/controllers/buscar.php:35
 #, php-format
 msgid "Resultados de la búsqueda: %s"
 msgstr "Resultados de la búsqueda: %s"
 
-#: application/controllers/buscar.php:60
+#: application/controllers/buscar.php:59
 #, php-format
 msgid "Biblat - Búsqueda por %s: \"%s\""
 msgstr "Biblat - Búsqueda por %s: \"%s\""
 
-#: application/controllers/buscar.php:61
+#: application/controllers/buscar.php:60
 #, php-format
 msgid "Resultados de la búsqueda por %s: %s"
 msgstr "Resultados de la búsqueda por %s: %s"
 
-#: application/controllers/indicadores.php:62
+#: application/controllers/indicadores.php:61
 #, php-format
 msgid "Biblat - Indicador: %s"
 msgstr "Biblat - Indicador: %s"
 
-#: application/controllers/indicadores.php:71
-#: application/controllers/indicadores.php:86
-#: application/controllers/indicadores.php:99
-#: application/controllers/indicadores.php:112
-#: application/controllers/indicadores.php:125
-#: application/controllers/indicadores.php:138
-#: application/controllers/indicadores.php:150
+#: application/controllers/indicadores.php:70
+#: application/controllers/indicadores.php:85
+#: application/controllers/indicadores.php:98
+#: application/controllers/indicadores.php:111
+#: application/controllers/indicadores.php:124
+#: application/controllers/indicadores.php:137
+#: application/controllers/indicadores.php:149
 msgid "Año"
 msgstr "Año"
 
-#: application/controllers/indicadores.php:82
+#: application/controllers/indicadores.php:81
 msgid "Media de autores por artículo en la revista"
 msgstr "Media de autores por artículo en la revista"
 
-#: application/controllers/indicadores.php:83
+#: application/controllers/indicadores.php:82
 msgid "Media de autores por articulo en las revistas del país"
 msgstr "Media de autores por articulo en las revistas del país"
 
-#: application/controllers/indicadores.php:88
+#: application/controllers/indicadores.php:87
 #, php-format
 msgid "Promedio de autores por artículo en el año %s: %s"
 msgstr "Promedio de autores por artículo en el año %s: %s"
 
-#: application/controllers/indicadores.php:89
+#: application/controllers/indicadores.php:88
 #, php-format
 msgid "Promedio de autores por artículo en las revistas del país en el año %s: %s"
 msgstr "Promedio de autores por artículo en las revistas del país en el año %s: %s"
 
-#: application/controllers/indicadores.php:95
+#: application/controllers/indicadores.php:94
 msgid "Media de documentos con autoría múltiple por revista"
 msgstr "Media de documentos con autoría múltiple por revista"
 
-#: application/controllers/indicadores.php:96
+#: application/controllers/indicadores.php:95
 msgid "Media de documentos con autoría múltiple en las revistas del país"
 msgstr "Media de documentos con autoría múltiple en las revistas del país"
 
-#: application/controllers/indicadores.php:98
+#: application/controllers/indicadores.php:97
 msgid "Tasa de documentos"
 msgstr "Tasa de documentos"
 
-#: application/controllers/indicadores.php:101
+#: application/controllers/indicadores.php:100
 #, php-format
 msgid "Promedio de artículos en coautoría en el año %s: %s"
 msgstr "Promedio de artículos en coautoría en el año %s: %s"
 
-#: application/controllers/indicadores.php:102
+#: application/controllers/indicadores.php:101
 #, php-format
 msgid "Promedio de artículos en coautoría en las revistas del país en el año %s: %s"
 msgstr "Promedio de artículos en coautoría en las revistas del país en el año %s: %s"
 
-#: application/controllers/indicadores.php:108
+#: application/controllers/indicadores.php:107
 msgid "Proporción de artículos con autoría múltiple"
 msgstr "Proporción de artículos con autoría múltiple"
 
-#: application/controllers/indicadores.php:109
+#: application/controllers/indicadores.php:108
 msgid "Proporción de artículos con autoría múltiple en las revistas del país"
 msgstr "Proporción de artículos con autoría múltiple en las revistas del país"
 
-#: application/controllers/indicadores.php:111
+#: application/controllers/indicadores.php:110
 msgid "Grado de Colaboración"
 msgstr "Grado de Colaboración"
 
-#: application/controllers/indicadores.php:114
+#: application/controllers/indicadores.php:113
 #, php-format
 msgid "Promedio de artículos con autoría múltiple en el año %s: %s"
 msgstr "Promedio de artículos con autoría múltiple en el año %s: %s"
 
-#: application/controllers/indicadores.php:115
+#: application/controllers/indicadores.php:114
 #, php-format
 msgid "Promedio de artículos con autoría múltiple en las revistas del país en el año %s: %s"
 msgstr "Promedio de artículos con autoría múltiple en las revistas del país en el año %s: %s"
 
-#: application/controllers/indicadores.php:121
+#: application/controllers/indicadores.php:120
 msgid "Grupo de autores más productivos por revista"
 msgstr "Grupo de autores más productivos por revista"
 
-#: application/controllers/indicadores.php:124
+#: application/controllers/indicadores.php:123
 msgid "Cantidad de autores"
 msgstr "Cantidad de autores"
 
+#: application/controllers/indicadores.php:126
 #: application/controllers/indicadores.php:127
-#: application/controllers/indicadores.php:128
 #, php-format
 msgid "Cantidad de autores que conforman la elite en el año %s: %s"
 msgstr "Cantidad de autores que conforman la elite en el año %s: %s"
 
-#: application/controllers/indicadores.php:134
+#: application/controllers/indicadores.php:133
 msgid "Peso promedio de autores por artículo."
 msgstr "Peso promedio de autores por artículo."
 
-#: application/controllers/indicadores.php:135
+#: application/controllers/indicadores.php:134
 msgid "Peso promedio del número de autores por artículo en las revistas del país"
 msgstr "Peso promedio del número de autores por artículo en las revistas del país"
 
-#: application/controllers/indicadores.php:137
+#: application/controllers/indicadores.php:136
 msgid "Índice de Colaboración"
 msgstr "Índice de Colaboración"
 
-#: application/controllers/indicadores.php:140
+#: application/controllers/indicadores.php:139
 #, php-format
 msgid "Promedio de coautores por artículo en el año %s: %s"
 msgstr "Promedio de coautores por artículo en el año %s: %s"
 
-#: application/controllers/indicadores.php:141
+#: application/controllers/indicadores.php:140
 #, php-format
 msgid "Promedio de coautores por articulo en las revistas del país en el año %s: %s"
 msgstr "Promedio de coautores por articulo en las revistas del país en el año %s: %s"
 
-#: application/controllers/indicadores.php:147
+#: application/controllers/indicadores.php:146
 msgid "Títulos con mayor cantidad de artículos"
 msgstr "Títulos con mayor cantidad de artículos"
 
-#: application/controllers/indicadores.php:149
+#: application/controllers/indicadores.php:148
 msgid "Índice de densidad"
 msgstr "Índice de densidad"
 
-#: application/controllers/indicadores.php:152
+#: application/controllers/indicadores.php:151
 #, php-format
 msgid "Cantidad de documentos por revista en el año %s: %s"
 msgstr "Cantidad de documentos por revista en el año %s: %s"
 
-#: application/controllers/indicadores.php:159
+#: application/controllers/indicadores.php:158
 msgid "Revista/Año"
 msgstr "Revista/Año"
 
-#: application/controllers/indicadores.php:172
+#: application/controllers/indicadores.php:171
 msgid "País/Año"
 msgstr "País/Año"
 
-#: application/controllers/indicadores.php:277
-#: application/controllers/indicadores.php:308
+#: application/controllers/indicadores.php:276
+#: application/controllers/indicadores.php:307
 msgid "Logaritmo de la cantidad acumulada de títulos de revista"
 msgstr "Logaritmo de la cantidad acumulada de títulos de revista"
 
-#: application/controllers/indicadores.php:278
-#: application/controllers/indicadores.php:460
-#: application/controllers/indicadores.php:484
+#: application/controllers/indicadores.php:277
+#: application/controllers/indicadores.php:459
+#: application/controllers/indicadores.php:483
 msgid "Títulos de revista"
 msgstr "Títulos de revista"
 
+#: application/controllers/indicadores.php:278
 #: application/controllers/indicadores.php:279
-#: application/controllers/indicadores.php:280
 #, php-format
 msgid "Zona %s de revistas más productivas"
 msgstr "Zona %s de revistas más productivas"
 
-#: application/controllers/indicadores.php:285
-#: application/controllers/indicadores.php:288
+#: application/controllers/indicadores.php:284
+#: application/controllers/indicadores.php:287
 msgid "Modelo matemático de Bradford por institución (afiliación del autor)"
 msgstr "Modelo matemático de Bradford por institución (afiliación del autor)"
 
-#: application/controllers/indicadores.php:286
+#: application/controllers/indicadores.php:285
 msgid "Logaritmo de la cantidad acumulada de instituciones"
 msgstr "Logaritmo de la cantidad acumulada de instituciones"
 
+#: application/controllers/indicadores.php:287
 #: application/controllers/indicadores.php:288
-#: application/controllers/indicadores.php:289
 #, php-format
 msgid "Zona %s de instituciones más productivas por disciplina"
 msgstr "Zona %s de instituciones más productivas por disciplina"
 
-#: application/controllers/indicadores.php:302
+#: application/controllers/indicadores.php:301
 msgid "log(fx)"
 msgstr "log(fx)"
 
-#: application/controllers/indicadores.php:304
-#: application/controllers/indicadores.php:351
-#: application/controllers/indicadores.php:360
+#: application/controllers/indicadores.php:303
+#: application/controllers/indicadores.php:350
+#: application/controllers/indicadores.php:359
 msgid "Zona núcleo"
 msgstr "Zona núcleo"
 
-#: application/controllers/indicadores.php:305
-#: application/controllers/indicadores.php:368
-#: application/controllers/indicadores.php:377
+#: application/controllers/indicadores.php:304
+#: application/controllers/indicadores.php:367
+#: application/controllers/indicadores.php:376
 msgid "Zona 2"
 msgstr "Zona 2"
 
-#: application/controllers/indicadores.php:306
-#: application/controllers/indicadores.php:385
+#: application/controllers/indicadores.php:305
+#: application/controllers/indicadores.php:384
 msgid "Zona 3"
 msgstr "Zona 3"
 
-#: application/controllers/indicadores.php:309
-#: application/controllers/indicadores.php:414
+#: application/controllers/indicadores.php:308
+#: application/controllers/indicadores.php:413
 msgid "Cantidad acumulada de artículos"
 msgstr "Cantidad acumulada de artículos"
 
-#: application/controllers/indicadores.php:351
-#: application/controllers/indicadores.php:360
-#: application/controllers/indicadores.php:368
-#: application/controllers/indicadores.php:377
-#: application/controllers/indicadores.php:385
+#: application/controllers/indicadores.php:350
+#: application/controllers/indicadores.php:359
+#: application/controllers/indicadores.php:367
+#: application/controllers/indicadores.php:376
+#: application/controllers/indicadores.php:384
 #, php-format
 msgid "Artículos: %s"
 msgstr "Artículos: %s"
 
-#: application/controllers/indicadores.php:351
-#: application/controllers/indicadores.php:360
-#: application/controllers/indicadores.php:368
-#: application/controllers/indicadores.php:377
-#: application/controllers/indicadores.php:385
+#: application/controllers/indicadores.php:350
+#: application/controllers/indicadores.php:359
+#: application/controllers/indicadores.php:367
+#: application/controllers/indicadores.php:376
+#: application/controllers/indicadores.php:384
 #, php-format
 msgid "Títulos de revista: %s"
 msgstr "Títulos de revista: %s"
 
-#: application/controllers/indicadores.php:464
-#: application/controllers/indicadores.php:488
-#: application/controllers/indicadores.php:508
-#: application/controllers/indicadores.php:602
-#: application/controllers/indicadores.php:606
-#: application/controllers/indicadores.php:643
+#: application/controllers/indicadores.php:463
+#: application/controllers/indicadores.php:487
+#: application/controllers/indicadores.php:507
+#: application/controllers/indicadores.php:601
+#: application/controllers/indicadores.php:605
+#: application/controllers/indicadores.php:642
 msgid "Título de revista"
 msgstr "Título de revista"
 
-#: application/controllers/indicadores.php:465
-#: application/controllers/indicadores.php:489
-#: application/controllers/indicadores.php:509
-#: application/controllers/indicadores.php:538
+#: application/controllers/indicadores.php:464
+#: application/controllers/indicadores.php:488
+#: application/controllers/indicadores.php:508
+#: application/controllers/indicadores.php:537
 msgid "Cantidad de artículos"
 msgstr "Cantidad de artículos"
 
-#: application/controllers/indicadores.php:474
+#: application/controllers/indicadores.php:473
+#: application/controllers/indicadores.php:497
 #, php-format
 msgid "Cantidad de artículos: %s"
 msgstr "Cantidad de artículos: %s"
 
-#: application/controllers/indicadores.php:498
-#, php-format
-msgid "<div class=\"chartTootip\"><b>%s</b><br/>Cantidad de artículos: %s</div>"
-msgstr "<div class=\"chartTootip\"><b>%s</b><br/>Cantidad de artículos: %s</div>"
-
-#: application/controllers/indicadores.php:582
+#: application/controllers/indicadores.php:581
 msgid "Índice de concentración temática"
 msgstr "Índice de concentración temática"
 
-#: application/controllers/indicadores.php:583
-msgid "<div id=\"chartTitle\"><div class=\"centrado\"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de concentración temática</div></div>"
-msgstr "<div id=\"chartTitle\"><div class=\"centrado\"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de concentración temática</div></div>"
+#: application/controllers/indicadores.php:582
+msgid "Distribución decreciente de las revistas considerando su grado de concentración temática"
+msgstr "Distribución decreciente de las revistas considerando su grado de concentración temática"
 
-#: application/controllers/indicadores.php:588
+#: application/controllers/indicadores.php:587
 msgid "Proporción de autoría exógena"
 msgstr "Proporción de autoría exógena"
 
-#: application/controllers/indicadores.php:589
+#: application/controllers/indicadores.php:588
 msgid "Distribución decreciente de las revistas considerando la proporción de autoría exógena"
 msgstr "Distribución decreciente de las revistas considerando la proporción de autoría exógena"
 
-#: application/controllers/indicadores.php:688
+#: application/controllers/indicadores.php:687
 msgid "Descriptor"
 msgstr "Descriptor"
 
-#: application/controllers/indicadores.php:689
-#: application/controllers/indicadores.php:704
+#: application/controllers/indicadores.php:688
+#: application/controllers/indicadores.php:703
 msgid "Frecuencia"
 msgstr "Frecuencia"
 
-#: application/controllers/indicadores.php:703
-#: application/controllers/frecuencias.php:180
-#: application/controllers/frecuencias.php:209
+#: application/controllers/indicadores.php:702
+#: application/controllers/frecuencias.php:179
+#: application/controllers/frecuencias.php:208
 msgid "País"
 msgstr "País"
 
-#: application/controllers/revista.php:52
+#: application/controllers/revista.php:51
 #, php-format
 msgid "Biblat - Revista: %s"
 msgstr "Biblat - Revista: %s"
 
-#: application/controllers/revista.php:53
-#: application/controllers/frecuencias.php:125
-#: application/controllers/frecuencias.php:144
+#: application/controllers/revista.php:52
+#: application/controllers/frecuencias.php:124
+#: application/controllers/frecuencias.php:143
 msgid "Revistas"
 msgstr "Revistas"
 
-#: application/controllers/revista.php:53
+#: application/controllers/revista.php:52
 msgid "title=\"Revistas\""
 msgstr "title=\"Revistas\""
 
-#: application/controllers/revista.php:192
+#: application/controllers/revista.php:191
 #, php-format
 msgid "Biblat - Revista: %s - Artículo: %s"
 msgstr "Biblat - Revista: %s - Artículo: %s"
 
-#: application/controllers/frecuencias.php:34
+#: application/controllers/frecuencias.php:33
 msgid "Biblat - Frecuencias"
 msgstr "Biblat - Frecuencias"
 
-#: application/controllers/frecuencias.php:67
+#: application/controllers/frecuencias.php:66
 msgid "Biblat - Frecuencias por autor"
 msgstr "Biblat - Frecuencias por autor"
 
-#: application/controllers/frecuencias.php:68
+#: application/controllers/frecuencias.php:67
 msgid "Frecuencia de documentos por autor"
 msgstr "Frecuencia de documentos por autor"
 
-#: application/controllers/frecuencias.php:69
-#: application/controllers/frecuencias.php:88
-#: application/controllers/frecuencias.php:102
-#: application/controllers/frecuencias.php:150
-#: application/controllers/frecuencias.php:167
-#: application/controllers/frecuencias.php:207
-#: application/controllers/frecuencias.php:238
-#: application/controllers/frecuencias.php:278
-#: application/controllers/frecuencias.php:309
-#: application/controllers/frecuencias.php:349
-#: application/controllers/frecuencias.php:380
-#: application/controllers/frecuencias.php:394
-#: application/controllers/frecuencias.php:452
-#: application/controllers/frecuencias.php:491
-#: application/controllers/frecuencias.php:522
-#: application/controllers/frecuencias.php:561
-#: application/controllers/frecuencias.php:592
-#: application/controllers/frecuencias.php:665
-#: application/controllers/frecuencias.php:695
-#: application/controllers/frecuencias.php:716
-#: application/controllers/frecuencias.php:755
-#: application/controllers/frecuencias.php:786
+#: application/controllers/frecuencias.php:68
+#: application/controllers/frecuencias.php:87
+#: application/controllers/frecuencias.php:101
+#: application/controllers/frecuencias.php:149
+#: application/controllers/frecuencias.php:166
+#: application/controllers/frecuencias.php:206
+#: application/controllers/frecuencias.php:237
+#: application/controllers/frecuencias.php:277
+#: application/controllers/frecuencias.php:308
+#: application/controllers/frecuencias.php:348
+#: application/controllers/frecuencias.php:379
+#: application/controllers/frecuencias.php:393
+#: application/controllers/frecuencias.php:451
+#: application/controllers/frecuencias.php:490
+#: application/controllers/frecuencias.php:521
+#: application/controllers/frecuencias.php:560
+#: application/controllers/frecuencias.php:591
+#: application/controllers/frecuencias.php:664
+#: application/controllers/frecuencias.php:694
+#: application/controllers/frecuencias.php:715
+#: application/controllers/frecuencias.php:754
+#: application/controllers/frecuencias.php:785
 msgid "title=\"Frecuencias\""
 msgstr "title=\"Frecuencias\""
 
-#: application/controllers/frecuencias.php:88
+#: application/controllers/frecuencias.php:87
 msgid "title=\"Autor\""
 msgstr "title=\"Autor\""
 
-#: application/controllers/frecuencias.php:89
-#: application/controllers/frecuencias.php:168
-#: application/controllers/frecuencias.php:239
-#: application/controllers/frecuencias.php:310
-#: application/controllers/frecuencias.php:381
+#: application/controllers/frecuencias.php:88
+#: application/controllers/frecuencias.php:167
+#: application/controllers/frecuencias.php:238
+#: application/controllers/frecuencias.php:309
+#: application/controllers/frecuencias.php:380
 #, php-format
 msgid "Biblat - %s (%%d documentos)"
 msgstr "Biblat - %s (%%d documentos)"
 
-#: application/controllers/frecuencias.php:102
-#: application/controllers/frecuencias.php:167
-#: application/controllers/frecuencias.php:207
-#: application/controllers/frecuencias.php:238
-#: application/controllers/frecuencias.php:278
-#: application/controllers/frecuencias.php:309
-#: application/controllers/frecuencias.php:349
-#: application/controllers/frecuencias.php:380
-#: application/controllers/frecuencias.php:665
+#: application/controllers/frecuencias.php:101
+#: application/controllers/frecuencias.php:166
+#: application/controllers/frecuencias.php:206
+#: application/controllers/frecuencias.php:237
+#: application/controllers/frecuencias.php:277
+#: application/controllers/frecuencias.php:308
+#: application/controllers/frecuencias.php:348
+#: application/controllers/frecuencias.php:379
+#: application/controllers/frecuencias.php:664
 msgid "title=\"Institución\""
 msgstr "title=\"Institución\""
 
-#: application/controllers/frecuencias.php:118
-#: application/controllers/frecuencias.php:144
+#: application/controllers/frecuencias.php:117
+#: application/controllers/frecuencias.php:143
 msgid "Países"
 msgstr "Países"
 
-#: application/controllers/frecuencias.php:132
-#: application/controllers/frecuencias.php:144
-#: application/controllers/frecuencias.php:396
-#: application/controllers/frecuencias.php:421
-#: application/controllers/frecuencias.php:681
-#: application/controllers/frecuencias.php:699
+#: application/controllers/frecuencias.php:131
+#: application/controllers/frecuencias.php:143
+#: application/controllers/frecuencias.php:395
+#: application/controllers/frecuencias.php:420
+#: application/controllers/frecuencias.php:680
+#: application/controllers/frecuencias.php:698
 msgid "Autores"
 msgstr "Autores"
 
-#: application/controllers/frecuencias.php:148
-#: application/controllers/frecuencias.php:433
+#: application/controllers/frecuencias.php:147
+#: application/controllers/frecuencias.php:432
 msgid "Biblat - Frecuencias por institución"
 msgstr "Biblat - Frecuencias por institución"
 
-#: application/controllers/frecuencias.php:149
+#: application/controllers/frecuencias.php:148
 msgid "Frecuencia de países, revistas, autores y documentos por institución"
 msgstr "Frecuencia de países, revistas, autores y documentos por institución"
 
-#: application/controllers/frecuencias.php:205
+#: application/controllers/frecuencias.php:204
 #, php-format
 msgid "Biblat - Frecuencias por institución \"%s\", países de publicación"
 msgstr "Biblat - Frecuencias por institución \"%s\", países de publicación"
 
-#: application/controllers/frecuencias.php:206
+#: application/controllers/frecuencias.php:205
 #, php-format
 msgid "Frecuencia de documentos por país de publicación en la institución:<br/> %s"
 msgstr "Frecuencia de documentos por país de publicación en la institución:<br/> %s"
 
-#: application/controllers/frecuencias.php:238
+#: application/controllers/frecuencias.php:237
 #, php-format
 msgid "%s/País"
 msgstr "%s/País"
 
-#: application/controllers/frecuencias.php:276
+#: application/controllers/frecuencias.php:275
 #, php-format
 msgid "Biblat - Frecuencias por institución \"%s\", revistas de publicación"
 msgstr "Biblat - Frecuencias por institución \"%s\", revistas de publicación"
 
-#: application/controllers/frecuencias.php:277
+#: application/controllers/frecuencias.php:276
 #, php-format
 msgid "Frecuencia de documentos por revista de publicación en la institución: <br/>%s"
 msgstr "Frecuencia de documentos por revista de publicación en la institución: <br/>%s"
 
-#: application/controllers/frecuencias.php:309
+#: application/controllers/frecuencias.php:308
 #, php-format
 msgid "%s/Revista"
 msgstr "%s/Revista"
 
-#: application/controllers/frecuencias.php:347
+#: application/controllers/frecuencias.php:346
 #, php-format
 msgid "Biblat - Frecuencias por institución \"%s\", autor"
 msgstr "Biblat - Frecuencias por institución \"%s\", autor"
 
-#: application/controllers/frecuencias.php:348
+#: application/controllers/frecuencias.php:347
 #, php-format
 msgid "Frecuencia de documentos por autor en la institución: <br/>%s"
 msgstr "Frecuencia de documentos por autor en la institución: <br/>%s"
 
-#: application/controllers/frecuencias.php:380
-#: application/controllers/frecuencias.php:592
-#: application/controllers/frecuencias.php:786
+#: application/controllers/frecuencias.php:379
+#: application/controllers/frecuencias.php:591
+#: application/controllers/frecuencias.php:785
 #, php-format
 msgid "%s/Autor"
 msgstr "%s/Autor"
 
-#: application/controllers/frecuencias.php:394
-#: application/controllers/frecuencias.php:435
-#: application/controllers/frecuencias.php:452
-#: application/controllers/frecuencias.php:491
-#: application/controllers/frecuencias.php:522
-#: application/controllers/frecuencias.php:561
-#: application/controllers/frecuencias.php:592
+#: application/controllers/frecuencias.php:393
+#: application/controllers/frecuencias.php:434
+#: application/controllers/frecuencias.php:451
+#: application/controllers/frecuencias.php:490
+#: application/controllers/frecuencias.php:521
+#: application/controllers/frecuencias.php:560
+#: application/controllers/frecuencias.php:591
 msgid "title=\"País de afiliación del autor\""
 msgstr "title=\"País de afiliación del autor\""
 
-#: application/controllers/frecuencias.php:396
-#: application/controllers/frecuencias.php:414
+#: application/controllers/frecuencias.php:395
+#: application/controllers/frecuencias.php:413
 msgid "Instituciones"
 msgstr "Instituciones"
 
-#: application/controllers/frecuencias.php:434
+#: application/controllers/frecuencias.php:433
 msgid "Frecuencia de instituciones, autores y documentos por país de afiliación del autor"
 msgstr "Frecuencia de instituciones, autores y documentos por país de afiliación del autor"
 
-#: application/controllers/frecuencias.php:453
+#: application/controllers/frecuencias.php:452
 #, php-format
 msgid "Biblat - País de afiliación: %s (%%d documentos)"
 msgstr "Biblat - País de afiliación: %s (%%d documentos)"
 
-#: application/controllers/frecuencias.php:489
+#: application/controllers/frecuencias.php:488
 #, php-format
 msgid "Biblat - Frecuencias por país de afiliación \"%s\", instituciones"
 msgstr "Biblat - Frecuencias por país de afiliación \"%s\", instituciones"
 
-#: application/controllers/frecuencias.php:490
+#: application/controllers/frecuencias.php:489
 #, php-format
 msgid "Frecuencia de documentos por institución en en el país de afiliación del autor:<br/> %s"
 msgstr "Frecuencia de documentos por institución en en el país de afiliación del autor:<br/> %s"
 
-#: application/controllers/frecuencias.php:522
+#: application/controllers/frecuencias.php:521
 #, php-format
 msgid "%s/Institución"
 msgstr "%s/Institución"
 
-#: application/controllers/frecuencias.php:523
-#: application/controllers/frecuencias.php:593
+#: application/controllers/frecuencias.php:522
+#: application/controllers/frecuencias.php:592
 #, php-format
 msgid "Biblat - País de afiliación: %s/%s (%%d documentos)"
 msgstr "Biblat - País de afiliación: %s/%s (%%d documentos)"
 
-#: application/controllers/frecuencias.php:559
+#: application/controllers/frecuencias.php:558
 #, php-format
 msgid "Biblat - Frecuencias país de afiliación \"%s\", autores"
 msgstr "Biblat - Frecuencias país de afiliación \"%s\", autores"
 
-#: application/controllers/frecuencias.php:560
+#: application/controllers/frecuencias.php:559
 #, php-format
 msgid "Frecuencia de documentos por autor en el país de afiliación:<br/> %s"
 msgstr "Frecuencia de documentos por autor en el país de afiliación:<br/> %s"
 
-#: application/controllers/frecuencias.php:693
+#: application/controllers/frecuencias.php:692
 msgid "Biblat - Frecuencias por revista"
 msgstr "Biblat - Frecuencias por revista"
 
-#: application/controllers/frecuencias.php:694
+#: application/controllers/frecuencias.php:693
 msgid "Frecuencia de autores y documentos por revista"
 msgstr "Frecuencia de autores y documentos por revista"
 
-#: application/controllers/frecuencias.php:716
-#: application/controllers/frecuencias.php:755
-#: application/controllers/frecuencias.php:786
+#: application/controllers/frecuencias.php:715
+#: application/controllers/frecuencias.php:754
+#: application/controllers/frecuencias.php:785
 msgid "title=\"Revista\""
 msgstr "title=\"Revista\""
 
-#: application/controllers/frecuencias.php:717
+#: application/controllers/frecuencias.php:716
 #, php-format
 msgid "Biblat - Revista: %s (%%d documentos)"
 msgstr "Biblat - Revista: %s (%%d documentos)"
 
-#: application/controllers/frecuencias.php:753
+#: application/controllers/frecuencias.php:752
 #, php-format
 msgid "Biblat - Frecuencias por revista: %s, autores"
 msgstr "Biblat - Frecuencias por revista: %s, autores"
 
-#: application/controllers/frecuencias.php:754
+#: application/controllers/frecuencias.php:753
 #, php-format
 msgid "Frecuencia de documentos por autor en la revista:<br/> %s"
 msgstr "Frecuencia de documentos por autor en la revista:<br/> %s"
 
-#: application/controllers/frecuencias.php:787
+#: application/controllers/frecuencias.php:786
 #, php-format
 msgid "Biblat - Revista: %s/%s (%%d documentos)"
 msgstr "Biblat - Revista: %s/%s (%%d documentos)"
 
-#: application/controllers/main.php:64
+#: application/controllers/main.php:63
 msgid "Biblat - Créditos"
 msgstr "Biblat - Créditos"
 
@@ -1287,6 +1283,20 @@ msgstr "Núm. %s"
 #, php-format
 msgid "Pág. %s"
 msgstr "Pág. %s"
+
+#~ msgid ""
+#~ "<div class=\"chartTootip\"><b>%s</b><br/>Cantidad de artículos: %s</div>"
+#~ msgstr ""
+#~ "<div class=\"chartTootip\"><b>%s</b><br/>Cantidad de artículos: %s</div>"
+
+#~ msgid ""
+#~ "<div id=\"chartTitle\"><div class=\"centrado\"><b>Índice de concentración "
+#~ "(Índice de Pratt)</b><br/>Distribución decreciente de las revistas "
+#~ "considerando su grado de concentración temática</div></div>"
+#~ msgstr ""
+#~ "<div id=\"chartTitle\"><div class=\"centrado\"><b>Índice de concentración "
+#~ "(Índice de Pratt)</b><br/>Distribución decreciente de las revistas "
+#~ "considerando su grado de concentración temática</div></div>"
 
 #~ msgid ""
 #~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/"
