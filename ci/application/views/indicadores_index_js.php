@@ -352,7 +352,7 @@ jQuery(document).ready(function(){
 <?php if (preg_match('%indicadores/(...+?)%', uri_string())):?>
 	urlData = {
 <?php 	if (preg_match('%indicadores/(.+?)(/.*|$)%', uri_string())):?>
-		indicador:"<?php echo preg_replace('%indicadores/(.+?)(/.*|$)%', '\1', uri_string());?>",
+		indicador:"<?php echo preg_replace('%.+?/indicadores/(.+?)(/.*|$)%', '\1', uri_string());?>",
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/disciplina/(.+?)(/.*|$)%', uri_string())):?>
 		disciplina:"<?php echo preg_replace('%.*?/disciplina/(.+?)(/.*|$)%', '\1', uri_string());?>",
