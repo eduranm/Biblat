@@ -37,75 +37,78 @@
 | in the URL cannot be matched to a valid route.
 |
 */
+$langs = "^(?:es|en|fr|pt)";
 
 $route['default_controller'] = "main";
 $route['404_override'] = '';
 
-$route['setlang/(.*)'] = 'setlang/index/$1';
+$route[$langs.'$'] = $route['default_controller'];
 
-$route['creditos'] = 'main/creditos';
+$route[$langs.'/creditos'] = 'main/creditos';
 
-$route['buscar/(autor|articulo|institucion|revista|tema)/(.*)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';
-$route['buscar/(.*)/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/$1/$2/$3$4';
-$route['buscar/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/null/$1/$2$3';
-$route['buscar/(autor|articulo|institucion|revista|tema)/(.*)/([0-9]+)'] = 'buscar/index/$1/null/$2/$3';
-$route['buscar/(.*)/(.*)/([0-9]+)'] = 'buscar/index/null/$1/$2/$3';
-$route['buscar/(.*)/([0-9]+)'] = 'buscar/index/null/null/$1/$2';
-$route['buscar/(autor|articulo|institucion|revista|tema)/(.*)'] = 'buscar/index/$1/null/$2';
-$route['buscar/(.*)/(.*)'] = 'buscar/index/null/$1/$2';
-$route['buscar/(.*)'] = 'buscar/index/null/null/$1';
+$route[$langs.'/buscar/(autor|articulo|institucion|revista|tema)/(.*)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';
+$route[$langs.'/buscar/(.*)/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/$1/$2/$3$4';
+$route[$langs.'/buscar/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/null/$1/$2$3';
+$route[$langs.'/buscar/(autor|articulo|institucion|revista|tema)/(.*)/([0-9]+)'] = 'buscar/index/$1/null/$2/$3';
+$route[$langs.'/buscar/(.*)/(.*)/([0-9]+)'] = 'buscar/index/null/$1/$2/$3';
+$route[$langs.'/buscar/(.*)/([0-9]+)'] = 'buscar/index/null/null/$1/$2';
+$route[$langs.'/buscar/(autor|articulo|institucion|revista|tema)/(.*)'] = 'buscar/index/$1/null/$2';
+$route[$langs.'/buscar/(.*)/(.*)'] = 'buscar/index/null/$1/$2';
+$route[$langs.'/buscar/(.*)'] = 'buscar/index/null/null/$1';
 
-$route['revista/(.+)/articulo/(.+)'] = "revista/articulo/revista/$1/articulo/$2";
-$route['revista/(.*)'] = "revista/index/$1";
+$route[$langs.'/revista/(.+)/articulo/(.+)'] = "revista/articulo/revista/$1/articulo/$2";
+$route[$langs.'/revista/(.*)'] = "revista/index/$1";
 
-$route['indicadores/(indice-coautoria|tasa-documentos-coautorados|grado-colaboracion|modelo-elitismo|indice-colaboracion|indice-densidad-documentos|indice-concentracion|modelo-bradford-revista|modelo-bradford-institucion|productividad-exogena)(.*)'] = "indicadores/index/$1";
+$route[$langs.'/indicadores/(indice-coautoria|tasa-documentos-coautorados|grado-colaboracion|modelo-elitismo|indice-colaboracion|indice-densidad-documentos|indice-concentracion|modelo-bradford-revista|modelo-bradford-institucion|productividad-exogena)(.*)'] = "indicadores/index/$1";
 
-$route['frecuencias/autor/([^/]+)'] = "frecuencias/autorDocumentos/$1";
-$route['frecuencias/autor/([^/]+)/([0-9]+)'] = "frecuencias/autorDocumentos/$1/$2";
+$route[$langs.'/frecuencias/autor/([^/]+)'] = "frecuencias/autorDocumentos/$1";
+$route[$langs.'/frecuencias/autor/([^/]+)/([0-9]+)'] = "frecuencias/autorDocumentos/$1/$2";
 
-$route['frecuencias/institucion/([^/]+)'] = "frecuencias/institucion/slug/$1";
-$route['frecuencias/institucion/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/institucion/slug/$1/$2";
+$route[$langs.'/frecuencias/institucion/([^/]+)'] = "frecuencias/institucion/slug/$1";
+$route[$langs.'/frecuencias/institucion/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/institucion/slug/$1/$2";
 
-$route['frecuencias/institucion/([^/]+)/documento'] = "frecuencias/institucionDocumentos/$1";
-$route['frecuencias/institucion/([^/]+)/documento/([0-9]+)'] = "frecuencias/institucionDocumentos/$1/$2";
+$route[$langs.'/frecuencias/institucion/([^/]+)/documento'] = "frecuencias/institucionDocumentos/$1";
+$route[$langs.'/frecuencias/institucion/([^/]+)/documento/([0-9]+)'] = "frecuencias/institucionDocumentos/$1/$2";
 
-$route['frecuencias/institucion/(.+?)/\bpais\b/([^/]+)$'] = "frecuencias/institucionPaisDocumentos/$1/$2";
-$route['frecuencias/institucion/(.+?)/\bpais\b/([^/]+)/[0-9^/]+$'] = "frecuencias/institucionPaisDocumentos/$1/$2/$3";
-$route['frecuencias/institucion/(.+?)/\bpais\b(.*)'] = "frecuencias/institucionPais/institucionSlug/$1$2";
+$route[$langs.'/frecuencias/institucion/(.+?)/\bpais\b/([^/]+)$'] = "frecuencias/institucionPaisDocumentos/$1/$2";
+$route[$langs.'/frecuencias/institucion/(.+?)/\bpais\b/([^/]+)/[0-9^/]+$'] = "frecuencias/institucionPaisDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/institucion/(.+?)/\bpais\b(.*)'] = "frecuencias/institucionPais/institucionSlug/$1$2";
 
-$route['frecuencias/institucion/(.+?)/\brevista\b/([^/]+)$'] = "frecuencias/institucionRevistaDocumentos/$1/$2";
-$route['frecuencias/institucion/(.+?)/\brevista\b/([^/]+)/[0-9^/]+$'] = "frecuencias/institucionRevistaDocumentos/$1/$2/$3";
-$route['frecuencias/institucion/(.+?)/\brevista\b(.*)'] = "frecuencias/institucionRevista/institucionSlug/$1$2";
+$route[$langs.'/frecuencias/institucion/(.+?)/\brevista\b/([^/]+)$'] = "frecuencias/institucionRevistaDocumentos/$1/$2";
+$route[$langs.'/frecuencias/institucion/(.+?)/\brevista\b/([^/]+)/[0-9^/]+$'] = "frecuencias/institucionRevistaDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/institucion/(.+?)/\brevista\b(.*)'] = "frecuencias/institucionRevista/institucionSlug/$1$2";
 
-$route['frecuencias/institucion/(.+?)/\bautor\b/([^/]+)$'] = "frecuencias/institucionAutorDocumentos/$1/$2";
-$route['frecuencias/institucion/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecuencias/institucionAutorDocumentos/$1/$2/$3";
-$route['frecuencias/institucion/(.+?)/\bautor\b(.*)'] = "frecuencias/institucionAutor/institucionSlug/$1$2";
+$route[$langs.'/frecuencias/institucion/(.+?)/\bautor\b/([^/]+)$'] = "frecuencias/institucionAutorDocumentos/$1/$2";
+$route[$langs.'/frecuencias/institucion/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecuencias/institucionAutorDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/institucion/(.+?)/\bautor\b(.*)'] = "frecuencias/institucionAutor/institucionSlug/$1$2";
 
-$route['frecuencias/pais-afiliacion'] = "frecuencias/paisAfiliacion";
-$route['frecuencias/pais-afiliacion/(ordenar/.*|export/excel$)'] = "frecuencias/paisAfiliacion/$1";
-$route['frecuencias/pais-afiliacion/([^/]+)'] = "frecuencias/paisAfiliacion/slug/$1";
-$route['frecuencias/pais-afiliacion/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/paisAfiliacion/slug/$1/$2";
+$route[$langs.'/frecuencias/pais-afiliacion'] = "frecuencias/paisAfiliacion";
+$route[$langs.'/frecuencias/pais-afiliacion/(ordenar/.*|export/excel$)'] = "frecuencias/paisAfiliacion/$1";
+$route[$langs.'/frecuencias/pais-afiliacion/([^/]+)'] = "frecuencias/paisAfiliacion/slug/$1";
+$route[$langs.'/frecuencias/pais-afiliacion/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/paisAfiliacion/slug/$1/$2";
 
-$route['frecuencias/pais-afiliacion/([^/]+)/documento'] = "frecuencias/paisAfiliacionDocumentos/$1";
-$route['frecuencias/pais-afiliacion/([^/]+)/documento/([0-9]+)'] = "frecuencias/paisAfiliacionDocumentos/$1/$2";
+$route[$langs.'/frecuencias/pais-afiliacion/([^/]+)/documento'] = "frecuencias/paisAfiliacionDocumentos/$1";
+$route[$langs.'/frecuencias/pais-afiliacion/([^/]+)/documento/([0-9]+)'] = "frecuencias/paisAfiliacionDocumentos/$1/$2";
 
-$route['frecuencias/pais-afiliacion/(.+?)/\binstitucion\b/([^/]+)$'] = "frecuencias/paisAfiliacionInstitucionDocumentos/$1/$2";
-$route['frecuencias/pais-afiliacion/(.+?)/\binstitucion\b/([^/]+)/[0-9^/]+$'] = "frecuencias/paisAfiliacionInstitucionDocumentos/$1/$2/$3";
-$route['frecuencias/pais-afiliacion/(.+?)/\binstitucion\b(.*)'] = "frecuencias/paisAfiliacionInstitucion/paisInstitucionSlug/$1$2";
+$route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\binstitucion\b/([^/]+)$'] = "frecuencias/paisAfiliacionInstitucionDocumentos/$1/$2";
+$route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\binstitucion\b/([^/]+)/[0-9^/]+$'] = "frecuencias/paisAfiliacionInstitucionDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\binstitucion\b(.*)'] = "frecuencias/paisAfiliacionInstitucion/paisInstitucionSlug/$1$2";
 
-$route['frecuencias/pais-afiliacion/(.+?)/\bautor\b/([^/]+)$'] = "frecuencias/paisAfiliacionAutorDocumentos/$1/$2";
-$route['frecuencias/pais-afiliacion/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecuencias/paisAfiliacionAutorDocumentos/$1/$2/$3";
-$route['frecuencias/pais-afiliacion/(.+?)/\bautor\b(.*)'] = "frecuencias/paisAfiliacionAutor/paisInstitucionSlug/$1$2";
+$route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\bautor\b/([^/]+)$'] = "frecuencias/paisAfiliacionAutorDocumentos/$1/$2";
+$route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecuencias/paisAfiliacionAutorDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\bautor\b(.*)'] = "frecuencias/paisAfiliacionAutor/paisInstitucionSlug/$1$2";
 
-$route['frecuencias/revista/([^/]+)'] = "frecuencias/revista/slug/$1";
-$route['frecuencias/revista/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/revista/slug/$1/$2";
+$route[$langs.'/frecuencias/revista/([^/]+)'] = "frecuencias/revista/slug/$1";
+$route[$langs.'/frecuencias/revista/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/revista/slug/$1/$2";
 
-$route['frecuencias/revista/([^/]+)/documento'] = "frecuencias/revistaDocumentos/$1";
-$route['frecuencias/revista/([^/]+)/documento/([0-9]+)'] = "frecuencias/revistaDocumentos/$1/$2";
+$route[$langs.'/frecuencias/revista/([^/]+)/documento'] = "frecuencias/revistaDocumentos/$1";
+$route[$langs.'/frecuencias/revista/([^/]+)/documento/([0-9]+)'] = "frecuencias/revistaDocumentos/$1/$2";
 
-$route['frecuencias/revista/(.+?)/\bautor\b/([^/]+)$'] = "frecuencias/revistaAutorDocumentos/$1/$2";
-$route['frecuencias/revista/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecuencias/revistaAutorDocumentos/$1/$2/$3";
-$route['frecuencias/revista/(.+?)/\bautor\b(.*)'] = "frecuencias/revistaAutor/revistaSlug/$1$2";
+$route[$langs.'/frecuencias/revista/(.+?)/\bautor\b/([^/]+)$'] = "frecuencias/revistaAutorDocumentos/$1/$2";
+$route[$langs.'/frecuencias/revista/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecuencias/revistaAutorDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/revista/(.+?)/\bautor\b(.*)'] = "frecuencias/revistaAutor/revistaSlug/$1$2";
 
+// URI like '/en/about' -> use controller 'about'
+$route[$langs.'/(.+)$'] = "$1";
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

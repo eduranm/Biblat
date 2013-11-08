@@ -1,28 +1,25 @@
 <?php
-$langs['es_ES'] = array(
-						'url' => site_url('setlang/es'),
+$langs['es'] = array(
+						'url' => site_url($this->lang->switch_uri('es')),
 						'title' => "Español",
 						'img' => "spanish.png"
 					);
-$langs['en_US'] = array(
-						'url' => site_url('setlang/en'),
+$langs['en'] = array(
+						'url' => site_url($this->lang->switch_uri('en')),
 						'title' => "English",
 						'img' => "english.png"
 					);
-$langs['pt_BR'] = array(
-						'url' => site_url('setlang/pt'),
+$langs['pt'] = array(
+						'url' => site_url($this->lang->switch_uri('pt')),
 						'title' => "Português",
 						'img' => "portuguese.png"
 					);
-$langs['fr_FR'] = array(
-						'url' => site_url('setlang/fr'),
+$langs['fr'] = array(
+						'url' => site_url($this->lang->switch_uri('fr')),
 						'title' => "Français",
 						'img' => "french.png"
 					);
-$defaultLang = 'es_ES';
-if (get_cookie('lang') != "" && get_cookie('lang') != NULL):
-	$defaultLang = get_cookie('lang');
-endif;
+$defaultLang = $this->lang->lang();
 ?>
 	<div id="header">
 		<div class="bannerLeft"></div>

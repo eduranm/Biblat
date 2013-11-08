@@ -44,7 +44,6 @@ class Indicadores extends CI_Controller {
 
 		$this->load->vars($data);
 
-		set_translation_language(get_cookie('lang'));
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
 	}
 

@@ -24,7 +24,6 @@ class Frecuencias extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		set_translation_language(get_cookie('lang'));
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
 	}
 
