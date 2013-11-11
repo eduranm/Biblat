@@ -618,7 +618,7 @@ class Frecuencias extends CI_Controller {
 			$order = $sort[0];
 			$orderDir = strtoupper($sort[1]);
 			$offset = $args['resultados'] * ($args['pagina']-1);
-			$query = "{$args['query']} {$where} ORDER BY {$order} {$orderDir} LIMIT {$args['resultados']} OFFSET {$offset}";
+			$query = "{$args['query']} {$where} ORDER BY \"{$order}\" {$orderDir} LIMIT {$args['resultados']} OFFSET {$offset}";
 			$query = $this->db->query($query);
 			$result = array();
 			$result['totalRecords']=$data['main']['total'];
