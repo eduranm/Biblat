@@ -63,7 +63,7 @@
 			jQuery("div#gridTable").on( "pqgridcellclick", function( event, ui ) {
 				section = <?php echo $section?>;
 				slug=ui.dataModel.data[ui.rowIndxPage][1];
-				window.location.href = "<?php echo site_url($this->uri->segment(1).'/'.$this->uri->segment(2))?>" + "/" + slug + section[ui.colIndx];
+				window.location.href = "<?php echo site_url($this->uri->segment(2).'/'.$this->uri->segment(3))?>" + "/" + slug + section[ui.colIndx];
 			});
 <?php 	break;
 	case 'institucionPais':
