@@ -104,7 +104,7 @@ $defaultLang = $this->lang->lang();
 					</div>
 				</li>
 				<li>
-					<a href="javascript:;" title="<?php _e('Mapa del sitio');?>"><img border="0" src="<?php echo base_url();?>img/sitemap.png" height="16px" alt="Sitemap"/></a>
+					<a href="<?php echo site_url('sitemap');?>" title="<?php _e('Mapa del sitio');?>"><img border="0" src="<?php echo base_url();?>img/sitemap.png" height="16px" alt="Sitemap"/></a>
 				</li>
 				<li>
 					<a href="javascript:;" title="<?php _e('Ayuda');?>"><img border="0"  src="<?php echo base_url();?>img/help.png" height="16px" alt="Sitemap"/></a>

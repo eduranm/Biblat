@@ -45,6 +45,7 @@ $route['404_override'] = '';
 $route[$langs.'$'] = $route['default_controller'];
 
 $route[$langs.'/creditos'] = 'main/creditos';
+$route[$langs.'/sitemap'] = 'main/sitemap';
 
 $route[$langs.'/buscar/(autor|articulo|institucion|revista|tema)/(.*)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';
 $route[$langs.'/buscar/(.*)/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/$1/$2/$3$4';

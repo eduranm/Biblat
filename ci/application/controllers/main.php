@@ -9,6 +9,7 @@ class Main extends CI_Controller{
 	public function index(){
 		$data = array();
 		$data['header']['title'] = _("Biblat");
+		$data['header']['description'] = _('Biblat ofrece: referencias bibliográficas de documentos publicados en revistas científicas y académicas latinoamericanas indizadas en CLASE y PERIÓDICA, acceso al texto completo de revistas en acceso abierto, indicadores bibliométricos e información sobre los políticas de acceso de las revistas.');
 		/*Consultas*/
 		$this->load->database();
 		/*Max disciplina*/
@@ -64,6 +65,15 @@ class Main extends CI_Controller{
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu');
 		$this->load->view('main_creditos');
+		$this->load->view('footer');
+	}
+
+	public function sitemap(){
+		$data = array();
+		$data['header']['title'] = _("Biblat - Mapa del sitio");
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu');
+		$this->load->view('main_sitemap');
 		$this->load->view('footer');
 	}
 }

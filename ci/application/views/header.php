@@ -2,6 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<?php if(isset($description)):?>
+	<meta name="description" content="<?php echo $description;?>" /> 
+<?php endif;?>
 	<title><?php echo $title;?></title>
 	<link rel="icon" href="<?php echo base_url();?>img/favicon.ico" type="image/x-icon"/>
 	<link rel="stylesheet" href="<?php echo base_url();?>css/estiloBiblat.css" type="text/css" />
@@ -13,7 +16,7 @@
 		addthis_config.data_track_clickback = false;
 		addthis_config.ui_language = "es";
 	</script>
-	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=herz"></script>
+	<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=herz"></script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function()
 		{
