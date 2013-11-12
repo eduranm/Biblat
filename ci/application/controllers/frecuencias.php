@@ -38,7 +38,7 @@ class Frecuencias extends CI_Controller {
 	}
 
 	public function autor(){
-		$args = $this->uri->uri_to_assoc();
+		$args = $this->uri->ruri_to_assoc();
 		$args['defaultOrder'] = "documentos";
 		$args['orderDir'] = "DESC";
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaAutorDocumentos\"";
