@@ -47,16 +47,6 @@ body {
 	margin-left: 4em;
 }
 
-@font-face {
-  font-family: 'FontAwesome';
-  src: url('fonts/fontawesome-webfont.eot');
-  src: url('fonts/fontawesome-webfont-iefix.eot') format('embedded-opentype'),
-    url('fonts/fontawesome-webfont.woff') format('woff'),
-    url('fonts/fontawesome-webfont.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 .wrapper {
 	min-height: 100%;
 	height: auto !important;
@@ -342,13 +332,13 @@ body {
 	text-decoration: none;
 	font-size: 13px;
 	padding: 5px 10px;
-	margin: 0;
+	margin: 0 32px;
 	background-color: transparent;
 	border-style: none;
 	color: #fff;
 	line-height: 1.3;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.76);
-	width: 85%;
+	width: 75%;
 	box-shadow: none;
 }
 
@@ -394,7 +384,26 @@ body {
 }
 
 .icon-search:before {
-    content: "\f002";
+	content: "\f002";
+}
+.icon-articulo:before {
+	content: "\f0f6   \f0d7";
+}
+.icon-autor:before {
+	content: "\f007   \f0d7";
+}
+.icon-institucion:before {
+	content: "\f0f7   \f0d7";
+}
+.icon-revista:before {
+	content: "\f02d   \f0d7";
+}
+.icon-palabra-clave:before {
+	content: "\f084   \f0d7";
+}
+.icon-todos:before {
+	content: "\f0c2   \f0d7";
+	font-size: 14px !important;
 }
 
 [class^="icon-"],
@@ -432,6 +441,69 @@ body {
 	opacity: 0.40;
 	color: #fff;
 	font-size: 16px;
+}
+
+.searchform .icon-search{
+	cursor: pointer;
+}
+
+.searchform #options {
+	position: absolute;
+	left: 7px;
+	top: 1px;
+	bottom: 3px;
+	border:0;
+	background-color: transparent;
+	padding: 0px;
+	opacity: 0.40;
+	color: #fff;
+	font-size: 16px;
+	outline: none;
+}
+
+.show{
+	display: block;
+}
+.searchform #options:focus, .searchform #options::-moz-focus-inner {
+	outline:none;
+	border:0;
+}
+
+.searchform #options:hover{
+	cursor: pointer;
+}
+
+.searchform .optionsMenu{
+	display: none;
+	position: absolute;
+	list-style: none;
+	padding: 0;
+	left: 0px;
+	top: 30px;
+	z-index: 20;
+	background-color: #FFFFFF;
+	width: 100%;
+}
+
+.optionsMenu li{
+	font-family: Verdana,Geneva,sans-serif,FontAwesome;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: inherit;
+	font-size: 15px;
+	color: #000;
+	opacity: 0.40;
+	padding: 2px 0 2px 0;
+}
+
+.optionsMenu li .fa{
+	width: 18px;
+	text-align: center;
+	padding: 0 10px;
+}
+
+.optionsMenu li:hover{
+	text-decoration: underline;
 }
 
 .footerRight {

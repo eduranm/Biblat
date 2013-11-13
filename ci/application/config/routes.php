@@ -47,13 +47,13 @@ $route[$langs.'$'] = $route['default_controller'];
 $route[$langs.'/creditos'] = 'main/creditos';
 $route[$langs.'/sitemap'] = 'main/sitemap';
 
-$route[$langs.'/buscar/(autor|articulo|institucion|revista|tema)/(.*)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';
+$route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave)/(.*)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';
 $route[$langs.'/buscar/(.*)/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/$1/$2/$3$4';
 $route[$langs.'/buscar/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/null/$1/$2$3';
-$route[$langs.'/buscar/(autor|articulo|institucion|revista|tema)/(.*)/([0-9]+)'] = 'buscar/index/$1/null/$2/$3';
+$route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave)/(.*)/([0-9]+)'] = 'buscar/index/$1/null/$2/$3';
 $route[$langs.'/buscar/(.*)/(.*)/([0-9]+)'] = 'buscar/index/null/$1/$2/$3';
 $route[$langs.'/buscar/(.*)/([0-9]+)'] = 'buscar/index/null/null/$1/$2';
-$route[$langs.'/buscar/(autor|articulo|institucion|revista|tema)/(.*)'] = 'buscar/index/$1/null/$2';
+$route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave)/(.*)'] = 'buscar/index/$1/null/$2';
 $route[$langs.'/buscar/(.*)/(.*)'] = 'buscar/index/null/$1/$2';
 $route[$langs.'/buscar/(.*)'] = 'buscar/index/null/null/$1';
 

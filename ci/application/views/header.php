@@ -8,6 +8,7 @@
 	<title><?php echo $title;?></title>
 	<link rel="icon" href="<?php echo base_url();?>img/favicon.ico" type="image/x-icon"/>
 	<link rel="stylesheet" href="<?php echo base_url();?>css/estiloBiblat.css" type="text/css" />
+	<link rel="stylesheet" href="<?php echo base_url();?>css/font-awesome.min.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>css/default.css" type="text/css" />
 	<script type="text/javascript" src="<?php echo base_url();?>js/jquery.js"></script>
 	<script type="text/javascript">
@@ -21,6 +22,37 @@
 		jQuery(document).ready(function()
 		{
 			jQuery(document).bind("contextmenu",function(e){
+				return false;
+			});
+			jQuery("#options").click(function(e) {
+				jQuery(".optionsMenu").toggle();
+				return false;
+			});
+			jQuery(".optionsMenu li").click(function(e) {
+				var button = jQuery(this).attr('rel');
+				jQuery('#options').attr('class', 'icon-'+button);
+				jQuery('#filtro').val(button);
+				jQuery(".optionsMenu").toggle();
+				console.log(button);
+			});
+			jQuery('.searchform #slug').keypress(function(e) {
+				if(e.which == 13) {
+					jQuery('.searchform').submit();
+					return false;
+				}
+			});
+			jQuery('.searchform').submit(function(e) {
+				var data = jQuery(this).serializeArray();
+				data.push({name: "ajax", value: true});
+				jQuery.ajax({
+					url: '<?php echo site_url('buscar');?>',
+					type: 'POST',
+					data: jQuery.param(data),
+					success: function(data) {
+						window.location = data;
+						return false;
+					}
+				});
 				return false;
 			});
 		});

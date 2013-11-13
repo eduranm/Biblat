@@ -13,7 +13,15 @@ class Buscar extends CI_Controller{
 				$textoCompleto="texto-completo";
 			endif;
 			//print_r($_POST); die();
-			$returnURL = site_url(preg_replace('%[/]+%', '/', "buscar/{$_POST['disciplina']}/".slugSearch($_POST['slug'])."/{$textoCompleto}"));
+			if($_POST['filtro'] === "todos"):
+				$_POST['filtro'] = "";
+			endif;
+			$returnURL = site_url(preg_replace('%[/]+%', '/', "buscar/{$_POST['filtro']}/{$_POST['disciplina']}/".slugSearch($_POST['slug'])."/{$textoCompleto}"));
+			if(isset($_POST['ajax'])):
+				$this->output->enable_profiler(false);
+				echo $returnURL;
+				return;
+			endif;
 			redirect($returnURL, 'refresh');
 		endif;
 		/*Si no exite ningun dato redirigimos al index*/
@@ -23,7 +31,7 @@ class Buscar extends CI_Controller{
 		/*Variables para vistas*/
 		$data = array();
 		/*Arrego con descripcion y sql para cada indice*/
-		$indiceArray['tema'] = array('sql' => 'palabrasClaveSlug', 'descripcion' => _('Tema'));
+		$indiceArray['palabra-clave'] = array('sql' => 'palabrasClaveSlug', 'descripcion' => _('Palabras clave'));
 		$indiceArray['articulo'] = array('sql' => 'articuloSlug', 'descripcion' => _('Artículo'));
 		$indiceArray['autor'] = array('sql' => 'autoresSlug', 'descripcion' => _('Autor'));
 		$indiceArray['institucion'] = array('sql' => 'institucionesSlug', 'descripcion' => _('Institución'));
@@ -95,8 +103,10 @@ class Buscar extends CI_Controller{
 			$disciplina['slug'] = "";
 			$disciplina['disciplina'] = "";
 		endif;
+		$data['header']['filtro'] = $filtro;
 		if($filtro == "null"):
 			$filtro = "";
+			$data['header']['filtro'] = "todos";
 		endif;
 		if ($textoCompleto == "texto-completo"):
 			$paginationURL = site_url(preg_replace('%[/]+%', '/',"buscar/{$filtro}/{$disciplina['slug']}/{$slug}/{$textoCompleto}"));

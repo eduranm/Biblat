@@ -127,15 +127,24 @@ $defaultLang = $this->lang->lang();
 	</div>
 	<div class="searchContainer">
 		<form action="<?php echo site_url('buscar');?>" class="searchform" method="post">
+			<button id="options" class="icon-<?php echo (empty($filtro)? 'todos':$filtro);?>"></button>
+			<ul class="optionsMenu">
+				<li rel="todos"><i class="fa fa-cloud"></i><?php _e('Buscar en todos los campos');?></li>
+				<li rel="articulo"><i class="fa fa-file-text-o"></i><?php _e('Buscar en título del articulo');?></li>
+				<li rel="revista"><i class="fa fa-book"></i><?php _e('Buscar en título de la revista');?></li>
+				<li rel="autor"><i class="fa fa-user"></i><?php _e('Buscar en nombre del autor');?></li>
+				<li rel="institucion"><i class="fa fa fa-building-o"></i><?php _e('Buscar en nombre de la institucion');?></li>
+				<li rel="palabra-clave"><i class="fa fa fa-key"></i><?php _e('Buscar en las palabras clave');?></li>
+			</ul>
 			<button class="icon-search" type="submit"><span class="visuallyhidden">buscar</span></button>
 			<input type="hidden" name="disciplina" value=""/>
-			<input type="hidden" name="filtro" value=""/>
+			<input type="hidden" name="filtro" id="filtro" value="todos"/>
 			<label>
 				<span class="visuallyhidden"><?php _e('Buscar en Biblat');?></span>
 <?php if (isset($search['slug'])) :?>
-				<input type="text" placeholder="<?php _e('Buscar en Biblat');?>" value='<?php echo $search['slug'];?>' name="slug">
+				<input type="text" placeholder="<?php _e('Buscar en Biblat');?>" value='<?php echo $search['slug'];?>' name="slug" id="slug">
 <?php else:?>
-				<input type="text" placeholder="<?php _e('Buscar en Biblat');?>" value="" name="slug">
+				<input type="text" placeholder="<?php _e('Buscar en Biblat');?>" value="" name="slug" id="slug">
 <?php endif;?>
 			</label>
 		</form>
