@@ -210,6 +210,7 @@ CREATE INDEX "searchRevistaSlugGin_idx" ON "mvSearch" USING gin("revistaSlug" gi
 CREATE INDEX "searchPaisSlugGin_idx" ON "mvSearch" USING gin("paisSlug" gin_trgm_ops);
 CREATE INDEX "searchPaisSlug_idx" ON "mvSearch"("paisSlug");
 CREATE INDEX "searchInstitucionesSlug_idx" ON "mvSearch" USING gin("institucionesSlug" gin_trgm_ops);
+CREATE INDEX "searchpalabrasClaveSlug_idx" ON "mvSearch" USING gin("palabrasClaveSlug" gin_trgm_ops);
 
 CREATE OR REPLACE VIEW "vSearchFields" AS SELECT 
     t.sistema, 
