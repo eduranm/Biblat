@@ -481,7 +481,7 @@ body {
 	left: 0px;
 	top: 30px;
 	z-index: 20;
-	background-color: #FFFFFF;
+	background-color: #83B8CE;
 	width: 100%;
 }
 
@@ -490,9 +490,10 @@ body {
 	font-weight: normal;
 	font-style: normal;
 	text-decoration: inherit;
+	text-shadow: none;
 	font-size: 15px;
-	color: #000;
-	opacity: 0.40;
+	color: #fff;
+	opacity: 0.70;
 	padding: 2px 0 2px 0;
 }
 
