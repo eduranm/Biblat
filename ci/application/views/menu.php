@@ -135,6 +135,7 @@ $defaultLang = $this->lang->lang();
 				<li rel="revista"><i class="fa fa-book"></i><?php _e('Buscar por revista');?></li>
 				<li rel="institucion"><i class="fa fa fa-building-o"></i><?php _e('Buscar por institucion');?></li>
 				<li rel="articulo"><i class="fa fa-file-text-o"></i><?php _e('Buscar por articulo');?></li>
+				<li rel="articulo"><i class="fa fa-search-plus"></i><?php _e('Búsqueda avanzada');?></li>
 			</ul>
 			<button class="icon-search" type="submit"><span class="visuallyhidden">buscar</span></button>
 			<input type="hidden" name="disciplina" value=""/>
@@ -142,9 +143,9 @@ $defaultLang = $this->lang->lang();
 			<label>
 				<span class="visuallyhidden"><?php _e('Buscar en Biblat');?></span>
 <?php if (isset($search['slug'])) :?>
-				<input type="text" placeholder="<?php _e('Buscar en Biblat');?>" value='<?php echo $search['slug'];?>' name="slug" id="slug">
+				<textarea autocomplete="off" placeholder="<?php _e('Buscar en Biblat');?>" name="slug" id="slug"><?php echo $search['slug'];?></textarea>
 <?php else:?>
-				<input type="text" placeholder="<?php _e('Buscar en Biblat');?>" value="" name="slug" id="slug">
+				<textarea autocomplete="off" placeholder="<?php _e('Buscar en Biblat');?>" value="" name="slug" id="slug"></textarea>
 <?php endif;?>
 			</label>
 		</form>

@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>css/font-awesome.min.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>css/default.css" type="text/css" />
 	<script type="text/javascript" src="<?php echo base_url();?>js/jquery.js"></script>
+	<script type="text/javascript" src="<?php echo base_url();?>js/jquery.autosize.min.js"></script>
 	<script type="text/javascript">
 		var addthis_config = addthis_config||{};
 		addthis_config.data_track_addressbar = false;
@@ -55,6 +56,7 @@
 				});
 				return false;
 			});
+			jQuery('textarea').autosize();
 		});
 	</script>
 	<script type="text/javascript">
