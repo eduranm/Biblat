@@ -8,6 +8,7 @@
 			</div>
 		</div>
 	</div>
+<?php if(ENVIRONMENT === "production"):?>
 <!-- Piwik -->
 <script type="text/javascript">
   var _paq = _paq || [];
@@ -25,5 +26,6 @@ s.parentNode.insertBefore(g,s);
   })();
 </script>
 <!-- End Piwik Code -->
+<?php endif;?>
 </body>
 </html>

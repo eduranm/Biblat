@@ -357,6 +357,6 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-$config['enable_profiler'] = TRUE;
+$config['enable_profiler'] = ENVIRONMENT === "production" ? FALSE : TRUE;
 /* End of file config.php */
 /* Location: ./application/config/config.php */

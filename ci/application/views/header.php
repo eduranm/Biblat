@@ -57,8 +57,12 @@
 				return false;
 			});
 			jQuery('textarea').autosize();
+			jQuery('body').click(function(e) {
+				jQuery(".optionsMenu").hide();
+			});
 		});
 	</script>
+<?php if(ENVIRONMENT === "production"):?>
 	<script type="text/javascript">
 		var _gaq = _gaq || [];
 		_gaq.push(['_setAccount', 'UA-33940112-1']);
@@ -70,6 +74,7 @@
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 		})();
 	</script>
+<?php endif;?>
 <?php 
 if(isset($content)):
 	echo $content;
