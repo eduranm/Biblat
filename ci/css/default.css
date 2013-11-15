@@ -7,6 +7,10 @@ html, body {
 body {
 	background-color: #FAA94D;
 }
+a:focus, a::-moz-focus-inner {
+	outline: none;
+	border: 0;
+}
 .cboth{
 	clear:both;
 }
@@ -695,6 +699,7 @@ body {
 	font-weight: lighter;
 	font-style: normal;
 	vertical-align: -3px;
+	margin-left: 2px;
 }
 
 p {
