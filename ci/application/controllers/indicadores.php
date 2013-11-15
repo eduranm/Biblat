@@ -494,7 +494,7 @@ class Indicadores extends CI_Controller {
 					'v' => (int)$articulos
 				);
 			$c[] = array(
-					'v' => printf('<div class="chartTootip"><b>%s</b><br/>', $revista)._sprintf('Cantidad de artículos: %s', $articulos).'</div>'
+					'v' => sprintf('<div class="chartTootip"><b>%s</b><br/>', $revista)._sprintf('Cantidad de artículos: %s', $articulos).'</div>'
 				);
 			/*Agregando filas a la tabla*/
 			$ct = array();

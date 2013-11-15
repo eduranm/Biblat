@@ -42,7 +42,7 @@
 			<input id="sliderPeriodo" type="slider" name="periodo" value="0;0" disabled/>
 		</div>
 		<div id="tabs" style="display:none;">
-			 <ul>
+			<ul>
 				<li class="chartTab"><a href="#charts"></a></li>
 				<li class="gridTab"><a href="#grid"></a></li>
 				<li class="infoTab"><a href="#info"></a></li>
@@ -51,6 +51,9 @@
 				<div id="chartContainer">
 					<div id="chartTitle"></div>
 					<div id="chart" style="width: 1000px; height: 500px;"></div>
+					<div class="chartCopyright">
+						<?php _e('Fuente:');?> <a href="<?php base_url();?>">biblat.unam.mx</a>
+					</div>
 				</div>
 				<div id="bradfodContainer" style="display:none;">
 					<ul id="bradfordSlide">
@@ -67,9 +70,15 @@
 							<div id="chartGroup2"></div>
 						</li>
 					</ul>
+					<div class="chartCopyright">
+						<?php _e('Fuente:');?> <a href="<?php base_url();?>">biblat.unam.mx</a>
+					</div>
 				</div>
 				<div id="prattContainer" style="display:none;">
 					<ul id="prattSlide"></ul>
+					<div class="chartCopyright">
+						<?php _e('Fuente:');?> <a href="<?php base_url();?>">biblat.unam.mx</a>
+					</div>
 				</div>
 			</div>
 			<div id="grid"><div id="gridContainer"></div></div>

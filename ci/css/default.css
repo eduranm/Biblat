@@ -1020,3 +1020,36 @@ div.pq-grid-title{
 	text-decoration: underline;
 }
 
+
+.chartCopyright{
+	font-size: 12px;
+	position: absolute;
+	opacity: 0.65;
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#chartContainer .chartCopyright{
+	top: 460px;
+	left: 625px;
+}
+
+#prattContainer .chartCopyright{
+	top: 470px;
+	left: 570px;
+	z-index: 100;
+	opacity: 0.70;
+	color: #FFF;
+}
+
+#bradfodContainer .chartCopyright{
+	top: 470px;
+	left: 665px;
+	z-index: 100;
+	opacity: 0.70;
+}
