@@ -65,7 +65,7 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por autor');
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor');
-		$data['main']['breadcrumb'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Autor'));
+		$data['main']['breadcrumb'] = sprintf('%s <i class="separador"></i> %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Autor'));
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('Autor'), _('Documentos') );
 		$args['xls']['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaAutorDocumentos\" ORDER BY documentos DESC, autor";
@@ -84,7 +84,7 @@ class Frecuencias extends CI_Controller {
 		$queryAutor = $this->db->query($queryAutor);
 		$this->db->close();
 		$queryAutor = $queryAutor->row_array();
-		$args['breadcrumb'] = sprintf('%s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/autor', _('Autor'), _('title="Autor"')), $queryAutor['autor']);
+		$args['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/autor', _('Autor'), _('title="Autor"')), $queryAutor['autor']);
 		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $queryAutor['autor']);
 		return $this->_renderDocuments($args);
 	}
@@ -98,7 +98,7 @@ class Frecuencias extends CI_Controller {
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionDARP\"";
 		$args['querySlug'] = $query = "SELECT e_100u AS unslug FROM institucion WHERE slug='{$args['slug']}' LIMIT 1";
 		$args['where'] = "WHERE \"institucionSlug\"='{$args['slug']}'";
-		$args['breadcrumbSlug'] = sprintf('%s > %s > %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')));
+		$args['breadcrumbSlug'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')));
 		/*Columnas de la tabla*/
 		$args['cols'][] = array(
 				'editable' => false,
@@ -146,7 +146,7 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución');
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de países, revistas, autores y documentos por institución');
-		$data['main']['breadcrumb'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Institución'));
+		$data['main']['breadcrumb'] = sprintf('%s <i class="separador"></i> %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Institución'));
 		$section = array('', '', '/pais', '/revista', '/autor', '/documento');
 		$data['header']['section'] = json_encode($section, true);
 		return $this->_renderFrecuency($args, $data);
@@ -163,7 +163,7 @@ class Frecuencias extends CI_Controller {
 		$queryInstitucion = $this->db->query($queryInstitucion);
 		$this->db->close();
 		$queryInstitucion = $queryInstitucion->row_array();
-		$args['breadcrumb'] = sprintf('%s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $queryInstitucion['institucion']);
+		$args['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $queryInstitucion['institucion']);
 		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $queryInstitucion['institucion']);
 		return $this->_renderDocuments($args);
 	}
@@ -203,7 +203,7 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", países de publicación', $institucion);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por país de publicación en la institución:<br/> %s', $institucion);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/País', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		$data['main']['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s/País', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('País'), _('Documentos'));
 		$args['xls']['query'] = "SELECT pais, documentos FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY documentos DESC, pais";
@@ -234,7 +234,7 @@ class Frecuencias extends CI_Controller {
 				'pais' => $query['pais']
 			);
 		$this->db->close();
-		$args['breadcrumb'] = sprintf('%s > %s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), anchor("frecuencias/institucion/{$institucion['slug']}/pais", _sprintf('%s/País', $institucion['institucion']), _("title= \"{$institucion['institucion']}/País\"")), $pais['pais']);
+		$args['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s <i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), anchor("frecuencias/institucion/{$institucion['slug']}/pais", _sprintf('%s/País', $institucion['institucion']), _("title= \"{$institucion['institucion']}/País\"")), $pais['pais']);
 		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $institucion['institucion']);
 		return $this->_renderDocuments($args);
 	}
@@ -274,7 +274,7 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", revistas de publicación', $institucion);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por revista de publicación en la institución: <br/>%s', $institucion);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Revista', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		$data['main']['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s/Revista', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('Revista'), _('Documentos'));
 		$args['xls']['query'] = "SELECT revista, documentos FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY documentos DESC, revista";
@@ -305,7 +305,7 @@ class Frecuencias extends CI_Controller {
 				'revista' => $query['revista']
 			);
 		$this->db->close();
-		$args['breadcrumb'] = sprintf('%s > %s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), anchor("frecuencias/institucion/{$institucion['slug']}/revista", _sprintf('%s/Revista', $institucion['institucion']), _("title= \"{$institucion['institucion']}/Revista\"")), $revista['revista']);
+		$args['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s <i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), anchor("frecuencias/institucion/{$institucion['slug']}/revista", _sprintf('%s/Revista', $institucion['institucion']), _("title= \"{$institucion['institucion']}/Revista\"")), $revista['revista']);
 		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $institucion['institucion']);
 		return $this->_renderDocuments($args);
 	}
@@ -345,7 +345,7 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", autor', $institucion);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en la institución: <br/>%s', $institucion);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		$data['main']['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('Autor'), _('Documentos'));
 		$args['xls']['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY documentos DESC, autor";
@@ -376,7 +376,7 @@ class Frecuencias extends CI_Controller {
 				'autor' => $query['autor']
 			);
 		$this->db->close();
-		$args['breadcrumb'] = sprintf('%s > %s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), anchor("frecuencias/institucion/{$institucion['slug']}/autor", _sprintf('%s/Autor', $institucion['institucion']), _("title= \"{$institucion['institucion']}/Autor\"")), $autor['autor']);
+		$args['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s <i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), anchor("frecuencias/institucion/{$institucion['slug']}/autor", _sprintf('%s/Autor', $institucion['institucion']), _("title= \"{$institucion['institucion']}/Autor\"")), $autor['autor']);
 		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $institucion['institucion']);
 		return $this->_renderDocuments($args);
 	}
@@ -390,7 +390,7 @@ class Frecuencias extends CI_Controller {
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaPaisAfiliacion\"";
 		$args['querySlug'] = $query = "SELECT e_100x AS unslug FROM institucion WHERE \"paisInstitucionSlug\"='{$args['slug']}' LIMIT 1";
 		$args['where'] = "WHERE \"paisInstitucionSlug\"='{$args['slug']}'";
-		$args['breadcrumbSlug'] = sprintf('%s > %s > %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')));
+		$args['breadcrumbSlug'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')));
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('País de afiliación'), _('Instituciones'), _('Autores'), _('Documentos') );
 		$args['xls']['query'] = "SELECT \"paisInstitucion\", instituciones, autores, documentos FROM \"mvFrecuenciaPaisAfiliacion\" ORDER BY documentos DESC, \"paisInstitucion\"";
@@ -431,7 +431,7 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución');
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de instituciones, autores y documentos por país de afiliación del autor');
-		$data['main']['breadcrumb'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="País de afiliación del autor"')), _('País de afiliación'));
+		$data['main']['breadcrumb'] = sprintf('%s <i class="separador"></i> %s', anchor('frecuencias', _('Frecuencias'), _('title="País de afiliación del autor"')), _('País de afiliación'));
 		$section = array('', '', '/institucion', '/autor', '/documento');
 		$data['header']['section'] = json_encode($section, true);
 		return $this->_renderFrecuency($args, $data);
@@ -448,7 +448,7 @@ class Frecuencias extends CI_Controller {
 		$query = $this->db->query($query);
 		$this->db->close();
 		$query = $query->row_array();
-		$args['breadcrumb'] = sprintf('%s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
+		$args['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
 		$args['title'] = _sprintf('Biblat - País de afiliación: %s (%%d documentos)', $query['paisInstitucion']);
 		return $this->_renderDocuments($args);
 	}
@@ -487,7 +487,7 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por país de afiliación "%s", instituciones', $query['paisInstitucion']);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por institución en en el país de afiliación del autor:<br/> %s', $query['paisInstitucion']);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Institución', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
+		$data['main']['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s/Institución', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('Institución'), _('Documentos'));
 		$args['xls']['query'] = "SELECT institucion, documentos FROM \"mvFrecuenciaPaisAfiliacionInstitucion\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' ORDER BY documentos DESC, institucion";
@@ -518,7 +518,7 @@ class Frecuencias extends CI_Controller {
 				'pais' => $query['pais']
 			);
 		$this->db->close();
-		$args['breadcrumb'] = sprintf('%s > %s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), anchor("frecuencias/pais-afiliacion/{$pais['slug']}/institucion", _sprintf('%s/Institución', $pais['pais']), _("title= \"{$institucion['institucion']}/Institución\"")), $institucion['institucion']);
+		$args['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s <i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), anchor("frecuencias/pais-afiliacion/{$pais['slug']}/institucion", _sprintf('%s/Institución', $pais['pais']), _("title= \"{$institucion['institucion']}/Institución\"")), $institucion['institucion']);
 		$args['title'] = _sprintf('Biblat - País de afiliación: %s/%s (%%d documentos)', $pais['pais'], $institucion['institucion']);
 		return $this->_renderDocuments($args);
 	}
@@ -557,7 +557,7 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias país de afiliación "%s", autores', $query['paisInstitucion']);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en el país de afiliación:<br/> %s', $query['paisInstitucion']);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
+		$data['main']['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('Autor'), _('Documentos') );
 		$args['xls']['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaPaisAfiliacionAutor\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' ORDER BY documentos DESC, autor";
@@ -588,7 +588,7 @@ class Frecuencias extends CI_Controller {
 				'pais' => $query['pais']
 			);
 		$this->db->close();
-		$args['breadcrumb'] = sprintf('%s > %s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), anchor("frecuencias/pais-afiliacion/{$pais['slug']}/autor", _sprintf('%s/Autor', $pais['pais']), _("title= \"{$autor['autor']}/Institución\"")), $autor['autor']);
+		$args['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s <i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), anchor("frecuencias/pais-afiliacion/{$pais['slug']}/autor", _sprintf('%s/Autor', $pais['pais']), _("title= \"{$autor['autor']}/Institución\"")), $autor['autor']);
 		$args['title'] = _sprintf('Biblat - País de afiliación: %s/%s (%%d documentos)', $pais['pais'], $autor['autor']);
 		return $this->_renderDocuments($args);
 	}
@@ -661,7 +661,7 @@ class Frecuencias extends CI_Controller {
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaRevista\"";
 		$args['querySlug'] = "SELECT revista AS unslug FROM \"mvFrecuenciaRevista\" WHERE \"revistaSlug\"='{$args['slug']}' LIMIT 1";
 		$args['where'] = "WHERE \"revistaSlug\"='{$args['slug']}'";
-		$args['breadcrumbSlug'] = sprintf('%s > %s > %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Institución"')));
+		$args['breadcrumbSlug'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Institución"')));
 		/*Columnas de la tabla*/
 		$args['cols'][] = array(
 				'editable' => false,
@@ -691,7 +691,7 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por revista');
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de autores y documentos por revista');
-		$data['main']['breadcrumb'] = sprintf('%s > %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Revista'));
+		$data['main']['breadcrumb'] = sprintf('%s <i class="separador"></i> %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Revista'));
 		$section = array('', '', '/autor', '/documento');
 		$data['header']['section'] = json_encode($section, true);
 		/*XML vars*/
@@ -712,7 +712,7 @@ class Frecuencias extends CI_Controller {
 		$query = $this->db->query($query);
 		$this->db->close();
 		$query = $query->row_array();
-		$args['breadcrumb'] = sprintf('%s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), $query['revista']);
+		$args['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), $query['revista']);
 		$args['title'] = _sprintf('Biblat - Revista: %s (%%d documentos)', $query['revista']);
 		return $this->_renderDocuments($args);
 	}
@@ -751,7 +751,7 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por revista: %s, autores', $query['revista']);
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en la revista:<br/> %s', $query['revista']);
-		$data['main']['breadcrumb'] = sprintf('%s > %s > %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), $query['revista']);
+		$data['main']['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), $query['revista']);
 		/*XML vars*/
 		$args['xls']['cols'] = array( ('Autor'), _('Documentos') );
 		$args['xls']['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaRevistaAutor\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' ORDER BY documentos DESC, autor";
@@ -782,7 +782,7 @@ class Frecuencias extends CI_Controller {
 				'autor' => $query['autor']
 			);
 		$this->db->close();
-		$args['breadcrumb'] = sprintf('%s > %s > %s > %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), anchor("frecuencias/revista/{$revista['slug']}/autor", _sprintf('%s/Autor', $revista['revista']), _("title= \"{$revista['revista']}/Autor\"")), $autor['autor']);
+		$args['breadcrumb'] = sprintf('%s <i class="separador"></i> %s <i class="separador"></i> %s <i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), anchor("frecuencias/revista/{$revista['slug']}/autor", _sprintf('%s/Autor', $revista['revista']), _("title= \"{$revista['revista']}/Autor\"")), $autor['autor']);
 		$args['title'] = _sprintf('Biblat - Revista: %s/%s (%%d documentos)', $revista['revista'], $autor['autor']);
 		return $this->_renderDocuments($args);
 	}	

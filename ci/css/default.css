@@ -342,25 +342,28 @@ body {
 	height: 18px;
 	box-shadow: none;
 	resize: none;
+	font-family: Verdana,Geneva,sans-serif,FontAwesome;
 }
 
-.searchform input:focus {
+.searchform textarea:focus, .searchform textarea::-moz-focus-inner,
+.searchform button:focus, .searchform button::-moz-focus-inner {
 	outline: none;
+	border: 0;
 }
 
-.searchform input::-webkit-input-placeholder {
+.searchform textarea::-webkit-input-placeholder {
 	color: #fff;
 }
-.searchform input:-moz-placeholder { /* 1 */
+.searchform textarea:-moz-placeholder { /* 1 */
 	color: #fff;
 }
-.searchform input::-moz-placeholder {
+.searchform textarea::-moz-placeholder {
 	color: #fff;
 }
-.searchform input:-ms-input-placeholder {
+.searchform textarea:-ms-input-placeholder {
 	color: #fff;
 }
-.searchform input:placeholder { /* 2 */
+.searchform textarea:placeholder { /* 2 */
 	color: #fff;
 }
 
@@ -595,6 +598,7 @@ body {
     background-color: #FAA84D;
     background-image: -moz-linear-gradient(left center , #FDCF9C, #FAA84D);
     background-image: -webkit-gradient(linear, left center, right center, from(#FDCF9C), to(#FAA84D));
+    font-family: Verdana,Geneva,sans-serif,FontAwesome;
 }
 
 .flag em {
@@ -682,6 +686,15 @@ body {
     transform: skew(45deg, 0deg);
     -webkit-transform: skew(45deg, 0deg);
     width: 0;
+}
+
+.flag .separador:before{
+	font-family: FontAwesome;
+	content: "\f105";
+	font-size: 24px;
+	font-weight: lighter;
+	font-style: normal;
+	vertical-align: -3px;
 }
 
 p {
