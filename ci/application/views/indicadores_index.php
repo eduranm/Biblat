@@ -52,7 +52,7 @@
 					<div id="chartTitle"></div>
 					<div id="chart" style="width: 1000px; height: 500px;"></div>
 					<div class="chartCopyright">
-						<?php _e('Fuente:');?> <a href="<?php base_url();?>">biblat.unam.mx</a>
+						<?php _e('Fuente:');?> <a href="<?php echo base_url();?>">biblat.unam.mx</a>
 					</div>
 				</div>
 				<div id="bradfodContainer" style="display:none;">
@@ -71,13 +71,13 @@
 						</li>
 					</ul>
 					<div class="chartCopyright">
-						<?php _e('Fuente:');?> <a href="<?php base_url();?>">biblat.unam.mx</a>
+						<?php _e('Fuente:');?> <a href="<?php echo base_url();?>">biblat.unam.mx</a>
 					</div>
 				</div>
 				<div id="prattContainer" style="display:none;">
 					<ul id="prattSlide"></ul>
 					<div class="chartCopyright">
-						<?php _e('Fuente:');?> <a href="<?php base_url();?>">biblat.unam.mx</a>
+						<?php _e('Fuente:');?> <a href="<?php echo base_url();?>">biblat.unam.mx</a>
 					</div>
 				</div>
 			</div>
