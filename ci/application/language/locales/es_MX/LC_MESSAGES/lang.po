@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 12:28-0600\n"
-"PO-Revision-Date: 2013-11-21 12:29-0600\n"
+"POT-Creation-Date: 2013-11-22 17:38-0600\n"
+"PO-Revision-Date: 2013-11-22 17:39-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -51,9 +51,24 @@ msgid "No se encontraron resultados para la búsqueda por: \"%s\""
 msgstr "No se encontraron resultados para la búsqueda por: \"%s\""
 
 #: application/views/frecuencias_index.php:5
-#: application/views/menu.php:54
 msgid "Frecuencias"
 msgstr "Frecuencias"
+
+#: application/views/main_contacto.php:5
+msgid "Nombre"
+msgstr "Nombre"
+
+#: application/views/main_contacto.php:7
+msgid "Dirección de correo electrónico"
+msgstr "Dirección de correo electrónico"
+
+#: application/views/main_contacto.php:9
+msgid "Asunto"
+msgstr "Asunto"
+
+#: application/views/main_contacto.php:11
+msgid "Mensaje"
+msgstr "Mensaje"
 
 #: application/views/main_index.php:5
 msgid "Revistas por disciplina"
@@ -144,6 +159,9 @@ msgid "País de afiliación"
 msgstr "País de afiliación"
 
 #: application/views/menu.php:59
+#: application/views/indice_pais.php:20
+#: application/views/indice_alfabetico.php:20
+#: application/views/indice_disciplina.php:20
 msgid "Revista"
 msgstr "Revista"
 
@@ -212,6 +230,8 @@ msgid "Modelo de Bradford por institución"
 msgstr "Modelo de Bradford por institución"
 
 #: application/views/menu.php:74
+#: application/views/indicadores_index.php:284
+#: application/views/indicadores_index.php:300
 msgid "Tasa de autoría exógena"
 msgstr "Tasa de autoría exógena"
 
@@ -233,6 +253,9 @@ msgid "Políticas de acceso"
 msgstr "Políticas de acceso"
 
 #: application/views/menu.php:88
+#: application/views/indice_pais.php:21
+#: application/views/indice_alfabetico.php:21
+#: application/views/indice_disciplina.php:21
 msgid "Documentos"
 msgstr "Documentos"
 
@@ -416,8 +439,8 @@ msgstr "El valor numérico representa la cantidad de los autores que integran di
 
 #: application/views/indicadores_index.php:165
 #, php-format
-msgid "Elite de autores que publican el 50% de los trabajos."
-msgstr "Elite de autores que publican el 50% de los trabajos."
+msgid "Elite de autores que publican el 50%% de los trabajos."
+msgstr "Elite de autores que publican el 50%% de los trabajos."
 
 #: application/views/indicadores_index.php:166
 msgid "Población total de autores."
@@ -1290,11 +1313,11 @@ msgstr "Biblat - Revista: %s/%s (%%d documentos)"
 msgid "Biblat ofrece: referencias bibliográficas de documentos publicados en revistas científicas y académicas latinoamericanas indizadas en CLASE y PERIÓDICA, acceso al texto completo de revistas en acceso abierto, indicadores bibliométricos e información sobre los políticas de acceso de las revistas."
 msgstr "Biblat ofrece: referencias bibliográficas de documentos publicados en revistas científicas y académicas latinoamericanas indizadas en CLASE y PERIÓDICA, acceso al texto completo de revistas en acceso abierto, indicadores bibliométricos e información sobre los políticas de acceso de las revistas."
 
-#: application/controllers/main.php:64
+#: application/controllers/main.php:63
 msgid "Biblat - Créditos"
 msgstr "Biblat - Créditos"
 
-#: application/controllers/main.php:73
+#: application/controllers/main.php:72
 msgid "Biblat - Mapa del sitio"
 msgstr "Biblat - Mapa del sitio"
 
