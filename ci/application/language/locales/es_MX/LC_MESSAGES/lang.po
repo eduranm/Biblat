@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-22 17:38-0600\n"
-"PO-Revision-Date: 2013-11-26 17:15-0600\n"
+"PO-Revision-Date: 2013-11-27 17:25-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -728,7 +728,7 @@ msgstr "Texto completo:"
 
 #: application/views/main_creditos.php:10
 msgid "Director General"
-msgstr "<i>(%s documentos publicados en el área de <b>%s</b>)</i>"
+msgstr "Director General"
 
 #: application/views/main_creditos.php:13
 msgid "Subdirectora de Servicios de Información Especializada"
