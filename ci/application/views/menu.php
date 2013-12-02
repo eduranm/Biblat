@@ -19,6 +19,11 @@ $langs['fr'] = array(
 						'title' => "Français",
 						'img' => "french.png"
 					);
+$langs['ca'] = array(
+						'url' => site_url($this->lang->switch_uri('ca')),
+						'title' => "Catalan",
+						'img' => "catalan.png"
+					);
 $defaultLang = $this->lang->lang();
 ?>
 	<div id="header">
