@@ -44,7 +44,7 @@ class MY_Lang extends CI_Lang {
       ),
     'ca' => array(
         'iso' => 'ca',
-        'i18n' => 'ca',
+        'i18n' => 'ca_ES',
         'name' => 'catalan'
       )
   );

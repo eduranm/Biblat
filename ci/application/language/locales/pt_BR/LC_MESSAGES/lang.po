@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-22 17:38-0600\n"
-"PO-Revision-Date: 2013-11-26 17:15-0600\n"
+"PO-Revision-Date: 2013-12-02 10:23-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/biblat/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -732,7 +732,7 @@ msgstr "Texto completo:"
 
 #: application/views/main_creditos.php:10
 msgid "Director General"
-msgstr "<i>(%s documentos publicados na área de <b>%s</b>)</i>"
+msgstr ""
 
 #: application/views/main_creditos.php:13
 msgid "Subdirectora de Servicios de Información Especializada"

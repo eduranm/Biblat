@@ -26,7 +26,7 @@ $defaultLang = $this->lang->lang();
 		<div class="bannerRight"></div>
 		<div class="banner">
 			<div class="bannerLinks">
-				<a class="biblatLink" href="<?php echo base_url();?>" title="Biblat"></a>
+				<a class="biblatLink" href="<?php echo site_url('/');?>" title="Biblat"></a>
 				<a class="unamLink" href="http://www.unam.mx" target="_blank" title="UNAM"></a>
 				<a class="dgbLink" href="http://dgb.unam.mx" target="_blank" title="DGB"></a>
 			</div>
@@ -104,13 +104,13 @@ $defaultLang = $this->lang->lang();
 					</div>
 				</li>
 				<li>
-					<a href="<?php echo site_url('sitemap');?>" title="<?php _e('Mapa del sitio');?>"><img border="0" src="<?php echo base_url();?>img/sitemap.png" height="16px" alt="Sitemap"/></a>
+					<a href="<?php echo site_url('sitemap');?>" title="<?php _e('Mapa del sitio');?>"><img border="0" src="<?php echo base_url();?>img/sitemap.png" height="16px" alt="<?php _e('Mapa del sitio');?>"/></a>
 				</li>
 				<li>
-					<a href="javascript:;" title="<?php _e('Ayuda');?>"><img border="0"  src="<?php echo base_url();?>img/help.png" height="16px" alt="Sitemap"/></a>
+					<a href="javascript:;" title="<?php _e('Ayuda');?>"><img border="0"  src="<?php echo base_url();?>img/help.png" height="16px" alt="<?php _e('Ayuda');?>"/></a>
 				</li>
 				<li>
-					<a href="javascript:;" title="<?php _e('Contacto');?>"><img border="0"  src="<?php echo base_url();?>img/mail.png" height="16px" alt="Sitemap"/></a>
+					<a href="javascript:;" title="<?php _e('Contacto');?>"><img border="0"  src="<?php echo base_url();?>img/mail.png" height="16px" alt="<?php _e('Contacto');?>"/></a>
 				</li>
 				<li>
 					<img src="<?php echo base_url();?>img/<?php echo $langs[$defaultLang]['img'];?>" border="0"  height="16px" alt="<?php echo $langs[$defaultLang]['title'];?>"/>
@@ -135,7 +135,7 @@ $defaultLang = $this->lang->lang();
 				<li rel="revista"><i class="fa fa-book"></i><?php _e('Buscar por revista');?></li>
 				<li rel="institucion"><i class="fa fa fa-building-o"></i><?php _e('Buscar por institucion');?></li>
 				<li rel="articulo"><i class="fa fa-file-text-o"></i><?php _e('Buscar por articulo');?></li>
-				<li rel="articulo"><i class="fa fa-search-plus"></i><?php _e('Búsqueda avanzada');?></li>
+				<li rel="avanzada"><i class="fa fa-search-plus"></i><?php _e('Búsqueda avanzada');?></li>
 			</ul>
 			<button class="icon-search" type="submit"><span class="visuallyhidden">buscar</span></button>
 			<input type="hidden" name="disciplina" value=""/>

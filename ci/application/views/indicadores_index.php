@@ -162,7 +162,7 @@
 					</div>
 					<p class="textoL ident1">
 						<?php _e('Donde:');?><br/>
-						<i>E</i> = <?php _e('Elite de autores que publican el 50% de los trabajos.');?><br/>
+						<i>E</i> = <?php _printf('Elite de autores que publican el 50%% de los trabajos.');?><br/>
 						<i>N</i> = <?php _e('Población total de autores.');?>
 					</p>					
 				</div>

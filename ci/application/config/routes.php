@@ -37,7 +37,7 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-$langs = "^(?:es|en|fr|pt)";
+$langs = "^(?:es|en|fr|pt|ca)";
 
 $route['default_controller'] = "main";
 $route['404_override'] = '';
@@ -46,6 +46,9 @@ $route[$langs.'$'] = $route['default_controller'];
 
 $route[$langs.'/creditos'] = 'main/creditos';
 $route[$langs.'/sitemap'] = 'main/sitemap';
+$route[$langs.'/contacto'] = 'main/contacto';
+$route[$langs.'/contacto/submit'] = 'main/contactoSubmit';
+
 
 $route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave)/(.*)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';
 $route[$langs.'/buscar/(.*)/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/$1/$2/$3$4';
