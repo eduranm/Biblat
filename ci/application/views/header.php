@@ -16,7 +16,7 @@
 		var addthis_config = addthis_config||{};
 		addthis_config.data_track_addressbar = false;
 		addthis_config.data_track_clickback = false;
-		addthis_config.ui_language = "es";
+		addthis_config.ui_language = "<?php echo lang_iso_code();?>";
 	</script>
 	<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=herz"></script>
 	<script type="text/javascript" language="javascript">

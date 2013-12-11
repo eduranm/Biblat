@@ -568,6 +568,6 @@ getFrecuencias = function (key) {
 			}
 		});
 		
-		console.log(revista)
+		console.log(revista);
 	}
 }

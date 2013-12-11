@@ -151,6 +151,7 @@ UPDATE articulo SET e_008='Internacional' WHERE e_222='Revista interamericana de
 
 UPDATE articulo SET e_008='México' WHERE e_008='Mexico' OR e_008='Mèxico';
 ALTER TABLE articulo ADD COLUMN "revistaSlug" varchar;
+ALTER TABLE articulo ADD COLUMN "e_698" varchar;
 UPDATE articulo SET "revistaSlug"=slug(e_222);
 UPDATE articulo a SET id_disciplina=r.id_disciplina 
 FROM rev_disciplinas r WHERE a."revistaSlug"=r."revistaSlug";

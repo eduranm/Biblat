@@ -1053,3 +1053,15 @@ div.pq-grid-title{
 	z-index: 100;
 	opacity: 0.70;
 }
+
+fieldset {
+	border-radius: 10px;
+}
+
+form.contacto input[type=text], form.contacto textarea{
+	width: 100%;
+}
+form.contacto input[type=submit]{
+	display: block;
+	margin: 0 auto;
+}

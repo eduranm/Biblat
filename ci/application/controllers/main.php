@@ -56,7 +56,6 @@ class Main extends CI_Controller{
 		$this->load->view('menu', $data['header']);
 		$this->load->view('main_index', $data['index']);
 		$this->load->view('footer');
-		//$this->load->view('main_test');
 	}
 
 	public function creditos(){
@@ -75,5 +74,20 @@ class Main extends CI_Controller{
 		$this->load->view('menu');
 		$this->load->view('main_sitemap');
 		$this->load->view('footer');
+	}
+
+	public function contacto(){
+		$this->load->library('recaptcha');
+		$data['main']['recaptcha_html'] = $this->recaptcha->recaptcha_get_html();
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu', $data['header']);
+		$this->load->view('main_contacto',$data['main']);
+		$this->load->view('footer');
+	}
+
+	public function contactoSubmit(){
+		$this->load->library('recaptcha');
+		$this->recaptcha->recaptcha_check_answer();
+		var_dump($this->recaptcha->getIsValid());
 	}
 }
