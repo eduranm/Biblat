@@ -1,3 +1,4 @@
+TRUNCATE TABLE articulo;
 COPY articulo(
 	iddatabase,
 	sistema,
@@ -17,7 +18,8 @@ COPY articulo(
 	e_546,
 	e_590a,
 	e_590b,
-	e_856u) FROM '/home/herz/Sites/biblat/clase/articulo.txt' (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8')
+	e_698,
+	e_856u) FROM '/home/herz/Sites/biblat/clase/articulo.txt' (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
 
 
 COPY articulo(
@@ -39,7 +41,9 @@ COPY articulo(
 	e_546,
 	e_590a,
 	e_590b,
+	e_698,
 	e_856u) FROM '/home/herz/Sites/biblat/periodica/articulo.txt' (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8')
+
 
 COPY artidisciplina 
 FROM '/home/herz/Sites/biblat/clase/artitema.txt'
@@ -83,3 +87,31 @@ FROM '/home/herz/Sites/biblat/periodica/palabraclave.txt'
 COPY keyword 
 FROM '/home/herz/Sites/biblat/periodica/keyword.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
+
+
+TRUNCATE TABLE aleph_tags;
+	COPY aleph_tags(
+		"008",
+		"022",
+		"024",
+		"035",
+		"036",
+		"039",
+		"041",
+		"100",
+		"110",
+		"120",
+		"222",
+		"245",
+		"260",
+		"300",
+		"504",
+		"520",
+		"546",
+		"590",
+		"650",
+		"653",
+		"654",
+		"698",
+		"856") 
+	FROM '/home/herz/Sites/biblat/periodicaJSON.txt' (FORMAT 'csv', DELIMITER ',', NULL 'NULL', QUOTE '''', ESCAPE E'\\', ENCODING 'UTF8')
