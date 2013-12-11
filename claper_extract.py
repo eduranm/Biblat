@@ -56,12 +56,12 @@ def add_record():
 	'''Transormamos el diccionario en JSON'''
 	jsonResult = re.sub(r"\\\\\\", "\\\\", json.dumps(registro, ensure_ascii=False, sort_keys=True))
 	'''Almacenamos la cadena JSON en el archivo'''
-	with open('periodicaJSON.txt', 'a') as fileJSON:
+	with open('../periodicaJSON.txt', 'a') as fileJSON:
 		fileJSON.write(csv + "\n")
 	registro = {}
 
 '''Abrimis archivo para almacenar el resultado del proceso'''
-with open('periodicaJSON.txt', 'w') as file:
+with open('../periodicaJSON.txt', 'w') as file:
 	tagOffset=1
 	for tag in tags:
 		file.write("'" + tag + "'")
@@ -73,7 +73,7 @@ with open('periodicaJSON.txt', 'w') as file:
 
 
 '''Abrimos el archivo con que contiene el resultado de p_print_03 de aleph'''
-with open('clase_101213_valid.txt', 'r') as file:
+with open('../clase_101213_valid.txt', 'r') as file:
 	'''Leemos cada linea del archivo'''
 	for line in file:
 		'''Eliminamos el salto de linea al final de la cadena'''
@@ -102,7 +102,7 @@ with open('clase_101213_valid.txt', 'r') as file:
 				'''Si existe el patron agregamos el elemento y su valor al diccionario'''
 				if result:
 					subtags.update({resultTag.group(1):resultTag.group(2)})
-					if etiqueta == "100" and resultTag.group(1) in ['z', 'u', 'v', 'w', 'x']:
+					if etiqueta == "100" and resultTag.group(1) in ['u', 'v', 'w', 'x']:
 						etiqueta = "120"
 			'''Si el tamanio del diccionario es de 1 almacenamos el valor del elemenro en la etiqueta'''
 			if len(subtags) == 1 and etiqueta not in ('100', '110', '120', '520'):
