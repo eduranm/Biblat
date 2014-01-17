@@ -6,7 +6,7 @@
 	url = https://github.com/CSS-Tricks/AnythingSlider.git
 [submodule "ci/js/pqgrid"]
 	path = ci/js/pqgrid
-	url = git@github.com:swarzesherz/grid.git
+	url = https://github.com/swarzesherz/grid.git
 [submodule "ci/application/third_party/PHPExcel"]
 	path = ci/application/third_party/PHPExcel
 	url = https://github.com/PHPOffice/PHPExcel.git
