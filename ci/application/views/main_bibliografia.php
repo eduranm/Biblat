@@ -95,7 +95,7 @@
 		Cetto, A. M. &amp; Alonso Gamboa, J. O. (1998) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Cetto_AlonsoGamboa_1998.pdf" target="_blank">Scientific periodicals in Latin America and the Caribbean: a perspective</a>. <i>Interciencia,</i> 23(2), 84-93.<br/><br/>
 
 		
-		Reyna Espinosa, F. R. &amp; Alonso Gamboa, J. O. (1997, octubre). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/ReynaEspinosa_AlonsoGamboa_1997.pdf">Retos y prospectiva de las bases de datos latinoamericanas: la experiencia de BLAT, CLASE y PERIODICA.</a> Ponencia presentada en el <i>Congreso Internacional de Informacion INFO 97</i>. Habana, Cuba: Instituto de Información Científica y Tecnológica.<br/><br/>
+		Reyna Espinosa, F. R. &amp; Alonso Gamboa, J. O. (1997, octubre). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/ReynaEspinosa_AlonsoGamboa_1997.pdf" target="_blank">Retos y prospectiva de las bases de datos latinoamericanas: la experiencia de BLAT, CLASE y PERIODICA.</a> Ponencia presentada en el <i>Congreso Internacional de Informacion INFO 97</i>. Habana, Cuba: Instituto de Información Científica y Tecnológica.<br/><br/>
 
 		
 		Alonso Gamboa, J. O. (1993). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/AlonsoGamboa_1993.pdf" target="_blank">Servicios, productos, docencia e investigación en información. La experiencia del Centro de Información Científica y Humanística de la Universidad Nacional Autónoma de México.</a> <i>Ciencias de la Información</i>24(4), 201-209.</b><br/><br/>
