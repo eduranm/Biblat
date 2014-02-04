@@ -67,6 +67,15 @@ class Main extends CI_Controller{
 		$this->load->view('footer');
 	}
 
+	public function bibliografia(){
+		$data = array();
+		$data['header']['title'] = _("Biblat - Bibliografía");
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu');
+		$this->load->view('main_bibliografia');
+		$this->load->view('footer');
+	}
+
 	public function sitemap(){
 		$data = array();
 		$data['header']['title'] = _("Biblat - Mapa del sitio");
