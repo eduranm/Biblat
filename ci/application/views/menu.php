@@ -92,7 +92,7 @@ $defaultLang = $this->lang->lang();
 				<li>
 					<a href="javascript:;" title="<?php _e('Documentos');?>"><?php _e('Documentos');?></a>
 					<ul>
-						<li><a href="javascript:;" title="<?php _e('Bibliografía');?>"><?php _e('Bibliografía');?></a></li>
+						<li><a href="<?php echo site_url('documentos/bibliografia');?>" title="<?php _e('Bibliografía');?>"><?php _e('Bibliografía');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Presentaciones PPT');?>"><?php _e('Presentaciones PPT');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Archivos multimedia');?>"><?php _e('Archivos multimedia');?></a></li>
 					</ul>

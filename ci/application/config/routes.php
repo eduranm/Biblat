@@ -45,6 +45,7 @@ $route['404_override'] = '';
 $route[$langs.'$'] = $route['default_controller'];
 
 $route[$langs.'/creditos'] = 'main/creditos';
+$route[$langs.'/documentos/bibliografia'] = 'main/bibliografia';
 $route[$langs.'/sitemap'] = 'main/sitemap';
 $route[$langs.'/contacto'] = 'main/contacto';
 $route[$langs.'/contacto/submit'] = 'main/contactoSubmit';
