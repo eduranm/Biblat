@@ -184,6 +184,11 @@ class Revista extends CI_Controller{
 			$articulo['paginacionLast'] = preg_replace("/[-\s]+/", "", preg_replace('/.*(-\s*\d+\s*?$|^\s*\d+?\s*$).*/m', '\1', $articulo['paginacion']));
 		endif;
 
+		$database[0] = "CLASE";
+		$database[1] = "PERIODICA";
+
+		$articulo['database'] = $database[$articulo['iddatabase']];
+
 		$articulo = remove_empty($articulo);
 
 		$data['main']['articulo'] = $articulo;
@@ -203,5 +208,24 @@ class Revista extends CI_Controller{
 		$data['main']['content'] = $this->load->view('revista_articulo', $data['header'], TRUE);
 		$this->load->view('revista_articulo_content', $data['main']);
 		$this->load->view('footer');
+	}
+
+	public function solicitudDocumento(){
+		$this->output->enable_profiler(false);
+		$config['protocol'] = 'sendmail';
+		$config['mailpath'] = '/usr/sbin/sendmail';
+		$config['charset'] = 'utf-8';
+		$config['wordwrap'] = TRUE;
+		$config['mailtype'] = 'html';
+		$this->load->library('email');
+		$this->email->initialize($config);
+		$this->email->from('solicitud@biblat.unam.mx', 'Solicitud Biblat');
+		$this->email->to('achwazer@gmail.com');
+		$this->email->subject('Solicitud de documento');
+		$body = $this->load->view('mail_solicitud', $_POST, TRUE);
+		$this->email->message($body);
+
+		$this->email->send();
+		//echo json_encode($_POST);
 	}
 }

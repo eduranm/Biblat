@@ -333,6 +333,16 @@ INNER JOIN
   GROUP BY "revistaSlug" HAVING  anios_continuos(array_agg(anio)) > 4) tc --Titlos de revista con más de 4 periodos consecutivos;
   ON a."revistaSlug"=tc."revistaSlug";
 
+--Autor indicador
+CREATE OR REPLACE VIEW "vAutorIndicador" AS
+SELECT a.*
+FROM autor a
+LEFT JOIN institucion i ON a.iddatabase=i.iddatabase
+AND a.sistema=i.sistema
+AND a.sec_autor=i.sec_autor
+AND a.sec_institucion=i.sec_institucion
+WHERE i.e_100x IS NOT NULL;
+
 --Autores por documento
 CREATE OR REPLACE VIEW "vAutoresDocumento" AS
 SELECT * FROM
@@ -340,6 +350,7 @@ SELECT * FROM
        a.sistema,
        count(*) AS autores,
        max(i.e_100x) AS e_100x
+
 FROM autor a
 LEFT JOIN institucion i ON a.iddatabase=i.iddatabase
 AND a.sistema=i.sistema
@@ -378,6 +389,30 @@ ON dp.iddatabase=ad.iddatabase
 AND dp.sistema=ad.sistema
 GROUP BY dp.iddatabase, dp.sistema, dp.e_100x;
 
+--Autores en revista
+CREATE OR REPLACE VIEW "vAutorRevista" AS
+SELECT 
+  ar."revistaSlug",
+  ar.anio,
+  ai.e_100a AS autor,
+  count(*) AS documentos
+FROM "vAutorIndicador" ai
+INNER JOIN "vArticulos" ar ON ai.iddatabase=ar.iddatabase AND ai.sistema=ar.sistema
+GROUP BY "revistaSlug", anio, autor
+ORDER BY "revistaSlug", anio, autor;
+SELECT create_matview('"mvAutorRevista"', '"vAutorRevista"');
+
+CREATE OR REPLACE VIEW "vAutorPais" AS
+SELECT 
+  ar."paisRevistaSlug",
+  ar.anio,
+  ai.e_100a AS autor,
+  count(*) AS documentos
+FROM "vAutorIndicador" ai
+INNER JOIN "vArticulos" ar ON ai.iddatabase=ar.iddatabase AND ai.sistema=ar.sistema
+GROUP BY "paisRevistaSlug", anio, autor
+ORDER BY "paisRevistaSlug", anio, autor;
+SELECT create_matview('"mvAutorPais"', '"vAutorPais"');
 
 --Indice de coautoria por revista
 CREATE OR REPLACE VIEW "vIndiceCoautoriaPriceRevista" AS
@@ -807,6 +842,42 @@ GROUP BY id_disciplina, "revistaSlug";
 SELECT create_matview('"mvPratt"', '"vPratt"');
 
 --Bradford
+
+CREATE OR REPLACE VIEW "vDocumentosBradford" AS
+SELECT 
+  a.iddatabase,
+  a.sistema
+FROM "vAutoresDocumento" ad
+INNER JOIN "vArticulos" a
+  ON ad.iddatabase=a.iddatabase AND ad.sistema=a.sistema
+GROUP BY a."revistaSlug", a.iddatabase, a.sistema;
+
+SELECT create_matview('"mvDocumentosBradford"', '"vDocumentosBradford"');
+
+CREATE OR REPLACE VIEW "vDocumentosBradfordFull" AS
+SELECT   
+  s.sistema,
+  s.iddatabase,
+  articulo, 
+  "articuloSlug", 
+  revista, 
+  "revistaSlug", 
+  pais, 
+  anio, 
+  volumen, 
+  numero, 
+  periodo, 
+  paginacion, 
+  url,
+  "autoresSecJSON",
+  "autoresSecInstitucionJSON",
+  "autoresJSON",
+  "institucionesSecJSON",
+  "institucionesJSON" 
+FROM "mvDocumentosBradford" db 
+INNER JOIN "mvSearch" s ON 
+db.iddatabase=s.iddatabase AND db.sistema=s.sistema;
+
 CREATE OR REPLACE VIEW "vArticulosDisciplinaRevista" AS
 SELECT * FROM
 (SELECT 

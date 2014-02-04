@@ -10,10 +10,9 @@
 	<link rel="stylesheet" href="<?php echo base_url();?>css/estiloBiblat.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>css/font-awesome.min.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url();?>css/default.css" type="text/css" />
+	<link rel="stylesheet" href="<?php echo base_url();?>css/default_ajax.css" type="text/css" />
 	<script type="text/javascript" src="<?php echo base_url();?>js/jquery.js"></script>
 	<script type="text/javascript" src="<?php echo base_url();?>js/jquery.autosize.min.js"></script>
-		<script type="text/javascript" src="<?php echo base_url();?>js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>js/jquery.blockUI.js"></script>
 	<script type="text/javascript">
 		var addthis_config = addthis_config||{};
 		addthis_config.data_track_addressbar = false;
@@ -22,31 +21,6 @@
 	</script>
 	<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=herz"></script>
 	<script type="text/javascript" language="javascript">
-		loading = {
-			start: function(){
-				jQuery.blockUI({ 
-					message: '<h2 style="white-space:nowrap;"><img src="<?php echo base_url();?>img/loading.gif" /><br /><?php _e('Espere un momento...');?></h2>',
-					css: { 
-						color: '#000', 
-						backgroundColor:'#FBFCEF', 
-						opacity: 0.6, 
-						border: '2px solid #114D66',
-						cursor: 'wait'
-					},
-					onBlock: function(){
-						loading.status=true;
-					},
-					onUnblock: function(){
-						loading.status=false;
-					}
-				});
-			},
-			end: function(){
-				jQuery.unblockUI();
-			},
-			status: false
-		}; 
-
 		jQuery(document).ready(function()
 		{
 			jQuery(document).bind("contextmenu",function(e){
@@ -86,32 +60,6 @@
 			jQuery('textarea').autosize();
 			jQuery('body').click(function(e) {
 				jQuery(".optionsMenu").hide();
-			});
-			jQuery('#solicitudDocumento').click(function(e) {
-				jQuery('.solicitudDocumento, #sd-disable, #sd-enable').toggle();
-			});
-			jQuery('#formSolicitudDocumento').submit(function(e) {
-				if(!loading.status){
-					loading.start();
-				}
-				console.log(jQuery(this).attr("action"));
-				jQuery.ajax({
-					url: jQuery(this).attr("action"),
-					type: 'POST',
-					dataType: 'json',
-					data: jQuery(this).serialize(),
-					success: function(data) {
-						console.log(data)
-						loading.end();
-						jQuery('input:text').each(function(){
-							jQuery(this).val('');
-						});
-						jQuery('.solicitudDocumento, #sd-disable, #sd-enable').toggle();
-						jQuery("#documentoEnviado").dialog();
-						return false;
-					}
-				});
-				return false;
 			});
 		});
 	</script>

@@ -98,7 +98,31 @@
 					<td><a href="<?php echo $articulo['url']?>" target="_blank"><?php echo $articulo['url']?></a></td>
 				</tr>
 <?php 	endif;?>
+				<tr id="solicitudDocumento">
+					<td colspan="2"><b><?php _e('Solicitud del documento')?></b> <span id="sd-enable" class="fa">&#xf152</span> <span id="sd-disable" class="fa">&#xf150</span></td>
+				</tr>
+				<tr class="solicitudDocumento">
+					<td colspan="2">
+						<form id="formSolicitudDocumento" action="<?php echo site_url('revista/solicitud/documento');?>" method="POST" class="contacto">
+							<fieldset>
+								<label><?php _e('Nombre');?></label><br/>
+								<input type="text" name="from"/><br/>
+								<label><?php _e('Dirección de correo electrónico');?></label><br/>
+								<input type="text" name="email" placeholder="me@domain.com"/><br/>
+								<label><?php _e('Instituto');?></label><br/>
+								<input type="text" name="instituto"/><br/>
+								<label><?php _e('Teléfono');?></label><br/>
+								<input type="text" name="telefono"/><br/>
+								<input type="hidden" name="database" value="<?php echo $articulo['database'];?>"/>
+								<input type="hidden" name="sistema" value="<?php echo $articulo['sistema'];?>"/>
+								<input type="hidden" name="url" value="<?php echo current_url();?>"/>
+								<input class="fa" type="submit" value="Enviar   &#xf0e0;"/>
+							</fieldset>
+						</form>
+					</td>
+				</tr>
 		</tbody>
 	</table>
+	<div id="documentoEnviado" style="display:none;"><?php _e('La solicitud ha sido enviada');?></div>
 <?php endif;?>
 </div>

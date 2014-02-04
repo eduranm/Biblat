@@ -268,6 +268,7 @@ jQuery(document).ready(function(){
 						chart.group1 = new google.visualization.ColumnChart(document.getElementById('chartGroup1'));
 					}
 					chart.group1.draw(chart.data.group1, data.options.groups);
+					google.visualization.events.addListener(chart.group1, 'select', function(){bradfordArticles('group1')});
 					jQuery("#group1Title").html(data.title.group1);
 
 					chart.data.group2 = new google.visualization.DataTable(data.chart.group2);
@@ -275,6 +276,7 @@ jQuery(document).ready(function(){
 						chart.group2 = new google.visualization.ColumnChart(document.getElementById('chartGroup2'));
 					}
 					chart.group2.draw(chart.data.group2, data.options.groups);
+					google.visualization.events.addListener(chart.group2, 'select', function(){bradfordArticles('group2')});
 					jQuery("#group2Title").html(data.title.group2);
 					var tableData = new google.visualization.DataTable(data.table.bradford);
 					jQuery("#gridContainer").empty();
@@ -328,11 +330,12 @@ jQuery(document).ready(function(){
 					break;
 				default:
 					jQuery("#tabs, #chartContainer").show("slow");
-					var chartData = new google.visualization.DataTable(data.data);
+					chart.data.normal = new google.visualization.DataTable(data.data);
 					if(chart.normal == null){
 						chart.normal = new google.visualization.LineChart(document.getElementById('chart'));
 					}
-					chart.normal.draw(chartData, data.options);
+					chart.normal.draw(chart.data.normal, data.options);
+					google.visualization.events.addListener(chart.normal, 'select', choosePoint);
 					jQuery("#chartTitle").html(data.chartTitle);
 
 					var tableData = new google.visualization.DataTable(data.dataTable);
@@ -341,6 +344,7 @@ jQuery(document).ready(function(){
 					jQuery("#gridContainer").append('<div class="dataTable" id="table0"></div>');
 					tables.normal = new google.visualization.Table(document.getElementById('table0'));
 					tables.normal.draw(tableData, data.tableOptions);
+					
 
 					break;
 			}
@@ -508,31 +512,6 @@ updateData = function(data){
 	asyncAjax=true;
 };
 
-loading = {
-	start: function(){
-		jQuery.blockUI({ 
-			message: '<h2 style="white-space:nowrap;"><img src="<?php echo base_url();?>img/loading.gif" /><br /><?php _e('Espere un momento...');?></h2>',
-			css: { 
-				color: '#000', 
-				backgroundColor:'#FBFCEF', 
-				opacity: 0.6, 
-				border: '2px solid #114D66',
-				cursor: 'wait'
-			},
-			onBlock: function(){
-				loading.status=true;
-			},
-			onUnblock: function(){
-				loading.status=false;
-			}
-		});
-	},
-	end: function(){
-		jQuery.unblockUI();
-	},
-	status: false
-}; 
-
 chooseZone = function () {
 	var selection = chart.bradford.getSelection();
 	if (selection[0] != null && selection[0].row != null){
@@ -546,6 +525,38 @@ chooseZone = function () {
 			jQuery("#tabs").tabs("option", "active", 1);
 			jQuery("#gridContainer").accordion("option", "active", 3);
 		}
+	}
+}
+
+choosePoint = function () {
+	var selection = chart.normal.getSelection()[0];
+	indicadorValue = jQuery("#indicador").val();
+	if (selection && indicadorValue == "modelo-elitismo"){
+		var revistaPais = chart.data.normal.getColumnId(selection.column);
+		var anio = chart.data.normal.getFormattedValue(selection.row, 0);
+		console.log(anio);
+		jQuery.ajax({
+			url: '<?php echo site_url("indicadores/getAutoresPrice");?>/'+ revistaPais + '/' + anio,
+			type: 'POST',
+			dataType: 'json',
+			data: jQuery("#generarIndicador").serialize(),
+			success: function(data){
+				console.log(data);
+				var tableData = new google.visualization.DataTable(data.table);
+				var table = new google.visualization.Table(document.getElementById('floatTable'));
+				table.draw(tableData, data.tableOptions);
+				jQuery.colorbox({inline: true, href: jQuery('#floatTable'), height:"90%",});
+			}
+		});
+	}
+}
+
+bradfordArticles = function (group) {
+	var selection = chart[group].getSelection()[0];
+	indicadorValue = jQuery("#indicador").val();
+	if (selection && indicadorValue == "modelo-bradford-revista"){
+		var revista = chart.data[group].getColumnId(selection.column);
+		jQuery.colorbox({href:"<?php echo site_url("indicadores/bradfordDocumentos");?>/" + revista + "/ajax", data: {ajax:true}, transition:"fade", height:"90%", width: "1000px", iframe: true});
 	}
 }
 

@@ -4,6 +4,24 @@ class Indicadores extends CI_Controller {
 
 	public $indicadores = array();
 	public $disciplinas = array();
+	public $queryFields="DISTINCT (sistema, 
+					iddatabase) AS \"sitemaIdDatabase\",
+					articulo, 
+					\"articuloSlug\", 
+					revista, 
+					\"revistaSlug\", 
+					pais, 
+					anio, 
+					volumen, 
+					numero, 
+					periodo, 
+					paginacion, 
+					url, 
+					\"autoresSecJSON\",
+					\"autoresSecInstitucionJSON\",
+					\"autoresJSON\",
+					\"institucionesSecJSON\",
+					\"institucionesJSON\"";
 
 	public function __construct()
 	{
@@ -438,17 +456,19 @@ class Indicadores extends CI_Controller {
 						);
 		/*Creando lista de revistas con su total de articulos agrupados según los límites calculados anteriormente*/
 		$column = strtolower($indicador[$_POST['indicador']]['sufix']);
-		$query = "SELECT {$column}, articulos FROM \"mvArticulosDisciplina{$indicador[$_POST['indicador']]['sufix']}\" WHERE id_disciplina={$idDisciplina} ORDER BY articulos DESC";
+		$query = "SELECT {$column}, \"{$column}Slug\" AS slug, articulos FROM \"mvArticulosDisciplina{$indicador[$_POST['indicador']]['sufix']}\" WHERE id_disciplina={$idDisciplina} ORDER BY articulos DESC";
 		$query = $this->db->query($query);
 		$revistaInstitucion = array();
 		foreach ($query->result_array() as $row) :
 			$acumulado += $row['articulos'];
+			$rowData['articulos'] = $row['articulos'];
+			$rowData['slug'] = $row['slug'];
 			if ($acumulado <= $grupos['1']['lim']['y']):
-				$revistaInstitucion['1'][$row[$column]] = $row['articulos'];
+				$revistaInstitucion['1'][$row[$column]] = $rowData;
 			elseif ($acumulado <= $grupos['2']['lim']['y']):
-				$revistaInstitucion['2'][$row[$column]] = $row['articulos'];
+				$revistaInstitucion['2'][$row[$column]] = $rowData;
 			else:
-				$revistaInstitucion['3'][$row[$column]] = $row['articulos'];
+				$revistaInstitucion['3'][$row[$column]] = $rowData;
 			endif;
 		endforeach;
 		/*Ordenando grupos alfabeticamnete*/
@@ -463,19 +483,19 @@ class Indicadores extends CI_Controller {
 		$result['table']['group1']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
 		$result['table']['group1']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
-		foreach ($revistaInstitucion['1'] as $label => $articulos):
-			$result['chart']['group1']['cols'][] = array('id' => '','label' => $label,'type' => 'number');
+		foreach ($revistaInstitucion['1'] as $label => $value):
+			$result['chart']['group1']['cols'][] = array('id' => $value['slug'],'label' => $label,'type' => 'number');
 			$result['chart']['group1']['cols'][] = array('id' => '','label' => 'tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
 			$c[] = array(
-					'v' => (int)$articulos
+					'v' => (int)$value['articulos']
 				);
 			$c[] = array(
-					'v' =>  sprintf('<div class="chartTootip"><b>%s</b><br/>', $label)._sprintf('Cantidad de artículos: %s', $articulos).'</div>'
+					'v' =>  sprintf('<div class="chartTootip"><b>%s</b><br/>', $label)._sprintf('Cantidad de artículos: %s', $value['articulos']).'</div>'
 				);
 			/*Agregando filas a la tabla*/
 			$ct = array();
 			$ct[] = array('v' => $label);
-			$ct[] = array('v' => (int)$articulos);
+			$ct[] = array('v' => (int)$value['articulos']);
 			$result['table']['group1']['rows'][]['c'] = $ct;
 		endforeach;
 		$result['chart']['group1']['rows'][]['c'] = $c;
@@ -487,19 +507,19 @@ class Indicadores extends CI_Controller {
 		$result['table']['group2']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
 		$result['table']['group2']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
-		foreach ($revistaInstitucion['2'] as $revista => $articulos):
-			$result['chart']['group2']['cols'][] = array('id' => '','label' => $revista,'type' => 'number');
+		foreach ($revistaInstitucion['2'] as $label => $value):
+			$result['chart']['group2']['cols'][] = array('id' => $value['slug'],'label' => $label,'type' => 'number');
 			$result['chart']['group2']['cols'][] = array('id' => '','label' => 'tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
 			$c[] = array(
-					'v' => (int)$articulos
+					'v' => (int)$value['articulos']
 				);
 			$c[] = array(
-					'v' => sprintf('<div class="chartTootip"><b>%s</b><br/>', $revista)._sprintf('Cantidad de artículos: %s', $articulos).'</div>'
+					'v' => sprintf('<div class="chartTootip"><b>%s</b><br/>', $label)._sprintf('Cantidad de artículos: %s', $value['articulos']).'</div>'
 				);
 			/*Agregando filas a la tabla*/
 			$ct = array();
-			$ct[] = array('v' => $revista);
-			$ct[] = array('v' => (int)$articulos);
+			$ct[] = array('v' => $label);
+			$ct[] = array('v' => (int)$value['articulos']);
 			$result['table']['group2']['rows'][]['c'] = $ct;
 		endforeach;
 		$result['chart']['group2']['rows'][]['c'] = $c;
@@ -846,6 +866,77 @@ class Indicadores extends CI_Controller {
 		$data['heterogeneity'] = json_encode($heterogeneity, true);
 		header('Content-Type: application/json');
 		echo json_encode($data, true);
+	}
+
+	public function getAutoresPrice($revistaPais, $anio){
+		$this->output->enable_profiler(false);
+		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
+		if(isset($_POST['revista'])):
+			$query = "SELECT autor, documentos FROM \"mvAutorRevista\" WHERE \"revistaSlug\"='{$revistaPais}' AND anio='{$anio}' ORDER BY documentos DESC";
+		else:
+			$query = "SELECT autor, documentos FROM \"mvAutorPais\" WHERE \"paisRevistaSlug\"='{$revistaPais}' AND anio='{$anio}' ORDER BY documentos DESC";
+		endif;
+		$query = $this->db->query($query);
+		$result = array();
+		$result['table']['cols'][] = array('id' => '','label' => _('Autor'),'type' => 'string');
+		$result['table']['cols'][] = array('id' => '','label' => _('Documentos'),'type' => 'number');
+		foreach ($query->result_array() as $row):
+			$c = array();
+			$c[] = array('v' => $row['autor']);
+			$c[] = array('v' => $row['documentos']);
+			$result['table']['rows'][]['c'] = $c;
+		endforeach;
+		/*Opciones para la tabla*/
+		$data['tableOptions'] = array(
+				'allowHtml' => true,
+				'showRowNumber' => false
+			);
+		header('Content-Type: application/json');
+		echo json_encode($result, true);
+	}
+
+	public function bradfordDocumentos($slug, $ajax=false){
+		$args['slug'] = $slug;
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vDocumentosBradfordFull\" WHERE \"revistaSlug\"='{$slug}'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vDocumentosBradfordFull\" WHERE \"revistaSlug\"='{$slug}'";
+		$args['paginationURL'] = site_url("indicadores/bradfordDocumentos/{$slug}");
+		if(isset($_POST['ajax']) || $ajax):
+			$args['paginationURL'] = site_url("indicadores/bradfordDocumentos/{$slug}/ajax");
+			$args['ajax'] = true;
+		endif;
+		/*Datos de la revista*/
+		$this->load->database();
+		$queryRevista = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$slug}' LIMIT 1";
+		$queryRevista = $this->db->query($queryRevista);
+		$this->db->close();
+		$queryRevista = $queryRevista->row_array();
+		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('indicadores', _('Indicadores'), _('title="Indicadores"')), anchor('indicadores/modelo-bradford-revista', _('Modelo de Bradford por revista'), _('title="Modelo de Bradford por revista"')), $queryRevista['revista']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $queryRevista['revista']);
+		return $this->_renderDocuments($args);
+	}
+
+	private function _renderDocuments($args){
+		/*Obtniendo los registros con paginación*/
+		$query = "{$args['query']} ORDER BY anio DESC, volumen DESC, numero DESC, articulo";
+		$articulosResultado = articulosResultado($query, $args['queryCount'], $args['paginationURL'], $resultados=20);
+		/*Vistas*/
+		$data = array();
+		$data['main']['links'] = $articulosResultado['links'];
+		$data['main']['resultados']=$articulosResultado['articulos'];
+		$data['header']['title'] = sprintf($args['title'], $articulosResultado['totalRows']);
+		$data['header']['slugHighLight']=slugHighLight($args['slug']);
+		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);
+		$data['main']['breadcrumb'] = sprintf($args['breadcrumb'], $articulosResultado['totalRows']);
+		if(isset($args['ajax'])):
+			$this->load->view('header_ajax', $data['header']);
+		else:
+			$this->load->view('header', $data['header']);
+			$this->load->view('menu', $data['header']);
+		endif;
+		$this->load->view('frecuencias_documentos', $data['main']);
+		if(! isset($args['ajax'])):
+			$this->load->view('footer');
+		endif;
 	}
 
 }

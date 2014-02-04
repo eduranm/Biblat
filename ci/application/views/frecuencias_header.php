@@ -6,7 +6,6 @@
 	<script type="text/javascript" src="<?php echo site_url("js/jquery-ui.min.js")?>"></script>
 	<script type="text/javascript" src="<?php echo site_url("js/pqgrid/pqgrid.dev.js")?>"></script>
 	<script type="text/javascript" src="<?php echo site_url("js/pqgrid/localize/pq-localize-es.js")?>"></script>
-	<script type="text/javascript" src="<?php echo site_url("js/jquery-ui.min.js")?>"></script>
 	<script type="text/javascript" src="<?php echo site_url("js/jquery.contextMenu.js")?>"></script>
 	<script type="text/javascript" src="<?php echo site_url("js/prettify/prettify.js")?>"></script>
 	<script type="text/javascript">
