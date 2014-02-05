@@ -107,9 +107,9 @@
 							<fieldset>
 								<b>Nota:</b> El envío del documento tiene costo.<br/><br/>
 								<label><?php _e('Nombre');?></label><br/>
-								<input type="text" name="from"/><br/>
+								<input type="text" name="from" required data-msg-required="<?php _e('El nombre es requerido');?>"/><br/>
 								<label><?php _e('Dirección de correo electrónico');?></label><br/>
-								<input type="text" name="email" placeholder="me@domain.com"/><br/>
+								<input type="text" name="email" placeholder="me@domain.com" required data-msg-required="<?php _e('El correo electrónico es requerido');?>"/><br/>
 								<label><?php _e('Instituto');?></label><br/>
 								<input type="text" name="instituto"/><br/>
 								<label><?php _e('Teléfono');?></label><br/>

@@ -51,3 +51,8 @@
 	<meta name="prism.issn" content="<?php echo $articulo['issn'];?>"/>
 	<meta name="dc.title" content="<?php echo $articulo['articulo'];?>"/>
 <?php endif;?>
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery('#formSolicitudDocumento').validate();
+		});
+	</script>

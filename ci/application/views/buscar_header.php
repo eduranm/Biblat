@@ -27,6 +27,7 @@
 			});
 			jQuery(document).bind('cbox_complete', function(){
 				addthis.toolbox('.addthis_toolbox');
+				jQuery('#formSolicitudDocumento').validate();
 			});
 			jQuery(".resultados").highlight([<?php echo $slugHighLight;?>]);
 		});

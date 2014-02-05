@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('js/pnotify/jquery.pnotify.default.css');?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo base_url('css/default.css');?>" type="text/css" />
 	<script type="text/javascript" src="<?php echo base_url('js/jquery.js');?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('js/jquery.validate.min.js');?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('js/jquery.autosize.min.js');?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('js/jquery-ui.min.js');?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('js/jquery.blockUI.js');?>"></script>

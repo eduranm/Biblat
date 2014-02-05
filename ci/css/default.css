@@ -1093,3 +1093,8 @@ form.contacto input[type=submit]{
 .ui-pnotify-container h4 {
 	font-size: 14px;
 }
+
+.error{
+	color: #FF0000;
+	font-weight: bold;
+}
