@@ -6,14 +6,17 @@
 	<meta name="description" content="<?php echo $description;?>" /> 
 <?php endif;?>
 	<title><?php echo $title;?></title>
-	<link rel="icon" href="<?php echo base_url();?>img/favicon.ico" type="image/x-icon"/>
-	<link rel="stylesheet" href="<?php echo base_url();?>css/estiloBiblat.css" type="text/css" />
-	<link rel="stylesheet" href="<?php echo base_url();?>css/font-awesome.min.css" type="text/css" />
-	<link rel="stylesheet" href="<?php echo base_url();?>css/default.css" type="text/css" />
-	<script type="text/javascript" src="<?php echo base_url();?>js/jquery.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>js/jquery.autosize.min.js"></script>
-		<script type="text/javascript" src="<?php echo base_url();?>js/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>js/jquery.blockUI.js"></script>
+	<link rel="icon" href="<?php echo base_url('img/favicon.ico');?>" type="image/x-icon"/>
+	<link rel="stylesheet" href="<?php echo base_url('css/estiloBiblat.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo base_url('css/font-awesome.min.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo base_url('css/jquery-ui.min.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo base_url('js/pnotify/jquery.pnotify.default.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo base_url('css/default.css');?>" type="text/css" />
+	<script type="text/javascript" src="<?php echo base_url('js/jquery.js');?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('js/jquery.autosize.min.js');?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('js/jquery-ui.min.js');?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('js/jquery.blockUI.js');?>"></script>
+	<script type="text/javascript" src="<?php echo base_url('js/pnotify/jquery.pnotify.min.js');?>"></script>
 	<script type="text/javascript">
 		var addthis_config = addthis_config||{};
 		addthis_config.data_track_addressbar = false;
@@ -46,12 +49,13 @@
 			},
 			status: false
 		}; 
-
+		jQuery.pnotify.defaults.history = false;
+		jQuery.pnotify.defaults.styling = "jqueryui";
+		jQuery(document).bind("contextmenu",function(e){
+			return false;
+		});
 		jQuery(document).ready(function()
 		{
-			jQuery(document).bind("contextmenu",function(e){
-				return false;
-			});
 			jQuery("#options").click(function(e) {
 				jQuery(".optionsMenu").toggle();
 				return false;
@@ -110,7 +114,12 @@
 							jQuery(this).val('');
 						});
 						jQuery('.solicitudDocumento, #sd-disable, #sd-enable').toggle();
-						jQuery("#documentoEnviado").dialog();
+						jQuery.pnotify({
+							title: '<?php _e('La solicitud ha sido enviada');?>',
+							icon: true,
+							type: 'success',
+							sticker: false
+						});
 						return false;
 					}
 				});

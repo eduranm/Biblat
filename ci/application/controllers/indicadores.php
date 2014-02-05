@@ -928,7 +928,8 @@ class Indicadores extends CI_Controller {
 		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);
 		$data['main']['breadcrumb'] = sprintf($args['breadcrumb'], $articulosResultado['totalRows']);
 		if(isset($args['ajax'])):
-			$this->load->view('header_ajax', $data['header']);
+			$data['header']['content'] .=  $this->load->view('header_ajax', $data['header'], TRUE);
+			$this->load->view('header', $data['header']);
 		else:
 			$this->load->view('header', $data['header']);
 			$this->load->view('menu', $data['header']);

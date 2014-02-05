@@ -1089,3 +1089,7 @@ form.contacto input[type=submit]{
 	min-width: 650px;
 	background-color: #FEFEFE;
 }
+
+.ui-pnotify-container h4 {
+	font-size: 14px;
+}

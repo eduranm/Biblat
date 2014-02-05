@@ -125,6 +125,5 @@
 				</tr>
 		</tbody>
 	</table>
-	<div id="documentoEnviado" style="display:none;"><?php _e('La solicitud ha sido enviada');?></div>
 <?php endif;?>
 </div>
