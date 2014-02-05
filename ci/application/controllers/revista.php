@@ -225,7 +225,7 @@ class Revista extends CI_Controller{
 		$body = $this->load->view('mail_solicitud', $_POST, TRUE);
 		$this->email->message($body);
 
-		//$this->email->send();
+		$this->email->send();
 		//echo json_encode($_POST);
 	}
 }
