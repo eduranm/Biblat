@@ -1,4 +1,4 @@
-# 
+#
 # Translators:
 # allorens <allorens@dgb.unam.mx>, 2013
 # Herz <herzmx@gmail.com>, 2013
@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-22 17:38-0600\n"
-"PO-Revision-Date: 2013-12-02 10:23-0600\n"
-"Last-Translator: Herz <achwazer@gmail.com>\n"
-"Language-Team: English (http://www.transifex.com/projects/p/biblat/language/en/)\n"
+"PO-Revision-Date: 2014-02-04 23:59-0600\n"
+"Last-Translator: Herz <herzmx@gmail.com>\n"
+"Language-Team: English (http://www.transifex.com/projects/p/biblat/language/"
+"en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Basepath: /home/herz/Sites/biblat/public_html/ci\n"
-"X-Poedit-Country: MEXICO\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;_sprintf;_printf\n"
-"X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Poedit-SearchPath-0: application\n"
 
 #: application/views/buscar_index.php:14
@@ -43,8 +43,7 @@ msgstr "<b>show \"%s\" results in full text</b>"
 msgid "mostrar %s resultados en texto completo"
 msgstr "show %s results in full text"
 
-#: application/views/buscar_index.php:34
-#: application/views/buscar_index.php:55
+#: application/views/buscar_index.php:34 application/views/buscar_index.php:55
 #: application/views/frecuencias_documentos.php:11
 #: application/views/frecuencias_documentos.php:32
 #, php-format
@@ -164,8 +163,7 @@ msgstr "Author afiliation country"
 msgid "País de afiliación"
 msgstr "Afiliation country"
 
-#: application/views/menu.php:59
-#: application/views/indice_pais.php:20
+#: application/views/menu.php:59 application/views/indice_pais.php:20
 #: application/views/indice_alfabetico.php:20
 #: application/views/indice_disciplina.php:20
 msgid "Revista"
@@ -235,8 +233,7 @@ msgstr "Bradford Model per institution (Author Affiliation)"
 msgid "Modelo de Bradford por institución"
 msgstr "Bradford Model per institution"
 
-#: application/views/menu.php:74
-#: application/views/indicadores_index.php:284
+#: application/views/menu.php:74 application/views/indicadores_index.php:284
 #: application/views/indicadores_index.php:300
 msgid "Tasa de autoría exógena"
 msgstr "Exogenous Authorship Rate"
@@ -249,8 +246,7 @@ msgstr "Submit a journal"
 msgid "Criterios de selección de revistas"
 msgstr "Criteria for journals selection"
 
-#: application/views/menu.php:83
-#: application/views/menu.php:113
+#: application/views/menu.php:83 application/views/menu.php:113
 msgid "Contacto"
 msgstr "Contact"
 
@@ -258,8 +254,7 @@ msgstr "Contact"
 msgid "Políticas de acceso"
 msgstr "Copyright policy"
 
-#: application/views/menu.php:88
-#: application/views/indice_pais.php:21
+#: application/views/menu.php:88 application/views/indice_pais.php:21
 #: application/views/indice_alfabetico.php:21
 #: application/views/indice_disciplina.php:21
 msgid "Documentos"
@@ -313,8 +308,7 @@ msgstr "Search by article"
 msgid "Búsqueda avanzada"
 msgstr "Advanced search"
 
-#: application/views/menu.php:144
-#: application/views/menu.php:146
+#: application/views/menu.php:144 application/views/menu.php:146
 #: application/views/menu.php:148
 msgid "Buscar en Biblat"
 msgstr "Search in Biblat"
@@ -359,7 +353,8 @@ msgstr "This indicator shows the average number of authors per article."
 
 #: application/views/indicadores_index.php:90
 msgid "El valor numérico indica el promedio de autores por documento."
-msgstr "The numeric value indicates the average number of authors per document."
+msgstr ""
+"The numeric value indicates the average number of authors per document."
 
 #: application/views/indicadores_index.php:92
 #: application/views/indicadores_index.php:114
@@ -404,8 +399,10 @@ msgstr "Indicator that determines the average of multiple authorship articles."
 
 #: application/views/indicadores_index.php:112
 #: application/views/indicadores_index.php:134
-msgid "El valor numérico indica la proporción de artículos con autoría múltiple."
-msgstr "The numeric value indicates the proportion of articles with multiple authors."
+msgid ""
+"El valor numérico indica la proporción de artículos con autoría múltiple."
+msgstr ""
+"The numeric value indicates the proportion of articles with multiple authors."
 
 #: application/views/indicadores_index.php:125
 msgid "Cantidad total de documentos con autoría multiple"
@@ -436,12 +433,19 @@ msgid "Modelo de Elitismo (Price)"
 msgstr "Elitism Model (Price)"
 
 #: application/views/indicadores_index.php:155
-msgid "Identifica la cantidad de autores que integran la elite de los más productivos por revista."
-msgstr "Identifies the number of authors who make up the elite of the most productive per journal."
+msgid ""
+"Identifica la cantidad de autores que integran la elite de los más "
+"productivos por revista."
+msgstr ""
+"Identifies the number of authors who make up the elite of the most "
+"productive per journal."
 
 #: application/views/indicadores_index.php:156
-msgid "El valor numérico representa la cantidad de los autores que integran dicha elite."
-msgstr "The numerical value represents the number of authors that make up such elite."
+msgid ""
+"El valor numérico representa la cantidad de los autores que integran dicha "
+"elite."
+msgstr ""
+"The numerical value represents the number of authors that make up such elite."
 
 #: application/views/indicadores_index.php:165
 #, php-format
@@ -462,11 +466,13 @@ msgstr "Provides the average weight of the number of authors per article."
 
 #: application/views/indicadores_index.php:174
 msgid "El valor numérico representa el promedio de autores por artículo."
-msgstr "The numerical value represents the average number of authors per article."
+msgstr ""
+"The numerical value represents the average number of authors per article."
 
 #: application/views/indicadores_index.php:175
 msgid "Además de  visualizar la frecuencia del número de autores por artículo."
-msgstr "In addition to displaying the frequency of the number of authors per article."
+msgstr ""
+"In addition to displaying the frequency of the number of authors per article."
 
 #: application/views/indicadores_index.php:193
 msgid "Total de documentos."
@@ -513,8 +519,12 @@ msgid "Indica el grado de concentración temática de las revistas."
 msgstr "Indicates the degree of thematic concentration of journals."
 
 #: application/views/indicadores_index.php:225
-msgid "El valor numérico representa el nivel de concentración temática basándose en sus descriptores."
-msgstr "The numerical value represents the level of thematic concentration based on their descriptors."
+msgid ""
+"El valor numérico representa el nivel de concentración temática basándose en "
+"sus descriptores."
+msgstr ""
+"The numerical value represents the level of thematic concentration based on "
+"their descriptors."
 
 #: application/views/indicadores_index.php:226
 msgid "Se muestra la frecuencia de descriptores."
@@ -529,8 +539,12 @@ msgid "Número de categorías."
 msgstr "Number of categories."
 
 #: application/views/indicadores_index.php:241
-msgid "&sum; del producto del rango por la frecuencia de una categoría dada, dividido por la cantidad de ítems en todas las categorías."
-msgstr "&sum; of the product of the frequency range of a given category, divided by the number of items in all categories."
+msgid ""
+"&sum; del producto del rango por la frecuencia de una categoría dada, "
+"dividido por la cantidad de ítems en todas las categorías."
+msgstr ""
+"&sum; of the product of the frequency range of a given category, divided by "
+"the number of items in all categories."
 
 #: application/views/indicadores_index.php:246
 #: application/views/indicadores_index.php:265
@@ -543,16 +557,28 @@ msgid "Distribución de artículos por revista"
 msgstr "Distribution of articles per journal"
 
 #: application/views/indicadores_index.php:248
-msgid "Modelo matemático que identifica el núcleo de revistas con mayor cantidad de información por temática."
-msgstr "Mathematical model that identifies the core of journals with more information by subject."
+msgid ""
+"Modelo matemático que identifica el núcleo de revistas con mayor cantidad de "
+"información por temática."
+msgstr ""
+"Mathematical model that identifies the core of journals with more "
+"information by subject."
 
 #: application/views/indicadores_index.php:249
-msgid "Se identifican tres zonas según la cantidad de artículos por revista en la  disciplina:"
-msgstr "Three zones are identified according to the amount of articles per journal in the discipline:"
+msgid ""
+"Se identifican tres zonas según la cantidad de artículos por revista en la  "
+"disciplina:"
+msgstr ""
+"Three zones are identified according to the amount of articles per journal "
+"in the discipline:"
 
 #: application/views/indicadores_index.php:250
-msgid "La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han publicado."
-msgstr "The core area, the 2nd and 3rd, the titles and the number of articles they have published."
+msgid ""
+"La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han "
+"publicado."
+msgstr ""
+"The core area, the 2nd and 3rd, the titles and the number of articles they "
+"have published."
 
 #: application/views/indicadores_index.php:251
 msgid "Se muestra la frecuencia de artículos por revista de la disciplina."
@@ -571,16 +597,28 @@ msgid "Distribución de artículos por instituciones."
 msgstr "Distribution of articles per institutions."
 
 #: application/views/indicadores_index.php:267
-msgid "Modelo matemático que identifica el núcleo de instituciones con mayor cantidad de información por temática."
-msgstr "Mathematical model that identifies the core of institutions with more amount of information by topic."
+msgid ""
+"Modelo matemático que identifica el núcleo de instituciones con mayor "
+"cantidad de información por temática."
+msgstr ""
+"Mathematical model that identifies the core of institutions with more amount "
+"of information by topic."
 
 #: application/views/indicadores_index.php:268
-msgid "Se identifican tres zonas según la cantidad de artículos por institución en la  disciplina:"
-msgstr "Three zones are identified according to the number of articles per institution in the discipline:"
+msgid ""
+"Se identifican tres zonas según la cantidad de artículos por institución en "
+"la  disciplina:"
+msgstr ""
+"Three zones are identified according to the number of articles per "
+"institution in the discipline:"
 
 #: application/views/indicadores_index.php:269
-msgid "La zona Núcleo, la 2° y 3°, las instituciones y la cantidad artículos que han publicado."
-msgstr "The core area, the 2nd and 3rd, the institutions and the number of articles they have published."
+msgid ""
+"La zona Núcleo, la 2° y 3°, las instituciones y la cantidad artículos que "
+"han publicado."
+msgstr ""
+"The core area, the 2nd and 3rd, the institutions and the number of articles "
+"they have published."
 
 #: application/views/indicadores_index.php:270
 msgid "Se muestra la frecuencia de artículos por institución en disciplina."
@@ -595,12 +633,26 @@ msgid "Multiplicador o factor de proporcionalidad de instituciones por zona."
 msgstr "Multiplier or proportionality factor of institutions per area."
 
 #: application/views/indicadores_index.php:286
-msgid "Indicador que mide el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta al de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores."
-msgstr "Indicator that measures the degree of internationalization of journals, considering the proportion of authors whose institutional affiliation is from a nationality other than that of the journal. Provides the exogenous productivity rate per journal and the frequency of nationality of their authors."
+msgid ""
+"Indicador que mide el grado de internacionalización de las revistas, "
+"considerando la proporción de autores cuya institución de afiliación es de "
+"una nacionalidad distinta al de la revista. Proporciona la tasa de "
+"productividad exógena por revista y la frecuencia de nacionalidad de sus "
+"autores."
+msgstr ""
+"Indicator that measures the degree of internationalization of journals, "
+"considering the proportion of authors whose institutional affiliation is "
+"from a nationality other than that of the journal. Provides the exogenous "
+"productivity rate per journal and the frequency of nationality of their "
+"authors."
 
 #: application/views/indicadores_index.php:287
-msgid "El valor numérico indica la proporción de autores extranjeros que han publicado en la revista."
-msgstr "The numerical value indicates the proportion of foreign authors who have published in the journal."
+msgid ""
+"El valor numérico indica la proporción de autores extranjeros que han "
+"publicado en la revista."
+msgstr ""
+"The numerical value indicates the proportion of foreign authors who have "
+"published in the journal."
 
 #: application/views/indicadores_index.php:301
 msgid "Autores extranjeros"
@@ -627,8 +679,12 @@ msgstr "Journals by country: \"%s\" (%d documents)"
 #: application/views/indice_pais.php:11
 #: application/views/indice_alfabetico.php:11
 #: application/views/indice_disciplina.php:11
-msgid "Revistas indizadas en CLASE y PERIÓDICA según orden alfabético y número de documentos de cada revista"
-msgstr "Journals indexed in CLASE and PERIÓDICA in alphabetical order and number of documents in each journal"
+msgid ""
+"Revistas indizadas en CLASE y PERIÓDICA según orden alfabético y número de "
+"documentos de cada revista"
+msgstr ""
+"Journals indexed in CLASE and PERIÓDICA in alphabetical order and number of "
+"documents in each journal"
 
 #: application/views/indice_pais.php:19
 #: application/views/indice_alfabetico.php:19
@@ -673,8 +729,18 @@ msgid "Revistas del área de \"%s\" (%d documentos)"
 msgstr "Journals in area  \"%s\" (%d documents)"
 
 #: application/views/footer.php:7
-msgid "® Derechos reservados. 2009 - 2012. Dirección General de Bibliotecas, Universidad Nacional Autónoma de México (UNAM). Esta página y sus contenidos pueden ser utilizados y reproducidos con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica. De otra forma, requiere permiso previo por escrito de la institución."
-msgstr "® All rights reserved 2009-2012. General Directorate for Libraries of the National Autonomous University of Mexico (UNAM). This page and its contents may be used and reproduced for non-profit purposes. Users must give credit citing the source and electronic address. Otherwise, it requires permission in writing from the institution."
+msgid ""
+"® Derechos reservados. 2009 - 2012. Dirección General de Bibliotecas, "
+"Universidad Nacional Autónoma de México (UNAM). Esta página y sus contenidos "
+"pueden ser utilizados y reproducidos con fines no lucrativos, siempre y "
+"cuando no se mutile, se cite la fuente completa y su dirección electrónica. "
+"De otra forma, requiere permiso previo por escrito de la institución."
+msgstr ""
+"® All rights reserved 2009-2012. General Directorate for Libraries of the "
+"National Autonomous University of Mexico (UNAM). This page and its contents "
+"may be used and reproduced for non-profit purposes. Users must give credit "
+"citing the source and electronic address. Otherwise, it requires permission "
+"in writing from the institution."
 
 #: application/views/revista_articulo.php:19
 msgid "Revista:"
@@ -841,7 +907,8 @@ msgstr "Authors average per article in the year %s: %s"
 
 #: application/controllers/indicadores.php:88
 #, php-format
-msgid "Promedio de autores por artículo en las revistas del país en el año %s: %s"
+msgid ""
+"Promedio de autores por artículo en las revistas del país en el año %s: %s"
 msgstr "Authors average per article in national journals in the year %s: %s"
 
 #: application/controllers/indicadores.php:94
@@ -863,8 +930,10 @@ msgstr "Average of co-authored articles in the year %s: %s"
 
 #: application/controllers/indicadores.php:101
 #, php-format
-msgid "Promedio de artículos en coautoría en las revistas del país en el año %s: %s"
-msgstr "Average of co-authored articles in national journals in the year %s: %s"
+msgid ""
+"Promedio de artículos en coautoría en las revistas del país en el año %s: %s"
+msgstr ""
+"Average of co-authored articles in national journals in the year %s: %s"
 
 #: application/controllers/indicadores.php:107
 msgid "Proporción de artículos con autoría múltiple"
@@ -885,8 +954,12 @@ msgstr "Average of articles with multiple authorship in the year %s: %s"
 
 #: application/controllers/indicadores.php:114
 #, php-format
-msgid "Promedio de artículos con autoría múltiple en las revistas del país en el año %s: %s"
-msgstr "Average of articles with multiple authorship in national journals in the year %s: %s"
+msgid ""
+"Promedio de artículos con autoría múltiple en las revistas del país en el "
+"año %s: %s"
+msgstr ""
+"Average of articles with multiple authorship in national journals in the "
+"year %s: %s"
 
 #: application/controllers/indicadores.php:120
 msgid "Grupo de autores más productivos por revista"
@@ -907,8 +980,10 @@ msgid "Peso promedio de autores por artículo."
 msgstr "Average weight of authors per article."
 
 #: application/controllers/indicadores.php:134
-msgid "Peso promedio del número de autores por artículo en las revistas del país"
-msgstr "Average weight of the number of authors per article in national journals"
+msgid ""
+"Peso promedio del número de autores por artículo en las revistas del país"
+msgstr ""
+"Average weight of the number of authors per article in national journals"
 
 #: application/controllers/indicadores.php:136
 msgid "Índice de Colaboración"
@@ -921,7 +996,8 @@ msgstr "Co-authors average per article in the year %s: %s"
 
 #: application/controllers/indicadores.php:140
 #, php-format
-msgid "Promedio de coautores por articulo en las revistas del país en el año %s: %s"
+msgid ""
+"Promedio de coautores por articulo en las revistas del país en el año %s: %s"
 msgstr "Co-authors average per article in national journals in the year %s: %s"
 
 #: application/controllers/indicadores.php:146
@@ -1048,16 +1124,24 @@ msgid "Índice de concentración temática"
 msgstr "Thematic concentration index"
 
 #: application/controllers/indicadores.php:582
-msgid "Distribución decreciente de las revistas considerando su grado de concentración temática"
-msgstr "Decreasing distribution of journals considering their degree of thematic concentration"
+msgid ""
+"Distribución decreciente de las revistas considerando su grado de "
+"concentración temática"
+msgstr ""
+"Decreasing distribution of journals considering their degree of thematic "
+"concentration"
 
 #: application/controllers/indicadores.php:587
 msgid "Proporción de autoría exógena"
 msgstr "Proportion of exogenous authorship"
 
 #: application/controllers/indicadores.php:588
-msgid "Distribución decreciente de las revistas considerando la proporción de autoría exógena"
-msgstr "Decreasing distribution of journals considering the proportion of exogenous authorship"
+msgid ""
+"Distribución decreciente de las revistas considerando la proporción de "
+"autoría exógena"
+msgstr ""
+"Decreasing distribution of journals considering the proportion of exogenous "
+"authorship"
 
 #: application/controllers/indicadores.php:687
 msgid "Descriptor"
@@ -1177,7 +1261,8 @@ msgstr "Biblat - Frequencies per institution"
 
 #: application/controllers/frecuencias.php:148
 msgid "Frecuencia de países, revistas, autores y documentos por institución"
-msgstr "Frequency of countries, journals, authors and documents per institution"
+msgstr ""
+"Frequency of countries, journals, authors and documents per institution"
 
 #: application/controllers/frecuencias.php:204
 #, php-format
@@ -1186,8 +1271,10 @@ msgstr "Biblat - Frequencies per institution \"%s\", countries of publication "
 
 #: application/controllers/frecuencias.php:205
 #, php-format
-msgid "Frecuencia de documentos por país de publicación en la institución:<br/> %s"
-msgstr "Frequency of documents per country of publication in the institution:<br/> %s"
+msgid ""
+"Frecuencia de documentos por país de publicación en la institución:<br/> %s"
+msgstr ""
+"Frequency of documents per country of publication in the institution:<br/> %s"
 
 #: application/controllers/frecuencias.php:237
 #, php-format
@@ -1201,8 +1288,11 @@ msgstr "Biblat - Frequencies per institution \"%s\", journals of publication"
 
 #: application/controllers/frecuencias.php:276
 #, php-format
-msgid "Frecuencia de documentos por revista de publicación en la institución: <br/>%s"
-msgstr "Frequency of documents per journal of publication in the institution: <br/>%s"
+msgid ""
+"Frecuencia de documentos por revista de publicación en la institución: <br/>"
+"%s"
+msgstr ""
+"Frequency of documents per journal of publication in the institution: <br/>%s"
 
 #: application/controllers/frecuencias.php:308
 #, php-format
@@ -1242,8 +1332,12 @@ msgid "Instituciones"
 msgstr "Institutions"
 
 #: application/controllers/frecuencias.php:433
-msgid "Frecuencia de instituciones, autores y documentos por país de afiliación del autor"
-msgstr "Frequency of institutions, authors and documents per country of affiliation of the author"
+msgid ""
+"Frecuencia de instituciones, autores y documentos por país de afiliación del "
+"autor"
+msgstr ""
+"Frequency of institutions, authors and documents per country of affiliation "
+"of the author"
 
 #: application/controllers/frecuencias.php:452
 #, php-format
@@ -1257,8 +1351,12 @@ msgstr "Biblat - Frequencies by country of affiliation \"%s\", institutions"
 
 #: application/controllers/frecuencias.php:489
 #, php-format
-msgid "Frecuencia de documentos por institución en en el país de afiliación del autor:<br/> %s"
-msgstr "Frequency of documents per institution in the country of affiliation of the author:<br/> %s"
+msgid ""
+"Frecuencia de documentos por institución en en el país de afiliación del "
+"autor:<br/> %s"
+msgstr ""
+"Frequency of documents per institution in the country of affiliation of the "
+"author:<br/> %s"
 
 #: application/controllers/frecuencias.php:521
 #, php-format
@@ -1279,7 +1377,8 @@ msgstr "Biblat - Frecuencies country of affiliation \"%s\", authors"
 #: application/controllers/frecuencias.php:559
 #, php-format
 msgid "Frecuencia de documentos por autor en el país de afiliación:<br/> %s"
-msgstr "Frequency of documents per author in the country of affiliation:<br/> %s"
+msgstr ""
+"Frequency of documents per author in the country of affiliation:<br/> %s"
 
 #: application/controllers/frecuencias.php:692
 msgid "Biblat - Frecuencias por revista"
@@ -1316,8 +1415,17 @@ msgid "Biblat - Revista: %s/%s (%%d documentos)"
 msgstr "Biblat - Journal: %s/%s (%%d documents)"
 
 #: application/controllers/main.php:12
-msgid "Biblat ofrece: referencias bibliográficas de documentos publicados en revistas científicas y académicas latinoamericanas indizadas en CLASE y PERIÓDICA, acceso al texto completo de revistas en acceso abierto, indicadores bibliométricos e información sobre los políticas de acceso de las revistas."
-msgstr "Biblat offers bibliographic references to documents published in Latin American scientific and scholarly journals indexed in CLASE and PERIODICA, access to the full text of open access journals, bibliometric indicators, and information regarding the access policies of journals."
+msgid ""
+"Biblat ofrece: referencias bibliográficas de documentos publicados en "
+"revistas científicas y académicas latinoamericanas indizadas en CLASE y "
+"PERIÓDICA, acceso al texto completo de revistas en acceso abierto, "
+"indicadores bibliométricos e información sobre los políticas de acceso de "
+"las revistas."
+msgstr ""
+"Biblat offers bibliographic references to documents published in Latin "
+"American scientific and scholarly journals indexed in CLASE and PERIODICA, "
+"access to the full text of open access journals, bibliometric indicators, "
+"and information regarding the access policies of journals."
 
 #: application/controllers/main.php:63
 msgid "Biblat - Créditos"
@@ -1356,8 +1464,10 @@ msgstr "Pag. %s"
 #~ msgid "Tema"
 #~ msgstr "Tema"
 
-#~ msgid "<div class=\"chartTootip\"><b>%s</b><br/>Cantidad de artículos: %s</div>"
-#~ msgstr "<div class=\"chartTootip\"><b>%s</b><br/>Cantidad de artículos: %s</div>"
+#~ msgid ""
+#~ "<div class=\"chartTootip\"><b>%s</b><br/>Cantidad de artículos: %s</div>"
+#~ msgstr ""
+#~ "<div class=\"chartTootip\"><b>%s</b><br/>Cantidad de artículos: %s</div>"
 
 #~ msgid ""
 #~ "<div id=\"chartTitle\"><div class=\"centrado\"><b>Índice de concentración "
@@ -1369,40 +1479,40 @@ msgstr "Pag. %s"
 #~ "considerando su grado de concentración temática</div></div>"
 
 #~ msgid ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de "
-#~ "Bradford</b><br/>Distribución de artículos por revista</div>"
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/"
+#~ ">Distribución de artículos por revista</div>"
 #~ msgstr ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de "
-#~ "Bradford</b><br/>Distribución de artículos por revista</div>"
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/"
+#~ ">Distribución de artículos por revista</div>"
 
 #~ msgid "<h3>Modelo matemático de Bradford</h3>"
 #~ msgstr "<h3>Modelo matemático de Bradford</h3>"
 
 #~ msgid ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Zona %s de "
-#~ "revistas más productivas</div>"
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Zona %s "
+#~ "de revistas más productivas</div>"
 #~ msgstr ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Zona %s de "
-#~ "revistas más productivas</div>"
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Zona %s "
+#~ "de revistas más productivas</div>"
 
 #~ msgid "<h3>Zona %s de revistas más productivas</h3>"
 #~ msgstr "<h3>Zona %s de revistas más productivas</h3>"
 
 #~ msgid ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de "
-#~ "Bradford</b><br/>Distribución de artículos por instituciones.</div>"
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/"
+#~ ">Distribución de artículos por instituciones.</div>"
 #~ msgstr ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de "
-#~ "Bradford</b><br/>Distribución de artículos por instituciones.</div>"
+#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/"
+#~ ">Distribución de artículos por instituciones.</div>"
 
 #~ msgid ""
 #~ "<div class=\"centrado\"><b>Modelo matemático de Bradford por institución "
-#~ "(afiliación del autor)</b><br/>Zona %s de instituciones más productivas por "
-#~ "disciplina</div>"
+#~ "(afiliación del autor)</b><br/>Zona %s de instituciones más productivas "
+#~ "por disciplina</div>"
 #~ msgstr ""
 #~ "<div class=\"centrado\"><b>Modelo matemático de Bradford por institución "
-#~ "(afiliación del autor)</b><br/>Zona %s de instituciones más productivas por "
-#~ "disciplina</div>"
+#~ "(afiliación del autor)</b><br/>Zona %s de instituciones más productivas "
+#~ "por disciplina</div>"
 
 #~ msgid ""
 #~ "<div class=\"centrado\"><b>Índice de Densidad de Documentos Zakutina y "
@@ -1412,48 +1522,48 @@ msgstr "Pag. %s"
 #~ "Priyenikova</b><br/>Títulos con mayor cantidad de artículos</div>"
 
 #~ msgid ""
-#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por "
-#~ "artículo en la revista</div>"
+#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores "
+#~ "por artículo en la revista</div>"
 #~ msgstr ""
-#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por "
-#~ "artículo en la revista</div>"
+#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores "
+#~ "por artículo en la revista</div>"
 
 #~ msgid ""
-#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por "
-#~ "articulo en las revistas del país</div>"
+#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores "
+#~ "por articulo en las revistas del país</div>"
 #~ msgstr ""
-#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por "
-#~ "articulo en las revistas del país</div>"
+#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores "
+#~ "por articulo en las revistas del país</div>"
 
 #~ msgid ""
-#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de "
-#~ "documentos con autoría múltiple por revista</div>"
+#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media "
+#~ "de documentos con autoría múltiple por revista</div>"
 #~ msgstr ""
-#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de "
-#~ "documentos con autoría múltiple por revista</div>"
+#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media "
+#~ "de documentos con autoría múltiple por revista</div>"
 
 #~ msgid ""
-#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de "
-#~ "documentos con autoría múltiple en las revistas del país</div>"
+#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media "
+#~ "de documentos con autoría múltiple en las revistas del país</div>"
 #~ msgstr ""
-#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de "
-#~ "documentos con autoría múltiple en las revistas del país</div>"
+#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media "
+#~ "de documentos con autoría múltiple en las revistas del país</div>"
 
 #~ msgid ""
-#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de "
-#~ "Subramayan)</b><br/>Proporción de artículos con autoría múltiple</div>"
+#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</"
+#~ "b><br/>Proporción de artículos con autoría múltiple</div>"
 #~ msgstr ""
-#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de "
-#~ "Subramayan)</b><br/>Proporción de artículos con autoría múltiple</div>"
+#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</"
+#~ "b><br/>Proporción de artículos con autoría múltiple</div>"
 
 #~ msgid ""
-#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de "
-#~ "Subramayan)</b><br/>Proporción de artículos con autoría múltiple en las "
-#~ "revistas del país</div>"
+#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</"
+#~ "b><br/>Proporción de artículos con autoría múltiple en las revistas del "
+#~ "país</div>"
 #~ msgstr ""
-#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de "
-#~ "Subramayan)</b><br/>Proporción de artículos con autoría múltiple en las "
-#~ "revistas del país</div>"
+#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</"
+#~ "b><br/>Proporción de artículos con autoría múltiple en las revistas del "
+#~ "país</div>"
 
 #~ msgid ""
 #~ "<div class=\"centrado\"><b>Modelo de Elitismo (Price)</b><br/>Grupo de "
@@ -1463,41 +1573,41 @@ msgstr "Pag. %s"
 #~ "autores más productivos por revista</div>"
 
 #~ msgid ""
-#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de "
-#~ "Lawani)</b><br/>Peso promedio de autores por artículo.</div>"
+#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</"
+#~ "b><br/>Peso promedio de autores por artículo.</div>"
 #~ msgstr ""
-#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de "
-#~ "Lawani)</b><br/>Peso promedio de autores por artículo.</div>"
+#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</"
+#~ "b><br/>Peso promedio de autores por artículo.</div>"
 
 #~ msgid ""
-#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de "
-#~ "Lawani)</b><br/>Peso promedio del número de autores por artículo en las "
-#~ "revistas del país</div>"
+#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</"
+#~ "b><br/>Peso promedio del número de autores por artículo en las revistas "
+#~ "del país</div>"
 #~ msgstr ""
-#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de "
-#~ "Lawani)</b><br/>Peso promedio del número de autores por artículo en las "
-#~ "revistas del país</div>"
+#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</"
+#~ "b><br/>Peso promedio del número de autores por artículo en las revistas "
+#~ "del país</div>"
 
 #~ msgid ""
-#~ "<div class=\"chartTootip\"><span style=\"color:#3366cc;\">&#9632; "
-#~ "</span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ "<div class=\"chartTootip\"><span style=\"color:#3366cc;\">&#9632; </"
+#~ "span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
 #~ msgstr ""
-#~ "<div class=\"chartTootip\"><span style=\"color:#3366cc;\">&#9632; "
-#~ "</span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ "<div class=\"chartTootip\"><span style=\"color:#3366cc;\">&#9632; </"
+#~ "span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
 
 #~ msgid ""
-#~ "<div class=\"chartTootip\"><span style=\"color:#dc3912;\">&#9632; "
-#~ "</span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ "<div class=\"chartTootip\"><span style=\"color:#dc3912;\">&#9632; </"
+#~ "span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
 #~ msgstr ""
-#~ "<div class=\"chartTootip\"><span style=\"color:#dc3912;\">&#9632; "
-#~ "</span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ "<div class=\"chartTootip\"><span style=\"color:#dc3912;\">&#9632; </"
+#~ "span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
 
 #~ msgid ""
-#~ "<div class=\"chartTootip\"><span style=\"color:#ff9900;\">&#9632; "
-#~ "</span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ "<div class=\"chartTootip\"><span style=\"color:#ff9900;\">&#9632; </"
+#~ "span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
 #~ msgstr ""
-#~ "<div class=\"chartTootip\"><span style=\"color:#ff9900;\">&#9632; "
-#~ "</span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ "<div class=\"chartTootip\"><span style=\"color:#ff9900;\">&#9632; </"
+#~ "span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
 
 #~ msgid "AutorSlug"
 #~ msgstr "Author"
