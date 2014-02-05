@@ -97,7 +97,7 @@
 					<td class="attributo"><?php _e('Texto completo:');?></td>
 					<td><a href="<?php echo $articulo['url']?>" target="_blank"><?php echo $articulo['url']?></a></td>
 				</tr>
-<?php 	endif;?>
+<?php 	else:?>
 				<tr id="solicitudDocumento">
 					<td colspan="2"><b><?php _e('Solicitud del documento')?></b> <span id="sd-enable" class="fa">&#xf152</span> <span id="sd-disable" class="fa">&#xf150</span></td>
 				</tr>
@@ -124,6 +124,7 @@
 						</form>
 					</td>
 				</tr>
+<?php 	endif;?>
 		</tbody>
 	</table>
 <?php endif;?>
