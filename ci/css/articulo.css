@@ -25,13 +25,6 @@ html {
 	margin:5px auto;
 }
 
-.articulo table{
-	margin: 0 auto;
-	border: 1px solid #C56917;
-	width: 580px;
-	min-width: 580px;
-	background-color: #FEFEFE;
-}
 
 .articulo table td{
 	border-bottom: 1px dotted #999999;

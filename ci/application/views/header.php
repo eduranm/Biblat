@@ -87,10 +87,13 @@
 			jQuery('body').click(function(e) {
 				jQuery(".optionsMenu").hide();
 			});
-			jQuery('#solicitudDocumento').click(function(e) {
+			jQuery('body').on('click', '#solicitudDocumento', function(e) {
 				jQuery('.solicitudDocumento, #sd-disable, #sd-enable').toggle();
 			});
-			jQuery('#formSolicitudDocumento').submit(function(e) {
+			jQuery('body').on('click', '#showmap', function(e) {
+				jQuery('#mapa-anexo').toggle();
+			});
+			jQuery('body').on('submit', '#formSolicitudDocumento', function(e) {
 				if(!loading.status){
 					loading.start();
 				}

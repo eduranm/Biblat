@@ -1077,3 +1077,15 @@ form.contacto input[type=submit]{
 .solicitudDocumento, #sd-disable{
 	display: none;
 }
+
+.articulo td:hover, .articulo tr:hover{
+	background-color:#FFF;
+}
+
+.articulo table{
+	margin: 0 auto;
+	border: 1px solid #C56917;
+	width: 650px;
+	min-width: 650px;
+	background-color: #FEFEFE;
+}

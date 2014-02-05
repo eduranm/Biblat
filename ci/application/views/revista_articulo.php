@@ -116,6 +116,8 @@
 								<input type="hidden" name="database" value="<?php echo $articulo['database'];?>"/>
 								<input type="hidden" name="sistema" value="<?php echo $articulo['sistema'];?>"/>
 								<input type="hidden" name="url" value="<?php echo current_url();?>"/>
+								<div class="textoJ">
+								<?php _e('Los documentos originales pueden ser consultados en la Hemeroteca Latinoamericana ubicada en el Anexo de la Dirección General de Bibliotecas (DGB), circuito de la Investigación Científica a un costado del Auditorio Nabor Carrillo, zona de Institutos entre Física y Astronomía. Ciudad Universitaria UNAM.');?> <a id="showmap" href="javascript:;"><?php _e('Ver mapa');?></a><img id="mapa-anexo" style="display:none" src="<?php echo base_url('img/mapa-anexo.jpg');?>" border="0" width="600px"/><br/><?php _e('Mayores informes: Departamento de Información y Servicios Documentales, Tels. (5255) 5622-3960, 5622-3964, e-mail: sinfo@dgb.unam.mx, Horario: Lunes a viernes (9 a 16 hrs.)');?></div>
 								<input class="fa" type="submit" value="Enviar   &#xf0e0;"/>
 							</fieldset>
 						</form>
