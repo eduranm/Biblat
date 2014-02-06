@@ -27,10 +27,10 @@ class Indice extends CI_Controller{
 		$this->db->close();
 		$data['alfabetico']['letra'] = $letra;
 		/*Vistas*/
-		$data['header']['content'] =  $this->load->view('indiceAlfabeticoHeader', $data['header'], TRUE);
+		$data['header']['content'] =  $this->load->view('indice/alfabetico_header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('indice_alfabetico', $data['alfabetico']);
+		$this->load->view('indice/alfabetico', $data['alfabetico']);
 		$this->load->view('footer');
 	}
 
@@ -60,10 +60,10 @@ class Indice extends CI_Controller{
 		$this->db->close();
 		/*Vistas*/
 		$data['header']['title'] = _sprintf('Biblat - Indice por disciplina "%s"', $data['disciplina']['current']['disciplina']);
-		$data['header']['content'] =  $this->load->view('indiceDisciplinaHeader', $data['header'], TRUE);
+		$data['header']['content'] =  $this->load->view('indice/disciplina_header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('indice_disciplina', $data['disciplina']);
+		$this->load->view('indice/disciplina', $data['disciplina']);
 		$this->load->view('footer');
 	}
 
@@ -96,7 +96,7 @@ class Indice extends CI_Controller{
 		$data['header']['content'] =  $this->load->view('indiceDisciplinaHeader', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('indice_pais', $data['pais']);
+		$this->load->view('indice/pais', $data['pais']);
 		$this->load->view('footer');
 	}
 }

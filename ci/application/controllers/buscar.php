@@ -129,10 +129,10 @@ class Buscar extends CI_Controller{
 		$data['main']['resultados']=$articulosResultado['articulos'];
 		$this->db->close();
 		/*Vistas*/
-		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);
+		$data['header']['content'] =  $this->load->view('buscar/header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('buscar_index', $data['main']);
+		$this->load->view('buscar/index', $data['main']);
 		$this->load->view('footer');
 	}
 }

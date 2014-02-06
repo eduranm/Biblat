@@ -33,7 +33,7 @@ class Frecuencias extends CI_Controller {
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias');
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('frecuencias_index', $data['main']);
+		$this->load->view('frecuencias/index', $data['main']);
 		$this->load->view('footer');
 	}
 
@@ -645,10 +645,10 @@ class Frecuencias extends CI_Controller {
 		$data['header']['sortBy'] = json_encode($args['sortBy'], true);
 		$data['header']['sortIndx'] = array_search($args['defaultOrder'], $args['sortBy']);
 		$data['header']['args'] = pqgrid_args($args);
-		$data['header']['content'] =  $this->load->view('frecuencias_header', $data['header'], TRUE);
+		$data['header']['content'] =  $this->load->view('frecuencias/header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('frecuencias_common', $data['main']);
+		$this->load->view('frecuencias/common', $data['main']);
 		$this->load->view('footer');
 	}
 
@@ -797,11 +797,11 @@ class Frecuencias extends CI_Controller {
 		$data['main']['resultados']=$articulosResultado['articulos'];
 		$data['header']['title'] = sprintf($args['title'], $articulosResultado['totalRows']);
 		$data['header']['slugHighLight']=slugHighLight($args['slug']);
-		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);
+		$data['header']['content'] =  $this->load->view('buscar/header', $data['header'], TRUE);
 		$data['main']['breadcrumb'] = sprintf($args['breadcrumb'], $articulosResultado['totalRows']);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('frecuencias_documentos', $data['main']);
+		$this->load->view('frecuencias/documentos', $data['main']);
 		$this->load->view('footer');
 	}
 	private function _excel($xls){
