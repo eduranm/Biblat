@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-05 09:17-0600\n"
-"PO-Revision-Date: 2014-02-05 09:17-0600\n"
+"POT-Creation-Date: 2014-02-06 13:08-0600\n"
+"PO-Revision-Date: 2014-02-06 13:09-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -81,18 +81,6 @@ msgstr "Instituto:"
 #: application/views/mail_solicitud.php:7
 msgid "Ha solicitado el siguiente documento:"
 msgstr "Ha solicitado el siguiente documento:"
-
-#: application/views/mail_solicitud.php:8
-msgid "Base de datos:"
-msgstr "Base de datos:"
-
-#: application/views/mail_solicitud.php:9
-msgid "Número de sistema:"
-msgstr "Número de sistema:"
-
-#: application/views/mail_solicitud.php:10
-msgid "URL:"
-msgstr "URL:"
 
 #: application/views/main_contacto.php:5
 msgid "Nombre"
@@ -351,9 +339,13 @@ msgstr "Búsqueda avanzada"
 msgid "Buscar en Biblat"
 msgstr "Buscar en Biblat"
 
-#: application/views/header.php:28
+#: application/views/header.php:32
 msgid "Espere un momento..."
 msgstr "Espere un momento..."
+
+#: application/views/header.php:119
+msgid "La solicitud ha sido enviada"
+msgstr "La solicitud ha sido enviada"
 
 #: application/views/indicadores_index.php:5
 msgid "Indicadores bibliométricos"
@@ -701,93 +693,141 @@ msgstr "Zona 2 de revistas más productivas"
 msgid "Revistas del área de \"%s\" (%d documentos)"
 msgstr "Revistas del área de \"%s\" (%d documentos)"
 
+#: application/views/mail_solicitud_usuario.php:1
+msgid "Estimado/Estimada"
+msgstr "<i>(%s documentos publicados en el área de <b>%s</b>)</i>"
+
+#: application/views/mail_solicitud_usuario.php:3
+msgid "Esperando te encuentres bien, te notifico que para la recuperación de este artículo tienes dos opciones:"
+msgstr "Esperando te encuentres bien, te notifico que para la recuperación de este artículo tienes dos opciones:"
+
+#: application/views/mail_solicitud_usuario.php:6
+msgid "Servicio de fotocopiado  con un costo de 30 centavos cada fotocopia, y tendrías que acudir a nuestras instalaciones a recogerlo."
+msgstr "Servicio de fotocopiado  con un costo de 30 centavos cada fotocopia, y tendrías que acudir a nuestras instalaciones a recogerlo."
+
+#: application/views/mail_solicitud_usuario.php:7
+msgid "Envío digital con un costo de  50.00 pesos cada artículo (Si es por este medio se te enviaría una ficha de depósito y hasta el momento que cubras el costo y envíes el comprobante de pago, se te enviaría el documento)."
+msgstr "Envío digital con un costo de  50.00 pesos cada artículo (Si es por este medio se te enviaría una ficha de depósito y hasta el momento que cubras el costo y envíes el comprobante de pago, se te enviaría el documento)."
+
+#: application/views/mail_solicitud_usuario.php:10
+msgid "Espero tu respuesta a la brevedad posible para darle seguimiento a dicha solicitud."
+msgstr "Espero tu respuesta a la brevedad posible para darle seguimiento a dicha solicitud."
+
+#: application/views/mail_solicitud_usuario.php:12
+msgid "Atte."
+msgstr "Atte."
+
+#: application/views/mail_solicitud_usuario.php:14
+msgid "Mtra. Araceli Noguez O."
+msgstr "Mtra. Araceli Noguez O."
+
+#: application/views/mail_solicitud_usuario.php:18
+msgid "Departamento de Información y Servicios Documentales- Subdirección de Servicios de Información Especializada-DGB-UNAM"
+msgstr "Departamento de Información y Servicios Documentales- Subdirección de Servicios de Información Especializada-DGB-UNAM"
+
 #: application/views/footer.php:7
 msgid "® Derechos reservados. 2009 - 2012. Dirección General de Bibliotecas, Universidad Nacional Autónoma de México (UNAM). Esta página y sus contenidos pueden ser utilizados y reproducidos con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica. De otra forma, requiere permiso previo por escrito de la institución."
 msgstr "® Derechos reservados. 2009 - 2012. Dirección General de Bibliotecas, Universidad Nacional Autónoma de México (UNAM). Esta página y sus contenidos pueden ser utilizados y reproducidos con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica. De otra forma, requiere permiso previo por escrito de la institución."
 
-#: application/views/revista_articulo.php:19
+#: application/views/revista_articulo.php:21
+msgid "Título del documento:"
+msgstr "Título del documento:"
+
+#: application/views/revista_articulo.php:27
 msgid "Revista:"
 msgstr "Revista:"
 
-#: application/views/revista_articulo.php:25
+#: application/views/revista_articulo.php:32
+msgid "Base de datos:"
+msgstr "Base de datos:"
+
+#: application/views/revista_articulo.php:36
+msgid "Número de sistema:"
+msgstr "Número de sistema:"
+
+#: application/views/revista_articulo.php:41
 msgid "ISSN:"
 msgstr "ISSN:"
 
-#: application/views/revista_articulo.php:31
+#: application/views/revista_articulo.php:47
 msgid "Autores:"
 msgstr "Autores:"
 
-#: application/views/revista_articulo.php:37
+#: application/views/revista_articulo.php:53
 msgid "Instituciones:"
 msgstr "Instituciones:"
 
-#: application/views/revista_articulo.php:43
+#: application/views/revista_articulo.php:59
 msgid "Año:"
 msgstr "Año:"
 
-#: application/views/revista_articulo.php:49
+#: application/views/revista_articulo.php:65
 msgid "Periodo:"
 msgstr "Periodo:"
 
-#: application/views/revista_articulo.php:55
+#: application/views/revista_articulo.php:71
 msgid "Volumen:"
 msgstr "Volumen:"
 
-#: application/views/revista_articulo.php:61
+#: application/views/revista_articulo.php:77
 msgid "Número:"
 msgstr "Número:"
 
-#: application/views/revista_articulo.php:67
+#: application/views/revista_articulo.php:83
 msgid "Paginación:"
 msgstr "Paginación:"
 
-#: application/views/revista_articulo.php:73
+#: application/views/revista_articulo.php:89
 msgid "País:"
 msgstr "País:"
 
-#: application/views/revista_articulo.php:79
+#: application/views/revista_articulo.php:95
 msgid "Idioma:"
 msgstr "Idioma:"
 
-#: application/views/revista_articulo.php:85
+#: application/views/revista_articulo.php:101
 msgid "Disciplinas:"
 msgstr "Disciplinas:"
 
-#: application/views/revista_articulo.php:91
+#: application/views/revista_articulo.php:107
 msgid "Palabras clave:"
 msgstr "Palabras clave:"
 
-#: application/views/revista_articulo.php:97
+#: application/views/revista_articulo.php:113
 msgid "Texto completo:"
 msgstr "Texto completo:"
 
-#: application/views/revista_articulo.php:102
+#: application/views/revista_articulo.php:118
 msgid "Solicitud del documento"
 msgstr "Solicitud del documento"
 
-#: application/views/revista_articulo.php:112
+#: application/views/revista_articulo.php:126
+msgid "El nombre es requerido"
+msgstr "El nombre es requerido"
+
+#: application/views/revista_articulo.php:128
+msgid "El correo electrónico es requerido"
+msgstr "El correo electrónico es requerido"
+
+#: application/views/revista_articulo.php:129
 msgid "Instituto"
 msgstr "Instituto"
 
-#: application/views/revista_articulo.php:114
+#: application/views/revista_articulo.php:131
 msgid "Teléfono"
 msgstr "Teléfono"
 
-#: application/views/revista_articulo.php:120
+#: application/views/revista_articulo.php:137
 msgid "Los documentos originales pueden ser consultados en la Hemeroteca Latinoamericana ubicada en el Anexo de la Dirección General de Bibliotecas (DGB), circuito de la Investigación Científica a un costado del Auditorio Nabor Carrillo, zona de Institutos entre Física y Astronomía. Ciudad Universitaria UNAM."
 msgstr "Los documentos originales pueden ser consultados en la Hemeroteca Latinoamericana ubicada en el Anexo de la Dirección General de Bibliotecas (DGB), circuito de la Investigación Científica a un costado del Auditorio Nabor Carrillo, zona de Institutos entre Física y Astronomía. Ciudad Universitaria UNAM."
 
-#: application/views/revista_articulo.php:120
+#: application/views/revista_articulo.php:137
 msgid "Ver mapa"
 msgstr "Ver mapa"
 
-#: application/views/revista_articulo.php:120
+#: application/views/revista_articulo.php:137
 msgid "Mayores informes: Departamento de Información y Servicios Documentales, Tels. (5255) 5622-3960, 5622-3964, e-mail: sinfo@dgb.unam.mx, Horario: Lunes a viernes (9 a 16 hrs.)"
 msgstr "Mayores informes: Departamento de Información y Servicios Documentales, Tels. (5255) 5622-3960, 5622-3964, e-mail: sinfo@dgb.unam.mx, Horario: Lunes a viernes (9 a 16 hrs.)"
-
-#: application/views/revista_articulo.php:128
-msgid "La solicitud ha sido enviada"
-msgstr "La solicitud ha sido enviada"
 
 #: application/views/main_creditos.php:10
 msgid "Director General"
@@ -1164,7 +1204,7 @@ msgstr "Revistas"
 msgid "title=\"Revistas\""
 msgstr "title=\"Revistas\""
 
-#: application/controllers/revista.php:196
+#: application/controllers/revista.php:201
 #, php-format
 msgid "Biblat - Revista: %s - Artículo: %s"
 msgstr "Biblat - Revista: %s - Artículo: %s"
@@ -1419,6 +1459,9 @@ msgstr "Núm. %s"
 #, php-format
 msgid "Pág. %s"
 msgstr "Pág. %s"
+
+#~ msgid "URL:"
+#~ msgstr "URL:"
 
 #~ msgid "Revista %s de %s"
 #~ msgstr "Revista %s de %s"
