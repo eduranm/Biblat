@@ -1,6 +1,7 @@
 <div class="articulo">
 <?php if (isset($articulo)):?>
-	<table>
+	<table <?php if ($mail):?> border="1" style="border-collapse:collapse; width:650px;"<?php endif;?>>
+<?php 	if (!$mail):?>
 		<caption class="centrado"> 
 			<?php echo $articulo['articulo'];?>
 			<div class="addthis_toolbox addthis_default_style" addthis:url="<?php echo site_url("revista/{$articulo['revistaSlug']}/articulo/{$articulo['articuloSlug']}")?>" addthis:title="<?php echo $title;?>">
@@ -13,13 +14,28 @@
 				<a class="addthis_counter addthis_bubble_style"></a>
 			</div>
 		</caption>
+<?php 	endif;?>
 		<tbody>
+<?php 	if ($mail):?>
+				<tr>
+					<td class="attributo"><?php _e('Título del documento:');?></td>
+					<td><a href="<?php echo site_url("revista/{$articulo['revistaSlug']}/articulo/{$articulo['articuloSlug']}")?>" title="<?php echo $articulo['revista']?>"><?php echo $articulo['articulo']?></a></td>
+				</tr>
+<?php 	endif;?>
 <?php 	if ( isset($articulo['revista']) ):?>
 				<tr>
 					<td class="attributo"><?php _e('Revista:');?></td>
 					<td><a href="<?php echo site_url("revista/{$articulo['revistaSlug']}")?>" title="<?php echo $articulo['revista']?>"><?php echo $articulo['revista']?></a></td>
 				</tr>
 <?php 	endif;?>
+				<tr>
+					<td class="attributo"><?php _e('Base de datos:');?></td>
+					<td><?php echo $articulo['database']?></td>
+				</tr>
+				<tr>
+					<td class="attributo"><?php _e('Número de sistema:');?></td>
+					<td><?php echo $articulo['sistema']?></td>
+				</tr>
 <?php 	if ( isset($articulo['issn']) ):?>
 				<tr>
 					<td class="attributo"><?php _e('ISSN:');?></td>
@@ -97,7 +113,7 @@
 					<td class="attributo"><?php _e('Texto completo:');?></td>
 					<td><a href="<?php echo $articulo['url']?>" target="_blank"><?php echo $articulo['url']?></a></td>
 				</tr>
-<?php 	else:?>
+<?php 	elseif (!$mail && !isset($articulo['url'])):?>
 				<tr id="solicitudDocumento">
 					<td colspan="2"><b><?php _e('Solicitud del documento')?></b> <span id="sd-enable" class="fa">&#xf152</span> <span id="sd-disable" class="fa">&#xf150</span></td>
 				</tr>

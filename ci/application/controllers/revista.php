@@ -57,8 +57,13 @@ class Revista extends CI_Controller{
 		$this->load->view('footer');
 	}
 
-	public function articulo(){
+	public function articulo($revista='', $articulo='', $mail=''){
 		$uriVar = $this->uri->ruri_to_assoc();
+		if($mail == 'true'):
+			$uriVar['revista'] = $revista;
+			$uriVar['articulo'] = $articulo;
+			$uriVar['mail'] = $mail;
+		endif;
 
 		/*Consultas*/
 		$this->load->database();
@@ -195,12 +200,17 @@ class Revista extends CI_Controller{
 		$data['header']['articulo'] = $data['main']['articulo'];
 		$data['header']['title'] = _sprintf('Biblat - Revista: %s - Artículo: %s', $articulo['revista'], $articulo['articulo']);
 		$data['main']['title'] = $data['header']['title'];
-
+		$data['main']['mail'] = FALSE;
 		/*Vistas*/
 		if(isset($_POST['ajax'])):
 			$this->output->enable_profiler(FALSE);
 			$this->load->view('revista/articulo', $data['main']);
 			return;
+		endif;
+		if($uriVar['mail'] == "true"):
+			$this->output->enable_profiler(FALSE);
+			$data['main']['mail'] = TRUE;
+			return $this->load->view('revista/articulo', $data['main'], TRUE);
 		endif;
 		$data['header']['content'] =  $this->load->view('revista/articulo_header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
@@ -212,18 +222,26 @@ class Revista extends CI_Controller{
 
 	public function solicitudDocumento(){
 		$this->output->enable_profiler(false);
-		$config['protocol'] = 'sendmail';
-		$config['mailpath'] = '/usr/sbin/sendmail';
-		$config['charset'] = 'utf-8';
-		$config['wordwrap'] = TRUE;
 		$config['mailtype'] = 'html';
 		$this->load->library('email');
 		$this->email->initialize($config);
 		$this->email->from('solicitud@biblat.unam.mx', 'Solicitud Biblat');
 		$this->email->to('sinfo@dgb.unam.mx');
+		//$this->email->to('achwazer@gmail.com');
 		$this->email->cc('anoguez@dgb.unam.mx');
 		$this->email->subject('Solicitud de documento Biblat');
-		$body = $this->load->view('mail_solicitud', $_POST, TRUE);
+		$data = $_POST;
+		$data['fichaDocumento'] = $this->articulo('revista-de-administracao-publica', 'produtividade-em-hospitais-individualizada-por-areas', 'true');
+		$body = $this->load->view('mail_solicitud', $data, TRUE);
+		$this->email->message($body);
+
+		$this->email->send();
+		unset($data['fichaDocumento']);
+		$this->email->clear();
+		$this->email->from('anoguez@dgb.unam.mx', 'Mtra. Araceli Noguez O.');
+		$this->email->to($_POST['email']);
+		$this->email->subject('Solicitud de documento Biblat');
+		$body = $this->load->view('mail_solicitud_usuario', $data, TRUE);
 		$this->email->message($body);
 
 		$this->email->send();
