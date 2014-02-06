@@ -71,15 +71,15 @@ class Indicadores extends CI_Controller {
 		$data['main']['indicador'] = $indicador;
 
 		/*Vistas*/
-		$js = $this->load->view('indicadores_index_js', $data['header'], TRUE);
+		$js = $this->load->view('indicadores/index_js', $data['header'], TRUE);
 		$data['header']['js'] = $this->minify->js->min($js);
 		//$data['header']['js'] = $js;
-		$data['header']['content'] =  $this->load->view('indicadores_header', $data['header'], TRUE);
+		$data['header']['content'] =  $this->load->view('indicadores/header', $data['header'], TRUE);
 		unset($data['header']['js']);
 		$data['header']['title'] = _sprintf('Biblat - Indicador: %s', $this->indicadores[$data['main']['indicador']]);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('indicadores_index', $data['main']);
+		$this->load->view('indicadores/index', $data['main']);
 		$this->load->view('footer');
 	}
 
@@ -925,7 +925,7 @@ class Indicadores extends CI_Controller {
 		$data['main']['resultados']=$articulosResultado['articulos'];
 		$data['header']['title'] = sprintf($args['title'], $articulosResultado['totalRows']);
 		$data['header']['slugHighLight']=slugHighLight($args['slug']);
-		$data['header']['content'] =  $this->load->view('buscar_header', $data['header'], TRUE);
+		$data['header']['content'] =  $this->load->view('buscar/header', $data['header'], TRUE);
 		$data['main']['breadcrumb'] = sprintf($args['breadcrumb'], $articulosResultado['totalRows']);
 		if(isset($args['ajax'])):
 			$data['header']['content'] .=  $this->load->view('header_ajax', $data['header'], TRUE);
@@ -934,7 +934,7 @@ class Indicadores extends CI_Controller {
 			$this->load->view('header', $data['header']);
 			$this->load->view('menu', $data['header']);
 		endif;
-		$this->load->view('frecuencias_documentos', $data['main']);
+		$this->load->view('frecuencias/documentos', $data['main']);
 		if(! isset($args['ajax'])):
 			$this->load->view('footer');
 		endif;

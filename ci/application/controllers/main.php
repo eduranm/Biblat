@@ -51,10 +51,10 @@ class Main extends CI_Controller{
 		$this->db->close();
 		/*Vistas*/
 		$data['header']['disciplinas'] = $data['index']['disciplinas'];
-		$data['header']['content'] =  $this->load->view('main_header', $data['header'], TRUE);
+		$data['header']['content'] =  $this->load->view('main/header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('main_index', $data['index']);
+		$this->load->view('main/index', $data['index']);
 		$this->load->view('footer');
 	}
 
@@ -63,7 +63,7 @@ class Main extends CI_Controller{
 		$data['header']['title'] = _("Biblat - Créditos");
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu');
-		$this->load->view('main_creditos');
+		$this->load->view('main/creditos');
 		$this->load->view('footer');
 	}
 
@@ -72,7 +72,7 @@ class Main extends CI_Controller{
 		$data['header']['title'] = _("Biblat - Bibliografía");
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu');
-		$this->load->view('main_bibliografia');
+		$this->load->view('main/bibliografia');
 		$this->load->view('footer');
 	}
 
@@ -81,7 +81,7 @@ class Main extends CI_Controller{
 		$data['header']['title'] = _("Biblat - Mapa del sitio");
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu');
-		$this->load->view('main_sitemap');
+		$this->load->view('main/sitemap');
 		$this->load->view('footer');
 	}
 
@@ -90,7 +90,7 @@ class Main extends CI_Controller{
 		$data['main']['recaptcha_html'] = $this->recaptcha->recaptcha_get_html();
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
-		$this->load->view('main_contacto',$data['main']);
+		$this->load->view('main/contacto',$data['main']);
 		$this->load->view('footer');
 	}
 
