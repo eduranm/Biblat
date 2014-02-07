@@ -1,1 +1,1 @@
-	<link rel="stylesheet" href="<?php echo base_url();?>css/estiloBiblatresultados.css" />
+	<link rel="stylesheet" href="<?=base_url('css/estiloBiblatresultados.css');?>" />

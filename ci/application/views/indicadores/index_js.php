@@ -37,7 +37,7 @@ jQuery(document).ready(function(){
 		}
 
 		if(typeof history.pushState === "function" && !popState.indicador){
-			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + value);
+			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + value);
 		}
 		popState.indicador=false;
 		console.log(e);
@@ -74,7 +74,7 @@ jQuery(document).ready(function(){
 			jQuery("#paisRevista").show("slow");
 			jQuery("#periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
 			jQuery.ajax({
-				url: '<?php echo site_url("indicadores/getRevistasPaises");?>',
+				url: '<?=site_url("indicadores/getRevistasPaises");?>',
 				type: 'POST',
 				dataType: 'json',
 				data: jQuery("#generarIndicador").serialize(),
@@ -106,7 +106,7 @@ jQuery(document).ready(function(){
 			if(value != "" && value != null){
 				disciplina='/disciplina/' + value;
 			}
-			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + indicadorValue + disciplina);
+			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + indicadorValue + disciplina);
 		}
 		popState.disciplina=false;
 		console.log(e);
@@ -135,7 +135,7 @@ jQuery(document).ready(function(){
 			if(value != "" && value != null){
 				paisRevista='/revista/' + value.join('/');
 			}
-			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista);
+			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista);
 		}
 		popState.revista=false;
 		console.log(e);
@@ -163,7 +163,7 @@ jQuery(document).ready(function(){
 			if(value != "" && value != null){
 				paisRevista='/pais/' + value.join('/');
 			}
-			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista);
+			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista);
 		}
 		popState.pais=false;
 		console.log(e);
@@ -228,15 +228,15 @@ jQuery(document).ready(function(){
 			loading.start();
 		}
 		indicadorValue = jQuery("#indicador").val();
-		urlRequest = '<?php echo site_url("indicadores/getChartData");?>';
+		urlRequest = '<?=site_url("indicadores/getChartData");?>';
 		switch(indicadorValue){
 			case "modelo-bradford-revista":
 			case "modelo-bradford-institucion":
-				urlRequest = '<?php echo site_url("indicadores/getChartDataBradford");?>';
+				urlRequest = '<?=site_url("indicadores/getChartDataBradford");?>';
 				break;
 			case "indice-concentracion":
 			case "productividad-exogena":
-				urlRequest = '<?php echo site_url("indicadores/getChartDataPrattExogena");?>';
+				urlRequest = '<?=site_url("indicadores/getChartDataPrattExogena");?>';
 				break;
 		}
 		jQuery.ajax({
@@ -356,26 +356,26 @@ jQuery(document).ready(function(){
 <?php if (preg_match('%indicadores/(...+?)%', uri_string())):?>
 	urlData = {
 <?php 	if (preg_match('%indicadores/(.+?)(/.*|$)%', uri_string())):?>
-		indicador:"<?php echo preg_replace('%.+?/indicadores/(.+?)(/.*|$)%', '\1', uri_string());?>",
+		indicador:"<?=preg_replace('%.+?/indicadores/(.+?)(/.*|$)%', '\1', uri_string());?>",
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/disciplina/(.+?)(/.*|$)%', uri_string())):?>
-		disciplina:"<?php echo preg_replace('%.*?/disciplina/(.+?)(/.*|$)%', '\1', uri_string());?>",
+		disciplina:"<?=preg_replace('%.*?/disciplina/(.+?)(/.*|$)%', '\1', uri_string());?>",
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-		revista:"<?php echo preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
+		revista:"<?=preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-		pais:"<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
+		pais:"<?=preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%', uri_string())):?>
-		periodo:"<?php echo preg_replace('%.*?/([0-9]{4})-([0-9]{4})%', '\1;\2', uri_string());?>"
+		periodo:"<?=preg_replace('%.*?/([0-9]{4})-([0-9]{4})%', '\1;\2', uri_string());?>"
 <?php 	endif;?>
 	}
 <?php 	if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-	paisRevista="/revista/<?php echo preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
+	paisRevista="/revista/<?=preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-	paisRevista="/pais/<?php echo preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
+	paisRevista="/pais/<?=preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
 <?php 	endif;?>
 	if(typeof urlData.indicador !== "undefined"){
 		updateData(urlData);
@@ -393,7 +393,7 @@ setPeridos = function(){
 	}
 	jQuery("#periodos").slideDown("slow");
 	jQuery.ajax({
-		url: '<?php echo site_url("indicadores/getPeriodos");?>',
+		url: '<?=site_url("indicadores/getPeriodos");?>',
 		type: 'POST',
 		dataType: 'json',
 		data: jQuery("#generarIndicador").serialize(),
@@ -422,7 +422,7 @@ setPeridos = function(){
 							jQuery("#sliderPeriodo").data('pre', value);
 							rango=value.replace(';', '-');
 							if(typeof history.pushState === "function"){
-								history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?php echo site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista + '/' + rango);
+								history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista + '/' + rango);
 							}
 							jQuery("#revista, #pais").select2("close");
 							jQuery("#generarIndicador").submit();
@@ -536,7 +536,7 @@ choosePoint = function () {
 		var anio = chart.data.normal.getFormattedValue(selection.row, 0);
 		console.log(anio);
 		jQuery.ajax({
-			url: '<?php echo site_url("indicadores/getAutoresPrice");?>/'+ revistaPais + '/' + anio,
+			url: '<?=site_url("indicadores/getAutoresPrice");?>/'+ revistaPais + '/' + anio,
 			type: 'POST',
 			dataType: 'json',
 			data: jQuery("#generarIndicador").serialize(),
@@ -556,7 +556,7 @@ bradfordArticles = function (group) {
 	indicadorValue = jQuery("#indicador").val();
 	if (selection && indicadorValue == "modelo-bradford-revista"){
 		var revista = chart.data[group].getColumnId(selection.column);
-		jQuery.colorbox({href:"<?php echo site_url("indicadores/bradfordDocumentos");?>/" + revista + "/ajax", data: {ajax:true}, transition:"fade", height:"90%", width: "1000px", iframe: true});
+		jQuery.colorbox({href:"<?=site_url("indicadores/bradfordDocumentos");?>/" + revista + "/ajax", data: {ajax:true}, transition:"fade", height:"90%", width: "1000px", iframe: true});
 	}
 }
 
@@ -566,7 +566,7 @@ getFrecuencias = function (key) {
 		disciplina=jQuery('#disciplina').val();
 		revista=chart.data.prattJ[key][(selection[0].column+1)/2 -1];
 		jQuery.ajax({
-			url: '<?php echo site_url("indicadores/getFrecuencias");?>/'+ revista,
+			url: '<?=site_url("indicadores/getFrecuencias");?>/'+ revista,
 			type: 'POST',
 			dataType: 'json',
 			data: jQuery("#generarIndicador").serialize(),

@@ -2,7 +2,7 @@
 	<div class="flagContainer">
 		<p class="flag">
 			<em>
-				<?php echo $breadcrumb;?>
+				<?=$breadcrumb;?>
 			</em>
 		</p>
 	</div>

@@ -1,5 +1,5 @@
-	<script src="<?php echo base_url();?>js/d3.js"></script>
-	<script src="<?php echo base_url();?>js/d3.layout.cloud.js"></script>
+	<script src="<?=base_url('js/d3.js');?>"></script>
+	<script src="<?=base_url('js/d3.layout.cloud.js');?>"></script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function()
 		{
@@ -13,7 +13,7 @@
 					$totalDisciplinas = count($disciplinas);
 					$indexOfDisciplina = 1;
 					foreach ($disciplinas as $disciplina):?>
-					{text: "<?php echo strtolower($disciplina['disciplina']);?>", size: "<?php echo number_format((11 + ($disciplina['size'] * 1.8)), '2', '.', '');?>", link: "<?php echo site_url("indice/disciplina/{$disciplina['slug']}");?>"}<?php 
+					{text: "<?=strtolower($disciplina['disciplina']);?>", size: "<?=number_format((11 + ($disciplina['size'] * 1.8)), '2', '.', '');?>", link: "<?=site_url("indice/disciplina/{$disciplina['slug']}");?>"}<?php 
 					if($indexOfDisciplina < $totalDisciplinas):
 					echo ",\n";
 					endif;

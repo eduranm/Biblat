@@ -3,7 +3,7 @@
 	<div class="flagContainer">
 		<p class="flag">
 			<em>
-				<?php echo $title;?>
+				<?=$title;?>
 			</em>
 		</p>
 	</div>
@@ -39,7 +39,7 @@
 <?php 	foreach ($resultados as $key => $resultado):?>
 				<tr>
 					<td>
-						<?php echo $key;?>.- <i><?php echo $resultado['articuloLink'];?></i> <?php echo $resultado['downloadLink'];?> <?php echo $resultado['mendeleyLink'];?><br/>
+						<?=$key;?>.- <i><?=$resultado['articuloLink'];?></i> <?=$resultado['downloadLink'];?> <?=$resultado['mendeleyLink'];?><br/>
 <?php 		if ($resultado['autoresHTML'] != ""): echo $resultado['autoresHTML'];?><br/>
 <?php 		endif;
 			if ($resultado['institucionesHTML'] != ""):  echo $resultado['institucionesHTML'];?><br/>

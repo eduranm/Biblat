@@ -3,33 +3,33 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php if(isset($description)):?>
-	<meta name="description" content="<?php echo $description;?>" /> 
+	<meta name="description" content="<?=$description;?>" /> 
 <?php endif;?>
-	<title><?php echo $title;?></title>
-	<link rel="icon" href="<?php echo base_url('img/favicon.ico');?>" type="image/x-icon"/>
-	<link rel="stylesheet" href="<?php echo base_url('css/estiloBiblat.css');?>" type="text/css" />
-	<link rel="stylesheet" href="<?php echo base_url('css/font-awesome.min.css');?>" type="text/css" />
-	<link rel="stylesheet" href="<?php echo base_url('css/jquery-ui.min.css');?>" type="text/css" />
-	<link rel="stylesheet" href="<?php echo base_url('js/pnotify/jquery.pnotify.default.css');?>" type="text/css" />
-	<link rel="stylesheet" href="<?php echo base_url('css/default.css');?>" type="text/css" />
-	<script type="text/javascript" src="<?php echo base_url('js/jquery.js');?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('js/jquery.validate.min.js');?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('js/jquery.autosize.min.js');?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('js/jquery-ui.min.js');?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('js/jquery.blockUI.js');?>"></script>
-	<script type="text/javascript" src="<?php echo base_url('js/pnotify/jquery.pnotify.min.js');?>"></script>
+	<title><?=$title;?></title>
+	<link rel="icon" href="<?=base_url('img/favicon.ico');?>" type="image/x-icon"/>
+	<link rel="stylesheet" href="<?=base_url('css/estiloBiblat.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url('css/font-awesome.min.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url('css/jquery-ui.min.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url('js/pnotify/jquery.pnotify.default.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url('css/default.css');?>" type="text/css" />
+	<script type="text/javascript" src="<?=base_url('js/jquery.js');?>"></script>
+	<script type="text/javascript" src="<?=base_url('js/jquery.validate.min.js');?>"></script>
+	<script type="text/javascript" src="<?=base_url('js/jquery.autosize.min.js');?>"></script>
+	<script type="text/javascript" src="<?=base_url('js/jquery-ui.min.js');?>"></script>
+	<script type="text/javascript" src="<?=base_url('js/jquery.blockUI.js');?>"></script>
+	<script type="text/javascript" src="<?=base_url('js/pnotify/jquery.pnotify.min.js');?>"></script>
 	<script type="text/javascript">
 		var addthis_config = addthis_config||{};
 		addthis_config.data_track_addressbar = false;
 		addthis_config.data_track_clickback = false;
-		addthis_config.ui_language = "<?php echo lang_iso_code();?>";
+		addthis_config.ui_language = "<?=lang_iso_code();?>";
 	</script>
 	<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=herz"></script>
 	<script type="text/javascript" language="javascript">
 		loading = {
 			start: function(){
 				jQuery.blockUI({ 
-					message: '<h2 style="white-space:nowrap;"><img src="<?php echo base_url();?>img/loading.gif" /><br /><?php _e('Espere un momento...');?></h2>',
+					message: '<h2 style="white-space:nowrap;"><img src="<?=base_url('img/loading.gif');?>" /><br /><?php _e('Espere un momento...');?></h2>',
 					css: { 
 						color: '#000', 
 						backgroundColor:'#FBFCEF', 
@@ -78,7 +78,7 @@
 				var data = jQuery(this).serializeArray();
 				data.push({name: "ajax", value: true});
 				jQuery.ajax({
-					url: '<?php echo site_url('buscar');?>',
+					url: '<?=site_url('buscar');?>',
 					type: 'POST',
 					data: jQuery.param(data),
 					success: function(data) {
@@ -106,7 +106,6 @@
 				jQuery.ajax({
 					url: jQuery(this).attr("action"),
 					type: 'POST',
-					dataType: 'json',
 					data: jQuery(this).serialize(),
 					success: function(data) {
 						console.log(data)

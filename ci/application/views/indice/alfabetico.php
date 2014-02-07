@@ -24,12 +24,12 @@
 			<tbody>
 <?php foreach ($registros as $key => $registro):?>
 				<tr class="registro">
-					<td><?php echo ($key + 1);?></td>
-					<td><?php echo $registro['revista'];?></td>
-					<td class="totalRight"><a class="enlace" href="<?php echo site_url("revista/{$registro['revistaSlug']}");?>" title="<?php echo $registro['revista'];?>"><?php echo number_format($registro['articulos']);?></a></td>
+					<td><?=($key + 1);?></td>
+					<td><?=$registro['revista'];?></td>
+					<td class="totalRight"><a class="enlace" href="<?=site_url("revista/{$registro['revistaSlug']}");?>" title="<?=$registro['revista'];?>"><?=number_format($registro['articulos']);?></a></td>
 				</tr>
 <?php endforeach;?>
-				<tr><td class='acumuladas' colspan=2><?php _e('Total:');?></td><td class='acumuladas'><?php echo number_format($registrosTotalArticulos);?></td></tr>
+				<tr><td class='acumuladas' colspan=2><?php _e('Total:');?></td><td class='acumuladas'><?=number_format($registrosTotalArticulos);?></td></tr>
 			</tbody>
 		</table>
 	</div>

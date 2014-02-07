@@ -31,7 +31,7 @@ $defaultLang = $this->lang->lang();
 		<div class="bannerRight"></div>
 		<div class="banner">
 			<div class="bannerLinks">
-				<a class="biblatLink" href="<?php echo site_url('/');?>" title="Biblat"></a>
+				<a class="biblatLink" href="<?=site_url('/');?>" title="Biblat"></a>
 				<a class="unamLink" href="http://www.unam.mx" target="_blank" title="UNAM"></a>
 				<a class="dgbLink" href="http://dgb.unam.mx" target="_blank" title="DGB"></a>
 			</div>
@@ -58,25 +58,25 @@ $defaultLang = $this->lang->lang();
 						<li>
 							<a href="javascript:;" title="<?php _e('Frecuencias');?>"><?php _e('Frecuencias');?></a>
 							<ul>
-								<li><a href="<?php echo site_url('frecuencias/autor');?>" title="<?php _e('Autor');?>"><?php _e('Autor');?></a></li>
-								<li><a href="<?php echo site_url('frecuencias/institucion');?>" title="<?php _e('Institución');?>"><?php _e('Institución');?></a></li>
-								<li><a href="<?php echo site_url('frecuencias/pais-afiliacion');?>" title="<?php _e('País de afiliación del autor');?>"><?php _e('País de afiliación');?></a></li>
-								<li><a href="<?php echo site_url('frecuencias/revista');?>" title="<?php _e('Revista');?>"><?php _e('Revista');?></a></li>
+								<li><a href="<?=site_url('frecuencias/autor');?>" title="<?php _e('Autor');?>"><?php _e('Autor');?></a></li>
+								<li><a href="<?=site_url('frecuencias/institucion');?>" title="<?php _e('Institución');?>"><?php _e('Institución');?></a></li>
+								<li><a href="<?=site_url('frecuencias/pais-afiliacion');?>" title="<?php _e('País de afiliación del autor');?>"><?php _e('País de afiliación');?></a></li>
+								<li><a href="<?=site_url('frecuencias/revista');?>" title="<?php _e('Revista');?>"><?php _e('Revista');?></a></li>
 							</ul>
 						</li>
 						<li>
-							<a href="<?php echo site_url('indicadores');?>" title="<?php _e('Indicadores');?>"><?php _e('Indicadores');?></a>
+							<a href="<?=site_url('indicadores');?>" title="<?php _e('Indicadores');?>"><?php _e('Indicadores');?></a>
 							<ul>
-								<li><a href="<?php echo site_url('indicadores/indice-coautoria');?>" title="<?php _e('Índice de coautoría');?>"><?php _e('Índice de coautoría');?></a></li>
-								<li><a href="<?php echo site_url('indicadores/tasa-documentos-coautorados');?>" title="<?php _e('Tasa de documentos coautorados');?>"><?php _e('Tasa de documentos coautorados');?></a></li>
-								<li><a href="<?php echo site_url('indicadores/grado-colaboracion');?>" title="<?php _e('Grado de colaboración (Índice Subramayan)');?>"><?php _e('Grado de colaboración');?></a></li>
-								<li><a href="<?php echo site_url('indicadores/modelo-elitismo');?>" title="<?php _e('Modelo de elitismo (Price)');?>"><?php _e('Modelo de elitismo');?></a></li>
-								<li><a href="<?php echo site_url('indicadores/indice-colaboracion');?>" title="<?php _e('Índice de colaboración (Índice de Lawani)');?>"><?php _e('Índice de colaboración');?></a></li>
-								<li><a href="<?php echo site_url('indicadores/indice-densidad-documentos');?>" title="<?php _e('Índice de densidad de documentos Zakutina y Priyenikova');?>"><?php _e('Índice de densidad de documentos');?></a></li>
-								<li><a href="<?php echo site_url('indicadores/indice-concentracion');?>" title="<?php _e('Índice de concentración (Índice Pratt)');?>"><?php _e('Índice de concentración');?></a></li>
-								<li><a href="<?php echo site_url('indicadores/modelo-bradford-revista');?>" title="<?php _e('Modelo de Bradford por revista');?>"><?php _e('Modelo de Bradford por revista');?></a></li>
-								<li><a href="<?php echo site_url('indicadores/modelo-bradford-institucion');?>" title="<?php _e('Modelo de Bradford por institución (Afiliación del autor)');?>"><?php _e('Modelo de Bradford por institución');?></a></li>
-								<li><a href="<?php echo site_url('indicadores/productividad-exogena');?>" title="<?php _e('Tasa de autoría exógena');?>"><?php _e('Tasa de autoría exógena');?></a></li>
+								<li><a href="<?=site_url('indicadores/indice-coautoria');?>" title="<?php _e('Índice de coautoría');?>"><?php _e('Índice de coautoría');?></a></li>
+								<li><a href="<?=site_url('indicadores/tasa-documentos-coautorados');?>" title="<?php _e('Tasa de documentos coautorados');?>"><?php _e('Tasa de documentos coautorados');?></a></li>
+								<li><a href="<?=site_url('indicadores/grado-colaboracion');?>" title="<?php _e('Grado de colaboración (Índice Subramayan)');?>"><?php _e('Grado de colaboración');?></a></li>
+								<li><a href="<?=site_url('indicadores/modelo-elitismo');?>" title="<?php _e('Modelo de elitismo (Price)');?>"><?php _e('Modelo de elitismo');?></a></li>
+								<li><a href="<?=site_url('indicadores/indice-colaboracion');?>" title="<?php _e('Índice de colaboración (Índice de Lawani)');?>"><?php _e('Índice de colaboración');?></a></li>
+								<li><a href="<?=site_url('indicadores/indice-densidad-documentos');?>" title="<?php _e('Índice de densidad de documentos Zakutina y Priyenikova');?>"><?php _e('Índice de densidad de documentos');?></a></li>
+								<li><a href="<?=site_url('indicadores/indice-concentracion');?>" title="<?php _e('Índice de concentración (Índice Pratt)');?>"><?php _e('Índice de concentración');?></a></li>
+								<li><a href="<?=site_url('indicadores/modelo-bradford-revista');?>" title="<?php _e('Modelo de Bradford por revista');?>"><?php _e('Modelo de Bradford por revista');?></a></li>
+								<li><a href="<?=site_url('indicadores/modelo-bradford-institucion');?>" title="<?php _e('Modelo de Bradford por institución (Afiliación del autor)');?>"><?php _e('Modelo de Bradford por institución');?></a></li>
+								<li><a href="<?=site_url('indicadores/productividad-exogena');?>" title="<?php _e('Tasa de autoría exógena');?>"><?php _e('Tasa de autoría exógena');?></a></li>
 							</ul>
 						</li>
 					</ul>
@@ -92,7 +92,7 @@ $defaultLang = $this->lang->lang();
 				<li>
 					<a href="javascript:;" title="<?php _e('Documentos');?>"><?php _e('Documentos');?></a>
 					<ul>
-						<li><a href="<?php echo site_url('documentos/bibliografia');?>" title="<?php _e('Bibliografía');?>"><?php _e('Bibliografía');?></a></li>
+						<li><a href="<?=site_url('documentos/bibliografia');?>" title="<?php _e('Bibliografía');?>"><?php _e('Bibliografía');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Presentaciones PPT');?>"><?php _e('Presentaciones PPT');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Archivos multimedia');?>"><?php _e('Archivos multimedia');?></a></li>
 					</ul>
@@ -109,20 +109,20 @@ $defaultLang = $this->lang->lang();
 					</div>
 				</li>
 				<li>
-					<a href="<?php echo site_url('sitemap');?>" title="<?php _e('Mapa del sitio');?>"><img border="0" src="<?php echo base_url();?>img/sitemap.png" height="16px" alt="<?php _e('Mapa del sitio');?>"/></a>
+					<a href="<?=site_url('sitemap');?>" title="<?php _e('Mapa del sitio');?>"><img border="0" src="<?=base_url();?>img/sitemap.png" height="16px" alt="<?php _e('Mapa del sitio');?>"/></a>
 				</li>
 				<li>
-					<a href="javascript:;" title="<?php _e('Ayuda');?>"><img border="0"  src="<?php echo base_url();?>img/help.png" height="16px" alt="<?php _e('Ayuda');?>"/></a>
+					<a href="javascript:;" title="<?php _e('Ayuda');?>"><img border="0"  src="<?=base_url();?>img/help.png" height="16px" alt="<?php _e('Ayuda');?>"/></a>
 				</li>
 				<li>
-					<a href="javascript:;" title="<?php _e('Contacto');?>"><img border="0"  src="<?php echo base_url();?>img/mail.png" height="16px" alt="<?php _e('Contacto');?>"/></a>
+					<a href="javascript:;" title="<?php _e('Contacto');?>"><img border="0"  src="<?=base_url();?>img/mail.png" height="16px" alt="<?php _e('Contacto');?>"/></a>
 				</li>
 				<li>
-					<img src="<?php echo base_url();?>img/<?php echo $langs[$defaultLang]['img'];?>" border="0"  height="16px" alt="<?php echo $langs[$defaultLang]['title'];?>"/>
+					<img src="<?=base_url();?>img/<?=$langs[$defaultLang]['img'];?>" border="0"  height="16px" alt="<?=$langs[$defaultLang]['title'];?>"/>
 					<ul>
 <?php foreach ($langs as $langKey => $lang):
 		if ($langKey != $defaultLang):?>
-						<li><a class="setlang" href="<?php echo $lang['url'];?>" title="<?php echo $lang['title'];?>"><img border="0"  src="<?php echo base_url();?>img/<?php echo $lang['img'];?>" height="16px" alt="<?php echo $lang['title'];?>"/></a></li>
+						<li><a class="setlang" href="<?=$lang['url'];?>" title="<?=$lang['title'];?>"><img border="0"  src="<?=base_url();?>img/<?=$lang['img'];?>" height="16px" alt="<?=$lang['title'];?>"/></a></li>
 <?php 	endif;
 	  endforeach;?>
 	  				</ul>
@@ -131,8 +131,8 @@ $defaultLang = $this->lang->lang();
 		</div>
 	</div>
 	<div class="searchContainer">
-		<form action="<?php echo site_url('buscar');?>" class="searchform" method="post">
-			<button id="options" class="icon-<?php echo (empty($filtro)? 'todos':$filtro);?>"></button>
+		<form action="<?=site_url('buscar');?>" class="searchform" method="post">
+			<button id="options" class="icon-<?=(empty($filtro)? 'todos':$filtro);?>"></button>
 			<ul class="optionsMenu">
 				<li rel="todos"><i class="fa fa-cloud"></i><?php _e('Buscar en todos los campos');?></li>
 				<li rel="palabra-clave"><i class="fa fa fa-key"></i><?php _e('Buscar por palabra clave');?></li>
@@ -148,7 +148,7 @@ $defaultLang = $this->lang->lang();
 			<label>
 				<span class="visuallyhidden"><?php _e('Buscar en Biblat');?></span>
 <?php if (isset($search['slug'])) :?>
-				<textarea autocomplete="off" placeholder="<?php _e('Buscar en Biblat');?>" name="slug" id="slug"><?php echo $search['slug'];?></textarea>
+				<textarea autocomplete="off" placeholder="<?php _e('Buscar en Biblat');?>" name="slug" id="slug"><?=$search['slug'];?></textarea>
 <?php else:?>
 				<textarea autocomplete="off" placeholder="<?php _e('Buscar en Biblat');?>" value="" name="slug" id="slug"></textarea>
 <?php endif;?>

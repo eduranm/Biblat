@@ -12,7 +12,7 @@
 				<select name="indicador" id="indicador" style="width:90%" data-placeholder="<?php _e('Seleccione indicador');?>">
 				<option></option>
 <?php foreach ($indicadores as $key => $value): ?>
-					<option value="<?php echo $key;?>" <?php if($key == $indicador) echo "selected";?>><?php echo $value;?></option>
+					<option value="<?=$key;?>" <?php if($key == $indicador) echo "selected";?>><?=$value;?></option>
 <?php endforeach;?>
 				</select>
 			</div>
@@ -20,7 +20,7 @@
 				<select name="disciplina" id="disciplina" style="width:90%" data-placeholder="<?php _e('Seleccione una disciplina');?>" <?php if($indicador == "") echo "disabled";?>>
 				<option></option>
 <?php foreach ($disciplinas as $kdisciplina => $disciplina):?>
-					<option value="<?php echo $kdisciplina;?>"><?php echo $disciplina['disciplina'];?></option>
+					<option value="<?=$kdisciplina;?>"><?=$disciplina['disciplina'];?></option>
 <?php endforeach;?>
 				</select>
 			</div>
@@ -52,7 +52,7 @@
 					<div id="chartTitle"></div>
 					<div id="chart" style="width: 1000px; height: 500px;"></div>
 					<div class="chartCopyright">
-						<?php _e('Fuente:');?> <a href="<?php echo base_url();?>">biblat.unam.mx</a>
+						<?php _e('Fuente:');?> <a href="<?=base_url();?>">biblat.unam.mx</a>
 					</div>
 				</div>
 				<div id="bradfodContainer" style="display:none;">
@@ -71,13 +71,13 @@
 						</li>
 					</ul>
 					<div class="chartCopyright">
-						<?php _e('Fuente:');?> <a href="<?php echo base_url();?>">biblat.unam.mx</a>
+						<?php _e('Fuente:');?> <a href="<?=base_url();?>">biblat.unam.mx</a>
 					</div>
 				</div>
 				<div id="prattContainer" style="display:none;">
 					<ul id="prattSlide"></ul>
 					<div class="chartCopyright">
-						<?php _e('Fuente:');?> <a href="<?php echo base_url();?>">biblat.unam.mx</a>
+						<?php _e('Fuente:');?> <a href="<?=base_url();?>">biblat.unam.mx</a>
 					</div>
 				</div>
 			</div>

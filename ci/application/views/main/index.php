@@ -17,9 +17,9 @@
 		</div>
 		<div class="rightColumn">
 			<ul class="paisesFlags">
-				<li><a href="<?php echo site_url("indice/pais/".slug("Internacional"));?>"><img src="<?php echo base_url();?>img/flags/world.png" title="Organismos Internacionales" border="0"/></a></li>
+				<li><a href="<?=site_url("indice/pais/".slug("Internacional"));?>"><img src="<?=base_url();?>img/flags/world.png" title="Organismos Internacionales" border="0"/></a></li>
 <?php foreach ($paises as $pais):?>
-				<li><a href="<?php echo site_url("indice/pais/{$pais['paisSlug']}");?>" title="<?php echo $pais['pais'];?>"><img src="<?php echo base_url("img/flags/{$pais['paisSlug']}.png");?>" title="<?php echo $pais['pais'];?>" border="0"/></a></li>
+				<li><a href="<?=site_url("indice/pais/{$pais['paisSlug']}");?>" title="<?=$pais['pais'];?>"><img src="<?=base_url("img/flags/{$pais['paisSlug']}.png");?>" title="<?=$pais['pais'];?>" border="0"/></a></li>
 <?php endforeach;?>
 			</ul>
 		</div>
@@ -31,7 +31,7 @@
 		<div class="rightColumn">
 			<p class="texto">
 <?php foreach (range('A', 'Z') as $i):?>
-				<a href="<?php echo site_url("indice/alfabetico/".strtolower($i));?>"><?php echo $i;?></a>
+				<a href="<?=site_url("indice/alfabetico/".strtolower($i));?>"><?=$i;?></a>
 <?php endforeach;?>
 			</p>
 		</div>
@@ -42,14 +42,14 @@
 		</p>
 		<div class="rightColumn">
 			<p class="texto">
-				<span class="disponibles"><?php echo number_format($totales['revistas']); ?></span> <?php _e('revistas');?><br />
-				<span class="disponibles"><?php echo number_format($totales['documentos']); ?></span> <?php _e('documentos');?><br />
-				<span class="disponibles"><?php echo number_format($totales['enlaces']); ?></span> <?php _e('textos completos');?><br />
-				<span class="disponibles"><?php echo number_format($totales['hevila']); ?></span> <?php _e('documentos en texto completo en repositorio HEVILA');?>
+				<span class="disponibles"><?=number_format($totales['revistas']); ?></span> <?php _e('revistas');?><br />
+				<span class="disponibles"><?=number_format($totales['documentos']); ?></span> <?php _e('documentos');?><br />
+				<span class="disponibles"><?=number_format($totales['enlaces']); ?></span> <?php _e('textos completos');?><br />
+				<span class="disponibles"><?=number_format($totales['hevila']); ?></span> <?php _e('documentos en texto completo en repositorio HEVILA');?>
 			</p>
 		</div>
 	</div>
 	<div id="creditos" class="cboth">
-		<a href="<?php echo site_url('creditos');?>"><?php _e('Créditos');?></a>
+		<a href="<?=site_url('creditos');?>"><?php _e('Créditos');?></a>
 	</div>
 </div>
