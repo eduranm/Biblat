@@ -93,7 +93,7 @@ class Indice extends CI_Controller{
 		$this->db->close();
 		/*Vistas*/
 		$data['header']['title'] = _sprintf('Biblat - Indice por país: "%s"', $data['pais']['paises'][$pais]['pais']);
-		$data['header']['content'] =  $this->load->view('indiceDisciplinaHeader', $data['header'], TRUE);
+		$data['header']['content'] =  $this->load->view('indice/disciplina_header', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
 		$this->load->view('indice/pais', $data['pais']);
