@@ -231,7 +231,7 @@ class Revista extends CI_Controller{
 		$this->email->cc('anoguez@dgb.unam.mx');
 		$this->email->subject('Solicitud de documento Biblat');
 		$data = $_POST;
-		$data['fichaDocumento'] = $this->articulo('revista-de-administracao-publica', 'produtividade-em-hospitais-individualizada-por-areas', 'true');
+		$data['fichaDocumento'] = $this->articulo($data['revista'], $data['articulo'], 'true');
 		$body = $this->load->view('revista/mail_solicitud', $data, TRUE);
 		$this->email->message($body);
 
