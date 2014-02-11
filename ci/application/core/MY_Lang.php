@@ -23,29 +23,39 @@ class MY_Lang extends CI_Lang {
   // languages
   private $languages = array(
     'es' => array(
-        'iso' => 'es',
-        'i18n' => 'es_ES',
-        'name' => 'spanish'
+        'iso'   => 'es',
+        'i18n'  => 'es_ES',
+        'name'  => 'spanish',
+        'title' => 'Español',
+        'img'   => 'spanish.png'
       ),
     'en' => array(
-        'iso' => 'en',
-        'i18n' => 'en_US',
-        'name' => 'english'
-      ),
-    'fr' => array(
-        'iso' => 'fr',
-        'i18n' => 'fr_FR',
-        'name' => 'french'
+        'iso'   => 'en',
+        'i18n'  => 'en_US',
+        'name'  => 'english',
+        'title' => 'English',
+        'img'   => 'english.png'
       ),
     'pt' => array(
-        'iso' => 'pt',
-        'i18n' => 'pt_BR',
-        'name' => 'portuguese'
+      'iso'   => 'pt',
+      'i18n'  => 'pt_BR',
+      'name'  => 'portuguese',
+      'title' => 'Português',
+      'img'   => 'portuguese.png'
+    ),
+    'fr' => array(
+        'iso'   => 'fr',
+        'i18n'  => 'fr_FR',
+        'name'  => 'french',
+        'title' => 'Français',
+        'img'   => 'french.png'
       ),
     'ca' => array(
-        'iso' => 'ca',
-        'i18n' => 'ca_ES',
-        'name' => 'catalan'
+        'iso'   => 'ca',
+        'i18n'  => 'ca_ES',
+        'name'  => 'catalan',
+        'title' => 'Catalan',
+        'img'   => 'catalan.png'
       )
   );
  
@@ -120,6 +130,10 @@ class MY_Lang extends CI_Lang {
     return NULL;    // this should not happen
   }
 
+  function supported_langs(){
+    return $this->languages;
+  }
+
   function lang_array(){
     return $this->languages[$this->lang()];
   }
@@ -152,7 +166,7 @@ class MY_Lang extends CI_Lang {
 
     return $uri;
   }
-    
+
   //check if the language exists
   //when true returns an array with lang abbreviation + rest
   function get_uri_lang($uri = '')

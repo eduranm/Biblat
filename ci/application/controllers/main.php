@@ -99,4 +99,11 @@ class Main extends CI_Controller{
 		$this->recaptcha->recaptcha_check_answer();
 		var_dump($this->recaptcha->getIsValid());
 	}
+
+	public function lang_notification(){
+		$browserLang = browser_lang_array();
+		$data['message'] = _sprintf('Deacuerdo al idioma de su navegador le sugerimos cambiar el idioma de la página a %s', $browserLang['title']);
+		$data['button'] = '<button class="translate">'._('Traducir').'</button>';
+		echo json_encode($data, TRUE); exit(0);
+	}
 }

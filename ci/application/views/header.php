@@ -57,6 +57,30 @@
 		});
 		jQuery(document).ready(function()
 		{
+<?php  
+	if ( lang_notification() ):
+		$broserLang = get_browser_lang();
+?>
+			jQuery.ajax({
+				url: '<?=base_url("{$broserLang}/main/lang_notification");?>',
+				dataType: 'json',
+				success: function(data) {
+					jQuery.pnotify({
+						title: data.message + '  ' + data.button,
+						icon: true,
+						addclass: "stack-bar-top",
+						type: 'info',
+						sticker: false,
+						animation: 'slide',
+						cornerclass: "",
+						width: "100%"
+					});
+				}
+			});
+			jQuery(document).on('click', '.translate', function(e) {
+				location = '<?=site_url($this->lang->switch_uri($broserLang));?>';
+			});
+<?php endif;?>
 			jQuery("#options").click(function(e) {
 				jQuery(".optionsMenu").toggle();
 				return false;

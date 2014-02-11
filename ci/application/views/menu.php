@@ -1,31 +1,3 @@
-<?php
-$langs['es'] = array(
-						'url' => site_url($this->lang->switch_uri('es')),
-						'title' => "Español",
-						'img' => "spanish.png"
-					);
-$langs['en'] = array(
-						'url' => site_url($this->lang->switch_uri('en')),
-						'title' => "English",
-						'img' => "english.png"
-					);
-$langs['pt'] = array(
-						'url' => site_url($this->lang->switch_uri('pt')),
-						'title' => "Português",
-						'img' => "portuguese.png"
-					);
-$langs['fr'] = array(
-						'url' => site_url($this->lang->switch_uri('fr')),
-						'title' => "Français",
-						'img' => "french.png"
-					);
-$langs['ca'] = array(
-						'url' => site_url($this->lang->switch_uri('ca')),
-						'title' => "Catalan",
-						'img' => "catalan.png"
-					);
-$defaultLang = $this->lang->lang();
-?>
 	<div id="header">
 		<div class="bannerLeft"></div>
 		<div class="bannerRight"></div>
@@ -117,12 +89,13 @@ $defaultLang = $this->lang->lang();
 				<li>
 					<a href="javascript:;" title="<?php _e('Contacto');?>"><img border="0"  src="<?=base_url();?>img/mail.png" height="16px" alt="<?php _e('Contacto');?>"/></a>
 				</li>
+<?php $langs=supported_langs(); $defaultLang=default_lang();?>
 				<li>
 					<img src="<?=base_url();?>img/<?=$langs[$defaultLang]['img'];?>" border="0"  height="16px" alt="<?=$langs[$defaultLang]['title'];?>"/>
 					<ul>
 <?php foreach ($langs as $langKey => $lang):
 		if ($langKey != $defaultLang):?>
-						<li><a class="setlang" href="<?=$lang['url'];?>" title="<?=$lang['title'];?>"><img border="0"  src="<?=base_url();?>img/<?=$lang['img'];?>" height="16px" alt="<?=$lang['title'];?>"/></a></li>
+						<li><a class="setlang" href="<?=site_url($this->lang->switch_uri($langKey));?>" title="<?=$lang['title'];?>"><img border="0"  src="<?=base_url();?>img/<?=$lang['img'];?>" height="16px" alt="<?=$lang['title'];?>"/></a></li>
 <?php 	endif;
 	  endforeach;?>
 	  				</ul>
