@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-11 11:01-0600\n"
-"PO-Revision-Date: 2014-02-11 11:11-0600\n"
+"PO-Revision-Date: 2014-02-12 10:09-0600\n"
 "Last-Translator: Herz <herzmx@gmail.com>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/biblat/language/"
 "en/)\n"
@@ -230,7 +230,7 @@ msgstr "Wait a moment..."
 
 #: application/views/header.php:142
 msgid "La solicitud ha sido enviada"
-msgstr ""
+msgstr "Document request send"
 
 #: application/views/footer.php:7
 msgid ""
@@ -308,7 +308,7 @@ msgstr "Phone:"
 
 #: application/views/revista/mail_solicitud.php:6
 msgid "Instituto:"
-msgstr ""
+msgstr "Institute:"
 
 #: application/views/revista/mail_solicitud.php:7
 msgid "Ha solicitado el siguiente documento:"
@@ -316,7 +316,7 @@ msgstr ""
 
 #: application/views/revista/articulo.php:21
 msgid "Título del documento:"
-msgstr ""
+msgstr "Document title:"
 
 #: application/views/revista/articulo.php:27
 msgid "Revista:"
@@ -324,11 +324,11 @@ msgstr "Journal:"
 
 #: application/views/revista/articulo.php:32
 msgid "Base de datos:"
-msgstr ""
+msgstr "Database:"
 
 #: application/views/revista/articulo.php:36
 msgid "Número de sistema:"
-msgstr ""
+msgstr "System number:"
 
 #: application/views/revista/articulo.php:41
 msgid "ISSN:"
@@ -384,7 +384,7 @@ msgstr "Full text:"
 
 #: application/views/revista/articulo.php:118
 msgid "Solicitud del documento"
-msgstr ""
+msgstr "Document request"
 
 #: application/views/revista/articulo.php:125
 msgid "Nombre"
@@ -392,7 +392,7 @@ msgstr "Name"
 
 #: application/views/revista/articulo.php:126
 msgid "El nombre es requerido"
-msgstr ""
+msgstr "Name is required"
 
 #: application/views/revista/articulo.php:127
 msgid "Dirección de correo electrónico"
@@ -400,11 +400,11 @@ msgstr "Email address"
 
 #: application/views/revista/articulo.php:128
 msgid "El correo electrónico es requerido"
-msgstr ""
+msgstr "Email is required"
 
 #: application/views/revista/articulo.php:129
 msgid "Instituto"
-msgstr ""
+msgstr "Institute"
 
 #: application/views/revista/articulo.php:131
 msgid "Teléfono"
@@ -432,7 +432,7 @@ msgstr ""
 
 #: application/views/revista/mail_solicitud_usuario.php:1
 msgid "Estimado/Estimada"
-msgstr ""
+msgstr "<i>(%s documents published in the area of <b>%s</b>)</i>"
 
 #: application/views/revista/mail_solicitud_usuario.php:3
 msgid ""
@@ -477,7 +477,7 @@ msgstr ""
 
 #: application/views/revista/mail_solicitud_usuario.php:20
 msgid "Teléfonos:"
-msgstr ""
+msgstr "Phones"
 
 #: application/views/indice/pais.php:5
 #, php-format
@@ -1305,11 +1305,11 @@ msgstr "Country"
 
 #: application/controllers/indicadores.php:913
 msgid "title=\"Indicadores\""
-msgstr ""
+msgstr "title=\"Indicators\""
 
 #: application/controllers/indicadores.php:913
 msgid "title=\"Modelo de Bradford por revista\""
-msgstr ""
+msgstr "title=\"Bradford model per journal\""
 
 #: application/controllers/indicadores.php:914
 #: application/controllers/frecuencias.php:88
@@ -1587,7 +1587,7 @@ msgstr "Biblat - Credits"
 
 #: application/controllers/main.php:72
 msgid "Biblat - Bibliografía"
-msgstr ""
+msgstr "Biblat - Bibliography"
 
 #: application/controllers/main.php:81
 msgid "Biblat - Mapa del sitio"
@@ -1604,7 +1604,7 @@ msgstr ""
 
 #: application/controllers/main.php:106
 msgid "Traducir"
-msgstr ""
+msgstr "Translate"
 
 #: application/helpers/custom_helper.php:253
 msgid "Mostrar artículo en texto completo"
