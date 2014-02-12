@@ -236,7 +236,6 @@ class Revista extends CI_Controller{
 		$this->email->message($body);
 
 		$this->email->send();
-		unset($data['fichaDocumento']);
 		$this->email->clear();
 		$this->email->from('anoguez@dgb.unam.mx', 'Mtra. Araceli Noguez O.');
 		$this->email->to($_POST['email']);

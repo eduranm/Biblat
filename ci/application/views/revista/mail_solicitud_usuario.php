@@ -1,6 +1,9 @@
 <?php _e('Estimado/Estimada');?> <?php echo $from;?>:<br/><br/>
 
-<?php _e('Esperando te encuentres bien, te notifico que, para la recuperación de este artículo, tienes dos opciones:');?><br/><br>
+<?php _e('Esperando te encuentres bien, te notifico que, para la recuperación de este documento:');?><br/><br>
+<?php echo $fichaDocumento;?><br/><br/>
+
+<?php _e('Contamos con las siguientes opciones');?><br/>
 
 <ol>
 	<li><?php _e('Servicio de fotocopiado, con un costo de 0.30 MXN por cada fotocopia, y tendrías que acudir a nuestras instalaciones a recogerlo.');?></li>
