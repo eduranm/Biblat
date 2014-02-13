@@ -121,7 +121,7 @@
 					<td colspan="2">
 						<form id="formSolicitudDocumento" action="<?php echo site_url('revista/solicitud/documento');?>" method="POST" class="contacto">
 							<fieldset>
-								<b>Nota:</b> El envío del documento tiene costo.<br/><br/>
+								<b><?php _e('Nota:');?></b> <?php _e('El envío del documento tiene costo.');?><br/><br/>
 								<label><?php _e('Nombre');?></label><br/>
 								<input type="text" name="from" required data-msg-required="<?php _e('El nombre es requerido');?>"/><br/>
 								<label><?php _e('Dirección de correo electrónico');?></label><br/>
