@@ -2,14 +2,14 @@
 # Translators:
 # allorens <allorens@dgb.unam.mx>, 2013
 # Herz <herzmx@gmail.com>, 2013-2014
-# frreynae <frreynae@me.com>, 2013
+# frreynae <frreynae@me.com>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-11 11:01-0600\n"
-"PO-Revision-Date: 2014-02-12 10:09-0600\n"
-"Last-Translator: Herz <herzmx@gmail.com>\n"
+"PO-Revision-Date: 2014-02-12 19:19-0600\n"
+"Last-Translator: frreynae <frreynae@me.com>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/biblat/language/"
 "en/)\n"
 "MIME-Version: 1.0\n"
@@ -287,11 +287,11 @@ msgstr "Export to Excel"
 
 #: application/views/revista/mail_solicitud.php:1
 msgid "A quien corresponda:"
-msgstr ""
+msgstr "To whom it may concern:"
 
 #: application/views/revista/mail_solicitud.php:2
 msgid "El usuario con los siguientes datos:"
-msgstr ""
+msgstr "The user with the following information:"
 
 #: application/views/revista/mail_solicitud.php:3
 msgid "Nombre:"
@@ -312,7 +312,7 @@ msgstr "Institute:"
 
 #: application/views/revista/mail_solicitud.php:7
 msgid "Ha solicitado el siguiente documento:"
-msgstr ""
+msgstr "Have requested the following document:"
 
 #: application/views/revista/articulo.php:21
 msgid "Título del documento:"
@@ -418,6 +418,11 @@ msgid ""
 "Nabor Carrillo, zona de Institutos entre Física y Astronomía. Ciudad "
 "Universitaria UNAM."
 msgstr ""
+"Original documents can be consulted at the Departamento de Información y "
+"Servicios Documentales (Monday to Friday from 8 to 16 hrs), located in the "
+"Annex to the General Directorate of Libraries (DGB), circuito de la "
+"Investigación Científica across from the Auditorium Nabor Carrillo, located "
+"between the Institutes of  Physics and Astronomy. Ciudad Universitaria UNAM."
 
 #: application/views/revista/articulo.php:139
 msgid "Ver mapa"
@@ -429,6 +434,9 @@ msgid ""
 "Tels. (5255) 5622-3960, 5622-3964, e-mail: sinfo@dgb.unam.mx, Horario: Lunes "
 "a viernes (9 a 16 hrs.)"
 msgstr ""
+"For more information: Departamento de Información y Servicios Documentales, "
+"Tels. (5255) 5622-3960, 5622-3964. E-mail: sinfo@dgb.unam.mx . Monday to "
+"Friday  from 9 to 16 hrs."
 
 #: application/views/revista/mail_solicitud_usuario.php:1
 msgid "Estimado/Estimada"
@@ -438,13 +446,15 @@ msgstr "<i>(%s documents published in the area of <b>%s</b>)</i>"
 msgid ""
 "Esperando te encuentres bien, te notifico que, para la recuperación de este "
 "artículo, tienes dos opciones:"
-msgstr ""
+msgstr "Dear user, there are two options for the recovery of this document:"
 
 #: application/views/revista/mail_solicitud_usuario.php:6
 msgid ""
 "Servicio de fotocopiado, con un costo de 0.30 MXN por cada fotocopia, y "
 "tendrías que acudir a nuestras instalaciones a recogerlo."
 msgstr ""
+"Photocopying service: cost of 0.30 MXN per copy. You need to collect your "
+"order in our office."
 
 #: application/views/revista/mail_solicitud_usuario.php:7
 msgid ""
@@ -454,26 +464,32 @@ msgid ""
 "costo y nos envíes el comprobante de pago, recibirías el documento en el "
 "correo electrónico que nos indiques."
 msgstr ""
+"Digital Delivery. Cost: 50 USD per item and 5.00 USD or 5.00 EUR, for "
+"foreign orders. If you choose this option, you will receive a form to make "
+"the payment. Upon receipt of proof of payment, you will receive the document "
+"in your email."
 
 #: application/views/revista/mail_solicitud_usuario.php:10
 msgid ""
 "Espero tu respuesta a la brevedad posible para darle seguimiento a tu "
 "solicitud."
-msgstr ""
+msgstr "Please let us know if we can assist you further."
 
 #: application/views/revista/mail_solicitud_usuario.php:12
 msgid "Atentamente:"
-msgstr ""
+msgstr "Best regards:"
 
 #: application/views/revista/mail_solicitud_usuario.php:14
 msgid "Mtra. Araceli Noguez O."
-msgstr ""
+msgstr "Mtra. Araceli Noguez"
 
 #: application/views/revista/mail_solicitud_usuario.php:18
 msgid ""
 "Departamento de Información y Servicios Documentales- Subdirección de "
 "Servicios de Información Especializada-DGB-UNAM"
 msgstr ""
+"Departamento de Información y Servicios Documentales- Subdirección de "
+"Servicios de Información Especializada-DGB-UNAM"
 
 #: application/views/revista/mail_solicitud_usuario.php:20
 msgid "Teléfonos:"
@@ -558,7 +574,7 @@ msgstr "Credits"
 
 #: application/views/main/creditos.php:10
 msgid "Director General"
-msgstr ""
+msgstr "Director-General"
 
 #: application/views/main/creditos.php:13
 msgid "Subdirectora de Servicios de Información Especializada"
