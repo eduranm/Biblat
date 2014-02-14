@@ -1491,3 +1491,5 @@ GROUP BY slug HAVING count(*) > 1
 --SELECT drop_matview('"mvSubramayanPais"');
 --SELECT drop_matview('"mvPeriodosPaisSubramayan"');
 --SELECT drop_matview('"mvZakutinaPais"');
+
+--DROP VIEW "vIndiceCoautoriaPricePais" CASCADE;
