@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-13 09:45-0600\n"
-"PO-Revision-Date: 2014-02-13 09:48-0600\n"
+"POT-Creation-Date: 2014-02-14 11:06-0600\n"
+"PO-Revision-Date: 2014-02-14 11:07-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -416,6 +416,10 @@ msgstr "Ver mapa"
 #: application/views/revista/articulo.php:139
 msgid "Mayores informes: Departamento de Información y Servicios Documentales, Tels. (5255) 5622-3960, 5622-3964, e-mail: sinfo@dgb.unam.mx, Horario: Lunes a viernes (8 a 16 hrs.)"
 msgstr "Mayores informes: Departamento de Información y Servicios Documentales, Tels. (5255) 5622-3960, 5622-3964, e-mail: sinfo@dgb.unam.mx, Horario: Lunes a viernes (8 a 16 hrs.)"
+
+#: application/views/revista/articulo.php:140
+msgid "Enviar"
+msgstr "Enviar"
 
 #: application/views/revista/mail_solicitud_usuario.php:1
 msgid "Estimado/Estimada"

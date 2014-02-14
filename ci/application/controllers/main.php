@@ -27,7 +27,7 @@ class Main extends CI_Controller{
 		endforeach;
 		$query->free_result();
 		/*Obtención de totales*/
-		$query = "SELECT count(*) AS documentos FROM articulo";
+		$query = "SELECT count(*) AS documentos FROM \"mvSearch\"";
 		$query = $this->db->query($query);
 		$data['index']['totales'] = $query->row_array();
 		$query->free_result();
@@ -35,11 +35,11 @@ class Main extends CI_Controller{
 		$query = $this->db->query($query);
 		$data['index']['totales'] = array_merge($data['index']['totales'], $query->row_array());
 		$query->free_result();
-		$query = "SELECT count(*) AS enlaces FROM articulo WHERE e_856u IS NOT NULL";
+		$query = "SELECT count(*) AS enlaces FROM \"mvSearch\" WHERE url IS NOT NULL";
 		$query = $this->db->query($query);
 		$data['index']['totales'] = array_merge($data['index']['totales'], $query->row_array());
 		$query->free_result();
-		$query = "SELECT count(*) AS hevila FROM articulo WHERE e_856u LIKE '%hevila%'";
+		$query = "SELECT count(*) AS hevila FROM \"mvSearch\" WHERE url ~ '%hevila%'";
 		$query = $this->db->query($query);
 		$data['index']['totales'] = array_merge($data['index']['totales'], $query->row_array());
 		$query->free_result();
