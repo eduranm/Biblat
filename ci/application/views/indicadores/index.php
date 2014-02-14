@@ -25,7 +25,7 @@
 				</select>
 			</div>
 		</div>
-		<div class="colums" id="paisRevista" style="display:none;">
+		<div class="colums" id="paisRevistaDiv" style="display:none;">
 			<div class="orColumn" id="orPaisRevistaColumn"><?php _e('ó');?></div>
 			<div class="leftColumn">
 				<select name="revista[]" id="revista" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione una o varias revistas');?>">
@@ -33,7 +33,7 @@
 				</select>
 			</div>
 			<div class="rightColumn">
-				<select name="pais[]" id="pais" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione uno o varios países de la revista');?>">
+				<select name="paisRevista[]" id="paisRevista" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione uno o varios países de la revista');?>">
 					<option></option>
 				</select>
 			</div>
