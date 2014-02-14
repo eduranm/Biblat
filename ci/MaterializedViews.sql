@@ -1484,10 +1484,10 @@ GROUP BY slug HAVING count(*) > 1
 
 
 --Drops
---SELECT drop_matview('"mvIndiceCoautoriaPricePaisRevista"');
---SELECT drop_matview('"mvTasaCoautoriaPaisRevista"');
---SELECT drop_matview('"mvPeriodosPaisRevistaTasaLawani"');
---SELECT drop_matview('"mvLawaniPaisRevista"');
---SELECT drop_matview('"mvSubramayanPaisRevista"');
---SELECT drop_matview('"mvPeriodosPaisRevistaSubramayan"');
---SELECT drop_matview('"mvZakutinaPaisRevista"');
+--SELECT drop_matview('"mvIndiceCoautoriaPricePais"');
+--SELECT drop_matview('"mvTasaCoautoriaPais"');
+--SELECT drop_matview('"mvPeriodosPaisTasaLawani"');
+--SELECT drop_matview('"mvLawaniPais"');
+--SELECT drop_matview('"mvSubramayanPais"');
+--SELECT drop_matview('"mvPeriodosPaisSubramayan"');
+--SELECT drop_matview('"mvZakutinaPais"');
