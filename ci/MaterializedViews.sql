@@ -432,8 +432,8 @@ SELECT create_matview('"mvIndiceCoautoriaPriceRevista"', '"vIndiceCoautoriaPrice
 CREATE INDEX "indiceCoautoriaPriceRevista_resvistaSlug" ON "mvIndiceCoautoriaPriceRevista"("revistaSlug");
 CREATE INDEX "indiceCoautoriaPriceRevista_anio" ON "mvIndiceCoautoriaPriceRevista"(anio);
 
---Indice de coautoria por país
-CREATE OR REPLACE VIEW "vIndiceCoautoriaPricePais" AS
+--Indice de coautoria por país de la revista
+CREATE OR REPLACE VIEW "vIndiceCoautoriaPricePaisRevista" AS
 SELECT ar.id_disciplina, max(ar."paisRevista") AS "paisRevista", ar."paisRevistaSlug", ar.anio, 
     count(*) AS documentos, sum(au.autores) AS autores, 
     sum(au.autores) / count(*)::numeric AS coautoria, 
@@ -443,12 +443,12 @@ SELECT ar.id_disciplina, max(ar."paisRevista") AS "paisRevista", ar."paisRevista
   GROUP BY ar.id_disciplina, ar."paisRevistaSlug", ar.anio
   ORDER BY ar.id_disciplina, ar."paisRevistaSlug", ar.anio;
 
-SELECT create_matview('"mvIndiceCoautoriaPricePais"', '"vIndiceCoautoriaPricePais"');
-CREATE INDEX "indiceCoautoriaPricePais_paisRevistaSlug" ON "mvIndiceCoautoriaPricePais"("paisRevistaSlug");
-CREATE INDEX "indiceCoautoriaPricePais_anio" ON "mvIndiceCoautoriaPricePais"(anio);
-CREATE INDEX "indiceCoautoriaPricePais_idDisciplina" ON "mvIndiceCoautoriaPricePais"(id_disciplina);
+SELECT create_matview('"mvIndiceCoautoriaPricePaisRevista"', '"vIndiceCoautoriaPricePaisRevista"');
+CREATE INDEX "indiceCoautoriaPricePaisRevista_paisRevistaSlug" ON "mvIndiceCoautoriaPricePaisRevista"("paisRevistaSlug");
+CREATE INDEX "indiceCoautoriaPricePaisRevista_anio" ON "mvIndiceCoautoriaPricePaisRevista"(anio);
+CREATE INDEX "indiceCoautoriaPricePaisRevista_idDisciplina" ON "mvIndiceCoautoriaPricePaisRevista"(id_disciplina);
 
---Vista para revistans con años continuos mayores a 4
+--Vista para revistas con años continuos mayores a 4
 CREATE OR REPLACE VIEW "vPeriodosRevistaCoautoriaPriceZakutina" AS
 SELECT dr.revista,
        dr."revistaSlug",
@@ -466,14 +466,14 @@ WHERE anios_continuos > 4;
 SELECT create_matview('"mvPeriodosRevistaCoautoriaPriceZakutina"', '"vPeriodosRevistaCoautoriaPriceZakutina"');
 
 --Vista para paises con años continuos mayores a 4
-CREATE OR REPLACE VIEW "vPeriodosPaisCoautoriaPriceZakutina" AS
+CREATE OR REPLACE VIEW "vPeriodosPaisRevistaCoautoriaPriceZakutina" AS
 SELECT *
 FROM
   (SELECT id_disciplina,
     max("paisRevista") AS "paisRevista",
           "paisRevistaSlug",
           anios_continuos(array_agg(anio))
-   FROM "vIndiceCoautoriaPricePais"
+   FROM "vIndiceCoautoriaPricePaisRevista"
    GROUP BY id_disciplina,
       "paisRevistaSlug"
    ORDER BY id_disciplina,
@@ -481,7 +481,7 @@ FROM
 WHERE anios_continuos > 4;
 
 
-SELECT create_matview('"mvPeriodosPaisCoautoriaPriceZakutina"', '"vPeriodosPaisCoautoriaPriceZakutina"');
+SELECT create_matview('"mvPeriodosPaisRevistaCoautoriaPriceZakutina"', '"vPeriodosPaisRevistaCoautoriaPriceZakutina"');
 
 --Vista para tasa de coutoria por revista
 CREATE OR REPLACE VIEW "vTasaCoautoriaRevista" AS
@@ -506,8 +506,8 @@ SELECT create_matview('"mvTasaCoautoriaRevista"', '"vTasaCoautoriaRevista"');
 CREATE INDEX "tasaCoautoriaRevista_resvistaSlug" ON "mvTasaCoautoriaRevista"("revistaSlug");
 CREATE INDEX "tasaCoautoriaRevista_anio" ON "mvTasaCoautoriaRevista"(anio);
 
---Vista para tasa de coutoria por pais
-CREATE OR REPLACE VIEW "vTasaCoautoriaPais" AS
+--Vista para tasa de coutoria por pais de la revista
+CREATE OR REPLACE VIEW "vTasaCoautoriaPaisRevista" AS
 SELECT td.id_disciplina,
        td."paisRevista",
        td."paisRevistaSlug",
@@ -515,7 +515,7 @@ SELECT td.id_disciplina,
        td.documentos AS "totalDocumentos",
        tda.documentos AS "documentosMultiple",
        (tda.documentos::numeric/td.documentos::numeric) AS "tasaCoautoria"
-FROM "vIndiceCoautoriaPricePais" td --Total de documentos
+FROM "vIndiceCoautoriaPricePaisRevista" td --Total de documentos
 INNER JOIN
   (SELECT ar.id_disciplina,
     ar."paisRevistaSlug",
@@ -526,10 +526,10 @@ INNER JOIN
    GROUP BY ar.id_disciplina, "paisRevistaSlug", anio) AS tda --Total de documentos con mas de un autor
 ON td.id_disciplina=tda.id_disciplina AND td."paisRevistaSlug"=tda."paisRevistaSlug" AND td.anio=tda.anio;
 
-SELECT create_matview('"mvTasaCoautoriaPais"', '"vTasaCoautoriaPais"');
-CREATE INDEX "tasaCoautoriaPais_resvistaSlug" ON "mvTasaCoautoriaPais"("paisRevistaSlug");
-CREATE INDEX "tasaCoautoriaPais_anio" ON "mvTasaCoautoriaPais"(anio);
-CREATE INDEX "tasaCoautoriaPais_idDisciplina" ON "mvTasaCoautoriaPais"(id_disciplina);
+SELECT create_matview('"mvTasaCoautoriaPaisRevista"', '"vTasaCoautoriaPaisRevista"');
+CREATE INDEX "tasaCoautoriaPaisRevista_resvistaSlug" ON "mvTasaCoautoriaPaisRevista"("paisRevistaSlug");
+CREATE INDEX "tasaCoautoriaPaisRevista_anio" ON "mvTasaCoautoriaPaisRevista"(anio);
+CREATE INDEX "tasaCoautoriaPaisRevista_idDisciplina" ON "mvTasaCoautoriaPaisRevista"(id_disciplina);
 
 -- Vista para periodos en reivistas para los indicadores Tasa de coautoría e Indice Lawani
 CREATE OR REPLACE VIEW "vPeriodosRevistaTasaLawani" AS
@@ -549,14 +549,14 @@ WHERE anios_continuos > 4;
 SELECT create_matview('"mvPeriodosRevistaTasaLawani"', '"vPeriodosRevistaTasaLawani"');
 
 -- Vista para periodos en paises para los indicadores Tasa de coautoría e Indice Lawani
-CREATE OR REPLACE VIEW "vPeriodosPaisTasaLawani" AS
+CREATE OR REPLACE VIEW "vPeriodosPaisRevistaTasaLawani" AS
 SELECT *
 FROM
   (SELECT "paisRevista",
           "paisRevistaSlug",
           id_disciplina,
           anios_continuos(array_agg(anio))
-   FROM "vTasaCoautoriaPais"
+   FROM "vTasaCoautoriaPaisRevista"
    GROUP BY "paisRevistaSlug",
             "paisRevista",
             id_disciplina
@@ -565,7 +565,7 @@ FROM
 WHERE anios_continuos > 4;
 
 
-SELECT create_matview('"mvPeriodosPaisTasaLawani"', '"vPeriodosPaisTasaLawani"');
+SELECT create_matview('"mvPeriodosPaisRevistaTasaLawani"', '"vPeriodosPaisRevistaTasaLawani"');
 
 --Vista lawani por revista
 CREATE OR REPLACE VIEW "vLawaniRevista" AS
@@ -598,8 +598,8 @@ AND td.anio=sad.anio;
 
 SELECT create_matview('"mvLawaniRevista"', '"vLawaniRevista"');
 
---Vista lawani por país
-CREATE OR REPLACE VIEW "vLawaniPais" AS
+--Vista lawani por país de la revista
+CREATE OR REPLACE VIEW "vLawaniPaisRevista" AS
 SELECT td.id_disciplina,
        td."paisRevista",
        td."paisRevistaSlug",
@@ -607,7 +607,7 @@ SELECT td.id_disciplina,
        td.documentos AS "totalDocumentos",
        sad."autoresXdocumentos",
        sad."autoresXdocumentos"::numeric/td.documentos::numeric AS lawani
-FROM "vIndiceCoautoriaPricePais" td --Total de documentos
+FROM "vIndiceCoautoriaPricePaisRevista" td --Total de documentos
 INNER JOIN
   (SELECT id_disciplina, 
    "paisRevistaSlug",
@@ -632,7 +632,7 @@ GROUP BY id_disciplina,
 ON td.id_disciplina=sad.id_disciplina AND td."paisRevistaSlug"=sad."paisRevistaSlug"
 AND td.anio=sad.anio;
 
-SELECT create_matview('"mvLawaniPais"', '"vLawaniPais"');
+SELECT create_matview('"mvLawaniPaisRevista"', '"vLawaniPaisRevista"');
 
 -- Vista para inide subramayan por revista
 CREATE OR REPLACE VIEW "vSubramayanRevista" AS
@@ -662,8 +662,8 @@ ON am."revistaSlug"=au."revistaSlug" AND am.anio=au.anio;
 
 SELECT create_matview('"mvSubramayanRevista"', '"vSubramayanRevista"');
 
---Vista para indice subramayan por país
-CREATE OR REPLACE VIEW "vSubramayanPais" AS
+--Vista para indice subramayan por país de la revista
+CREATE OR REPLACE VIEW "vSubramayanPaisRevista" AS
 SELECT
   am.id_disciplina, 
   am."paisRevista",
@@ -691,7 +691,7 @@ INNER JOIN
    GROUP BY id_disciplina, "paisRevistaSlug", anio) au --Autores unicos
 ON am.id_disciplina=au.id_disciplina AND am."paisRevistaSlug"=au."paisRevistaSlug" AND am.anio=au.anio;
 
-SELECT create_matview('"mvSubramayanPais"', '"vSubramayanPais"');
+SELECT create_matview('"mvSubramayanPaisRevista"', '"vSubramayanPaisRevista"');
 
 -- Vista para periodos en reivistas para en indicador subramayab
 CREATE OR REPLACE VIEW "vPeriodosRevistaSubramayan" AS
@@ -711,23 +711,23 @@ WHERE anios_continuos > 4;
 SELECT create_matview('"mvPeriodosRevistaSubramayan"', '"vPeriodosRevistaSubramayan"');
 
 --Vista para periodos en paises para el indicador subramayan
-CREATE OR REPLACE VIEW "vPeriodosPaisSubramayan" AS
+CREATE OR REPLACE VIEW "vPeriodosPaisRevistaSubramayan" AS
 SELECT *
 FROM
-  (SELECT "paisAutor",
-          "paisAutorSlug",
+  (SELECT "paisRevista",
+          "paisRevistaSlug",
           id_disciplina,
           anios_continuos(array_agg(anio))
-   FROM "vSubramayanPais"
-   GROUP BY "paisAutorSlug",
-            "paisAutor",
+   FROM "vSubramayanPaisRevista"
+   GROUP BY "paisRevistaSlug",
+            "paisRevista",
             id_disciplina
-   ORDER BY "paisAutorSlug",
+   ORDER BY "paisRevistaSlug",
             id_disciplina) AS ac --Años continuos por revista
 WHERE anios_continuos > 4;
 
 
-SELECT create_matview('"mvPeriodosPaisSubramayan"', '"vPeriodosPaisSubramayan"');
+SELECT create_matview('"mvPeriodosPaisRevistaSubramayan"', '"vPeriodosPaisRevistaSubramayan"');
 
 -- Vista para inidice zakutina por revista
 
@@ -752,8 +752,8 @@ ON td."revistaSlug"=t."revistaSlug" AND td.anio=t.anio;
 
 SELECT create_matview('"mvZakutinaRevista"', '"vZakutinaRevista"');
 
---Vista para indice zakutina por país
-CREATE OR REPLACE VIEW "vZakutinaPais" AS
+--Vista para indice zakutina por país de la revista
+CREATE OR REPLACE VIEW "vZakutinaPaisRevista" AS
 SELECT td.id_disciplina,
        td."paisRevista",
        td."paisRevistaSlug",
@@ -761,7 +761,7 @@ SELECT td.id_disciplina,
        td.documentos AS "totalDocumentos",
        t.titulos,
        (td.documentos::numeric/t.titulos::numeric) AS zakutina
-FROM "vIndiceCoautoriaPricePais" td --Total de documentos
+FROM "vIndiceCoautoriaPricePaisRevista" td --Total de documentos
 INNER JOIN
   (SELECT id_disciplina,
     "paisRevistaSlug",
@@ -786,7 +786,7 @@ GROUP BY id_disciplina, "paisRevistaSlug",
 ON td.id_disciplina=t.id_disciplina AND td."paisRevistaSlug"=t."paisRevistaSlug"
 AND td.anio=t.anio;
 
-SELECT create_matview('"mvZakutinaPais"', '"vZakutinaPais"');
+SELECT create_matview('"mvZakutinaPaisRevista"', '"vZakutinaPaisRevista"');
 
 --Vista para indice Pratt
 CREATE OR REPLACE VIEW "vPratt" AS
@@ -1364,3 +1364,13 @@ FROM
   GROUP BY slug, e_100u
   ORDER BY slug, documentos DESC) tb
 GROUP BY slug HAVING count(*) > 1
+
+
+--Drops
+--SELECT drop_matview('"mvIndiceCoautoriaPricePaisRevista"');
+--SELECT drop_matview('"mvTasaCoautoriaPaisRevista"');
+--SELECT drop_matview('"mvPeriodosPaisRevistaTasaLawani"');
+--SELECT drop_matview('"mvLawaniPaisRevista"');
+--SELECT drop_matview('"mvSubramayanPaisRevista"');
+--SELECT drop_matview('"mvPeriodosPaisRevistaSubramayan"');
+--SELECT drop_matview('"mvZakutinaPaisRevista"');
