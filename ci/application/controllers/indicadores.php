@@ -185,13 +185,13 @@ class Indicadores extends CI_Controller {
 				$revistaOffset++;
 			endforeach;
 			$query .=") AND anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}'";
-		elseif (isset($_POST['pais'])):
+		elseif (isset($_POST['paisRevista'])):
 			$data['dataTable']['cols'][] = array('id' => '', 'label' => _('País/Año'), 'type' => 'string');
 			$selection = 'pais';
-			$query = "SELECT \"paisRevista\" AS title, anio, {$indicador[$_POST['indicador']]['campoTabla']}Pais\" WHERE \"paisRevistaSlug\" IN (";
+			$query = "SELECT \"paisRevista\" AS title, anio, {$indicador[$_POST['indicador']]['campoTabla']}PaisRevista\" WHERE \"paisRevistaSlug\" IN (";
 			$paisOffset=1;
-			$paisTotal= count($_POST['pais']);
-			foreach ($_POST['pais'] as $pais):
+			$paisTotal= count($_POST['paisRevista']);
+			foreach ($_POST['paisRevista'] as $pais):
 				$query .= "'{$pais}'";
 				if($paisOffset < $paisTotal):
 					$query .=",";
@@ -764,7 +764,7 @@ class Indicadores extends CI_Controller {
 				);
 			$data['revistas'][] = $revista;
 		endforeach;
-		$query = "SELECT \"paisRevista\", \"paisRevistaSlug\" FROM \"mvPeriodosPais{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
+		$query = "SELECT \"paisRevista\", \"paisRevistaSlug\" FROM \"mvPeriodosPaisRevista{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row ):
 			$revista = array(
@@ -814,11 +814,11 @@ class Indicadores extends CI_Controller {
 				$revistaOffset++;
 			endforeach;
 			$query .= ")";
-		elseif (isset($_POST['pais'])):
-			$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"{$indicadorTabla[$_POST['indicador']]}Pais\" WHERE \"paisRevistaSlug\" IN (";
+		elseif (isset($_POST['paisRevista'])):
+			$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"{$indicadorTabla[$_POST['indicador']]}PaisRevista\" WHERE \"paisRevistaSlug\" IN (";
 			$paisOffset=1;
-			$paisTotal= count($_POST['pais']);
-			foreach ($_POST['pais'] as $pais):
+			$paisTotal= count($_POST['paisRevista']);
+			foreach ($_POST['paisRevista'] as $pais):
 				$query .= "'{$pais}'";
 				if($paisOffset < $paisTotal):
 					$query .=",";
