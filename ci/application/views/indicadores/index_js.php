@@ -17,21 +17,21 @@ jQuery(document).ready(function(){
 
 	jQuery("#indicador").on("change", function(e){
 		value = jQuery(this).val();
-		jQuery("#paisRevista, #periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
+		jQuery("#paisRevistaDiv, #periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
 		jQuery("#disciplina").select2("val", "");
 		jQuery("#sliderPeriodo").prop('disabled', true);
 		if (value == "") {
-			jQuery("#disciplina, #revista, #pais").select2("enable", false);
-			jQuery("#revista, #pais").empty().append('<option></option>');
-			jQuery("#revista, #pais").select2("destroy");
+			jQuery("#disciplina, #revista, #paisRevista").select2("enable", false);
+			jQuery("#revista, #paisRevista").empty().append('<option></option>');
+			jQuery("#revista, #paisRevista").select2("destroy");
 		}else if(jQuery.inArray(value, soloDisciplina) > -1){
-			jQuery("#revista, #pais").select2("enable", false);
-			jQuery("#revista, #pais").empty().append('<option></option>');
-			jQuery("#revista, #pais").select2("destroy");
+			jQuery("#revista, #paisRevista").select2("enable", false);
+			jQuery("#revista, #paisRevista").empty().append('<option></option>');
+			jQuery("#revista, #paisRevista").select2("destroy");
 			jQuery("#disciplina").select2("enable", true);
 			updateInfo(value);
 		}else{
-			jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
+			jQuery("#revista, #paisRevista").select2({allowClear: true, closeOnSelect: true});
 			jQuery("#disciplina").select2("enable", true);
 			updateInfo(value);
 		}
@@ -58,11 +58,11 @@ jQuery(document).ready(function(){
 		indicadorValue = jQuery("#indicador").val();
 		jQuery("#sliderPeriodo").prop('disabled', true);
 		if (value == "") {
-			jQuery("#paisRevista, #periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
-			jQuery("#revista, #pais").empty().append('<option></option>');
-			jQuery("#revista, #pais").select2("destroy");
-			jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
-			jQuery("#revista, #pais").select2("enable", false);
+			jQuery("#paisRevistaDiv, #periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
+			jQuery("#revista, #paisRevista").empty().append('<option></option>');
+			jQuery("#revista, #paisRevista").select2("destroy");
+			jQuery("#revista, #paisRevista").select2({allowClear: true, closeOnSelect: true});
+			jQuery("#revista, #paisRevista").select2("enable", false);
 		} else if (jQuery.inArray(indicadorValue, soloDisciplina) > -1) {
 			jQuery("#generarIndicador").submit();
 		} else {
@@ -71,7 +71,7 @@ jQuery(document).ready(function(){
 			}
 			jQuery()
 			jQuery("#orPaisRevistaColumn").show();
-			jQuery("#paisRevista").show("slow");
+			jQuery("#paisRevistaDiv").show("slow");
 			jQuery("#periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
 			jQuery.ajax({
 				url: '<?=site_url("indicadores/getRevistasPaises");?>',
@@ -81,21 +81,21 @@ jQuery(document).ready(function(){
 				async: asyncAjax,
 				success: function(data) {
 					console.log(data);
-					jQuery("#revista, #pais").empty().append('<option></option>');
-					jQuery("#revista, #pais").select2("destroy");
-					jQuery("#revista, #pais").select2({allowClear: true, closeOnSelect: true});
-					jQuery("#revista, #pais").select2("enable", false);
+					jQuery("#revista, #paisRevista").empty().append('<option></option>');
+					jQuery("#revista, #paisRevista").select2("destroy");
+					jQuery("#revista, #paisRevista").select2({allowClear: true, closeOnSelect: true});
+					jQuery("#revista, #paisRevista").select2("enable", false);
 					jQuery.each(data.revistas, function(key, val) {
 						jQuery("#revista").append('<option value="' + val.val +'">' + val.text + '</option>');
 					});
 
 					jQuery.each(data.paises, function(key, val) {
-						jQuery("#pais").append('<option value="' + val.val +'">' + val.text + '</option>');
+						jQuery("#paisRevista").append('<option value="' + val.val +'">' + val.text + '</option>');
 					});
-					jQuery("#revista, #pais").select2("enable", true);
+					jQuery("#revista, #paisRevista").select2("enable", true);
 					if(indicadorValue === "indice-densidad-documentos"){
-						jQuery("#pais").select2("destroy");
-						jQuery("#pais, #orPaisRevistaColumn").hide();
+						jQuery("#paisRevista").select2("destroy");
+						jQuery("#paisRevista, #orPaisRevistaColumn").hide();
 					}
 					loading.end();
 				}
@@ -123,11 +123,11 @@ jQuery(document).ready(function(){
 		disciplinaValue = jQuery("#disciplina").val();
 		jQuery("#sliderPeriodo").prop("disabled", true);
 		if (value != "" && value != null) {
-			jQuery("#pais").select2("enable", false);
+			jQuery("#paisRevista").select2("enable", false);
 			setPeridos();
 		}else{
 			jQuery("#periodos, #tabs, #chartContainer").hide("slow");
-			jQuery("#pais").select2("enable", true);
+			jQuery("#paisRevista").select2("enable", true);
 		}
 
 		if(typeof history.pushState === "function" && !popState.revista){
@@ -141,12 +141,12 @@ jQuery(document).ready(function(){
 		console.log(e);
 	});
 
-	jQuery("#pais").select2({
+	jQuery("#paisRevista").select2({
 		allowClear: true,
 		closeOnSelect: true
 	});
 
-	jQuery("#pais").on("change", function(e){
+	jQuery("#paisRevista").on("change", function(e){
 		value = jQuery(this).val();
 		indicadorValue = jQuery("#indicador").val();
 		disciplinaValue = jQuery("#disciplina").val();
@@ -424,7 +424,7 @@ setPeridos = function(){
 							if(typeof history.pushState === "function"){
 								history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista + '/' + rango);
 							}
-							jQuery("#revista, #pais").select2("close");
+							jQuery("#revista, #paisRevista").select2("close");
 							jQuery("#generarIndicador").submit();
 						}
 					}
@@ -478,7 +478,7 @@ updateData = function(data){
 		jQuery('#revista option').first().prop('selected', false);
 		jQuery("#revista").select2("destroy");
 		jQuery("#revista").select2({allowClear: true, closeOnSelect: true});
-		jQuery("#pais").select2("enable", true);
+		jQuery("#paisRevista").select2("enable", true);
 	}
 	
 	if(data.revista !== "" && typeof data.revista !== "undefined" && data.revista.join('/') != actualForm.revista.join('/')){
@@ -493,15 +493,15 @@ updateData = function(data){
 
 	if(data.pais === "" || typeof data.pais === "undefined" && typeof data.revista === "undefined" && data.indicador != "indice-densidad-documentos"){
 		jQuery("#periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
-		jQuery("#pais").select2("val", null);
-		jQuery('#pais option').first().prop('selected', false);
-		jQuery("#pais").select2("destroy");
-		jQuery("#pais").select2({allowClear: true, closeOnSelect: true});
+		jQuery("#paisRevista").select2("val", null);
+		jQuery('#paisRevista option').first().prop('selected', false);
+		jQuery("#paisRevista").select2("destroy");
+		jQuery("#paisRevista").select2({allowClear: true, closeOnSelect: true});
 		jQuery("#revista").select2("enable", true);
 	}
 	if(data.pais !== "" &&  typeof data.pais !== "undefined" && data.pais.join('/') != actualForm.pais.join('/')){
 		popState.pais=true;
-		jQuery("#pais").val(data.pais).trigger("change");
+		jQuery("#paisRevista").val(data.pais).trigger("change");
 		actualForm = jQuery("#generarIndicador").serializeJSON();
 	}
 	if(typeof data.periodo !== "undefined"){
