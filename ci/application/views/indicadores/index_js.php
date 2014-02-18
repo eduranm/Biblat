@@ -10,6 +10,7 @@ var dataPeriodo="0-0";
 var paisRevista="";
 var asyncAjax=false;
 var soloDisciplina = ['indice-concentracion', 'modelo-bradford-revista', 'modelo-bradford-institucion', 'productividad-exogena'];
+var soloPaisAutor = ['indice-coautoria', 'tasa-documentos-coautorados', 'indice-colaboracion'];
 jQuery(document).ready(function(){
 	jQuery("#indicador").select2({
 		allowClear: true
@@ -21,17 +22,17 @@ jQuery(document).ready(function(){
 		jQuery("#disciplina").select2("val", "");
 		jQuery("#sliderPeriodo").prop('disabled', true);
 		if (value == "") {
-			jQuery("#disciplina, #revista, #paisRevista").select2("enable", false);
-			jQuery("#revista, #paisRevista").empty().append('<option></option>');
-			jQuery("#revista, #paisRevista").select2("destroy");
+			jQuery("#disciplina, #revista, #paisRevista, #paisAutor").select2("enable", false);
+			jQuery("#revista, #paisRevista, #paisAutor").empty().append('<option></option>');
+			jQuery("#revista, #paisRevista, #paisAutor").select2("destroy");
 		}else if(jQuery.inArray(value, soloDisciplina) > -1){
-			jQuery("#revista, #paisRevista").select2("enable", false);
-			jQuery("#revista, #paisRevista").empty().append('<option></option>');
-			jQuery("#revista, #paisRevista").select2("destroy");
+			jQuery("#revista, #paisRevista, #paisAutor").select2("enable", false);
+			jQuery("#revista, #paisRevista, #paisAutor").empty().append('<option></option>');
+			jQuery("#revista, #paisRevista, #paisAutor").select2("destroy");
 			jQuery("#disciplina").select2("enable", true);
 			updateInfo(value);
 		}else{
-			jQuery("#revista, #paisRevista").select2({allowClear: true, closeOnSelect: true});
+			jQuery("#revista, #paisRevista, #paisAutor").select2({allowClear: true, closeOnSelect: true});
 			jQuery("#disciplina").select2("enable", true);
 			updateInfo(value);
 		}
@@ -59,17 +60,16 @@ jQuery(document).ready(function(){
 		jQuery("#sliderPeriodo").prop('disabled', true);
 		if (value == "") {
 			jQuery("#paisRevistaDiv, #periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
-			jQuery("#revista, #paisRevista").empty().append('<option></option>');
-			jQuery("#revista, #paisRevista").select2("destroy");
-			jQuery("#revista, #paisRevista").select2({allowClear: true, closeOnSelect: true});
-			jQuery("#revista, #paisRevista").select2("enable", false);
+			jQuery("#revista, #paisRevista, #paisAutor").empty().append('<option></option>');
+			jQuery("#revista, #paisRevista, #paisAutor").select2("destroy");
+			jQuery("#revista, #paisRevista, #paisAutor").select2({allowClear: true, closeOnSelect: true});
+			jQuery("#revista, #paisRevista, #paisAutor").select2("enable", false);
 		} else if (jQuery.inArray(indicadorValue, soloDisciplina) > -1) {
 			jQuery("#generarIndicador").submit();
 		} else {
 			if(!loading.status){
 				loading.start();
 			}
-			jQuery()
 			jQuery("#orPaisRevistaColumn").show();
 			jQuery("#paisRevistaDiv").show("slow");
 			jQuery("#periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
@@ -81,21 +81,50 @@ jQuery(document).ready(function(){
 				async: asyncAjax,
 				success: function(data) {
 					console.log(data);
-					jQuery("#revista, #paisRevista").empty().append('<option></option>');
-					jQuery("#revista, #paisRevista").select2("destroy");
-					jQuery("#revista, #paisRevista").select2({allowClear: true, closeOnSelect: true});
-					jQuery("#revista, #paisRevista").select2("enable", false);
-					jQuery.each(data.revistas, function(key, val) {
-						jQuery("#revista").append('<option value="' + val.val +'">' + val.text + '</option>');
-					});
-
-					jQuery.each(data.paises, function(key, val) {
-						jQuery("#paisRevista").append('<option value="' + val.val +'">' + val.text + '</option>');
-					});
-					jQuery("#revista, #paisRevista").select2("enable", true);
-					if(indicadorValue === "indice-densidad-documentos"){
-						jQuery("#paisRevista").select2("destroy");
-						jQuery("#paisRevista, #orPaisRevistaColumn").hide();
+					controlsTotal = 0;
+					jQuery("#revista, #paisRevista, #paisAutor").empty().append('<option></option>');
+					jQuery("#revista").select2("destroy");
+					jQuery("#paisRevista").select2("destroy");
+					jQuery("#paisAutor").select2("destroy");
+					jQuery("#revista, #paisRevista, #paisAutor").hide();
+					if(typeof data.revistas !== "undefined"){
+						jQuery("#revista").select2({allowClear: true, closeOnSelect: true});
+						jQuery("#revista").select2("enable", false);
+						jQuery.each(data.revistas, function(key, val) {
+							jQuery("#revista").append('<option value="' + val.val +'">' + val.text + '</option>');
+						});
+						controlsTotal++;
+						jQuery("#revista").select2("enable", true);
+					}
+					if(typeof data.paisesRevistas !== "undefined" && indicadorValue != "indice-densidad-documentos"){
+						jQuery("#paisRevista").select2({allowClear: true, closeOnSelect: true});
+						jQuery("#paisRevista").select2("enable", false);
+						jQuery.each(data.paisesRevistas, function(key, val) {
+							jQuery("#paisRevista").append('<option value="' + val.val +'">' + val.text + '</option>');
+						});
+						controlsTotal++;
+						jQuery("#paisRevista").select2("enable", true);
+					}
+					if(typeof data.paisesAutores !== "undefined" && jQuery.inArray(indicadorValue, soloPaisAutor > -1)){
+						jQuery("#paisAutor").select2({allowClear: true, closeOnSelect: true});
+						jQuery("#paisAutor").select2("enable", false);
+						jQuery.each(data.paisesAutores, function(key, val) {
+							jQuery("#paisAutor").append('<option value="' + val.val +'">' + val.text + '</option>');
+						});
+						controlsTotal++;
+						jQuery("#paisAutor").select2("enable", true);
+					}
+					if(controlsTotal < 2){
+						jQuery("#orPaisRevistaColumn").hide();
+					}
+					if(controlsTotal == 0){
+						jQuery.pnotify({
+							title: '<?php _e('No se encontraron datos para la disciplina seleccionada');?>',
+							icon: true,
+							type: 'error',
+							addclass: 'errorNotification',
+							sticker: false
+						});
 					}
 					loading.end();
 				}
@@ -124,10 +153,12 @@ jQuery(document).ready(function(){
 		jQuery("#sliderPeriodo").prop("disabled", true);
 		if (value != "" && value != null) {
 			jQuery("#paisRevista").select2("enable", false);
+			jQuery("#paisAutor").select2("enable", false);
 			setPeridos();
 		}else{
 			jQuery("#periodos, #tabs, #chartContainer").hide("slow");
 			jQuery("#paisRevista").select2("enable", true);
+			jQuery("#paisAutor").select2("enable", true);
 		}
 
 		if(typeof history.pushState === "function" && !popState.revista){
@@ -153,10 +184,12 @@ jQuery(document).ready(function(){
 		jQuery("#sliderPeriodo").prop("disabled", true);
 		if (value != "" && value != null) {
 			jQuery("#revista").select2("enable", false);
+			jQuery("#paisAutor").select2("enable", false);
 			setPeridos();
 		}else{
 			jQuery("#periodos, #tabs, #chartContainer").hide("slow");
 			jQuery("#revista").select2("enable", true);
+			jQuery("#paisAutor").select2("enable", true);
 		}
 		if(typeof history.pushState === "function" && !popState.pais){
 			paisRevista="";
@@ -169,6 +202,27 @@ jQuery(document).ready(function(){
 		console.log(e);
 	});
 	
+	jQuery("#paisAutor").select2({
+		allowClear: true,
+		closeOnSelect: true
+	});
+
+	jQuery("#paisAutor").on("change", function(e){
+		value = jQuery(this).val();
+		indicadorValue = jQuery("#indicador").val();
+		disciplinaValue = jQuery("#disciplina").val();
+		jQuery("#sliderPeriodo").prop("disabled", true);
+		if (value != "" && value != null) {
+			jQuery("#revista").select2("enable", false);
+			jQuery("#paisRevista").select2("enable", false);
+			setPeridos();
+		}else{
+			jQuery("#periodos, #tabs, #chartContainer").hide("slow");
+			jQuery("#revista").select2("enable", true);
+			jQuery("#paisRevista").select2("enable", true);
+		}
+	});
+
 	jQuery("#sliderPeriodo").jslider();
 
 	jQuery("#prattSlide").anythingSlider({
@@ -447,7 +501,7 @@ updateInfo = function(indicador){
 	jQuery("#info").children(".infoBox").hide();
 	jQuery("#info-" + indicador).show();
 }
-
+/*TODO: Revisar actualizacion del popstate*/
 updateData = function(data){
 	console.log(data);
 	asyncAjax=false;
