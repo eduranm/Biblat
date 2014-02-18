@@ -97,65 +97,71 @@ class Indicadores extends CI_Controller {
 			'campoTabla' => "coautoria AS valor FROM \"mvIndiceCoautoriaPrice",
 			'title' => array(
 					'revista' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Media de autores por artículo en la revista').'</div>',
-					'pais' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Media de autores por articulo en las revistas del país').'</div>',
+					'paisRevista' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Media de autores por articulo en las revistas del país').'</div>',
+					'paisAutor' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Media de autores por articulo en el país').'</div>'
 				),
 			'vTitle' => _('Índice de Coautoría'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
 					'revista' => _('Promedio de autores por artículo en el año %s: %s'),
-					'pais' => _('Promedio de autores por artículo en las revistas del país en el año %s: %s')
+					'paisRevista' => _('Promedio de autores por artículo en las revistas del país en el año %s: %s'),
+					'paisAutor' => _('Promedio de autores por artículo en el país en el año %s: %s'),
 				)
 			);
 		$indicador['tasa-documentos-coautorados'] = array(
 			'campoTabla' => "\"tasaCoautoria\" AS valor FROM \"mvTasaCoautoria",
 			'title' => array(
 					'revista' => '<div class="centrado"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple por revista').'</div>',
-					'pais' => '<div class="centrado"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple en las revistas del país').'</div>',
+					'paisRevista' => '<div class="centrado"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple en las revistas del país').'</div>',
+					'paisAutor' => '<div class="centrado"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple en el país').'</div>',
 				),
 			'vTitle' => _('Tasa de documentos'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
 					'revista' => _('Promedio de artículos en coautoría en el año %s: %s'),
-					'pais' => _('Promedio de artículos en coautoría en las revistas del país en el año %s: %s')
+					'paisRevista' => _('Promedio de artículos en coautoría en las revistas del país en el año %s: %s'),
+					'paisAutor' => _('Promedio de artículos en coautoría en el país en el año %s: %s'),
 				)
 			);
 		$indicador['grado-colaboracion'] = array(
 			'campoTabla' => "subramayan AS valor FROM \"mvSubramayan",
 			'title' => array(
 					'revista' => '<div class="centrado"><b>'._('Grado de Colaboración (Índice de Subramayan)').'</b><br/>'._('Proporción de artículos con autoría múltiple').'</div>',
-					'pais' => '<div class="centrado"><b>'._('Grado de Colaboración (Índice de Subramayan)').'</b><br/>'._('Proporción de artículos con autoría múltiple en las revistas del país').'</div>',
+					'paisRevista' => '<div class="centrado"><b>'._('Grado de Colaboración (Índice de Subramayan)').'</b><br/>'._('Proporción de artículos con autoría múltiple en las revistas del país').'</div>',
 				),
 			'vTitle' => _('Grado de Colaboración'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
 					'revista' => _('Promedio de artículos con autoría múltiple en el año %s: %s'),
-					'pais' => _('Promedio de artículos con autoría múltiple en las revistas del país en el año %s: %s')
+					'paisRevista' => _('Promedio de artículos con autoría múltiple en las revistas del país en el año %s: %s')
 				)
 			);
 		$indicador['modelo-elitismo'] = array(
 			'campoTabla' => "price AS valor FROM \"mvIndiceCoautoriaPrice",
 			'title' => array(
 					'revista' => '<div class="centrado"><b>'._('Modelo de Elitismo (Price)').'</b><br/>'._('Grupo de autores más productivos por revista').'</div>',
-					'pais' => '<div class="centrado"><b>Modelo de Elitismo (Price)</b><br/>Grupo de autores más productivos por revista</div>',
+					'paisRevista' => '<div class="centrado"><b>Modelo de Elitismo (Price)</b><br/>Grupo de autores más productivos por revista</div>',
 				),
 			'vTitle' => _('Cantidad de autores'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
 					'revista' => _('Cantidad de autores que conforman la elite en el año %s: %s'),
-					'pais' => _('Cantidad de autores que conforman la elite en el año %s: %s')
+					'paisRevista' => _('Cantidad de autores que conforman la elite en el año %s: %s')
 				)
 			);
 		$indicador['indice-colaboracion'] = array(
 			'campoTabla' => "lawani AS valor FROM \"mvLawani",
 			'title' => array(
 					'revista' => '<div class="centrado"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio de autores por artículo.').'</div>',
-					'pais' => '<div class="centrado"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio del número de autores por artículo en las revistas del país').'</div>',
+					'paisRevista' => '<div class="centrado"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio del número de autores por artículo en las revistas del país').'</div>',
+					'paisAutor' => '<div class="centrado"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio del número de autores por artículo en el país').'</div>'
 				),
 			'vTitle' => _('Índice de Colaboración'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
 					'revista' => _('Promedio de coautores por artículo en el año %s: %s'),
-					'pais' => _('Promedio de coautores por articulo en las revistas del país en el año %s: %s')
+					'paisRevista' => _('Promedio de coautores por articulo en las revistas del país en el año %s: %s'),
+					'paisAutor' => _('Promedio de coautores por articulo en el país en el año %s: %s')
 				)
 			);
 		$indicador['indice-densidad-documentos'] = array(
@@ -187,11 +193,25 @@ class Indicadores extends CI_Controller {
 			$query .=") AND anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}'";
 		elseif (isset($_POST['paisRevista'])):
 			$data['dataTable']['cols'][] = array('id' => '', 'label' => _('País/Año'), 'type' => 'string');
-			$selection = 'pais';
+			$selection = 'paisRevista';
 			$query = "SELECT \"paisRevista\" AS title, anio, {$indicador[$_POST['indicador']]['campoTabla']}PaisRevista\" WHERE \"paisRevistaSlug\" IN (";
 			$paisOffset=1;
 			$paisTotal= count($_POST['paisRevista']);
 			foreach ($_POST['paisRevista'] as $pais):
+				$query .= "'{$pais}'";
+				if($paisOffset < $paisTotal):
+					$query .=",";
+				endif;
+				$paisOffset++;
+			endforeach;
+			$query .=") AND anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}' AND id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
+		elseif (isset($_POST['paisAutor'])):
+			$data['dataTable']['cols'][] = array('id' => '', 'label' => _('País/Año'), 'type' => 'string');
+			$selection = 'paisAutor';
+			$query = "SELECT \"paisAutor\" AS title, anio, {$indicador[$_POST['indicador']]['campoTabla']}PaisAutor\" WHERE \"paisAutorSlug\" IN (";
+			$paisOffset=1;
+			$paisTotal= count($_POST['paisAutor']);
+			foreach ($_POST['paisAutor'] as $pais):
 				$query .= "'{$pais}'";
 				if($paisOffset < $paisTotal):
 					$query .=",";
@@ -771,8 +791,19 @@ class Indicadores extends CI_Controller {
 					'val' => $row['paisRevistaSlug'],
 					'text' => htmlspecialchars($row['paisRevista'])
 				);
-			$data['paises'][] = $revista;
+			$data['paisesRevistas'][] = $revista;
 		endforeach;
+
+		$query = "SELECT \"paisAutor\", \"paisAutorSlug\" FROM \"mvPeriodosPaisAutor{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
+		$query = $this->db->query($query);
+		foreach ($query->result_array() as $row ):
+			$revista = array(
+					'val' => $row['paisAutorSlug'],
+					'text' => htmlspecialchars($row['paisAutor'])
+				);
+			$data['paisesAutores'][] = $revista;
+		endforeach;
+
 		$this->db->close();
 		header('Content-Type: application/json');
 		echo json_encode($data, true);
@@ -819,6 +850,18 @@ class Indicadores extends CI_Controller {
 			$paisOffset=1;
 			$paisTotal= count($_POST['paisRevista']);
 			foreach ($_POST['paisRevista'] as $pais):
+				$query .= "'{$pais}'";
+				if($paisOffset < $paisTotal):
+					$query .=",";
+				endif;
+				$paisOffset++;
+			endforeach;
+			$query .= ") AND id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
+		elseif (isset($_POST['paisAutor'])):
+			$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"{$indicadorTabla[$_POST['indicador']]}PaisAutor\" WHERE \"paisAutorSlug\" IN (";
+			$paisOffset=1;
+			$paisTotal= count($_POST['paisAutor']);
+			foreach ($_POST['paisAutor'] as $pais):
 				$query .= "'{$pais}'";
 				if($paisOffset < $paisTotal):
 					$query .=",";
