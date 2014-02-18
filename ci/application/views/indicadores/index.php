@@ -37,6 +37,11 @@
 					<option></option>
 				</select>
 			</div>
+			<div class="rightColumn">
+				<select name="paisAutor[]" id="paisAutor" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione uno o varios países del autor');?>">
+					<option></option>
+				</select>
+			</div>
 		</div>
 		<div id="periodos" class="sliderPeriodo" style="display:none;">
 			<input id="sliderPeriodo" type="slider" name="periodo" value="0;0" disabled/>
