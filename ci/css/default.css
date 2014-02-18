@@ -1150,3 +1150,7 @@ form.contacto input[type=submit]{
 	top:1px;
 }
 /* This button was generated using CSSButtonGenerator.com */
+
+.errorNotification  {
+	background-color: #FFF;
+}
