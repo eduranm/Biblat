@@ -1151,6 +1151,6 @@ form.contacto input[type=submit]{
 }
 /* This button was generated using CSSButtonGenerator.com */
 
-.errorNotification  {
+.errorNotification,  .ui-pnotify-container{
 	background-color: #FFF;
 }

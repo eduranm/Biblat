@@ -114,6 +114,22 @@ END
 $$
 LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION truncate_matviews()
+  RETURNS void AS $$
+DECLARE 
+  matview RECORD;
+  sql text;
+BEGIN
+  FOR matview IN SELECT mv_name FROM matviews LOOP
+    sql :='TRUNCATE '||matview.mv_name;
+    RAISE NOTICE 'EXECUTE: %', sql;
+    EXECUTE sql;
+  END LOOP;
+RETURN;
+END
+$$
+LANGUAGE plpgsql;
+
 
 --Vista para busquedas
 CREATE OR REPLACE VIEW "vSearch" AS SELECT 
@@ -1491,5 +1507,7 @@ GROUP BY slug HAVING count(*) > 1
 --SELECT drop_matview('"mvSubramayanPais"');
 --SELECT drop_matview('"mvPeriodosPaisSubramayan"');
 --SELECT drop_matview('"mvZakutinaPais"');
+--SELECT drop_matview('"mvPeriodosPaisCoautoriaPriceZakutina"');
 
 --DROP VIEW "vIndiceCoautoriaPricePais" CASCADE;
+--DROP VIEW "vSubramayanPais" CASCADE;

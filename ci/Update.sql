@@ -44,7 +44,7 @@ COPY articulo(
 	e_698,
 	e_856u) FROM '/home/herz/Sites/biblat/periodica/articulo.txt' (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8')
 
-
+TRUNCATE TABLE artidisciplina;
 COPY artidisciplina 
 FROM '/home/herz/Sites/biblat/clase/artitema.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
@@ -54,6 +54,7 @@ FROM '/home/herz/Sites/biblat/periodica/artitema.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
 
 --sed -E -e '/"[01]";"[0-9]+?";"[0-9]+?";("[^0-9]"|NULL)/d' clase/autor.txt > autor.txt
+TRUNCATE TABLE autor;
 COPY autor(iddatabase,sistema,sec_autor,sec_institucion,st_institucion,etiqueta,e_100a,e_1006) 
 FROM '/home/herz/Sites/biblat/clase/autor.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
@@ -64,6 +65,7 @@ FROM '/home/herz/Sites/biblat/periodica/autor.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
 
 --sed -E -e '/"[01]";"[0-9]+?";"[0-9]+?";("[^0-9]"|NULL)/d' clase/institucion.txt > institucion.txt
+TRUNCATE TABLE institucion;
 COPY institucion(iddatabase,sistema,sec_autor,sec_institucion,e_100u,e_100v,e_100w,e_100x,etiqueta) 
 FROM '/home/herz/Sites/biblat/clase/institucion.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
@@ -73,7 +75,7 @@ COPY institucion(iddatabase,sistema,sec_autor,sec_institucion,e_100u,e_100v,e_10
 FROM '/home/herz/Sites/biblat/periodica/institucion.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
 
-
+TRUNCATE TABLE palabraclave;
 COPY palabraclave 
 FROM '/home/herz/Sites/biblat/clase/palabraclave.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
@@ -84,9 +86,12 @@ FROM '/home/herz/Sites/biblat/periodica/palabraclave.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
 
 --sed -E -e '/;NULL$/d' periodica/keyword.txt > keyword.txt
+TRUNCATE TABLE keyword;
 COPY keyword 
 FROM '/home/herz/Sites/biblat/periodica/keyword.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
+
+--Actualizacion de datos
 
 
 TRUNCATE TABLE aleph_tags;
