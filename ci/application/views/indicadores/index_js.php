@@ -4,10 +4,10 @@ var chart = {normal: null, bradford:null, group1:null, group2:null, pratt:null, 
 chart.data = {normal: null, bradford:null, group1:null, group2:null, pratt:null, prattJ:null};
 var tables = {normal: null, bradford:null, group1:null, group2:null, group3:null, pratt:null};
 var brfLim = null;
-var popState = {indicador:false, disciplina:false, revista:false, pais:false, periodo:false};
+var popState = {indicador:false, disciplina:false, revista:false, paisRevista:false, paisAutor:false, periodo:false};
 var rangoPeriodo="0-0";
 var dataPeriodo="0-0";
-var paisRevista="";
+var paisRevistaURL="";
 var asyncAjax=false;
 var soloDisciplina = ['indice-concentracion', 'modelo-bradford-revista', 'modelo-bradford-institucion', 'productividad-exogena'];
 var soloPaisAutor = ['indice-coautoria', 'tasa-documentos-coautorados', 'indice-colaboracion'];
@@ -105,7 +105,7 @@ jQuery(document).ready(function(){
 						controlsTotal++;
 						jQuery("#paisRevista").select2("enable", true);
 					}
-					if(typeof data.paisesAutores !== "undefined" && jQuery.inArray(indicadorValue, soloPaisAutor > -1)){
+					if(typeof data.paisesAutores !== "undefined" && jQuery.inArray(indicadorValue, soloPaisAutor) > -1){
 						jQuery("#paisAutor").select2({allowClear: true, closeOnSelect: true});
 						jQuery("#paisAutor").select2("enable", false);
 						jQuery.each(data.paisesAutores, function(key, val) {
@@ -162,11 +162,11 @@ jQuery(document).ready(function(){
 		}
 
 		if(typeof history.pushState === "function" && !popState.revista){
-			paisRevista="";
+			paisRevistaURL="";
 			if(value != "" && value != null){
-				paisRevista='/revista/' + value.join('/');
+				paisRevistaURL='/revista/' + value.join('/');
 			}
-			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista);
+			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevistaURL);
 		}
 		popState.revista=false;
 		console.log(e);
@@ -191,14 +191,16 @@ jQuery(document).ready(function(){
 			jQuery("#revista").select2("enable", true);
 			jQuery("#paisAutor").select2("enable", true);
 		}
-		if(typeof history.pushState === "function" && !popState.pais){
-			paisRevista="";
+		if(typeof history.pushState === "function" && !popState.paisRevista){
+			paisRevistaURL="";
 			if(value != "" && value != null){
-				paisRevista='/pais/' + value.join('/');
+				paisRevistaURL='/pais-revista/' + value.join('/');
 			}
-			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista);
+			console.log('pushState');
+			console.log(paisRevistaURL);
+			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevistaURL);
 		}
-		popState.pais=false;
+		popState.paisRevista=false;
 		console.log(e);
 	});
 	
@@ -221,6 +223,15 @@ jQuery(document).ready(function(){
 			jQuery("#revista").select2("enable", true);
 			jQuery("#paisRevista").select2("enable", true);
 		}
+		if(typeof history.pushState === "function" && !popState.paisAutor){
+			paisRevistaURL="";
+			if(value != "" && value != null){
+				paisRevistaURL='/pais-autor/' + value.join('/');
+			}
+			history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevistaURL);
+		}
+		popState.paisAutor=false;
+		console.log(e);
 	});
 
 	jQuery("#sliderPeriodo").jslider();
@@ -418,18 +429,21 @@ jQuery(document).ready(function(){
 <?php 	if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
 		revista:"<?=preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
-<?php 	if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-		pais:"<?=preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
+<?php 	if (preg_match('%.*?/pais-revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
+		paisRevista:"<?=preg_replace('%.*?/pais-revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
+<?php 	endif;?>
+<?php 	if (preg_match('%.*?/pais-autor/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
+		paisAutor:"<?=preg_replace('%.*?/pais-autor/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%', uri_string())):?>
 		periodo:"<?=preg_replace('%.*?/([0-9]{4})-([0-9]{4})%', '\1;\2', uri_string());?>"
 <?php 	endif;?>
 	}
 <?php 	if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-	paisRevista="/revista/<?=preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
+	paisRevistaURL="/revista/<?=preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-	paisRevista="/pais/<?=preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
+	paisRevistaURL="/pais/<?=preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
 <?php 	endif;?>
 	if(typeof urlData.indicador !== "undefined"){
 		updateData(urlData);
@@ -476,7 +490,7 @@ setPeridos = function(){
 							jQuery("#sliderPeriodo").data('pre', value);
 							rango=value.replace(';', '-');
 							if(typeof history.pushState === "function"){
-								history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevista + '/' + rango);
+								history.pushState(jQuery("#generarIndicador").serializeJSON(), null, '<?=site_url('indicadores')."/"?>' + indicadorValue + '/disciplina/' + disciplinaValue + paisRevistaURL + '/' + rango);
 							}
 							jQuery("#revista, #paisRevista").select2("close");
 							jQuery("#generarIndicador").submit();
@@ -501,7 +515,7 @@ updateInfo = function(indicador){
 	jQuery("#info").children(".infoBox").hide();
 	jQuery("#info-" + indicador).show();
 }
-/*TODO: Revisar actualizacion del popstate*/
+
 updateData = function(data){
 	console.log(data);
 	asyncAjax=false;
@@ -512,12 +526,12 @@ updateData = function(data){
 	if(typeof data.indicador !== "undefined"){
 		updateInfo(data.indicador);
 	}
-	if(typeof data.indicador !== "undefined" && data.indicador != actualForm.indicador){
+	if(typeof data.indicador !== "undefined"){
 		popState.indicador=true;
 		jQuery("#indicador").val(data.indicador).trigger("change");
 		actualForm = jQuery("#generarIndicador").serializeJSON();
 	}
-	if(typeof data.disciplina !== "undefined" && data.disciplina != actualForm.disciplina){
+	if(typeof data.disciplina !== "undefined"){
 		popState.disciplina=true;
 		jQuery("#disciplina").val(data.disciplina).trigger("change");
 		actualForm = jQuery("#generarIndicador").serializeJSON();
@@ -541,21 +555,23 @@ updateData = function(data){
 		actualForm = jQuery("#generarIndicador").serializeJSON();
 	}
 
-	if(!actualForm.pais){
-		actualForm.pais = ["pais"];
+	if(!actualForm.paisRevista){
+		actualForm.paisRevista = ["pais"];
 	}
 
-	if(data.pais === "" || typeof data.pais === "undefined" && typeof data.revista === "undefined" && data.indicador != "indice-densidad-documentos"){
-		jQuery("#periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
-		jQuery("#paisRevista").select2("val", null);
-		jQuery('#paisRevista option').first().prop('selected', false);
-		jQuery("#paisRevista").select2("destroy");
-		jQuery("#paisRevista").select2({allowClear: true, closeOnSelect: true});
-		jQuery("#revista").select2("enable", true);
+	if(data.paisRevista !== "" &&  typeof data.paisRevista !== "undefined" && data.paisRevista.join('/') != actualForm.paisRevista.join('/')){
+		popState.paisRevista=true;
+		jQuery("#paisRevista").val(data.paisRevista).trigger("change");
+		actualForm = jQuery("#generarIndicador").serializeJSON();
 	}
-	if(data.pais !== "" &&  typeof data.pais !== "undefined" && data.pais.join('/') != actualForm.pais.join('/')){
-		popState.pais=true;
-		jQuery("#paisRevista").val(data.pais).trigger("change");
+
+	if(!actualForm.paisAutor){
+		actualForm.paisAutor = ["pais"];
+	}
+
+	if(data.paisAutor !== "" &&  typeof data.paisAutor !== "undefined" && data.paisAutor.join('/') != actualForm.paisAutor.join('/')){
+		popState.paisAutor=true;
+		jQuery("#paisAutor").val(data.paisAutor).trigger("change");
 		actualForm = jQuery("#generarIndicador").serializeJSON();
 	}
 	if(typeof data.periodo !== "undefined"){
