@@ -39,7 +39,7 @@ class Main extends CI_Controller{
 		$query = $this->db->query($query);
 		$data['index']['totales'] = array_merge($data['index']['totales'], $query->row_array());
 		$query->free_result();
-		$query = "SELECT count(*) AS hevila FROM \"mvSearch\" WHERE url ~ '%hevila%'";
+		$query = "SELECT count(*) AS hevila FROM \"mvSearch\" WHERE url ~~ '%hevila%'";
 		$query = $this->db->query($query);
 		$data['index']['totales'] = array_merge($data['index']['totales'], $query->row_array());
 		$query->free_result();
