@@ -113,7 +113,6 @@
 				<div id="info-tasa-documentos-coautorados" class="infoBox">
 					<p class="textoTitulo centrado"><?php _e('Tasa de Documentos Coautorados');?></p>
 					<p class="textoL">
-						<?php _e('Indicador que determina el promedio de artículos con autoría múltiple.');?><br/>
 						<?php _e('El valor numérico indica la proporción de artículos con autoría múltiple.');?>
 					</p>
 					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
@@ -133,9 +132,8 @@
 				</div>
 
 				<div id="info-grado-colaboracion" class="infoBox">
-					<p class="textoTitulo centrado"><?php _e('Grado de Colaboración (Índice de Subramayan)');?></p>
+					<p class="textoTitulo centrado"><?php _e('Grado de Colaboración (Índice de Subramanyan)');?></p>
 					<p class="textoL">
-						<?php _e('Indica el promedio de artículos con autoría múltiple.');?><br/>
 						<?php _e('El valor numérico indica la proporción de artículos con autoría múltiple.');?>
 					</p>
 					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
