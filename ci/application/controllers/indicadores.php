@@ -23,6 +23,9 @@ class Indicadores extends CI_Controller {
 					\"institucionesSecJSON\",
 					\"institucionesJSON\"";
 
+	public $soloPaisRevista = array('indice-coautoria', 'tasa-documentos-coautorados', 'grado-colaboracion', 'modelo-elitismo', 'indice-colaboracion');
+	public $soloPaisAutor = array('indice-coautoria', 'tasa-documentos-coautorados', 'indice-colaboracion');
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -784,25 +787,29 @@ class Indicadores extends CI_Controller {
 				);
 			$data['revistas'][] = $revista;
 		endforeach;
-		$query = "SELECT \"paisRevista\", \"paisRevistaSlug\" FROM \"mvPeriodosPaisRevista{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
-		$query = $this->db->query($query);
-		foreach ($query->result_array() as $row ):
-			$revista = array(
-					'val' => $row['paisRevistaSlug'],
-					'text' => htmlspecialchars($row['paisRevista'])
-				);
-			$data['paisesRevistas'][] = $revista;
-		endforeach;
+		if(in_array($_POST['indicador'], $this->soloPaisRevista)):
+			$query = "SELECT \"paisRevista\", \"paisRevistaSlug\" FROM \"mvPeriodosPaisRevista{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
+			$query = $this->db->query($query);
+			foreach ($query->result_array() as $row ):
+				$revista = array(
+						'val' => $row['paisRevistaSlug'],
+						'text' => htmlspecialchars($row['paisRevista'])
+					);
+				$data['paisesRevistas'][] = $revista;
+			endforeach;
+		endif;
 
-		$query = "SELECT \"paisAutor\", \"paisAutorSlug\" FROM \"mvPeriodosPaisAutor{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
-		$query = $this->db->query($query);
-		foreach ($query->result_array() as $row ):
-			$revista = array(
-					'val' => $row['paisAutorSlug'],
-					'text' => htmlspecialchars($row['paisAutor'])
-				);
-			$data['paisesAutores'][] = $revista;
-		endforeach;
+		if(in_array($_POST['indicador'], $this->soloPaisAutor)):
+			$query = "SELECT \"paisAutor\", \"paisAutorSlug\" FROM \"mvPeriodosPaisAutor{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
+			$query = $this->db->query($query);
+			foreach ($query->result_array() as $row ):
+				$revista = array(
+						'val' => $row['paisAutorSlug'],
+						'text' => htmlspecialchars($row['paisAutor'])
+					);
+				$data['paisesAutores'][] = $revista;
+			endforeach;
+		endif;
 
 		$this->db->close();
 		header('Content-Type: application/json');
@@ -845,7 +852,7 @@ class Indicadores extends CI_Controller {
 				$revistaOffset++;
 			endforeach;
 			$query .= ")";
-		elseif (isset($_POST['paisRevista'])):
+		elseif (isset($_POST['paisRevista']) && in_array($_POST['indicador'], $this->soloPaisRevista)):
 			$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"{$indicadorTabla[$_POST['indicador']]}PaisRevista\" WHERE \"paisRevistaSlug\" IN (";
 			$paisOffset=1;
 			$paisTotal= count($_POST['paisRevista']);
@@ -857,7 +864,7 @@ class Indicadores extends CI_Controller {
 				$paisOffset++;
 			endforeach;
 			$query .= ") AND id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
-		elseif (isset($_POST['paisAutor'])):
+		elseif (isset($_POST['paisAutor']) && in_array($_POST['indicador'], $this->soloPaisAutor)):
 			$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"{$indicadorTabla[$_POST['indicador']]}PaisAutor\" WHERE \"paisAutorSlug\" IN (";
 			$paisOffset=1;
 			$paisTotal= count($_POST['paisAutor']);
