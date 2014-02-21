@@ -41,7 +41,7 @@
 							<ul>
 								<li><a href="<?=site_url('indicadores/indice-coautoria');?>" title="<?php _e('Índice de coautoría');?>"><?php _e('Índice de coautoría');?></a></li>
 								<li><a href="<?=site_url('indicadores/tasa-documentos-coautorados');?>" title="<?php _e('Tasa de documentos coautorados');?>"><?php _e('Tasa de documentos coautorados');?></a></li>
-								<li><a href="<?=site_url('indicadores/grado-colaboracion');?>" title="<?php _e('Grado de colaboración (Índice Subramayan)');?>"><?php _e('Grado de colaboración');?></a></li>
+								<li><a href="<?=site_url('indicadores/grado-colaboracion');?>" title="<?php _e('Grado de colaboración (Índice Subramanyan)');?>"><?php _e('Grado de colaboración');?></a></li>
 								<li><a href="<?=site_url('indicadores/modelo-elitismo');?>" title="<?php _e('Modelo de elitismo (Price)');?>"><?php _e('Modelo de elitismo');?></a></li>
 								<li><a href="<?=site_url('indicadores/indice-colaboracion');?>" title="<?php _e('Índice de colaboración (Índice de Lawani)');?>"><?php _e('Índice de colaboración');?></a></li>
 								<li><a href="<?=site_url('indicadores/indice-densidad-documentos');?>" title="<?php _e('Índice de densidad de documentos Zakutina y Priyenikova');?>"><?php _e('Índice de densidad de documentos');?></a></li>
