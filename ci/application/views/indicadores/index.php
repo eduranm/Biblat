@@ -113,7 +113,6 @@
 				<div id="info-tasa-documentos-coautorados" class="infoBox">
 					<p class="textoTitulo centrado"><?php _e('Tasa de Documentos Coautorados');?></p>
 					<p class="textoL">
-						<?php _e('Indicador que determina el promedio de artículos con autoría múltiple.');?><br/>
 						<?php _e('El valor numérico indica la proporción de artículos con autoría múltiple.');?>
 					</p>
 					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
@@ -130,12 +129,14 @@
 						<i>Cta</i> = <?php _e('Cantidad total de documentos con autoría multiple');?><br/>
 						<i>Ctd</i> = <?php _e('Cantidad total de documentos');?>
 					</p>
+					<p class="textoL">
+						<?php _e('Se interpreta que valores cercanos a 1 muestran mayor cantidad de documentos en coautoría.');?>
+					</p>
 				</div>
 
 				<div id="info-grado-colaboracion" class="infoBox">
-					<p class="textoTitulo centrado"><?php _e('Grado de Colaboración (Índice de Subramayan)');?></p>
+					<p class="textoTitulo centrado"><?php _e('Grado de Colaboración (Índice de Subramanyan)');?></p>
 					<p class="textoL">
-						<?php _e('Indica el promedio de artículos con autoría múltiple.');?><br/>
 						<?php _e('El valor numérico indica la proporción de artículos con autoría múltiple.');?>
 					</p>
 					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
@@ -151,6 +152,9 @@
 						<?php _e('Donde:');?><br/>
 						<i>N<sub>m</sub></i> = <?php _e('Total de documentos con autoría múltiple.');?><br/>
 						<i>N<sub>s</sub></i> = <?php _e('Total de documentos escritos por un solo autor.');?>
+					</p>
+					<p class="textoL">
+						<?php _e('Se interpreta que valores cercanos a 0 muestran un fuerte componente de autoría simple, mientras que los cercanos a 1 denotan una fuerte proporción de autoría múltiple.');?>
 					</p>
 				</div>
 
@@ -244,6 +248,9 @@
 						<i>C</i> = <?php _e('Índice de concentración de Pratt.');?><br/>
 						<i>n</i> = <?php _e('Número de categorías.');?><br/>
 						<i>q</i> = <?php _e('&sum; del producto del rango por la frecuencia de una categoría dada, dividido por la cantidad de ítems en todas las categorías.');?>
+					</p>
+					<p class="textoJ">
+						<?php _e('Se interpreta que valores cercanos a 1 muestran mayor grado de especialización.');?>
 					</p>				
 				</div>
 

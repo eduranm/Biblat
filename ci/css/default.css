@@ -874,7 +874,10 @@ p {
 	font-family: Verdana,Geneva,sans-serif,FontAwesome;
 	font-size: 14px;
 	color: #666666;
-}
+	text-align: justify;
+	width: 600px;
+	}
+	
 .infoBox pre { 
 	white-space: -moz-pre-wrap; /* Mozilla, supported since 1999 */
 	white-space: -pre-wrap; /* Opera */
