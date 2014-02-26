@@ -1,0 +1,151 @@
+.flagspr {
+    background-image: url(../img/flag-spritesheet.png);
+    background-repeat: no-repeat;
+    display: block;
+    border: 0px none;
+    content: "";
+}
+
+.flagspr-argentina {
+    width: 32px;
+    height: 32px;
+    background-position: -2px -2px;
+}
+
+.flagspr-barbados {
+    width: 32px;
+    height: 32px;
+    background-position: -38px -2px;
+}
+
+.flagspr-bolivia {
+    width: 32px;
+    height: 32px;
+    background-position: -74px -2px;
+}
+
+.flagspr-brasil {
+    width: 32px;
+    height: 32px;
+    background-position: -110px -2px;
+}
+
+.flagspr-chile {
+    width: 32px;
+    height: 32px;
+    background-position: -146px -2px;
+}
+
+.flagspr-colombia {
+    width: 32px;
+    height: 32px;
+    background-position: -2px -38px;
+}
+
+.flagspr-costa-rica {
+    width: 32px;
+    height: 32px;
+    background-position: -38px -38px;
+}
+
+.flagspr-cuba {
+    width: 32px;
+    height: 32px;
+    background-position: -74px -38px;
+}
+
+.flagspr-ecuador {
+    width: 32px;
+    height: 32px;
+    background-position: -110px -38px;
+}
+
+.flagspr-el-salvador {
+    width: 32px;
+    height: 32px;
+    background-position: -146px -38px;
+}
+
+.flagspr-guatemala {
+    width: 32px;
+    height: 32px;
+    background-position: -2px -74px;
+}
+
+.flagspr-haiti {
+    width: 32px;
+    height: 32px;
+    background-position: -38px -74px;
+}
+
+.flagspr-honduras {
+    width: 32px;
+    height: 32px;
+    background-position: -74px -74px;
+}
+
+.flagspr-jamaica {
+    width: 32px;
+    height: 32px;
+    background-position: -110px -74px;
+}
+
+.flagspr-mexico {
+    width: 32px;
+    height: 32px;
+    background-position: -146px -74px;
+}
+
+.flagspr-nicaragua {
+    width: 32px;
+    height: 32px;
+    background-position: -2px -110px;
+}
+
+.flagspr-panama {
+    width: 32px;
+    height: 32px;
+    background-position: -38px -110px;
+}
+
+.flagspr-paraguay {
+    width: 32px;
+    height: 32px;
+    background-position: -74px -110px;
+}
+
+.flagspr-peru {
+    width: 32px;
+    height: 32px;
+    background-position: -110px -110px;
+}
+
+.flagspr-puerto-rico {
+    width: 32px;
+    height: 32px;
+    background-position: -146px -110px;
+}
+
+.flagspr-republica-dominicana {
+    width: 32px;
+    height: 32px;
+    background-position: -2px -146px;
+}
+
+.flagspr-uruguay {
+    width: 32px;
+    height: 32px;
+    background-position: -38px -146px;
+}
+
+.flagspr-venezuela {
+    width: 32px;
+    height: 32px;
+    background-position: -74px -146px;
+}
+
+.flagspr-world {
+    width: 32px;
+    height: 32px;
+    background-position: -110px -146px;
+}
