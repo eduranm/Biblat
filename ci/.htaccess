@@ -2,3 +2,4 @@ RewriteEngine on
 RewriteCond $1 !^(index\.php|js|css|img|images|robots\.txt)
 RewriteRule ^(.*)$ /index.php/$1 [L]
 Options -Indexes -FollowSymLinks +SymLinksIfOwnerMatch
+GeoIPEnable On
