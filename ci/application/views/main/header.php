@@ -1,3 +1,4 @@
+	<link rel="stylesheet" href="<?=base_url('css/flag-stylesheet.css');?>" type="text/css" />
 	<script src="<?=base_url('js/d3.js');?>"></script>
 	<script src="<?=base_url('js/d3.layout.cloud.js');?>"></script>
 	<script type="text/javascript" language="javascript">

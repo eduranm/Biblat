@@ -19,7 +19,7 @@
 			<ul class="paisesFlags">
 				<li><a href="<?=site_url("indice/pais/".slug("Internacional"));?>"><img src="<?=base_url();?>img/flags/world.png" title="Organismos Internacionales" border="0"/></a></li>
 <?php foreach ($paises as $pais):?>
-				<li><a href="<?=site_url("indice/pais/{$pais['paisSlug']}");?>" title="<?=$pais['pais'];?>"><img src="<?=base_url("img/flags/{$pais['paisSlug']}.png");?>" title="<?=$pais['pais'];?>" border="0"/></a></li>
+				<li><a href="<?=site_url("indice/pais/{$pais['paisSlug']}");?>" title="<?=$pais['pais'];?>"><img class="flagspr flagspr-<?=$pais['paisSlug'];?>" title="<?=$pais['pais'];?>"/></a></li>
 <?php endforeach;?>
 			</ul>
 		</div>
