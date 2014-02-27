@@ -246,7 +246,7 @@ class Revista extends CI_Controller{
 		$this->email->message($body);
 		$this->email->send();
 		/*Almacenando registro en la bitácora*/
-		$database = ($data['database'] == "CLASE") ? 1 : 0;
+		$database = ($data['database'] == "CLASE") ? 0 : 1;
 		$ip = (isset($_SERVER['GEOIP_ADDR'])) ? $_SERVER['GEOIP_ADDR'] : $_SERVER['REMOTE_ADDR'];
 		$pais = (isset($_SERVER['GEOIP_COUNTRY_NAME'])) ? "'{$_SERVER['GEOIP_COUNTRY_NAME']}'" : "NULL";
 		$ciudad = (isset($_SERVER['GEOIP_REGION_NAME'])) ? "'{$_SERVER['GEOIP_REGION_NAME']}'" : "NULL";
