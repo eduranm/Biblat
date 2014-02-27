@@ -1,6 +1,6 @@
-<?php _e('Estimado/Estimada');?> <?php echo $from;?>:<br/><br/>
+<?php _e('Estimado/a');?> <?php echo $from;?>:<br/><br/>
 
-<?php _e('Esperando te encuentres bien, te notifico que, para la recuperación de este documento:');?><br/><br>
+<?php _e('Te notifico que, para la recuperación de este documento:');?><br/><br>
 <?php echo $fichaDocumento;?><br/><br/>
 
 <?php _e('Contamos con las siguientes opciones');?><br/>
