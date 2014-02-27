@@ -63,5 +63,21 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+
+$db['biblat']['hostname'] = 'localhost';
+$db['biblat']['username'] = 'postgres';
+$db['biblat']['password'] = '';
+$db['biblat']['database'] = 'biblat';
+$db['biblat']['dbdriver'] = 'postgre';
+$db['biblat']['dbprefix'] = '';
+$db['biblat']['pconnect'] = TRUE;
+$db['biblat']['db_debug'] = TRUE;
+$db['biblat']['cache_on'] = FALSE;
+$db['biblat']['cachedir'] = 'application/cache';
+$db['biblat']['char_set'] = 'utf8';
+$db['biblat']['dbcollat'] = 'utf8_general_ci';
+$db['biblat']['swap_pre'] = '';
+$db['biblat']['autoinit'] = TRUE;
+$db['biblat']['stricton'] = FALSE;
 /* End of file database.php */
 /* Location: ./application/config/database.php */
