@@ -45,55 +45,23 @@
 | the active record class
 */
 
-$active_group = 'devpsql';
+$active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
+$db['default']['username'] = 'postgres';
 $db['default']['password'] = '';
-$db['default']['database'] = '';
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['database'] = 'claper';
+$db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
 $db['default']['cache_on'] = FALSE;
-$db['default']['cachedir'] = '';
+$db['default']['cachedir'] = 'application/cache';
 $db['default']['char_set'] = 'utf8';
 $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
-
-$db['develop']['hostname'] = 'localhost';
-$db['develop']['username'] = 'website';
-$db['develop']['password'] = 'ws04#11';
-$db['develop']['database'] = 'claperinnodb';
-$db['develop']['dbdriver'] = 'mysql';
-$db['develop']['dbprefix'] = '';
-$db['develop']['pconnect'] = TRUE;
-$db['develop']['db_debug'] = TRUE;
-$db['develop']['cache_on'] = FALSE;
-$db['develop']['cachedir'] = '';
-$db['develop']['char_set'] = 'utf8';
-$db['develop']['dbcollat'] = 'utf8_general_ci';
-$db['develop']['swap_pre'] = '';
-$db['develop']['autoinit'] = TRUE;
-$db['develop']['stricton'] = FALSE;
-
-$db['devpsql']['hostname'] = 'localhost';
-$db['devpsql']['username'] = 'postgres';
-$db['devpsql']['password'] = '';
-$db['devpsql']['database'] = 'claper';
-$db['devpsql']['dbdriver'] = 'postgre';
-$db['devpsql']['dbprefix'] = '';
-$db['devpsql']['pconnect'] = TRUE;
-$db['devpsql']['db_debug'] = TRUE;
-$db['devpsql']['cache_on'] = FALSE;
-$db['devpsql']['cachedir'] = 'application/cache';
-$db['devpsql']['char_set'] = 'utf8';
-$db['devpsql']['dbcollat'] = 'utf8_general_ci';
-$db['devpsql']['swap_pre'] = '';
-$db['devpsql']['autoinit'] = TRUE;
-$db['devpsql']['stricton'] = FALSE;
 /* End of file database.php */
 /* Location: ./application/config/database.php */
