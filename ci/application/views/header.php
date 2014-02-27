@@ -37,7 +37,7 @@
 						border: '2px solid #114D66',
 						cursor: 'wait'
 					},
-					baseZ: 9000,
+					baseZ: 1000000,
 					onBlock: function(){
 						loading.status=true;
 					},
