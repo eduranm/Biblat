@@ -104,9 +104,11 @@
 				if(button == "avanzada"){
 					jQuery('#slug').hide();
 					jQuery('#advsearch').show();
+					jQuery('.evo-bNew').trigger('click');
 					advsearch.updateData();
 				}
 				if(jQuery('#options').data('last') == "avanzada"){
+					jQuery('#advsearch').advancedSearch("clear");
 					jQuery('#slug').val('');
 				}
 				jQuery('#options').data('last', button);
