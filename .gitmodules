@@ -13,3 +13,6 @@
 [submodule "ci/js/pnotify"]
 	path = ci/js/pnotify
 	url = https://github.com/sciactive/pnotify
+[submodule "ci/js/advancedsearch"]
+	path = ci/js/advancedsearch
+	url = https://github.com/swarzesherz/advancedSearch.git
