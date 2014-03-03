@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="<?=base_url('css/font-awesome.min.css');?>" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url('css/jquery-ui.min.css');?>" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url('js/pnotify/jquery.pnotify.default.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url('css/advancedsearch.css');?>" />
 	<link rel="stylesheet" href="<?=base_url('css/default.css');?>" type="text/css" />
 	<script type="text/javascript" src="<?=base_url('js/jquery.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/jquery.validate.min.js');?>"></script>
@@ -18,6 +19,7 @@
 	<script type="text/javascript" src="<?=base_url('js/jquery-ui.min.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/jquery.blockUI.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/pnotify/jquery.pnotify.min.js');?>"></script>
+	<script type="text/javascript" src="<?=base_url('js/advancedsearch/js/evol.advancedSearch.js');?>"></script>
 	<script type="text/javascript">
 		var addthis_config = addthis_config||{};
 		addthis_config.data_track_addressbar = false;
@@ -51,6 +53,11 @@
 			},
 			status: false
 		}; 
+		advsearch = {
+			updateData: function(){
+				jQuery('#slug').val(JSON.stringify(jQuery('#advsearch').advancedSearch("val")));
+			}
+		};
 		jQuery.pnotify.defaults.history = false;
 		jQuery.pnotify.defaults.styling = "jqueryui";
 		jQuery(document).bind("contextmenu",function(e){
@@ -91,6 +98,18 @@
 				jQuery('#options').attr('class', 'icon-'+button);
 				jQuery('#filtro').val(button);
 				jQuery(".optionsMenu").toggle();
+				jQuery('#slug').show();
+				jQuery('#advsearch').hide();
+				console.log();
+				if(button == "avanzada"){
+					jQuery('#slug').hide();
+					jQuery('#advsearch').show();
+					advsearch.updateData();
+				}
+				if(jQuery('#options').data('last') == "avanzada"){
+					jQuery('#slug').val('');
+				}
+				jQuery('#options').data('last', button);
 				console.log(button);
 			});
 			jQuery('.searchform #slug').keypress(function(e) {
@@ -114,6 +133,16 @@
 				return false;
 			});
 			jQuery('textarea').autosize();
+			jQuery('#advsearch').advancedSearch({
+				fields:[
+					{ type:"text", id:"Autor", label:"Autor"},
+					{ type:"text", id:"Revista", label:"Revista"}
+				],
+				defaultOperator: 'eq' 
+			}).on('submit.search change.search', function(evt){
+				advsearch.updateData();
+			});
+
 			jQuery('body').click(function(e) {
 				jQuery(".optionsMenu").hide();
 			});

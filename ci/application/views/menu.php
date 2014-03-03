@@ -118,6 +118,7 @@
 			<button class="icon-search" type="submit"><span class="visuallyhidden">buscar</span></button>
 			<input type="hidden" name="disciplina" value=""/>
 			<input type="hidden" name="filtro" id="filtro" value="todos"/>
+			<div id="advsearch"></div>
 			<label>
 				<span class="visuallyhidden"><?php _e('Buscar en Biblat');?></span>
 <?php if (isset($search['slug'])) :?>

@@ -325,7 +325,6 @@ a:focus, a::-moz-focus-inner {
 	border-radius: 4px;
 	border: 1px solid rgba(0,0,0,0.25);
 	color: #fff;
-	text-shadow: rgba(0, 0, 0, 0.796875) 0px -1px 0px, rgba(255, 255, 255, 0.296875) 0px 0px 10px;
 }
 
 .searchform {
@@ -375,6 +374,11 @@ a:focus, a::-moz-focus-inner {
 	color: #fff;
 }
 
+.searchform *{
+	font-size: 13px;
+	vertical-align: middle;
+}
+
 .visuallyhidden {
 	border: 0;
 	clip: rect(0 0 0 0);
@@ -416,6 +420,10 @@ a:focus, a::-moz-focus-inner {
 }
 .icon-todos:before {
 	content: "\f0c2   \f0d7";
+	font-size: 14px !important;
+}
+.icon-avanzada:before {
+	content: "\f00e   \f0d7";
 	font-size: 14px !important;
 }
 
