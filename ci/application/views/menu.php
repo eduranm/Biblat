@@ -111,8 +111,8 @@
 				<li rel="palabra-clave"><i class="fa fa fa-key"></i><?php _e('Buscar por palabra clave');?></li>
 				<li rel="autor"><i class="fa fa-user"></i><?php _e('Buscar por autor');?></li>
 				<li rel="revista"><i class="fa fa-book"></i><?php _e('Buscar por revista');?></li>
-				<li rel="institucion"><i class="fa fa fa-building-o"></i><?php _e('Buscar por institucion');?></li>
-				<li rel="articulo"><i class="fa fa-file-text-o"></i><?php _e('Buscar por articulo');?></li>
+				<li rel="institucion"><i class="fa fa fa-building-o"></i><?php _e('Buscar por institución');?></li>
+				<li rel="articulo"><i class="fa fa-file-text-o"></i><?php _e('Buscar por artículo');?></li>
 				<li rel="avanzada"><i class="fa fa-search-plus"></i><?php _e('Búsqueda avanzada');?></li>
 			</ul>
 			<button class="icon-search" type="submit"><span class="visuallyhidden">buscar</span></button>

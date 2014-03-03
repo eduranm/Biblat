@@ -137,8 +137,11 @@
 			jQuery('textarea').autosize();
 			jQuery('#advsearch').advancedSearch({
 				fields:[
-					{ type:"text", id:"Autor", label:"Autor"},
-					{ type:"text", id:"Revista", label:"Revista"}
+					{ type:"text", id:"autor", label:"<?php _e('Autor')?>"},
+					{ type:"text", id:"revista", label:"<?php _e('Revista')?>"},
+					{ type:"text", id:"articulo", label:"<?php _e('Artículo')?>"},
+					{ type:"text", id:"institucion", label:"<?php _e('Institución')?>"},
+					{ type:"text", id:"palabra-clave", label:"<?php _e('Palabra clave')?>"}
 				],
 				defaultOperator: 'eq' 
 			}).on('submit.search change.search', function(evt){
