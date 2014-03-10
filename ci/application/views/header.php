@@ -153,7 +153,7 @@
 				}
 			});
 			jQuery('.searchform').submit(function(e) {
-				if(jQuery('#value').length > 0 && jQuery('#value').val().length > 0){
+				if(jQuery('#value').length > 0 && jQuery('#value').val().length > 0 || jQuery('#lov').length > 0){
 					jQuery('.evo-bAdd').trigger('click');
 				}
 				var data = jQuery(this).serializeArray();

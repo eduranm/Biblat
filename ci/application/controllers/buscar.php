@@ -26,6 +26,11 @@ class Buscar extends CI_Controller{
 			endif;
 			if($_POST['filtro'] === "avanzada"):
 				$biblatDB = $this->load->database('biblat', TRUE);
+				if($_POST['slug'] == "[]" || empty($_POST['slug'])):
+					$this->output->enable_profiler(false);
+					echo site_url('buscar');
+					return;
+				endif;
 				$filters=json_decode($_POST['slug'], TRUE);
 				$where = "";
 				foreach ($filters as $filter):
