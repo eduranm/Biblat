@@ -17,7 +17,7 @@ CREATE TABLE "logSolicitudDocumento" (
     session_id character varying(40)
 );
 
-CREATE TABLE "advacedSearchHash"
+CREATE TABLE "advancedSearchHash"
 (
   hash character varying(32) NOT NULL,
   search character varying,
@@ -25,7 +25,7 @@ CREATE TABLE "advacedSearchHash"
   CONSTRAINT "advacedSearchHash_pkey" PRIMARY KEY (hash)
 );
 
-CREATE OR REPLACE FUNCTION "advacedSearchHashInsert"(character varying(32), character varying, character varying)
+CREATE OR REPLACE FUNCTION "advancedSearchHashInsert"(character varying(32), character varying, character varying)
     RETURNS text
         AS $$
             DECLARE
@@ -34,12 +34,12 @@ CREATE OR REPLACE FUNCTION "advacedSearchHashInsert"(character varying(32), char
                 vquery ALIAS FOR $3;
                 retval text;
             BEGIN
-                UPDATE "advacedSearchHash" SET search=vsearch, query=vquery
+                UPDATE "advancedSearchHash" SET search=vsearch, query=vquery
                     WHERE hash=vhash;
                 IF (FOUND) THEN
                     retval := 'registro actualizado';
                 ELSE
-                    INSERT INTO "advacedSearchHash" (hash, search, query)
+                    INSERT INTO "advancedSearchHash" (hash, search, query)
                         VALUES (vhash, vsearch, vquery);
                     retval := 'registro insertado';
                 END IF;
