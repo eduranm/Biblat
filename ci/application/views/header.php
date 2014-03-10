@@ -152,14 +152,15 @@
 					return false;
 				}
 			});
-			jQuery('.searchform').submit(function(e) {x
-				if(jQuery('#value').length > 0 && jQuery('#value').val().length > 1){
+			jQuery('.searchform').submit(function(e) {
+				if(jQuery('#value').length > 0 && jQuery('#value').val().length > 0){
 					jQuery('.evo-bAdd').trigger('click');
 				}
 				var data = jQuery(this).serializeArray();
 				data.push({name: "ajax", value: true});
 				jQuery.ajax({
 					url: '<?=site_url('buscar');?>',
+					async: false,
 					type: 'POST',
 					data: jQuery.param(data),
 					success: function(data) {
