@@ -51,14 +51,14 @@ $route[$langs.'/contacto'] = 'main/contacto';
 $route[$langs.'/contacto/submit'] = 'main/contactoSubmit';
 $route[$langs.'/revista/solicitud/documento'] = 'revista/solicitudDocumento';
 
-
-$route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave)/(.*)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';
+$route[$langs.'/buscar/getList'] = 'buscar/getList';
+$route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave|avanzada)/(.+)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';
 $route[$langs.'/buscar/(.*)/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/$1/$2/$3$4';
 $route[$langs.'/buscar/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/null/$1/$2$3';
-$route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave)/(.*)/([0-9]+)'] = 'buscar/index/$1/null/$2/$3';
-$route[$langs.'/buscar/(.*)/(.*)/([0-9]+)'] = 'buscar/index/null/$1/$2/$3';
-$route[$langs.'/buscar/(.*)/([0-9]+)'] = 'buscar/index/null/null/$1/$2';
-$route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave)/(.*)'] = 'buscar/index/$1/null/$2';
+$route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave|avanzada)/(.+)/([0-9]+$)'] = 'buscar/index/$1/null/$2/$3';
+$route[$langs.'/buscar/(.*)/(.*)/([0-9]+$)'] = 'buscar/index/null/$1/$2/$3';
+$route[$langs.'/buscar/(.*)/([0-9]+$)'] = 'buscar/index/null/null/$1/$2';
+$route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave|avanzada)/(.+)'] = 'buscar/index/$1/null/$2';
 $route[$langs.'/buscar/(.*)/(.*)'] = 'buscar/index/null/$1/$2';
 $route[$langs.'/buscar/(.*)'] = 'buscar/index/null/null/$1';
 
@@ -68,13 +68,13 @@ $route[$langs.'/revista/(.*)'] = "revista/index/$1";
 $route[$langs.'/indicadores/(indice-coautoria|tasa-documentos-coautorados|grado-colaboracion|modelo-elitismo|indice-colaboracion|indice-densidad-documentos|indice-concentracion|modelo-bradford-revista|modelo-bradford-institucion|productividad-exogena)(.*)'] = "indicadores/index/$1";
 
 $route[$langs.'/frecuencias/autor/([^/]+)'] = "frecuencias/autorDocumentos/$1";
-$route[$langs.'/frecuencias/autor/([^/]+)/([0-9]+)'] = "frecuencias/autorDocumentos/$1/$2";
+$route[$langs.'/frecuencias/autor/([^/]+)/([0-9]+$)'] = "frecuencias/autorDocumentos/$1/$2";
 
 $route[$langs.'/frecuencias/institucion/([^/]+)'] = "frecuencias/institucion/slug/$1";
 $route[$langs.'/frecuencias/institucion/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/institucion/slug/$1/$2";
 
 $route[$langs.'/frecuencias/institucion/([^/]+)/documento'] = "frecuencias/institucionDocumentos/$1";
-$route[$langs.'/frecuencias/institucion/([^/]+)/documento/([0-9]+)'] = "frecuencias/institucionDocumentos/$1/$2";
+$route[$langs.'/frecuencias/institucion/([^/]+)/documento/([0-9]+$)'] = "frecuencias/institucionDocumentos/$1/$2";
 
 $route[$langs.'/frecuencias/institucion/(.+?)/\bpais\b/([^/]+)$'] = "frecuencias/institucionPaisDocumentos/$1/$2";
 $route[$langs.'/frecuencias/institucion/(.+?)/\bpais\b/([^/]+)/[0-9^/]+$'] = "frecuencias/institucionPaisDocumentos/$1/$2/$3";
@@ -94,7 +94,7 @@ $route[$langs.'/frecuencias/pais-afiliacion/([^/]+)'] = "frecuencias/paisAfiliac
 $route[$langs.'/frecuencias/pais-afiliacion/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/paisAfiliacion/slug/$1/$2";
 
 $route[$langs.'/frecuencias/pais-afiliacion/([^/]+)/documento'] = "frecuencias/paisAfiliacionDocumentos/$1";
-$route[$langs.'/frecuencias/pais-afiliacion/([^/]+)/documento/([0-9]+)'] = "frecuencias/paisAfiliacionDocumentos/$1/$2";
+$route[$langs.'/frecuencias/pais-afiliacion/([^/]+)/documento/([0-9]+$)'] = "frecuencias/paisAfiliacionDocumentos/$1/$2";
 
 $route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\binstitucion\b/([^/]+)$'] = "frecuencias/paisAfiliacionInstitucionDocumentos/$1/$2";
 $route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\binstitucion\b/([^/]+)/[0-9^/]+$'] = "frecuencias/paisAfiliacionInstitucionDocumentos/$1/$2/$3";
@@ -108,7 +108,7 @@ $route[$langs.'/frecuencias/revista/([^/]+)'] = "frecuencias/revista/slug/$1";
 $route[$langs.'/frecuencias/revista/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/revista/slug/$1/$2";
 
 $route[$langs.'/frecuencias/revista/([^/]+)/documento'] = "frecuencias/revistaDocumentos/$1";
-$route[$langs.'/frecuencias/revista/([^/]+)/documento/([0-9]+)'] = "frecuencias/revistaDocumentos/$1/$2";
+$route[$langs.'/frecuencias/revista/([^/]+)/documento/([0-9]+$)'] = "frecuencias/revistaDocumentos/$1/$2";
 
 $route[$langs.'/frecuencias/revista/(.+?)/\bautor\b/([^/]+)$'] = "frecuencias/revistaAutorDocumentos/$1/$2";
 $route[$langs.'/frecuencias/revista/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecuencias/revistaAutorDocumentos/$1/$2/$3";

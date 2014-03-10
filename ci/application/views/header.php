@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="<?=base_url('css/font-awesome.min.css');?>" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url('css/jquery-ui.min.css');?>" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url('js/pnotify/jquery.pnotify.default.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url('js/select2/select2.css');?>" />
 	<link rel="stylesheet" href="<?=base_url('css/advancedsearch.css');?>" />
 	<link rel="stylesheet" href="<?=base_url('css/default.css');?>" type="text/css" />
 	<script type="text/javascript" src="<?=base_url('js/jquery.js');?>"></script>
@@ -19,6 +20,7 @@
 	<script type="text/javascript" src="<?=base_url('js/jquery-ui.min.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/jquery.blockUI.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/pnotify/jquery.pnotify.min.js');?>"></script>
+	<script type="text/javascript" src="<?=base_url('js/select2/select2.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/advancedsearch/js/evol.advancedSearch.js');?>"></script>
 	<script type="text/javascript">
 		var addthis_config = addthis_config||{};
@@ -56,6 +58,13 @@
 		advsearch = {
 			updateData: function(){
 				jQuery('#slug').val(JSON.stringify(jQuery('#advsearch').advancedSearch("val")));
+			},
+			getList: function(){
+				var json;
+				jQuery.ajax({async: false,type: "POST",url: "<?php echo site_url('buscar/getList');?>",dataType: "json",data:{request:'clients'},
+					success: function(data){ json = data; }
+				});
+				return json;
 			}
 		};
 		jQuery.pnotify.defaults.history = false;
@@ -89,10 +98,35 @@
 				location = '<?=site_url($this->lang->switch_uri($broserLang));?>';
 			});
 <?php endif;?>
+			lists = advsearch.getList();
+			jQuery('#advsearch').advancedSearch({
+				fields:[
+					{ type:"text", id:"palabra-clave", label:"<?php _e('Palabra clave')?>", opDefault: 'lk', opHide: true},
+					{ type:"text", id:"autor", label:"<?php _e('Autor')?>", opDefault: 'lk', opHide: true},
+					{ type:"text", id:"revista", label:"<?php _e('Revista')?>", opDefault: 'lk', opHide: true},
+					{ type:"text", id:"institucion", label:"<?php _e('Institución')?>", opDefault: 'lk', opHide: true},
+					{ type:"text", id:"articulo", label:"<?php _e('Artículo')?>", opDefault: 'lk', opHide: true},
+					{ type:"lov", id:"pais", label:"<?php _e('País de la revista')?>", list: lists.paises, listPlaceholder: "<?php _e('Seleccione país');?>"},
+					{ type:"lov", id:"disciplina", label:"<?php _e('Disciplina')?>", list: lists.disciplinas, listPlaceholder: "<?php _e('Seleccione disciplina');?>"}
+				],
+				lang: {sEqual: '=', sLike: '&asymp;', sInList: "<?php _e('cualquiera de');?>"},
+				enableSelect2: true,
+				placeholder: "<?php _e('Seleccione filtro');?>"
+			}).on('submit.search change.search', function(evt){
+				advsearch.updateData();
+			});
+			
+<?php if($search['filtro'] == "avanzada"):?>
+			jQuery('#options').attr('class', 'icon-avanzada');
+			jQuery('#filtro').val('avanzada');
+			jQuery('#slug').hide();
+			jQuery('#advsearch').show();
+			jQuery('#advsearch').advancedSearch('val', jQuery.parseJSON('<?php echo $search['json']?>'));
+<?php endif;?>
 			jQuery("#options").click(function(e) {
 				jQuery(".optionsMenu").toggle();
 				return false;
-			});
+			}).data('last', 'todos');
 			jQuery(".optionsMenu li").click(function(e) {
 				var button = jQuery(this).attr('rel');
 				jQuery('#options').attr('class', 'icon-'+button);
@@ -100,19 +134,17 @@
 				jQuery(".optionsMenu").toggle();
 				jQuery('#slug').show();
 				jQuery('#advsearch').hide();
-				console.log();
+				console.log(button);
 				if(button == "avanzada"){
 					jQuery('#slug').hide();
 					jQuery('#advsearch').show();
 					jQuery('.evo-bNew').trigger('click');
-					advsearch.updateData();
 				}
 				if(jQuery('#options').data('last') == "avanzada"){
 					jQuery('#advsearch').advancedSearch("clear");
 					jQuery('#slug').val('');
 				}
 				jQuery('#options').data('last', button);
-				console.log(button);
 			});
 			jQuery('.searchform #slug').keypress(function(e) {
 				if(e.which == 13) {
@@ -120,7 +152,10 @@
 					return false;
 				}
 			});
-			jQuery('.searchform').submit(function(e) {
+			jQuery('.searchform').submit(function(e) {x
+				if(jQuery('#value').length > 0 && jQuery('#value').val().length > 1){
+					jQuery('.evo-bAdd').trigger('click');
+				}
 				var data = jQuery(this).serializeArray();
 				data.push({name: "ajax", value: true});
 				jQuery.ajax({
@@ -135,18 +170,6 @@
 				return false;
 			});
 			jQuery('textarea').autosize();
-			jQuery('#advsearch').advancedSearch({
-				fields:[
-					{ type:"text", id:"autor", label:"<?php _e('Autor')?>"},
-					{ type:"text", id:"revista", label:"<?php _e('Revista')?>"},
-					{ type:"text", id:"articulo", label:"<?php _e('Artículo')?>"},
-					{ type:"text", id:"institucion", label:"<?php _e('Institución')?>"},
-					{ type:"text", id:"palabra-clave", label:"<?php _e('Palabra clave')?>"}
-				],
-				defaultOperator: 'eq' 
-			}).on('submit.search change.search', function(evt){
-				advsearch.updateData();
-			});
 
 			jQuery('body').click(function(e) {
 				jQuery(".optionsMenu").hide();

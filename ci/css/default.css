@@ -20,10 +20,6 @@ a:focus, a::-moz-focus-inner {
 	color: #666666;
 }
 
-.fa{
-	font-family: Verdana,Geneva,sans-serif,FontAwesome;
-}
-
 .textoJ{
 	font-family: Verdana,Geneva,sans-serif;
 	font-size: 14px;
@@ -328,7 +324,7 @@ a:focus, a::-moz-focus-inner {
 }
 
 .searchform {
-	width: 60%;
+	width: 650px;
 	padding: 0;
 	border-radius: 20px;
 	position: relative;
@@ -338,14 +334,14 @@ a:focus, a::-moz-focus-inner {
 .searchform textarea, .autosizejs {
 	text-decoration: none;
 	font-size: 13px;
-	padding: 5px 10px;
+	padding: 5px 11px;
 	margin: 0 32px;
 	background-color: transparent;
 	border-style: none;
 	color: #fff;
 	line-height: 1.3;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.76);
-	width: 85%;
+	width: 560px;
 	height: 18px;
 	box-shadow: none;
 	resize: none;
@@ -811,8 +807,8 @@ p {
 /*Selec2*/
 
 .select2-results{
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 13px;
+    line-height: 14px;
 }
 
 .goog-tooltip{
@@ -824,8 +820,8 @@ p {
 }
 
 .select2-container {
-	display: block !important;
-	margin: 0 auto !important;
+	display: block;
+	margin: 0 auto;
 }
 
 #google-visualization-errors-all-1 {

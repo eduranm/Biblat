@@ -44,11 +44,15 @@ class Main extends CI_Controller{
 		$data['index']['totales'] = array_merge($data['index']['totales'], $query->row_array());
 		$query->free_result();
 		/*Obteniendo lista de paises*/
-		$query = "SELECT * FROM \"mvPais\" WHERE \"paisSlug\" <> 'internacional'";
-		$query = $this->db->query($query);
-		$data['index']['paises'] = $query->result_array();
-		$query->free_result();
-		$this->db->close();
+		if(! $this->session->userdata('paises')){
+			$query = "SELECT * FROM \"mvPais\" WHERE \"paisSlug\" <> 'internacional'";
+			$query = $this->db->query($query);
+			$paises = $query->result_array();
+			$query->free_result();
+			$this->db->close();
+			$this->session->set_userdata('paises', json_encode($paises));
+		}
+		$data['index']['paises'] = json_decode($this->session->userdata('paises'), TRUE);
 		/*Vistas*/
 		$data['header']['disciplinas'] = $data['index']['disciplinas'];
 		$data['header']['content'] =  $this->load->view('main/header', $data['header'], TRUE);

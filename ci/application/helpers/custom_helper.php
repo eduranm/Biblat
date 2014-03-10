@@ -189,8 +189,14 @@ if ( ! function_exists('articulosResultado') ):
 
 		$totalRows=(int)$ci->session->userdata('query{'.md5($queryCount).'}');
 
+		$uri_segment = $ci->uri->total_segments();
+
+		if(preg_match('/[0-9a-f]{32}/', $ci->uri->segment($uri_segment))):
+			$uri_segment++;
+		endif;
+
 		$config['base_url'] = $paginationURL;
-		$config['uri_segment'] = $ci->uri->total_segments();
+		$config['uri_segment'] = $uri_segment;
 		$config['total_rows'] = $totalRows;
 		$config['per_page'] = $perPage;
 		$config['use_page_numbers'] = true;
@@ -212,6 +218,7 @@ if ( ! function_exists('articulosResultado') ):
 		$config['last_tag_close'] = '</span>';
 		$config['full_tag_open'] = '<div class="navbar">';
 		$config['full_tag_close'] = '</div>';
+		$config['use_page_numbers'] = TRUE;
 		$ci->pagination->initialize($config);
 		
 		$resultado['links'] = $ci->pagination->create_links();
