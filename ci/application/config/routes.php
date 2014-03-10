@@ -49,6 +49,9 @@ $route[$langs.'/documentos/bibliografia'] = 'main/bibliografia';
 $route[$langs.'/sitemap'] = 'main/sitemap';
 $route[$langs.'/contacto'] = 'main/contacto';
 $route[$langs.'/contacto/submit'] = 'main/contactoSubmit';
+$route[$langs.'/sobre-biblat'] = 'main/sobreBiblat';
+$route[$langs.'/clase-y-periodica'] = 'main/clasePeriodica';
+$route[$langs.'/scielo'] = 'main/scielo';
 $route[$langs.'/revista/solicitud/documento'] = 'revista/solicitudDocumento';
 
 

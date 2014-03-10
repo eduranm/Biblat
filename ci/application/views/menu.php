@@ -15,10 +15,11 @@
 				<li>
 					<a href="javascript:;" title="<?php _e('¿Qué es Biblat?');?>"><?php _e('¿Qué es Biblat?');?></a>
 					<ul>
-						<li><a href="javascript:;" title="<?php _e('Biblat');?>"><?php _e('Biblat');?></a></li>
-						<li><a href="javascript:;" title="<?php _e('Clase y Periódica');?>"><?php _e('Clase y Periódica');?></a></li>
-						<li><a href="javascript:;" title="<?php _e('Tutoriales');?>"><?php _e('Tutoriales');?></a></li>
+						<li><a href="<?=site_url('sobre-biblat');?>" title="<?php _e('Biblat');?>"><?php _e('Biblat');?></a></li>
+						<li><a href="<?=site_url('clase-y-periodica');?>" title="<?php _e('Clase y Periódica');?>"><?php _e('Clase y Periódica');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Materiales de difusión');?>"><?php _e('Materiales de difusión');?></a></li>
+						<li><a href="<?=site_url('scielo');?>" title="<?php _e('SciELO');?>"><?php _e('SciELO');?></a></li>
+						<li><a href="javascript:;" title="<?php _e('Tutoriales');?>"><?php _e('Tutoriales');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Manual de indización');?>"><?php _e('Manual de indización');?></a></li>
 					</ul>
 				</li>

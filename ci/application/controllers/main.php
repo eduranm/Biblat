@@ -75,6 +75,32 @@ class Main extends CI_Controller{
 		$this->load->view('main/bibliografia');
 		$this->load->view('footer');
 	}
+	public function sobreBiblat(){
+		$data = array();
+		$data['header']['title'] = _("Biblat - Sobre Biblat");
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu');
+		$this->load->view('main/info_biblat');
+		$this->load->view('footer');
+	}
+
+	public function clasePeriodica(){
+		$data = array();
+		$data['header']['title'] = _("Biblat - CLASE y PERIÓDICA");
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu');
+		$this->load->view('main/info_clase_periodica');
+		$this->load->view('footer');
+	}
+
+	public function scielo(){
+		$data = array();
+		$data['header']['title'] = _("Biblat - Sobre SciELO");
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu');
+		$this->load->view('main/info_scielo');
+		$this->load->view('footer');
+	}
 
 	public function sitemap(){
 		$data = array();
