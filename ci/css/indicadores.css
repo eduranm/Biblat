@@ -64,3 +64,9 @@
 .ui-state-active a:visited {
 	background-position: top;
 }
+
+/*Select2*/
+#generarIndicador .select2-container{
+	display: block !important;
+	margin: 0 auto;
+}
