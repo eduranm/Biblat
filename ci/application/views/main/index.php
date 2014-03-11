@@ -17,9 +17,9 @@
 		</div>
 		<div class="rightColumn">
 			<ul class="paisesFlags">
-				<li><a href="<?=site_url("indice/pais/".slug("Internacional"));?>"><img class="flagspr flagspr-world" title="<?=$pais['pais'];?>"/></a></li>
+				<li><a href="<?=site_url("indice/pais/".slug("Internacional"));?>"><span class="flagspr flagspr-world" title="<?=$pais['pais'];?>"></span></a></li>
 <?php foreach ($paises as $pais):?>
-				<li><a href="<?=site_url("indice/pais/{$pais['paisSlug']}");?>" title="<?=$pais['pais'];?>"><img class="flagspr flagspr-<?=$pais['paisSlug'];?>" title="<?=$pais['pais'];?>"/></a></li>
+				<li><a href="<?=site_url("indice/pais/{$pais['paisSlug']}");?>" title="<?=$pais['pais'];?>"><span class="flagspr flagspr-<?=$pais['paisSlug'];?>" title="<?=$pais['pais'];?>"></span></a></li>
 <?php endforeach;?>
 			</ul>
 		</div>
