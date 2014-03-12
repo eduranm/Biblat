@@ -824,6 +824,10 @@ p {
 	margin: 0 auto;
 }
 
+.select2-container-multi .select2-choices{
+	border-radius: 4px;
+}
+
 #google-visualization-errors-all-1 {
 	display: none !important;
 }
