@@ -222,38 +222,49 @@ class Revista extends CI_Controller{
 
 	public function solicitudDocumento(){
 		$this->output->enable_profiler(false);
-		$biblatDB = $this->load->database('biblat', TRUE);
-		$config['mailtype'] = 'html';
-		$this->load->library('email');
-		$this->email->initialize($config);
-		$this->email->from('solicitud@biblat.unam.mx', 'Solicitud Biblat');
-		$this->email->to('sinfo@dgb.unam.mx');
-		//$this->email->to('achwazer@gmail.com');
-		$this->email->cc('anoguez@dgb.unam.mx');
-		$this->email->subject('Solicitud de documento Biblat');
-		$data = $_POST;
-		$data['fichaDocumento'] = $this->articulo($data['revista'], $data['articulo'], 'true');
-		$body = $this->load->view('revista/mail_solicitud', $data, TRUE);
-		$this->email->message($body);
-		$this->email->send();
+		if(isset($_POST['email']) && isset($_POST['from']) && isset($_POST['revista']) && isset($_POST['articulo'])):
+			$biblatDB = $this->load->database('biblat', TRUE);
+			$config['mailtype'] = 'html';
+			$this->load->library('email');
+			$this->email->initialize($config);
+			$this->email->from('solicitud@biblat.unam.mx', 'Solicitud Biblat');
+			$this->email->to('sinfo@dgb.unam.mx');
+			//$this->email->to('achwazer@gmail.com');
+			$this->email->cc('anoguez@dgb.unam.mx');
+			$this->email->subject('Solicitud de documento Biblat');
+			$data = $_POST;
+			$data['fichaDocumento'] = $this->articulo($data['revista'], $data['articulo'], 'true');
+			$body = $this->load->view('revista/mail_solicitud', $data, TRUE);
+			$this->email->message($body);
+			$this->email->send();
 
-		$this->email->clear();
+			$this->email->clear();
 
-		$this->email->from('anoguez@dgb.unam.mx', 'Mtra. Araceli Noguez O.');
-		$this->email->to($_POST['email']);
-		$this->email->subject('Solicitud de documento Biblat');
-		$body = $this->load->view('revista/mail_solicitud_usuario', $data, TRUE);
-		$this->email->message($body);
-		$this->email->send();
-		/*Almacenando registro en la bitácora*/
-		$database = ($data['database'] == "CLASE") ? 0 : 1;
-		$ip = (isset($_SERVER['GEOIP_ADDR'])) ? $_SERVER['GEOIP_ADDR'] : $_SERVER['REMOTE_ADDR'];
-		$pais = (isset($_SERVER['GEOIP_COUNTRY_NAME'])) ? "'{$_SERVER['GEOIP_COUNTRY_NAME']}'" : "NULL";
-		$ciudad = (isset($_SERVER['GEOIP_REGION_NAME'])) ? "'{$_SERVER['GEOIP_REGION_NAME']}'" : "NULL";
-		$session_id = $this->session->userdata('session_id');
-		$query = "INSERT INTO \"logSolicitudDocumento\"(database, sistema, nombre, email, instituto, telefono, ip, pais, ciudad, session_id)
-			VALUES ({$database}, '{$data['sistema']}', '{$data['from']}', '{$data['email']}', '{$data['instituto']}', '{$data['telefono']}', '{$ip}', {$pais}, {$ciudad}, '{$session_id}');";
-		$biblatDB->query($query);
-		//echo json_encode($_POST);
+			$this->email->from('anoguez@dgb.unam.mx', 'Mtra. Araceli Noguez O.');
+			$this->email->to($_POST['email']);
+			$this->email->subject('Solicitud de documento Biblat');
+			$body = $this->load->view('revista/mail_solicitud_usuario', $data, TRUE);
+			$this->email->message($body);
+			$this->email->send();
+			/*Almacenando registro en la bitácora*/
+			$database = ($data['database'] == "CLASE") ? 0 : 1;
+			$ip = (isset($_SERVER['GEOIP_ADDR'])) ? $_SERVER['GEOIP_ADDR'] : $_SERVER['REMOTE_ADDR'];
+			$pais = (isset($_SERVER['GEOIP_COUNTRY_NAME'])) ? "'{$_SERVER['GEOIP_COUNTRY_NAME']}'" : "NULL";
+			$ciudad = (isset($_SERVER['GEOIP_REGION_NAME'])) ? "'{$_SERVER['GEOIP_REGION_NAME']}'" : "NULL";
+			$session_id = $this->session->userdata('session_id');
+			$query = "INSERT INTO \"logSolicitudDocumento\"(database, sistema, nombre, email, instituto, telefono, ip, pais, ciudad, session_id)
+				VALUES ({$database}, '{$data['sistema']}', '{$data['from']}', '{$data['email']}', '{$data['instituto']}', '{$data['telefono']}', '{$ip}', {$pais}, {$ciudad}, '{$session_id}');";
+			$biblatDB->query($query);
+			$result = array(
+					'type' => 'success',
+					'title' => _('La solicitud ha sido enviada')
+				);
+		else:
+			$result = array(
+					'type' => 'error',
+					'title' => _('No se pudo enviar la solictud')
+				);
+		endif;
+		echo json_encode($result);
 	}
 }

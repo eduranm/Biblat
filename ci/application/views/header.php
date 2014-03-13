@@ -189,6 +189,7 @@
 				jQuery.ajax({
 					url: jQuery(this).attr("action"),
 					type: 'POST',
+					dataType: 'json',
 					data: jQuery(this).serialize(),
 					success: function(data) {
 						console.log(data)
@@ -198,9 +199,9 @@
 						});
 						jQuery('.solicitudDocumento, #sd-disable, #sd-enable').toggle();
 						jQuery.pnotify({
-							title: '<?php _e('La solicitud ha sido enviada');?>',
+							title: data.title,
 							icon: true,
-							type: 'success',
+							type: data.type,
 							sticker: false
 						});
 						return false;
