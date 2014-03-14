@@ -132,7 +132,7 @@ LANGUAGE plpgsql;
 
 
 --Vista para busquedas
-CREATE OR REPLACE VIEW "vSearch" AS SELECT 
+CREATE MATERIALIZED VIEW "mvSearch" AS SELECT 
     t.sistema, 
     t.iddatabase, 
     t.e_245 AS articulo,
@@ -162,13 +162,17 @@ CREATE OR REPLACE VIEW "vSearch" AS SELECT
     array_to_json(d."idDisciplinasArray")::text AS "idDisciplinasJSON",
     array_to_json(d."disciplinasArray")::text AS "disciplinasJSON",
     array_to_json(p."palabrasClaveArray")::text AS "palabrasClaveJSON",
-    p."palabrasClaveSlug",
-    (COALESCE(p."palabrasClaveSlug", '') || 
-        COALESCE(slug_space(t.e_245) || ' | ', '') || 
-        COALESCE(slug_space(t.e_222) || ' | ', '') || 
-        COALESCE(slug_space(t.e_008) || ' | ', '') || 
-        COALESCE(i."institucionesSlug", '') || 
-        COALESCE(a."autoresSlug", ''))  AS "generalSlug"
+    array_to_json(k."keywordArray")::text AS "keywordJSON",
+    concat(p."palabrasClaveSlug", k."keywordSlug") AS "palabrasClaveSlug",
+    concat(
+        p."palabrasClaveSlug",
+        k."keywordSlug",
+        slug_space(t.e_245) || ' | ',
+        slug_space(t.e_222) || ' | ',
+        slug_space(t.e_008) || ' | ',
+        i."institucionesSlug",
+        a."autoresSlug"
+      ) AS "generalSlug"
 FROM articulo t
     LEFT JOIN (SELECT 
             at.iddatabase, 
@@ -178,16 +182,16 @@ FROM articulo t
             array_agg(at.e_100a ORDER BY at.sec_autor) AS "autoresArray",
             string_agg(slug_space(at.e_100a), ' | ' ORDER BY at.sec_autor) || ' | ' AS "autoresSlug"
         FROM autor at
-        GROUP BY at.iddatabase, at.sistema) a 
+        GROUP BY at.iddatabase, at.sistema) a --Autores
     ON (t.iddatabase=a.iddatabase AND t.sistema=a.sistema) 
     LEFT JOIN (SELECT 
             it.iddatabase, 
             it.sistema, 
             array_agg(it.sec_institucion ORDER BY it.sec_institucion) AS "institucionesSecArray",
-            array_agg(it.e_100u ORDER BY it.sec_institucion) AS "institucionesArray",
+            array_agg(concat(it.e_100u, ', '||it.e_100v, ', '||e_100w, '. '||e_100x) ORDER BY it.sec_institucion) AS "institucionesArray",
             string_agg(slug_space(it.e_100u), ' | ' ORDER BY it.sec_institucion) || ' | ' AS "institucionesSlug"
         FROM institucion it
-        GROUP BY it.iddatabase, it.sistema) i 
+        GROUP BY it.iddatabase, it.sistema) i --Instituciones
     ON (t.iddatabase=i.iddatabase AND t.sistema=i.sistema)
     LEFT JOIN (SELECT 
             dt.iddatabase, 
@@ -204,10 +208,15 @@ FROM articulo t
         string_agg(slug_space(pt.descpalabraclave), ' | ' ORDER BY pt.descpalabraclave) || ' | ' AS "palabrasClaveSlug"
         FROM palabraclave pt
         GROUP BY pt.iddatabase, pt.sistema) p 
-    ON (t.iddatabase=p.iddatabase AND t.sistema=p.sistema);
-
-
-SELECT create_matview('"mvSearch"', '"vSearch"');
+    ON (t.iddatabase=p.iddatabase AND t.sistema=p.sistema)
+    LEFT JOIN (SELECT
+        kw.iddatabase, 
+        kw.sistema, 
+        array_agg(kw.desckeyword ORDER BY kw.desckeyword) AS "keywordArray", 
+        string_agg(slug_space(kw.desckeyword), ' | ' ORDER BY kw.desckeyword) || ' | ' AS "keywordSlug"
+        FROM keyword kw
+        GROUP BY kw.iddatabase, kw.sistema) k
+    ON (t.iddatabase=k.iddatabase AND t.sistema=k.sistema);
 
 CREATE INDEX "searchSistema_idx" ON "mvSearch"(sistema);
 CREATE INDEX "searchIdDatabase_idx" ON "mvSearch"(iddatabase);
@@ -228,69 +237,18 @@ CREATE INDEX "searchPaisSlug_idx" ON "mvSearch"("paisSlug");
 CREATE INDEX "searchInstitucionesSlug_idx" ON "mvSearch" USING gin("institucionesSlug" gin_trgm_ops);
 CREATE INDEX "searchpalabrasClaveSlug_idx" ON "mvSearch" USING gin("palabrasClaveSlug" gin_trgm_ops);
 
-CREATE OR REPLACE VIEW "vSearchFields" AS SELECT 
-    t.sistema, 
-    t.iddatabase, 
-    unnest(
-        array_cat(    
-          array_cat(
-              array_append(
-                array_append(
-                    array_append(p."palabrasClaveArray", slug_space(t.e_245)),
-                    slug_space(t.e_222)
-                ),
-                slug_space(t.e_008)
-              ),
-              i."institucionesArray"
-          ),
-          a."autoresArray"
-        )
-    ) AS "singleFields"
-FROM articulo t
-    LEFT JOIN (SELECT 
-            at.iddatabase, 
-            at.sistema, 
-            array_agg(slug_space(at.e_100a) ORDER BY at.sec_autor) AS "autoresArray"
-        FROM autor at
-        GROUP BY at.iddatabase, at.sistema) a 
-    ON (t.iddatabase=a.iddatabase AND t.sistema=a.sistema) 
-    LEFT JOIN (SELECT 
-            it.iddatabase, 
-            it.sistema, 
-            array_agg(slug_space(it.e_100u) ORDER BY it.sec_institucion) AS "institucionesArray"
-        FROM institucion it
-        GROUP BY it.iddatabase, it.sistema) i 
-    ON (t.iddatabase=i.iddatabase AND t.sistema=i.sistema)
-    LEFT JOIN (SELECT 
-        pt.iddatabase, 
-        pt.sistema, 
-        array_agg(slug_space(pt.descpalabraclave) ORDER BY pt.descpalabraclave) AS "palabrasClaveArray"
-        FROM palabraclave pt
-        GROUP BY pt.iddatabase, pt.sistema) p 
-    ON (t.iddatabase=p.iddatabase AND t.sistema=p.sistema);
-
-SELECT create_matview('"mvSearchFields"', '"vSearchFields"');
-
-CREATE INDEX "searchFieldSistema_idx" ON "mvSearchFields"(sistema);
-CREATE INDEX "searchFieldIdDatabase_idx" ON "mvSearchFields"(iddatabase);
-CREATE INDEX "searchFieldSistemaIdDatabase_idx" ON "mvSearchFields"(sistema, iddatabase);
-#CREATE INDEX "searchSingleFields_idx" ON "mvSearchFields" USING gin(("singleFields"::tsvector));
-CREATE INDEX "searchSingleFields_idx" ON "mvSearchFields" USING gin("singleFields" gin_trgm_ops);
-
 --Vista para lista de paises
-CREATE OR REPLACE VIEW "vPais" AS 
+CREATE MATERIALIZED VIEW "mvPais" AS 
 SELECT
   "paisSlug",
   pais,
   count(*) as total
-  FROM  "vSearch"
+  FROM  "mvSearch"
   GROUP BY "paisSlug", pais
   ORDER BY "paisSlug";
 
-SELECT create_matview('"mvPais"', '"vPais"');
-
 --Vista para disciplinas
-CREATE OR REPLACE VIEW "vDisciplina" AS
+CREATE MATERIALIZED VIEW "mvDisciplina" AS
 SELECT DISTINCT 
   a.id_disciplina, 
   d.disciplina, 
@@ -300,19 +258,16 @@ FROM articulo a INNER JOIN disciplinas d ON a.id_disciplina=d.id_disciplina
 GROUP BY a.id_disciplina, d.disciplina, d.slug 
 ORDER BY d.disciplina;
 
-SELECT create_matview('"mvDisciplina"', '"vDisciplina"');
-
 --Vista para las revistas por disciplina
-CREATE OR REPLACE VIEW "vDisciplinaRevistas" AS
+CREATE MATERIALIZED VIEW "mvDisciplinaRevistas" AS
 SELECT 
-  e_222 as revista, 
+  e_222 AS revista,
+  slug(e_222) AS "revistaSlug",
   id_disciplina, 
-  count(*) as documentos 
+  count(*) AS documentos 
 FROM articulo 
 GROUP BY id_disciplina, e_222 
 ORDER BY id_disciplina;
-
-SELECT create_matview('"mvDisciplinaRevistas"', '"vDisciplinaRevistas"');
 
 
 --Vista para mostrar solo los documentos que sean artículos y mostrando el año en una cadena de 4 digitos
@@ -406,7 +361,7 @@ AND dp.sistema=ad.sistema
 GROUP BY dp.iddatabase, dp.sistema, dp.e_100x;
 
 --Autores en revista
-CREATE OR REPLACE VIEW "vAutorRevista" AS
+CREATE MATERIALIZED VIEW "mvAutorRevista" AS
 SELECT 
   ar."revistaSlug",
   ar.anio,
@@ -416,9 +371,8 @@ FROM "vAutorIndicador" ai
 INNER JOIN "vArticulos" ar ON ai.iddatabase=ar.iddatabase AND ai.sistema=ar.sistema
 GROUP BY "revistaSlug", anio, autor
 ORDER BY "revistaSlug", anio, autor;
-SELECT create_matview('"mvAutorRevista"', '"vAutorRevista"');
 
-CREATE OR REPLACE VIEW "vAutorPais" AS
+CREATE MATERIALIZED VIEW "mvAutorPais" AS
 SELECT 
   ar."paisRevistaSlug",
   ar.anio,
@@ -428,10 +382,9 @@ FROM "vAutorIndicador" ai
 INNER JOIN "vArticulos" ar ON ai.iddatabase=ar.iddatabase AND ai.sistema=ar.sistema
 GROUP BY "paisRevistaSlug", anio, autor
 ORDER BY "paisRevistaSlug", anio, autor;
-SELECT create_matview('"mvAutorPais"', '"vAutorPais"');
 
 --Indice de coautoria por revista
-CREATE OR REPLACE VIEW "vIndiceCoautoriaPriceRevista" AS
+CREATE MATERIALIZED VIEW "mvIndiceCoautoriaPriceRevista" AS
 SELECT max(ar.revista) AS revista,
        ar."revistaSlug",
        ar.anio,
@@ -444,12 +397,11 @@ INNER JOIN "vArticulos" ar ON au.iddatabase=ar.iddatabase AND au.sistema=ar.sist
 GROUP BY "revistaSlug", anio
 ORDER BY "revistaSlug", anio;
 
-SELECT create_matview('"mvIndiceCoautoriaPriceRevista"', '"vIndiceCoautoriaPriceRevista"');
 CREATE INDEX "indiceCoautoriaPriceRevista_resvistaSlug" ON "mvIndiceCoautoriaPriceRevista"("revistaSlug");
 CREATE INDEX "indiceCoautoriaPriceRevista_anio" ON "mvIndiceCoautoriaPriceRevista"(anio);
 
 --Indice de coautoria por país de la revista
-CREATE OR REPLACE VIEW "vIndiceCoautoriaPricePaisRevista" AS
+CREATE MATERIALIZED VIEW "mvIndiceCoautoriaPricePaisRevista" AS
 SELECT ar.id_disciplina, max(ar."paisRevista") AS "paisRevista", ar."paisRevistaSlug", ar.anio, 
     count(*) AS documentos, sum(au.autores) AS autores, 
     sum(au.autores) / count(*)::numeric AS coautoria, 
@@ -459,14 +411,13 @@ SELECT ar.id_disciplina, max(ar."paisRevista") AS "paisRevista", ar."paisRevista
   GROUP BY ar.id_disciplina, ar."paisRevistaSlug", ar.anio
   ORDER BY ar.id_disciplina, ar."paisRevistaSlug", ar.anio;
 
-SELECT create_matview('"mvIndiceCoautoriaPricePaisRevista"', '"vIndiceCoautoriaPricePaisRevista"');
 CREATE INDEX "indiceCoautoriaPricePaisRevista_paisRevistaSlug" ON "mvIndiceCoautoriaPricePaisRevista"("paisRevistaSlug");
 CREATE INDEX "indiceCoautoriaPricePaisRevista_anio" ON "mvIndiceCoautoriaPricePaisRevista"(anio);
 CREATE INDEX "indiceCoautoriaPricePaisRevista_idDisciplina" ON "mvIndiceCoautoriaPricePaisRevista"(id_disciplina);
 
  
 --Indice de coautoria por país del autor
-CREATE OR REPLACE VIEW "vIndiceCoautoriaPricePaisAutor" AS
+CREATE MATERIALIZED VIEW "mvIndiceCoautoriaPricePaisAutor" AS
 SELECT 
   au.e_100x AS "paisAutor", 
   slug(au.e_100x) AS "paisAutorSlug", 
@@ -482,13 +433,12 @@ INNER JOIN  "vArticulos" ar
   GROUP BY "paisAutor", id_disciplina, anio
   ORDER BY "paisAutor", id_disciplina, anio;
 
-SELECT create_matview('"mvIndiceCoautoriaPricePaisAutor"', '"vIndiceCoautoriaPricePaisAutor"');
 CREATE INDEX "indiceCoautoriaPricePaisAutor_paisAutorSlug" ON "mvIndiceCoautoriaPricePaisAutor"("paisAutorSlug");
 CREATE INDEX "indiceCoautoriaPricePaisAutor_anio" ON "mvIndiceCoautoriaPricePaisAutor"(anio);
 CREATE INDEX "indiceCoautoriaPricePaisAutor_idDisciplina" ON "mvIndiceCoautoriaPricePaisAutor"(id_disciplina);
 
 --Vista para revistas con años continuos mayores a 4
-CREATE OR REPLACE VIEW "vPeriodosRevistaCoautoriaPriceZakutina" AS
+CREATE MATERIALIZED VIEW "mvPeriodosRevistaCoautoriaPriceZakutina" AS
 SELECT dr.revista,
        dr."revistaSlug",
        dr.id_disciplina,
@@ -497,39 +447,35 @@ SELECT dr.revista,
 FROM
   (SELECT "revistaSlug",
           anios_continuos(array_agg(anio))
-   FROM "vIndiceCoautoriaPriceRevista"
+   FROM "mvIndiceCoautoriaPriceRevista"
    GROUP BY "revistaSlug") AS ac --Años continuos por revista
-INNER JOIN "vDisciplinaRevistas" dr ON ac."revistaSlug"=dr."revistaSlug"
+INNER JOIN "mvDisciplinaRevistas" dr ON ac."revistaSlug"=dr."revistaSlug"
 WHERE anios_continuos > 4;
 
-SELECT create_matview('"mvPeriodosRevistaCoautoriaPriceZakutina"', '"vPeriodosRevistaCoautoriaPriceZakutina"');
-
 --Vista para paises con años continuos mayores a 4
-CREATE OR REPLACE VIEW "vPeriodosPaisRevistaCoautoriaPriceZakutina" AS
+CREATE MATERIALIZED VIEW "mvPeriodosPaisRevistaCoautoriaPriceZakutina" AS
 SELECT *
 FROM
   (SELECT id_disciplina,
     max("paisRevista") AS "paisRevista",
           "paisRevistaSlug",
           anios_continuos(array_agg(anio))
-   FROM "vIndiceCoautoriaPricePaisRevista"
+   FROM "mvIndiceCoautoriaPricePaisRevista"
    GROUP BY id_disciplina,
       "paisRevistaSlug"
    ORDER BY id_disciplina,
      "paisRevistaSlug") AS ac --Años continuos por revista
 WHERE anios_continuos > 4;
 
-SELECT create_matview('"mvPeriodosPaisRevistaCoautoriaPriceZakutina"', '"vPeriodosPaisRevistaCoautoriaPriceZakutina"');
-
 --Vista para autores con años continuos mayores a 4
-CREATE OR REPLACE VIEW "vPeriodosPaisAutorCoautoriaPriceZakutina" AS
+CREATE MATERIALIZED VIEW "mvPeriodosPaisAutorCoautoriaPriceZakutina" AS
 SELECT * 
 FROM
   (SELECT "paisAutor",
     "paisAutorSlug",
     id_disciplina,
     anios_continuos(array_agg(anio))
-  FROM "vIndiceCoautoriaPricePaisAutor"
+  FROM "mvIndiceCoautoriaPricePaisAutor"
   GROUP BY "paisAutorSlug",
     "paisAutor",
     id_disciplina
@@ -537,17 +483,15 @@ FROM
     id_disciplina) AS ac --Años continuos por revista
 WHERE anios_continuos > 4;
 
-SELECT create_matview('"mvPeriodosPaisAutorCoautoriaPriceZakutina"', '"vPeriodosPaisAutorCoautoriaPriceZakutina"');
-
 --Vista para tasa de coutoria por revista
-CREATE OR REPLACE VIEW "vTasaCoautoriaRevista" AS
+CREATE MATERIALIZED VIEW "mvTasaCoautoriaRevista" AS
 SELECT td.revista,
        td."revistaSlug",
        td.anio,
        td.documentos AS "totalDocumentos",
        tda.documentos AS "documentosMultiple",
        (tda.documentos::numeric/td.documentos::numeric) AS "tasaCoautoria"
-FROM "vIndiceCoautoriaPriceRevista" td --Total de documentos
+FROM "mvIndiceCoautoriaPriceRevista" td --Total de documentos
 INNER JOIN
   (SELECT ar."revistaSlug",
           ar.anio,
@@ -557,13 +501,11 @@ INNER JOIN
    GROUP BY "revistaSlug", anio) AS tda --Total de documentos con mas de un autor
 ON td."revistaSlug"=tda."revistaSlug" AND td.anio=tda.anio;
 
-
-SELECT create_matview('"mvTasaCoautoriaRevista"', '"vTasaCoautoriaRevista"');
 CREATE INDEX "tasaCoautoriaRevista_resvistaSlug" ON "mvTasaCoautoriaRevista"("revistaSlug");
 CREATE INDEX "tasaCoautoriaRevista_anio" ON "mvTasaCoautoriaRevista"(anio);
 
 --Vista para tasa de coutoria por pais de la revista
-CREATE OR REPLACE VIEW "vTasaCoautoriaPaisRevista" AS
+CREATE MATERIALIZED VIEW "mvTasaCoautoriaPaisRevista" AS
 SELECT td.id_disciplina,
        td."paisRevista",
        td."paisRevistaSlug",
@@ -571,7 +513,7 @@ SELECT td.id_disciplina,
        td.documentos AS "totalDocumentos",
        tda.documentos AS "documentosMultiple",
        (tda.documentos::numeric/td.documentos::numeric) AS "tasaCoautoria"
-FROM "vIndiceCoautoriaPricePaisRevista" td --Total de documentos
+FROM "mvIndiceCoautoriaPricePaisRevista" td --Total de documentos
 INNER JOIN
   (SELECT ar.id_disciplina,
     ar."paisRevistaSlug",
@@ -582,13 +524,12 @@ INNER JOIN
    GROUP BY ar.id_disciplina, "paisRevistaSlug", anio) AS tda --Total de documentos con mas de un autor
 ON td.id_disciplina=tda.id_disciplina AND td."paisRevistaSlug"=tda."paisRevistaSlug" AND td.anio=tda.anio;
 
-SELECT create_matview('"mvTasaCoautoriaPaisRevista"', '"vTasaCoautoriaPaisRevista"');
 CREATE INDEX "tasaCoautoriaPaisRevista_resvistaSlug" ON "mvTasaCoautoriaPaisRevista"("paisRevistaSlug");
 CREATE INDEX "tasaCoautoriaPaisRevista_anio" ON "mvTasaCoautoriaPaisRevista"(anio);
 CREATE INDEX "tasaCoautoriaPaisRevista_idDisciplina" ON "mvTasaCoautoriaPaisRevista"(id_disciplina);
 
 --Vista para tasa de coutoria por pais del autor
-CREATE OR REPLACE VIEW "vTasaCoautoriaPaisAutor" AS
+CREATE MATERIALIZED VIEW "mvTasaCoautoriaPaisAutor" AS
 SELECT 
   td."paisAutor",
   td."paisAutorSlug",
@@ -597,7 +538,7 @@ SELECT
   td.documentos AS "totalDocumentos",
   tda.documentos AS "documentosMultiple",
   (tda.documentos::numeric/td.documentos::numeric) AS "tasaCoautoria"
-FROM "vIndiceCoautoriaPricePaisAutor" td --Total de documentos
+FROM "mvIndiceCoautoriaPricePaisAutor" td --Total de documentos
 INNER JOIN
   (SELECT 
     slug(au.e_100x) AS "paisAutorSlug", 
@@ -610,13 +551,12 @@ INNER JOIN
   GROUP BY "paisAutorSlug", id_disciplina, anio) AS tda --Documentos con más de un autor
 ON td."paisAutorSlug"=tda."paisAutorSlug" AND td.id_disciplina=tda.id_disciplina AND td.anio=tda.anio;
 
-SELECT create_matview('"mvTasaCoautoriaPaisAutor"', '"vTasaCoautoriaPaisAutor"');
 CREATE INDEX "tasaCoautoriaPaisAutor_resvistaSlug" ON "mvTasaCoautoriaPaisAutor"("paisAutorSlug");
 CREATE INDEX "tasaCoautoriaPaisAutor_anio" ON "mvTasaCoautoriaPaisAutor"(anio);
 CREATE INDEX "tasaCoautoriaPaisAutor_idDisciplina" ON "mvTasaCoautoriaPaisAutor"(id_disciplina);
 
 -- Vista para periodos en reivistas para los indicadores Tasa de coautoría e Indice Lawani
-CREATE OR REPLACE VIEW "vPeriodosRevistaTasaLawani" AS
+CREATE MATERIALIZED VIEW "mvPeriodosRevistaTasaLawani" AS
 SELECT dr.revista,
        dr."revistaSlug",
        dr.id_disciplina,
@@ -625,22 +565,20 @@ SELECT dr.revista,
 FROM
   (SELECT "revistaSlug",
           anios_continuos(array_agg(anio))
-   FROM "vTasaCoautoriaRevista"
+   FROM "mvTasaCoautoriaRevista"
    GROUP BY "revistaSlug") AS ac --Años continuos por revista
-INNER JOIN "vDisciplinaRevistas" dr ON ac."revistaSlug"=dr."revistaSlug"
+INNER JOIN "mvDisciplinaRevistas" dr ON ac."revistaSlug"=dr."revistaSlug"
 WHERE anios_continuos > 4;
 
-SELECT create_matview('"mvPeriodosRevistaTasaLawani"', '"vPeriodosRevistaTasaLawani"');
-
 -- Vista para periodos en paises para los indicadores Tasa de coautoría e Indice Lawani
-CREATE OR REPLACE VIEW "vPeriodosPaisRevistaTasaLawani" AS
+CREATE MATERIALIZED VIEW "mvPeriodosPaisRevistaTasaLawani" AS
 SELECT *
 FROM
   (SELECT "paisRevista",
           "paisRevistaSlug",
           id_disciplina,
           anios_continuos(array_agg(anio))
-   FROM "vTasaCoautoriaPaisRevista"
+   FROM "mvTasaCoautoriaPaisRevista"
    GROUP BY "paisRevistaSlug",
             "paisRevista",
             id_disciplina
@@ -648,17 +586,15 @@ FROM
             id_disciplina) AS ac --Años continuos por revista
 WHERE anios_continuos > 4;
 
-SELECT create_matview('"mvPeriodosPaisRevistaTasaLawani"', '"vPeriodosPaisRevistaTasaLawani"');
-
 -- Vista para periodos de autores para los indicadores Tasa de coautoría e Indice Lawani
-CREATE OR REPLACE VIEW "vPeriodosPaisAutorTasaLawani" AS
+CREATE MATERIALIZED VIEW "mvPeriodosPaisAutorTasaLawani" AS
 SELECT *
 FROM
   (SELECT "paisAutor",
     "paisAutorSlug",
     id_disciplina,
     anios_continuos(array_agg(anio))
-  FROM "vTasaCoautoriaPaisAutor"
+  FROM "mvTasaCoautoriaPaisAutor"
   GROUP BY "paisAutorSlug",
     "paisAutor",
     id_disciplina
@@ -666,17 +602,15 @@ FROM
     id_disciplina) AS ac --Años continuos por revista
   WHERE anios_continuos > 4;
 
-SELECT create_matview('"mvPeriodosPaisAutorTasaLawani"', '"vPeriodosPaisAutorTasaLawani"');
-
 --Vista lawani por revista
-CREATE OR REPLACE VIEW "vLawaniRevista" AS
+CREATE MATERIALIZED VIEW "mvLawaniRevista" AS
 SELECT td.revista,
        td."revistaSlug",
        td.anio,
        td.documentos AS "totalDocumentos",
        sad."autoresXdocumentos",
        sad."autoresXdocumentos"::numeric/td.documentos::numeric AS lawani
-FROM "vIndiceCoautoriaPriceRevista" td --Total de documentos
+FROM "mvIndiceCoautoriaPriceRevista" td --Total de documentos
 INNER JOIN
   (SELECT "revistaSlug",
           anio,
@@ -697,10 +631,8 @@ GROUP BY "revistaSlug",
 ON td."revistaSlug"=sad."revistaSlug"
 AND td.anio=sad.anio;
 
-SELECT create_matview('"mvLawaniRevista"', '"vLawaniRevista"');
-
 --Vista lawani por país de la revista
-CREATE OR REPLACE VIEW "vLawaniPaisRevista" AS
+CREATE MATERIALIZED VIEW "mvLawaniPaisRevista" AS
 SELECT td.id_disciplina,
        td."paisRevista",
        td."paisRevistaSlug",
@@ -708,7 +640,7 @@ SELECT td.id_disciplina,
        td.documentos AS "totalDocumentos",
        sad."autoresXdocumentos",
        sad."autoresXdocumentos"::numeric/td.documentos::numeric AS lawani
-FROM "vIndiceCoautoriaPricePaisRevista" td --Total de documentos
+FROM "mvIndiceCoautoriaPricePaisRevista" td --Total de documentos
 INNER JOIN
   (SELECT id_disciplina, 
    "paisRevistaSlug",
@@ -733,18 +665,15 @@ GROUP BY id_disciplina,
 ON td.id_disciplina=sad.id_disciplina AND td."paisRevistaSlug"=sad."paisRevistaSlug"
 AND td.anio=sad.anio;
 
-SELECT create_matview('"mvLawaniPaisRevista"', '"vLawaniPaisRevista"');
-
-
 --Vista lawani por país del autor
-CREATE OR REPLACE VIEW "vLawaniPaisAutor" AS
+CREATE MATERIALIZED VIEW "mvLawaniPaisAutor" AS
 SELECT
   td."paisAutor",
   td."paisAutorSlug",
   td.id_disciplina,
   td.anio,
   sadp."autoresXdocumentos"::numeric/td.documentos::numeric AS lawani 
-FROM "vIndiceCoautoriaPricePaisAutor" td --Total de documentos
+FROM "mvIndiceCoautoriaPricePaisAutor" td --Total de documentos
 INNER JOIN
   (SELECT 
     "paisAutorSlug",
@@ -765,10 +694,8 @@ INNER JOIN
   GROUP BY "paisAutorSlug", id_disciplina, anio) AS sadp --Suma de autores por documentos en pais, disciplina y año
   ON td."paisAutorSlug"=sadp."paisAutorSlug" AND td.id_disciplina=sadp.id_disciplina AND td.anio=sadp.anio;
 
-SELECT create_matview('"mvLawaniPaisAutor"', '"vLawaniPaisAutor"');
-
 -- Vista para inide subramayan por revista
-CREATE OR REPLACE VIEW "vSubramayanRevista" AS
+CREATE MATERIALIZED VIEW "mvSubramayanRevista" AS
 SELECT
   am.revista,
   am."revistaSlug",
@@ -793,10 +720,8 @@ INNER JOIN
    GROUP BY "revistaSlug", anio) au --Autores unicos
 ON am."revistaSlug"=au."revistaSlug" AND am.anio=au.anio;
 
-SELECT create_matview('"mvSubramayanRevista"', '"vSubramayanRevista"');
-
 --Vista para indice subramayan por país de la revista
-CREATE OR REPLACE VIEW "vSubramayanPaisRevista" AS
+CREATE MATERIALIZED VIEW "mvSubramayanPaisRevista" AS
 SELECT
   am.id_disciplina, 
   am."paisRevista",
@@ -824,10 +749,8 @@ INNER JOIN
    GROUP BY id_disciplina, "paisRevistaSlug", anio) au --Autores unicos
 ON am.id_disciplina=au.id_disciplina AND am."paisRevistaSlug"=au."paisRevistaSlug" AND am.anio=au.anio;
 
-SELECT create_matview('"mvSubramayanPaisRevista"', '"vSubramayanPaisRevista"');
-
 -- Vista para periodos en reivistas para en indicador subramayab
-CREATE OR REPLACE VIEW "vPeriodosRevistaSubramayan" AS
+CREATE MATERIALIZED VIEW "mvPeriodosRevistaSubramayan" AS
 SELECT dr.revista,
        dr."revistaSlug",
        dr.id_disciplina,
@@ -836,22 +759,20 @@ SELECT dr.revista,
 FROM
   (SELECT "revistaSlug",
           anios_continuos(array_agg(anio))
-   FROM "vSubramayanRevista"
+   FROM "mvSubramayanRevista"
    GROUP BY "revistaSlug") AS ac --Años continuos por revista
-INNER JOIN "vDisciplinaRevistas" dr ON ac."revistaSlug"=dr."revistaSlug"
+INNER JOIN "mvDisciplinaRevistas" dr ON ac."revistaSlug"=dr."revistaSlug"
 WHERE anios_continuos > 4;
 
-SELECT create_matview('"mvPeriodosRevistaSubramayan"', '"vPeriodosRevistaSubramayan"');
-
 --Vista para periodos en paises para el indicador subramayan
-CREATE OR REPLACE VIEW "vPeriodosPaisRevistaSubramayan" AS
+CREATE MATERIALIZED VIEW "mvPeriodosPaisRevistaSubramayan" AS
 SELECT *
 FROM
   (SELECT "paisRevista",
           "paisRevistaSlug",
           id_disciplina,
           anios_continuos(array_agg(anio))
-   FROM "vSubramayanPaisRevista"
+   FROM "mvSubramayanPaisRevista"
    GROUP BY "paisRevistaSlug",
             "paisRevista",
             id_disciplina
@@ -859,19 +780,16 @@ FROM
             id_disciplina) AS ac --Años continuos por revista
 WHERE anios_continuos > 4;
 
-
-SELECT create_matview('"mvPeriodosPaisRevistaSubramayan"', '"vPeriodosPaisRevistaSubramayan"');
-
 -- Vista para inidice zakutina por revista
 
-CREATE OR REPLACE VIEW "vZakutinaRevista" AS
+CREATE MATERIALIZED VIEW "mvZakutinaRevista" AS
 SELECT td.revista,
        td."revistaSlug",
        td.anio,
        td.documentos AS "totalDocumentos",
        t.titulos,
        (td.documentos::numeric/t.titulos::numeric) AS zakutina
-FROM "vIndiceCoautoriaPriceRevista" td --Total de documentos
+FROM "mvIndiceCoautoriaPriceRevista" td --Total de documentos
 INNER JOIN
 (SELECT "revistaSlug", anio, count(*) AS titulos FROM (SELECT "revistaSlug", anio, e_300a, e_300b FROM 
 "vAutoresDocumento" ad 
@@ -883,10 +801,8 @@ GROUP BY "revistaSlug", anio, e_300a, e_300b) ravn -- Revista, año, volumen, nu
 GROUP BY "revistaSlug", anio) t --Titulos por revista al año
 ON td."revistaSlug"=t."revistaSlug" AND td.anio=t.anio;
 
-SELECT create_matview('"mvZakutinaRevista"', '"vZakutinaRevista"');
-
 --Vista para indice zakutina por país de la revista
-CREATE OR REPLACE VIEW "vZakutinaPaisRevista" AS
+CREATE MATERIALIZED VIEW "mvZakutinaPaisRevista" AS
 SELECT td.id_disciplina,
        td."paisRevista",
        td."paisRevistaSlug",
@@ -894,7 +810,7 @@ SELECT td.id_disciplina,
        td.documentos AS "totalDocumentos",
        t.titulos,
        (td.documentos::numeric/t.titulos::numeric) AS zakutina
-FROM "vIndiceCoautoriaPricePaisRevista" td --Total de documentos
+FROM "mvIndiceCoautoriaPricePaisRevista" td --Total de documentos
 INNER JOIN
   (SELECT id_disciplina,
     "paisRevistaSlug",
@@ -919,10 +835,8 @@ GROUP BY id_disciplina, "paisRevistaSlug",
 ON td.id_disciplina=t.id_disciplina AND td."paisRevistaSlug"=t."paisRevistaSlug"
 AND td.anio=t.anio;
 
-SELECT create_matview('"mvZakutinaPaisRevista"', '"vZakutinaPaisRevista"');
-
 --Vista para indice Pratt
-CREATE OR REPLACE VIEW "vPratt" AS
+CREATE MATERIALIZED VIEW "mvPratt" AS
 SELECT 
   id_disciplina,
   max(revista) AS revista,
@@ -972,11 +886,9 @@ GROUP BY "revistaSlug", id_disciplina, p.descpalabraclave) fd --Frecuencia del d
 ON ad."revistaSlug"=fd."revistaSlug" AND ad.id_disciplina=fd.id_disciplina) fdr
 GROUP BY id_disciplina, "revistaSlug";
 
-SELECT create_matview('"mvPratt"', '"vPratt"');
-
 --Bradford
 
-CREATE OR REPLACE VIEW "vDocumentosBradford" AS
+CREATE MATERIALIZED VIEW "mvDocumentosBradford" AS
 SELECT 
   a.iddatabase,
   a.sistema
@@ -984,8 +896,6 @@ FROM "vAutoresDocumento" ad
 INNER JOIN "vArticulos" a
   ON ad.iddatabase=a.iddatabase AND ad.sistema=a.sistema
 GROUP BY a."revistaSlug", a.iddatabase, a.sistema;
-
-SELECT create_matview('"mvDocumentosBradford"', '"vDocumentosBradford"');
 
 CREATE OR REPLACE VIEW "vDocumentosBradfordFull" AS
 SELECT   
@@ -1011,7 +921,7 @@ FROM "mvDocumentosBradford" db
 INNER JOIN "mvSearch" s ON 
 db.iddatabase=s.iddatabase AND db.sistema=s.sistema;
 
-CREATE OR REPLACE VIEW "vArticulosDisciplinaRevista" AS
+CREATE MATERIALIZED VIEW "mvArticulosDisciplinaRevista" AS
 SELECT * FROM
 (SELECT 
     a.id_disciplina, 
@@ -1022,8 +932,6 @@ SELECT * FROM
   INNER JOIN "vArticulos" a
     ON ad.iddatabase=a.iddatabase AND ad.sistema=a.sistema
   GROUP BY a.id_disciplina, a."revistaSlug") adr ORDER BY id_disciplina, articulos DESC;
-
-SELECT create_matview('"mvArticulosDisciplinaRevista"', '"vArticulosDisciplinaRevista"');
 
 CREATE OR REPLACE VIEW "vBradfordRevista" AS
 SELECT 
@@ -1042,7 +950,7 @@ FROM "mvArticulosDisciplinaRevista"
 GROUP BY id_disciplina, articulos) adrc; --Articulos por disciplina, revista, acumulados
 
 --Bradford institucion
-CREATE OR REPLACE VIEW "vArticulosDisciplinaInstitucion" AS
+CREATE MATERIALIZED VIEW "mvArticulosDisciplinaInstitucion" AS
 SELECT * FROM
 (SELECT 
       id_disciplina,
@@ -1063,9 +971,6 @@ SELECT * FROM
       GROUP BY i.iddatabase, i.sistema, a.id_disciplina, "institucionSlug") ai --Articulo institucion
     GROUP BY id_disciplina, "institucionSlug") adi ORDER BY id_disciplina, articulos DESC;
 
-SELECT create_matview('"mvArticulosDisciplinaInstitucion"', '"vArticulosDisciplinaInstitucion"');
-
-
 CREATE OR REPLACE VIEW "vBradfordInstitucion" AS
 SELECT 
   * ,
@@ -1080,10 +985,10 @@ FROM
     --articulos * count(*) AS "articulosXfrecuencia",
     sum(articulos * count(*)) OVER (PARTITION BY id_disciplina ORDER BY articulos DESC) AS "articulosXfrecuenciaAcumulado"
   FROM "mvArticulosDisciplinaInstitucion"
-  GROUP BY id_disciplina, articulos) adic --Articulos por disciplina, revista, acumulados
+  GROUP BY id_disciplina, articulos) adic; --Articulos por disciplina, revista, acumulados
 
 --Autores por revista, pais
-CREATE OR REPLACE VIEW "vAutoresRevistaPais" AS
+CREATE MATERIALIZED VIEW "mvAutoresRevistaPais" AS
 SELECT 
   max(ar.revista) AS revista,
   ar."revistaSlug",
@@ -1103,10 +1008,8 @@ GROUP BY a.iddatabase, a.sistema, slug(i.e_100x)) adp --Autores por documento y 
 INNER JOIN "vArticulos" ar ON adp.iddatabase=ar.iddatabase AND adp.sistema=ar.sistema
 GROUP BY ar."revistaSlug", adp."paisAutorSlug";
 
-SELECT create_matview('"mvAutoresRevistaPais"', '"vAutoresRevistaPais"');
-
 --Productividad exogena
-CREATE OR REPLACE VIEW "vProductividadExogena" AS
+CREATE MATERIALIZED VIEW "mvProductividadExogena" AS
 SELECT 
   dr.id_disciplina,
   max(dr.revista) AS revista,
@@ -1125,22 +1028,18 @@ FROM
   GROUP BY ar.id_disciplina, "revistaSlug" HAVING count(*) > 25
   ORDER BY "revistaSlug") dr --Documentos por revista
 INNER JOIN 
-  "vAutoresRevistaPais" arp ON dr."revistaSlug"=arp."revistaSlug" AND dr."paisRevistaSlug"!=arp."paisAutorSlug"
+  "mvAutoresRevistaPais" arp ON dr."revistaSlug"=arp."revistaSlug" AND dr."paisRevistaSlug"!=arp."paisAutorSlug"
 GROUP BY dr.id_disciplina, dr."revistaSlug", documentos
 ORDER BY dr.id_disciplina, dr."revistaSlug";
 
-SELECT create_matview('"mvProductividadExogena"', '"vProductividadExogena"');
-
 --Frecuencias--
 --Documentos por autor
-CREATE OR REPLACE VIEW "vFrecuenciaAutorDocumentos" AS
+CREATE MATERIALIZED VIEW "mvFrecuenciaAutorDocumentos" AS
 SELECT 
   max(e_100a) AS autor, 
   slug as "autorSlug", 
   count(DISTINCT (iddatabase, sistema)) AS documentos 
 FROM autor GROUP BY slug ORDER BY documentos DESC, "autorSlug";
-
-SELECT create_matview('"mvFrecuenciaAutorDocumentos"', '"vFrecuenciaAutorDocumentos"');
 
 CREATE INDEX "frecuencuaAutorDocumentos_autor" ON "mvFrecuenciaAutorDocumentos"(autor);
 CREATE INDEX "frecuencuaAutorDocumentos_documentos" ON "mvFrecuenciaAutorDocumentos"(documentos);
@@ -1179,7 +1078,7 @@ SELECT
   max(revista) AS revista,
   "revistaSlug"
 FROM institucion i
-INNER JOIN "vSearch" s 
+INNER JOIN "mvSearch" s 
   ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema
 GROUP BY "institucionSlug", "revistaSlug";
 
@@ -1196,7 +1095,7 @@ INNER JOIN "autor" a
 GROUP BY "institucionSlug", "autorSlug";
 
 --Autores, documentos, revistas y paises por institucion
-CREATE OR REPLACE VIEW "vFrecuenciaInstitucionDARP" AS
+CREATE MATERIALIZED VIEW "mvFrecuenciaInstitucionDARP" AS
 SELECT 
   irpd.institucion, 
   irpd."institucionSlug", 
@@ -1212,7 +1111,7 @@ FROM
     count(DISTINCT s."paisSlug") AS paises,
     count(DISTINCT (s.iddatabase, s.sistema)) AS documentos
      FROM institucion i
-     JOIN "vSearch" s ON i.iddatabase = s.iddatabase AND i.sistema=s.sistema
+     JOIN "mvSearch" s ON i.iddatabase = s.iddatabase AND i.sistema=s.sistema
     GROUP BY i.slug) irpd --Institucion revistas, documentos, paises
 INNER JOIN 
   (SELECT
@@ -1226,13 +1125,11 @@ INNER JOIN
   GROUP BY i.slug) ia --Institucion autores
 ON irpd."institucionSlug"=ia."institucionSlug";
 
-SELECT create_matview('"mvFrecuenciaInstitucionDARP"', '"vFrecuenciaInstitucionDARP"');
-
 CREATE INDEX "idx_fInstitucionDARPInstitucion" ON "mvFrecuenciaInstitucionDARP"(institucion);
 CREATE INDEX "idx_fInstitucionDARPDocumentos" ON "mvFrecuenciaInstitucionDARP"(documentos);
 
 --Documentos por institucion -> país de publicación
-CREATE OR REPLACE VIEW "vFrecuenciaInstitucionPais" AS
+CREATE MATERIALIZED VIEW "mvFrecuenciaInstitucionPais" AS
 SELECT 
   max(i.e_100u) AS institucion,
   i.slug AS "institucionSlug",
@@ -1240,14 +1137,13 @@ SELECT
   "paisSlug",
   count(DISTINCT (s.iddatabase, s.sistema)) AS documentos
 FROM institucion i
-INNER JOIN "vSearch" s 
+INNER JOIN "mvSearch" s 
   ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema
 GROUP BY "institucionSlug", "paisSlug";
 
-SELECT create_matview('"mvFrecuenciaInstitucionPais"', '"vFrecuenciaInstitucionPais"');
 
 --Documentos por institucion -> revista
-CREATE OR REPLACE VIEW "vFrecuenciaInstitucionRevista" AS
+CREATE MATERIALIZED VIEW "mvFrecuenciaInstitucionRevista" AS
 SELECT 
   max(i.e_100u) AS institucion,
   i.slug AS "institucionSlug",
@@ -1255,14 +1151,13 @@ SELECT
   "revistaSlug",
   count(DISTINCT (s.iddatabase, s.sistema)) AS documentos
 FROM institucion i
-INNER JOIN "vSearch" s 
+INNER JOIN "mvSearch" s 
   ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema
 GROUP BY "institucionSlug", "revistaSlug";
 
-SELECT create_matview('"mvFrecuenciaInstitucionRevista"', '"vFrecuenciaInstitucionRevista"');
 
 --Documentos por institucion -> autor
-CREATE OR REPLACE VIEW "vFrecuenciaInstitucionAutor" AS
+CREATE MATERIALIZED VIEW "mvFrecuenciaInstitucionAutor" AS
 SELECT
     max(i.e_100u) AS institucion,
     i.slug AS "institucionSlug",
@@ -1276,10 +1171,8 @@ SELECT
     i.sec_autor=a.sec_autor
   GROUP BY i.slug, a.slug;
 
-SELECT create_matview('"mvFrecuenciaInstitucionAutor"', '"vFrecuenciaInstitucionAutor"');
-
 --Institucion documentos
-CREATE OR REPLACE VIEW "vInstucionDocumentos" AS
+CREATE MATERIALIZED VIEW "mvInstucionDocumentos" AS
 SELECT 
   s.sistema,
   s.iddatabase,
@@ -1302,15 +1195,13 @@ SELECT
   "institucionesSecJSON",
   "institucionesJSON" 
 FROM institucion i 
-INNER JOIN "vSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema;
-
-SELECT create_matview('"mvInstucionDocumentos"', '"vInstucionDocumentos"');
+INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema;
 
 CREATE INDEX "idx_institucionDocumentos" ON "mvInstucionDocumentos"(iddatabase, sistema);
 CREATE INDEX "idx_institucionDocumentosinstitucionSlug" ON "mvInstucionDocumentos"("institucionSlug");
 
 --Institucion->autor documentos--
-CREATE OR REPLACE VIEW "vInstucionAutorDocumentos" AS
+CREATE MATERIALIZED VIEW "mvInstucionAutorDocumentos" AS
 SELECT
   s.sistema,
   s.iddatabase,
@@ -1337,13 +1228,12 @@ SELECT
     i.iddatabase=a.iddatabase AND
     i.sistema=a.sistema AND
     i.sec_autor=a.sec_autor
-  INNER JOIN "vSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema;
+  INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema;
 
-SELECT create_matview('"mvInstucionAutorDocumentos"', '"vInstucionAutorDocumentos"');
 
 
 --Frecuencia Pais de afiliacion del autor, total de documentos, autores, instituciones
-CREATE OR REPLACE VIEW "vFrecuenciaPaisAfiliacion" AS
+CREATE MATERIALIZED VIEW "mvFrecuenciaPaisAfiliacion" AS
 SELECT 
   max(e_100x) AS "paisInstitucion", 
   "paisInstitucionSlug", 
@@ -1357,12 +1247,8 @@ LEFT JOIN autor a ON
   i.sec_autor=a.sec_autor
 WHERE i.slug IS NOT NULL AND i.e_100x IS NOT NULL GROUP BY "paisInstitucionSlug";
 
-SELECT create_matview('"mvFrecuenciaPaisAfiliacion"', '"vFrecuenciaPaisAfiliacion"'); 
-
-
-
 --Frecuencia de documentos por: País de afiliacion -> intitucion
-CREATE OR REPLACE VIEW "vFrecuenciaPaisAfiliacionInstitucion" AS
+CREATE MATERIALIZED VIEW "mvFrecuenciaPaisAfiliacionInstitucion" AS
 SELECT 
   max(e_100x) AS "paisInstitucion", 
   "paisInstitucionSlug", 
@@ -1372,10 +1258,8 @@ SELECT
 FROM institucion i
 WHERE i.slug IS NOT NULL GROUP BY "paisInstitucionSlug", i.slug;
 
-SELECT create_matview('"mvFrecuenciaPaisAfiliacionInstitucion"', '"vFrecuenciaPaisAfiliacionInstitucion"');
-
 --Frecuencia de documentos por: País de afiliacion -> autor
-CREATE OR REPLACE VIEW "vFrecuenciaPaisAfiliacionAutor" AS
+CREATE MATERIALIZED VIEW "mvFrecuenciaPaisAfiliacionAutor" AS
 SELECT 
   max(e_100x) AS "paisInstitucion", 
   "paisInstitucionSlug", 
@@ -1389,10 +1273,8 @@ INNER JOIN autor a ON
   i.sec_autor=a.sec_autor
 WHERE i.slug IS NOT NULL GROUP BY "paisInstitucionSlug", a.slug;
 
-SELECT create_matview('"mvFrecuenciaPaisAfiliacionAutor"', '"vFrecuenciaPaisAfiliacionAutor"');
-
 --Pais de afiliacion documentos
-CREATE OR REPLACE VIEW "vPaisAfiliacionDocumentos" AS
+CREATE MATERIALIZED VIEW "mvPaisAfiliacionDocumentos" AS
 SELECT 
   s.sistema,
   s.iddatabase,
@@ -1421,38 +1303,33 @@ LEFT JOIN autor a ON
   i.sistema=a.sistema AND
   i.sec_autor=a.sec_autor AND
   a.slug IS NOT NULL
-INNER JOIN "vSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema WHERE i.slug IS NOT NULL;
-
-SELECT create_matview('"mvPaisAfiliacionDocumentos"', '"vPaisAfiliacionDocumentos"');
+INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema WHERE i.slug IS NOT NULL;
 
 CREATE INDEX ON "mvPaisAfiliacionDocumentos"("paisInstitucionSlug");
 CREATE INDEX ON "mvPaisAfiliacionDocumentos"(iddatabase, sistema);
+
 --Frecuencia de documentos, autores por revista
-CREATE OR REPLACE VIEW "vFrecuenciaRevista" AS
+CREATE MATERIALIZED VIEW "mvFrecuenciaRevista" AS
 SELECT 
   max(revista) AS revista,
   "revistaSlug",
   count(DISTINCT a.slug) AS autores,
   count(DISTINCT(s.sistema, s.iddatabase)) AS documentos
-FROM "vSearch" s LEFT JOIN autor a ON s.sistema=a.sistema AND s.iddatabase=a.iddatabase
+FROM "mvSearch" s LEFT JOIN autor a ON s.sistema=a.sistema AND s.iddatabase=a.iddatabase
 WHERE "revistaSlug" IS NOT NULL GROUP BY "revistaSlug";
 
-SELECT create_matview('"mvFrecuenciaRevista"', '"vFrecuenciaRevista"');
-
 --Frecuencia de documentos, autores por revista
-CREATE OR REPLACE VIEW "vFrecuenciaRevistaAutor" AS
+CREATE MATERIALIZED VIEW "mvFrecuenciaRevistaAutor" AS
 SELECT 
   "revistaSlug",
   max(a.e_100a) AS autor,
   a.slug AS "autorSlug",
   count(DISTINCT(s.sistema, s.iddatabase)) AS documentos
-FROM "vSearch" s INNER JOIN autor a ON s.sistema=a.sistema AND s.iddatabase=a.iddatabase AND a.slug IS NOT NULL
+FROM "mvSearch" s INNER JOIN autor a ON s.sistema=a.sistema AND s.iddatabase=a.iddatabase AND a.slug IS NOT NULL
 WHERE "revistaSlug" IS NOT NULL GROUP BY "revistaSlug", "autorSlug";
 
-SELECT create_matview('"mvFrecuenciaRevistaAutor"', '"vFrecuenciaRevistaAutor"');
-
 --Revista documentos
-CREATE OR REPLACE VIEW "vRevistaDocumentos" AS
+CREATE MATERIALIZED VIEW "mvRevistaDocumentos" AS
 SELECT 
   s.sistema,
   s.iddatabase,
@@ -1473,14 +1350,12 @@ SELECT
   "autoresJSON",
   "institucionesSecJSON",
   "institucionesJSON" 
-FROM "vSearch" s
+FROM "mvSearch" s
 LEFT JOIN autor a ON 
   s.sistema=a.sistema AND
   s.iddatabase=a.iddatabase AND
   a.slug IS NOT NULL 
 WHERE s.revista IS NOT NULL;
-
-SELECT create_matview('"mvRevistaDocumentos"', '"vRevistaDocumentos"');
 
 CREATE INDEX "idx_revistaDocumentos" ON "mvRevistaDocumentos"("revistaSlug");
 
