@@ -92,6 +92,7 @@ class Revista extends CI_Controller{
 				s.\"idDisciplinasJSON\", 
 				s.\"disciplinasJSON\", 
 				s.\"palabrasClaveJSON\",
+				s.\"keywordJSON\",
 				s.url
 			FROM \"mvSearch\" s
 			WHERE \"revistaSlug\"='{$uriVar['revista']}' AND \"articuloSlug\"='{$uriVar['articulo']}'";
@@ -124,6 +125,11 @@ class Revista extends CI_Controller{
 			$articulo['palabrasClave'] = json_decode($articulo['palabrasClaveJSON']);
 		endif;
 		unset($articulo['palabrasClaveJSON']);
+		/*Generando keyword*/
+		if($articulo['keywordJSON'] != NULL):
+			$articulo['keyword'] = json_decode($articulo['keywordJSON']);
+		endif;
+		unset($articulo['keywordJSON']);
 		/*Limpiando caracteres html*/
 		$articulo = htmlspecialchars_deep($articulo);
 		/*Creando lista de autores en html*/
@@ -181,6 +187,20 @@ class Revista extends CI_Controller{
 					$articulo['palabrasClaveHTML'] .= ",<br/>";
 				endif;
 				$indexPalabraClave++;
+			endforeach;
+		endif;
+
+		/*Creando keyword HTML*/
+		$articulo['keywordHTML'] = "";
+		if(isset($articulo['keyword'])):
+			$totalKeyword = count($articulo['keyword']);
+			$indexKeyword = 1;
+			foreach ($articulo['keyword'] as $key => $keyword):
+				$articulo['keywordHTML'] .= "{$keyword}";
+				if($indexKeyword < $totalKeyword):
+					$articulo['keywordHTML'] .= ",<br/>";
+				endif;
+				$indexKeyword++;
 			endforeach;
 		endif;
 

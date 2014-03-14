@@ -108,6 +108,12 @@
 					<td><?php echo $articulo['palabrasClaveHTML']?></td>
 				</tr>
 <?php 	endif;?>
+<?php 	if ( isset($articulo['keywordHTML']) ):?>
+				<tr>
+					<td class="attributo"><?php _e('Keyword:');?></td>
+					<td><?php echo $articulo['keywordHTML']?></td>
+				</tr>
+<?php 	endif;?>
 <?php 	if ( isset($articulo['url']) ):?>
 				<tr>
 					<td class="attributo"><?php _e('Texto completo:');?></td>
