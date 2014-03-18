@@ -1498,7 +1498,15 @@ FROM
   ORDER BY slug, documentos DESC) tb
 GROUP BY slug HAVING count(*) > 1
 
-
+CREATE OR REPLACE VIEW "vDisciplinasBase" AS 
+ SELECT articulo.iddatabase,
+    disciplinas.disciplina,
+    disciplinas.slug
+   FROM disciplinas
+   JOIN articulo ON disciplinas.id_disciplina = articulo.id_disciplina AND disciplinas.id_disciplina <> 23::numeric
+  GROUP BY disciplinas.slug, disciplinas.disciplina, articulo.iddatabase
+  ORDER BY articulo.iddatabase, disciplinas.slug;
+  
 --Drops
 --SELECT drop_matview('"mvIndiceCoautoriaPricePais"');
 --SELECT drop_matview('"mvTasaCoautoriaPais"');

@@ -75,6 +75,7 @@ class Main extends CI_Controller{
 		$this->load->view('main/bibliografia');
 		$this->load->view('footer');
 	}
+
 	public function sobreBiblat(){
 		$data = array();
 		$data['header']['title'] = _("Biblat - Sobre Biblat");
@@ -82,14 +83,24 @@ class Main extends CI_Controller{
 		$this->load->view('menu');
 		$this->load->view('main/info_biblat');
 		$this->load->view('footer');
+		$this->load->helper('url');
 	}
 
 	public function clasePeriodica(){
 		$data = array();
 		$data['header']['title'] = _("Biblat - CLASE y PERIÓDICA");
+		$this->load->database();
+		$query = "SELECT * FROM \"vDisciplinasBase\" ORDER BY disciplina";
+		$query = $this->db->query($query);
+		foreach ($query->result_array() as $row):
+				$disciplina['disciplina'] = $row['disciplina'];
+				$disciplina['slug'] = $row['slug'];
+   				$data[ 'disciplina' ][ $row[ 'iddatabase' ] ][] = $disciplina;	
+		endforeach;
+		$this->db->close();
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu');
-		$this->load->view('main/info_clase_periodica');
+		$this->load->view('main/info_clase_periodica', $data);
 		$this->load->view('footer');
 	}
 
