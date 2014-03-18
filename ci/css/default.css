@@ -1023,6 +1023,10 @@ div.pq-grid-title{
 	text-align: left;
 }
 
+.articulo table .justify{
+	text-align: justify;
+}
+
 .attributo{
 	white-space: nowrap;
 }

@@ -92,8 +92,10 @@ class Revista extends CI_Controller{
 				s.\"idDisciplinasJSON\", 
 				s.\"disciplinasJSON\", 
 				s.\"palabrasClaveJSON\",
+				s.\"keywordJSON\",
+				s.\"resumenJSON\",
 				s.url
-			FROM \"mvSearch\" s
+			FROM \"fichaDocumento\" s
 			WHERE \"revistaSlug\"='{$uriVar['revista']}' AND \"articuloSlug\"='{$uriVar['articulo']}'";
 		$query = $this->db->query($query);
 		$articulo = $query->row_array();
@@ -124,6 +126,16 @@ class Revista extends CI_Controller{
 			$articulo['palabrasClave'] = json_decode($articulo['palabrasClaveJSON']);
 		endif;
 		unset($articulo['palabrasClaveJSON']);
+		/*Generando keyword*/
+		if($articulo['keywordJSON'] != NULL):
+			$articulo['keyword'] = json_decode($articulo['keywordJSON']);
+		endif;
+		unset($articulo['keywordJSON']);
+		/*Generando resumen*/
+		if($articulo['resumenJSON'] != NULL):
+			$articulo['resumen'] = json_decode($articulo['resumenJSON']);
+		endif;
+		unset($articulo['resumenJSON']);
 		/*Limpiando caracteres html*/
 		$articulo = htmlspecialchars_deep($articulo);
 		/*Creando lista de autores en html*/
@@ -181,6 +193,42 @@ class Revista extends CI_Controller{
 					$articulo['palabrasClaveHTML'] .= ",<br/>";
 				endif;
 				$indexPalabraClave++;
+			endforeach;
+		endif;
+
+		/*Creando keyword HTML*/
+		$articulo['keywordHTML'] = "";
+		if(isset($articulo['keyword'])):
+			$totalKeyword = count($articulo['keyword']);
+			$indexKeyword = 1;
+			foreach ($articulo['keyword'] as $key => $keyword):
+				$articulo['keywordHTML'] .= "{$keyword}";
+				if($indexKeyword < $totalKeyword):
+					$articulo['keywordHTML'] .= ",<br/>";
+				endif;
+				$indexKeyword++;
+			endforeach;
+		endif;
+		/*Creando resumen HTML*/
+		$articulo['resumenHTML'] = array();
+		if(isset($articulo['resumen'])):
+			foreach ($articulo['resumen'] as $key => $resumen):
+				switch ($key):
+					case 'a':
+						$resumenHTML['title'] = _('Resumen en español');
+						break;
+					case 'p':
+						$resumenHTML['title'] = _('Resumen en portugués');
+						break;
+					case 'i':
+						$resumenHTML['title'] = _('Resumen en inglés')	;
+						break;
+					case 'o':
+						$resumenHTML['title'] = _('Otro resumen');
+						break;
+				endswitch;
+				$resumenHTML['body'] = $resumen;
+				$articulo['resumenHTML'][] = $resumenHTML;
 			endforeach;
 		endif;
 
