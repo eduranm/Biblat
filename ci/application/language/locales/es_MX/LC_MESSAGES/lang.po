@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-24 12:42-0600\n"
-"PO-Revision-Date: 2014-02-24 12:42-0600\n"
+"POT-Creation-Date: 2014-03-18 10:41-0600\n"
+"PO-Revision-Date: 2014-03-18 10:41-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -58,10 +58,12 @@ msgid "Frecuencias"
 msgstr "Frecuencias"
 
 #: application/views/menu.php:33
+#: application/views/header.php:105
 msgid "Autor"
 msgstr "Autor"
 
 #: application/views/menu.php:34
+#: application/views/header.php:107
 msgid "Institución"
 msgstr "Institución"
 
@@ -74,6 +76,7 @@ msgid "País de afiliación"
 msgstr "País de afiliación"
 
 #: application/views/menu.php:36
+#: application/views/header.php:106
 msgid "Revista"
 msgstr "Revista"
 
@@ -203,30 +206,58 @@ msgid "Buscar por revista"
 msgstr "Buscar por revista"
 
 #: application/views/menu.php:114
-msgid "Buscar por institucion"
-msgstr "Buscar por institucion"
+msgid "Buscar por institución"
+msgstr "Buscar por institución"
 
 #: application/views/menu.php:115
-msgid "Buscar por articulo"
-msgstr "Buscar por articulo"
+msgid "Buscar por artículo"
+msgstr "Buscar por artículo"
 
 #: application/views/menu.php:116
 msgid "Búsqueda avanzada"
 msgstr "Búsqueda avanzada"
 
-#: application/views/menu.php:122
-#: application/views/menu.php:124
-#: application/views/menu.php:126
+#: application/views/menu.php:123
+#: application/views/menu.php:125
+#: application/views/menu.php:127
 msgid "Buscar en Biblat"
 msgstr "Buscar en Biblat"
 
-#: application/views/header.php:32
+#: application/views/header.php:36
 msgid "Espere un momento..."
 msgstr "Espere un momento..."
 
-#: application/views/header.php:142
-msgid "La solicitud ha sido enviada"
-msgstr "La solicitud ha sido enviada"
+#: application/views/header.php:104
+msgid "Palabra clave"
+msgstr "Palabra clave"
+
+#: application/views/header.php:108
+msgid "Artículo"
+msgstr "Artículo"
+
+#: application/views/header.php:109
+msgid "País de la revista"
+msgstr "País de la revista"
+
+#: application/views/header.php:109
+msgid "Seleccione país"
+msgstr "Seleccione país"
+
+#: application/views/header.php:110
+msgid "Disciplina"
+msgstr "Disciplina"
+
+#: application/views/header.php:110
+msgid "Seleccione disciplina"
+msgstr "Seleccione disciplina"
+
+#: application/views/header.php:112
+msgid "cualquiera de"
+msgstr "cualquiera de"
+
+#: application/views/header.php:114
+msgid "Seleccione filtro"
+msgstr "Seleccione filtro"
 
 #: application/views/footer.php:7
 #, php-format
@@ -286,7 +317,7 @@ msgid "Nombre:"
 msgstr "Nombre:"
 
 #: application/views/revista/mail_solicitud.php:4
-#: application/views/revista/mail_solicitud_usuario.php:19
+#: application/views/revista/mail_solicitud_usuario.php:21
 msgid "Correo electrónico:"
 msgstr "Correo electrónico:"
 
@@ -359,76 +390,88 @@ msgid "Idioma:"
 msgstr "Idioma:"
 
 #: application/views/revista/articulo.php:101
+msgid "Tipo de documento:"
+msgstr "Tipo de documento:"
+
+#: application/views/revista/articulo.php:107
+msgid "Enfoque:"
+msgstr "Enfoque:"
+
+#: application/views/revista/articulo.php:121
 msgid "Disciplinas:"
 msgstr "Disciplinas:"
 
-#: application/views/revista/articulo.php:107
+#: application/views/revista/articulo.php:127
 msgid "Palabras clave:"
 msgstr "Palabras clave:"
 
-#: application/views/revista/articulo.php:113
+#: application/views/revista/articulo.php:133
+msgid "Keyword:"
+msgstr "Keyword:"
+
+#: application/views/revista/articulo.php:139
 msgid "Texto completo:"
 msgstr "Texto completo:"
 
-#: application/views/revista/articulo.php:118
+#: application/views/revista/articulo.php:144
 msgid "Solicitud del documento"
 msgstr "Solicitud del documento"
 
-#: application/views/revista/articulo.php:124
+#: application/views/revista/articulo.php:150
 msgid "Nota:"
 msgstr "Nota:"
 
-#: application/views/revista/articulo.php:124
+#: application/views/revista/articulo.php:150
 msgid "El envío del documento tiene costo."
 msgstr "El envío del documento tiene costo."
 
-#: application/views/revista/articulo.php:125
+#: application/views/revista/articulo.php:151
 msgid "Nombre"
 msgstr "Nombre"
 
-#: application/views/revista/articulo.php:126
+#: application/views/revista/articulo.php:152
 msgid "El nombre es requerido"
 msgstr "El nombre es requerido"
 
-#: application/views/revista/articulo.php:127
+#: application/views/revista/articulo.php:153
 msgid "Dirección de correo electrónico"
 msgstr "Dirección de correo electrónico"
 
-#: application/views/revista/articulo.php:128
+#: application/views/revista/articulo.php:154
 msgid "El correo electrónico es requerido"
 msgstr "El correo electrónico es requerido"
 
-#: application/views/revista/articulo.php:129
+#: application/views/revista/articulo.php:155
 msgid "Instituto"
 msgstr "Instituto"
 
-#: application/views/revista/articulo.php:131
+#: application/views/revista/articulo.php:157
 msgid "Teléfono"
 msgstr "Teléfono"
 
-#: application/views/revista/articulo.php:139
+#: application/views/revista/articulo.php:165
 msgid "Los documentos originales pueden ser consultados en el Departamento de Información y Servicios Documentales, ubicado en el Anexo de la Dirección General de Bibliotecas (DGB), circuito de la Investigación Científica a un costado del Auditorio Nabor Carrillo, zona de Institutos entre Física y Astronomía. Ciudad Universitaria UNAM."
 msgstr "Los documentos originales pueden ser consultados en el Departamento de Información y Servicios Documentales, ubicado en el Anexo de la Dirección General de Bibliotecas (DGB), circuito de la Investigación Científica a un costado del Auditorio Nabor Carrillo, zona de Institutos entre Física y Astronomía. Ciudad Universitaria UNAM."
 
-#: application/views/revista/articulo.php:139
+#: application/views/revista/articulo.php:165
 msgid "Ver mapa"
 msgstr "Ver mapa"
 
-#: application/views/revista/articulo.php:139
+#: application/views/revista/articulo.php:165
 msgid "Mayores informes: Departamento de Información y Servicios Documentales, Tels. (5255) 5622-3960, 5622-3964, e-mail: sinfo@dgb.unam.mx, Horario: Lunes a viernes (8 a 16 hrs.)"
 msgstr "Mayores informes: Departamento de Información y Servicios Documentales, Tels. (5255) 5622-3960, 5622-3964, e-mail: sinfo@dgb.unam.mx, Horario: Lunes a viernes (8 a 16 hrs.)"
 
-#: application/views/revista/articulo.php:140
+#: application/views/revista/articulo.php:166
 msgid "Enviar"
 msgstr "Enviar"
 
 #: application/views/revista/mail_solicitud_usuario.php:1
-msgid "Estimado/Estimada"
-msgstr "Estimado/Estimada"
+msgid "Estimado/a"
+msgstr "Estimado/a"
 
 #: application/views/revista/mail_solicitud_usuario.php:3
-msgid "Esperando te encuentres bien, te notifico que, para la recuperación de este documento:"
-msgstr "Esperando te encuentres bien, te notifico que, para la recuperación de este documento:"
+msgid "Te notifico que, para la recuperación de este documento:"
+msgstr "Te notifico que, para la recuperación de este documento:"
 
 #: application/views/revista/mail_solicitud_usuario.php:6
 msgid "Contamos con las siguientes opciones"
@@ -442,23 +485,27 @@ msgstr "Servicio de fotocopiado, con un costo de 0.30 MXN por cada fotocopia, y 
 msgid "Envío digital con un costo de  50.00 MXN (5.00 USD o 5.00 EUR, para solicitudes del extranjero)  por cada artículo.  Si es por este medio te mandaríamos primero una ficha de depósito y, hasta el momento que cubras el costo y nos envíes el comprobante de pago, recibirías el documento en el correo electrónico que nos indiques."
 msgstr "Envío digital con un costo de  50.00 MXN (5.00 USD o 5.00 EUR, para solicitudes del extranjero)  por cada artículo.  Si es por este medio te mandaríamos primero una ficha de depósito y, hasta el momento que cubras el costo y nos envíes el comprobante de pago, recibirías el documento en el correo electrónico que nos indiques."
 
-#: application/views/revista/mail_solicitud_usuario.php:13
+#: application/views/revista/mail_solicitud_usuario.php:11
+msgid "NOTA: Al realizar la solicitud por esta opción es necesario que enviee sus datos fiscales (Nombre completo, RFC, Calle, Número, Colonia, Ciudad, Entidad federativa, Delegación o municipio, Código postal) en la respuesta a este correo."
+msgstr "NOTA: Al realizar la solicitud por esta opción es necesario que enviee sus datos fiscales (Nombre completo, RFC, Calle, Número, Colonia, Ciudad, Entidad federativa, Delegación o municipio, Código postal) en la respuesta a este correo."
+
+#: application/views/revista/mail_solicitud_usuario.php:15
 msgid "Espero tu respuesta a la brevedad posible para darle seguimiento a tu solicitud."
 msgstr "Espero tu respuesta a la brevedad posible para darle seguimiento a tu solicitud."
 
-#: application/views/revista/mail_solicitud_usuario.php:15
+#: application/views/revista/mail_solicitud_usuario.php:17
 msgid "Atentamente:"
 msgstr "Atentamente:"
 
-#: application/views/revista/mail_solicitud_usuario.php:17
+#: application/views/revista/mail_solicitud_usuario.php:19
 msgid "Mtra. Araceli Noguez O."
 msgstr "Mtra. Araceli Noguez O."
 
-#: application/views/revista/mail_solicitud_usuario.php:21
+#: application/views/revista/mail_solicitud_usuario.php:23
 msgid "Departamento de Información y Servicios Documentales- Subdirección de Servicios de Información Especializada-DGB-UNAM"
 msgstr "Departamento de Información y Servicios Documentales- Subdirección de Servicios de Información Especializada-DGB-UNAM"
 
-#: application/views/revista/mail_solicitud_usuario.php:23
+#: application/views/revista/mail_solicitud_usuario.php:25
 msgid "Teléfonos:"
 msgstr "Teléfonos:"
 
@@ -818,7 +865,7 @@ msgstr "Se interpreta que valores cercanos a 1 muestran mayor grado de especiali
 
 #: application/views/indicadores/index.php:258
 #: application/views/indicadores/index.php:277
-#: application/views/indicadores/index_js.php:262
+#: application/views/indicadores/index_js.php:259
 #: application/controllers/indicadores.php:315
 #: application/controllers/indicadores.php:316
 #: application/controllers/indicadores.php:319
@@ -900,19 +947,19 @@ msgstr "Autores extranjeros"
 msgid "Total de documentos"
 msgstr "Total de documentos"
 
-#: application/views/indicadores/index_js.php:122
+#: application/views/indicadores/index_js.php:119
 msgid "No se encontraron datos para la disciplina seleccionada"
 msgstr "No se encontraron datos para la disciplina seleccionada"
 
-#: application/views/indicadores/index_js.php:249
+#: application/views/indicadores/index_js.php:246
 msgid "Gráfica "
 msgstr "Gráfica "
 
-#: application/views/indicadores/index_js.php:262
+#: application/views/indicadores/index_js.php:259
 msgid "Zona núcleo de revistas más productivas"
 msgstr "Zona núcleo de revistas más productivas"
 
-#: application/views/indicadores/index_js.php:262
+#: application/views/indicadores/index_js.php:259
 msgid "Zona 2 de revistas más productivas"
 msgstr "Zona 2 de revistas más productivas"
 
@@ -931,33 +978,44 @@ msgstr "Biblat - Indice por disciplina \"%s\""
 msgid "Biblat - Indice por país: \"%s\""
 msgstr "Biblat - Indice por país: \"%s\""
 
-#: application/controllers/buscar.php:34
+#: application/controllers/buscar.php:11
 msgid "Palabras clave"
 msgstr "Palabras clave"
 
-#: application/controllers/buscar.php:35
-msgid "Artículo"
-msgstr "Artículo"
+#: application/controllers/buscar.php:16
+#: application/controllers/indicadores.php:745
+#: application/controllers/frecuencias.php:179
+#: application/controllers/frecuencias.php:208
+msgid "País"
+msgstr "País"
 
-#: application/controllers/buscar.php:41
+#: application/controllers/buscar.php:81
 #, php-format
 msgid "Biblat - Búsqueda %s: \"%s\""
 msgstr "Biblat - Búsqueda %s: \"%s\""
 
-#: application/controllers/buscar.php:43
+#: application/controllers/buscar.php:83
 #, php-format
 msgid "Resultados de la búsqueda: %s"
 msgstr "Resultados de la búsqueda: %s"
 
-#: application/controllers/buscar.php:67
+#: application/controllers/buscar.php:107
 #, php-format
 msgid "Biblat - Búsqueda por %s: \"%s\""
 msgstr "Biblat - Búsqueda por %s: \"%s\""
 
-#: application/controllers/buscar.php:68
+#: application/controllers/buscar.php:108
 #, php-format
 msgid "Resultados de la búsqueda por %s: %s"
 msgstr "Resultados de la búsqueda por %s: %s"
+
+#: application/controllers/buscar.php:124
+msgid "Biblat - Búsqueda avanzada"
+msgstr "Biblat - Búsqueda avanzada"
+
+#: application/controllers/buscar.php:126
+msgid "Resultados de la búsqueda"
+msgstr "Resultados de la búsqueda"
 
 #: application/controllers/indicadores.php:82
 #, php-format
@@ -1244,12 +1302,6 @@ msgstr "Descriptor"
 msgid "Frecuencia"
 msgstr "Frecuencia"
 
-#: application/controllers/indicadores.php:745
-#: application/controllers/frecuencias.php:179
-#: application/controllers/frecuencias.php:208
-msgid "País"
-msgstr "País"
-
 #: application/controllers/indicadores.php:963
 msgid "title=\"Indicadores\""
 msgstr "title=\"Indicadores\""
@@ -1283,10 +1335,34 @@ msgstr "Revistas"
 msgid "title=\"Revistas\""
 msgstr "title=\"Revistas\""
 
-#: application/controllers/revista.php:201
+#: application/controllers/revista.php:218
+msgid "Resumen en español"
+msgstr "Resumen en español"
+
+#: application/controllers/revista.php:221
+msgid "Resumen en portugués"
+msgstr "Resumen en portugués"
+
+#: application/controllers/revista.php:224
+msgid "Resumen en inglés"
+msgstr "Resumen en inglés"
+
+#: application/controllers/revista.php:227
+msgid "Otro resumen"
+msgstr "Otro resumen"
+
+#: application/controllers/revista.php:249
 #, php-format
 msgid "Biblat - Revista: %s - Artículo: %s"
 msgstr "Biblat - Revista: %s - Artículo: %s"
+
+#: application/controllers/revista.php:308
+msgid "La solicitud ha sido enviada"
+msgstr "La solicitud ha sido enviada"
+
+#: application/controllers/revista.php:313
+msgid "No se pudo enviar la solictud"
+msgstr "No se pudo enviar la solictud"
 
 #: application/controllers/frecuencias.php:33
 msgid "Biblat - Frecuencias"
@@ -1504,46 +1580,46 @@ msgstr "Biblat - Revista: %s/%s (%%d documentos)"
 msgid "Biblat ofrece: referencias bibliográficas de documentos publicados en revistas científicas y académicas latinoamericanas indizadas en CLASE y PERIÓDICA, acceso al texto completo de revistas en acceso abierto, indicadores bibliométricos e información sobre los políticas de acceso de las revistas."
 msgstr "Biblat ofrece: referencias bibliográficas de documentos publicados en revistas científicas y académicas latinoamericanas indizadas en CLASE y PERIÓDICA, acceso al texto completo de revistas en acceso abierto, indicadores bibliométricos e información sobre los políticas de acceso de las revistas."
 
-#: application/controllers/main.php:63
+#: application/controllers/main.php:67
 msgid "Biblat - Créditos"
 msgstr "Biblat - Créditos"
 
-#: application/controllers/main.php:72
+#: application/controllers/main.php:76
 msgid "Biblat - Bibliografía"
 msgstr "Biblat - Bibliografía"
 
-#: application/controllers/main.php:81
+#: application/controllers/main.php:85
 msgid "Biblat - Mapa del sitio"
 msgstr "Biblat - Mapa del sitio"
 
-#: application/controllers/main.php:105
+#: application/controllers/main.php:109
 #, php-format
 msgid "Deacuerdo al idioma de su navegador le sugerimos cambiar el idioma de la página a %s"
 msgstr "Deacuerdo al idioma de su navegador le sugerimos cambiar el idioma de la página a %s"
 
-#: application/controllers/main.php:106
+#: application/controllers/main.php:110
 msgid "Traducir"
 msgstr "Traducir"
 
-#: application/helpers/custom_helper.php:253
+#: application/helpers/custom_helper.php:260
 msgid "Mostrar artículo en texto completo"
 msgstr "Mostrar artículo en texto completo"
 
-#: application/helpers/custom_helper.php:255
+#: application/helpers/custom_helper.php:262
 msgid "Agregue este articulo a su biblioteca Mendeley"
 msgstr "Agregue este articulo a su biblioteca Mendeley"
 
-#: application/helpers/custom_helper.php:288
+#: application/helpers/custom_helper.php:295
 #, php-format
 msgid "Vól. %s"
 msgstr "Vól. %s"
 
-#: application/helpers/custom_helper.php:291
+#: application/helpers/custom_helper.php:298
 #, php-format
 msgid "Núm. %s"
 msgstr "Núm. %s"
 
-#: application/helpers/custom_helper.php:297
+#: application/helpers/custom_helper.php:304
 #, php-format
 msgid "Pág. %s"
 msgstr "Pág. %s"

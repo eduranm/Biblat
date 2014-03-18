@@ -92,8 +92,10 @@ class Revista extends CI_Controller{
 				s.\"idDisciplinasJSON\", 
 				s.\"disciplinasJSON\", 
 				s.\"palabrasClaveJSON\",
+				s.\"keywordJSON\",
+				s.\"resumenJSON\",
 				s.url
-			FROM \"mvSearch\" s
+			FROM \"fichaDocumento\" s
 			WHERE \"revistaSlug\"='{$uriVar['revista']}' AND \"articuloSlug\"='{$uriVar['articulo']}'";
 		$query = $this->db->query($query);
 		$articulo = $query->row_array();
@@ -124,6 +126,16 @@ class Revista extends CI_Controller{
 			$articulo['palabrasClave'] = json_decode($articulo['palabrasClaveJSON']);
 		endif;
 		unset($articulo['palabrasClaveJSON']);
+		/*Generando keyword*/
+		if($articulo['keywordJSON'] != NULL):
+			$articulo['keyword'] = json_decode($articulo['keywordJSON']);
+		endif;
+		unset($articulo['keywordJSON']);
+		/*Generando resumen*/
+		if($articulo['resumenJSON'] != NULL):
+			$articulo['resumen'] = json_decode($articulo['resumenJSON']);
+		endif;
+		unset($articulo['resumenJSON']);
 		/*Limpiando caracteres html*/
 		$articulo = htmlspecialchars_deep($articulo);
 		/*Creando lista de autores en html*/
@@ -184,6 +196,42 @@ class Revista extends CI_Controller{
 			endforeach;
 		endif;
 
+		/*Creando keyword HTML*/
+		$articulo['keywordHTML'] = "";
+		if(isset($articulo['keyword'])):
+			$totalKeyword = count($articulo['keyword']);
+			$indexKeyword = 1;
+			foreach ($articulo['keyword'] as $key => $keyword):
+				$articulo['keywordHTML'] .= "{$keyword}";
+				if($indexKeyword < $totalKeyword):
+					$articulo['keywordHTML'] .= ",<br/>";
+				endif;
+				$indexKeyword++;
+			endforeach;
+		endif;
+		/*Creando resumen HTML*/
+		$articulo['resumenHTML'] = array();
+		if(isset($articulo['resumen'])):
+			foreach ($articulo['resumen'] as $key => $resumen):
+				switch ($key):
+					case 'a':
+						$resumenHTML['title'] = _('Resumen en español');
+						break;
+					case 'p':
+						$resumenHTML['title'] = _('Resumen en portugués');
+						break;
+					case 'i':
+						$resumenHTML['title'] = _('Resumen en inglés')	;
+						break;
+					case 'o':
+						$resumenHTML['title'] = _('Otro resumen');
+						break;
+				endswitch;
+				$resumenHTML['body'] = $resumen;
+				$articulo['resumenHTML'][] = $resumenHTML;
+			endforeach;
+		endif;
+
 		if (isset($articulo['paginacion'])):
 			$articulo['paginacionFirst'] = preg_replace("/[-\s]+/", "", preg_replace('/(^\s*\d+\s*?-|^\s*\d+?\s*$).*/m', '\1', $articulo['paginacion']));
 			$articulo['paginacionLast'] = preg_replace("/[-\s]+/", "", preg_replace('/.*(-\s*\d+\s*?$|^\s*\d+?\s*$).*/m', '\1', $articulo['paginacion']));
@@ -222,38 +270,49 @@ class Revista extends CI_Controller{
 
 	public function solicitudDocumento(){
 		$this->output->enable_profiler(false);
-		$biblatDB = $this->load->database('biblat', TRUE);
-		$config['mailtype'] = 'html';
-		$this->load->library('email');
-		$this->email->initialize($config);
-		$this->email->from('solicitud@biblat.unam.mx', 'Solicitud Biblat');
-		$this->email->to('sinfo@dgb.unam.mx');
-		//$this->email->to('achwazer@gmail.com');
-		$this->email->cc('anoguez@dgb.unam.mx');
-		$this->email->subject('Solicitud de documento Biblat');
-		$data = $_POST;
-		$data['fichaDocumento'] = $this->articulo($data['revista'], $data['articulo'], 'true');
-		$body = $this->load->view('revista/mail_solicitud', $data, TRUE);
-		$this->email->message($body);
-		$this->email->send();
+		if(isset($_POST['email']) && isset($_POST['from']) && isset($_POST['revista']) && isset($_POST['articulo'])):
+			$biblatDB = $this->load->database('biblat', TRUE);
+			$config['mailtype'] = 'html';
+			$this->load->library('email');
+			$this->email->initialize($config);
+			$this->email->from('solicitud@biblat.unam.mx', 'Solicitud Biblat');
+			$this->email->to('sinfo@dgb.unam.mx');
+			//$this->email->to('achwazer@gmail.com');
+			$this->email->cc('anoguez@dgb.unam.mx');
+			$this->email->subject('Solicitud de documento Biblat');
+			$data = $_POST;
+			$data['fichaDocumento'] = $this->articulo($data['revista'], $data['articulo'], 'true');
+			$body = $this->load->view('revista/mail_solicitud', $data, TRUE);
+			$this->email->message($body);
+			$this->email->send();
 
-		$this->email->clear();
+			$this->email->clear();
 
-		$this->email->from('anoguez@dgb.unam.mx', 'Mtra. Araceli Noguez O.');
-		$this->email->to($_POST['email']);
-		$this->email->subject('Solicitud de documento Biblat');
-		$body = $this->load->view('revista/mail_solicitud_usuario', $data, TRUE);
-		$this->email->message($body);
-		$this->email->send();
-		/*Almacenando registro en la bitácora*/
-		$database = ($data['database'] == "CLASE") ? 0 : 1;
-		$ip = (isset($_SERVER['GEOIP_ADDR'])) ? $_SERVER['GEOIP_ADDR'] : $_SERVER['REMOTE_ADDR'];
-		$pais = (isset($_SERVER['GEOIP_COUNTRY_NAME'])) ? "'{$_SERVER['GEOIP_COUNTRY_NAME']}'" : "NULL";
-		$ciudad = (isset($_SERVER['GEOIP_REGION_NAME'])) ? "'{$_SERVER['GEOIP_REGION_NAME']}'" : "NULL";
-		$session_id = $this->session->userdata('session_id');
-		$query = "INSERT INTO \"logSolicitudDocumento\"(database, sistema, nombre, email, instituto, telefono, ip, pais, ciudad, session_id)
-			VALUES ({$database}, '{$data['sistema']}', '{$data['from']}', '{$data['email']}', '{$data['instituto']}', '{$data['telefono']}', '{$ip}', {$pais}, {$ciudad}, '{$session_id}');";
-		$biblatDB->query($query);
-		//echo json_encode($_POST);
+			$this->email->from('anoguez@dgb.unam.mx', 'Mtra. Araceli Noguez O.');
+			$this->email->to($_POST['email']);
+			$this->email->subject('Solicitud de documento Biblat');
+			$body = $this->load->view('revista/mail_solicitud_usuario', $data, TRUE);
+			$this->email->message($body);
+			$this->email->send();
+			/*Almacenando registro en la bitácora*/
+			$database = ($data['database'] == "CLASE") ? 0 : 1;
+			$ip = (isset($_SERVER['GEOIP_ADDR'])) ? $_SERVER['GEOIP_ADDR'] : $_SERVER['REMOTE_ADDR'];
+			$pais = (isset($_SERVER['GEOIP_COUNTRY_NAME'])) ? "'{$_SERVER['GEOIP_COUNTRY_NAME']}'" : "NULL";
+			$ciudad = (isset($_SERVER['GEOIP_REGION_NAME'])) ? "'{$_SERVER['GEOIP_REGION_NAME']}'" : "NULL";
+			$session_id = $this->session->userdata('session_id');
+			$query = "INSERT INTO \"logSolicitudDocumento\"(database, sistema, nombre, email, instituto, telefono, ip, pais, ciudad, session_id)
+				VALUES ({$database}, '{$data['sistema']}', '{$data['from']}', '{$data['email']}', '{$data['instituto']}', '{$data['telefono']}', '{$ip}', {$pais}, {$ciudad}, '{$session_id}');";
+			$biblatDB->query($query);
+			$result = array(
+					'type' => 'success',
+					'title' => _('La solicitud ha sido enviada')
+				);
+		else:
+			$result = array(
+					'type' => 'error',
+					'title' => _('No se pudo enviar la solictud')
+				);
+		endif;
+		echo json_encode($result);
 	}
 }

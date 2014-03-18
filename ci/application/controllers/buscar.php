@@ -7,6 +7,14 @@ class Buscar extends CI_Controller{
 	}
 	
 	public function index($filtro="", $disciplina="", $slug="", $textoCompleto=""){
+		/*Arrego con descripcion y sql para cada indice*/
+		$indiceArray['palabra-clave'] = array('sql' => 'palabrasClaveSlug', 'descripcion' => _('Palabras clave'));
+		$indiceArray['articulo'] = array('sql' => 'articuloSlug', 'descripcion' => _('Artículo'));
+		$indiceArray['autor'] = array('sql' => 'autoresSlug', 'descripcion' => _('Autor'));
+		$indiceArray['institucion'] = array('sql' => 'institucionesSlug', 'descripcion' => _('Institución'));
+		$indiceArray['revista'] = array('sql' => 'revistaSlug', 'descripcion' => _('Revista'));
+		$indiceArray['pais'] = array('sql' => 'paisSlug', 'descripcion' => _('País'));
+		$indiceArray['disciplina'] = array('sql' => 'id_disciplina', 'descripcion' => _('Disciplina'));
 		/*Si se hizo una consulta con POST redirigimos a una url correcta*/
 		if(isset($_POST['disciplina']) && isset($_POST['slug'])):
 			if(isset($_POST['textoCompleto'])):
@@ -15,6 +23,44 @@ class Buscar extends CI_Controller{
 			//print_r($_POST); die();
 			if($_POST['filtro'] === "todos"):
 				$_POST['filtro'] = "";
+			endif;
+			if($_POST['filtro'] === "avanzada"):
+				$biblatDB = $this->load->database('biblat', TRUE);
+				if($_POST['slug'] == "[]" || empty($_POST['slug'])):
+					$this->output->enable_profiler(false);
+					echo site_url('buscar');
+					return;
+				endif;
+				$filters=json_decode($_POST['slug'], TRUE);
+				$where = "";
+				foreach ($filters as $filter):
+					if(isset($filter['andor'])):
+						$filter['andor']['value'] = strtoupper($filter['andor']['value']);
+						$where .= " {$filter['andor']['value']} ";
+					endif;
+					switch ($filter['operator']['value']):
+						case 'eq':
+								$where .= " \"{$indiceArray[$filter['field']['value']]['sql']}\"='{$filter['value']['value']}'";
+							break;
+						case 'in':
+							$paises = implode("','", explode(',', $filter['value']['value']));
+							$where .= " \"{$indiceArray[$filter['field']['value']]['sql']}\" IN ('{$paises}')";
+							break;
+						
+						default:
+							$slugQuerySearch = slugQuerySearch(slugSearch($filter['value']['value']), $indiceArray[$filter['field']['value']]['sql']);
+							$where .= $slugQuerySearch['where'];
+							break;
+					endswitch;
+				endforeach;
+				$hash = md5($_POST['slug']);
+				$session['search'] = $filters;
+				$session['query'] = $where;
+				$this->session->set_userdata('search{'.$hash.'}', json_encode($session));
+				$where = str_replace("'", "\\'", $where);
+				$query="SELECT \"advancedSearchHashInsert\"('{$hash}', '{$_POST['slug']}', E'{$where}')";
+				$biblatDB->query($query);
+				$_POST['slug'] = $hash;
 			endif;
 			$returnURL = site_url(preg_replace('%[/]+%', '/', "buscar/{$_POST['filtro']}/{$_POST['disciplina']}/".slugSearch($_POST['slug'])."/{$textoCompleto}"));
 			if(isset($_POST['ajax'])):
@@ -30,12 +76,6 @@ class Buscar extends CI_Controller{
 		endif;
 		/*Variables para vistas*/
 		$data = array();
-		/*Arrego con descripcion y sql para cada indice*/
-		$indiceArray['palabra-clave'] = array('sql' => 'palabrasClaveSlug', 'descripcion' => _('Palabras clave'));
-		$indiceArray['articulo'] = array('sql' => 'articuloSlug', 'descripcion' => _('Artículo'));
-		$indiceArray['autor'] = array('sql' => 'autoresSlug', 'descripcion' => _('Autor'));
-		$indiceArray['institucion'] = array('sql' => 'institucionesSlug', 'descripcion' => _('Institución'));
-		$indiceArray['revista'] = array('sql' => 'revistaSlug', 'descripcion' => _('Revista'));
 
 		/*Header title*/
 		$data['header']['title'] = _sprintf('Biblat - Búsqueda %s: "%s"', strtolower($indiceArray[$indice]['descripcion']), slugSearchClean($slug));
@@ -66,6 +106,24 @@ class Buscar extends CI_Controller{
 			$slugQuerySearch = slugQuerySearch($slug, $indiceArray[$filtro]['sql']);
 			$data['header']['title'] = _sprintf('Biblat - Búsqueda por %s: "%s"', strtolower($indiceArray[$filtro]['descripcion']), slugSearchClean($slug));
 			$data['main']['title'] = _sprintf('Resultados de la búsqueda por %s: %s', strtolower($indiceArray[$filtro]['descripcion']), slugSearchClean($slug));
+		endif;
+		if($filtro == "avanzada"):
+			if ( ! $this->session->userdata('search{'.$slug.'}')):
+				$biblatDB = $this->load->database('biblat', TRUE);
+				$advancedSearch = $biblatDB->query("SELECT search, query FROM \"advancedSearchHash\" WHERE hash='{$slug}' LIMIT 1");
+				if($advancedSearch->num_rows() < 1):
+					redirect(base_url(), 'refresh');
+				endif;
+				$advancedSearch = $advancedSearch->row_array();
+				$advancedSearch['search'] = json_decode($advancedSearch['search'], TRUE);
+				$this->session->set_userdata('search{'.$slug.'}', json_encode($advancedSearch));
+			endif;
+			$advancedSearch = json_decode($this->session->userdata('search{'.$slug.'}'), TRUE);
+			$slugQuerySearch['where'] = $advancedSearch['query'];
+			$data['main']['search']['json'] = json_encode($advancedSearch['search']);
+			$data['header']['title'] = _('Biblat - Búsqueda avanzada');
+			$data['main']['search']['filtro'] = $filtro;
+			$data['main']['title'] = _('Resultados de la búsqueda');
 		endif;
 
 		$queryFields="SELECT 
@@ -134,5 +192,54 @@ class Buscar extends CI_Controller{
 		$this->load->view('menu', $data['header']);
 		$this->load->view('buscar/index', $data['main']);
 		$this->load->view('footer');
+	}
+
+	public function getList(){
+		$this->output->enable_profiler(FALSE);
+		$result = array(
+				'paises' => $this->getPaises(),
+				'disciplinas' => $this->getDisciplinas()
+			);
+		echo json_encode($result);
+	}
+
+	public function getPaises(){
+		$this->output->enable_profiler(FALSE);
+		if(! $this->session->userdata('paises')){
+			$this->load->database();
+			$query = "SELECT * FROM \"mvPais\" WHERE \"paisSlug\" <> 'internacional'";
+			$query = $this->db->query($query);
+			$paises = $query->result_array();
+			$query->free_result();
+			$this->db->close();
+			$this->session->set_userdata('paises', json_encode($paises));
+		}
+		$paises = json_decode($this->session->userdata('paises'), TRUE);
+		$result = array();
+		foreach ($paises as $pais):
+			$row['id'] = $pais['paisSlug'];
+			$row['label'] = $pais['pais'];
+			$result[] = $row;
+		endforeach;
+		return $result;
+	}
+	public function getDisciplinas(){
+		$this->output->enable_profiler(FALSE);
+		if(! $this->session->userdata('discipliasBusqueda') ){
+			$this->load->database();
+			$query = "SELECT * FROM \"mvDisciplina\" WHERE id_disciplina <> '23'";
+			$query = $this->db->query($query);
+			$disciplinas = $query->result_array();
+			$query->free_result();
+			$this->db->close();
+			$session = array();
+			foreach ($disciplinas as $disciplina):
+				$row['id'] = $disciplina['id_disciplina'];
+				$row['label'] = $disciplina['disciplina'];
+				$session[] = $row;
+			endforeach;
+			$this->session->set_userdata('discipliasBusqueda', json_encode($session));
+		}
+		return json_decode($this->session->userdata('discipliasBusqueda'), TRUE);
 	}
 }

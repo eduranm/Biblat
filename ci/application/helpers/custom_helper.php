@@ -189,8 +189,14 @@ if ( ! function_exists('articulosResultado') ):
 
 		$totalRows=(int)$ci->session->userdata('query{'.md5($queryCount).'}');
 
+		$uri_segment = $ci->uri->total_segments();
+
+		if(preg_match('/[0-9a-f]{32}/', $ci->uri->segment($uri_segment))):
+			$uri_segment++;
+		endif;
+
 		$config['base_url'] = $paginationURL;
-		$config['uri_segment'] = $ci->uri->total_segments();
+		$config['uri_segment'] = $uri_segment;
 		$config['total_rows'] = $totalRows;
 		$config['per_page'] = $perPage;
 		$config['use_page_numbers'] = true;
@@ -212,6 +218,7 @@ if ( ! function_exists('articulosResultado') ):
 		$config['last_tag_close'] = '</span>';
 		$config['full_tag_open'] = '<div class="navbar">';
 		$config['full_tag_close'] = '</div>';
+		$config['use_page_numbers'] = TRUE;
 		$ci->pagination->initialize($config);
 		
 		$resultado['links'] = $ci->pagination->create_links();
@@ -246,13 +253,13 @@ if ( ! function_exists('articulosResultado') ):
 			/*Creando link en caso de que exista texto completo*/
 			$row['articuloLink'] = anchor("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}", $row['articulo'], "title=\"{$row['articulo']}\" class=\"registro\"");
 			if( $row['url'] != NULL):
-				$img = "<img src=\"".base_url("img/html.png")."\"/>";
+				$img = "<img src=\"".base_url("img/html.png")."\" border=\"0\"/>";
 				if(preg_match('/.*pdf.*/', $row['url'])):
-					$img = "<img src=\"".base_url("img/pdf.png")."\"/>";
+					$img = "<img src=\"".base_url("img/pdf.png")."\" border=\"0\"/>";
 				endif;
 				$row['downloadLink'] = "<a href=\"{$row['url']}\" target=\"_blank\" title=\""._('Mostrar artículo en texto completo')."\">{$img}</a>";
 			endif;
-			$row['mendeleyLink'] = "<a target=\"_blank\" href=\"http://www.mendeley.com/import/?url=".urlencode(site_url("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}"))."\" title=\""._('Agregue este articulo a su biblioteca Mendeley')."\"><img src=\"http://www.mendeley.com/graphics/mendeley.png\"></a>";
+			$row['mendeleyLink'] = "<a target=\"_blank\" href=\"http://www.mendeley.com/import/?url=".urlencode(site_url("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}"))."\" title=\""._('Agregue este articulo a su biblioteca Mendeley')."\"><img src=\"http://www.mendeley.com/graphics/mendeley.png\" border=\"0\"></a>";
 
 			/*Creando lista de autores en html*/
 			$row['autoresHTML'] = "";
