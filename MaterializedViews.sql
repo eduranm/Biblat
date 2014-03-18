@@ -58,6 +58,29 @@ CREATE OR REPLACE FUNCTION create_matview(NAME, NAME)
      RETURN;
  END';
 
+CREATE OR REPLACE FUNCTION indexes_matview(name)
+  RETURNS void AS
+$BODY$
+DECLARE 
+  matview ALIAS FOR $1;
+  index_matview RECORD;
+  indexes_matview text[];
+  i integer;
+BEGIN
+  SELECT array_agg(indexdef) INTO indexes_matview FROM pg_indexes WHERE tablename='mvIndiceCoautoriaPricePais';
+  RAISE NOTICE 'indexes_matview: %', indexes_matview;
+  FOR i IN SELECT generate_subscripts( indexes_matview, 1 ) LOOP
+    RAISE NOTICE 'Index definition: %', indexes_matview[i];
+    EXECUTE indexes_matview[i];
+  END LOOP;
+  RAISE NOTICE 'mat_view: %', matview;
+  FOR index_matview IN SELECT indexdef FROM pg_indexes WHERE tablename=replace(matview, '"', '') LOOP
+    RAISE NOTICE 'Index definition: %', index_matview.indexdef;
+  END LOOP;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE;
+
 CREATE OR REPLACE FUNCTION refresh_matview(name)
   RETURNS void AS $$
  DECLARE 
@@ -204,7 +227,7 @@ FROM articulo t
     LEFT JOIN (SELECT 
         pt.iddatabase, 
         pt.sistema, 
-        array_agg(pt.descpalabraclave ORDER BY pt.descpalabraclave) AS "palabrasClaveArray", 
+        array_agg(pt.descpalabraclave ORDER BY pt.sec_palcve) AS "palabrasClaveArray", 
         string_agg(slug_space(pt.descpalabraclave), ' | ' ORDER BY pt.descpalabraclave) || ' | ' AS "palabrasClaveSlug"
         FROM palabraclave pt
         GROUP BY pt.iddatabase, pt.sistema) p 
@@ -212,7 +235,7 @@ FROM articulo t
     LEFT JOIN (SELECT
         kw.iddatabase, 
         kw.sistema, 
-        array_agg(kw.desckeyword ORDER BY kw.desckeyword) AS "keywordArray", 
+        array_agg(kw.desckeyword ORDER BY kw.sec_keyword) AS "keywordArray", 
         string_agg(slug_space(kw.desckeyword), ' | ' ORDER BY kw.desckeyword) || ' | ' AS "keywordSlug"
         FROM keyword kw
         GROUP BY kw.iddatabase, kw.sistema) k
@@ -236,6 +259,16 @@ CREATE INDEX "searchPaisSlugGin_idx" ON "mvSearch" USING gin("paisSlug" gin_trgm
 CREATE INDEX "searchPaisSlug_idx" ON "mvSearch"("paisSlug");
 CREATE INDEX "searchInstitucionesSlug_idx" ON "mvSearch" USING gin("institucionesSlug" gin_trgm_ops);
 CREATE INDEX "searchpalabrasClaveSlug_idx" ON "mvSearch" USING gin("palabrasClaveSlug" gin_trgm_ops);
+
+--Vista con el contenido de la ficha del documento
+CREATE OR REPLACE VIEW "fichaDocumento" AS
+  SELECT 
+    s.*,
+    a."520" AS "resumenJSON" 
+FROM "mvSearch" s
+INNER JOIN 
+  aleph_tags a
+  ON a."035"=CASE iddatabase WHEN 0 THEN 'CLA01' ELSE 'PER01' END||sistema;
 
 --Vista para lista de paises
 CREATE MATERIALIZED VIEW "mvPais" AS 

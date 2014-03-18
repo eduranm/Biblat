@@ -96,6 +96,26 @@
 					<td><?php echo $articulo['idioma']?></td>
 				</tr>
 <?php 	endif;?>
+<?php 	if ( isset($articulo['tipoDocumento']) ):?>
+				<tr>
+					<td class="attributo"><?php _e('Tipo de documento:');?></td>
+					<td><?php echo $articulo['tipoDocumento'];?></td>
+				</tr>
+<?php endif;?>
+<?php 	if ( isset($articulo['enfoqueDocumento']) ):?>
+				<tr>
+					<td class="attributo"><?php _e('Enfoque:');?></td>
+					<td><?php echo $articulo['enfoqueDocumento'];?></td>
+				</tr>
+<?php endif;?>
+<?php 	if ( isset($articulo['resumenHTML']) ):
+			foreach ($articulo['resumenHTML'] as $resumen):?>
+				<tr>
+					<td class="attributo"><?php echo $resumen['title'];?></td>
+					<td class="justify"><?php echo $resumen['body'];?></td>
+				</tr>
+<?php 		endforeach;
+		endif;?>
 <?php 	if ( isset($articulo['disciplinasHTML']) ):?>
 				<tr>
 					<td class="attributo"><?php _e('Disciplinas:');?></td>
