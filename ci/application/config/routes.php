@@ -53,6 +53,9 @@ $route[$langs.'/sobre-biblat'] = 'main/sobreBiblat';
 $route[$langs.'/clase-y-periodica'] = 'main/clasePeriodica';
 $route[$langs.'/scielo'] = 'main/scielo';
 $route[$langs.'/revista/solicitud/documento'] = 'revista/solicitudDocumento';
+$route[$langs.'/bibliometria/descripcion-biblat'] = 'main/descripcionBiblat';
+$route[$langs.'/bibliometria/metodologia-biblat'] = 'main/metodologiaBiblat';
+$route[$langs.'/postular-revista/criterios-de-seleccion'] = 'main/criteriosSeleccion';
 
 $route[$langs.'/buscar/getList'] = 'buscar/getList';
 $route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave|avanzada)/(.+)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';

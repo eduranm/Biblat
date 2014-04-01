@@ -26,8 +26,8 @@
 				<li>
 					<a href="javascript:;" title="<?php _e('Bibliometría');?>"><?php _e('Bibliometría');?></a>
 					<ul>
-						<li><a href="javascript:;" title="<?php _e('Descripción');?>"><?php _e('Descripción');?></a></li>
-						<li><a href="javascript:;" title="<?php _e('Metodología');?>"><?php _e('Metodología');?></a></li>
+						<li><a href="<?=site_url('bibliometria/descripcion-biblat');?>" title="<?php _e('Descripción');?>"><?php _e('Descripción');?></a></li>
+						<li><a href="<?=site_url('bibliometria/metodologia-biblat');?>" title="<?php _e('Metodología');?>"><?php _e('Metodología');?></a></li>
 						<li>
 							<a href="javascript:;" title="<?php _e('Frecuencias');?>"><?php _e('Frecuencias');?></a>
 							<ul>
@@ -57,8 +57,7 @@
 				<li>
 					<a href="javascript:;" title="<?php _e('Postular una revista');?>"><?php _e('Postular una revista');?></a>
 					<ul>
-						<li><a href="javascript:;" title="<?php _e('Criterios de selección de revistas');?>"><?php _e('Criterios de selección de revistas');?></a></li>
-						<li><a href="javascript:;" title="<?php _e('Contacto');?>"><?php _e('Contacto');?></a></li>
+						<li><a href="<?=site_url('postular-revista/criterios-de-seleccion');?>" title="<?php _e('Criterios de selección de revistas');?>"><?php _e('Criterios de selección de revistas');?></a></li>
 					</ul>
 				</li>
 				<li><a href="javascript:;" title="<?php _e('Políticas de acceso');?>"><?php _e('Políticas de acceso');?></a></li>
