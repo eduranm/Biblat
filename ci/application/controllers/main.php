@@ -117,6 +117,33 @@ class Main extends CI_Controller{
 		$this->load->view('footer');
 	}
 
+	public function descripcionBiblat(){
+		$data = array();
+		$data['header']['title'] = _("Biblat - Descripción");
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu');
+		$this->load->view('main/descripcion_biblat');
+		$this->load->view('footer');
+	}
+
+	public function metodologiaBiblat(){
+		$data = array();
+		$data['header']['title'] = _("Biblat - Metodología");
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu');
+		$this->load->view('main/metodologia_biblat');
+		$this->load->view('footer');
+	}
+
+	public function criteriosSeleccion(){
+		$data = array();
+		$data['header']['title'] = _("Biblat - Metodología");
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu');
+		$this->load->view('main/criterios_seleccion');
+		$this->load->view('footer');
+	}
+
 	public function sitemap(){
 		$data = array();
 		$data['header']['title'] = _("Biblat - Mapa del sitio");

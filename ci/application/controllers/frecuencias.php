@@ -114,7 +114,7 @@ class Frecuencias extends CI_Controller {
 		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
-				'title' => _('Países'),
+				'title' => _('País-Revista'),
 				'width' => 100,
 				'className' => 'pq-link'
 			);
@@ -145,7 +145,7 @@ class Frecuencias extends CI_Controller {
 		$args['xls']['fileName'] = "Frecuencia-Institucion.csv";
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución');
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de países, revistas, autores y documentos por institución');
+		$data['header']['gridTitle'] = _sprintf('Número de documentos por país de publicación de la revista, título de la revista, autor y disciplina, por institución de afiliación del autor');
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Institución'));
 		$section = array('', '', '/pais', '/revista', '/autor', '/documento');
 		$data['header']['section'] = json_encode($section, true);
@@ -202,7 +202,7 @@ class Frecuencias extends CI_Controller {
 		$this->db->close();
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", países de publicación', $institucion);
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por país de publicación en la institución:<br/> %s', $institucion);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos por país de publicación de la revista de la institución:<br/> %s', $institucion);
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/País', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('País'), _('Documentos'));
@@ -273,7 +273,7 @@ class Frecuencias extends CI_Controller {
 		$this->db->close();
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", revistas de publicación', $institucion);
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por revista de publicación en la institución: <br/>%s', $institucion);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos publicados por revista de la institución: <br/>%s', $institucion);
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Revista', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('Revista'), _('Documentos'));
@@ -344,7 +344,7 @@ class Frecuencias extends CI_Controller {
 		$this->db->close();
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", autor', $institucion);
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en la institución: <br/>%s', $institucion);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos publicados por autor adscritos a la institución: <br/>%s', $institucion);
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('Autor'), _('Documentos'));
@@ -430,7 +430,7 @@ class Frecuencias extends CI_Controller {
 			);
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución');
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de instituciones, autores y documentos por país de afiliación del autor');
+		$data['header']['gridTitle'] = _sprintf('Número de documentos por institución, autor y disciplina por país de la institución del autor');
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s', anchor('frecuencias', _('Frecuencias'), _('title="País de afiliación del autor"')), _('País de afiliación'));
 		$section = array('', '', '/institucion', '/autor', '/documento');
 		$data['header']['section'] = json_encode($section, true);
@@ -486,7 +486,7 @@ class Frecuencias extends CI_Controller {
 		$this->db->close();
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por país de afiliación "%s", instituciones', $query['paisInstitucion']);
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por institución en en el país de afiliación del autor:<br/> %s', $query['paisInstitucion']);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos por institución de afiliación del autor del país:<br/> %s', $query['paisInstitucion']);
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Institución', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('Institución'), _('Documentos'));
@@ -556,7 +556,7 @@ class Frecuencias extends CI_Controller {
 		$this->db->close();
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias país de afiliación "%s", autores', $query['paisInstitucion']);
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en el país de afiliación:<br/> %s', $query['paisInstitucion']);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos por autor del país de institución de afiliación:<br/> %s', $query['paisInstitucion']);
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('Autor'), _('Documentos') );
@@ -690,7 +690,7 @@ class Frecuencias extends CI_Controller {
 			);
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por revista');
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de autores y documentos por revista');
+		$data['header']['gridTitle'] = _sprintf('Número de documentos publicados por revista y autor');
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Revista'));
 		$section = array('', '', '/autor', '/documento');
 		$data['header']['section'] = json_encode($section, true);
@@ -750,7 +750,7 @@ class Frecuencias extends CI_Controller {
 		$this->db->close();
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por revista: %s, autores', $query['revista']);
-		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor en la revista:<br/> %s', $query['revista']);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos publicados por autor en la revista:<br/> %s', $query['revista']);
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), $query['revista']);
 		/*XML vars*/
 		$args['xls']['cols'] = array( ('Autor'), _('Documentos') );

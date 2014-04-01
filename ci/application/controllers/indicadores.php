@@ -99,16 +99,16 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-coautoria'] = array(
 			'campoTabla' => "coautoria AS valor FROM \"mvIndiceCoautoriaPrice",
 			'title' => array(
-					'revista' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Media de autores por artículo en la revista').'</div>',
-					'paisRevista' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Media de autores por articulo en las revistas del país').'</div>',
-					'paisAutor' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Media de autores por articulo en el país').'</div>'
+					'revista' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Promedio de autores por artículo en la revista').'</div>',
+					'paisRevista' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Promedio de autores por articulo en las revistas del país').'</div>',
+					'paisAutor' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Promedio de autores por articulo en el país').'</div>'
 				),
 			'vTitle' => _('Índice de Coautoría'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
 					'revista' => _('Promedio de autores por artículo en el año %s: %s'),
 					'paisRevista' => _('Promedio de autores por artículo en las revistas del país en el año %s: %s'),
-					'paisAutor' => _('Promedio de autores por artículo en el país en el año %s: %s'),
+					'paisAutor' => _('Promedio de autores por artículo según país del autor año %s: %s'),
 				)
 			);
 		$indicador['tasa-documentos-coautorados'] = array(
@@ -135,8 +135,8 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Grado de Colaboración'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Promedio de artículos con autoría múltiple en el año %s: %s'),
-					'paisRevista' => _('Promedio de artículos con autoría múltiple en las revistas del país en el año %s: %s')
+					'revista' => _('Proporción de artículos con autoría múltiple en el año %s: %s'),
+					'paisRevista' => _('Proporción de artículos con autoría múltiple en las revistas del país en el año %s: %s')
 				)
 			);
 		$indicador['modelo-elitismo'] = array(

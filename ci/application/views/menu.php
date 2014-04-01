@@ -17,17 +17,17 @@
 					<ul>
 						<li><a href="<?=site_url('sobre-biblat');?>" title="<?php _e('Biblat');?>"><?php _e('Biblat');?></a></li>
 						<li><a href="<?=site_url('clase-y-periodica');?>" title="<?php _e('Clase y Periódica');?>"><?php _e('Clase y Periódica');?></a></li>
-						<li><a href="javascript:;" title="<?php _e('Materiales de difusión');?>"><?php _e('Materiales de difusión');?></a></li>
+						<li><a href="javascript:;" title="<?php _e('Manual de indización');?>"><?php _e('Manual de indización');?></a></li>
 						<li><a href="<?=site_url('scielo');?>" title="<?php _e('SciELO');?>"><?php _e('SciELO');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Tutoriales');?>"><?php _e('Tutoriales');?></a></li>
-						<li><a href="javascript:;" title="<?php _e('Manual de indización');?>"><?php _e('Manual de indización');?></a></li>
+						<li><a href="javascript:;" title="<?php _e('Materiales de difusión');?>"><?php _e('Materiales de difusión');?></a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="javascript:;" title="<?php _e('Bibliometría');?>"><?php _e('Bibliometría');?></a>
 					<ul>
-						<li><a href="javascript:;" title="<?php _e('Descripción');?>"><?php _e('Descripción');?></a></li>
-						<li><a href="javascript:;" title="<?php _e('Metodología');?>"><?php _e('Metodología');?></a></li>
+						<li><a href="<?=site_url('bibliometria/descripcion-biblat');?>" title="<?php _e('Descripción');?>"><?php _e('Descripción');?></a></li>
+						<li><a href="<?=site_url('bibliometria/metodologia-biblat');?>" title="<?php _e('Metodología');?>"><?php _e('Metodología');?></a></li>
 						<li>
 							<a href="javascript:;" title="<?php _e('Frecuencias');?>"><?php _e('Frecuencias');?></a>
 							<ul>
@@ -57,8 +57,7 @@
 				<li>
 					<a href="javascript:;" title="<?php _e('Postular una revista');?>"><?php _e('Postular una revista');?></a>
 					<ul>
-						<li><a href="javascript:;" title="<?php _e('Criterios de selección de revistas');?>"><?php _e('Criterios de selección de revistas');?></a></li>
-						<li><a href="javascript:;" title="<?php _e('Contacto');?>"><?php _e('Contacto');?></a></li>
+						<li><a href="<?=site_url('postular-revista/criterios-de-seleccion');?>" title="<?php _e('Criterios de selección de revistas');?>"><?php _e('Criterios de selección de revistas');?></a></li>
 					</ul>
 				</li>
 				<li><a href="javascript:;" title="<?php _e('Políticas de acceso');?>"><?php _e('Políticas de acceso');?></a></li>

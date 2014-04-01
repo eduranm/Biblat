@@ -1169,3 +1169,6 @@ form.contacto input[type=submit]{
 .errorNotification,  .ui-pnotify-container{
 	background-color: #FFF;
 }
+.biblat{
+	color:#cc6600;
+}

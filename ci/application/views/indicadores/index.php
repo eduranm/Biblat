@@ -38,7 +38,7 @@
 				</select>
 			</div>
 			<div class="rightColumn">
-				<select name="paisAutor[]" id="paisAutor" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione uno o varios países del autor');?>">
+				<select name="paisAutor[]" id="paisAutor" style="width:90%" disabled multiple data-placeholder="<?php _e('Seleccione uno o varios países de la afiliación del autor');?>">
 					<option></option>
 				</select>
 			</div>
@@ -91,8 +91,7 @@
 				<div id="info-indice-coautoria" class="infoBox">
 					<p class="textoTitulo centrado"><?php _e('Índice de Coautoría');?></p>
 					<p class="textoL">
-						<?php _e('Este indicador muestra el número medio de autores por artículo.');?><br/>
-						<?php _e('El valor numérico indica el promedio de autores por documento.');?>
+						<?php _e('Este indicador muestra el número promedio de autores por artículo.');?>
 					</p>
 					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 					<div class="textoL ident2 formula">
@@ -161,7 +160,7 @@
 				<div id="info-modelo-elitismo" class="infoBox">
 					<p class="textoTitulo centrado"><?php _e('Modelo de Elitismo (Price)');?></p>
 					<p class="textoL">
-						<?php _e('Identifica la cantidad de autores que integran la elite de los más productivos por revista.');?><br/>
+						<?php _e('Identifica la cantidad de autores que integran la elite de los más productivos por revista o país de publicación de la revista.');?><br/>
 						<?php _e('El valor numérico representa la cantidad de los autores que integran dicha elite.');?>
 					</p>
 					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
@@ -295,7 +294,7 @@
 				<div id="info-productividad-exogena" class="infoBox">
 					<p class="textoTitulo centrado"><?php _e('Tasa de autoría exógena');?></p>
 					<p class="textoJ">
-						<?php _e('Indicador que mide el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta al de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores.');?><br/>
+						<?php _e('Indicador que mide el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta a la de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores.');?><br/>
 						<?php _e('El valor numérico indica la proporción de autores extranjeros que han publicado en la revista.');?><br/>
 					</p>
 					<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
