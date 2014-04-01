@@ -276,7 +276,7 @@ class Revista extends CI_Controller{
 			$this->load->library('email');
 			$this->email->initialize($config);
 			$this->email->from('solicitud@biblat.unam.mx', 'Solicitud Biblat');
-			$this->email->to('sinfo@dgb.unam.mx');
+			//$this->email->to('sinfo@dgb.unam.mx');
 			//$this->email->to('achwazer@gmail.com');
 			$this->email->cc('anoguez@dgb.unam.mx');
 			$this->email->subject('Solicitud de documento Biblat');
