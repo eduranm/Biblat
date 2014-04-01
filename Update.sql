@@ -53,24 +53,24 @@ COPY artidisciplina
 FROM '/home/herz/Sites/biblat/periodica/artitema.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
 
---sed -E -e '/"[01]";"[0-9]+?";"[0-9]+?";("[^0-9]"|NULL)/d' clase/autor.txt > autor.txt
+--sed -E -e '/"[01]";"[0-9]+?";"[0-9]+?";("[^0-9]"|NULL)/d' clase/autor.txt > autor.txt && mv autor.txt clase/autor.txt
 TRUNCATE TABLE autor;
 COPY autor(iddatabase,sistema,sec_autor,sec_institucion,st_institucion,etiqueta,e_100a,e_1006) 
 FROM '/home/herz/Sites/biblat/clase/autor.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
 
---sed -E -e '/"[01]";"[0-9]+?";"[0-9]+?";("[^0-9]"|NULL)/d' periodica/autor.txt > autor.txt
+--sed -E -e '/"[01]";"[0-9]+?";"[0-9]+?";("[^0-9]"|NULL)/d' periodica/autor.txt > autor.txt && mv autor.txt periodica/autor.txt
 COPY autor(iddatabase,sistema,sec_autor,sec_institucion,st_institucion,etiqueta,e_100a,e_1006) 
 FROM '/home/herz/Sites/biblat/periodica/autor.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
 
---sed -E -e '/"[01]";"[0-9]+?";"[0-9]+?";("[^0-9]"|NULL)/d' clase/institucion.txt > institucion.txt
+--sed -E -e '/"[01]";"[0-9]+?";"[0-9]+?";("[^0-9]"|NULL)/d' clase/institucion.txt > institucion.txt && mv institucion.txt clase/institucion.txt
 TRUNCATE TABLE institucion;
 COPY institucion(iddatabase,sistema,sec_autor,sec_institucion,e_100u,e_100v,e_100w,e_100x,etiqueta) 
 FROM '/home/herz/Sites/biblat/clase/institucion.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
 
---sed -E -e '/"[01]";"[0-9]+?";"[0-9]+?";("[^0-9]"|NULL)/d' periodica/institucion.txt > institucion.txt
+--sed -E -e '/"[01]";"[0-9]+?";"[0-9]+?";("[^0-9]"|NULL)/d' periodica/institucion.txt > institucion.txt && mv institucion.txt periodica/institucion.txt
 COPY institucion(iddatabase,sistema,sec_autor,sec_institucion,e_100u,e_100v,e_100w,e_100x,etiqueta) 
 FROM '/home/herz/Sites/biblat/periodica/institucion.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
@@ -80,12 +80,12 @@ COPY palabraclave
 FROM '/home/herz/Sites/biblat/clase/palabraclave.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
 
---sed -E -e '/;NULL$/d' periodica/palabraclave.txt > palabraclave.txt
+--sed -E -e '/;NULL$/d' periodica/palabraclave.txt > palabraclave.txt && mv palabraclave.txt periodica/palabraclave.txt
 COPY palabraclave 
 FROM '/home/herz/Sites/biblat/periodica/palabraclave.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
 
---sed -E -e '/;NULL$/d' periodica/keyword.txt > keyword.txt
+--sed -E -e '/;NULL$/d' periodica/keyword.txt > keyword.txt && mv keyword.txt periodica/keyword.txt
 TRUNCATE TABLE keyword;
 COPY keyword 
 FROM '/home/herz/Sites/biblat/periodica/keyword.txt'
@@ -119,4 +119,4 @@ TRUNCATE TABLE aleph_tags;
 		"654",
 		"698",
 		"856") 
-	FROM '/home/herz/Sites/biblat/periodicaJSON.txt' (FORMAT 'csv', DELIMITER ',', NULL 'NULL', QUOTE '''', ESCAPE E'\\', ENCODING 'UTF8')
+	FROM '/home/herz/Sites/biblat/claperJSON.txt' (FORMAT 'csv', DELIMITER ',', NULL 'NULL', QUOTE '''', ESCAPE E'\\', ENCODING 'UTF8');
