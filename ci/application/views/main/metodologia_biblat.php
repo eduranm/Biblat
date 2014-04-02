@@ -32,14 +32,14 @@
 				</ul>	
 			</li>
 		</ul><br></br>
-		<b><?php _e('Información sobre institución de afiliación del autor:');?></b><?php _printf(' %s proporciona información sobre la adscripción institucional (o lugar de trabajo) de los autores de los artículos publicados en las revistas indizadas en %s y %s, lo cual permite generar reportes cuantitativos sobre la producción de artículos considerando a las instituciones, organismos o centros de investigación en los que los autores desempeñan su actividad académica. La generación de estos reportes es posible dado que %s y %s compilan desde el inicio de ambas bases de datos la información sobre la adscripción institucional del autor. Sin embargo, es necesario considerar la evolución de los criterios adoptados por dichas bases en la indización de esta información, dado que de ello depende su representación estadística.','<span class="biblat">Biblat</span>','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>');?><br></br>
+		<b><?php _e('Información sobre institución de afiliación del autor:');?></b> <?php _printf('%s proporciona información sobre la adscripción institucional (o lugar de trabajo) de los autores de los artículos publicados en las revistas indizadas en %s y %s, lo cual permite generar reportes cuantitativos sobre la producción de artículos considerando a las instituciones, organismos o centros de investigación en los que los autores desempeñan su actividad académica. La generación de estos reportes es posible dado que %s y %s compilan desde el inicio de ambas bases de datos la información sobre la adscripción institucional del autor. Sin embargo, es necesario considerar la evolución de los criterios adoptados por dichas bases en la indización de esta información, dado que de ello depende su representación estadística.','<span class="biblat">Biblat</span>','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>');?><br></br>
 		<b><?php _printf('Hasta 1998, se registraban hasta tres niveles jerárquicos de cada institución: la Institución y sus Dependencias y Subdependencias. A partir de 1998, sólo se codifican dos niveles: Institución y Dependencia, incluyendo ciudad, estado (o división político-administrativa) y país.');?></b><br></br>
 		<b><?php _printf('Hasta 1987, sólo se registraba la información de adscripción institucional del primer autor. A partir de 1988, %s y %s registran todas las instituciones diferentes que aparecen en el documento. A partir de junio de 2009, se implementa una nueva política para la codificación de esta información, consistente en el registro de todas las instituciones (manteniendo el criterio de vincular a cada autor con solo una institución) que aparecen en el documento (ver metodología en %s','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>','<a href="http://bibliotecas.unam.mx/eventos/manual/adscinstitucion.html" target="_blank">Manual de Indización</a>)');?></b><br></br><br></br>
 		<p class="textoTitulo centrado"><?php _e('Normas de indización de la adscripción institucional de los autores');?></p>
 		<?php _e('Para que una institución sea registrada se requiere que en el documento indizado se consignen al menos tres datos: el nombre de la institución, la ciudad y el país en que se localiza.');?>
 		<?php _e('Por cada institución se registran hasta dos niveles diferentes en jerarquía:');?><br></br>
-		<b><?php _e('Nombre de la Institución:');?></b><?php _e(' es el caso de universidades, ministerios, secretarías de estado, empresas u organismos internacionales, por citar los ejemplos más comunes.');?><br></br>
-		<b><?php _e('Nombre de la dependencia:');?></b><?php _e(' consistente en aquellas entidades ubicadas en el nivel inferior inmediato de una institución: áreas, centros de investigación, departamentos, direcciones y facultades, por ejemplo.');?><br></br>
+		<b><?php _e('Nombre de la Institución:');?></b> <?php _e('es el caso de universidades, ministerios, secretarías de estado, empresas u organismos internacionales, por citar los ejemplos más comunes.');?><br></br>
+		<b><?php _e('Nombre de la dependencia:');?></b> <?php _e('consistente en aquellas entidades ubicadas en el nivel inferior inmediato de una institución: áreas, centros de investigación, departamentos, direcciones y facultades, por ejemplo.');?><br></br>
 		<?php _e('Complementariamente se incluye la siguiente información para cada institución:');?><br></br>
 		<ul>
 			<li><?php _e('Nombre de la ciudad');?></li>
@@ -50,8 +50,8 @@
 		<?php _e('Solamente se registra una institución por autor. En caso de que un autor aparezca vinculado a distintas instituciones, el criterio adoptado para elegir la institución es aquella en la cual el autor desempeña su actividad académica en el momento en que se produjo el documento; en caso de que esto sea así para más de una institución se registra la que aparece en primer término.');?><br></br>
 		<?php _e('También se consideran como instituciones de adscripción aquellas que, durante un período de tiempo determinado, acogen a profesores o investigadores visitantes, así como a becarios y alumnos de posgrado.');?><br></br>
 		<?php _e('No se consideran instituciones de adscripción a las instituciones que patrocinaron la investigación que dio lugar al documento o las instituciones en donde el autor obtuvo sus grados académicos. Tampoco se ingresan direcciones personales.');?><br></br>
-		<b><?php _printf('Sesgo hacia el país productor de las bases de datos:');?></b><?php _e(' No obstante que %s y %s son las bases de datos multidisciplinarias con más títulos de publicaciones periódicas latinoamericanas de carácter académico, lo cierto es que presentan el mismo fenómeno que enfrentan muchos servicios de información en los que predomina la información del país en donde se produce la base de datos, lo cual se manifiesta, en este caso, en el predominio de las revistas mexicanas. Por otra parte, la aparición y la consolidación de la publicación electrónica, en particular, de las publicaciones de acceso libre a través de Internet, han permitido vencer la barrera de la distancia geográfica y con ello equilibrar la representatividad por país de edición de las revistas indizadas en %s y %s. De particular importancia ha sido, en este sentido, la indización de revistas disponibles en texto completo en las diversas hemerotecas virtuales de la región que surgieron a inicios de este siglo.','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>');?><br></br>
-		<b><?php _printf('Normalización y actualización permanente:');?></b><?php _printf(' las bases de datos %s y %s se normalizan constantemente y de manera retrospectiva. Esto quiere decir, en primer lugar, que la información contenida en las bases está sujeta a procesos de revisión y corrección recurrentes y, en segundo lugar, que frecuentemente y por diversas causas, algunos fascículos de revistas son indizados con dos o más años de retraso. Esto implica que los datos para una revista no siempre se indizan en el mismo año de publicación ni en el siguiente. La repercusión que esto tiene en la generación de indicadores bibliométricos es que la información retrospectiva también está sujeta a modificaciones frecuentes.','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>');?><br></br>
+		<b><?php _printf('Sesgo hacia el país productor de las bases de datos:');?></b> <?php _e('No obstante que %s y %s son las bases de datos multidisciplinarias con más títulos de publicaciones periódicas latinoamericanas de carácter académico, lo cierto es que presentan el mismo fenómeno que enfrentan muchos servicios de información en los que predomina la información del país en donde se produce la base de datos, lo cual se manifiesta, en este caso, en el predominio de las revistas mexicanas. Por otra parte, la aparición y la consolidación de la publicación electrónica, en particular, de las publicaciones de acceso libre a través de Internet, han permitido vencer la barrera de la distancia geográfica y con ello equilibrar la representatividad por país de edición de las revistas indizadas en %s y %s. De particular importancia ha sido, en este sentido, la indización de revistas disponibles en texto completo en las diversas hemerotecas virtuales de la región que surgieron a inicios de este siglo.','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>');?><br></br>
+		<b><?php _printf('Normalización y actualización permanente:');?></b> <?php _printf('las bases de datos %s y %s se normalizan constantemente y de manera retrospectiva. Esto quiere decir, en primer lugar, que la información contenida en las bases está sujeta a procesos de revisión y corrección recurrentes y, en segundo lugar, que frecuentemente y por diversas causas, algunos fascículos de revistas son indizados con dos o más años de retraso. Esto implica que los datos para una revista no siempre se indizan en el mismo año de publicación ni en el siguiente. La repercusión que esto tiene en la generación de indicadores bibliométricos es que la información retrospectiva también está sujeta a modificaciones frecuentes.','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>');?><br></br>
 	</div>
 
 	<div class="flagContainer">
@@ -65,21 +65,21 @@
 		<?php _printf('Frecuencias disponibles en %s:','<span class="biblat">Biblat</span>');?><br></br>
 		<?php _e('Por autor:');?><br></br>
 		<ul>
-			<li><?php _e('Número de documentos publicados por autor');?></li>
+			<li><a href="<?=site_url("frecuencias/autor");?>" target="_blank"><?php _e('Número de documentos publicados por autor');?></a></li>
 		</ul><br></br>
 		<?php _e('Por institución de afiliación del autor:');?><br></br>
 		<ul>
-			<li><?php _e('Número de documentos publicados por institución');?></li>
-			<li><?php _e('Número de documentos publicados por institución según el país de la revista');?></li>
-			<li><?php _e('Número de documentos publicados por institución según la revista de publicación');?></li>
-			<li><?php _e('Número de documentos publicados por autor según su institución de adscripción');?></li>
-			<li><?php _e('Número de documentos publicados por disciplina según la institución');?></li>
+			<li><a href="<?=site_url("frecuencias/institucion");?>" target="_blank"><?php _e('Número de documentos publicados por institución');?></a></li>
+			<li><a href="<?=site_url("frecuencias/institucion");?>" target="_blank"><?php _e('Número de documentos publicados por institución según el país de la revista');?></a></li>
+			<li><a href="<?=site_url("frecuencias/institucion");?>" target="_blank"><?php _e('Número de documentos publicados por institución según la revista de publicación');?></a></li>
+			<li><a href="<?=site_url("frecuencias/institucion");?>" target="_blank"><?php _e('Número de documentos publicados por autor según su institución de adscripción');?></a></li>
+			<li><a href="<?=site_url("frecuencias/institucion");?>" target="_blank"><?php _e('Número de documentos publicados por disciplina según la institución');?></a></li>
 		</ul><br></br>
 		<?php _e('Por país de institución de afiliación del autor:');?><br></br>
 		<ul>
-			<li><?php _e('Número de documentos publicados por país de la institución de afiliación del autor');?></li>
-			<li><?php _e('Número de documentos por institución de afiliación por país');?></li>
-			<li><?php _e('Número de documentos por autor según país de institución de afiliación');?></li>
+			<li><a href="<?=site_url("frecuencias/pais-afiliacion");?>" target="_blank"><?php _e('Número de documentos publicados por país de la institución de afiliación del autor');?></a></li>
+			<li><a href="<?=site_url("frecuencias/pais-afiliacion");?>" target="_blank"><?php _e('Número de documentos por institución de afiliación por país');?></a></li>
+			<li><a href="<?=site_url("frecuencias/pais-afiliacion");?>" target="_blank"><?php _e('Número de documentos por autor según país de institución de afiliación');?></a></li>
 			<li><?php _e('Número de documentos por disciplina según país de la institución del autor');?></li>
 		</ul><br></br>
 		<?php _e('Por disciplina:');?><br></br>
@@ -92,8 +92,8 @@
 		</ul><br></br>
 		<?php _e('Por revista:');?><br></br>
 		<ul>
-			<li><?php _e('Número de documentos publicados por revista');?></li>
-			<li><?php _e('Número de documentos publicados por autor y revista');?></li>
+			<li><a href="<?=site_url("frecuencias/revista");?>" target="_blank"><?php _e('Número de documentos publicados por revista');?></a></li>
+			<li><a href="<?=site_url("frecuencias/revista");?>" target="_blank"><?php _e('Número de documentos publicados por autor y revista');?></a></li>
 			<li><?php _e('Número de documentos publicados por institución de afiliación del autor en las revistas');?></li>
 			<li><?php _e('Número de artículos publicados por año');?></li>
 		</ul><br></br>
@@ -109,16 +109,16 @@
 	<div class="textoJ">
 		<?php _e('El módulo de Indicadores proporciona 13 indicadores bibliométricos agrupados, de acuerdo con su especificidad, en tres rubros:');?><br></br>
 		<ul>
-			<li><b><?php _e('De autoría y colaboración entre autores');?></b><?php _printf(' (4 indicadores)');?></li>
-			<li><b><?php _e('De productividad de los autores');?></b><?php _printf(' (2 indicadores)');?></li>
-			<li><b><?php _e('De Concentración – Dispersión, Núcleo básico de revistas y densidad de la información');?></b><?php _printf(' ( 4 indicadores)');?></li>
-			<li><b><?php _e('Coautorías');?></b><?php _printf(' (3 indicadores)');?></li>
+			<li><b><?php _e('De autoría y colaboración entre autores');?></b> <?php _printf('(4 indicadores)');?></li>
+			<li><b><?php _e('De productividad de los autores');?></b> <?php _printf('(2 indicadores)');?></li>
+			<li><b><?php _e('De Concentración – Dispersión, Núcleo básico de revistas y densidad de la información');?></b> <?php _printf('( 4 indicadores)');?></li>
+			<li><b><?php _e('Coautorías');?></b> <?php _printf('(3 indicadores)');?></li>
 		</ul><br></br>
 		<?php _printf('Estos indicadores se enfocan en la obtención de datos objetivos que nos dan cuenta del comportamiento y las regularidades de la producción científica contenida en %s.','<span class="biblat">Biblat</span>');?><br></br>
 	</div>
 
 	<div id="info-indice-coautoria" class="infoBox">
-		<p class="textoTitulo centrado"><?php _e('Índice de Coautoría');?><sup>1</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-coautoria");?>" target="_blank"><?php _e('Índice de Coautoría');?><sup>1</sup></a></p>
 		<p class="textoL">
 			<?php _e('Este indicador muestra el número promedio de autores por artículo.');?><br/>
 		</p>
@@ -142,7 +142,7 @@
 	</div>
 		
 	<div id="info-tasa-documentos-coautorados" class="infoBox">
-		<p class="textoTitulo centrado"><?php _e('Tasa de Documentos Coautorados');?><sup>2</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/tasa-documentos-coautorados");?>" target="_blank"><?php _e('Tasa de Documentos Coautorados');?><sup>2</sup></a></p>
 		<p class="textoL">
 			<?php _e('El valor numérico indica la proporción de artículos con autoría múltiple.');?>
 		</p>
@@ -166,7 +166,7 @@
 	</div>
 
 	<div id="info-grado-colaboracion" class="infoBox">
-		<p class="textoTitulo centrado"><?php _e('Grado de Colaboración (Índice de Subramanyan)');?><sup>3</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/grado-colaboracion");?>" target="_blank"><?php _e('Grado de Colaboración (Índice de Subramanyan)');?><sup>3</sup></a></p>
 		<p class="textoL">
 				<?php _e('El valor numérico indica la proporción de artículos con autoría múltiple.');?>
 		</p>
@@ -190,7 +190,7 @@
 	</div>
 
 	<div id="info-indice-colaboracion" class="infoBox">
-		<p class="textoTitulo centrado"><?php _e('Índice de Colaboración (Índice de Lawani)');?><sup>4</<sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-colaboracion");?>" target="_blank"><?php _e('Índice de Colaboración (Índice de Lawani)');?><sup>4</sup></a></p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 			<i>IC</i> = 
@@ -218,7 +218,7 @@
 	</div>
 
 	<div id="info-modelo-elitismo" class="infoBox">
-		<p class="textoTitulo centrado"><?php _e('Modelo de Elitismo (Price)');?><sup>5</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/modelo-elitismo");?>" target="_blank"><?php _e('Modelo de Elitismo (Price)');?><sup>5</sup></a></p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 				<i>E</i> = 
@@ -235,7 +235,7 @@
 	</div>
 
 	<div id="info-indice-densidad-documentos" class="infoBox">
-		<p class="textoTitulo centrado"><?php _e('Índice de Densidad de Documentos Zakutina y Priyenikova');?><sup>6</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-densidad-documentos");?>" target="_blank"><?php _e('Índice de Densidad de Documentos Zakutina y Priyenikova');?><sup>6</sup></a></p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 				<i>p</i> = 
@@ -257,7 +257,7 @@
 	</div>
 
 	<div id="info-indice-concentracion" class="infoBox">
-		<p class="textoTitulo centrado"><?php _e('Índice de concentración (Índice de Pratt)');?><sup>7</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-concentracion");?>" target="_blank"><?php _e('Índice de concentración temática (Índice de Pratt)');?><sup>7</sup></a></p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 				<i>C</i> = 
@@ -279,7 +279,7 @@
 	</div>
 
 	<div id="info-modelo-bradford-revista" class="infoBox">
-		<p class="textoTitulo centrado"><b><?php _e('Modelo matemático de Bradford por revista');?><sup>8</sup></b><br/>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/modelo-bradford-revista");?>" target="_blank"><?php _e('Modelo de Bradford por revista');?><sup>8</sup></a><br/>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 				<i>p</i>:<i>p</i><sub>1</sub>:<i>p</i><sub>2</sub>:1:<i>n</i><sub>1</sub>:<i>n</i><sub>2</sub>
@@ -295,7 +295,7 @@
 	</div>
 
 	<div id="info-modelo-bradford-institucion" class="infoBox">
-		<p class="textoTitulo centrado"><b><?php _e('Modelo matemático de Bradford (Productividad institucional)');?></b><br/>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-concentracion");?>" target="_blank"><?php _e('Modelo de Bradford (Productividad institucional)');?></a><br/>
 		</p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
@@ -307,11 +307,11 @@
 			<i>n</i> = <?php _e('Multiplicador o factor de proporcionalidad de instituciones por zona.');?>
 		</p>
 		<p class="textoL">
-			<?php _e('Es una variante del modelo original de Bradford. Este indicador mide la concentración - dispersión de la información por institución de adscripción del autor, identificando tres zonas: las instituciones más importantes para la disciplina conformado por aquellas más productivas y especializadas (zona núcleo), grupo de instituciones con menor concentración de artículos publicados en la disciplina (segunda zona) y  tercer zona  que presentan el resto de instituciones relacionadas con la disciplina. Además de mostrar la cantidad de instituciones y artículos por zona. ');?><br/>
+			<?php _e('Es una variante del modelo original de Bradford. Este indicador mide la concentración - dispersión de la información por institución de adscripción del autor, identificando tres zonas: las instituciones más importantes para la disciplina conformado por aquellas más productivas y especializadas (zona núcleo), grupo de instituciones con menor concentración de artículos publicados en la disciplina (segunda zona) y  tercer zona  que presentan el resto de instituciones relacionadas con la disciplina. Además de mostrar la cantidad de instituciones y artículos por zona.');?><br/>
 		</p>
 	</div>
 
-	<p class="textoTitulo centrado"><?php _e('Productividad exógena por título de revista');?></p>
+	<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/productividad-exogena");?>" target="_blank"><?php _e('Productividad exógena por título de revista');?></a></p>
 	<p class="textoJ">
 		<?php _e('Es un indicador que se utiliza para medir el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta a la de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores.');?><br/>
 
@@ -345,7 +345,7 @@
 			<li><?php _e('Número de revistas incluidas en las colecciones de la red SciELO (a partir de 2000)');?></li>
 			<li><?php _e('Número de artículos publicados por revistas SciELO (a partir de 2000)');?></li>
 			<li><?php _e('Número y tipo de documento publicados en las revistas de las colecciones SciELO (a partir de 2000)');?></li>
-			<li><?php _e('Número de artículos incluidos en las colecciones SciELO por área del conocimiento (a partir de 2000) ');?></li>
+			<li><?php _e('Número de artículos incluidos en las colecciones SciELO por área del conocimiento (a partir de 2000)');?></li>
 			<li><?php _e('Número de artículos incluidos por área del conocimiento en las colecciones SciELO (a partir de 2000)');?></li>
 			<li><?php _e('Número de artículos incluidos en la red SciELO según país de la afiliación del autor (a partir de 2000)');?></li>
 			<li><?php _e('Número de artículos publicados por revistas SciELO según el país de la afiliación del autor (a partir de 2000)');?></li>
@@ -361,6 +361,26 @@
 			<li><?php _e('Tipo de documento citado por revista citante (a partir de 2000)');?></li>
 			<li><?php _e('Tipo de documento citado por área del conocimiento de la revista citante (a partir de 2000)');?></li>
 			<li><?php _e('Tipo de documento citado por país de la afiliación del autor citante (a partir de 2000)');?></li>
+		</ul><br></br>
+	</div>
+	<div class="flagContainer">
+		<p class="flag">
+			<em>
+				<?php _e('Indicadores por revista');?>
+			</em>
+		</p>
+	</div>
+	<div class="textoJ">
+		<?php _e('Atmósfera:');?><br></br>
+		<ul>
+			<li><a href="<?=site_url("indicadores/indice-coautoria/disciplina/geociencias/revista/atmosfera");?>" tagert="_blank"><?php _e('Índice de coautoría');?></a></li>
+			<li><a href="<?=site_url("indicadores/tasa-documentos-coautorados/disciplina/geociencias/revista/atmosfera");?>" tagert="_blank"><?php _e('Tasa de Documentos Coautorados');?></a></li>
+			<li><a href="<?=site_url("indicadores/grado-colaboracion/disciplina/geociencias/revista/atmosfera");?>" tagert="_blank"><?php _e('Grado de Colaboración (Índice de Subramanyan)');?></a></li>
+			<li><a href="<?=site_url("indicadores/modelo-elitismo/disciplina/geociencias/revista/atmosfera");?>" tagert="_blank"><?php _e('Modelo de Elitismo (Price)');?></a></li>
+			<li><a href="<?=site_url("indicadores/indice-colaboracion/disciplina/geociencias/revista/atmosfera");?>" tagert="_blank"><?php _e('Índice de Colaboración (Índice de Lawani)');?></a></li>
+			<li><a href="<?=site_url("indicadores/indice-densidad-documentos/disciplina/geociencias/revista/atmosfera");?>" tagert="_blank"><?php _e('Índice de Densidad de Documentos Zakutina y Priyenikova');?></a></li>
+			<li><a href="javascript:;" tagert="_blank"><?php _e('Índice de concentración (Índice de Pratt)');?></a></li>
+			<li><a href="javascript:;" tagert="_blank"><?php _e('Tasa de autoría exógena');?></a></li>
 		</ul><br></br>
 		<?php _printf('Contacto para comentarios y consultas: %s','<a href="mailto:biblat@dgb.unam.mx">biblat@dgb.unam.mx</a>');?><br></br>
 	</div>

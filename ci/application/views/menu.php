@@ -52,6 +52,8 @@
 								<li><a href="<?=site_url('indicadores/productividad-exogena');?>" title="<?php _e('Tasa de autoría exógena');?>"><?php _e('Tasa de autoría exógena');?></a></li>
 							</ul>
 						</li>
+						<li><a href="javascript:;" title="<?php _e('Indicadores SciELO');?>"><?php _e('Indicadores SciELO');?></a></li>
+						<li><a href="javascript:;" title="<?php _e('Indicadores por revista');?>"><?php _e('Indicadores por revista');?></a></li>
 					</ul>
 				</li>
 				<li>
