@@ -155,6 +155,8 @@ ALTER TABLE articulo ADD COLUMN "e_698" varchar;
 UPDATE articulo SET "revistaSlug"=slug(e_222);
 UPDATE articulo a SET id_disciplina=r.id_disciplina 
 FROM rev_disciplinas r WHERE a."revistaSlug"=r."revistaSlug";
+UPDATE articulo a SET id_disciplina=d.id_disciplina 
+FROM disciplinas d WHERE slug(a.e_698)=d.slug;
 /*Indices para optimizar las consultas*/
 CREATE INDEX "articuloTextoCompleto_idx" ON articulo(e_856u);	
 CREATE INDEX "articuloAlfabetico_idx" ON articulo(substring(LOWER(e_222), 1, 1));
