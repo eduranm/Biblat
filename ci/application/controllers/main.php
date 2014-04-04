@@ -94,9 +94,11 @@ class Main extends CI_Controller{
 		$data = array();
 		$data['header']['title'] = _("Biblat - CLASE y PERIÓDICA");
 		$this->load->database();
-		$query = "SELECT * FROM \"vDisciplinasBase\" ORDER BY disciplina";
+		$query = "SELECT * FROM \"vDisciplinasBase\" ORDER BY iddatabase, disciplina";
 		$query = $this->db->query($query);
+		$data[ 'disciplina' ] = array();
 		foreach ($query->result_array() as $row):
+				$disciplina = array();
 				$disciplina['disciplina'] = $row['disciplina'];
 				$disciplina['slug'] = $row['slug'];
    				$data[ 'disciplina' ][ $row[ 'iddatabase' ] ][] = $disciplina;	
