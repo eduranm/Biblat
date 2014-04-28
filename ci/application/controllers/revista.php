@@ -270,7 +270,7 @@ class Revista extends CI_Controller{
 
 	public function solicitudDocumento(){
 		$this->output->enable_profiler(false);
-		if(isset($_POST['email']) && isset($_POST['from']) && isset($_POST['revista']) && isset($_POST['articulo'])):
+		if(!empty($_POST['email']) && !empty($_POST['from']) && !empty($_POST['revista']) && !empty($_POST['articulo'])):
 			$biblatDB = $this->load->database('biblat', TRUE);
 			$config['mailtype'] = 'html';
 			$this->load->library('email');
@@ -285,7 +285,6 @@ class Revista extends CI_Controller{
 			$body = $this->load->view('revista/mail_solicitud', $data, TRUE);
 			$this->email->message($body);
 			$this->email->send();
-
 			$this->email->clear();
 
 			$this->email->from('anoguez@dgb.unam.mx', 'Mtra. Araceli Noguez O.');

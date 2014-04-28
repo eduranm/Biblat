@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-18 10:41-0600\n"
-"PO-Revision-Date: 2014-03-18 10:41-0600\n"
+"POT-Creation-Date: 2014-04-02 14:32-0600\n"
+"PO-Revision-Date: 2014-04-02 14:36-0600\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: bummer <achwazer@gmail.com>\n"
 "Language: \n"
@@ -30,196 +30,207 @@ msgid "Clase y Periódica"
 msgstr "Clase y Periódica"
 
 #: application/views/menu.php:20
-msgid "Tutoriales"
-msgstr "Tutoriales"
-
-#: application/views/menu.php:21
-msgid "Materiales de difusión"
-msgstr "Materiales de difusión"
-
-#: application/views/menu.php:22
 msgid "Manual de indización"
 msgstr "Manual de indización"
 
-#: application/views/menu.php:26
+#: application/views/menu.php:21
+msgid "SciELO"
+msgstr "¿Qué es Biblat?"
+
+#: application/views/menu.php:22
+msgid "Tutoriales"
+msgstr "Tutoriales"
+
+#: application/views/menu.php:23
+msgid "Materiales de difusión"
+msgstr "Materiales de difusión"
+
+#: application/views/menu.php:27
 msgid "Bibliometría"
 msgstr "Bibliometría"
 
-#: application/views/menu.php:28
+#: application/views/menu.php:29
 msgid "Descripción"
 msgstr "Descripción"
 
-#: application/views/menu.php:29
+#: application/views/menu.php:30
 msgid "Metodología"
 msgstr "Metodología"
 
-#: application/views/menu.php:31
+#: application/views/menu.php:32
 msgid "Frecuencias"
 msgstr "Frecuencias"
 
-#: application/views/menu.php:33
+#: application/views/menu.php:34
 #: application/views/header.php:105
 msgid "Autor"
 msgstr "Autor"
 
-#: application/views/menu.php:34
+#: application/views/menu.php:35
 #: application/views/header.php:107
 msgid "Institución"
 msgstr "Institución"
 
-#: application/views/menu.php:35
+#: application/views/menu.php:36
 msgid "País de afiliación del autor"
 msgstr "País de afiliación del autor"
 
-#: application/views/menu.php:35
+#: application/views/menu.php:36
 msgid "País de afiliación"
 msgstr "País de afiliación"
 
-#: application/views/menu.php:36
+#: application/views/menu.php:37
 #: application/views/header.php:106
 msgid "Revista"
 msgstr "Revista"
 
-#: application/views/menu.php:40
+#: application/views/menu.php:41
 msgid "Indicadores"
 msgstr "Indicadores"
 
-#: application/views/menu.php:42
+#: application/views/menu.php:43
 msgid "Índice de coautoría"
 msgstr "Índice de coautoría"
 
-#: application/views/menu.php:43
+#: application/views/menu.php:44
 msgid "Tasa de documentos coautorados"
 msgstr "Tasa de documentos coautorados"
 
-#: application/views/menu.php:44
+#: application/views/menu.php:45
 msgid "Grado de colaboración (Índice Subramanyan)"
 msgstr "Grado de colaboración (Índice Subramanyan)"
 
-#: application/views/menu.php:44
+#: application/views/menu.php:45
 msgid "Grado de colaboración"
 msgstr "Grado de colaboración"
 
-#: application/views/menu.php:45
+#: application/views/menu.php:46
 msgid "Modelo de elitismo (Price)"
 msgstr "Modelo de elitismo (Price)"
 
-#: application/views/menu.php:45
+#: application/views/menu.php:46
 msgid "Modelo de elitismo"
 msgstr "Modelo de elitismo"
 
-#: application/views/menu.php:46
+#: application/views/menu.php:47
 msgid "Índice de colaboración (Índice de Lawani)"
 msgstr "Índice de colaboración (Índice de Lawani)"
 
-#: application/views/menu.php:46
+#: application/views/menu.php:47
 msgid "Índice de colaboración"
 msgstr "Índice de colaboración"
 
-#: application/views/menu.php:47
+#: application/views/menu.php:48
 msgid "Índice de densidad de documentos Zakutina y Priyenikova"
 msgstr "Índice de densidad de documentos Zakutina y Priyenikova"
 
-#: application/views/menu.php:47
+#: application/views/menu.php:48
 msgid "Índice de densidad de documentos"
 msgstr "Índice de densidad de documentos"
 
-#: application/views/menu.php:48
+#: application/views/menu.php:49
 msgid "Índice de concentración (Índice Pratt)"
 msgstr "Índice de concentración (Índice Pratt)"
 
-#: application/views/menu.php:48
+#: application/views/menu.php:49
 msgid "Índice de concentración"
 msgstr "Índice de concentración"
 
-#: application/views/menu.php:49
+#: application/views/menu.php:50
 msgid "Modelo de Bradford por revista"
 msgstr "Modelo de Bradford por revista"
 
-#: application/views/menu.php:50
+#: application/views/menu.php:51
 msgid "Modelo de Bradford por institución (Afiliación del autor)"
 msgstr "Modelo de Bradford por institución (Afiliación del autor)"
 
-#: application/views/menu.php:50
+#: application/views/menu.php:51
 msgid "Modelo de Bradford por institución"
 msgstr "Modelo de Bradford por institución"
 
-#: application/views/menu.php:51
+#: application/views/menu.php:52
 msgid "Tasa de autoría exógena"
 msgstr "Tasa de autoría exógena"
 
-#: application/views/menu.php:57
+#: application/views/menu.php:55
+msgid "Indicadores SciELO"
+msgstr "Indicadores SciELO"
+
+#: application/views/menu.php:56
+msgid "Indicadores por revista"
+msgstr "Indicadores por revista"
+
+#: application/views/menu.php:60
 msgid "Postular una revista"
 msgstr "Postular una revista"
 
-#: application/views/menu.php:59
+#: application/views/menu.php:62
 msgid "Criterios de selección de revistas"
 msgstr "Criterios de selección de revistas"
 
-#: application/views/menu.php:60
-#: application/views/menu.php:90
-msgid "Contacto"
-msgstr "Contacto"
-
-#: application/views/menu.php:63
+#: application/views/menu.php:65
 msgid "Políticas de acceso"
 msgstr "Políticas de acceso"
 
-#: application/views/menu.php:65
+#: application/views/menu.php:67
 msgid "Documentos"
 msgstr "Documentos"
 
-#: application/views/menu.php:67
+#: application/views/menu.php:69
 msgid "Bibliografía"
 msgstr "Bibliografía"
 
-#: application/views/menu.php:68
+#: application/views/menu.php:70
 msgid "Presentaciones PPT"
 msgstr "Presentaciones PPT"
 
-#: application/views/menu.php:69
+#: application/views/menu.php:71
 msgid "Archivos multimedia"
 msgstr "Archivos multimedia"
 
-#: application/views/menu.php:84
+#: application/views/menu.php:86
 msgid "Mapa del sitio"
 msgstr "Mapa del sitio"
 
-#: application/views/menu.php:87
+#: application/views/menu.php:89
 msgid "Ayuda"
 msgstr "Ayuda"
 
-#: application/views/menu.php:110
+#: application/views/menu.php:92
+msgid "Contacto"
+msgstr "Contacto"
+
+#: application/views/menu.php:112
 msgid "Buscar en todos los campos"
 msgstr "Buscar en todos los campos"
 
-#: application/views/menu.php:111
+#: application/views/menu.php:113
 msgid "Buscar por palabra clave"
 msgstr "Buscar por palabra clave"
 
-#: application/views/menu.php:112
+#: application/views/menu.php:114
 msgid "Buscar por autor"
 msgstr "Buscar por autor"
 
-#: application/views/menu.php:113
+#: application/views/menu.php:115
 msgid "Buscar por revista"
 msgstr "Buscar por revista"
 
-#: application/views/menu.php:114
+#: application/views/menu.php:116
 msgid "Buscar por institución"
 msgstr "Buscar por institución"
 
-#: application/views/menu.php:115
+#: application/views/menu.php:117
 msgid "Buscar por artículo"
 msgstr "Buscar por artículo"
 
-#: application/views/menu.php:116
+#: application/views/menu.php:118
 msgid "Búsqueda avanzada"
 msgstr "Búsqueda avanzada"
 
-#: application/views/menu.php:123
 #: application/views/menu.php:125
 #: application/views/menu.php:127
+#: application/views/menu.php:129
 msgid "Buscar en Biblat"
 msgstr "Buscar en Biblat"
 
@@ -470,24 +481,28 @@ msgid "Estimado/a"
 msgstr "Estimado/a"
 
 #: application/views/revista/mail_solicitud_usuario.php:3
-msgid "Te notifico que, para la recuperación de este documento:"
-msgstr "Te notifico que, para la recuperación de este documento:"
+msgid "Te notifico que para la recuperación de este documento:"
+msgstr "Te notifico que para la recuperación de este documento:"
 
 #: application/views/revista/mail_solicitud_usuario.php:6
-msgid "Contamos con las siguientes opciones"
-msgstr "Contamos con las siguientes opciones"
+msgid "Contamos con las siguientes opciones:"
+msgstr "Contamos con las siguientes opciones:"
 
 #: application/views/revista/mail_solicitud_usuario.php:9
 msgid "Servicio de fotocopiado, con un costo de 0.30 MXN por cada fotocopia, y tendrías que acudir a nuestras instalaciones a recogerlo."
 msgstr "Servicio de fotocopiado, con un costo de 0.30 MXN por cada fotocopia, y tendrías que acudir a nuestras instalaciones a recogerlo."
 
 #: application/views/revista/mail_solicitud_usuario.php:10
-msgid "Envío digital con un costo de  50.00 MXN (5.00 USD o 5.00 EUR, para solicitudes del extranjero)  por cada artículo.  Si es por este medio te mandaríamos primero una ficha de depósito y, hasta el momento que cubras el costo y nos envíes el comprobante de pago, recibirías el documento en el correo electrónico que nos indiques."
-msgstr "Envío digital con un costo de  50.00 MXN (5.00 USD o 5.00 EUR, para solicitudes del extranjero)  por cada artículo.  Si es por este medio te mandaríamos primero una ficha de depósito y, hasta el momento que cubras el costo y nos envíes el comprobante de pago, recibirías el documento en el correo electrónico que nos indiques."
+msgid "Envío digital con un costo de 50.00 MXN (5.00 USD o 3.00 EUR, para solicitudes del extranjero) por cada artículo. Si es por este medio te mandaríamos primero una ficha de depósito y, hasta el momento que cubras el costo y nos envíes el comprobante de pago, recibirías el documento en el correo electrónico que nos indiques."
+msgstr "Envío digital con un costo de 50.00 MXN (5.00 USD o 3.00 EUR, para solicitudes del extranjero) por cada artículo. Si es por este medio te mandaríamos primero una ficha de depósito y, hasta el momento que cubras el costo y nos envíes el comprobante de pago, recibirías el documento en el correo electrónico que nos indiques."
 
 #: application/views/revista/mail_solicitud_usuario.php:11
-msgid "NOTA: Al realizar la solicitud por esta opción es necesario que enviee sus datos fiscales (Nombre completo, RFC, Calle, Número, Colonia, Ciudad, Entidad federativa, Delegación o municipio, Código postal) en la respuesta a este correo."
-msgstr "NOTA: Al realizar la solicitud por esta opción es necesario que enviee sus datos fiscales (Nombre completo, RFC, Calle, Número, Colonia, Ciudad, Entidad federativa, Delegación o municipio, Código postal) en la respuesta a este correo."
+msgid "NOTA: "
+msgstr "NOTA: "
+
+#: application/views/revista/mail_solicitud_usuario.php:11
+msgid "Al realizar la solicitud por esta opción es necesario que envíes datos fiscales (Nombre completo, RFC, Calle, Número, Colonia, Ciudad, Entidad federativa, Delegación o municipio, Código postal) en la respuesta a este correo."
+msgstr "Al realizar la solicitud por esta opción es necesario que envíes datos fiscales (Nombre completo, RFC, Calle, Número, Colonia, Ciudad, Entidad federativa, Delegación o municipio, Código postal) en la respuesta a este correo."
 
 #: application/views/revista/mail_solicitud_usuario.php:15
 msgid "Espero tu respuesta a la brevedad posible para darle seguimiento a tu solicitud."
@@ -583,6 +598,1328 @@ msgstr "documentos en texto completo en repositorio HEVILA"
 msgid "Créditos"
 msgstr "Créditos"
 
+#: application/views/main/info_clase_periodica.php:5
+msgid "CLASE y PERIÓDICA"
+msgstr "CLASE y PERIÓDICA"
+
+#: application/views/main/info_clase_periodica.php:10
+#, php-format
+msgid "La principal fuente de información de %s son las bases de datos %s (Citas Latinoamericanas en Ciencias Sociales y Humanidades) y %s (Índice de Revistas Latinoamericanas en Ciencias), las cuales difunden registros de documentos contenidos en publicaciones periódicas y seriadas editadas en países y territorios de América Latina y el Caribe, así como aquellas de organismos internacionales ubicados dentro de la región que tienen una participación mayoritaria de países latinoamericanos."
+msgstr "La principal fuente de información de %s son las bases de datos %s (Citas Latinoamericanas en Ciencias Sociales y Humanidades) y %s (Índice de Revistas Latinoamericanas en Ciencias), las cuales difunden registros de documentos contenidos en publicaciones periódicas y seriadas editadas en países y territorios de América Latina y el Caribe, así como aquellas de organismos internacionales ubicados dentro de la región que tienen una participación mayoritaria de países latinoamericanos."
+
+#: application/views/main/info_clase_periodica.php:11
+msgid "se encuentran disponibles para consulta en línea en las siguientes direcciones:"
+msgstr "se encuentran disponibles para consulta en línea en las siguientes direcciones:"
+
+#: application/views/main/info_clase_periodica.php:14
+#, php-format
+msgid "O bien, en el sitio web de la Dirección General de Bibliotecas %s, seleccionar Catálogos y bajo el enunciado Revistas Latinoamericanas encontrará los enlaces correspondientes."
+msgstr "O bien, en el sitio web de la Dirección General de Bibliotecas %s, seleccionar Catálogos y bajo el enunciado Revistas Latinoamericanas encontrará los enlaces correspondientes."
+
+#: application/views/main/info_clase_periodica.php:19
+msgid "Características"
+msgstr "Características"
+
+#: application/views/main/info_clase_periodica.php:24
+#, php-format
+msgid "%s es una base de datos bibliográfica creada en 1975 en la Universidad Nacional Autónoma de México (%s). Contiene registros bibliográficos de artículos, ensayos, reseñas de libro, revisiones bibliográficas, notas breves, editoriales, biografías, entrevistas, estadísticas y otros documentos publicados en más de 1,700 revistas publicadas en América Latina y el Caribe, especializadas en ciencias sociales y humanidades."
+msgstr "%s es una base de datos bibliográfica creada en 1975 en la Universidad Nacional Autónoma de México (%s). Contiene registros bibliográficos de artículos, ensayos, reseñas de libro, revisiones bibliográficas, notas breves, editoriales, biografías, entrevistas, estadísticas y otros documentos publicados en más de 1,700 revistas publicadas en América Latina y el Caribe, especializadas en ciencias sociales y humanidades."
+
+#: application/views/main/info_clase_periodica.php:25
+#: application/views/main/info_clase_periodica.php:32
+#, php-format
+msgid "Las revistas incluidas en %s cumplen con criterios de selección y son analizadas por un equipo multidisciplinario que cubre los siguientes temas:"
+msgstr "Las revistas incluidas en %s cumplen con criterios de selección y son analizadas por un equipo multidisciplinario que cubre los siguientes temas:"
+
+#: application/views/main/info_clase_periodica.php:31
+#, php-format
+msgid "%s es una base de datos bibliográfica creada en 1978 en la Universidad Nacional Autónoma de México (%s). Contiene registros bibliográficos de artículos originales, informes técnicos, estudios de caso, estadísticas y otros documentos publicados en cerca de 1,500 revistas de América Latina y el Caribe, especializadas en ciencia y tecnología."
+msgstr "%s es una base de datos bibliográfica creada en 1978 en la Universidad Nacional Autónoma de México (%s). Contiene registros bibliográficos de artículos originales, informes técnicos, estudios de caso, estadísticas y otros documentos publicados en cerca de 1,500 revistas de América Latina y el Caribe, especializadas en ciencia y tecnología."
+
+#: application/views/main/info_clase_periodica.php:38
+#, php-format
+msgid "Metodología de indización de %s y %s:"
+msgstr "Metodología de indización de %s y %s:"
+
+#: application/views/main/info_clase_periodica.php:39
+#, php-format
+msgid "Para conocer la metodología que se utiliza para el análisis documental, normalización y asentamiento de la información en %s y %s, consulte el %s."
+msgstr "Para conocer la metodología que se utiliza para el análisis documental, normalización y asentamiento de la información en %s y %s, consulte el %s."
+
+#: application/views/main/info_clase_periodica.php:44
+#, php-format
+msgid "Opciones de búsqueda en %s:"
+msgstr "Opciones de búsqueda en %s:"
+
+#: application/views/main/info_clase_periodica.php:49
+#, php-format
+msgid "proporciona un acceso integrado de la información contenida en %s y %s, lo cual permite realizar búsquedas de información simultáneas tanto en el área de ciencias sociales y humanidades (%s) o en ciencias exactas y naturales (%s), o bien, realizar búsquedas restringidas por disciplina del conocimiento."
+msgstr "proporciona un acceso integrado de la información contenida en %s y %s, lo cual permite realizar búsquedas de información simultáneas tanto en el área de ciencias sociales y humanidades (%s) o en ciencias exactas y naturales (%s), o bien, realizar búsquedas restringidas por disciplina del conocimiento."
+
+#: application/views/main/info_clase_periodica.php:50
+msgid "Las opciones de búsqueda son:"
+msgstr "Las opciones de búsqueda son:"
+
+#: application/views/main/info_clase_periodica.php:51
+msgid "Búsqueda básica:"
+msgstr "Búsqueda básica:"
+
+#: application/views/main/info_clase_periodica.php:51
+msgid "utilizando un término de búsqueda dentro de alguno de los siguientes campos:"
+msgstr "utilizando un término de búsqueda dentro de alguno de los siguientes campos:"
+
+#: application/views/main/info_clase_periodica.php:51
+msgid "palabra clave"
+msgstr "palabra clave"
+
+#: application/views/main/info_clase_periodica.php:51
+msgid "(término que describe más específicamente el contenido de cada documento, incluyendo nombres geográficos, de organizaciones, de personas y fechas relevantes mencionadas en el documento; sólo términos en español) de los documentos indizados (sólo búsquedas en español),"
+msgstr "(término que describe más específicamente el contenido de cada documento, incluyendo nombres geográficos, de organizaciones, de personas y fechas relevantes mencionadas en el documento; sólo términos en español) de los documentos indizados (sólo búsquedas en español),"
+
+#: application/views/main/info_clase_periodica.php:51
+msgid "autor"
+msgstr "author"
+
+#: application/views/main/info_clase_periodica.php:51
+msgid "(apellidos y nombres o iniciales de los autores del documento),"
+msgstr "(apellidos y nombres o iniciales de los autores del documento),"
+
+#: application/views/main/info_clase_periodica.php:51
+msgid "revista"
+msgstr "journals"
+
+#: application/views/main/info_clase_periodica.php:51
+msgid "(título de la revista),"
+msgstr "(título de la revista),"
+
+#: application/views/main/info_clase_periodica.php:51
+msgid "título del documento"
+msgstr "título del documento"
+
+#: application/views/main/info_clase_periodica.php:51
+msgid "(título del artículo o documento) o nombre de la"
+msgstr "(título del artículo o documento) o nombre de la"
+
+#: application/views/main/info_clase_periodica.php:51
+msgid "institución"
+msgstr "institution"
+
+#: application/views/main/info_clase_periodica.php:51
+msgid "(institución de afiliación del autor); o bien, en todos estos campos."
+msgstr "(institución de afiliación del autor); o bien, en todos estos campos."
+
+#: application/views/main/info_clase_periodica.php:52
+msgid "Búsqueda avanzada:"
+msgstr "Búsqueda avanzada:"
+
+#: application/views/main/info_clase_periodica.php:52
+msgid "para realizar búsquedas combinando distintos campos y utilizando los operadores boléanos AND y OR."
+msgstr "para realizar búsquedas combinando distintos campos y utilizando los operadores boléanos AND y OR."
+
+#: application/views/main/info_clase_periodica.php:53
+#, php-format
+msgid "Algunos registros bibliográficos están enlazados a artículos en texto completo. %s ofrece dos tipos de acceso al texto completo: mediante enlaces hipertextuales a los sitios web de las revistas (recursos externos) y a través de la colección del acervo digital de la Hemeroteca Virtual Latinoamericana de la Dirección General de Bibliotecas Dirección General de Bibliotecas (%s), UNAM. Todas las revistas se encuentran en la Hemeroteca Latinoamericana, a través de la cual se ofrece el servicio de obtención de documentos."
+msgstr "Algunos registros bibliográficos están enlazados a artículos en texto completo. %s ofrece dos tipos de acceso al texto completo: mediante enlaces hipertextuales a los sitios web de las revistas (recursos externos) y a través de la colección del acervo digital de la Hemeroteca Virtual Latinoamericana de la Dirección General de Bibliotecas Dirección General de Bibliotecas (%s), UNAM. Todas las revistas se encuentran en la Hemeroteca Latinoamericana, a través de la cual se ofrece el servicio de obtención de documentos."
+
+#: application/views/main/criterios_seleccion.php:5
+msgid "Criterios de selección"
+msgstr "Criterios de selección"
+
+#: application/views/main/criterios_seleccion.php:10
+#, php-format
+msgid "Para la visualización de los contenidos de una revista en el portal %s, así como para la generación de sus indicadores bibliométricos, toda publicación debe estar indizada en CLASE o PERIÓDICA. Para la generación de indicadores bibliométricos sólo se consideran revistas de investigación y técnico-profesionales, no así las de difusión científica o cultural; además, es requisito contar con, al menos, cinco años de indización consecutivos."
+msgstr "Para la visualización de los contenidos de una revista en el portal %s, así como para la generación de sus indicadores bibliométricos, toda publicación debe estar indizada en CLASE o PERIÓDICA. Para la generación de indicadores bibliométricos sólo se consideran revistas de investigación y técnico-profesionales, no así las de difusión científica o cultural; además, es requisito contar con, al menos, cinco años de indización consecutivos."
+
+#: application/views/main/criterios_seleccion.php:11
+#, php-format
+msgid "Criterios de selección de revistas para las bases de datos %s y %s"
+msgstr "Criterios de selección de revistas para las bases de datos %s y %s"
+
+#: application/views/main/criterios_seleccion.php:12
+#, php-format
+msgid "%s y %s indizan revistas académicas de investigación, técnico-profesionales y de difusión científica o cultural, editadas en países de América Latina y el Caribe. También se incluyen revistas editadas por organismos internacionales de alcance panamericano. Las revistas pueden ser especializadas o multidisciplinarias, en formato impreso o electrónico."
+msgstr "%s y %s indizan revistas académicas de investigación, técnico-profesionales y de difusión científica o cultural, editadas en países de América Latina y el Caribe. También se incluyen revistas editadas por organismos internacionales de alcance panamericano. Las revistas pueden ser especializadas o multidisciplinarias, en formato impreso o electrónico."
+
+#: application/views/main/criterios_seleccion.php:13
+#, php-format
+msgid "Las revistas especializadas en ciencias sociales y humanidades se indizan en %s, mientras que las de ciencia y tecnología se incluyen en %s. Las multidisciplinarias pueden incluirse en alguna de las dos bases de datos, conforme a la opinión del Comité de Selección. Todas las revistas son evaluadas por el Comité, de acuerdo con los siguientes criterios."
+msgstr "Las revistas especializadas en ciencias sociales y humanidades se indizan en %s, mientras que las de ciencia y tecnología se incluyen en %s. Las multidisciplinarias pueden incluirse en alguna de las dos bases de datos, conforme a la opinión del Comité de Selección. Todas las revistas son evaluadas por el Comité, de acuerdo con los siguientes criterios."
+
+#: application/views/main/criterios_seleccion.php:14
+msgid "Criterios de normalización editorial"
+msgstr "Criterios de normalización editorial"
+
+#: application/views/main/criterios_seleccion.php:15
+msgid "Las revistas deberán observar normas técnicas, nacionales o internacionales, que apoyan la transferencia de información y facilitan su registro, ya que proporcionan información única, suficiente y confiable relativa al historial de cada revista. Dentro de este grupo se valora que las revistas proporcionen los datos del editor o responsable de la revista; los datos del organismo responsable de su edición; el registro ISSN; la mención de periodicidad; el membrete bibliográfico en la portada, en páginas de presentación y en los documentos mismos, entre otros criterios."
+msgstr "Las revistas deberán observar normas técnicas, nacionales o internacionales, que apoyan la transferencia de información y facilitan su registro, ya que proporcionan información única, suficiente y confiable relativa al historial de cada revista. Dentro de este grupo se valora que las revistas proporcionen los datos del editor o responsable de la revista; los datos del organismo responsable de su edición; el registro ISSN; la mención de periodicidad; el membrete bibliográfico en la portada, en páginas de presentación y en los documentos mismos, entre otros criterios."
+
+#: application/views/main/criterios_seleccion.php:16
+msgid "Criterios de gestión y visibilidad"
+msgstr "Criterios de gestión y visibilidad"
+
+#: application/views/main/criterios_seleccion.php:17
+msgid "Este grupo de criterios permite conocer cómo es administrada la revista, qué tan estable ha sido y cuánto se difunde. Se valora que la revista mencione su objetivo, cobertura temática y público al que va dirigida; que cumpla con su periodicidad; que cuente con un consejo o comité editorial y que sus integrantes provengan de instituciones diversas; que se haga mención del tipo de arbitraje aplicado a los documentos; que se proporcionen las fechas de recepción y aceptación de los documentos y que incluyan instrucciones a los autores, entre otros. En cuanto a su visibilidad, se toma en cuenta que la revista esté cubierta por otras bases de datos o servicios de información y que indique sus mecanismos de distribución, incluyendo versiones electrónicas disponibles en Internet u otros formatos."
+msgstr "Este grupo de criterios permite conocer cómo es administrada la revista, qué tan estable ha sido y cuánto se difunde. Se valora que la revista mencione su objetivo, cobertura temática y público al que va dirigida; que cumpla con su periodicidad; que cuente con un consejo o comité editorial y que sus integrantes provengan de instituciones diversas; que se haga mención del tipo de arbitraje aplicado a los documentos; que se proporcionen las fechas de recepción y aceptación de los documentos y que incluyan instrucciones a los autores, entre otros. En cuanto a su visibilidad, se toma en cuenta que la revista esté cubierta por otras bases de datos o servicios de información y que indique sus mecanismos de distribución, incluyendo versiones electrónicas disponibles en Internet u otros formatos."
+
+#: application/views/main/criterios_seleccion.php:18
+msgid "Criterios de contenidos con fines de indización"
+msgstr "Criterios de contenidos con fines de indización"
+
+#: application/views/main/criterios_seleccion.php:19
+msgid "Se trata de criterios que el analista de información utiliza para describir bibliográficamente los contenidos. Aquí se consideran criterios que tienen que ver con la inclusión de resúmenes, palabras clave o descriptores; referencias o citas bibliográficas, así como la adscripción de los autores, elementos que se requieren para efectos de indización en las bases de datos. Asimismo, se cuantifica la proporción de documentos indizables: artículos originales, artículos de revisión, ensayos, informes técnicos, comunicaciones cortas, reseñas de libro, revisiones bibliográficas, entrevistas y estadísticas, entre otros."
+msgstr "Se trata de criterios que el analista de información utiliza para describir bibliográficamente los contenidos. Aquí se consideran criterios que tienen que ver con la inclusión de resúmenes, palabras clave o descriptores; referencias o citas bibliográficas, así como la adscripción de los autores, elementos que se requieren para efectos de indización en las bases de datos. Asimismo, se cuantifica la proporción de documentos indizables: artículos originales, artículos de revisión, ensayos, informes técnicos, comunicaciones cortas, reseñas de libro, revisiones bibliográficas, entrevistas y estadísticas, entre otros."
+
+#: application/views/main/criterios_seleccion.php:20
+msgid "Dichos criterios están condensados en la plantilla de evaluación que se expone a continuación. Para ser aprobada, la revista candidata debe sumar al menos"
+msgstr "Dichos criterios están condensados en la plantilla de evaluación que se expone a continuación. Para ser aprobada, la revista candidata debe sumar al menos"
+
+#: application/views/main/criterios_seleccion.php:20
+msgid "25 puntos."
+msgstr "25 puntos."
+
+#: application/views/main/criterios_seleccion.php:20
+#, php-format
+msgid "El proceso de evaluación es realizado por el Comité de Selección de %s y %s."
+msgstr "El proceso de evaluación es realizado por el Comité de Selección de %s y %s."
+
+#: application/views/main/criterios_seleccion.php:21
+#, php-format
+msgid "Plantilla de evaluación del Comité de Selección de Revistas para %s y %s"
+msgstr "Plantilla de evaluación del Comité de Selección de Revistas para %s y %s"
+
+#: application/views/main/criterios_seleccion.php:22
+msgid "Para ser aprobada la revista deberá obtener 25 puntos como mínimo."
+msgstr "Para ser aprobada la revista deberá obtener 25 puntos como mínimo."
+
+#: application/views/main/criterios_seleccion.php:24
+#: application/views/main/criterios_seleccion.php:33
+msgid "Criterios mínimos / OBLIGATORIOS"
+msgstr "Criterios mínimos / OBLIGATORIOS"
+
+#: application/views/main/criterios_seleccion.php:34
+msgid "Puntos"
+msgstr "Puntos"
+
+#: application/views/main/criterios_seleccion.php:40
+msgid "Mención de un editor o responsable de la revista."
+msgstr "Mención de un editor o responsable de la revista."
+
+#: application/views/main/criterios_seleccion.php:40
+msgid "Se valora positivamente la mención de un editor, director o responsable de la revista."
+msgstr "Se valora positivamente la mención de un editor, director o responsable de la revista."
+
+#: application/views/main/criterios_seleccion.php:41
+#: application/views/main/criterios_seleccion.php:46
+#: application/views/main/criterios_seleccion.php:51
+#: application/views/main/criterios_seleccion.php:56
+#: application/views/main/criterios_seleccion.php:61
+#: application/views/main/criterios_seleccion.php:66
+#: application/views/main/criterios_seleccion.php:71
+#: application/views/main/criterios_seleccion.php:76
+#: application/views/main/criterios_seleccion.php:81
+#: application/views/main/criterios_seleccion.php:86
+#: application/views/main/criterios_seleccion.php:91
+#: application/views/main/criterios_seleccion.php:96
+#: application/views/main/criterios_seleccion.php:101
+#: application/views/main/criterios_seleccion.php:106
+#: application/views/main/criterios_seleccion.php:111
+#: application/views/main/criterios_seleccion.php:116
+#: application/views/main/criterios_seleccion.php:121
+#: application/views/main/criterios_seleccion.php:126
+#: application/views/main/criterios_seleccion.php:131
+#: application/views/main/criterios_seleccion.php:136
+#: application/views/main/criterios_seleccion.php:141
+#: application/views/main/criterios_seleccion.php:146
+#: application/views/main/criterios_seleccion.php:151
+#: application/views/main/criterios_seleccion.php:156
+#: application/views/main/criterios_seleccion.php:161
+msgid "(1 pt)"
+msgstr "(1 pt)"
+
+#: application/views/main/criterios_seleccion.php:45
+msgid "Datos del organismo responsable y lugar de edición."
+msgstr "Datos del organismo responsable y lugar de edición."
+
+#: application/views/main/criterios_seleccion.php:45
+msgid "Se valora positivamente si la revista proporciona información suficiente para la identificación y localización del organismo editor o institución responsable, así como los datos del lugar de edición. Los datos pueden ser: nombre completo de la institución editora, dirección postal, ciudad o lugar de edición, teléfonos, correo electrónico o sitio web."
+msgstr "Se valora positivamente si la revista proporciona información suficiente para la identificación y localización del organismo editor o institución responsable, así como los datos del lugar de edición. Los datos pueden ser: nombre completo de la institución editora, dirección postal, ciudad o lugar de edición, teléfonos, correo electrónico o sitio web."
+
+#: application/views/main/criterios_seleccion.php:50
+msgid "Existencia de tabla de contenidos o índice."
+msgstr "Existencia de tabla de contenidos o índice."
+
+#: application/views/main/criterios_seleccion.php:50
+msgid "Se valora positivamente si la revista proporciona la tabla de contenido o sumario en la que consten, entre otros, los nombres de los autores, título del trabajo y páginas."
+msgstr "Se valora positivamente si la revista proporciona la tabla de contenido o sumario en la que consten, entre otros, los nombres de los autores, título del trabajo y páginas."
+
+#: application/views/main/criterios_seleccion.php:55
+msgid "Identificación de los autores personales o institucionales en los documentos."
+msgstr "Identificación de los autores personales o institucionales en los documentos."
+
+#: application/views/main/criterios_seleccion.php:55
+msgid "Los trabajos deben estar firmados por los autores con nombre y apellidos o declaración de autor institucional."
+msgstr "Los trabajos deben estar firmados por los autores con nombre y apellidos o declaración de autor institucional."
+
+#: application/views/main/criterios_seleccion.php:60
+msgid "Referencias bibliográficas en los documentos."
+msgstr "Referencias bibliográficas en los documentos."
+
+#: application/views/main/criterios_seleccion.php:60
+msgid "Los documentos publicados deben proporcionar una lista de referencias bibliográficas, obras citadas o notas bibliográficas al pie de página. La presencia de estas referencias será valorada solamente en artículos, ensayos o reseñas y no en cartas al editor, editoriales, entrevistas, reportajes u otro tipo de documentos que no suelen citar referencias bibliográficas."
+msgstr "Los documentos publicados deben proporcionar una lista de referencias bibliográficas, obras citadas o notas bibliográficas al pie de página. La presencia de estas referencias será valorada solamente en artículos, ensayos o reseñas y no en cartas al editor, editoriales, entrevistas, reportajes u otro tipo de documentos que no suelen citar referencias bibliográficas."
+
+#: application/views/main/criterios_seleccion.php:65
+msgid "Membrete bibliográfico en cubiertas o páginas de presentación."
+msgstr "Membrete bibliográfico en cubiertas o páginas de presentación."
+
+#: application/views/main/criterios_seleccion.php:65
+msgid "Estas deberán incluir al menos el título completo de la revista, así como ISSN, volumen, número, fecha y membrete bibliográfico."
+msgstr "Estas deberán incluir al menos el título completo de la revista, así como ISSN, volumen, número, fecha y membrete bibliográfico."
+
+#: application/views/main/criterios_seleccion.php:70
+#, php-format
+msgid "60% de contenido indizable."
+msgstr "60% de contenido indizable."
+
+#: application/views/main/criterios_seleccion.php:70
+#, php-format
+msgid "Al menos el 60% de los documentos publicados en un fascículo, deben ser: artículos originales, ensayos, reseñas de libro, revisiones bibliográficas, notas de más de una cuartilla, informes técnicos o cartas al editor."
+msgstr "Al menos el 60% de los documentos publicados en un fascículo, deben ser: artículos originales, ensayos, reseñas de libro, revisiones bibliográficas, notas de más de una cuartilla, informes técnicos o cartas al editor."
+
+#: application/views/main/criterios_seleccion.php:75
+msgid "ISSN"
+msgstr "ISSN"
+
+#: application/views/main/criterios_seleccion.php:75
+msgid "Se considerará positivamente la existencia de código ISSN"
+msgstr "Se considerará positivamente la existencia de código ISSN"
+
+#: application/views/main/criterios_seleccion.php:80
+msgid "Mención del objetivo de la revista."
+msgstr "Mención del objetivo de la revista."
+
+#: application/views/main/criterios_seleccion.php:80
+msgid "En el fascículo se debe hacer mención de los objetivos que la publicación persigue. Puede valorarse también si hace explícita su especialización temática y/o la audiencia a la que va dirigida."
+msgstr "En el fascículo se debe hacer mención de los objetivos que la publicación persigue. Puede valorarse también si hace explícita su especialización temática y/o la audiencia a la que va dirigida."
+
+#: application/views/main/criterios_seleccion.php:85
+msgid "Mención de periodicidad."
+msgstr "Mención de periodicidad."
+
+#: application/views/main/criterios_seleccion.php:85
+msgid "Para su valoración la revista debe declarar su periodicidad sin ambigüedad o bien el número de ejemplares que ofrece al año. Este criterio califica solamente la mención de periodicidad, no su cumplimiento."
+msgstr "Para su valoración la revista debe declarar su periodicidad sin ambigüedad o bien el número de ejemplares que ofrece al año. Este criterio califica solamente la mención de periodicidad, no su cumplimiento."
+
+#: application/views/main/criterios_seleccion.php:90
+msgid "Periodicidad semestral o más frecuente."
+msgstr "Periodicidad semestral o más frecuente."
+
+#: application/views/main/criterios_seleccion.php:90
+msgid "Califica positivamente si la periodicidad de la revista es semestral o más frecuente, ya que se aprecia que cumpla con su misión de difundir sus contenidos en el menor tiempo posible."
+msgstr "Califica positivamente si la periodicidad de la revista es semestral o más frecuente, ya que se aprecia que cumpla con su misión de difundir sus contenidos en el menor tiempo posible."
+
+#: application/views/main/criterios_seleccion.php:95
+msgid "Cumplimiento de periodicidad."
+msgstr "Cumplimiento de periodicidad."
+
+#: application/views/main/criterios_seleccion.php:95
+msgid "Se entiende que una revista cumple su periodicidad si a lo largo del año publica el número de fascículos que se corresponden con la periodicidad expresada por la revista (por ejemplo, tres fascículos al año, en el caso de las revistas cuatrimestrales). Por lo tanto, para poder calificar este criterio es indispensable que la revista explicite el número de ejemplares que ofrece al año."
+msgstr "Se entiende que una revista cumple su periodicidad si a lo largo del año publica el número de fascículos que se corresponden con la periodicidad expresada por la revista (por ejemplo, tres fascículos al año, en el caso de las revistas cuatrimestrales). Por lo tanto, para poder calificar este criterio es indispensable que la revista explicite el número de ejemplares que ofrece al año."
+
+#: application/views/main/criterios_seleccion.php:100
+msgid "Existencia de un consejo, comité o cuerpo editorial."
+msgstr "Existencia de un consejo, comité o cuerpo editorial."
+
+#: application/views/main/criterios_seleccion.php:100
+msgid "Deberá constar en la revista la existencia de un cuerpo editorial que apoye al editor en diversas responsabilidades inherentes a la gestión de la revista o bien a la evaluación de las contribuciones, y deberán proporcionarse los nombres de cada uno de los que forman parte de esas instancias."
+msgstr "Deberá constar en la revista la existencia de un cuerpo editorial que apoye al editor en diversas responsabilidades inherentes a la gestión de la revista o bien a la evaluación de las contribuciones, y deberán proporcionarse los nombres de cada uno de los que forman parte de esas instancias."
+
+#: application/views/main/criterios_seleccion.php:105
+msgid "Servicios de indización que cubren la revista."
+msgstr "Servicios de indización que cubren la revista."
+
+#: application/views/main/criterios_seleccion.php:105
+msgid "Califica positivamente si la revista está incluida en algún servicio de índices y resúmenes, directorios, catálogos, hemerotecas virtuales y listas del núcleo básico de revistas nacionales, entre otros servicios de información. Este campo califica positivamente solamente si el servicio de información es mencionado por la propia revista."
+msgstr "Califica positivamente si la revista está incluida en algún servicio de índices y resúmenes, directorios, catálogos, hemerotecas virtuales y listas del núcleo básico de revistas nacionales, entre otros servicios de información. Este campo califica positivamente solamente si el servicio de información es mencionado por la propia revista."
+
+#: application/views/main/criterios_seleccion.php:110
+msgid "Clasificación de los tipos de documentos publicados (Tabla de contenido)"
+msgstr "Clasificación de los tipos de documentos publicados (Tabla de contenido)"
+
+#: application/views/main/criterios_seleccion.php:110
+msgid "La revista debe proporcionar una clasificación de los tipos de documentos que publica, ya sea en la tabla de contenidos, al inicio de cada sección o documento, o bien en las instrucciones a los autores."
+msgstr "La revista debe proporcionar una clasificación de los tipos de documentos que publica, ya sea en la tabla de contenidos, al inicio de cada sección o documento, o bien en las instrucciones a los autores."
+
+#: application/views/main/criterios_seleccion.php:115
+msgid "Instrucciones a los autores."
+msgstr "Instrucciones a los autores."
+
+#: application/views/main/criterios_seleccion.php:115
+msgid "Califica positivamente si aparecen las instrucciones a los autores sobre el envío de originales."
+msgstr "Califica positivamente si aparecen las instrucciones a los autores sobre el envío de originales."
+
+#: application/views/main/criterios_seleccion.php:120
+msgid "Membrete bibliográfico al inicio del documento."
+msgstr "Membrete bibliográfico al inicio del documento."
+
+#: application/views/main/criterios_seleccion.php:120
+msgid "Califica positivamente si el membrete bibliográfico aparece al inicio de cada artículo e identifica a la fuente. Para darlo por cumplido el membrete debe contener por lo menos: título completo o abreviado y la numeración de la revista (volumen, número, parte, mes o sus equivalentes)"
+msgstr "Califica positivamente si el membrete bibliográfico aparece al inicio de cada artículo e identifica a la fuente. Para darlo por cumplido el membrete debe contener por lo menos: título completo o abreviado y la numeración de la revista (volumen, número, parte, mes o sus equivalentes)"
+
+#: application/views/main/criterios_seleccion.php:125
+msgid "Membrete bibliográfico en cada página del documento."
+msgstr "Membrete bibliográfico en cada página del documento."
+
+#: application/views/main/criterios_seleccion.php:125
+msgid "Califica positivamente si el membrete que identifica la fuente aparece en páginas pares o impares del artículo, no necesariamente en ambas."
+msgstr "Califica positivamente si el membrete que identifica la fuente aparece en páginas pares o impares del artículo, no necesariamente en ambas."
+
+#: application/views/main/criterios_seleccion.php:130
+msgid "Fechas de recepción y/o aceptación del documento."
+msgstr "Fechas de recepción y/o aceptación del documento."
+
+#: application/views/main/criterios_seleccion.php:130
+msgid "Califica positivamente sólo si indica ambas fechas. Esta información puede ser localizada al inicio o al final de cada artículo y es sólo exigible para artículos originales."
+msgstr "Califica positivamente sólo si indica ambas fechas. Esta información puede ser localizada al inicio o al final de cada artículo y es sólo exigible para artículos originales."
+
+#: application/views/main/criterios_seleccion.php:135
+msgid "Resumen del documento."
+msgstr "Resumen del documento."
+
+#: application/views/main/criterios_seleccion.php:135
+msgid "Califica positivamente si se incluyen resúmenes en el idioma original del trabajo."
+msgstr "Califica positivamente si se incluyen resúmenes en el idioma original del trabajo."
+
+#: application/views/main/criterios_seleccion.php:140
+msgid "Resumen del documento en dos idiomas."
+msgstr "Resumen del documento en dos idiomas."
+
+#: application/views/main/criterios_seleccion.php:140
+msgid "Califica positivamente si se incluyen resúmenes en el idioma original del trabajo y en un segundo idioma."
+msgstr "Califica positivamente si se incluyen resúmenes en el idioma original del trabajo y en un segundo idioma."
+
+#: application/views/main/criterios_seleccion.php:145
+msgid "Afiliación de los autores."
+msgstr "Afiliación de los autores."
+
+#: application/views/main/criterios_seleccion.php:145
+msgid "Deberá proporcionarse el nombre de la institución de trabajo del autor o autores de cada artículo."
+msgstr "Deberá proporcionarse el nombre de la institución de trabajo del autor o autores de cada artículo."
+
+#: application/views/main/criterios_seleccion.php:150
+msgid "Palabras clave."
+msgstr "Palabras clave."
+
+#: application/views/main/criterios_seleccion.php:150
+msgid "Deben proporcionarse palabras clave, en cualquier idioma, que describan el contenido del documento. Al igual que con los resúmenes, las palabras clave se valoran solamente en artículos."
+msgstr "Deben proporcionarse palabras clave, en cualquier idioma, que describan el contenido del documento. Al igual que con los resúmenes, las palabras clave se valoran solamente en artículos."
+
+#: application/views/main/criterios_seleccion.php:155
+msgid "Palabras clave en dos idiomas."
+msgstr "Palabras clave en dos idiomas."
+
+#: application/views/main/criterios_seleccion.php:155
+msgid "Las palabras clave deben proporcionarse en dos idiomas y al igual que en el criterio referido al idioma de los resúmenes, en este caso tampoco se considera obligatorio que estén presentes en otro tipo de documentos diferentes a los artículos."
+msgstr "Las palabras clave deben proporcionarse en dos idiomas y al igual que en el criterio referido al idioma de los resúmenes, en este caso tampoco se considera obligatorio que estén presentes en otro tipo de documentos diferentes a los artículos."
+
+#: application/views/main/criterios_seleccion.php:160
+msgid "Mención del sistema de arbitraje por pares."
+msgstr "Mención del sistema de arbitraje por pares."
+
+#: application/views/main/criterios_seleccion.php:160
+msgid "En la revista deberá constar que el procedimiento empleado para la selección de los artículos a publicar es el arbitraje por pares."
+msgstr "En la revista deberá constar que el procedimiento empleado para la selección de los artículos a publicar es el arbitraje por pares."
+
+#: application/views/main/criterios_seleccion.php:165
+msgid "Sistema de arbitraje doble ciego."
+msgstr "Sistema de arbitraje doble ciego."
+
+#: application/views/main/criterios_seleccion.php:165
+msgid "En la revista deberá constar que el procedimiento empleado para la selección de los artículos a publicar es el arbitraje por pares especificando que sea mediante el sistema “doble ciego”."
+msgstr "En la revista deberá constar que el procedimiento empleado para la selección de los artículos a publicar es el arbitraje por pares especificando que sea mediante el sistema “doble ciego”."
+
+#: application/views/main/criterios_seleccion.php:166
+msgid "(3 pt)"
+msgstr "(3 pt)"
+
+#: application/views/main/criterios_seleccion.php:170
+msgid "Mención de originalidad de los documentos."
+msgstr "Mención de originalidad de los documentos."
+
+#: application/views/main/criterios_seleccion.php:170
+msgid "Califica positivamente si en la presentación de la revista o en las instrucciones a los autores se menciona explícitamente esta exigencia para los trabajos sometidos a publicación."
+msgstr "Califica positivamente si en la presentación de la revista o en las instrucciones a los autores se menciona explícitamente esta exigencia para los trabajos sometidos a publicación."
+
+#: application/views/main/criterios_seleccion.php:171
+#: application/views/main/criterios_seleccion.php:176
+msgid "(2 pt)"
+msgstr "(2 pt)"
+
+#: application/views/main/criterios_seleccion.php:175
+msgid "Apertura institucional del consejo, comité o cuerpo editorial."
+msgstr "Apertura institucional del consejo, comité o cuerpo editorial."
+
+#: application/views/main/criterios_seleccion.php:175
+#, php-format
+msgid "Para calificar positivamente, los cuerpos editoriales deberán contar con evaluadores externos a la entidad editora, por lo que deberá constar su afiliación institucional. Al menos el 50% de los miembros del consejo editorial deberán pertenecer a instituciones diferentes a la editora, de lo contrario no calificará positivamente."
+msgstr "Para calificar positivamente, los cuerpos editoriales deberán contar con evaluadores externos a la entidad editora, por lo que deberá constar su afiliación institucional. Al menos el 50% de los miembros del consejo editorial deberán pertenecer a instituciones diferentes a la editora, de lo contrario no calificará positivamente."
+
+#: application/views/main/criterios_seleccion.php:180
+msgid "Para"
+msgstr "Para"
+
+#: application/views/main/criterios_seleccion.php:180
+#, php-format
+msgid "solicitar la inclusión de su revista en %s y %s"
+msgstr "solicitar la inclusión de su revista en %s y %s"
+
+#: application/views/main/criterios_seleccion.php:180
+#, php-format
+msgid "se requiere enviar los tres últimos fascículos publicados por la revista, en archivos PDF sin candados de impresión, al buzón %s (con copia a %s), o bien, la dirección electrónica (URL) de la revista, acompañado de un mensaje dirigido a Antonio Sánchez Pereyra, Presidente del Comité de Selección de %s y %s, en el que se explicite la intención de que la revista sea evaluada para su indización en dichas bases de datos"
+msgstr "se requiere enviar los tres últimos fascículos publicados por la revista, en archivos PDF sin candados de impresión, al buzón %s (con copia a %s), o bien, la dirección electrónica (URL) de la revista, acompañado de un mensaje dirigido a Antonio Sánchez Pereyra, Presidente del Comité de Selección de %s y %s, en el que se explicite la intención de que la revista sea evaluada para su indización en dichas bases de datos"
+
+#: application/views/main/criterios_seleccion.php:181
+msgid "Por otra parte, solicitamos, en caso de así convenir al editor de la revista, proporcionarnos la autorización para albergar los archivos PDF de la revista en la colección"
+msgstr "Por otra parte, solicitamos, en caso de así convenir al editor de la revista, proporcionarnos la autorización para albergar los archivos PDF de la revista en la colección"
+
+#: application/views/main/criterios_seleccion.php:181
+msgid "Hemeroteca Virtual Latinoamericana"
+msgstr "Hemeroteca Virtual Latinoamericana"
+
+#: application/views/main/criterios_seleccion.php:181
+#, php-format
+msgid "y ofrecer acceso al texto completo de los artículos a los usuarios de %s y %s, sin mediar por ello costo alguno para ustedes como editores ni para el usuario. Por nuestra parte y habida cuenta de las cuatro décadas de trabajo que respaldan nuestro compromiso y responsabilidad con la difusión del conocimiento científico y humanístico, asumimos lo siguiente:"
+msgstr "y ofrecer acceso al texto completo de los artículos a los usuarios de %s y %s, sin mediar por ello costo alguno para ustedes como editores ni para el usuario. Por nuestra parte y habida cuenta de las cuatro décadas de trabajo que respaldan nuestro compromiso y responsabilidad con la difusión del conocimiento científico y humanístico, asumimos lo siguiente:"
+
+#: application/views/main/criterios_seleccion.php:183
+msgid "Ser un proyecto estrictamente académico impulsado por la Dirección General de Bibliotecas de la UNAM, y en consecuencia ser una organización de carácter científico."
+msgstr "Ser un proyecto estrictamente académico impulsado por la Dirección General de Bibliotecas de la UNAM, y en consecuencia ser una organización de carácter científico."
+
+#: application/views/main/criterios_seleccion.php:184
+msgid "Ser una hemeroteca científica en línea, de libre acceso a los contenidos completos de los artículos de su acervo."
+msgstr "Ser una hemeroteca científica en línea, de libre acceso a los contenidos completos de los artículos de su acervo."
+
+#: application/views/main/criterios_seleccion.php:185
+msgid "Difundir de manera transparente y gratuita los trabajos y materiales que forman parte de la publicación para su consulta por parte de la comunidad científica a través de las siguientes páginas web:"
+msgstr "Difundir de manera transparente y gratuita los trabajos y materiales que forman parte de la publicación para su consulta por parte de la comunidad científica a través de las siguientes páginas web:"
+
+#: application/views/main/criterios_seleccion.php:186
+msgid "No adjudicarse derechos de comercialización de los contenidos y materiales de la publicación, ni de sus logos, marcas y nombres registrados, por lo que tampoco está obligado a pagar regalías por la publicación de los mismos."
+msgstr "No adjudicarse derechos de comercialización de los contenidos y materiales de la publicación, ni de sus logos, marcas y nombres registrados, por lo que tampoco está obligado a pagar regalías por la publicación de los mismos."
+
+#: application/views/main/criterios_seleccion.php:187
+msgid "Respetar los derechos morales del autor, y en consecuencia mantener la integridad de la información salvaguardándola de mutilaciones, o modificaciones diferentes a las necesarias para la publicación electrónica de la obra, que generen inexactitudes o que vulneren la imagen de la revista, o del autor."
+msgstr "Respetar los derechos morales del autor, y en consecuencia mantener la integridad de la información salvaguardándola de mutilaciones, o modificaciones diferentes a las necesarias para la publicación electrónica de la obra, que generen inexactitudes o que vulneren la imagen de la revista, o del autor."
+
+#: application/views/main/criterios_seleccion.php:188
+#, php-format
+msgid "Respetar la decisión de la revista de brindar sus contenidos a cualquier otra hemeroteca, sitio web, sistema de indización que considere conveniente, con lo que se entiende que %s y %s no reclama ningún tipo de exclusividad."
+msgstr "Respetar la decisión de la revista de brindar sus contenidos a cualquier otra hemeroteca, sitio web, sistema de indización que considere conveniente, con lo que se entiende que %s y %s no reclama ningún tipo de exclusividad."
+
+#: application/views/main/criterios_seleccion.php:190
+msgid "En cuanto a la autorización solicitada al editor para el depósito de los archivos electrónicos en la colección Hemeroteca Virtual Latinoamericana así como para el acceso libre al texto completo de los artículos, solicitamos el envío del siguiente formato:"
+msgstr "En cuanto a la autorización solicitada al editor para el depósito de los archivos electrónicos en la colección Hemeroteca Virtual Latinoamericana así como para el acceso libre al texto completo de los artículos, solicitamos el envío del siguiente formato:"
+
+#: application/views/main/info_scielo.php:10
+#, php-format
+msgid ""
+"%s ofrece la visualización gráfica de indicadores bibliométricos aportados por las bases de datos de la red de \n"
+"\t\t%s (Scientific Electronic Library Online) conformada por las colecciones de revistas académicas de 15 países:"
+msgstr ""
+"%s ofrece la visualización gráfica de indicadores bibliométricos aportados por las bases de datos de la red de \n"
+"\t\t%s (Scientific Electronic Library Online) conformada por las colecciones de revistas académicas de 15 países:"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Argentina"
+msgstr "Argentina"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Bolivia"
+msgstr "Bolivia"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Brasil"
+msgstr "Brasil"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Chile"
+msgstr "Chile"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Colombia"
+msgstr "Colombia"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Costa Rica"
+msgstr "Costa Rica"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Cuba"
+msgstr "Cuba"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "España"
+msgstr "España"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "México"
+msgstr "México"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Paraguay"
+msgstr "Paraguay"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Perú"
+msgstr "Perú"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Portugal"
+msgstr "Portugal"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Sudáfrica"
+msgstr "Sudáfrica"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Uruguay"
+msgstr "Uruguay"
+
+#: application/views/main/info_scielo.php:11
+#: application/views/main/metodologia_biblat.php:342
+msgid "Venezuela"
+msgstr "Venezuela"
+
+#: application/views/main/info_scielo.php:13
+#, php-format
+msgid "Por otra parte, %s ofrece reportes y gráficas de indicadores bibliométricos de revistas mexicanas y latinoamericanas aportados por otros sistemas de información."
+msgstr "Por otra parte, %s ofrece reportes y gráficas de indicadores bibliométricos de revistas mexicanas y latinoamericanas aportados por otros sistemas de información."
+
+#: application/views/main/metodologia_biblat.php:10
+#, php-format
+msgid "La base de datos de %s está conformada por %s y %s, dos bases de datos de alcance latinoamericano y multidisciplinar. En la primera, se almacenan y recuperan los registros bibliográficos de artículos de revistas especializadas en Ciencias Sociales y Humanidades, mientras que en la segunda, los artículos de las revistas especializadas en Ciencia y Tecnología."
+msgstr "La base de datos de %s está conformada por %s y %s, dos bases de datos de alcance latinoamericano y multidisciplinar. En la primera, se almacenan y recuperan los registros bibliográficos de artículos de revistas especializadas en Ciencias Sociales y Humanidades, mientras que en la segunda, los artículos de las revistas especializadas en Ciencia y Tecnología."
+
+#: application/views/main/metodologia_biblat.php:11
+#, php-format
+msgid "Para la generación de las frecuencias e indicadores bibliométricos se %s se basa en una muestra con las características siguientes:"
+msgstr "Para la generación de las frecuencias e indicadores bibliométricos se %s se basa en una muestra con las características siguientes:"
+
+#: application/views/main/metodologia_biblat.php:12
+msgid "De ambas bases se consideraron:"
+msgstr "De ambas bases se consideraron:"
+
+#: application/views/main/metodologia_biblat.php:14
+msgid "Sólo el tipo de documento “artículo”."
+msgstr "Sólo el tipo de documento “artículo”."
+
+#: application/views/main/metodologia_biblat.php:15
+#, php-format
+msgid "%s  y %s cuentan con registros que datan de 1970. Sin embargo, en los primeros 10 años los registros presentan problemas de normalización de sus campos, vacíos de información en períodos importantes así como limitaciones en los datos registrados. De 1980 en adelante, los registros presentan una mejor consistencia no obstante que, para el caso de algunas revistas y períodos de tiempo, se observan lagunas considerables. A pesar de estas carencias, se integraron todos los años con el propósito de presentar la mayor información posible, además de que la información de los años recientes se actualiza paulatina y sistemáticamente."
+msgstr "%s  y %s cuentan con registros que datan de 1970. Sin embargo, en los primeros 10 años los registros presentan problemas de normalización de sus campos, vacíos de información en períodos importantes así como limitaciones en los datos registrados. De 1980 en adelante, los registros presentan una mejor consistencia no obstante que, para el caso de algunas revistas y períodos de tiempo, se observan lagunas considerables. A pesar de estas carencias, se integraron todos los años con el propósito de presentar la mayor información posible, además de que la información de los años recientes se actualiza paulatina y sistemáticamente."
+
+#: application/views/main/metodologia_biblat.php:16
+msgid "Sólo aquellas revistas que han sido indizadas al menos durante cinco años consecutivos."
+msgstr "Sólo aquellas revistas que han sido indizadas al menos durante cinco años consecutivos."
+
+#: application/views/main/metodologia_biblat.php:17
+msgid "Sólo se consideran artículos cuyo autor aparece con su país e institución de afiliación institucional o corporativa."
+msgstr "Sólo se consideran artículos cuyo autor aparece con su país e institución de afiliación institucional o corporativa."
+
+#: application/views/main/metodologia_biblat.php:18
+msgid "Se descartaron los registros de las revistas de difusión."
+msgstr "Se descartaron los registros de las revistas de difusión."
+
+#: application/views/main/metodologia_biblat.php:19
+msgid "Las variables utilizadas en la conformación de los indicadores, son:"
+msgstr "Las variables utilizadas en la conformación de los indicadores, son:"
+
+#: application/views/main/metodologia_biblat.php:21
+msgid "Tipología documental"
+msgstr "Tipología documental"
+
+#: application/views/main/metodologia_biblat.php:22
+msgid "Autores"
+msgstr "Autores"
+
+#: application/views/main/metodologia_biblat.php:23
+msgid "Tipología de autoría"
+msgstr "Tipología de autoría"
+
+#: application/views/main/metodologia_biblat.php:24
+msgid "Título de la revista"
+msgstr "Título de la revista"
+
+#: application/views/main/metodologia_biblat.php:25
+msgid "Volumen de la revista"
+msgstr "Volumen de la revista"
+
+#: application/views/main/metodologia_biblat.php:26
+msgid "Disciplinas"
+msgstr "Disciplinas"
+
+#: application/views/main/metodologia_biblat.php:27
+msgid "Entidad editora"
+msgstr "Entidad editora"
+
+#: application/views/main/metodologia_biblat.php:28
+msgid "País de adscripción de la institución del autor"
+msgstr "País de adscripción de la institución del autor"
+
+#: application/views/main/metodologia_biblat.php:29
+msgid "País de publicación de la revista"
+msgstr "País de publicación de la revista"
+
+#: application/views/main/metodologia_biblat.php:30
+msgid "Temáticas o descriptores"
+msgstr "Temáticas o descriptores"
+
+#: application/views/main/metodologia_biblat.php:31
+msgid "Fecha de publicación"
+msgstr "Fecha de publicación"
+
+#: application/views/main/metodologia_biblat.php:35
+msgid "Información sobre institución de afiliación del autor:"
+msgstr "Información sobre institución de afiliación del autor:"
+
+#: application/views/main/metodologia_biblat.php:35
+#, php-format
+msgid "%s proporciona información sobre la adscripción institucional (o lugar de trabajo) de los autores de los artículos publicados en las revistas indizadas en %s y %s, lo cual permite generar reportes cuantitativos sobre la producción de artículos considerando a las instituciones, organismos o centros de investigación en los que los autores desempeñan su actividad académica. La generación de estos reportes es posible dado que %s y %s compilan desde el inicio de ambas bases de datos la información sobre la adscripción institucional del autor. Sin embargo, es necesario considerar la evolución de los criterios adoptados por dichas bases en la indización de esta información, dado que de ello depende su representación estadística."
+msgstr "%s proporciona información sobre la adscripción institucional (o lugar de trabajo) de los autores de los artículos publicados en las revistas indizadas en %s y %s, lo cual permite generar reportes cuantitativos sobre la producción de artículos considerando a las instituciones, organismos o centros de investigación en los que los autores desempeñan su actividad académica. La generación de estos reportes es posible dado que %s y %s compilan desde el inicio de ambas bases de datos la información sobre la adscripción institucional del autor. Sin embargo, es necesario considerar la evolución de los criterios adoptados por dichas bases en la indización de esta información, dado que de ello depende su representación estadística."
+
+#: application/views/main/metodologia_biblat.php:36
+msgid "Hasta 1998, se registraban hasta tres niveles jerárquicos de cada institución: la Institución y sus Dependencias y Subdependencias. A partir de 1998, sólo se codifican dos niveles: Institución y Dependencia, incluyendo ciudad, estado (o división político-administrativa) y país."
+msgstr "Hasta 1998, se registraban hasta tres niveles jerárquicos de cada institución: la Institución y sus Dependencias y Subdependencias. A partir de 1998, sólo se codifican dos niveles: Institución y Dependencia, incluyendo ciudad, estado (o división político-administrativa) y país."
+
+#: application/views/main/metodologia_biblat.php:37
+#, php-format
+msgid "Hasta 1987, sólo se registraba la información de adscripción institucional del primer autor. A partir de 1988, %s y %s registran todas las instituciones diferentes que aparecen en el documento. A partir de junio de 2009, se implementa una nueva política para la codificación de esta información, consistente en el registro de todas las instituciones (manteniendo el criterio de vincular a cada autor con solo una institución) que aparecen en el documento (ver metodología en %s"
+msgstr "Hasta 1987, sólo se registraba la información de adscripción institucional del primer autor. A partir de 1988, %s y %s registran todas las instituciones diferentes que aparecen en el documento. A partir de junio de 2009, se implementa una nueva política para la codificación de esta información, consistente en el registro de todas las instituciones (manteniendo el criterio de vincular a cada autor con solo una institución) que aparecen en el documento (ver metodología en %s"
+
+#: application/views/main/metodologia_biblat.php:38
+msgid "Normas de indización de la adscripción institucional de los autores"
+msgstr "Normas de indización de la adscripción institucional de los autores"
+
+#: application/views/main/metodologia_biblat.php:39
+msgid "Para que una institución sea registrada se requiere que en el documento indizado se consignen al menos tres datos: el nombre de la institución, la ciudad y el país en que se localiza."
+msgstr "Para que una institución sea registrada se requiere que en el documento indizado se consignen al menos tres datos: el nombre de la institución, la ciudad y el país en que se localiza."
+
+#: application/views/main/metodologia_biblat.php:40
+msgid "Por cada institución se registran hasta dos niveles diferentes en jerarquía:"
+msgstr "Por cada institución se registran hasta dos niveles diferentes en jerarquía:"
+
+#: application/views/main/metodologia_biblat.php:41
+msgid "Nombre de la Institución:"
+msgstr "Nombre de la Institución:"
+
+#: application/views/main/metodologia_biblat.php:41
+msgid "es el caso de universidades, ministerios, secretarías de estado, empresas u organismos internacionales, por citar los ejemplos más comunes."
+msgstr "es el caso de universidades, ministerios, secretarías de estado, empresas u organismos internacionales, por citar los ejemplos más comunes."
+
+#: application/views/main/metodologia_biblat.php:42
+msgid "Nombre de la dependencia:"
+msgstr "Nombre de la dependencia:"
+
+#: application/views/main/metodologia_biblat.php:42
+msgid "consistente en aquellas entidades ubicadas en el nivel inferior inmediato de una institución: áreas, centros de investigación, departamentos, direcciones y facultades, por ejemplo."
+msgstr "consistente en aquellas entidades ubicadas en el nivel inferior inmediato de una institución: áreas, centros de investigación, departamentos, direcciones y facultades, por ejemplo."
+
+#: application/views/main/metodologia_biblat.php:43
+msgid "Complementariamente se incluye la siguiente información para cada institución:"
+msgstr "Complementariamente se incluye la siguiente información para cada institución:"
+
+#: application/views/main/metodologia_biblat.php:45
+msgid "Nombre de la ciudad"
+msgstr "Nombre de la ciudad"
+
+#: application/views/main/metodologia_biblat.php:46
+msgid "Nombre de la división político-administrativa en que se ubica la ciudad"
+msgstr "Nombre de la división político-administrativa en que se ubica la ciudad"
+
+#: application/views/main/metodologia_biblat.php:47
+msgid "Nombre del país"
+msgstr "Nombre del país"
+
+#: application/views/main/metodologia_biblat.php:48
+msgid "Correo electrónico del primer autor"
+msgstr "Correo electrónico del primer autor"
+
+#: application/views/main/metodologia_biblat.php:50
+msgid "Solamente se registra una institución por autor. En caso de que un autor aparezca vinculado a distintas instituciones, el criterio adoptado para elegir la institución es aquella en la cual el autor desempeña su actividad académica en el momento en que se produjo el documento; en caso de que esto sea así para más de una institución se registra la que aparece en primer término."
+msgstr "Solamente se registra una institución por autor. En caso de que un autor aparezca vinculado a distintas instituciones, el criterio adoptado para elegir la institución es aquella en la cual el autor desempeña su actividad académica en el momento en que se produjo el documento; en caso de que esto sea así para más de una institución se registra la que aparece en primer término."
+
+#: application/views/main/metodologia_biblat.php:51
+msgid "También se consideran como instituciones de adscripción aquellas que, durante un período de tiempo determinado, acogen a profesores o investigadores visitantes, así como a becarios y alumnos de posgrado."
+msgstr "También se consideran como instituciones de adscripción aquellas que, durante un período de tiempo determinado, acogen a profesores o investigadores visitantes, así como a becarios y alumnos de posgrado."
+
+#: application/views/main/metodologia_biblat.php:52
+msgid "No se consideran instituciones de adscripción a las instituciones que patrocinaron la investigación que dio lugar al documento o las instituciones en donde el autor obtuvo sus grados académicos. Tampoco se ingresan direcciones personales."
+msgstr "No se consideran instituciones de adscripción a las instituciones que patrocinaron la investigación que dio lugar al documento o las instituciones en donde el autor obtuvo sus grados académicos. Tampoco se ingresan direcciones personales."
+
+#: application/views/main/metodologia_biblat.php:53
+msgid "Sesgo hacia el país productor de las bases de datos:"
+msgstr "Sesgo hacia el país productor de las bases de datos:"
+
+#: application/views/main/metodologia_biblat.php:53
+#, php-format
+msgid "No obstante que %s y %s son las bases de datos multidisciplinarias con más títulos de publicaciones periódicas latinoamericanas de carácter académico, lo cierto es que presentan el mismo fenómeno que enfrentan muchos servicios de información en los que predomina la información del país en donde se produce la base de datos, lo cual se manifiesta, en este caso, en el predominio de las revistas mexicanas. Por otra parte, la aparición y la consolidación de la publicación electrónica, en particular, de las publicaciones de acceso libre a través de Internet, han permitido vencer la barrera de la distancia geográfica y con ello equilibrar la representatividad por país de edición de las revistas indizadas en %s y %s. De particular importancia ha sido, en este sentido, la indización de revistas disponibles en texto completo en las diversas hemerotecas virtuales de la región que surgieron a inicios de este siglo."
+msgstr "No obstante que %s y %s son las bases de datos multidisciplinarias con más títulos de publicaciones periódicas latinoamericanas de carácter académico, lo cierto es que presentan el mismo fenómeno que enfrentan muchos servicios de información en los que predomina la información del país en donde se produce la base de datos, lo cual se manifiesta, en este caso, en el predominio de las revistas mexicanas. Por otra parte, la aparición y la consolidación de la publicación electrónica, en particular, de las publicaciones de acceso libre a través de Internet, han permitido vencer la barrera de la distancia geográfica y con ello equilibrar la representatividad por país de edición de las revistas indizadas en %s y %s. De particular importancia ha sido, en este sentido, la indización de revistas disponibles en texto completo en las diversas hemerotecas virtuales de la región que surgieron a inicios de este siglo."
+
+#: application/views/main/metodologia_biblat.php:54
+msgid "Normalización y actualización permanente:"
+msgstr "Normalización y actualización permanente:"
+
+#: application/views/main/metodologia_biblat.php:54
+#, php-format
+msgid "las bases de datos %s y %s se normalizan constantemente y de manera retrospectiva. Esto quiere decir, en primer lugar, que la información contenida en las bases está sujeta a procesos de revisión y corrección recurrentes y, en segundo lugar, que frecuentemente y por diversas causas, algunos fascículos de revistas son indizados con dos o más años de retraso. Esto implica que los datos para una revista no siempre se indizan en el mismo año de publicación ni en el siguiente. La repercusión que esto tiene en la generación de indicadores bibliométricos es que la información retrospectiva también está sujeta a modificaciones frecuentes."
+msgstr "las bases de datos %s y %s se normalizan constantemente y de manera retrospectiva. Esto quiere decir, en primer lugar, que la información contenida en las bases está sujeta a procesos de revisión y corrección recurrentes y, en segundo lugar, que frecuentemente y por diversas causas, algunos fascículos de revistas son indizados con dos o más años de retraso. Esto implica que los datos para una revista no siempre se indizan en el mismo año de publicación ni en el siguiente. La repercusión que esto tiene en la generación de indicadores bibliométricos es que la información retrospectiva también está sujeta a modificaciones frecuentes."
+
+#: application/views/main/metodologia_biblat.php:65
+#, php-format
+msgid "Frecuencias disponibles en %s:"
+msgstr "Frecuencias disponibles en %s:"
+
+#: application/views/main/metodologia_biblat.php:66
+msgid "Por autor:"
+msgstr "Por autor:"
+
+#: application/views/main/metodologia_biblat.php:68
+msgid "Número de documentos publicados por autor"
+msgstr "Número de documentos publicados por autor"
+
+#: application/views/main/metodologia_biblat.php:70
+msgid "Por institución de afiliación del autor:"
+msgstr "Por institución de afiliación del autor:"
+
+#: application/views/main/metodologia_biblat.php:72
+msgid "Número de documentos publicados por institución"
+msgstr "Número de documentos publicados por institución"
+
+#: application/views/main/metodologia_biblat.php:73
+msgid "Número de documentos publicados por institución según el país de la revista"
+msgstr "Número de documentos publicados por institución según el país de la revista"
+
+#: application/views/main/metodologia_biblat.php:74
+msgid "Número de documentos publicados por institución según la revista de publicación"
+msgstr "Número de documentos publicados por institución según la revista de publicación"
+
+#: application/views/main/metodologia_biblat.php:75
+msgid "Número de documentos publicados por autor según su institución de adscripción"
+msgstr "Número de documentos publicados por autor según su institución de adscripción"
+
+#: application/views/main/metodologia_biblat.php:76
+msgid "Número de documentos publicados por disciplina según la institución"
+msgstr "Número de documentos publicados por disciplina según la institución"
+
+#: application/views/main/metodologia_biblat.php:78
+msgid "Por país de institución de afiliación del autor:"
+msgstr "Por país de institución de afiliación del autor:"
+
+#: application/views/main/metodologia_biblat.php:80
+msgid "Número de documentos publicados por país de la institución de afiliación del autor"
+msgstr "Número de documentos publicados por país de la institución de afiliación del autor"
+
+#: application/views/main/metodologia_biblat.php:81
+msgid "Número de documentos por institución de afiliación por país"
+msgstr "Número de documentos por institución de afiliación por país"
+
+#: application/views/main/metodologia_biblat.php:82
+msgid "Número de documentos por autor según país de institución de afiliación"
+msgstr "Número de documentos por autor según país de institución de afiliación"
+
+#: application/views/main/metodologia_biblat.php:83
+msgid "Número de documentos por disciplina según país de la institución del autor"
+msgstr "Número de documentos por disciplina según país de la institución del autor"
+
+#: application/views/main/metodologia_biblat.php:85
+msgid "Por disciplina:"
+msgstr "Por disciplina:"
+
+#: application/views/main/metodologia_biblat.php:87
+msgid "Número de documentos publicados por disciplina"
+msgstr "Número de documentos publicados por disciplina"
+
+#: application/views/main/metodologia_biblat.php:88
+msgid "Número de documentos publicados por disciplina y revista"
+msgstr "Número de documentos publicados por disciplina y revista"
+
+#: application/views/main/metodologia_biblat.php:89
+msgid "Número de documentos publicados por disciplina e institución de afiliación del autor"
+msgstr "Número de documentos publicados por disciplina e institución de afiliación del autor"
+
+#: application/views/main/metodologia_biblat.php:90
+msgid "Número de documentos publicados por disciplina y país de la revista"
+msgstr "Número de documentos publicados por disciplina y país de la revista"
+
+#: application/views/main/metodologia_biblat.php:91
+msgid "Número de documentos publicados por disciplina y país de la institución de afiliación del autor"
+msgstr "Número de documentos publicados por disciplina y país de la institución de afiliación del autor"
+
+#: application/views/main/metodologia_biblat.php:93
+msgid "Por revista:"
+msgstr "Por revista:"
+
+#: application/views/main/metodologia_biblat.php:95
+msgid "Número de documentos publicados por revista"
+msgstr "Número de documentos publicados por revista"
+
+#: application/views/main/metodologia_biblat.php:96
+msgid "Número de documentos publicados por autor y revista"
+msgstr "Número de documentos publicados por autor y revista"
+
+#: application/views/main/metodologia_biblat.php:97
+msgid "Número de documentos publicados por institución de afiliación del autor en las revistas"
+msgstr "Número de documentos publicados por institución de afiliación del autor en las revistas"
+
+#: application/views/main/metodologia_biblat.php:98
+msgid "Número de artículos publicados por año"
+msgstr "Número de artículos publicados por año"
+
+#: application/views/main/metodologia_biblat.php:110
+msgid "El módulo de Indicadores proporciona 13 indicadores bibliométricos agrupados, de acuerdo con su especificidad, en tres rubros:"
+msgstr "El módulo de Indicadores proporciona 13 indicadores bibliométricos agrupados, de acuerdo con su especificidad, en tres rubros:"
+
+#: application/views/main/metodologia_biblat.php:112
+msgid "De autoría y colaboración entre autores"
+msgstr "De autoría y colaboración entre autores"
+
+#: application/views/main/metodologia_biblat.php:112
+msgid "(4 indicadores)"
+msgstr "(4 indicadores)"
+
+#: application/views/main/metodologia_biblat.php:113
+msgid "De productividad de los autores"
+msgstr "De productividad de los autores"
+
+#: application/views/main/metodologia_biblat.php:113
+msgid "(2 indicadores)"
+msgstr "(2 indicadores)"
+
+#: application/views/main/metodologia_biblat.php:114
+msgid "De Concentración – Dispersión, Núcleo básico de revistas y densidad de la información"
+msgstr "De Concentración – Dispersión, Núcleo básico de revistas y densidad de la información"
+
+#: application/views/main/metodologia_biblat.php:114
+msgid "( 4 indicadores)"
+msgstr "( 4 indicadores)"
+
+#: application/views/main/metodologia_biblat.php:115
+msgid "Coautorías"
+msgstr "Coautorías"
+
+#: application/views/main/metodologia_biblat.php:115
+msgid "(3 indicadores)"
+msgstr "(3 indicadores)"
+
+#: application/views/main/metodologia_biblat.php:117
+#, php-format
+msgid "Estos indicadores se enfocan en la obtención de datos objetivos que nos dan cuenta del comportamiento y las regularidades de la producción científica contenida en %s."
+msgstr "Estos indicadores se enfocan en la obtención de datos objetivos que nos dan cuenta del comportamiento y las regularidades de la producción científica contenida en %s."
+
+#: application/views/main/metodologia_biblat.php:121
+#: application/views/indicadores/index.php:92
+msgid "Índice de Coautoría"
+msgstr "Índice de Coautoría"
+
+#: application/views/main/metodologia_biblat.php:123
+#: application/views/indicadores/index.php:94
+msgid "Este indicador muestra el número promedio de autores por artículo."
+msgstr "Este indicador muestra el número promedio de autores por artículo."
+
+#: application/views/main/metodologia_biblat.php:125
+#: application/views/main/metodologia_biblat.php:149
+#: application/views/main/metodologia_biblat.php:173
+#: application/views/main/metodologia_biblat.php:194
+#: application/views/main/metodologia_biblat.php:222
+#: application/views/main/metodologia_biblat.php:239
+#: application/views/main/metodologia_biblat.php:261
+#: application/views/main/metodologia_biblat.php:283
+#: application/views/main/metodologia_biblat.php:300
+#: application/views/indicadores/index.php:96
+#: application/views/indicadores/index.php:117
+#: application/views/indicadores/index.php:141
+#: application/views/indicadores/index.php:166
+#: application/views/indicadores/index.php:185
+#: application/views/indicadores/index.php:213
+#: application/views/indicadores/index.php:236
+#: application/views/indicadores/index.php:264
+#: application/views/indicadores/index.php:283
+#: application/views/indicadores/index.php:300
+msgid "La formulación matemática es:"
+msgstr "La formulación matemática es:"
+
+#: application/views/main/metodologia_biblat.php:135
+#: application/views/main/metodologia_biblat.php:159
+#: application/views/main/metodologia_biblat.php:183
+#: application/views/main/metodologia_biblat.php:209
+#: application/views/main/metodologia_biblat.php:228
+#: application/views/main/metodologia_biblat.php:271
+#: application/views/main/metodologia_biblat.php:288
+#: application/views/main/metodologia_biblat.php:305
+#: application/views/indicadores/index.php:106
+#: application/views/indicadores/index.php:127
+#: application/views/indicadores/index.php:151
+#: application/views/indicadores/index.php:172
+#: application/views/indicadores/index.php:200
+#: application/views/indicadores/index.php:246
+#: application/views/indicadores/index.php:269
+#: application/views/indicadores/index.php:288
+#: application/views/indicadores/index.php:309
+msgid "Donde:"
+msgstr "Donde:"
+
+#: application/views/main/metodologia_biblat.php:136
+#: application/views/indicadores/index.php:107
+msgid "Cantidad de autores firmantes"
+msgstr "Cantidad de autores firmantes"
+
+#: application/views/main/metodologia_biblat.php:137
+#: application/views/indicadores/index.php:108
+msgid "Cantidad de documentos"
+msgstr "Cantidad de documentos"
+
+#: application/views/main/metodologia_biblat.php:140
+msgid "El resultado del indicador da cuenta del número promedio de autores por artículo por revista, país de publicación de la revista o país de la institución de afiliación de los autores, así como su evolución temporal."
+msgstr "El resultado del indicador da cuenta del número promedio de autores por artículo por revista, país de publicación de la revista o país de la institución de afiliación de los autores, así como su evolución temporal."
+
+#: application/views/main/metodologia_biblat.php:145
+#: application/views/main/metodologia_biblat.php:377
+#: application/views/indicadores/index.php:113
+msgid "Tasa de Documentos Coautorados"
+msgstr "Tasa de Documentos Coautorados"
+
+#: application/views/main/metodologia_biblat.php:147
+#: application/views/main/metodologia_biblat.php:171
+#: application/views/indicadores/index.php:115
+#: application/views/indicadores/index.php:139
+msgid "El valor numérico indica la proporción de artículos con autoría múltiple."
+msgstr "El valor numérico indica la proporción de artículos con autoría múltiple."
+
+#: application/views/main/metodologia_biblat.php:160
+#: application/views/indicadores/index.php:128
+msgid "Cantidad total de documentos con autoría multiple"
+msgstr "Cantidad total de documentos con autoría multiple"
+
+#: application/views/main/metodologia_biblat.php:161
+#: application/views/indicadores/index.php:129
+msgid "Cantidad total de documentos"
+msgstr "Cantidad total de documentos"
+
+#: application/views/main/metodologia_biblat.php:164
+msgid "Brinda información sobre la proporción de artículos con autoría múltiple por título de la revista, país de publicación de la revista o país de la institución de afiliación de los autores, así como su evolución temporal. Se interpreta que valores cercanos a 1 muestran mayor cantidad de documentos en coautoría."
+msgstr "Brinda información sobre la proporción de artículos con autoría múltiple por título de la revista, país de publicación de la revista o país de la institución de afiliación de los autores, así como su evolución temporal. Se interpreta que valores cercanos a 1 muestran mayor cantidad de documentos en coautoría."
+
+#: application/views/main/metodologia_biblat.php:169
+#: application/views/main/metodologia_biblat.php:378
+#: application/views/indicadores/index.php:137
+msgid "Grado de Colaboración (Índice de Subramanyan)"
+msgstr "Grado de Colaboración (Índice de Subramanyan)"
+
+#: application/views/main/metodologia_biblat.php:184
+#: application/views/indicadores/index.php:152
+msgid "Total de documentos con autoría múltiple."
+msgstr "Total de documentos con autoría múltiple."
+
+#: application/views/main/metodologia_biblat.php:185
+#: application/views/indicadores/index.php:153
+msgid "Total de documentos escritos por un solo autor."
+msgstr "Total de documentos escritos por un solo autor."
+
+#: application/views/main/metodologia_biblat.php:188
+msgid "El valor numérico indica la proporción de documentos escritos en colaboración y los documentos con autoría simple, indicado el grado de colaboración por título de revista o país de publicación de la revista. Se interpreta que valores cercanos a 0 muestran un fuerte componente de autoría simple, mientras que los cercanos a 1 denotan una fuerte proporción de autoría múltiple."
+msgstr "El valor numérico indica la proporción de documentos escritos en colaboración y los documentos con autoría simple, indicado el grado de colaboración por título de revista o país de publicación de la revista. Se interpreta que valores cercanos a 0 muestran un fuerte componente de autoría simple, mientras que los cercanos a 1 denotan una fuerte proporción de autoría múltiple."
+
+#: application/views/main/metodologia_biblat.php:193
+#: application/views/main/metodologia_biblat.php:380
+#: application/views/indicadores/index.php:179
+msgid "Índice de Colaboración (Índice de Lawani)"
+msgstr "Índice de Colaboración (Índice de Lawani)"
+
+#: application/views/main/metodologia_biblat.php:210
+#: application/views/indicadores/index.php:201
+msgid "Total de documentos."
+msgstr "Total de documentos."
+
+#: application/views/main/metodologia_biblat.php:211
+#: application/views/indicadores/index.php:202
+msgid "Número de firmas (autores) por documentos."
+msgstr "Número de firmas (autores) por documentos."
+
+#: application/views/main/metodologia_biblat.php:212
+#: application/views/indicadores/index.php:203
+msgid "Cantidad de documentos con autoría múltiple."
+msgstr "Cantidad de documentos con autoría múltiple."
+
+#: application/views/main/metodologia_biblat.php:215
+msgid "Proporciona el peso promedio del número de autores por documento."
+msgstr "Proporciona el peso promedio del número de autores por documento."
+
+#: application/views/main/metodologia_biblat.php:216
+msgid "El valor numérico representa el promedio de autores por documento."
+msgstr "El valor numérico representa el promedio de autores por documento."
+
+#: application/views/main/metodologia_biblat.php:221
+#: application/views/main/metodologia_biblat.php:379
+#: application/views/indicadores/index.php:161
+msgid "Modelo de Elitismo (Price)"
+msgstr "Modelo de Elitismo (Price)"
+
+#: application/views/main/metodologia_biblat.php:229
+#: application/views/indicadores/index.php:173
+#, php-format
+msgid "Elite de autores que publican el 50%% de los trabajos."
+msgstr "Elite de autores que publican el 50%% de los trabajos."
+
+#: application/views/main/metodologia_biblat.php:230
+#: application/views/indicadores/index.php:174
+msgid "Población total de autores."
+msgstr "Población total de autores."
+
+#: application/views/main/metodologia_biblat.php:233
+msgid "Es uno de los indicadores más importantes para medir la productividad científica de los autores ya que identifica la elite de autores más productivos por título de revista o país de publicación de la revista."
+msgstr "Es uno de los indicadores más importantes para medir la productividad científica de los autores ya que identifica la elite de autores más productivos por título de revista o país de publicación de la revista."
+
+#: application/views/main/metodologia_biblat.php:238
+#: application/views/main/metodologia_biblat.php:381
+#: application/views/indicadores/index.php:208
+msgid "Índice de Densidad de Documentos Zakutina y Priyenikova"
+msgstr "Índice de Densidad de Documentos Zakutina y Priyenikova"
+
+#: application/views/main/metodologia_biblat.php:249
+#: application/views/indicadores/index.php:223
+msgid "Donde"
+msgstr "Donde"
+
+#: application/views/main/metodologia_biblat.php:250
+#: application/views/indicadores/index.php:224
+msgid "Artículos"
+msgstr "Artículos"
+
+#: application/views/main/metodologia_biblat.php:251
+#: application/views/indicadores/index.php:225
+msgid "Títulos de revistas"
+msgstr "Títulos de revistas"
+
+#: application/views/main/metodologia_biblat.php:254
+#: application/views/indicadores/index.php:210
+msgid "Índice que identifica los títulos con mayor densidad de información."
+msgstr "Índice que identifica los títulos con mayor densidad de información."
+
+#: application/views/main/metodologia_biblat.php:255
+msgid "El valor numérico proporciona la cantidad de documentos publicados por revista o país de publicación de la revista al año."
+msgstr "El valor numérico proporciona la cantidad de documentos publicados por revista o país de publicación de la revista al año."
+
+#: application/views/main/metodologia_biblat.php:260
+msgid "Índice de concentración temática (Índice de Pratt)"
+msgstr "Índice de concentración temática (Índice de Pratt)"
+
+#: application/views/main/metodologia_biblat.php:272
+#: application/views/indicadores/index.php:247
+msgid "Índice de concentración de Pratt."
+msgstr "Índice de concentración de Pratt."
+
+#: application/views/main/metodologia_biblat.php:273
+#: application/views/indicadores/index.php:248
+msgid "Número de categorías."
+msgstr "Número de categorías."
+
+#: application/views/main/metodologia_biblat.php:274
+#: application/views/indicadores/index.php:249
+msgid "&sum; del producto del rango por la frecuencia de una categoría dada, dividido por la cantidad de ítems en todas las categorías."
+msgstr "&sum; del producto del rango por la frecuencia de una categoría dada, dividido por la cantidad de ítems en todas las categorías."
+
+#: application/views/main/metodologia_biblat.php:277
+msgid "Muestra las revistas de la disciplina seleccionada ordenándolas según su grado de especialización en proporción con todas las categorías existentes por título de revista y basándose en los descriptores de los documentos publicados. El valor numérico representa el nivel de concentración temática basándose en sus descriptores. Además de proporcionar frecuencias de los descriptores existentes. Se interpreta que valores cercanos a 1 muestran mayor grado de especialización."
+msgstr "Muestra las revistas de la disciplina seleccionada ordenándolas según su grado de especialización en proporción con todas las categorías existentes por título de revista y basándose en los descriptores de los documentos publicados. El valor numérico representa el nivel de concentración temática basándose en sus descriptores. Además de proporcionar frecuencias de los descriptores existentes. Se interpreta que valores cercanos a 1 muestran mayor grado de especialización."
+
+#: application/views/main/metodologia_biblat.php:289
+#: application/views/indicadores/index.php:270
+msgid "Cantidad de títulos por zona."
+msgstr "Cantidad de títulos por zona."
+
+#: application/views/main/metodologia_biblat.php:290
+#: application/views/indicadores/index.php:271
+msgid "Multiplicador o factor de proporcionalidad de títulos por zona."
+msgstr "Multiplicador o factor de proporcionalidad de títulos por zona."
+
+#: application/views/main/metodologia_biblat.php:293
+msgid "Este indicador mide la concentración - dispersión de la información por revista identificando tres zonas: los títulos de revistas más importantes para la disciplina conformado por los títulos más productivos y especializados (zona núcleo), grupo de títulos con menor concentración de artículos en la disciplina (segunda zona) y tercer zona que representan el resto de títulos relacionados con la disciplina. Además de mostrar la cantidad de títulos y artículos por zona."
+msgstr "Este indicador mide la concentración - dispersión de la información por revista identificando tres zonas: los títulos de revistas más importantes para la disciplina conformado por los títulos más productivos y especializados (zona núcleo), grupo de títulos con menor concentración de artículos en la disciplina (segunda zona) y tercer zona que representan el resto de títulos relacionados con la disciplina. Además de mostrar la cantidad de títulos y artículos por zona."
+
+#: application/views/main/metodologia_biblat.php:298
+msgid "Modelo de Bradford (Productividad institucional)"
+msgstr "Modelo de Bradford (Productividad institucional)"
+
+#: application/views/main/metodologia_biblat.php:306
+#: application/views/indicadores/index.php:289
+msgid "Cantidad de instituciones por zona."
+msgstr "Cantidad de instituciones por zona."
+
+#: application/views/main/metodologia_biblat.php:307
+#: application/views/indicadores/index.php:290
+msgid "Multiplicador o factor de proporcionalidad de instituciones por zona."
+msgstr "Multiplicador o factor de proporcionalidad de instituciones por zona."
+
+#: application/views/main/metodologia_biblat.php:310
+msgid "Es una variante del modelo original de Bradford. Este indicador mide la concentración - dispersión de la información por institución de adscripción del autor, identificando tres zonas: las instituciones más importantes para la disciplina conformado por aquellas más productivas y especializadas (zona núcleo), grupo de instituciones con menor concentración de artículos publicados en la disciplina (segunda zona) y  tercer zona  que presentan el resto de instituciones relacionadas con la disciplina. Además de mostrar la cantidad de instituciones y artículos por zona."
+msgstr "Es una variante del modelo original de Bradford. Este indicador mide la concentración - dispersión de la información por institución de adscripción del autor, identificando tres zonas: las instituciones más importantes para la disciplina conformado por aquellas más productivas y especializadas (zona núcleo), grupo de instituciones con menor concentración de artículos publicados en la disciplina (segunda zona) y  tercer zona  que presentan el resto de instituciones relacionadas con la disciplina. Además de mostrar la cantidad de instituciones y artículos por zona."
+
+#: application/views/main/metodologia_biblat.php:314
+msgid "Productividad exógena por título de revista"
+msgstr "Productividad exógena por título de revista"
+
+#: application/views/main/metodologia_biblat.php:316
+msgid "Es un indicador que se utiliza para medir el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta a la de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores."
+msgstr "Es un indicador que se utiliza para medir el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta a la de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores."
+
+#: application/views/main/metodologia_biblat.php:318
+msgid "Regionalización de la producción institucional"
+msgstr "Regionalización de la producción institucional"
+
+#: application/views/main/metodologia_biblat.php:320
+msgid "Número de artículos publicados por institución de afiliación del autor según país de publicación de la revistas [institución de afiliación + país de la institución de afiliación del autor + país de publicación de la revista]"
+msgstr "Número de artículos publicados por institución de afiliación del autor según país de publicación de la revistas [institución de afiliación + país de la institución de afiliación del autor + país de publicación de la revista]"
+
+#: application/views/main/metodologia_biblat.php:321
+#: application/views/main/metodologia_biblat.php:326
+#: application/views/main/metodologia_biblat.php:331
+msgid "Evolución temporal"
+msgstr "Evolución temporal"
+
+#: application/views/main/metodologia_biblat.php:323
+msgid "Coautoría por institución de afiliación del autor"
+msgstr "Coautoría por institución de afiliación del autor"
+
+#: application/views/main/metodologia_biblat.php:325
+msgid "Número de documentos publicados en coautoría de acuerdo con la institución de afiliación del autor [institución de afiliación del autor : misma institución y otras]"
+msgstr "Número de documentos publicados en coautoría de acuerdo con la institución de afiliación del autor [institución de afiliación del autor : misma institución y otras]"
+
+#: application/views/main/metodologia_biblat.php:328
+msgid "Coautoría según país de la institución de afiliación del autor"
+msgstr "Coautoría según país de la institución de afiliación del autor"
+
+#: application/views/main/metodologia_biblat.php:330
+msgid "Número de documentos publicados en coautoría de acuerdo con el país de la institución de afiliación del autor [país de la institución de afiliación del autor : misma institución y otras]"
+msgstr "Número de documentos publicados en coautoría de acuerdo con el país de la institución de afiliación del autor [país de la institución de afiliación del autor : misma institución y otras]"
+
+#: application/views/main/metodologia_biblat.php:341
+#, php-format
+msgid "Estos indicadores son generados a partir de las revistas incluidas en las colecciones de la red %s a través del reporte que periódicamente se publica en el portal %s"
+msgstr "Estos indicadores son generados a partir de las revistas incluidas en las colecciones de la red %s a través del reporte que periódicamente se publica en el portal %s"
+
+#: application/views/main/metodologia_biblat.php:342
+#, php-format
+msgid "La red de %s cual está conformada por las colecciones de revistas académicas de 15 países:"
+msgstr "La red de %s cual está conformada por las colecciones de revistas académicas de 15 países:"
+
+#: application/views/main/metodologia_biblat.php:344
+msgid "Indicadores bibliométricos anuales de las revistas de la red SciELO (a partir de 2000)"
+msgstr "Indicadores bibliométricos anuales de las revistas de la red SciELO (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:345
+msgid "Número de revistas incluidas en las colecciones de la red SciELO (a partir de 2000)"
+msgstr "Número de revistas incluidas en las colecciones de la red SciELO (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:346
+msgid "Número de artículos publicados por revistas SciELO (a partir de 2000)"
+msgstr "Número de artículos publicados por revistas SciELO (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:347
+msgid "Número y tipo de documento publicados en las revistas de las colecciones SciELO (a partir de 2000)"
+msgstr "Número y tipo de documento publicados en las revistas de las colecciones SciELO (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:348
+msgid "Número de artículos incluidos en las colecciones SciELO por área del conocimiento (a partir de 2000)"
+msgstr "Número de artículos incluidos en las colecciones SciELO por área del conocimiento (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:349
+msgid "Número de artículos incluidos por área del conocimiento en las colecciones SciELO (a partir de 2000)"
+msgstr "Número de artículos incluidos por área del conocimiento en las colecciones SciELO (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:350
+msgid "Número de artículos incluidos en la red SciELO según país de la afiliación del autor (a partir de 2000)"
+msgstr "Número de artículos incluidos en la red SciELO según país de la afiliación del autor (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:351
+msgid "Número de artículos publicados por revistas SciELO según el país de la afiliación del autor (a partir de 2000)"
+msgstr "Número de artículos publicados por revistas SciELO según el país de la afiliación del autor (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:352
+msgid "Número de artículos publicados por revistas SciELO según el país de publicación de la revista y país de la afiliación del autor (a partir de 2000)"
+msgstr "Número de artículos publicados por revistas SciELO según el país de publicación de la revista y país de la afiliación del autor (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:353
+msgid "Número de artículos publicados por revistas SciELO según área del conocimiento y país de la afiliación del autor (a partir de 2000)"
+msgstr "Número de artículos publicados por revistas SciELO según área del conocimiento y país de la afiliación del autor (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:354
+msgid "Número de citas recibidas por revista SciELO según área del conocimiento de la revista citante (a partir de 2000)"
+msgstr "Número de citas recibidas por revista SciELO según área del conocimiento de la revista citante (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:355
+msgid "Número de citas recibidas por revista SciELO según país de la afiliación del autor citante (a partir de 2000)"
+msgstr "Número de citas recibidas por revista SciELO según país de la afiliación del autor citante (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:356
+msgid "Número de artículos citados según la edad de citación en artículos incluidos en todas las colecciones SciELO (a partir de 2000)"
+msgstr "Número de artículos citados según la edad de citación en artículos incluidos en todas las colecciones SciELO (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:357
+msgid "Número de artículos citados según la edad de citación por título de revista (a partir de 2000)"
+msgstr "Número de artículos citados según la edad de citación por título de revista (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:358
+msgid "Número de artículos citados según la edad de citación por área del conocimiento de las revistas citantes (a partir de 2000)"
+msgstr "Número de artículos citados según la edad de citación por área del conocimiento de las revistas citantes (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:359
+msgid "Número de artículos citados según la edad de citación por país de la afiliación del autor citante (a partir de 2000)"
+msgstr "Número de artículos citados según la edad de citación por país de la afiliación del autor citante (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:360
+msgid "Tipo de documento citado por los artículos incluidos en todas las colecciones SciELO (a partir de 2000)"
+msgstr "Tipo de documento citado por los artículos incluidos en todas las colecciones SciELO (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:361
+msgid "Tipo de documento citado por revista citante (a partir de 2000)"
+msgstr "Tipo de documento citado por revista citante (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:362
+msgid "Tipo de documento citado por área del conocimiento de la revista citante (a partir de 2000)"
+msgstr "Tipo de documento citado por área del conocimiento de la revista citante (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:363
+msgid "Tipo de documento citado por país de la afiliación del autor citante (a partir de 2000)"
+msgstr "Tipo de documento citado por país de la afiliación del autor citante (a partir de 2000)"
+
+#: application/views/main/metodologia_biblat.php:374
+msgid "Atmósfera:"
+msgstr "Atmósfera:"
+
+#: application/views/main/metodologia_biblat.php:382
+#: application/views/indicadores/index.php:230
+msgid "Índice de concentración (Índice de Pratt)"
+msgstr "Índice de concentración (Índice de Pratt)"
+
+#: application/views/main/metodologia_biblat.php:385
+#, php-format
+msgid "Contacto para comentarios y consultas: %s"
+msgstr "Contacto para comentarios y consultas: %s"
+
 #: application/views/main/creditos.php:10
 msgid "Director General"
 msgstr "Director General"
@@ -619,6 +1956,66 @@ msgstr "Traducción de textos"
 msgid "Responsable de la sección Políticas de acceso"
 msgstr "Responsable de la sección Políticas de acceso"
 
+#: application/views/main/descripcion_biblat.php:10
+msgid "fuente bibliométrica para conocer la productividad científica de América Latina y el Caribe"
+msgstr "fuente bibliométrica para conocer la productividad científica de América Latina y el Caribe"
+
+#: application/views/main/descripcion_biblat.php:11
+#, php-format
+msgid "es un portal especializado en la generación de frecuencias e indicadores bibliométricos de las bases de datos %s (Citas Latinoamericanas en Ciencias Sociales y Humanidades) y %s (Índice de Revistas Latinoamericanas en Ciencias), el cual ha sido concebido como una fuente de información que permite conocer las características de la producción científica de América Latina y el Caribe publicada en revistas académicas de la región. Para tal fin, %s conjunta y sistematiza la información contenida en %s y %s, las bases de datos bibliográficas con el conjunto más representativo e incluyente de revistas académicas publicadas en América Latina y el Caribe (más de 3 mil revistas y más de 700,000 registros bibliográficos entre ambas bases). Por otra parte, dichas bases de datos cuentan con una"
+msgstr "es un portal especializado en la generación de frecuencias e indicadores bibliométricos de las bases de datos %s (Citas Latinoamericanas en Ciencias Sociales y Humanidades) y %s (Índice de Revistas Latinoamericanas en Ciencias), el cual ha sido concebido como una fuente de información que permite conocer las características de la producción científica de América Latina y el Caribe publicada en revistas académicas de la región. Para tal fin, %s conjunta y sistematiza la información contenida en %s y %s, las bases de datos bibliográficas con el conjunto más representativo e incluyente de revistas académicas publicadas en América Latina y el Caribe (más de 3 mil revistas y más de 700,000 registros bibliográficos entre ambas bases). Por otra parte, dichas bases de datos cuentan con una"
+
+#: application/views/main/descripcion_biblat.php:11
+msgid "cobertura multidisciplinaria en todas las áreas del conocimiento."
+msgstr "cobertura multidisciplinaria en todas las áreas del conocimiento."
+
+#: application/views/main/descripcion_biblat.php:12
+#, php-format
+msgid "La muestra de las frecuencias e indicadores bibliométricos aportados por %s está conformada por las publicaciones de América Latina y el Caribe y sus correspondientes registros bibliográficos indizados en %s y %s. Las revistas y registros bibliográficos indizados por base de datos son:"
+msgstr "La muestra de las frecuencias e indicadores bibliométricos aportados por %s está conformada por las publicaciones de América Latina y el Caribe y sus correspondientes registros bibliográficos indizados en %s y %s. Las revistas y registros bibliográficos indizados por base de datos son:"
+
+#: application/views/main/descripcion_biblat.php:13
+#, php-format
+msgid "La selección de las publicaciones seriadas y periódicas que ingresan a las dos bases de datos es realizada por un comité de evaluación y selección conforme los lineamientos contenidos en el \"Reglamento del Comité de Evaluación y Selección de Publicaciones Seriadas para las bases de datos %s y %s\", en su versión actualizada en abril de 2010. Para consultar los criterios editoriales que se utilizan en la selección de las revistas véase criterios de selección."
+msgstr "La selección de las publicaciones seriadas y periódicas que ingresan a las dos bases de datos es realizada por un comité de evaluación y selección conforme los lineamientos contenidos en el \"Reglamento del Comité de Evaluación y Selección de Publicaciones Seriadas para las bases de datos %s y %s\", en su versión actualizada en abril de 2010. Para consultar los criterios editoriales que se utilizan en la selección de las revistas véase criterios de selección."
+
+#: application/views/main/descripcion_biblat.php:14
+#, php-format
+msgid "Tipo de publicación y de documento indizados: en %s y %s se indizan diversos tipos de revistas, las cuales pueden ser clasificadas como revistas de investigación científica, de carácter técnico-profesional y de divulgación científica y cultural. Desde 1997, el Comité de Evaluación y Selección prioriza la inclusión de revistas de investigación científica y humanística, dirigidas a especialistas, así como revistas de comunicación científica, dirigidas a profesionistas, técnicos, estudiantes y profesores. Asimismo, se registran los diversos tipos de documentos que aparecen publicados, tales como son artículos, biografías, conferencias o discursos, correspondencia, cronologías, editorial, ensayos, entrevistas, estadísticas o encuestas, leyes o reglamentos, monografías, notas breves o noticias, proyectos técnicos o programas, reportes técnicos, reseñas de libro y revisiones bibliográficas. Con objeto de realizar un análisis bibliométrico especializado en artículos publicados en revistas con arbitraje por pares, %s ofrece la opción de realizar las distintas búsquedas disponibles aplicadas solamente al universo de revistas con arbitraje y considerando solamente los documentos clasificados como artículos y ensayos."
+msgstr "Tipo de publicación y de documento indizados: en %s y %s se indizan diversos tipos de revistas, las cuales pueden ser clasificadas como revistas de investigación científica, de carácter técnico-profesional y de divulgación científica y cultural. Desde 1997, el Comité de Evaluación y Selección prioriza la inclusión de revistas de investigación científica y humanística, dirigidas a especialistas, así como revistas de comunicación científica, dirigidas a profesionistas, técnicos, estudiantes y profesores. Asimismo, se registran los diversos tipos de documentos que aparecen publicados, tales como son artículos, biografías, conferencias o discursos, correspondencia, cronologías, editorial, ensayos, entrevistas, estadísticas o encuestas, leyes o reglamentos, monografías, notas breves o noticias, proyectos técnicos o programas, reportes técnicos, reseñas de libro y revisiones bibliográficas. Con objeto de realizar un análisis bibliométrico especializado en artículos publicados en revistas con arbitraje por pares, %s ofrece la opción de realizar las distintas búsquedas disponibles aplicadas solamente al universo de revistas con arbitraje y considerando solamente los documentos clasificados como artículos y ensayos."
+
+#: application/views/main/descripcion_biblat.php:15
+msgid "Consultar Lista de revistas arbitradas."
+msgstr "Consultar Lista de revistas arbitradas."
+
+#: application/views/main/info_biblat.php:10
+msgid "es un portal especializado en revistas científicas y académicas publicadas en América Latina y el Caribe, que ofrece los siguientes servicios:"
+msgstr "es un portal especializado en revistas científicas y académicas publicadas en América Latina y el Caribe, que ofrece los siguientes servicios:"
+
+#: application/views/main/info_biblat.php:12
+#, php-format
+msgid "Referencias bibliográficas de los artículos y documentos publicados en más de 3,000 títulos indizados en %s y %s, mediante opciones de búsqueda básica y avanzada."
+msgstr "Referencias bibliográficas de los artículos y documentos publicados en más de 3,000 títulos indizados en %s y %s, mediante opciones de búsqueda básica y avanzada."
+
+#: application/views/main/info_biblat.php:13
+#, php-format
+msgid "Acceso al texto completo de los artículos publicados en revistas de acceso abierto. %s ofrece dos tipos de acceso al texto completo: mediante enlaces hipertextuales a los sitios web de las revistas (recursos externos) y a través de la colección del acervo digital de la Hemeroteca Virtual Latinoamericana de la Dirección General de Bibliotecas %s, Universidad Nacional Autónoma de México %s."
+msgstr "Acceso al texto completo de los artículos publicados en revistas de acceso abierto. %s ofrece dos tipos de acceso al texto completo: mediante enlaces hipertextuales a los sitios web de las revistas (recursos externos) y a través de la colección del acervo digital de la Hemeroteca Virtual Latinoamericana de la Dirección General de Bibliotecas %s, Universidad Nacional Autónoma de México %s."
+
+#: application/views/main/info_biblat.php:14
+#, php-format
+msgid "Frecuencias e %s extraídos de las revistas indizadas en %s y %s, en las colecciones %s así como de otras fuentes de información."
+msgstr "Frecuencias e %s extraídos de las revistas indizadas en %s y %s, en las colecciones %s así como de otras fuentes de información."
+
+#: application/views/main/info_biblat.php:15
+#, php-format
+msgid "En Postular una revista se describen los Criterios de selección de revistas para su indización en %s y %s, que son la fuente de información principal de %s. Los editores de revistas pueden someter a evaluación su revista dirigiéndose a: %s."
+msgstr "En Postular una revista se describen los Criterios de selección de revistas para su indización en %s y %s, que son la fuente de información principal de %s. Los editores de revistas pueden someter a evaluación su revista dirigiéndose a: %s."
+
+#: application/views/main/info_biblat.php:16
+msgid "En Políticas de acceso se clasifican las revistas de acceso abierto de acuerdo con los permisos de acceso, uso y archivado adoptados por éstas."
+msgstr "En Políticas de acceso se clasifican las revistas de acceso abierto de acuerdo con los permisos de acceso, uso y archivado adoptados por éstas."
+
 #: application/views/main/contacto.php:9
 msgid "Asunto"
 msgstr "Asunto"
@@ -652,8 +2049,8 @@ msgid "Seleccione uno o varios países de la revista"
 msgstr "Seleccione uno o varios países de la revista"
 
 #: application/views/indicadores/index.php:41
-msgid "Seleccione uno o varios países del autor"
-msgstr "Seleccione uno o varios países del autor"
+msgid "Seleccione uno o varios países de la afiliación del autor"
+msgstr "Seleccione uno o varios países de la afiliación del autor"
 
 #: application/views/indicadores/index.php:60
 #: application/views/indicadores/index.php:79
@@ -661,289 +2058,113 @@ msgstr "Seleccione uno o varios países del autor"
 msgid "Fuente:"
 msgstr "Fuente:"
 
-#: application/views/indicadores/index.php:92
-#: application/controllers/indicadores.php:102
-#: application/controllers/indicadores.php:103
-#: application/controllers/indicadores.php:104
-#: application/controllers/indicadores.php:106
-msgid "Índice de Coautoría"
-msgstr "Índice de Coautoría"
-
-#: application/views/indicadores/index.php:94
-msgid "Este indicador muestra el número medio de autores por artículo."
-msgstr "Este indicador muestra el número medio de autores por artículo."
-
-#: application/views/indicadores/index.php:95
-msgid "El valor numérico indica el promedio de autores por documento."
-msgstr "El valor numérico indica el promedio de autores por documento."
-
-#: application/views/indicadores/index.php:97
-#: application/views/indicadores/index.php:118
-#: application/views/indicadores/index.php:142
-#: application/views/indicadores/index.php:167
-#: application/views/indicadores/index.php:186
-#: application/views/indicadores/index.php:214
-#: application/views/indicadores/index.php:237
-#: application/views/indicadores/index.php:265
-#: application/views/indicadores/index.php:284
-#: application/views/indicadores/index.php:301
-msgid "La formulación matemática es:"
-msgstr "La formulación matemática es:"
-
-#: application/views/indicadores/index.php:107
-#: application/views/indicadores/index.php:128
-#: application/views/indicadores/index.php:152
-#: application/views/indicadores/index.php:173
-#: application/views/indicadores/index.php:201
-#: application/views/indicadores/index.php:247
-#: application/views/indicadores/index.php:270
-#: application/views/indicadores/index.php:289
-#: application/views/indicadores/index.php:310
-msgid "Donde:"
-msgstr "Donde:"
-
-#: application/views/indicadores/index.php:108
-msgid "Cantidad de autores firmantes"
-msgstr "Cantidad de autores firmantes"
-
-#: application/views/indicadores/index.php:109
-msgid "Cantidad de documentos"
-msgstr "Cantidad de documentos"
-
-#: application/views/indicadores/index.php:114
-#: application/controllers/indicadores.php:117
-#: application/controllers/indicadores.php:118
-#: application/controllers/indicadores.php:119
-msgid "Tasa de Documentos Coautorados"
-msgstr "Tasa de Documentos Coautorados"
-
-#: application/views/indicadores/index.php:116
-#: application/views/indicadores/index.php:140
-msgid "El valor numérico indica la proporción de artículos con autoría múltiple."
-msgstr "El valor numérico indica la proporción de artículos con autoría múltiple."
-
-#: application/views/indicadores/index.php:129
-msgid "Cantidad total de documentos con autoría multiple"
-msgstr "Cantidad total de documentos con autoría multiple"
-
-#: application/views/indicadores/index.php:130
-msgid "Cantidad total de documentos"
-msgstr "Cantidad total de documentos"
-
-#: application/views/indicadores/index.php:133
+#: application/views/indicadores/index.php:132
 msgid "Se interpreta que valores cercanos a 1 muestran mayor cantidad de documentos en coautoría."
 msgstr "Se interpreta que valores cercanos a 1 muestran mayor cantidad de documentos en coautoría."
 
-#: application/views/indicadores/index.php:138
-#: application/controllers/indicadores.php:132
-#: application/controllers/indicadores.php:133
-msgid "Grado de Colaboración (Índice de Subramanyan)"
-msgstr "Grado de Colaboración (Índice de Subramanyan)"
-
-#: application/views/indicadores/index.php:153
-msgid "Total de documentos con autoría múltiple."
-msgstr "Total de documentos con autoría múltiple."
-
-#: application/views/indicadores/index.php:154
-msgid "Total de documentos escritos por un solo autor."
-msgstr "Total de documentos escritos por un solo autor."
-
-#: application/views/indicadores/index.php:157
+#: application/views/indicadores/index.php:156
 msgid "Se interpreta que valores cercanos a 0 muestran un fuerte componente de autoría simple, mientras que los cercanos a 1 denotan una fuerte proporción de autoría múltiple."
 msgstr "Se interpreta que valores cercanos a 0 muestran un fuerte componente de autoría simple, mientras que los cercanos a 1 denotan una fuerte proporción de autoría múltiple."
 
-#: application/views/indicadores/index.php:162
-#: application/controllers/indicadores.php:145
-msgid "Modelo de Elitismo (Price)"
-msgstr "Modelo de Elitismo (Price)"
+#: application/views/indicadores/index.php:163
+msgid "Identifica la cantidad de autores que integran la elite de los más productivos por revista o país de publicación de la revista."
+msgstr "Identifica la cantidad de autores que integran la elite de los más productivos por revista o país de publicación de la revista."
 
 #: application/views/indicadores/index.php:164
-msgid "Identifica la cantidad de autores que integran la elite de los más productivos por revista."
-msgstr "Identifica la cantidad de autores que integran la elite de los más productivos por revista."
-
-#: application/views/indicadores/index.php:165
 msgid "El valor numérico representa la cantidad de los autores que integran dicha elite."
 msgstr "El valor numérico representa la cantidad de los autores que integran dicha elite."
 
-#: application/views/indicadores/index.php:174
-#, php-format
-msgid "Elite de autores que publican el 50%% de los trabajos."
-msgstr "Elite de autores que publican el 50%% de los trabajos."
-
-#: application/views/indicadores/index.php:175
-msgid "Población total de autores."
-msgstr "Población total de autores."
-
-#: application/views/indicadores/index.php:180
-#: application/controllers/indicadores.php:158
-#: application/controllers/indicadores.php:159
-#: application/controllers/indicadores.php:160
-msgid "Índice de Colaboración (Índice de Lawani)"
-msgstr "Índice de Colaboración (Índice de Lawani)"
-
-#: application/views/indicadores/index.php:182
+#: application/views/indicadores/index.php:181
 msgid "Proporciona el peso promedio del número de autores por artículo."
 msgstr "Proporciona el peso promedio del número de autores por artículo."
 
-#: application/views/indicadores/index.php:183
+#: application/views/indicadores/index.php:182
 msgid "El valor numérico representa el promedio de autores por artículo."
 msgstr "El valor numérico representa el promedio de autores por artículo."
 
-#: application/views/indicadores/index.php:184
+#: application/views/indicadores/index.php:183
 msgid "Además de  visualizar la frecuencia del número de autores por artículo."
 msgstr "Además de  visualizar la frecuencia del número de autores por artículo."
 
-#: application/views/indicadores/index.php:202
-msgid "Total de documentos."
-msgstr "Total de documentos."
-
-#: application/views/indicadores/index.php:203
-msgid "Número de firmas (autores) por documentos."
-msgstr "Número de firmas (autores) por documentos."
-
-#: application/views/indicadores/index.php:204
-msgid "Cantidad de documentos con autoría múltiple."
-msgstr "Cantidad de documentos con autoría múltiple."
-
-#: application/views/indicadores/index.php:209
-#: application/controllers/indicadores.php:173
-msgid "Índice de Densidad de Documentos Zakutina y Priyenikova"
-msgstr "Índice de Densidad de Documentos Zakutina y Priyenikova"
-
 #: application/views/indicadores/index.php:211
-msgid "Índice que identifica los títulos con mayor densidad de información."
-msgstr "Índice que identifica los títulos con mayor densidad de información."
-
-#: application/views/indicadores/index.php:212
 msgid "El valor numérico proporciona la cantidad de artículos por revista."
 msgstr "El valor numérico proporciona la cantidad de artículos por revista."
 
-#: application/views/indicadores/index.php:224
-msgid "Donde"
-msgstr "Donde"
-
-#: application/views/indicadores/index.php:225
-msgid "Artículos"
-msgstr "Artículos"
-
-#: application/views/indicadores/index.php:226
-msgid "Títulos de revistas"
-msgstr "Títulos de revistas"
-
-#: application/views/indicadores/index.php:231
-#: application/controllers/indicadores.php:625
-msgid "Índice de concentración (Índice de Pratt)"
-msgstr "Índice de concentración (Índice de Pratt)"
-
-#: application/views/indicadores/index.php:233
+#: application/views/indicadores/index.php:232
 msgid "Indica el grado de concentración temática de las revistas."
 msgstr "Indica el grado de concentración temática de las revistas."
 
-#: application/views/indicadores/index.php:234
+#: application/views/indicadores/index.php:233
 msgid "El valor numérico representa el nivel de concentración temática basándose en sus descriptores."
 msgstr "El valor numérico representa el nivel de concentración temática basándose en sus descriptores."
 
-#: application/views/indicadores/index.php:235
+#: application/views/indicadores/index.php:234
 msgid "Se muestra la frecuencia de descriptores."
 msgstr "Se muestra la frecuencia de descriptores."
 
-#: application/views/indicadores/index.php:248
-msgid "Índice de concentración de Pratt."
-msgstr "Índice de concentración de Pratt."
-
-#: application/views/indicadores/index.php:249
-msgid "Número de categorías."
-msgstr "Número de categorías."
-
-#: application/views/indicadores/index.php:250
-msgid "&sum; del producto del rango por la frecuencia de una categoría dada, dividido por la cantidad de ítems en todas las categorías."
-msgstr "&sum; del producto del rango por la frecuencia de una categoría dada, dividido por la cantidad de ítems en todas las categorías."
-
-#: application/views/indicadores/index.php:253
+#: application/views/indicadores/index.php:252
 msgid "Se interpreta que valores cercanos a 1 muestran mayor grado de especialización."
 msgstr "Se interpreta que valores cercanos a 1 muestran mayor grado de especialización."
 
-#: application/views/indicadores/index.php:258
-#: application/views/indicadores/index.php:277
+#: application/views/indicadores/index.php:257
+#: application/views/indicadores/index.php:276
 #: application/views/indicadores/index_js.php:259
-#: application/controllers/indicadores.php:315
-#: application/controllers/indicadores.php:316
-#: application/controllers/indicadores.php:319
-#: application/controllers/indicadores.php:324
 msgid "Modelo matemático de Bradford"
 msgstr "Modelo matemático de Bradford"
 
-#: application/views/indicadores/index.php:258
-#: application/controllers/indicadores.php:315
+#: application/views/indicadores/index.php:257
 msgid "Distribución de artículos por revista"
 msgstr "Distribución de artículos por revista"
 
-#: application/views/indicadores/index.php:260
+#: application/views/indicadores/index.php:259
 msgid "Modelo matemático que identifica el núcleo de revistas con mayor cantidad de información por temática."
 msgstr "Modelo matemático que identifica el núcleo de revistas con mayor cantidad de información por temática."
 
-#: application/views/indicadores/index.php:261
+#: application/views/indicadores/index.php:260
 msgid "Se identifican tres zonas según la cantidad de artículos por revista en la  disciplina:"
 msgstr "Se identifican tres zonas según la cantidad de artículos por revista en la  disciplina:"
 
-#: application/views/indicadores/index.php:262
+#: application/views/indicadores/index.php:261
 msgid "La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han publicado."
 msgstr "La zona Núcleo, la 2° y 3°, los títulos y la cantidad artículos que han publicado."
 
-#: application/views/indicadores/index.php:263
+#: application/views/indicadores/index.php:262
 msgid "Se muestra la frecuencia de artículos por revista de la disciplina."
 msgstr "Se muestra la frecuencia de artículos por revista de la disciplina."
 
-#: application/views/indicadores/index.php:271
-msgid "Cantidad de títulos por zona."
-msgstr "Cantidad de títulos por zona."
-
-#: application/views/indicadores/index.php:272
-msgid "Multiplicador o factor de proporcionalidad de títulos por zona."
-msgstr "Multiplicador o factor de proporcionalidad de títulos por zona."
-
-#: application/views/indicadores/index.php:277
-#: application/controllers/indicadores.php:324
+#: application/views/indicadores/index.php:276
 msgid "Distribución de artículos por instituciones."
 msgstr "Distribución de artículos por instituciones."
 
-#: application/views/indicadores/index.php:279
+#: application/views/indicadores/index.php:278
 msgid "Modelo matemático que identifica el núcleo de instituciones con mayor cantidad de información por temática."
 msgstr "Modelo matemático que identifica el núcleo de instituciones con mayor cantidad de información por temática."
 
-#: application/views/indicadores/index.php:280
+#: application/views/indicadores/index.php:279
 msgid "Se identifican tres zonas según la cantidad de artículos por institución en la  disciplina:"
 msgstr "Se identifican tres zonas según la cantidad de artículos por institución en la  disciplina:"
 
-#: application/views/indicadores/index.php:281
+#: application/views/indicadores/index.php:280
 msgid "La zona Núcleo, la 2° y 3°, las instituciones y la cantidad artículos que han publicado."
 msgstr "La zona Núcleo, la 2° y 3°, las instituciones y la cantidad artículos que han publicado."
 
-#: application/views/indicadores/index.php:282
+#: application/views/indicadores/index.php:281
 msgid "Se muestra la frecuencia de artículos por institución en disciplina."
 msgstr "Se muestra la frecuencia de artículos por institución en disciplina."
 
-#: application/views/indicadores/index.php:290
-msgid "Cantidad de instituciones por zona."
-msgstr "Cantidad de instituciones por zona."
-
-#: application/views/indicadores/index.php:291
-msgid "Multiplicador o factor de proporcionalidad de instituciones por zona."
-msgstr "Multiplicador o factor de proporcionalidad de instituciones por zona."
+#: application/views/indicadores/index.php:297
+msgid "Indicador que mide el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta a la de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores."
+msgstr "Indicador que mide el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta a la de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores."
 
 #: application/views/indicadores/index.php:298
-msgid "Indicador que mide el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta al de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores."
-msgstr "Indicador que mide el grado de internacionalización de las revistas, considerando la proporción de autores cuya institución de afiliación es de una nacionalidad distinta al de la revista. Proporciona la tasa de productividad exógena por revista y la frecuencia de nacionalidad de sus autores."
-
-#: application/views/indicadores/index.php:299
 msgid "El valor numérico indica la proporción de autores extranjeros que han publicado en la revista."
 msgstr "El valor numérico indica la proporción de autores extranjeros que han publicado en la revista."
 
-#: application/views/indicadores/index.php:313
+#: application/views/indicadores/index.php:312
 msgid "Autores extranjeros"
 msgstr "Autores extranjeros"
 
-#: application/views/indicadores/index.php:314
+#: application/views/indicadores/index.php:313
 msgid "Total de documentos"
 msgstr "Total de documentos"
 
@@ -1033,16 +2254,16 @@ msgid "Año"
 msgstr "Año"
 
 #: application/controllers/indicadores.php:102
-msgid "Media de autores por artículo en la revista"
-msgstr "Media de autores por artículo en la revista"
+msgid "Promedio de autores por artículo en la revista"
+msgstr "Promedio de autores por artículo en la revista"
 
 #: application/controllers/indicadores.php:103
-msgid "Media de autores por articulo en las revistas del país"
-msgstr "Media de autores por articulo en las revistas del país"
+msgid "Promedio de autores por articulo en las revistas del país"
+msgstr "Promedio de autores por articulo en las revistas del país"
 
 #: application/controllers/indicadores.php:104
-msgid "Media de autores por articulo en el país"
-msgstr "Media de autores por articulo en el país"
+msgid "Promedio de autores por articulo en el país"
+msgstr "Promedio de autores por articulo en el país"
 
 #: application/controllers/indicadores.php:109
 #, php-format
@@ -1056,8 +2277,8 @@ msgstr "Promedio de autores por artículo en las revistas del país en el año %
 
 #: application/controllers/indicadores.php:111
 #, php-format
-msgid "Promedio de autores por artículo en el país en el año %s: %s"
-msgstr "Promedio de autores por artículo en el país en el año %s: %s"
+msgid "Promedio de autores por artículo según país del autor año %s: %s"
+msgstr "Promedio de autores por artículo según país del autor año %s: %s"
 
 #: application/controllers/indicadores.php:117
 msgid "Media de documentos con autoría múltiple por revista"
@@ -1104,13 +2325,13 @@ msgstr "Grado de Colaboración"
 
 #: application/controllers/indicadores.php:138
 #, php-format
-msgid "Promedio de artículos con autoría múltiple en el año %s: %s"
-msgstr "Promedio de artículos con autoría múltiple en el año %s: %s"
+msgid "Proporción de artículos con autoría múltiple en el año %s: %s"
+msgstr "Proporción de artículos con autoría múltiple en el año %s: %s"
 
 #: application/controllers/indicadores.php:139
 #, php-format
-msgid "Promedio de artículos con autoría múltiple en las revistas del país en el año %s: %s"
-msgstr "Promedio de artículos con autoría múltiple en las revistas del país en el año %s: %s"
+msgid "Proporción de artículos con autoría múltiple en las revistas del país en el año %s: %s"
+msgstr "Proporción de artículos con autoría múltiple en las revistas del país en el año %s: %s"
 
 #: application/controllers/indicadores.php:145
 msgid "Grupo de autores más productivos por revista"
@@ -1418,18 +2639,12 @@ msgid "title=\"Institución\""
 msgstr "title=\"Institución\""
 
 #: application/controllers/frecuencias.php:117
+msgid "País-Revista"
+msgstr "País-Revista"
+
 #: application/controllers/frecuencias.php:143
 msgid "Países"
 msgstr "Países"
-
-#: application/controllers/frecuencias.php:131
-#: application/controllers/frecuencias.php:143
-#: application/controllers/frecuencias.php:395
-#: application/controllers/frecuencias.php:420
-#: application/controllers/frecuencias.php:680
-#: application/controllers/frecuencias.php:698
-msgid "Autores"
-msgstr "Autores"
 
 #: application/controllers/frecuencias.php:147
 #: application/controllers/frecuencias.php:432
@@ -1437,8 +2652,8 @@ msgid "Biblat - Frecuencias por institución"
 msgstr "Biblat - Frecuencias por institución"
 
 #: application/controllers/frecuencias.php:148
-msgid "Frecuencia de países, revistas, autores y documentos por institución"
-msgstr "Frecuencia de países, revistas, autores y documentos por institución"
+msgid "Número de documentos por país de publicación de la revista, título de la revista, autor y disciplina, por institución de afiliación del autor"
+msgstr "Número de documentos por país de publicación de la revista, título de la revista, autor y disciplina, por institución de afiliación del autor"
 
 #: application/controllers/frecuencias.php:204
 #, php-format
@@ -1447,8 +2662,8 @@ msgstr "Biblat - Frecuencias por institución \"%s\", países de publicación"
 
 #: application/controllers/frecuencias.php:205
 #, php-format
-msgid "Frecuencia de documentos por país de publicación en la institución:<br/> %s"
-msgstr "Frecuencia de documentos por país de publicación en la institución:<br/> %s"
+msgid "Número de documentos por país de publicación de la revista de la institución:<br/> %s"
+msgstr "Número de documentos por país de publicación de la revista de la institución:<br/> %s"
 
 #: application/controllers/frecuencias.php:237
 #, php-format
@@ -1462,8 +2677,8 @@ msgstr "Biblat - Frecuencias por institución \"%s\", revistas de publicación"
 
 #: application/controllers/frecuencias.php:276
 #, php-format
-msgid "Frecuencia de documentos por revista de publicación en la institución: <br/>%s"
-msgstr "Frecuencia de documentos por revista de publicación en la institución: <br/>%s"
+msgid "Número de documentos publicados por revista de la institución: <br/>%s"
+msgstr "Número de documentos publicados por revista de la institución: <br/>%s"
 
 #: application/controllers/frecuencias.php:308
 #, php-format
@@ -1477,8 +2692,8 @@ msgstr "Biblat - Frecuencias por institución \"%s\", autor"
 
 #: application/controllers/frecuencias.php:347
 #, php-format
-msgid "Frecuencia de documentos por autor en la institución: <br/>%s"
-msgstr "Frecuencia de documentos por autor en la institución: <br/>%s"
+msgid "Número de documentos publicados por autor adscritos a la institución: <br/>%s"
+msgstr "Número de documentos publicados por autor adscritos a la institución: <br/>%s"
 
 #: application/controllers/frecuencias.php:379
 #: application/controllers/frecuencias.php:591
@@ -1503,8 +2718,8 @@ msgid "Instituciones"
 msgstr "Instituciones"
 
 #: application/controllers/frecuencias.php:433
-msgid "Frecuencia de instituciones, autores y documentos por país de afiliación del autor"
-msgstr "Frecuencia de instituciones, autores y documentos por país de afiliación del autor"
+msgid "Número de documentos por institución, autor y disciplina por país de la institución del autor"
+msgstr "Número de documentos por institución, autor y disciplina por país de la institución del autor"
 
 #: application/controllers/frecuencias.php:452
 #, php-format
@@ -1518,8 +2733,8 @@ msgstr "Biblat - Frecuencias por país de afiliación \"%s\", instituciones"
 
 #: application/controllers/frecuencias.php:489
 #, php-format
-msgid "Frecuencia de documentos por institución en en el país de afiliación del autor:<br/> %s"
-msgstr "Frecuencia de documentos por institución en en el país de afiliación del autor:<br/> %s"
+msgid "Número de documentos por institución de afiliación del autor del país:<br/> %s"
+msgstr "Número de documentos por institución de afiliación del autor del país:<br/> %s"
 
 #: application/controllers/frecuencias.php:521
 #, php-format
@@ -1539,16 +2754,16 @@ msgstr "Biblat - Frecuencias país de afiliación \"%s\", autores"
 
 #: application/controllers/frecuencias.php:559
 #, php-format
-msgid "Frecuencia de documentos por autor en el país de afiliación:<br/> %s"
-msgstr "Frecuencia de documentos por autor en el país de afiliación:<br/> %s"
+msgid "Número de documentos por autor del país de institución de afiliación:<br/> %s"
+msgstr "Número de documentos por autor del país de institución de afiliación:<br/> %s"
 
 #: application/controllers/frecuencias.php:692
 msgid "Biblat - Frecuencias por revista"
 msgstr "Biblat - Frecuencias por revista"
 
 #: application/controllers/frecuencias.php:693
-msgid "Frecuencia de autores y documentos por revista"
-msgstr "Frecuencia de autores y documentos por revista"
+msgid "Número de documentos publicados por revista y autor"
+msgstr "Número de documentos publicados por revista y autor"
 
 #: application/controllers/frecuencias.php:715
 #: application/controllers/frecuencias.php:754
@@ -1568,8 +2783,8 @@ msgstr "Biblat - Frecuencias por revista: %s, autores"
 
 #: application/controllers/frecuencias.php:753
 #, php-format
-msgid "Frecuencia de documentos por autor en la revista:<br/> %s"
-msgstr "Frecuencia de documentos por autor en la revista:<br/> %s"
+msgid "Número de documentos publicados por autor en la revista:<br/> %s"
+msgstr "Número de documentos publicados por autor en la revista:<br/> %s"
 
 #: application/controllers/frecuencias.php:786
 #, php-format
@@ -1589,15 +2804,36 @@ msgid "Biblat - Bibliografía"
 msgstr "Biblat - Bibliografía"
 
 #: application/controllers/main.php:85
+msgid "Biblat - Sobre Biblat"
+msgstr "Biblat - Sobre Biblat"
+
+#: application/controllers/main.php:95
+msgid "Biblat - CLASE y PERIÓDICA"
+msgstr "Biblat - CLASE y PERIÓDICA"
+
+#: application/controllers/main.php:113
+msgid "Biblat - Sobre SciELO"
+msgstr "Biblat - Sobre SciELO"
+
+#: application/controllers/main.php:122
+msgid "Biblat - Descripción"
+msgstr "Biblat - Descripción"
+
+#: application/controllers/main.php:131
+#: application/controllers/main.php:140
+msgid "Biblat - Metodología"
+msgstr "Biblat - Metodología"
+
+#: application/controllers/main.php:149
 msgid "Biblat - Mapa del sitio"
 msgstr "Biblat - Mapa del sitio"
 
-#: application/controllers/main.php:109
+#: application/controllers/main.php:173
 #, php-format
 msgid "Deacuerdo al idioma de su navegador le sugerimos cambiar el idioma de la página a %s"
 msgstr "Deacuerdo al idioma de su navegador le sugerimos cambiar el idioma de la página a %s"
 
-#: application/controllers/main.php:110
+#: application/controllers/main.php:174
 msgid "Traducir"
 msgstr "Traducir"
 
@@ -1623,6 +2859,13 @@ msgstr "Núm. %s"
 #, php-format
 msgid "Pág. %s"
 msgstr "Pág. %s"
+
+#~ msgid "Frecuencia de países, revistas, autores y documentos por institución"
+#~ msgstr ""
+#~ "Frecuencia de países, revistas, autores y documentos por institución"
+
+#~ msgid "Frecuencia de autores y documentos por revista"
+#~ msgstr "Frecuencia de autores y documentos por revista"
 
 #~ msgid ""
 #~ "Indicador que determina el promedio de artículos con autoría múltiple."
@@ -1796,20 +3039,11 @@ msgstr "Pág. %s"
 #~ msgid "Ver registro completo"
 #~ msgstr "Show full record"
 
-#~ msgid "Colaboración entre paises"
-#~ msgstr "Countries collaboration"
-
 #~ msgid "Colaboración inter-institucional"
 #~ msgstr "Inter-institutional collaboration"
 
-#~ msgid "Español"
-#~ msgstr "Español"
-
 #~ msgid "English"
 #~ msgstr "English"
-
-#~ msgid "Português"
-#~ msgstr "Português"
 
 #~ msgid "Français"
 #~ msgstr "Français"
@@ -1819,12 +3053,6 @@ msgstr "Pág. %s"
 
 #~ msgid "Buscar"
 #~ msgstr "Search"
-
-#~ msgid "Enlace a las bases de datos"
-#~ msgstr "Link to databases"
-
-#~ msgid "Estadísticas"
-#~ msgstr "Statistics"
 
 #~ msgid "Ver Top Ten"
 #~ msgstr "Show top-ten"
@@ -1849,12 +3077,3 @@ msgstr "Pág. %s"
 
 #~ msgid "artículo"
 #~ msgstr "article"
-
-#~ msgid "autor"
-#~ msgstr "author"
-
-#~ msgid "institución"
-#~ msgstr "institution"
-
-#~ msgid "revista"
-#~ msgstr "journals"
