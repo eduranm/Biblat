@@ -118,6 +118,9 @@
 		
 		Sandoval, A. (1956, diciembre) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Sandoval_1956.pdf" target="_blank">El centro de Documentación científica y técnica de México y la bibliografía científica en América Latina</a>. Ponencia presentada en las <i>Primeras Jornadas de Biblioteconomía, Bibliografía y Canje</i> de la AMBAC. México<br/><br/>
 
+
+		Rodríguez Yunta, L.  (2014, abril) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/RodriguezYunta_2014.pdf" target="_blank">Indicadores bibliométricos sobre revistas: más allá de los índices de citas.</a> Ponencia presentada en el XI Seminario Hispano-Mexicano de Investigación en Bibliotecología y Documentación: La información y sus contextos en el cambio social.  México: UNAM, Instituto de Investigaciones Bibliotecológicas y de la Información.
+
 	</div>
 
 </div>
