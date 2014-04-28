@@ -118,7 +118,7 @@
 	</div>
 
 	<div id="info-indice-coautoria" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-coautoria");?>" target="_blank"><?php _e('Índice de Coautoría');?><sup>1</sup></a></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-coautoria");?>" target="_blank"><?php _e('Índice de Coautoría');?></a><sup>1</sup></p>
 		<p class="textoL">
 			<?php _e('Este indicador muestra el número promedio de autores por artículo.');?><br/>
 		</p>
@@ -142,7 +142,7 @@
 	</div>
 		
 	<div id="info-tasa-documentos-coautorados" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/tasa-documentos-coautorados");?>" target="_blank"><?php _e('Tasa de Documentos Coautorados');?><sup>2</sup></a></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/tasa-documentos-coautorados");?>" target="_blank"><?php _e('Tasa de Documentos Coautorados');?></a><sup>2</sup></p>
 		<p class="textoL">
 			<?php _e('El valor numérico indica la proporción de artículos con autoría múltiple.');?>
 		</p>
@@ -166,7 +166,7 @@
 	</div>
 
 	<div id="info-grado-colaboracion" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/grado-colaboracion");?>" target="_blank"><?php _e('Grado de Colaboración (Índice de Subramanyan)');?><sup>3</sup></a></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/grado-colaboracion");?>" target="_blank"><?php _e('Grado de Colaboración (Índice de Subramanyan)');?></a><sup>3</sup></p>
 		<p class="textoL">
 				<?php _e('El valor numérico indica la proporción de artículos con autoría múltiple.');?>
 		</p>
@@ -190,7 +190,7 @@
 	</div>
 
 	<div id="info-indice-colaboracion" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-colaboracion");?>" target="_blank"><?php _e('Índice de Colaboración (Índice de Lawani)');?><sup>4</sup></a></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-colaboracion");?>" target="_blank"><?php _e('Índice de Colaboración (Índice de Lawani)');?></a><sup>4</sup></p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 			<i>IC</i> = 
@@ -218,7 +218,7 @@
 	</div>
 
 	<div id="info-modelo-elitismo" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/modelo-elitismo");?>" target="_blank"><?php _e('Modelo de Elitismo (Price)');?><sup>5</sup></a></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/modelo-elitismo");?>" target="_blank"><?php _e('Modelo de Elitismo (Price)');?></a><sup>5</sup></p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 				<i>E</i> = 
@@ -235,7 +235,7 @@
 	</div>
 
 	<div id="info-indice-densidad-documentos" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-densidad-documentos");?>" target="_blank"><?php _e('Índice de Densidad de Documentos Zakutina y Priyenikova');?><sup>6</sup></a></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-densidad-documentos");?>" target="_blank"><?php _e('Índice de Densidad de Documentos Zakutina y Priyenikova');?></a><sup>6</sup></p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 				<i>p</i> = 
@@ -257,7 +257,7 @@
 	</div>
 
 	<div id="info-indice-concentracion" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-concentracion");?>" target="_blank"><?php _e('Índice de concentración temática (Índice de Pratt)');?><sup>7</sup></a></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-concentracion");?>" target="_blank"><?php _e('Índice de concentración temática (Índice de Pratt)');?></a><sup>7</sup></p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 				<i>C</i> = 
@@ -279,7 +279,7 @@
 	</div>
 
 	<div id="info-modelo-bradford-revista" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/modelo-bradford-revista");?>" target="_blank"><?php _e('Modelo de Bradford por revista');?><sup>8</sup></a><br/>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/modelo-bradford-revista");?>" target="_blank"><?php _e('Modelo de Bradford por revista');?></a><sup>8</sup><br/>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 				<i>p</i>:<i>p</i><sub>1</sub>:<i>p</i><sub>2</sub>:1:<i>n</i><sub>1</sub>:<i>n</i><sub>2</sub>
@@ -329,59 +329,8 @@
 	<p class="textoJ">
 		<?php _e('Número de documentos publicados en coautoría de acuerdo con el país de la institución de afiliación del autor [país de la institución de afiliación del autor : misma institución y otras]');?><br/>
 		<?php _e('Evolución temporal');?><br/>
-	</p>
-	<div class="flagContainer">
-		<p class="flag">
-			<em>
-				<?php _e('Indicadores SciELO');?>
-			</em>
-		</p>
-	</div>
+	</p><br></br>
 	<div class="textoJ">
-		<?php _printf('Estos indicadores son generados a partir de las revistas incluidas en las colecciones de la red %s a través del reporte que periódicamente se publica en el portal %s','<a href="http://www.scielo.org.mx/scielo.php" target="_blank">SciELO</a>','<a href="http://www.scielo.org/php/level.php?lang=es&component=44&item=25" target="_blank">SciELO.org</a>');?><br></br>
-		<?php _printf('La red de %s cual está conformada por las colecciones de revistas académicas de 15 países:','<a href="http://www.scielo.org.mx" target="_blank">SciELO</a>');?><a href="http://www.scielo.org.ar/scielo.php" target="_blank"><?php _e('Argentina');?></a>, <a href="www.scielo.org.bo/scielo.php?lng=en" target="_blank"><?php _e('Bolivia');?></a>, <a href="http://www.scielo.br/?lng=es" target="_blank"><?php _e('Brasil');?></a>, <a href="http://www.scielo.cl/?lng=es" target="_blank"><?php _e('Chile');?></a>, <a href="http://www.scielo.org.co/?lng=es" target="_blank"><?php _e('Colombia');?></a>, <a href="http://www.scielo.sa.cr/scielo.php?lng=es" target="_blank"><?php _e('Costa Rica');?></a>, <a href="http://scielo.sld.cu/scielo.php" target="_blank"><?php _e('Cuba');?></a>, <a href="http://scielo.isciii.es/scielo.php" target="_blank"><?php _e('España');?></a>, <a href="http://www.scielo.org.mx/scielo.php" target="_blank"><?php _e('México');?></a>, <a href="http://scielo.iics.una.py/scielo.php?lng=es" target="_blank"><?php _e('Paraguay');?></a>, <a href="http://www.scielo.org.pe/" target="_blank"><?php _e('Perú');?></a>, <a href="http://www.scielo.gpeari.mctes.pt/?lng=es" target="_blank"><?php _e('Portugal');?></a>, <a href="http://www.scielo.org.za/?lng=es" target="_blank"><?php _e('Sudáfrica');?></a>, <a href="http://www.scielo.edu.uy/scielo.php?lng=es" target="_blank"><?php _e('Uruguay');?></a>, <a href="http://www.scielo.org.ve/scielo.php" target="_blank"><?php _e('Venezuela');?></a>.<br></br>
-		<ul>
-			<li><?php _e('Indicadores bibliométricos anuales de las revistas de la red SciELO (a partir de 2000)');?></li>
-			<li><?php _e('Número de revistas incluidas en las colecciones de la red SciELO (a partir de 2000)');?></li>
-			<li><?php _e('Número de artículos publicados por revistas SciELO (a partir de 2000)');?></li>
-			<li><?php _e('Número y tipo de documento publicados en las revistas de las colecciones SciELO (a partir de 2000)');?></li>
-			<li><?php _e('Número de artículos incluidos en las colecciones SciELO por área del conocimiento (a partir de 2000)');?></li>
-			<li><?php _e('Número de artículos incluidos por área del conocimiento en las colecciones SciELO (a partir de 2000)');?></li>
-			<li><?php _e('Número de artículos incluidos en la red SciELO según país de la afiliación del autor (a partir de 2000)');?></li>
-			<li><?php _e('Número de artículos publicados por revistas SciELO según el país de la afiliación del autor (a partir de 2000)');?></li>
-			<li><?php _e('Número de artículos publicados por revistas SciELO según el país de publicación de la revista y país de la afiliación del autor (a partir de 2000)');?></li>
-			<li><?php _e('Número de artículos publicados por revistas SciELO según área del conocimiento y país de la afiliación del autor (a partir de 2000)');?></li>
-			<li><?php _e('Número de citas recibidas por revista SciELO según área del conocimiento de la revista citante (a partir de 2000)');?></li>
-			<li><?php _e('Número de citas recibidas por revista SciELO según país de la afiliación del autor citante (a partir de 2000)');?></li>
-			<li><?php _e('Número de artículos citados según la edad de citación en artículos incluidos en todas las colecciones SciELO (a partir de 2000)');?></li>
-			<li><?php _e('Número de artículos citados según la edad de citación por título de revista (a partir de 2000)');?></li>
-			<li><?php _e('Número de artículos citados según la edad de citación por área del conocimiento de las revistas citantes (a partir de 2000)');?></li>
-			<li><?php _e('Número de artículos citados según la edad de citación por país de la afiliación del autor citante (a partir de 2000)');?></li>
-			<li><?php _e('Tipo de documento citado por los artículos incluidos en todas las colecciones SciELO (a partir de 2000)');?></li>
-			<li><?php _e('Tipo de documento citado por revista citante (a partir de 2000)');?></li>
-			<li><?php _e('Tipo de documento citado por área del conocimiento de la revista citante (a partir de 2000)');?></li>
-			<li><?php _e('Tipo de documento citado por país de la afiliación del autor citante (a partir de 2000)');?></li>
-		</ul><br></br>
-	</div>
-	<div class="flagContainer">
-		<p class="flag">
-			<em>
-				<?php _e('Indicadores por revista');?>
-			</em>
-		</p>
-	</div>
-	<div class="textoJ">
-		<?php _e('Atmósfera:');?><br></br>
-		<ul>
-			<li><a href="<?=site_url("indicadores/indice-coautoria/disciplina/geociencias/revista/atmosfera");?>" tagert="_blank"><?php _e('Índice de coautoría');?></a></li>
-			<li><a href="<?=site_url("indicadores/tasa-documentos-coautorados/disciplina/geociencias/revista/atmosfera");?>" tagert="_blank"><?php _e('Tasa de Documentos Coautorados');?></a></li>
-			<li><a href="<?=site_url("indicadores/grado-colaboracion/disciplina/geociencias/revista/atmosfera");?>" tagert="_blank"><?php _e('Grado de Colaboración (Índice de Subramanyan)');?></a></li>
-			<li><a href="<?=site_url("indicadores/modelo-elitismo/disciplina/geociencias/revista/atmosfera");?>" tagert="_blank"><?php _e('Modelo de Elitismo (Price)');?></a></li>
-			<li><a href="<?=site_url("indicadores/indice-colaboracion/disciplina/geociencias/revista/atmosfera");?>" tagert="_blank"><?php _e('Índice de Colaboración (Índice de Lawani)');?></a></li>
-			<li><a href="<?=site_url("indicadores/indice-densidad-documentos/disciplina/geociencias/revista/atmosfera");?>" tagert="_blank"><?php _e('Índice de Densidad de Documentos Zakutina y Priyenikova');?></a></li>
-			<li><a href="javascript:;" tagert="_blank"><?php _e('Índice de concentración (Índice de Pratt)');?></a></li>
-			<li><a href="javascript:;" tagert="_blank"><?php _e('Tasa de autoría exógena');?></a></li>
-		</ul><br></br>
 		<?php _printf('Contacto para comentarios y consultas: %s','<a href="mailto:biblat@dgb.unam.mx">biblat@dgb.unam.mx</a>');?><br></br>
 	</div>
 </div>

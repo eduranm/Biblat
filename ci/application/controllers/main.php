@@ -135,9 +135,27 @@ class Main extends CI_Controller{
 		$this->load->view('footer');
 	}
 
+	public function indicadoresScielo(){
+		$data = array();
+		$data['header']['title'] = _("Biblat - Indicadores por revista");
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu');
+		$this->load->view('main/indicadores_scielo');
+		$this->load->view('footer');
+	}
+
+	public function indicadoresRevista(){
+		$data = array();
+		$data['header']['title'] = _("Biblat - Indicadores por revista");
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu');
+		$this->load->view('main/indicadores_por_revista');
+		$this->load->view('footer');
+	}
+
 	public function criteriosSeleccion(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - Metodología");
+		$data['header']['title'] = _("Biblat - Criterios de selección");
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu');
 		$this->load->view('main/criterios_seleccion');
