@@ -122,8 +122,8 @@ def add_claper():
 			else:
 				file.write("\n")
 			tagOffset += 1
-	parse_database('../clase_101213_valid.txt')
-	parse_database('../periodica_101213_valid.txt')
+	parse_database('../clase_valid.txt')
+	parse_database('../periodica_valid.txt')
 
 add_claper()
 

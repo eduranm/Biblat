@@ -127,8 +127,8 @@ DECLARE
   matview RECORD;
   sql text;
 BEGIN
-  FOR matview IN SELECT mv_name FROM matviews LOOP
-    sql :='SELECT refresh_matview('''||matview.mv_name||''')';
+  FOR matview IN SELECT matviewname FROM pg_matviews LOOP
+    sql :='REFRESH MATERIALIZED VIEW "'||matview.matviewname||'"';
     RAISE NOTICE 'EXECUTE: %', sql;
     EXECUTE sql;
   END LOOP;
@@ -143,8 +143,8 @@ DECLARE
   matview RECORD;
   sql text;
 BEGIN
-  FOR matview IN SELECT mv_name FROM matviews LOOP
-    sql :='TRUNCATE '||matview.mv_name;
+  FOR matview IN SELECT matviewname FROM pg_matviews LOOP
+    sql :='REFRESH MATERIALIZED VIEW "'||matview.matviewname||'" WITH NO DATA';
     RAISE NOTICE 'EXECUTE: %', sql;
     EXECUTE sql;
   END LOOP;
@@ -153,7 +153,16 @@ END
 $$
 LANGUAGE plpgsql;
 
-
+--Vista para revista y su disciplina correspondiente
+CREATE MATERIALIZED VIEW "mvRevistaDisciplina" AS 
+SELECT 
+  iddatabase, 
+  e_222 AS revista, 
+  slug(e_222) AS "revistaSlug", 
+  id_disciplina, 
+  e_698 AS disciplina, 
+  count(*) AS documentos 
+FROM articulo GROUP BY iddatabase, e_222, id_disciplina, e_698;
 --Vista para busquedas
 CREATE MATERIALIZED VIEW "mvSearch" AS SELECT 
     t.sistema, 

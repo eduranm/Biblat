@@ -31,7 +31,7 @@ class Main extends CI_Controller{
 		$query = $this->db->query($query);
 		$data['index']['totales'] = $query->row_array();
 		$query->free_result();
-		$query = "SELECT count(*) AS revistas FROM rev_disciplinas";
+		$query = "SELECT count(*) AS revistas FROM \"mvRevistaDisciplina\"";
 		$query = $this->db->query($query);
 		$data['index']['totales'] = array_merge($data['index']['totales'], $query->row_array());
 		$query->free_result();
