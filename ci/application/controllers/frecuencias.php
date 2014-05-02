@@ -1067,12 +1067,12 @@ class Frecuencias extends CI_Controller {
 
 	public function disciplinaDocumentos($slug){
 		$args['slug'] = $slug;
-		$args['query'] = "SELECT {$this->queryFields} FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$slug}'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$slug}'";
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$slug}'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$slug}'";
 		$args['paginationURL'] = site_url("frecuencias/disciplina/{$slug}/documento");
 		/*Datos de la disciplina*/
 		$this->load->database();
-		$queryDisciplina = "SELECT disciplina AS disciplina FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$slug}' LIMIT 1";
+		$queryDisciplina = "SELECT disciplina  FROM disciplinas WHERE slug='{$slug}' LIMIT 1";
 		$queryDisciplina = $this->db->query($queryDisciplina);
 		$this->db->close();
 		$queryDisciplina = $queryDisciplina->row_array();
@@ -1108,7 +1108,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaDisciplinaInstitucion\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaDisciplinaInstitucion\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}'";
 		$this->load->database();
-		$query = "SELECT disciplina FROM \"mvFrecuenciaDisciplinaInstitucion\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' LIMIT 1";
+		$query = "SELECT disciplina FROM disciplinas WHERE slug='{$args['disciplinaSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$disciplina = $query['disciplina'];
@@ -1179,7 +1179,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaDisciplinaPais\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaDisciplinaPais\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}'";
 		$this->load->database();
-		$query = "SELECT disciplina FROM \"mvFrecuenciaDisciplinaPais\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' LIMIT 1";
+		$query = "SELECT disciplina FROM disciplinas WHERE slug='{$args['disciplinaSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$disciplina = $query['disciplina'];
@@ -1197,8 +1197,8 @@ class Frecuencias extends CI_Controller {
 
 	public function disciplinaPaisDocumentos($disciplina, $pais){
 		$args['slug'] = $pais;
-		$args['query'] = "SELECT {$this->queryFields} FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"paisSlug\"='$pais'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"paisSlug\"='{$pais}'";
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"paisSlug\"='$pais'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"paisSlug\"='{$pais}'";
 		$args['paginationURL'] = site_url("frecuencias/disciplina/{$disciplina}/pais/{$pais}");
 		/*Datos de la disciplina*/
 		$this->load->database();
@@ -1250,7 +1250,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaDisciplinaRevista\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaDisciplinaRevista\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}'";
 		$this->load->database();
-		$query = "SELECT disciplina FROM \"mvFrecuenciaDisciplinaRevista\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' LIMIT 1";
+		$query = "SELECT disciplina FROM disciplinas WHERE slug='{$args['disciplinaSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$disciplina = $query['disciplina'];
@@ -1268,8 +1268,8 @@ class Frecuencias extends CI_Controller {
 
 	public function disciplinaRevistaDocumentos($disciplina, $revista){
 		$args['slug'] = $revista;
-		$args['query'] = "SELECT {$this->queryFields} FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"revistaSlug\"='$revista'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"revistaSlug\"='{$revista}'";
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"revistaSlug\"='$revista'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"revistaSlug\"='{$revista}'";
 		$args['paginationURL'] = site_url("frecuencias/disciplina/{$disciplina}/revista/{$revista}");
 		/*Datos de la disciplina*/
 		$this->load->database();
