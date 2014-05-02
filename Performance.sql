@@ -8,11 +8,12 @@ DECLARE
     result varchar;
 BEGIN
     result := regexp_replace(translate(replace(lower(texto), ' ', '-'),
-        'áàâãäåāăąÁÂÃÄÅĀĂĄèééêëēĕėęěĒĔĖĘĚìíîïìĩīĭÌÍÎÏÌĨĪĬóôõöōŏőÒÓÔÕÖŌŎŐùúûüũūŭůÙÚÛÜŨŪŬŮçÇÿ&,.ñÑŠšŽžÝÞßøýþ',
-        'aaaaaaaaaaaaaaaaaeeeeeeeeeeeeeeeiiiiiiiiiiiiiiiiooooooooooooooouuuuuuuuuuuuuuuuccy---nnsszzybsoyb'), E'[^\\w -]', '', 'g');
+        'áàâãäåāăąÁÂÃÄÅĀĂĄèééêëēĕėęěĒĔĖĘĚìíîïìĩīĭÌÍÎÏÌĨĪĬóôõöōŏőÒÓÔÕÖŌŎŐùúûüũūŭůÙÚÛÜŨŪŬŮçÇÿ&,.ñÑŠšşŞŽžÝÞßøýþ"',
+        'aaaaaaaaaaaaaaaaaeeeeeeeeeeeeeeeiiiiiiiiiiiiiiiiooooooooooooooouuuuuuuuuuuuuuuuccy---nnsssszzybsoyb'), E'[^\\w -]', '', 'g');
 	
     result := regexp_replace(result, '-+', '-', 'g');
     result := regexp_replace(result, '-$', '', 'g');
+    result := regexp_replace(result, '^-', '', 'g');
     RETURN NULLIF(result, '');
 END;
 $BODY$
