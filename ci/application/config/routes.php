@@ -56,6 +56,9 @@ $route[$langs.'/revista/solicitud/documento'] = 'revista/solicitudDocumento';
 $route[$langs.'/bibliometria/descripcion-biblat'] = 'main/descripcionBiblat';
 $route[$langs.'/bibliometria/metodologia-biblat'] = 'main/metodologiaBiblat';
 $route[$langs.'/postular-revista/criterios-de-seleccion'] = 'main/criteriosSeleccion';
+$route[$langs.'/bibliometria/indicadores-scielo'] = 'main/indicadoresScielo';
+$route[$langs.'/bibliometria/indicadores-por-revista'] = 'main/indicadoresRevista';
+$route[$langs.'/manual-de-indizacion'] = 'main/manualIndizacion';
 
 $route[$langs.'/buscar/getList'] = 'buscar/getList';
 $route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave|avanzada)/(.+)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';
@@ -119,6 +122,28 @@ $route[$langs.'/frecuencias/revista/([^/]+)/documento/([0-9]+$)'] = "frecuencias
 $route[$langs.'/frecuencias/revista/(.+?)/\bautor\b/([^/]+)$'] = "frecuencias/revistaAutorDocumentos/$1/$2";
 $route[$langs.'/frecuencias/revista/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecuencias/revistaAutorDocumentos/$1/$2/$3";
 $route[$langs.'/frecuencias/revista/(.+?)/\bautor\b(.*)'] = "frecuencias/revistaAutor/revistaSlug/$1$2";
+
+
+$route[$langs.'/frecuencias/disciplina/([^/]+)'] = "frecuencias/disciplina/slug/$1";
+$route[$langs.'/frecuencias/disciplina/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/disciplina/slug/$1/$2";
+
+$route[$langs.'/frecuencias/disciplina/([^/]+)/documento'] = "frecuencias/disciplinaDocumentos/$1";
+$route[$langs.'/frecuencias/disciplina/([^/]+)/documento/([0-9]+$)'] = "frecuencias/disciplinaDocumentos/$1/$2";
+
+$route[$langs.'/frecuencias/disciplina/(.+?)/\binstitucion\b/([^/]+)$'] = "frecuencias/disciplinaInstitucionDocumentos/$1/$2";
+$route[$langs.'/frecuencias/disciplina/(.+?)/\binstitucion\b/([^/]+)/[0-9^/]+$'] = "frecuencias/disciplinaInstitucionDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/disciplina/(.+?)/\binstitucion\b(.*)'] = "frecuencias/disciplinaInstitucion/disciplinaSlug/$1$2";
+
+$route[$langs.'/frecuencias/disciplina/(.+?)/\bpais\b/([^/]+)$'] = "frecuencias/disciplinaPaisDocumentos/$1/$2";
+$route[$langs.'/frecuencias/disciplina/(.+?)/\bpais\b/([^/]+)/[0-9^/]+$'] = "frecuencias/disciplinaPaisDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/disciplina/(.+?)/\bpais\b(.*)'] = "frecuencias/disciplinaPais/disciplinaSlug/$1$2";
+
+$route[$langs.'/frecuencias/disciplina/(.+?)/\brevista\b/([^/]+)$'] = "frecuencias/disciplinaRevistaDocumentos/$1/$2";
+$route[$langs.'/frecuencias/disciplina/(.+?)/\brevista\b/([^/]+)/[0-9^/]+$'] = "frecuencias/disciplinaRevistaDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/disciplina/(.+?)/\brevista\b(.*)'] = "frecuencias/disciplinaRevista/disciplinaSlug/$1$2";
+
+
+
 
 // URI like '/en/about' -> use controller 'about'
 $route[$langs.'/(.+)$'] = "$1";

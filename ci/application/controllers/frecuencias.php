@@ -2,6 +2,7 @@
 
 class Frecuencias extends CI_Controller {
 
+	public $disciplinas = array();
 	public $queryFields="DISTINCT (sistema, 
 					iddatabase) AS \"sitemaIdDatabase\",
 					articulo, 
@@ -25,6 +26,21 @@ class Frecuencias extends CI_Controller {
 	{
 		parent::__construct();
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
+		$this->load->database();
+		$query = "SELECT id_disciplina, disciplina, slug FROM \"mvDisciplina\"";
+		if ( ! $this->session->userdata('query{'.md5($query).'}')):
+			$queryResult = $this->db->query($query);
+			$disciplina = array();
+			foreach ($queryResult->result_array() as $row):
+				$disciplina['disciplina'] = $row['disciplina'];
+				$disciplina['id_disciplina'] = $row['id_disciplina'];
+				$disciplinas[$row['slug']] = $disciplina;
+			endforeach;
+			$this->session->set_userdata('query{'.md5($query).'}', json_encode($disciplinas));
+		endif;
+		$this->disciplinas = json_decode($this->session->userdata('query{'.md5($query).'}'), true);
+		$data['disciplinas'] = $this->disciplinas;
+		$this->db->close();
 	}
 
 	public function index()
@@ -590,6 +606,298 @@ class Frecuencias extends CI_Controller {
 		$this->db->close();
 		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), anchor("frecuencias/pais-afiliacion/{$pais['slug']}/autor", _sprintf('%s/Autor', $pais['pais']), _("title= \"{$autor['autor']}/Institución\"")), $autor['autor']);
 		$args['title'] = _sprintf('Biblat - País de afiliación: %s/%s (%%d documentos)', $pais['pais'], $autor['autor']);
+		return $this->_renderDocuments($args);
+	}
+
+	public function disciplina(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('disciplina', 'slug', 'instituciones', 'paises', 'revistas', 'documentos');
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaDisciplina\" {$where}";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaDisciplina\"";
+		$args['querySlug'] = $query = "SELECT disciplina AS unslug FROM disciplinas WHERE slug='{$args['slug']}' LIMIT 1";
+		$args['where'] = "WHERE slug='{$args['slug']}'";
+		$args['breadcrumbSlug'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/disciplina', _('Disciplina'), _('title="Disciplina"')));
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('Disciplina'),
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'disciplinaSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Institución'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('País-Revista'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Revistas'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Disciplina'), _('Institución'), _('Países'), _('Revistas'), _('Documentos'));
+		$args['xls']['query'] = "SELECT disciplina, paises, revistas, instituciones, documentos FROM \"mvFrecuenciaDisciplina\" ORDER BY documentos DESC, disciplina";
+		$args['xls']['fileName'] = "Frecuencia-Disciplina.csv";
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por disciplina');
+		$data['header']['gridTitle'] = _sprintf('Número de documentos por institución de afiliación del autor, país de la revista y título de la revista, por disciplina');
+		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Disciplina'));
+		$section = array('', '', '/institucion', '/pais', '/revista', '/documento');
+		$data['header']['section'] = json_encode($section, true);
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function disciplinaDocumentos($slug){
+		$args['slug'] = $slug;
+		$args['query'] = "SELECT {$this->queryFields} FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$slug}'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$slug}'";
+		$args['paginationURL'] = site_url("frecuencias/disciplina/{$slug}/documento");
+		/*Datos de la disciplina*/
+		$this->load->database();
+		$queryDisciplina = "SELECT disciplina AS disciplina FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$slug}' LIMIT 1";
+		$queryDisciplina = $this->db->query($queryDisciplina);
+		$this->db->close();
+		$queryDisciplina = $queryDisciplina->row_array();
+		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/disciplina', _('Disciplina'), _('title="Disciplina"')), $queryDisciplina['disciplina']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $queryDisciplina['disciplina']);
+		return $this->_renderDocuments($args);
+	}
+
+	public function disciplinaInstitucion(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('institucion', 'institucionSlug', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('Institución'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'institucionSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaDisciplinaInstitucion\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaDisciplinaInstitucion\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}'";
+		$this->load->database();
+		$query = "SELECT disciplina FROM \"mvFrecuenciaDisciplinaInstitucion\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$disciplina = $query['disciplina'];
+		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por disciplina "%s", institución de afiliación del autor', $disciplina);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos por institución de afiliación del autor de la disciplina:<br/> %s', $disciplina);
+		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Institución', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/disciplina', _('Disciplina'), _('title="Disciplina"')), $disciplina);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Institución'), _('Documentos'));
+		$args['xls']['query'] = "SELECT institucion, documentos FROM \"mvFrecuenciaDisciplinaInstitucion\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' ORDER BY documentos DESC, institucion";
+		$args['xls']['fileName'] = "Frecuencia-{$disciplina}-Instituciones.csv";
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function disciplinaInstitucionDocumentos($disciplina, $institucion){
+		$args['slug'] = $institucion;
+		$args['query'] = "SELECT {$this->queryFields} FROM \"mvInstucionDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"institucionSlug\"='$institucion'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvInstucionDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"institucionSlug\"='{$institucion}'";
+		$args['paginationURL'] = site_url("frecuencias/disciplina/{$disciplina}/institucion/{$institucion}");
+		/*Datos de la disciplina*/
+		$this->load->database();
+		$query = "SELECT disciplina FROM disciplinas WHERE slug='{$disciplina}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$disciplina = array(
+				'slug' => $disciplina,
+				'disciplina' => $query['disciplina']
+			);
+		/*Datos de la institución*/
+		$query = "SELECT \"institucionSlug\" FROM \"mvInstucionDocumentos\" WHERE \"institucionSlug\"LIKE'{$institucion}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$institucion = array(
+				'slug' => $institucion,
+				'institucion' => $query['institucion']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/disciplina', _('Disciplina'), _('title="Disciplina"')), anchor("frecuencias/disciplina/{$disciplina['slug']}/institucion", _sprintf('%s/País', $disciplina['disciplina']), _("title= \"{$disciplina['disciplina']}/Institución\"")), $institucion['institucion']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $disciplina['disciplina']);
+		return $this->_renderDocuments($args);
+	}
+
+	public function disciplinaPais(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('pais', 'paisSlug', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('País-Revista'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'paisSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaDisciplinaPais\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaDisciplinaPais\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}'";
+		$this->load->database();
+		$query = "SELECT disciplina FROM \"mvFrecuenciaDisciplinaPais\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$disciplina = $query['disciplina'];
+		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por disciplina "%s", países de publicación de la revista', $disciplina);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos por país de la revista de la disciplina:<br/> %s', $disciplina);
+		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/País', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/disciplina', _('Disciplina'), _('title="Disciplina"')), $disciplina);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('País'), _('Documentos'));
+		$args['xls']['query'] = "SELECT pais, documentos FROM \"mvFrecuenciaDisciplinaPais\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' ORDER BY documentos DESC, pais";
+		$args['xls']['fileName'] = "Frecuencia-{$disciplina}-Paises.csv";
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function disciplinaPaisDocumentos($disciplina, $pais){
+		$args['slug'] = $pais;
+		$args['query'] = "SELECT {$this->queryFields} FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"paisSlug\"='$pais'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"paisSlug\"='{$pais}'";
+		$args['paginationURL'] = site_url("frecuencias/disciplina/{$disciplina}/pais/{$pais}");
+		/*Datos de la disciplina*/
+		$this->load->database();
+		$query = "SELECT disciplina FROM disciplinas WHERE slug='{$disciplina}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$disciplina = array(
+				'slug' => $disciplina,
+				'disciplina' => $query['disciplina']
+			);
+		/*Datos del país*/
+		$query = "SELECT pais FROM \"mvSearch\" WHERE \"paisSlug\"='{$pais}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$pais = array(
+				'slug' => $pais,
+				'pais' => $query['pais']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/disciplina', _('Disciplina'), _('title="Disciplina"')), anchor("frecuencias/disciplina/{$disciplina['slug']}/pais", _sprintf('%s/País', $disciplina['disciplina']), _("title= \"{$disciplina['disciplina']}/País\"")), $pais['pais']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $disciplina['disciplina']);
+		return $this->_renderDocuments($args);
+	}
+
+	public function disciplinaRevista(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('revista', 'revistaSlug', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('Revista'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'revistaSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaDisciplinaRevista\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaDisciplinaRevista\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}'";
+		$this->load->database();
+		$query = "SELECT disciplina FROM \"mvFrecuenciaDisciplinaRevista\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$disciplina = $query['disciplina'];
+		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por disciplina "%s", revistas de publicación', $disciplina);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos publicados por revista de la disciplina: <br/>%s', $disciplina);
+		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Revista', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/disciplina', _('Disciplina'), _('title="Disciplina"')), $disciplina);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Revista'), _('Documentos'));
+		$args['xls']['query'] = "SELECT revista, documentos FROM \"mvFrecuenciaDisciplinaRevista\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' ORDER BY documentos DESC, revista";
+		$args['xls']['fileName'] = "Frecuencia-{$disciplina}-Revistas.csv";
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function disciplinaRevistaDocumentos($disciplina, $revista){
+		$args['slug'] = $revista;
+		$args['query'] = "SELECT {$this->queryFields} FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"revistaSlug\"='$revista'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvDisciplinaDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"revistaSlug\"='{$revista}'";
+		$args['paginationURL'] = site_url("frecuencias/disciplina/{$disciplina}/revista/{$revista}");
+		/*Datos de la disciplina*/
+		$this->load->database();
+		$query = "SELECT disciplina FROM disciplinas WHERE slug='{$disciplina}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$disciplina = array(
+				'slug' => $disciplina,
+				'disciplina' => $query['disciplina']
+			);
+		/*Datos de la revista*/
+		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$revista = array(
+				'slug' => $revista,
+				'revista' => $query['revista']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/disciplina', _('Disciplina'), _('title="Disciplina"')), anchor("frecuencias/disciplina/{$disciplina['slug']}/revista", _sprintf('%s/Revista', $disciplina['disciplina']), _("title= \"{$disciplina['disciplina']}/Revista\"")), $revista['revista']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $disciplina['disciplina']);
 		return $this->_renderDocuments($args);
 	}
 
