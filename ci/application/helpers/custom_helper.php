@@ -162,7 +162,7 @@ if ( ! function_exists('slugHighLight') ):
 endif;
 
 if ( ! function_exists('articulosResultado') ):
-	function articulosResultado($query, $queryCount, $paginationURL, $perPage, $countCompleto=FALSE){
+	function articulosResultado($query, $queryCount, $paginationURL, $perPage, $countCompleto=FALSE, $firstPageNumber=FALSE){
 		/**/
 		$resultado = array();
 		/*Load libraries*/
@@ -190,7 +190,6 @@ if ( ! function_exists('articulosResultado') ):
 		$totalRows=(int)$ci->session->userdata('query{'.md5($queryCount).'}');
 
 		$uri_segment = $ci->uri->total_segments();
-
 		if(preg_match('/[0-9a-f]{32}/', $ci->uri->segment($uri_segment))):
 			$uri_segment++;
 		endif;
@@ -200,6 +199,9 @@ if ( ! function_exists('articulosResultado') ):
 		$config['total_rows'] = $totalRows;
 		$config['per_page'] = $perPage;
 		$config['use_page_numbers'] = true;
+		if($firstPageNumber):
+			$config['first_url'] = "$paginationURL/1";
+		endif;
 		$config['first_link'] = "<img src=\"".base_url()."img/first.png\" border=\"0\"/>";
 		$config['last_link'] = "<img src=\"".base_url()."img/last.png\" border=\"0\"/>";
 		$config['next_link'] = "<img src=\"".base_url()."img/next.png\" border=\"0\"/>";
