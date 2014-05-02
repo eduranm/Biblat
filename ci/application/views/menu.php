@@ -17,7 +17,7 @@
 					<ul>
 						<li><a href="<?=site_url('sobre-biblat');?>" title="<?php _e('Biblat');?>"><?php _e('Biblat');?></a></li>
 						<li><a href="<?=site_url('clase-y-periodica');?>" title="<?php _e('Clase y Periódica');?>"><?php _e('Clase y Periódica');?></a></li>
-						<li><a href="javascript:;" title="<?php _e('Manual de indización');?>"><?php _e('Manual de indización');?></a></li>
+						<li><a href="<?=site_url('manual-de-indizacion');?>" title="<?php _e('Manual de indización');?>"><?php _e('Manual de indización');?></a></li>
 						<li><a href="<?=site_url('scielo');?>" title="<?php _e('SciELO');?>"><?php _e('SciELO');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Tutoriales');?>"><?php _e('Tutoriales');?></a></li>
 						<li><a href="javascript:;" title="<?php _e('Materiales de difusión');?>"><?php _e('Materiales de difusión');?></a></li>
@@ -35,6 +35,7 @@
 								<li><a href="<?=site_url('frecuencias/institucion');?>" title="<?php _e('Institución');?>"><?php _e('Institución');?></a></li>
 								<li><a href="<?=site_url('frecuencias/pais-afiliacion');?>" title="<?php _e('País de afiliación del autor');?>"><?php _e('País de afiliación');?></a></li>
 								<li><a href="<?=site_url('frecuencias/revista');?>" title="<?php _e('Revista');?>"><?php _e('Revista');?></a></li>
+								<li><a href="<?=site_url('frecuencias/disciplina');?>" title="<?php _e('Disciplina');?>"><?php _e('Disciplina');?></a></li>
 							</ul>
 						</li>
 						<li>
@@ -43,8 +44,8 @@
 								<li><a href="<?=site_url('indicadores/indice-coautoria');?>" title="<?php _e('Índice de coautoría');?>"><?php _e('Índice de coautoría');?></a></li>
 								<li><a href="<?=site_url('indicadores/tasa-documentos-coautorados');?>" title="<?php _e('Tasa de documentos coautorados');?>"><?php _e('Tasa de documentos coautorados');?></a></li>
 								<li><a href="<?=site_url('indicadores/grado-colaboracion');?>" title="<?php _e('Grado de colaboración (Índice Subramanyan)');?>"><?php _e('Grado de colaboración');?></a></li>
-								<li><a href="<?=site_url('indicadores/modelo-elitismo');?>" title="<?php _e('Modelo de elitismo (Price)');?>"><?php _e('Modelo de elitismo');?></a></li>
 								<li><a href="<?=site_url('indicadores/indice-colaboracion');?>" title="<?php _e('Índice de colaboración (Índice de Lawani)');?>"><?php _e('Índice de colaboración');?></a></li>
+								<li><a href="<?=site_url('indicadores/modelo-elitismo');?>" title="<?php _e('Modelo de elitismo (Price)');?>"><?php _e('Modelo de elitismo');?></a></li>
 								<li><a href="<?=site_url('indicadores/indice-densidad-documentos');?>" title="<?php _e('Índice de densidad de documentos Zakutina y Priyenikova');?>"><?php _e('Índice de densidad de documentos');?></a></li>
 								<li><a href="<?=site_url('indicadores/indice-concentracion');?>" title="<?php _e('Índice de concentración (Índice Pratt)');?>"><?php _e('Índice de concentración');?></a></li>
 								<li><a href="<?=site_url('indicadores/modelo-bradford-revista');?>" title="<?php _e('Modelo de Bradford por revista');?>"><?php _e('Modelo de Bradford por revista');?></a></li>

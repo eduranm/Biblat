@@ -23,14 +23,14 @@
 	<div class="textoJ">
 		<a href="http://clase.unam.mx" target="_blank"><img style="float: left; padding-right: 10px;" src="<?=base_url();?>img/clase.gif" width="83" height="55" /></a><?php _printf('%s es una base de datos bibliográfica creada en 1975 en la Universidad Nacional Autónoma de México (%s). Contiene registros bibliográficos de artículos, ensayos, reseñas de libro, revisiones bibliográficas, notas breves, editoriales, biografías, entrevistas, estadísticas y otros documentos publicados en más de 1,700 revistas publicadas en América Latina y el Caribe, especializadas en ciencias sociales y humanidades.','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://unam.mx/" target="_blank">UNAM</a>');?><br></br>
 		<?php _printf('Las revistas incluidas en %s cumplen con criterios de selección y son analizadas por un equipo multidisciplinario que cubre los siguientes temas:','<a href="http://clase.unam.mx" target="_blank">CLASE</a>');?><br></br>
-		<ol type="circle">
+		<ol>
 			<?php foreach ($disciplina[0] as $item):?>
 				<li><a href="<?php echo site_url('indice/disciplina/'.$item['slug']);?>"><?php echo $item['disciplina'];?></a></li>
 			<?php endforeach;?>
 		</ol><br></br>
 		<a href="http://periodica.unam.mx" target="_blank"><img style="float: left; padding-right: 10px;" src="<?=base_url();?>img/periodica.gif" width="123" height="55" /></a><?php _printf('%s es una base de datos bibliográfica creada en 1978 en la Universidad Nacional Autónoma de México (%s). Contiene registros bibliográficos de artículos originales, informes técnicos, estudios de caso, estadísticas y otros documentos publicados en cerca de 1,500 revistas de América Latina y el Caribe, especializadas en ciencia y tecnología.','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>','<a href="http://unam.mx/" target="_blank">UNAM</a>');?><br></br>
 		<?php _printf('Las revistas incluidas en %s cumplen con criterios de selección y son analizadas por un equipo multidisciplinario que cubre los siguientes temas:','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>');?><br></br>
-		<ol type="circle">
+		<ol>
 			<?php foreach ($disciplina[1] as $item):?>
 				<li><a href="<?php echo site_url('indice/disciplina/'.$item['slug']);?>"><?php echo $item['disciplina'];?></a></li>
 			<?php endforeach;?>
