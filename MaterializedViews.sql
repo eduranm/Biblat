@@ -1159,6 +1159,10 @@ SELECT
     INNER JOIN autor a ON aa.iddatabase=a.iddatabase AND aa.sistema=a.sistema AND aa.slug<>a.slug
     GROUP BY aa.slug, a.slug;
 
+CREATE INDEX ON "mvFrecuenciaAutorCoautoria"("autorSlug");
+CREATE INDEX ON "mvFrecuenciaAutorCoautoria"("autorCoSlug");
+
+
 --Documentos de couatorias por autor
 CREATE MATERIALIZED VIEW "mvAutorCoautoriaSI" AS
 SELECT 
