@@ -309,7 +309,7 @@ class Revista extends CI_Controller{
 		else:
 			$result = array(
 					'type' => 'error',
-					'title' => _('No se pudo enviar la solictud')
+					'title' => _('No se pudo enviar la solicitud')
 				);
 		endif;
 		echo json_encode($result);

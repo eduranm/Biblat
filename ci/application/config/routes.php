@@ -73,9 +73,18 @@ $route[$langs.'/revista/(.*)'] = "revista/index/$1";
 
 $route[$langs.'/indicadores/(indice-coautoria|tasa-documentos-coautorados|grado-colaboracion|modelo-elitismo|indice-colaboracion|indice-densidad-documentos|indice-concentracion|modelo-bradford-revista|modelo-bradford-institucion|productividad-exogena)(.*)'] = "indicadores/index/$1";
 
-$route[$langs.'/frecuencias/autor/([^/]+)'] = "frecuencias/autorDocumentos/$1";
-$route[$langs.'/frecuencias/autor/([^/]+)/([0-9]+$)'] = "frecuencias/autorDocumentos/$1/$2";
+/*≠≠≠≠≠≠≠≠ Frecuencias por autor ≠≠≠≠≠≠≠≠*/
+$route[$langs.'/frecuencias/autor/([^/]+)'] = "frecuencias/autor/slug/$1";
+$route[$langs.'/frecuencias/autor/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/autor/slug/$1/$2";
 
+$route[$langs.'/frecuencias/autor/([^/]+)/documento'] = "frecuencias/autorDocumentos/$1";
+$route[$langs.'/frecuencias/autor/([^/]+)/documento/([0-9]+$)'] = "frecuencias/autorDocumentos/$1/$2";
+
+$route[$langs.'/frecuencias/autor/(.+?)/\bcoautoria\b/([^/]+)$'] = "frecuencias/autorCoautoriaDocumentos/$1/$2";
+$route[$langs.'/frecuencias/autor/(.+?)/\bcoautoria\b/([^/]+)/[0-9^/]+$'] = "frecuencias/autorCoautoriaDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/autor/(.+?)/\bcoautoria\b(.*)'] = "frecuencias/autorCoautoria/autorSlug/$1$2";
+
+/*≠≠≠≠≠≠≠≠ Frecuencias por institución ≠≠≠≠≠≠≠≠*/
 $route[$langs.'/frecuencias/institucion/([^/]+)'] = "frecuencias/institucion/slug/$1";
 $route[$langs.'/frecuencias/institucion/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/institucion/slug/$1/$2";
 
@@ -94,6 +103,15 @@ $route[$langs.'/frecuencias/institucion/(.+?)/\bautor\b/([^/]+)$'] = "frecuencia
 $route[$langs.'/frecuencias/institucion/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecuencias/institucionAutorDocumentos/$1/$2/$3";
 $route[$langs.'/frecuencias/institucion/(.+?)/\bautor\b(.*)'] = "frecuencias/institucionAutor/institucionSlug/$1$2";
 
+$route[$langs.'/frecuencias/institucion/(.+?)/\bdisciplina\b/([^/]+)$'] = "frecuencias/institucionDisciplinaDocumentos/$1/$2";
+$route[$langs.'/frecuencias/institucion/(.+?)/\bdisciplina\b/([^/]+)/[0-9^/]+$'] = "frecuencias/institucionDisciplinaDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/institucion/(.+?)/\bdisciplina\b(.*)'] = "frecuencias/institucionDisciplina/institucionSlug/$1$2";
+
+$route[$langs.'/frecuencias/institucion/(.+?)/\bcoautoria\b/([^/]+)$'] = "frecuencias/institucionCoautoriaDocumentos/$1/$2";
+$route[$langs.'/frecuencias/institucion/(.+?)/\bcoautoria\b/([^/]+)/[0-9^/]+$'] = "frecuencias/institucionCoautoriaDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/institucion/(.+?)/\bcoautoria\b(.*)'] = "frecuencias/institucionCoautoria/institucionSlug/$1$2";
+
+/*≠≠≠≠≠≠≠≠ Frecuencias por país de afiliación ≠≠≠≠≠≠≠≠*/
 $route[$langs.'/frecuencias/pais-afiliacion'] = "frecuencias/paisAfiliacion";
 $route[$langs.'/frecuencias/pais-afiliacion/(ordenar/.*|export/excel$)'] = "frecuencias/paisAfiliacion/$1";
 $route[$langs.'/frecuencias/pais-afiliacion/([^/]+)'] = "frecuencias/paisAfiliacion/slug/$1";
@@ -110,6 +128,15 @@ $route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\bautor\b/([^/]+)$'] = "frecue
 $route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecuencias/paisAfiliacionAutorDocumentos/$1/$2/$3";
 $route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\bautor\b(.*)'] = "frecuencias/paisAfiliacionAutor/paisInstitucionSlug/$1$2";
 
+$route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\bdisciplina\b/([^/]+)$'] = "frecuencias/paisAfiliacionDisciplinaDocumentos/$1/$2";
+$route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\bdisciplina\b/([^/]+)/[0-9^/]+$'] = "frecuencias/paisAfiliacionDisciplinaDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\bdisciplina\b(.*)'] = "frecuencias/paisAfiliacionDisciplina/paisInstitucionSlug/$1$2";
+
+$route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\bcoautoria\b/([^/]+)$'] = "frecuencias/paisAfiliacionCoautoriaDocumentos/$1/$2";
+$route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\bcoautoria\b/([^/]+)/[0-9^/]+$'] = "frecuencias/paisAfiliacionCoautoriaDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/pais-afiliacion/(.+?)/\bcoautoria\b(.*)'] = "frecuencias/paisAfiliacionCoautoria/paisInstitucionSlug/$1$2";
+
+/*≠≠≠≠≠≠≠≠ Frecuencias por revista ≠≠≠≠≠≠≠≠*/
 $route[$langs.'/frecuencias/revista/([^/]+)'] = "frecuencias/revista/slug/$1";
 $route[$langs.'/frecuencias/revista/([^/]+)/(ordenar/.*|export/excel$)'] = "frecuencias/revista/slug/$1/$2";
 
@@ -119,6 +146,14 @@ $route[$langs.'/frecuencias/revista/([^/]+)/documento/([0-9]+$)'] = "frecuencias
 $route[$langs.'/frecuencias/revista/(.+?)/\bautor\b/([^/]+)$'] = "frecuencias/revistaAutorDocumentos/$1/$2";
 $route[$langs.'/frecuencias/revista/(.+?)/\bautor\b/([^/]+)/[0-9^/]+$'] = "frecuencias/revistaAutorDocumentos/$1/$2/$3";
 $route[$langs.'/frecuencias/revista/(.+?)/\bautor\b(.*)'] = "frecuencias/revistaAutor/revistaSlug/$1$2";
+
+$route[$langs.'/frecuencias/revista/(.+?)/\binstitucion\b/([^/]+)$'] = "frecuencias/revistaInstitucionDocumentos/$1/$2";
+$route[$langs.'/frecuencias/revista/(.+?)/\binstitucion\b/([^/]+)/[0-9^/]+$'] = "frecuencias/revistaInstitucionDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/revista/(.+?)/\binstitucion\b(.*)'] = "frecuencias/revistaInstitucion/revistaSlug/$1$2";
+
+$route[$langs.'/frecuencias/revista/(.+?)/\banio\b/(\d{4})($|/$)'] = "frecuencias/revistaAnioDocumentos/$1/$2/1";
+$route[$langs.'/frecuencias/revista/(.+?)/\banio\b/(\d{4})/[0-9^/]+$'] = "frecuencias/revistaAnioDocumentos/$1/$2/$3";
+$route[$langs.'/frecuencias/revista/(.+?)/\banio\b(.*)'] = "frecuencias/revistaAnio/revistaSlug/$1$2";
 
 // URI like '/en/about' -> use controller 'about'
 $route[$langs.'/(.+)$'] = "$1";

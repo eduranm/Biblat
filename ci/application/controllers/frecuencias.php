@@ -42,7 +42,11 @@ class Frecuencias extends CI_Controller {
 		$args['defaultOrder'] = "documentos";
 		$args['orderDir'] = "DESC";
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaAutorDocumentos\"";
+		$args['sortBy'] = array('autor', 'autorSlug', 'coautorias','documentos');
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaAutorDocumentos\"";
+		$args['querySlug'] = "SELECT e_100a AS unslug FROM autor WHERE slug='{$args['slug']}' LIMIT 1";
+		$args['where'] = "WHERE \"autorSlug\"='{$args['slug']}'";
+		$args['breadcrumbSlug'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/autor', _('Autor'), _('title="Autor"')));
 		$args['cols'][] = array(
 				'editable' => false,
 				'title' => _('Autor'),
@@ -57,19 +61,27 @@ class Frecuencias extends CI_Controller {
 		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
+				'title' => _('Coautorías'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
 				'className' => 'pq-link'
 			);
-		$args['sortBy'] = array('autor', 'autorSlug', 'documentos');
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por autor');
 		$data['header']['gridTitle'] = _sprintf('Frecuencia de documentos por autor');
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Autor'));
 		/*XML vars*/
-		$args['xls']['cols'] = array( _('Autor'), _('Documentos') );
-		$args['xls']['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaAutorDocumentos\" ORDER BY documentos DESC, autor";
+		$args['xls']['cols'] = array( _('Autor'), _('Coautorías'), _('Documentos') );
+		$args['xls']['query'] = "SELECT autor, coautorias, documentos FROM \"mvFrecuenciaAutorDocumentos\" ORDER BY documentos DESC, autor";
 		$args['xls']['fileName'] = "Frecuencia-Autor.csv";
+		$section = array('', '', '/coautoria', '/documento');
+		$data['header']['section'] = json_encode($section, true);
 		return $this->_renderFrecuency($args, $data);
 	}
 
@@ -89,14 +101,85 @@ class Frecuencias extends CI_Controller {
 		return $this->_renderDocuments($args);
 	}
 
+	public function autorCoautoria(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('autorCoautoria', 'autorCoSlug', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('Autor'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'autorCoSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaAutorCoautoria\" WHERE \"autorSlug\"='{$args['autorSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaAutorCoautoria\" WHERE \"autorSlug\"='{$args['autorSlug']}'";
+		$this->load->database();
+		$query = "SELECT e_100a AS autor FROM autor WHERE slug='{$args['autorSlug']}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$autor = $query['autor'];
+		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por autor "%s", coautores', $autor);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos por coautor del autor:<br/> %s', $autor);
+		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Coautoría', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/autor', _('Autor'), _('title="Autor"')), $autor);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Autor'), _('Documentos'));
+		$args['xls']['query'] = "SELECT autorCoautoria, documentos FROM \"mvFrecuenciaAutorCoautoria\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY documentos DESC, pais";
+		$args['xls']['fileName'] = "Frecuencia-{$autor}-Coautorias.csv";
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function autorCoautoriaDocumentos($autor, $coautor){
+		$args['slug'] = $coautor;
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vAutorCoautoriaDocumentos\" WHERE \"autorSlug\"='{$autor}' AND \"autorCoSlug\"='$coautor'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vAutorCoautoriaDocumentos\" WHERE \"autorSlug\"='{$autor}' AND \"autorCoSlug\"='{$coautor}'";
+		$args['paginationURL'] = site_url("frecuencias/autor/{$autor}/coautoria/{$coautor}");
+		/*Datos del autor*/
+		$this->load->database();
+		$query = "SELECT e_100a AS autor FROM autor WHERE slug='{$autor}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$autor = array(
+				'slug' => $autor,
+				'autor' => $query['autor']
+			);
+		/*Datos del coautor*/
+		$query = "SELECT e_100a AS coautor FROM autor WHERE slug='{$coautor}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$coautor = array(
+				'slug' => $coautor,
+				'coautor' => $query['coautor']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/autor', _('Autor'), _('title="Autor"')), anchor("frecuencias/autor/{$autor['slug']}/coautoria", _sprintf('%s/Coautoría', $autor['autor']), _("title= \"{$autor['autor']}/Coautoría\"")), $coautor['coautor']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $autor['autor']);
+		return $this->_renderDocuments($args);
+	}
+
 	public function institucion(){
 		$args = $this->uri->ruri_to_assoc();
 		$args['defaultOrder'] = "documentos";
 		$args['orderDir'] = "DESC";
-		$args['sortBy'] = array('institucion', 'institucionSlug', 'paises', 'revistas', 'autores', 'documentos');
+		$args['sortBy'] = array('institucion', 'institucionSlug', 'paises', 'revistas', 'autores', 'disciplinas', 'coautorias','documentos');
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionDARP\" {$where}";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionDARP\"";
-		$args['querySlug'] = $query = "SELECT e_100u AS unslug FROM institucion WHERE slug='{$args['slug']}' LIMIT 1";
+		$args['querySlug'] = "SELECT e_100u AS unslug FROM institucion WHERE slug='{$args['slug']}' LIMIT 1";
 		$args['where'] = "WHERE \"institucionSlug\"='{$args['slug']}'";
 		$args['breadcrumbSlug'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')));
 		/*Columnas de la tabla*/
@@ -135,19 +218,33 @@ class Frecuencias extends CI_Controller {
 		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
+				'title' => _('Disciplinas'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Instituciones coautoras'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
 				'className' => 'pq-link'
 			);
 		/*XML vars*/
-		$args['xls']['cols'] = array( _('Institución'), _('Países'), _('Revistas'), _('Autores'), _('Documentos'));
-		$args['xls']['query'] = "SELECT institucion, paises, revistas, autores, documentos FROM \"mvFrecuenciaInstitucionDARP\" ORDER BY documentos DESC, institucion";
+		$args['xls']['cols'] = array( _('Institución'), _('Países'), _('Revistas'), _('Autores'), _('Disciplinas'), _('Coautoría institucional'), _('Documentos'));
+		$args['xls']['query'] = "SELECT institucion, paises, revistas, autores, disciplinas, coautorias,documentos FROM \"mvFrecuenciaInstitucionDARP\" ORDER BY documentos DESC, institucion";
 		$args['xls']['fileName'] = "Frecuencia-Institucion.csv";
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución');
 		$data['header']['gridTitle'] = _sprintf('Número de documentos por país de publicación de la revista, título de la revista, autor y disciplina, por institución de afiliación del autor');
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Institución'));
-		$section = array('', '', '/pais', '/revista', '/autor', '/documento');
+		$section = array('', '', '/pais', '/revista', '/autor', '/disciplina', '/coautoria','/documento');
 		$data['header']['section'] = json_encode($section, true);
 		return $this->_renderFrecuency($args, $data);
 	}
@@ -195,7 +292,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$this->load->database();
-		$query = "SELECT institucion FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' LIMIT 1";
+		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$args['institucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = $query['institucion'];
@@ -266,7 +363,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$this->load->database();
-		$query = "SELECT institucion FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' LIMIT 1";
+		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$args['institucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = $query['institucion'];
@@ -337,7 +434,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$this->load->database();
-		$query = "SELECT institucion FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' LIMIT 1";
+		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$args['institucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = $query['institucion'];
@@ -381,18 +478,160 @@ class Frecuencias extends CI_Controller {
 		return $this->_renderDocuments($args);
 	}
 
+	public function institucionDisciplina(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('disciplina', 'disciplinaSlug', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('Disciplina'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'disciplinaSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionDisciplina\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionDisciplina\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
+		$this->load->database();
+		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$args['institucionSlug']}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$institucion = $query['institucion'];
+		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", disciplina', $institucion);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos publicados por disciplina en la institución: <br/>%s', $institucion);
+		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Disciplina', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Disciplina'), _('Documentos'));
+		$args['xls']['query'] = "SELECT disciplina, documentos FROM \"mvFrecuenciaInstitucionDisciplina\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY documentos DESC, autor";
+		$args['xls']['fileName'] = "Frecuencia-{$institucion}-Disciplinas.csv";
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function institucionDisciplinaDocumentos($institucion, $disciplina){
+		$args['slug'] = $disciplina;
+		$args['query'] = "SELECT {$this->queryFields} FROM \"mvInstucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"disciplinaSlug\"='$disciplina'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvInstucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"disciplinaSlug\"='{$disciplina}'";
+		$args['paginationURL'] = site_url("frecuencias/institucion/{$institucion}/disciplina/{$disciplina}");
+		/*Datos de la institucion*/
+		$this->load->database();
+		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$institucion = array(
+				'slug' => $institucion,
+				'institucion' => $query['institucion']
+			);
+		/*Datos de la disciplina*/
+		$query = "SELECT disciplina FROM disciplinas WHERE slug='{$disciplina}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$disciplina = array(
+				'slug' => $disciplina,
+				'disciplina' => $query['disciplina']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), anchor("frecuencias/institucion/{$institucion['slug']}/disciplina", _sprintf('%s/Disciplina', $institucion['institucion']), _("title= \"{$institucion['institucion']}/Disciplina\"")), $disciplina['disciplina']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $institucion['institucion']);
+		return $this->_renderDocuments($args);
+	}
+
+	public function institucionCoautoria(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('institucionCoautoria', 'institucionCoSlug', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('Institución'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'institucionSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionCoautoria\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionCoautoria\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
+		$this->load->database();
+		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$args['institucionSlug']}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$institucion = $query['institucion'];
+		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", disciplina', $institucion);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos en coautoría en la institución: <br/>%s', $institucion);
+		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Coautoría', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), $institucion);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Institución'), _('Documentos'));
+		$args['xls']['query'] = "SELECT \"institucionCoautoria\", documentos FROM \"mvFrecuenciaInstitucionCoautoria\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY documentos DESC, autor";
+		$args['xls']['fileName'] = "Frecuencia-{$institucion}-Coautoria.csv";
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function institucionCoautoriaDocumentos($institucion, $coautoria){
+		$args['slug'] = $coautoria;
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vInstucionCoautoriaDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"institucionCoSlug\"='$coautoria'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vInstucionCoautoriaDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"institucionCoSlug\"='{$coautoria}'";
+		$args['paginationURL'] = site_url("frecuencias/institucion/{$institucion}/coautoria/{$coautoria}");
+		/*Datos de la institucion*/
+		$this->load->database();
+		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$institucion = array(
+				'slug' => $institucion,
+				'institucion' => $query['institucion']
+			);
+		/*Datos de la institucion coautoria*/
+		$query = "SELECT e_100u AS coautoria FROM institucion WHERE slug='{$coautoria}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$coautoria = array(
+				'slug' => $coautoria,
+				'coautoria' => $query['coautoria']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/institucion', _('Institución'), _('title="Institución"')), anchor("frecuencias/institucion/{$institucion['slug']}/coautoria", _sprintf('%s/Coautoría', $institucion['institucion']), _("title= \"{$institucion['institucion']}/Coautoría\"")), $coautoria['coautoria']);
+		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $institucion['institucion']);
+		return $this->_renderDocuments($args);
+	}
+
 	public function paisAfiliacion(){
 		$args = $this->uri->ruri_to_assoc();
 		$args['defaultOrder'] = "documentos";
 		$args['orderDir'] = "DESC";
-		$args['sortBy'] = array('paisInstitucion', 'paisInstitucionSlug', 'instituciones', 'autores', 'documentos');
+		$args['sortBy'] = array('paisInstitucion', 'paisInstitucionSlug', 'instituciones', 'autores', 'disciplinas', 'coautorias','documentos');
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaPaisAfiliacion\" {$where}";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaPaisAfiliacion\"";
 		$args['querySlug'] = $query = "SELECT e_100x AS unslug FROM institucion WHERE \"paisInstitucionSlug\"='{$args['slug']}' LIMIT 1";
 		$args['where'] = "WHERE \"paisInstitucionSlug\"='{$args['slug']}'";
 		$args['breadcrumbSlug'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %%s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')));
 		/*XML vars*/
-		$args['xls']['cols'] = array( _('País de afiliación'), _('Instituciones'), _('Autores'), _('Documentos') );
+		$args['xls']['cols'] = array( _('País de afiliación'), _('Instituciones'), _('Autores'), _('Disciplinas'), _('Paises coautores'), _('Documentos') );
 		$args['xls']['query'] = "SELECT \"paisInstitucion\", instituciones, autores, documentos FROM \"mvFrecuenciaPaisAfiliacion\" ORDER BY documentos DESC, \"paisInstitucion\"";
 		$args['xls']['fileName'] = "Frecuencia-PaisAfiliacion.csv";
 		/*Columnas de la tabla*/
@@ -424,6 +663,20 @@ class Frecuencias extends CI_Controller {
 		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
+				'title' => _('Disciplinas'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Paises coautores'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
 				'className' => 'pq-link'
@@ -432,7 +685,7 @@ class Frecuencias extends CI_Controller {
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución');
 		$data['header']['gridTitle'] = _sprintf('Número de documentos por institución, autor y disciplina por país de la institución del autor');
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s', anchor('frecuencias', _('Frecuencias'), _('title="País de afiliación del autor"')), _('País de afiliación'));
-		$section = array('', '', '/institucion', '/autor', '/documento');
+		$section = array('', '', '/institucion', '/autor', '/disciplina', '/coautoria', '/documento');
 		$data['header']['section'] = json_encode($section, true);
 		return $this->_renderFrecuency($args, $data);
 	}
@@ -593,6 +846,146 @@ class Frecuencias extends CI_Controller {
 		return $this->_renderDocuments($args);
 	}
 
+	public function paisAfiliacionDisciplina(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('disciplina', 'disciplinaSlug', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('Disciplina'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'disciplinaSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaPaisAfiliacionDisciplina\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaPaisAfiliacionDisciplina\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
+		$this->load->database();
+		$query = "SELECT e_100x AS \"paisInstitucion\" FROM institucion WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias país de afiliación "%s", autores', $query['paisInstitucion']);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos por autor del país de institución de afiliación:<br/> %s', $query['paisInstitucion']);
+		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('Autor'), _('Documentos') );
+		$args['xls']['query'] = "SELECT disciplina, documentos FROM \"mvFrecuenciaPaisAfiliacionDisciplina\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' ORDER BY documentos DESC, autor";
+		$args['xls']['fileName'] = "Frecuencia-{$query['paisInstitucion']}-Disciplinas.csv";
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function paisAfiliacionDisciplinaDocumentos($pais, $disciplina){
+		$args['slug'] = $disciplina;
+		$args['query'] = "SELECT {$this->queryFields} FROM \"mvPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"disciplinaSlug\"='{$disciplina}'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"disciplinaSlug\"='{$disciplina}'";
+		$args['paginationURL'] = site_url("frecuencias/pais-afiliacion/{$pais}/disciplina/{$disciplina}");
+		/*Datos de la disciplina*/
+		$this->load->database();
+		$query = "SELECT disciplina FROM disciplinas WHERE slug='{$disciplina}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$disciplina = array(
+				'slug' => $disciplina,
+				'disciplina' => $query['disciplina']
+			);
+		/*Datos del país*/
+		$query = "SELECT e_100x AS pais FROM institucion WHERE \"paisInstitucionSlug\"='{$pais}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$pais = array(
+				'slug' => $pais,
+				'pais' => $query['pais']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), anchor("frecuencias/pais-afiliacion/{$pais['slug']}/disciplina", _sprintf('%s/Disciplina', $pais['pais']), _("title= \"{$disciplina['disciplina']}/Disciplina\"")), $disciplina['disciplina']);
+		$args['title'] = _sprintf('Biblat - País de afiliación: %s/%s (%%d documentos)', $pais['pais'], $disciplina['disciplina']);
+		return $this->_renderDocuments($args);
+	}
+
+	public function paisAfiliacionCoautoria(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('paisInstitucionCoautoria', 'paisInstitucionCoSlug', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('País coautor'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'paisInstitucionCoSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaPaisAfiliacionCoautoria\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaPaisAfiliacionCoautoria\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
+		$this->load->database();
+		$query = "SELECT e_100x AS \"paisInstitucion\" FROM institucion WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias país de afiliación "%s", paises', $query['paisInstitucion']);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos en coautoría por país de institución de afiliación:<br/> %s', $query['paisInstitucion']);
+		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Coautoría', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), $query['paisInstitucion']);
+		/*XML vars*/
+		$args['xls']['cols'] = array( _('País coautor'), _('Documentos') );
+		$args['xls']['query'] = "SELECT \"paisInstitucionCoautoria\", documentos FROM \"mvFrecuenciaPaisAfiliacionCoautoria\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' ORDER BY documentos DESC, autor";
+		$args['xls']['fileName'] = "Frecuencia-{$query['paisInstitucion']}-Coautoria.csv";
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function paisAfiliacionCoautoriaDocumentos($pais, $coautoria){
+		$args['slug'] = $coautoria;
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vPaisAfiliacionDocumentosCoautoria\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"paisInstitucionCoSlug\"='{$coautoria}'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vPaisAfiliacionDocumentosCoautoria\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"paisInstitucionCoSlug\"='{$coautoria}'";
+		$args['paginationURL'] = site_url("frecuencias/pais-afiliacion/{$pais}/coautoria/{$coautoria}");
+		/*Datos del país coautor*/
+		$this->load->database();
+		$query = "SELECT e_100x AS coautoria FROM institucion WHERE \"paisInstitucionSlug\"='{$coautoria}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$coautoria = array(
+				'slug' => $coautoria,
+				'coautoria' => $query['coautoria']
+			);
+		/*Datos del país*/
+		$query = "SELECT e_100x AS pais FROM institucion WHERE \"paisInstitucionSlug\"='{$pais}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$pais = array(
+				'slug' => $pais,
+				'pais' => $query['pais']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/pais-afiliacion', _('País de afiliación'), _('title="País de afiliación del autor"')), anchor("frecuencias/pais-afiliacion/{$pais['slug']}/coautoria", _sprintf('%s/Coautoría', $pais['pais']), _("title= \"{$coautoria['coautoria']}/Coautoría\"")), $coautoria['coautoria']);
+		$args['title'] = _sprintf('Biblat - País de afiliación: %s/%s (%%d documentos)', $pais['pais'], $coautoria['coautoria']);
+		return $this->_renderDocuments($args);
+	}
+
 	private function _renderFrecuency($args, $data){
 		if ($args['export'] == "excel"):
 			$args['xls']['queryTotal'] = $args['queryTotal'];
@@ -643,6 +1036,7 @@ class Frecuencias extends CI_Controller {
 		/*Vistas*/
 		$data['header']['colModel'] = json_encode($args['cols'], true);
 		$data['header']['sortBy'] = json_encode($args['sortBy'], true);
+		$data['header']['sortDir'] = $args['orderDir'];
 		$data['header']['sortIndx'] = array_search($args['defaultOrder'], $args['sortBy']);
 		$data['header']['args'] = pqgrid_args($args);
 		$data['header']['content'] =  $this->load->view('frecuencias/header', $data['header'], TRUE);
@@ -656,7 +1050,7 @@ class Frecuencias extends CI_Controller {
 		$args = $this->uri->ruri_to_assoc();
 		$args['defaultOrder'] = "documentos";
 		$args['orderDir'] = "DESC";
-		$args['sortBy'] = array('revista', 'revistaSlug', 'autores', 'documentos');
+		$args['sortBy'] = array('revista', 'revistaSlug', 'autores', 'instituciones', 'anios','documentos');
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaRevista\" {$where}";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaRevista\"";
 		$args['querySlug'] = "SELECT revista AS unslug FROM \"mvFrecuenciaRevista\" WHERE \"revistaSlug\"='{$args['slug']}' LIMIT 1";
@@ -684,6 +1078,20 @@ class Frecuencias extends CI_Controller {
 		$args['cols'][] = array(
 				'align' => 'center',
 				'editable' => false,
+				'title' => _('Instituciones'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Años'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
 				'title' => _('Documentos'),
 				'width' => 100,
 				'className' => 'pq-link'
@@ -692,11 +1100,11 @@ class Frecuencias extends CI_Controller {
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por revista');
 		$data['header']['gridTitle'] = _sprintf('Número de documentos publicados por revista y autor');
 		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), _('Revista'));
-		$section = array('', '', '/autor', '/documento');
+		$section = array('', '', '/autor', '/institucion', '/anio', '/documento');
 		$data['header']['section'] = json_encode($section, true);
 		/*XML vars*/
-		$args['xls']['cols'] = array( _('Revista'), _('Autores'), _('Documentos') );
-		$args['xls']['query'] = "SELECT revista, autores, documentos FROM \"mvFrecuenciaRevista\" ORDER BY documentos DESC, revista";
+		$args['xls']['cols'] = array( _('Revista'), _('Autores'), _('Instituciones'), _('Años'), _('Documentos') );
+		$args['xls']['query'] = "SELECT revista, autores, instituciones, anios, documentos FROM \"mvFrecuenciaRevista\" ORDER BY documentos DESC, revista";
 		$args['xls']['fileName'] = "Frecuencia-Revista.csv";
 		return $this->_renderFrecuency($args, $data);
 	}
@@ -787,10 +1195,153 @@ class Frecuencias extends CI_Controller {
 		return $this->_renderDocuments($args);
 	}	
 
+	public function revistaAnio(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "anio";
+		$args['orderDir'] = "ASC";
+		$args['sortBy'] = array('anio', 'anio', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('Año'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'anio',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaRevistaAnio\" WHERE \"revistaSlug\"='{$args['revistaSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaRevistaAnio\" WHERE \"revistaSlug\"='{$args['revistaSlug']}'";
+		$this->load->database();
+		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por revista: %s, autores', $query['revista']);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos publicados por autor en la revista:<br/> %s', $query['revista']);
+		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), $query['revista']);
+		/*XML vars*/
+		$args['xls']['cols'] = array( ('Autor'), _('Documentos') );
+		$args['xls']['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaRevistaAutor\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' ORDER BY documentos DESC, autor";
+		$args['xls']['fileName'] = "Frecuencia-{$query['revista']}-Años.csv";
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function revistaAnioDocumentos($revista, $anio){
+		$args['slug'] = $anio;
+		$args['query'] = "SELECT {$this->queryFields} FROM \"mvRevistaDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND anio='$anio'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvRevistaDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND anio='{$anio}'";
+		$args['paginationURL'] = site_url("frecuencias/revista/{$revista}/anio/{$anio}");
+		$args['firstPageNumber'] = TRUE;
+		/*Datos de la revista*/
+		$this->load->database();
+		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$revista = array(
+				'slug' => $revista,
+				'revista' => $query['revista']
+			);
+		/*Datos del año*/
+		$anio = array(
+				'slug' => $anio,
+				'anio' => $anio
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), anchor("frecuencias/revista/{$revista['slug']}/anio", _sprintf('%s/Año', $revista['revista']), _("title= \"{$revista['revista']}/Año\"")), $anio['anio']);
+		$args['title'] = _sprintf('Biblat - Revista: %s/%s (%%d documentos)', $revista['revista'], $anio['anio']);
+		return $this->_renderDocuments($args);
+	}
+
+	public function revistaInstitucion(){
+		$args = $this->uri->ruri_to_assoc();
+		$args['defaultOrder'] = "documentos";
+		$args['orderDir'] = "DESC";
+		$args['sortBy'] = array('institucion', 'institucionSlug', 'documentos');
+		/*Columnas de la tabla*/
+		$args['cols'][] = array(
+				'editable' => false,
+				'title' => _('Institución'),
+				'width' => 320
+			);
+		$args['cols'][] = array(
+				'editable' => false,
+				'hidden' => true,
+				'title' => 'institucionSlug',
+				'width' => 200
+			);
+		$args['cols'][] = array(
+				'align' => 'center',
+				'editable' => false,
+				'title' => _('Documentos'),
+				'width' => 100,
+				'className' => 'pq-link'
+			);
+		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaRevistaInstitucion\" WHERE \"revistaSlug\"='{$args['revistaSlug']}'";
+		$args['query'] = "SELECT * FROM \"mvFrecuenciaRevistaInstitucion\" WHERE \"revistaSlug\"='{$args['revistaSlug']}'";
+		$this->load->database();
+		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$this->db->close();
+		$data = array();
+		$data['header']['title'] = _sprintf('Biblat - Frecuencias por revista: %s, autores', $query['revista']);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos publicados por autor en la revista:<br/> %s', $query['revista']);
+		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), $query['revista']);
+		/*XML vars*/
+		$args['xls']['cols'] = array( ('Autor'), _('Documentos') );
+		$args['xls']['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaRevistaAutor\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' ORDER BY documentos DESC, autor";
+		$args['xls']['fileName'] = "Frecuencia-{$query['revista']}-Instituciones.csv";
+		return $this->_renderFrecuency($args, $data);
+	}
+
+	public function revistaInstitucionDocumentos($revista, $institucion){
+		$args['slug'] = $institucion;
+		$args['query'] = "SELECT {$this->queryFields} FROM \"mvRevistaDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND \"institucionSlug\"='$institucion'";
+		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvRevistaDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND \"institucionSlug\"='{$institucion}'";
+		$args['paginationURL'] = site_url("frecuencias/revista/{$revista}/institucion/{$institucion}");
+		/*Datos de la revista*/
+		$this->load->database();
+		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$revista = array(
+				'slug' => $revista,
+				'revista' => $query['revista']
+			);
+		/*Datos de la institucion*/
+		$this->load->database();
+		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = $this->db->query($query);
+		$query = $query->row_array();
+		$institucion = array(
+				'slug' => $institucion,
+				'institucion' => $query['institucion']
+			);
+		$this->db->close();
+		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), anchor("frecuencias/revista/{$revista['slug']}/institucion", _sprintf('%s/Institución', $revista['revista']), _("title= \"{$revista['revista']}/Institución\"")), $institucion['institucion']);
+		$args['title'] = _sprintf('Biblat - Revista: %s/%s (%%d documentos)', $revista['revista'], $institucion['institucion']);
+		return $this->_renderDocuments($args);
+	}
+
 	private function _renderDocuments($args){
 		/*Obtniendo los registros con paginación*/
 		$query = "{$args['query']} ORDER BY anio DESC, volumen DESC, numero DESC, articulo";
-		$articulosResultado = articulosResultado($query, $args['queryCount'], $args['paginationURL'], $resultados=20);
+		if($args['firstPageNumber']):
+			$articulosResultado = articulosResultado($query, $args['queryCount'], $args['paginationURL'], $resultados=20, FALSE, TRUE);
+		else:
+			$articulosResultado = articulosResultado($query, $args['queryCount'], $args['paginationURL'], $resultados=20);
+		endif;
 		/*Vistas*/
 		$data = array();
 		$data['main']['links'] = $articulosResultado['links'];
