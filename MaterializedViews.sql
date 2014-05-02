@@ -1414,6 +1414,143 @@ CREATE OR REPLACE VIEW "vDisciplinasBase" AS
    JOIN articulo ON disciplinas.id_disciplina = articulo.id_disciplina AND disciplinas.id_disciplina <> 23::numeric
   GROUP BY disciplinas.slug, disciplinas.disciplina, articulo.iddatabase
   ORDER BY articulo.iddatabase, disciplinas.slug;
+
+--Vista materializada de frecuencis por disciplina
+CREATE MATERIALIZED VIEW "mvFrecuenciaDisciplina" AS
+SELECT 
+  *
+FROM disciplinas d
+
+LEFT JOIN
+  (SELECT
+    a.id_disciplina AS "idDisciplina",
+    count(DISTINCT a.e_008) AS paises,
+    count(DISTINCT a.e_222) AS revistas,
+    count(DISTINCT (a.iddatabase, a.sistema)) AS documentos,
+    count(DISTINCT i.e_100u) AS instituciones
+  FROM institucion i
+  JOIN articulo a ON a.iddatabase = i.iddatabase AND a.sistema = i.sistema
+  GROUP BY a.id_disciplina) dip --Disciplinas, Instituciones, Paises, Documentos
+ON d.id_disciplina = dip."idDisciplina"
+ORDER BY d.disciplina;
+
+-- Vista materializada de disciplina/documentos
+CREATE MATERIALIZED VIEW "mvDisciplinaDocumentos" AS
+SELECT s.sistema,
+    s.iddatabase,
+    s.articulo,
+    s."articuloSlug",
+    s.revista,
+    s."revistaSlug",
+    s.pais,
+    s."paisSlug",
+    s.anio,
+    s.volumen,
+    s.numero,
+    s.periodo,
+    s.paginacion,
+    s.url,
+    d.slug AS "disciplinaSlug",
+    d.disciplina,
+    s."autoresSecJSON",
+    s."autoresSecInstitucionJSON",
+    s."autoresJSON",
+    s."institucionesSecJSON",
+    s."institucionesJSON"
+FROM disciplinas d
+JOIN "mvSearch" s ON d.id_disciplina = s.id_disciplina
+
+--Vista materializada de frecuencia por disciplina
+CREATE MATERIALIZED VIEW "mvFrecuenciaDisciplina" AS
+SELECT d.disciplina,
+    d.id_disciplina,
+    d.slug,
+    dipd."idDisciplina",
+    dipd.paises,
+    dipd.revistas,
+    dipd.documentos,
+    dipd.instituciones,
+    dipd."paisInstitucion"
+FROM disciplinas d
+LEFT JOIN ( SELECT a.id_disciplina AS "idDisciplina",
+            count(DISTINCT a.e_008) AS paises,
+            count(DISTINCT a.e_222) AS revistas,
+            count(DISTINCT ROW(a.iddatabase, a.sistema)) AS documentos,
+            count(DISTINCT i.slug) AS instituciones,
+            count(DISTINCT i."paisInstitucionSlug") AS "paisInstitucion"
+           FROM articulo a
+      LEFT JOIN institucion i ON a.iddatabase = i.iddatabase AND a.sistema = i.sistema
+     GROUP BY a.id_disciplina) dipd ON d.id_disciplina = dipd."idDisciplina"
+ORDER BY dipd.documentos DESC
+
+--Vista materializada de frecuencia disciplina/institución
+CREATE MATERIALIZED VIEW "mvFrecuenciaDisciplinaInstitucion" AS
+SELECT  d.disciplina,
+  d.id_disciplina,
+  d.slug AS "disciplinaSlug",
+  dipd."idDisciplina",
+  dipd.documentos,
+  dipd.institucion,
+  slug(dipd.institucion) AS "institucionSlug"
+FROM disciplinas d
+INNER JOIN ( SELECT a.id_disciplina AS "idDisciplina",
+            count(DISTINCT ROW(a.iddatabase, a.sistema)) AS documentos,
+            i.e_100u AS institucion
+            FROM articulo a
+      JOIN institucion i ON a.iddatabase = i.iddatabase AND a.sistema::text = i.sistema::text
+     GROUP BY a.id_disciplina, i.e_100u) dipd ON d.id_disciplina = dipd."idDisciplina"
+WHERE institucion IS NOT NULL ORDER BY dipd.documentos DESC
+
+--Vista materializada de frecuencia disciplina/país
+CREATE MATERIALIZED VIEW "mvFrecuenciaDisciplinaPais" AS
+ SELECT max(d.disciplina) AS disciplina,
+    d.slug AS "disciplinaSlug",
+    max(s.pais) AS pais,
+    s."paisSlug",
+    count(DISTINCT ROW(s.iddatabase, s.sistema)) AS documentos
+   FROM disciplinas d
+   JOIN "mvSearch" s ON d.id_disciplina = s.id_disciplina
+  GROUP BY d.slug, s."paisSlug"
+
+--Vista materializada de frecuencia disciplina/revista
+CREATE MATERIALIZED VIEW "mvFrecuenciaDisciplinaRevista" AS 
+ SELECT max(disciplina) AS disciplina,
+    d.slug AS "disciplinaSlug",
+    max(s.revista) AS revista,
+    s."revistaSlug",
+    count(DISTINCT ROW(s.iddatabase, s.sistema)) AS documentos
+   FROM disciplinas d
+   JOIN "mvSearch" s ON d.id_disciplina = s.id_disciplina
+  GROUP BY d.slug, s."revistaSlug"
+
+  --Modificación de vista materializada Institución/documentos
+  CREATE MATERIALIZED VIEW "mvInstucionDocumentos" AS
+SELECT  s.sistema,
+  s.iddatabase,
+  s.articulo,
+  s."articuloSlug",
+  s.revista,
+  s."revistaSlug",
+  s.pais,
+  s."paisSlug",
+  s.anio,
+  s.volumen,
+  s.numero,
+  s.periodo,
+  s.paginacion,
+  s.url,
+  i.slug AS "institucionSlug",
+  s."autoresSecJSON",
+  s."autoresSecInstitucionJSON",
+  s."autoresJSON",
+  s."institucionesSecJSON",
+  s."institucionesJSON",
+  s.id_disciplina,
+  d.slug AS "disciplinaSlug"
+FROM institucion i
+JOIN "mvSearch" s ON i.iddatabase = s.iddatabase AND i.sistema = s.sistema
+JOIN disciplinas d ON d.id_disciplina = s.id_disciplina
+
   
 --Drops
 --SELECT drop_matview('"mvIndiceCoautoriaPricePais"');
