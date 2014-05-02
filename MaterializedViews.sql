@@ -1773,6 +1773,7 @@ FROM "mvSearch" s;
 --DROP MATERIALIZED VIEW "mvFrecuenciaDisciplinaInstitucion";
 CREATE MATERIALIZED VIEW "mvFrecuenciaDisciplinaInstitucion" AS
 SELECT 
+  s."disciplinaSlug",
   i.slug AS "institucionSlug",
   max(i.e_100u) AS institucion,
   count(DISTINCT (i.iddatabase, i.sistema)) AS documentos
