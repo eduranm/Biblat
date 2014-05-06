@@ -201,6 +201,8 @@ ALTER TABLE institucion ADD COLUMN "paisInstitucionSlug" varchar;
 UPDATE institucion SET "paisInstitucionSlug"=slug(e_100x);
 
 CREATE INDEX "idx_institucionDSAI" ON institucion(iddatabase, sistema, sec_autor, sec_institucion);
+CREATE INDEX ON institucion(iddatabase, sistema);
+CREATE INDEX ON institucion(slug); 
 
 VACUUM (VERBOSE, FULL) institucion;
 

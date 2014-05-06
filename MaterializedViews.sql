@@ -1334,8 +1334,8 @@ SELECT
     GROUP BY ia.slug, i.slug ORDER BY "institucionSlug", documentos DESC
 
 --Institucion documentos
---DROP MATERIALIZED VIEW "mvInstucionDocumentos";
-CREATE MATERIALIZED VIEW "mvInstucionDocumentos" AS
+--DROP VIEW "vInstitucionDocumentos";
+CREATE VIEW "vInstitucionDocumentos" AS
 SELECT 
   s.sistema,
   s.iddatabase,
@@ -1361,11 +1361,24 @@ SELECT
 FROM institucion i 
 INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema;
 
-CREATE INDEX "idx_institucionDocumentos" ON "mvInstucionDocumentos"(iddatabase, sistema);
-CREATE INDEX "idx_institucionDocumentosinstitucionSlug" ON "mvInstucionDocumentos"("institucionSlug");
-
 --Institucion->autor documentos--
-CREATE MATERIALIZED VIEW "mvInstucionAutorDocumentos" AS
+CREATE MATERIALIZED VIEW "mvInstitucionAutorSI" AS
+SELECT
+  i.iddatabase,
+  i.sistema,
+  i.slug AS "institucionSlug",
+  a.slug AS "autorSlug"
+FROM institucion i
+  INNER JOIN autor a ON
+    i.iddatabase=a.iddatabase AND
+    i.sistema=a.sistema AND
+    i.sec_autor=a.sec_autor;
+
+CREATE INDEX ON "mvInstitucionAutorSI"(iddatabase, sistema);
+CREATE INDEX ON "mvInstitucionAutorSI"("institucionSlug");
+CREATE INDEX ON "mvInstitucionAutorSI"("autorSlug");
+
+CREATE VIEW "vInstitucionAutorDocumentos" AS
 SELECT
   s.sistema,
   s.iddatabase,
@@ -1380,19 +1393,15 @@ SELECT
   periodo, 
   paginacion, 
   url, 
-  i.slug AS "institucionSlug",
+  ia."institucionSlug",
+  ia."autorSlug",
   "autoresSecJSON",
   "autoresSecInstitucionJSON",
   "autoresJSON",
   "institucionesSecJSON",
-  "institucionesJSON",
-  a.slug AS "autorSlug"
-  FROM institucion i
-  INNER JOIN autor a ON
-    i.iddatabase=a.iddatabase AND
-    i.sistema=a.sistema AND
-    i.sec_autor=a.sec_autor
-  INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema;
+  "institucionesJSON"
+  FROM "mvInstitucionAutorSI" ia
+  INNER JOIN "mvSearch" s ON ia.iddatabase=s.iddatabase AND ia.sistema=s.sistema;
 
 --Documentos en coautoria con la isntitucion
 CREATE MATERIALIZED VIEW "mvInstitucionCoautoriaSI" AS
@@ -1410,7 +1419,7 @@ CREATE INDEX "institucionCoautoriaSI_idx" ON "mvInstitucionCoautoriaSI"(iddataba
 CREATE INDEX "institucionCoautoriaSIInstitucion_idx" ON "mvInstitucionCoautoriaSI"("institucionSlug");
 CREATE INDEX "institucionCoautoriaSIInstitucionCo_idx" ON "mvInstitucionCoautoriaSI"("institucionCoSlug");
 
-CREATE VIEW "vInstucionCoautoriaDocumentos" AS
+CREATE VIEW "vInstitucionCoautoriaDocumentos" AS
 SELECT
   s.sistema,
   s.iddatabase,
@@ -1530,8 +1539,29 @@ SELECT
 GROUP BY pa."paisInstitucionSlug", i."paisInstitucionSlug";
 
 --Pais de afiliacion documentos
---DROP MATERIALIZED VIEW "mvPaisAfiliacionDocumentos";
-CREATE MATERIALIZED VIEW "mvPaisAfiliacionDocumentos" AS
+--DROP MATERIALIZED VIEW "mvPaisAfiliacionSI";
+CREATE MATERIALIZED VIEW "mvPaisAfiliacionSI" AS
+SELECT
+  i.iddatabase,
+  i.sistema,
+  i."paisInstitucionSlug",
+  i.slug AS "institucionSlug",
+  a.slug AS "autorSlug"
+FROM institucion i
+LEFT JOIN autor a ON
+  i.iddatabase=a.iddatabase AND
+  i.sistema=a.sistema AND
+  i.sec_autor=a.sec_autor AND
+  a.slug IS NOT NULL
+WHERE i.slug IS NOT NULL;
+
+CREATE INDEX ON "mvPaisAfiliacionSI"(iddatabase, sistema);
+CREATE INDEX ON "mvPaisAfiliacionSI"("paisInstitucionSlug");
+CREATE INDEX ON "mvPaisAfiliacionSI"("institucionSlug");
+CREATE INDEX ON "mvPaisAfiliacionSI"("autorSlug");
+
+--DROP VIEW "vPaisAfiliacionDocumentos";
+CREATE VIEW "vPaisAfiliacionDocumentos" AS
 SELECT 
   s.sistema,
   s.iddatabase,
@@ -1547,28 +1577,19 @@ SELECT
   paginacion, 
   url, 
   "disciplinaSlug",
-  i."paisInstitucionSlug",
-  i.slug AS "institucionSlug",
-  a.slug AS "autorSlug",
+  pi."paisInstitucionSlug",
+  pi."institucionSlug",
+  pi."autorSlug",
   "autoresSecJSON",
   "autoresSecInstitucionJSON",
   "autoresJSON",
   "institucionesSecJSON",
   "institucionesJSON" 
-FROM institucion i
-INNER JOIN "mvSearch" s ON i.iddatabase=s.iddatabase AND i.sistema=s.sistema
-LEFT JOIN autor a ON
-  i.iddatabase=a.iddatabase AND
-  i.sistema=a.sistema AND
-  i.sec_autor=a.sec_autor AND
-  a.slug IS NOT NULL
-WHERE i.slug IS NOT NULL;
-
-CREATE INDEX ON "mvPaisAfiliacionDocumentos"("paisInstitucionSlug");
-CREATE INDEX ON "mvPaisAfiliacionDocumentos"(iddatabase, sistema);
+FROM "mvPaisAfiliacionSI" pi
+INNER JOIN "mvSearch" s ON pi.iddatabase=s.iddatabase AND pi.sistema=s.sistema;
 
 --Documentos en coautoria por país de afiliación
-CREATE MATERIALIZED VIEW "mvPaisAfiliacionSI" AS
+CREATE MATERIALIZED VIEW "mvPaisAfiliacionCoautoriaSI" AS
 SELECT
     i.iddatabase, 
     i.sistema,
@@ -1586,11 +1607,11 @@ SELECT
   WHERE i.slug IS NOT NULL AND i.e_100x IS NOT NULL 
 GROUP BY i.iddatabase, i.sistema, pa."paisInstitucionSlug", i."paisInstitucionSlug";
 
-CREATE INDEX ON "mvPaisAfiliacionSI"(iddatabase, sistema);
-CREATE INDEX ON "mvPaisAfiliacionSI"("paisInstitucionSlug");
-CREATE INDEX ON "mvPaisAfiliacionSI"("paisInstitucionCoSlug");
+CREATE INDEX ON "mvPaisAfiliacionCoautoriaSI"(iddatabase, sistema);
+CREATE INDEX ON "mvPaisAfiliacionCoautoriaSI"("paisInstitucionSlug");
+CREATE INDEX ON "mvPaisAfiliacionCoautoriaSI"("paisInstitucionCoSlug");
 
-CREATE VIEW "vPaisAfiliacionDocumentosCoautoria" AS
+CREATE VIEW "vPaisAfiliacionCoautoriaDocumentos" AS
 SELECT 
   s.sistema,
   s.iddatabase,
@@ -1612,7 +1633,7 @@ SELECT
   "institucionesJSON",
   pc."paisInstitucionSlug",
   pc."paisInstitucionCoSlug"
-FROM "mvPaisAfiliacionSI" pc
+FROM "mvPaisAfiliacionCoautoriaSI" pc
 INNER JOIN "mvSearch" s 
   ON pc.iddatabase=s.iddatabase AND pc.sistema=s.sistema;
 
@@ -1663,42 +1684,6 @@ LEFT JOIN institucion i ON s.sistema=i.sistema AND s.iddatabase=i.iddatabase
 WHERE "revistaSlug" IS NOT NULL AND i.slug IS NOT NULL 
 GROUP BY "revistaSlug", i.slug;
 
---Revista documentos
---DROP MATERIALIZED VIEW "mvRevistaDocumentos";
-CREATE MATERIALIZED VIEW "mvRevistaDocumentos" AS
-SELECT 
-  s.sistema,
-  s.iddatabase,
-  articulo, 
-  "articuloSlug", 
-  revista, 
-  "revistaSlug", 
-  pais, 
-  anio, 
-  volumen, 
-  numero, 
-  periodo, 
-  paginacion, 
-  url,
-  a.slug AS "autorSlug",
-  i.slug AS "institucionSlug",
-  "autoresSecJSON",
-  "autoresSecInstitucionJSON",
-  "autoresJSON",
-  "institucionesSecJSON",
-  "institucionesJSON" 
-FROM "mvSearch" s
-LEFT JOIN autor a ON 
-  s.sistema=a.sistema AND
-  s.iddatabase=a.iddatabase AND
-  a.slug IS NOT NULL
-LEFT JOIN institucion i ON s.sistema=i.sistema AND s.iddatabase=i.iddatabase
-WHERE s.revista IS NOT NULL;
-
-CREATE INDEX "idx_revistaDocumentos" ON "mvRevistaDocumentos"("revistaSlug");
-
-
-
 
 SELECT slug, array_to_json(array_agg(institucion)) AS instituciones, array_to_json(array_agg(documentos)) AS documentos
 FROM
@@ -1743,31 +1728,6 @@ INNER JOIN ( SELECT a.id_disciplina AS "idDisciplina",
       LEFT JOIN institucion i ON a.iddatabase = i.iddatabase AND a.sistema = i.sistema
      GROUP BY a.id_disciplina) dipd ON d.id_disciplina = dipd."idDisciplina"
 ORDER BY dipd.documentos DESC;
-
--- Vista materializada de disciplina/documentos
-CREATE VIEW "vDisciplinaDocumentos" AS
-SELECT s.sistema,
-    s.iddatabase,
-    s.articulo,
-    s."articuloSlug",
-    s.revista,
-    s."revistaSlug",
-    s.pais,
-    s."paisSlug",
-    s.anio,
-    s.volumen,
-    s.numero,
-    s.periodo,
-    s.paginacion,
-    s.url,
-    s."disciplinaSlug",
-    s.disciplina,
-    s."autoresSecJSON",
-    s."autoresSecInstitucionJSON",
-    s."autoresJSON",
-    s."institucionesSecJSON",
-    s."institucionesJSON"
-FROM "mvSearch" s;
 
 --Vista materializada de frecuencia disciplina/institución
 --DROP MATERIALIZED VIEW "mvFrecuenciaDisciplinaInstitucion";
