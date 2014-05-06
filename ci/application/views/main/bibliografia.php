@@ -7,6 +7,12 @@
 		</p>
 	</div>
 	<div class="textoJ">
+
+		Rodríguez Yunta, L.  (2014, abril) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/RodriguezYunta_2014.pdf" target="_blank">Indicadores bibliométricos sobre revistas: más allá de los índices de citas.</a> Ponencia presentada en el <i>XI Seminario Hispano-Mexicano de Investigación en Bibliotecología y Documentación: La información y sus contextos en el cambio social.</i>  México: UNAM, Instituto de Investigaciones Bibliotecológicas y de la Información.<br></br>
+
+
+		Sánchez Pereyra, A., Quintero León, K., García Bravo, I. & Rendón Cruz, A. (2013, abril)  <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/SanchezPereyra_Quintero_Garcia_Rendon_2013.pdf" target="blank"><i>BIBLAT: Indicadores bibliométricos alternativos de la producción científica publicada en revistas de América Latina y el Caribe.</i></a> Ponencia presentada en el  Taller sobre Indicadores en Ciencia y Tecnología en Latinoamérica (TICyTLA). México: UNAM; Foro Consultivo Científico y Tecnológico (FCCyT); ITAM; Cinvestav.<br></br>
+
 		
 		Salinas Ibarra, Hugo (2013). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Salinas_Ibarra_2013.pdf" target="_blank"><i>Análisis Sociológico del proceso de producción y difusión y consumo de información científica. El caso de la base de datos CLASE</i></a>. Informe de servicio social (Licenciatura). México, Distrito Federal, Universidad Nacional Autónoma de México, Facultad de Ciencias Políticas y Sociales.<br/><br/>
 
@@ -116,10 +122,7 @@
 		Sandoval, A. (1978). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Sandoval_1978.pdf" target="_blank">Centro de información Científica y Humanística: un centro de información universitario del tercer mundo</a>. <em><i>Boletín de la Unesco para</i></em><b></b><i>las<b> </b></i><em><i>Bibliotecas</i></em><em>, 32(1), 45-52</em><br/><br/>
 
 		
-		Sandoval, A. (1956, diciembre) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Sandoval_1956.pdf" target="_blank">El centro de Documentación científica y técnica de México y la bibliografía científica en América Latina</a>. Ponencia presentada en las <i>Primeras Jornadas de Biblioteconomía, Bibliografía y Canje</i> de la AMBAC. México<br/><br/>
-
-
-		Rodríguez Yunta, L.  (2014, abril) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/RodriguezYunta_2014.pdf" target="_blank">Indicadores bibliométricos sobre revistas: más allá de los índices de citas.</a> Ponencia presentada en el <i>XI Seminario Hispano-Mexicano de Investigación en Bibliotecología y Documentación: La información y sus contextos en el cambio social.</i>  México: UNAM, Instituto de Investigaciones Bibliotecológicas y de la Información.
+		Sandoval, A. (1956, diciembre) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Sandoval_1956.pdf" target="_blank">El centro de Documentación científica y técnica de México y la bibliografía científica en América Latina</a>. Ponencia presentada en las <i>Primeras Jornadas de Biblioteconomía, Bibliografía y Canje</i> de la AMBAC. México
 
 	</div>
 
