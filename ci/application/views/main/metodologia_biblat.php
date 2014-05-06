@@ -12,7 +12,7 @@
 		<?php _e('De ambas bases se consideraron:');?><br></br>
 		<ul>
 			<li><?php _e('Sólo el tipo de documento “artículo”.');?></li>
-			<li><?php _printf('%s  y %s cuentan con registros que datan de 1970. Sin embargo, en los primeros 10 años los registros presentan problemas de normalización de sus campos, vacíos de información en períodos importantes así como limitaciones en los datos registrados. De 1980 en adelante, los registros presentan una mejor consistencia no obstante que, para el caso de algunas revistas y períodos de tiempo, se observan lagunas considerables. A pesar de estas carencias, se integraron todos los años con el propósito de presentar la mayor información posible, además de que la información de los años recientes se actualiza paulatina y sistemáticamente.','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>');?></li>
+			<li><?php _printf('%s y %s cuentan con registros que datan de 1970. Sin embargo, en los primeros 10 años los registros presentan problemas de normalización de sus campos, vacíos de información en períodos importantes así como limitaciones en los datos registrados. De 1980 en adelante, los registros presentan una mejor consistencia no obstante que, para el caso de algunas revistas y períodos de tiempo, se observan lagunas considerables. A pesar de estas carencias, se integraron todos los años con el propósito de presentar la mayor información posible, además de que la información de los años recientes se actualiza paulatina y sistemáticamente.','<a href="http://clase.unam.mx" target="_blank">CLASE</a>','<a href="http://periodica.unam.mx" target="_blank">PERIÓDICA</a>');?></li>
 			<li><?php _e('Sólo aquellas revistas que han sido indizadas al menos durante cinco años consecutivos.');?></li>
 			<li><?php _e('Sólo se consideran artículos cuyo autor aparece con su país e institución de afiliación institucional o corporativa.');?></li>
 			<li><?php _e('Se descartaron los registros de las revistas de difusión.');?></li>
@@ -118,7 +118,7 @@
 	</div>
 
 	<div id="info-indice-coautoria" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-coautoria");?>" target="_blank"><?php _e('Índice de Coautoría');?></a><sup>1</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-coautoria");?>" target="_blank"><?php _e('Índice de Coautoría');?></a><a class="referencia" href="#ref1"><sup>1</sup></a></p>
 		<p class="textoL">
 			<?php _e('Este indicador muestra el número promedio de autores por artículo.');?><br/>
 		</p>
@@ -142,7 +142,7 @@
 	</div>
 		
 	<div id="info-tasa-documentos-coautorados" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/tasa-documentos-coautorados");?>" target="_blank"><?php _e('Tasa de Documentos Coautorados');?></a><sup>2</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/tasa-documentos-coautorados");?>" target="_blank"><?php _e('Tasa de Documentos Coautorados');?></a><a class="referencia" href="#ref2"><sup>2</sup></a></p>
 		<p class="textoL">
 			<?php _e('El valor numérico indica la proporción de artículos con autoría múltiple.');?>
 		</p>
@@ -166,7 +166,7 @@
 	</div>
 
 	<div id="info-grado-colaboracion" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/grado-colaboracion");?>" target="_blank"><?php _e('Grado de Colaboración (Índice de Subramanyan)');?></a><sup>3</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/grado-colaboracion");?>" target="_blank"><?php _e('Grado de Colaboración (Índice de Subramanyan)');?></a><a class="referencia" href="#ref3"><sup>3</sup></a></p>
 		<p class="textoL">
 				<?php _e('El valor numérico indica la proporción de artículos con autoría múltiple.');?>
 		</p>
@@ -190,7 +190,7 @@
 	</div>
 
 	<div id="info-indice-colaboracion" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-colaboracion");?>" target="_blank"><?php _e('Índice de Colaboración (Índice de Lawani)');?></a><sup>4</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-colaboracion");?>" target="_blank"><?php _e('Índice de Colaboración (Índice de Lawani)');?></a><a class="referencia" href="#ref4"><sup>4</sup></a></p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 			<i>IC</i> = 
@@ -209,7 +209,7 @@
 			<?php _e('Donde:');?><br/>
 			<i>N</i> = <?php _e('Total de documentos.');?><br/>
 			<i>j<sub>i</sub></i> = <?php _e('Número de firmas (autores) por documentos.');?><br/>
-			<i>n<sub>i</sub></i> =  <?php _e('Cantidad de documentos con autoría múltiple.');?>
+			<i>n<sub>i</sub></i> = <?php _e('Cantidad de documentos con autoría múltiple.');?>
 		</p>
 		<p class="textoL">
 			<?php _e('Proporciona el peso promedio del número de autores por documento.');?><br/>
@@ -218,7 +218,7 @@
 	</div>
 
 	<div id="info-modelo-elitismo" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/modelo-elitismo");?>" target="_blank"><?php _e('Modelo de Elitismo (Price)');?></a><sup>5</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/modelo-elitismo");?>" target="_blank"><?php _e('Modelo de Elitismo (Price)');?></a><a class="referencia" href="#ref5"><sup>5</sup></a></p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 				<i>E</i> = 
@@ -235,7 +235,7 @@
 	</div>
 
 	<div id="info-indice-densidad-documentos" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-densidad-documentos");?>" target="_blank"><?php _e('Índice de Densidad de Documentos Zakutina y Priyenikova');?></a><sup>6</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-densidad-documentos");?>" target="_blank"><?php _e('Índice de Densidad de Documentos Zakutina y Priyenikova');?></a><a class="referencia" href="#ref6"><sup>6</sup></a></p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 				<i>p</i> = 
@@ -257,7 +257,7 @@
 	</div>
 
 	<div id="info-indice-concentracion" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-concentracion");?>" target="_blank"><?php _e('Índice de concentración temática (Índice de Pratt)');?></a><sup>7</sup></p>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/indice-concentracion");?>" target="_blank"><?php _e('Índice de concentración temática (Índice de Pratt)');?></a><a class="referencia" href="#ref7"><sup>7</sup></a></p>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 				<i>C</i> = 
@@ -279,7 +279,7 @@
 	</div>
 
 	<div id="info-modelo-bradford-revista" class="infoBox">
-		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/modelo-bradford-revista");?>" target="_blank"><?php _e('Modelo de Bradford por revista');?></a><sup>8</sup><br/>
+		<p class="textoTitulo centrado"><a href="<?=site_url("indicadores/modelo-bradford-revista");?>" target="_blank"><?php _e('Modelo de Bradford por revista');?></a><a class="referencia" href="#ref8"><sup>8</sup></a><br/>
 		<p class="textoL ident1"><?php _e('La formulación matemática es:');?></p>
 		<div class="textoL ident2 formula">
 				<i>p</i>:<i>p</i><sub>1</sub>:<i>p</i><sub>2</sub>:1:<i>n</i><sub>1</sub>:<i>n</i><sub>2</sub>
@@ -307,7 +307,7 @@
 			<i>n</i> = <?php _e('Multiplicador o factor de proporcionalidad de instituciones por zona.');?>
 		</p>
 		<p class="textoL">
-			<?php _e('Es una variante del modelo original de Bradford. Este indicador mide la concentración - dispersión de la información por institución de adscripción del autor, identificando tres zonas: las instituciones más importantes para la disciplina conformado por aquellas más productivas y especializadas (zona núcleo), grupo de instituciones con menor concentración de artículos publicados en la disciplina (segunda zona) y  tercer zona  que presentan el resto de instituciones relacionadas con la disciplina. Además de mostrar la cantidad de instituciones y artículos por zona.');?><br/>
+			<?php _e('Es una variante del modelo original de Bradford. Este indicador mide la concentración - dispersión de la información por institución de adscripción del autor, identificando tres zonas: las instituciones más importantes para la disciplina conformado por aquellas más productivas y especializadas (zona núcleo), grupo de instituciones con menor concentración de artículos publicados en la disciplina (segunda zona) y tercer zona que presentan el resto de instituciones relacionadas con la disciplina. Además de mostrar la cantidad de instituciones y artículos por zona.');?><br/>
 		</p>
 	</div>
 
@@ -332,5 +332,31 @@
 	</p><br></br>
 	<div class="textoJ">
 		<?php _printf('Contacto para comentarios y consultas: %s','<a href="mailto:biblat@dgb.unam.mx">biblat@dgb.unam.mx</a>');?><br></br>
+	</div>
+	<div style="display:none">
+		<div id="ref1" align="justify">
+			Gorbea Portal, Salvador (2005) <i>Modelo matemático de Lotka: Su aplicación a la producción científica latinoamericana en ciencias bibliotecológicas y de la información.</i> México: UNAM, pp. 68-71. Bellavista, J. et. al. (1997) Evaluación de la investigación. Madrid: Centro de Investigaciones Sociológicas.
+		</div>
+		<div id="ref2" align="justify">
+			Gorbea Portal, Salvador (2005) <i>Modelo matemático de Lotka: Su aplicación a la producción científica latinoamericana en ciencias bibliotecológica y de la información.</i> México: UNAM, pp. 68-71. Bellavista, J. et. al. (1997) Evaluación de la investigación. Madrid: Centro de Investigaciones Sociológicas.
+		</div>
+		<div id="ref3" align="justify">
+			Gorbea Portal, Salvador (2005) <i>Modelo matemático de Lotka: Su aplicación a la producción científica latinoamericana en ciencias bibliotecológica y de la información.</i> México: UNAM, pp. 68-71. Vinkler. P. (1993) Research contribution, authorship and team cooperativeness. Scientometrics 26(1) 270-272.
+		</div>
+		<div id="ref4" align="justify">
+			Gorbea Portal, Salvador (2005) <i>Modelo matemático de Lotka: Su aplicación a la producción científica latinoamericana en ciencias bibliotecológica y de la información.</i> México: UNAM, pp. 68-71. Vinkler. P. (1993) Research contribution, authorship and team cooperativeness. Scientometrics 26(1) 270-272.
+		</div>
+		<div id="ref5" align="justify">
+			Gorbea Portal, Salvador (2005) <i>Modelo teórico para el estudio métrico de la información documental.</i> España: Trea. Price, D. J. D. S. (1981) Hacia una ciencia de la ciencia. Barcelona: Ariel.
+		</div>
+		<div id="ref6" align="justify">
+			Zakutina, G. P., Priyenikova, V. K. (1983) <i>Características y análisis del flujo de los documentos primarios.</i> La Habana: IDICT.
+		</div>
+		<div id="ref7" align="justify">
+			Gorbea Portal, Salvador (2007) Principales revistas latinoamericanas en ciencias bibliotecológica y de la información: su difusión y su concentración temática y geográfica. <i>Investigación Bibliotecológica: Archivonomía, bibliotecología e información,</i> 21(42) 79-108. Pratt, A. D. (1977) A measure of class concentration in bibliometrics. Journal of the American Society for Information Science, 28(5) 285-292
+		</div>
+		<div id="ref8" align="justify">
+			Gorbea Portal, Salvador (1996) <i>Modelo matemático de Bradford: su aplicación a las revistas latinoamericanas de las ciencias bibliotecológicas y de la información.</i> México: UNAM.
+		</div>
 	</div>
 </div>

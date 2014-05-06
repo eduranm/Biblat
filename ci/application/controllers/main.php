@@ -131,6 +131,7 @@ class Main extends CI_Controller{
 	public function metodologiaBiblat(){
 		$data = array();
 		$data['header']['title'] = _("Biblat - Metodología");
+		$data['header']['content'] = $this->load->view('header_metodologia', $data['header'],TRUE);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu');
 		$this->load->view('main/metodologia_biblat');
