@@ -168,9 +168,9 @@ if ( ! function_exists('articulosResultado') ):
 		/*Load libraries*/
 		$ci=& get_instance();
 		$ci->load->database();
-		$ci->load->library('session');
+		//$ci->load->library('session');
 		$ci->load->library('pagination');
-
+		//print_r($ci->session->all_userdata());die();
 		if ( ! $ci->session->userdata('query{'.md5($queryCount).'}')):
 			$queryTotalRows = $ci->db->query($queryCount);
 			$queryTotalRows = $queryTotalRows->row_array();
