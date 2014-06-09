@@ -5,7 +5,7 @@
 		jQuery('a.referencia').colorbox({
 			inline: true,
 			innerWidth:600,
-			innerHeight:200,
+			innerHeight:100,
 		});
 	});
 </script>

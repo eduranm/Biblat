@@ -233,4 +233,4 @@ endif;
 ?>
 </head>
 <body>
-	<div class="wrapper">
+	<div id="wrapper">
