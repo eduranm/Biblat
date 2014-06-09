@@ -82,7 +82,7 @@ class Main extends CI_Controller{
 
 	public function sobreBiblat(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - Sobre Biblat");
+		$data['header']['title'] = _("Biblat - ¿Qué es Biblat?");
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu');
 		$this->load->view('main/info_biblat');

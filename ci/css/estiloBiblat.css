@@ -1,276 +1,144 @@
-/* CSS Document */
+@charset "utf-8";
+/* CSS de Biblat */
+/* Diseño: Carolina Silva Bretón y Alfredo Batta Albertos*/
 
-* {
-	font-family:Verdana, Geneva, sans-serif;
-}
-/*ESTILO MENU ---------------------------------------------------------*/
+/*----HEADER-----*/ 
 
-#menu{
-	background-image:url(../img/fondomenu.jpg);
-	background-repeat:no-repeat;
-	height:35px;
-}
 
-#menu > li {
-        float:left;
-        position:relative;
-        padding-left:5px;
-        padding-right:10px;
-        padding-top:2px;
-        border-left: 1px solid #CCC;
-}
+#slider{
+	margin:0px auto;
+	/*border:#cbcccd 1px solid;*/
+	width:980px;
+	height:290px;
+}	
 
-#menu, #menu ul{
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        font-size:13px;
-        font-weight:bold;
+/*----CONTENT-----*/
+#content{
+	width:100%;
+	height:auto;
+	background:#FFF;
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:14px;
+	color:#505050;
 }
+	
+#titulo_index{
+	width:100%;
+	height:40px;
+	background:url(../img/plk_h.jpg) no-repeat left bottom #FFF;
+}	
 
-#menu li a {
-       display:block;
-       padding:5px 12px; 
-       border-bottom: 1px solid #e7edf5;
+#titulo_index p{
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:20px;
+	color:#505050;
+	margin:0; padding:0;
+	text-align:left;
 }
-
-#menu ul li a:hover{
-        color:#cc6600;
-}
-
-#menu li ul {
-        display:none;
-        position:absolute;
-        padding: 0;
-        margin: 0;
-        list-style: none;        font-size:13px;
-        font-weight:bold;
-        background-color:#fff;
-
-}
-
-#menu li:hover > ul {
-      display:block;
-}
-
-#menu li ul li ul{
-        right: -305px;
-        top: 50px;
-
-}
-
-* html #menu a{
-	width: 100%;
-}
-
-#menu a:link, #menu a:visited{
-        display: block;
-        text-decoration:none;
-        padding-left: 1em;
-        color:#2d486c;  
-}
-/*------- Estilos GENERALES -----------------*/
-
-a{
-	font-size:12px;
-}
-
-a:link {
-	color:#cc6600;
-}
-a:visited {
-	color:#cc6600;
-	text-align: right;
-}
-html {
-	background-image:url(../img/fondo.jpg);
-	background-position:top;
-	background-repeat:repeat-x;
-}
-
-/* ------------------ LAYOUT GENERAL------------------*/
-#submenu{
-	text-align:right;
-	font-size:11px;
-	padding-bottom:3px;
-	padding-top:2px;
-	margin-right:15px;
-}
-#submenu a{
-	color:#036;
-	text-decoration:none;
-}
-#submenu a:hover{
-	color:#cc6600;
-}
-
-#creditos{
-	text-align:right;
-	padding-right:10px;
-}
-
-#envolvente{
-	width:998px;
-	background-color:#FFFFFF;
-    margin-right: auto;
-	margin-left: auto;
-	border-right: 1px solid #999;
-	border-left: 1px solid #999	
-}
-
-/* ------------------ LAYOUT INDEX------------------*/
-
-.buscador{
-	border:1px dotted #036;
-	background-color:#fcfbed;
-}
-
-#titulobusq{
-	background-color:#3E3690;
-	color:#fff;
-	padding:5px;
-	font-size:15px;
-	font-weight:bold;
-	text-align:center
-}
-#form{
-	font-size:12px;
-	padding:5px;
-	padding-left:20px;
-}
-#logos{
-	padding:2px;
-	padding-top:5px;
-	font-size:12px;
-	text-align:center;
-	border-bottom:1px dotted #036;
+	
+#info_index{
+	width:95%;
+	height:290px;
 }
 
 #alfabetico{
-	border:1px dotted #036;
-	background-image:url(../img/sombrita.png);
-	background-repeat:repeat-x;
-	padding:14px;
-	font-size:12px;
+	background:url(../img/fdo_abc.jpg) no-repeat #FFF;
+	height:150px;
+	margin:10px 0px;
+}
+
+#alfabetico p{
 	text-align:center;
-}
-#alfabetico a:hover {
-	color:#3e3690;
+	margin:10px;
+	padding-top: 50px;
+	font-size: 13px;
+}		
+
+/*---- SITE -----*/
+#site{
+	width:100%;
+	background: url(../img/px_site.jpg) repeat-x top left #cacaca;
+	height:137px;
 }
 
-#bienvenida{
-	background-image:url(../img/sombrita.png);
-	background-repeat:repeat-x;
-	border:1px dotted #036;
-	border-left:0px;
-	padding:13px;
-	padding-top:15px;
-	font-size:12px;
-	text-align:justify;
+.site_col{
+	width:28%;
+	height:auto;
+	vertical-align:top;
+	margin:0;
+	padding-top:10px;
+	padding-left:20px;
+	float:left;
 }
 
-.disponibles{
-	color:#990000;
-	font-size:15px;
-	font-weight:bold;
-}
-
-#disciplina{
+.site_col a:link, .site_col a:visited, .site_col a:active{
+	color:#6a6a6a;
 	font-size:12px;
 	text-align:left;
-	padding:15px;
+	padding:5px 10px;
+	text-decoration:none;
 }
 
-#disciplina a{
-        color:#666666;
-        text-decoration:none;
-}
-#disciplina a:hover{
-        color:#cc6600;
+.site_col a:hover{
+	color:#333;
+	text-decoration:underline;
 }
 
-.disciplina1{
-	font-size:10px;
+/*----FOOTER-----*/
+
+#px_foot{
+	width:100%;
+	height:20px;
+	vertical-align:bottom;
+	background:#ff8000;
 }
-.disciplina2{
-	font-size:12px;
+
+/*+++++++++++++++++++++++   HIPERVÍNCULO +++++++++++++++++++++++++++++++++++++++++++*/
+
+a:link, a:visited, a:active{
+	color:#ff8000;
+	text-decoration:none;
+	font-size:inherit;
+	font-family:inherit;
 }
-.disciplina3{
-	font-size:14px;
+
+a:hover{
+	color:#ff8000;
+	text-decoration:underline;
+	font-size:inherit;
+	font-family:inherit;
+}	
+	
+a.leer_mas:link, a.leer_mas:visited, a.leer_mas:active{
+	color:#adadad;
+	text-decoration:none;
 }
-.disciplina4{
-	font-size:16px;
+
+a.leer_mas:hover{
+	color:#adadad;
+	text-decoration:underline;
 }
-.disciplina5{
+
+a.leer_mas img{
+	vertical-align:middle;
+}	
+	
+a.abc:link, a.abc:visited, a.abc:active{
+	color:#505050;
+	font-weight:bold;
+	margin:0;
+	padding:2px;
+	background:#f7f7f7;
+	text-decoration:none;
+	font-size:17px;
+}
+
+a.abc:hover{
+	color:#fff;
+	font-weight:bold;
+	margin:0;
+	padding:2px;
+	background:#ff8000;
+	text-decoration:none;
 	font-size:18px;
 }
-.disciplina6{
-	font-size:20px;
-}
-.disciplina7{
-	font-size:21px;
-}
-
-#disponibles{
-	border:1px dotted #036;
-}
-
-#pais{
-	border:1px dotted #036;
-	font-size:12px;
-	text-align:center;
-	padding:8px;
-	background-image:url(../img/fondogde.jpg);
-}
-#accesos{
-	font-size:12px;
-	text-align:center;
-	padding:8px;
-}
-
-#buscadortabla{
-	text-align:center;
-}
-
-/*------- Clases para contenidos -----------------*/
-.titulo{
-	font-weight:bold;
-        font-size:15px;
-	color:#cc6600;
-}
-
-.titulo a{
-	color:#036;
-	font-size:17px;	
-	font-family:GVerdana, Geneva, sans-serif;
-	font-weight:bold;
-}
-.texto {
-	font-size:12px;
-	text-align:justify;
-	}
-
-/*------- Estilos TABLA -----------------*/
-#tabla{
-      table-layout: fixed;
-}
-
-.nube-html {
-border: 1px solid #333;
-margin: 10px 0 15px 0;
-overflow-x:hidden;
-line-height: 20px;
-text-align: left;
-max-width:100px;
-background-color:yellow;
-padding: 2px;
-padding-top: 10px;
-}
-#nube-html a{
-        color:#666666;
-        text-decoration:none;
-}
-#nube-html a:hover{
-        color:#cc6600;
-}
-

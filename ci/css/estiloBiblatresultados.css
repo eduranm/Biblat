@@ -115,20 +115,7 @@ html {
 	color:#cc6600;
 }
 
-#footer {
-        background-image:url(../img/fondofooter.jpg);
-        background-repeat:repeat-x;
-        font: 0.9em Verdana, Geneva, sans-serif;
-        color: #fff;
-        text-align: center;
-        margin-right: auto;
-        margin-left: auto;
-        padding: 5px;
-        width:850px;
-        bottom:0px;
-        background-color:#CCC;
-        margin-top: 5px;
-}
+
 
 #envolvente{
 	width:998px;
@@ -144,13 +131,6 @@ html {
 	height:10px;
 }
 /*------- Estilos CONTENIDO -----------------*/
-#contenido{
-	padding:20px;
-	padding-top:8px;
-	
-	
-}
-
 .titulo{
 	font-family:Verdana, Geneva, sans-serif;
 	font-weight:bold;
