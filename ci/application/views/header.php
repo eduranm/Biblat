@@ -28,7 +28,9 @@
 		addthis_config.data_track_clickback = false;
 		addthis_config.ui_language = "<?=lang_iso_code();?>";
 	</script>
+<?php if(ENVIRONMENT === "production"):?>
 	<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=herz"></script>
+<?php endif;?>
 	<script type="text/javascript" language="javascript">
 		loading = {
 			start: function(){
