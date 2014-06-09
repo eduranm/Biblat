@@ -119,6 +119,15 @@ class Main extends CI_Controller{
 		$this->load->view('footer');
 	}
 
+	public function materialesDifusion(){
+		$data = array();
+		$data['header']['title'] = _("Biblat - Materiales de difusión");
+		$this->load->view('header', $data['header']);
+		$this->load->view('menu');
+		$this->load->view('main/materiales_difusion');
+		$this->load->view('footer');
+	}
+
 	public function descripcionBiblat(){
 		$data = array();
 		$data['header']['title'] = _("Biblat - Descripción");
