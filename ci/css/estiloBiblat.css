@@ -17,9 +17,9 @@
 	width:100%;
 	height:auto;
 	background:#FFF;
-	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-size:14px;
-	color:#505050;
+	color:#606060;
 }
 	
 #titulo_index{
@@ -29,9 +29,9 @@
 }	
 
 #titulo_index p{
-	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-size:20px;
-	color:#505050;
+	color:#606060;
 	margin:0; padding:0;
 	text-align:left;
 }
@@ -124,7 +124,7 @@ a.leer_mas img{
 }	
 	
 a.abc:link, a.abc:visited, a.abc:active{
-	color:#505050;
+	color:#606060;
 	font-weight:bold;
 	margin:0;
 	padding:2px;

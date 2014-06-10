@@ -5,79 +5,21 @@
 
 body {
         padding-left: 11em;
-        font-family:Verdana, Geneva, sans-serif !important;;
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome !important;
         font-size:12px !important;
 }
 
 #form{
-        font-family:Verdana, Geneva, sans-serif;
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
         font-size:12px;
         padding:5px;
         padding-left:10px;
 }
 
-#menu{
-	background-image:url(../img/fondomenu.jpg);
-	background-repeat:no-repeat;
-	height:35px;
-}
 
-#menu, #menu ul{
-	padding: 0;
-	margin: 0;
-	list-style: none;
-	font-family:Verdana, Geneva, sans-serif;
-	font-size:17px;
-	font-weight:bold;
-}
-
-#menu li {
-	float:left;
-	position:relative;
-	padding-left:5px;
-	padding-right:10px;
-	padding-top:8px;
-	border-left: 1px solid #CCC;
-	border-bottom: 5px solid #e7edf5;
-}
-
-
-#menu li:hover ul{
-	display: block;
-}
-
-
-#menu a:link, #menu a:visited{
-	display: block;
-	text-decoration:none;
-	padding-left: 1em;
-	color:#2d486c;	
-}
-
-* html #menu a{
-	width: 100%;
-	
-}
-
-#menu ul{
-	display:none;
-	position:absolute;
-	padding:0;
-	background-color:#fff;
-}
-
-
-
-#menu ul li{
-	font-size: 12px;
-}
-
-#menu ul li a:hover{
-	color:#cc6600;
-}
 
 a{
-	font-family:Verdana, Geneva, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-size:12px;
 }
 
@@ -101,7 +43,7 @@ html {
 
 #submenu{
 	text-align:right;
-	font-family:Verdana, Geneva, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-size:11px;
 	padding-bottom:3px;
 	padding-top:2px;
@@ -132,7 +74,7 @@ html {
 }
 /*------- Estilos CONTENIDO -----------------*/
 .titulo{
-	font-family:Verdana, Geneva, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-weight:bold;
         font-size:14px;
         text-align:center;
@@ -152,13 +94,13 @@ html {
 .titulo a{
 	color:#036;
 	font-size:16px;	
-	font-family:Verdana, Geneva, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-weight:bold;
 }
 
 
 .texto {
-	font-family:Verdana, Geneva, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-size:12px;
 	text-align:justify;
 
@@ -183,7 +125,7 @@ html {
 
 /*------- Estilos TABLA -----------------*/
 #tablaresultados{
-	font-family:Verdana, Geneva, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-size:12px;
         border-bottom: 1px solid #ffffff;
         border-collape:collapse;
@@ -203,7 +145,7 @@ html {
 }
 
 .acumuladas{
-	font-family:Verdana, Geneva, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-size:12px;
 	text-align:right;	
         color:#cc6600;
@@ -211,7 +153,7 @@ html {
 }
 
 .indicadores{
-        font-family:Verdana, Geneva, sans-serif;
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
         font-size:12px;
         text-align:center;
 }
@@ -220,7 +162,7 @@ html {
 /*------- Estilos Nuevos -----------------*/
 
 .navegacion{
-        font-family:Verdana, Geneva, sans-serif;
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
         font-size:12px;
         text-align:justify;
         color:#cc6600;
@@ -231,13 +173,13 @@ html {
 }
 
 .totalRight{
-        font-family:Verdana, Geneva, sans-serif;
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
         font-size:10px;
         text-align:right;
 }
 
 .totalRight2{
-        font-family:Verdana, Geneva, sans-serif;
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
         font-size:12px;
         text-align:right;
 }
@@ -305,6 +247,7 @@ td.totalRight {
         padding-bottom: 0.1em;
         padding-left: 1em;
         text-align: right;
+        font-size: 13px;
 }
 
 td.txtRight {

@@ -1,4 +1,4 @@
-	<div id="site">
+  <div id="site">
         <div class="site_col">
         	<a href="<?=site_url('sobre-biblat');?>"><?php _e('¿Qué es Biblat?');?></a>  <br>
          	<a href="<?=site_url('clase-y-periodica');?>"><?php _e('Clase y Periódica');?></a><br> 
@@ -8,7 +8,6 @@
 	        <a href="<?=site_url('materiales-de-difusion');?>"><?php _e('Materiales de difusión');?></a><br>
         </div> 
         <div class="site_col">
-	        <a href="javascript:;"><?php _e('Bibliometría');?></a><br>
 	        <a href="<?=site_url('bibliometria/descripcion-biblat');?>"><?php _e('Descripción');?></a><br>
 	        <a href="<?=site_url('bibliometria/metodologia-biblat');?>"><?php _e('Metodología');?></a><br> 
 	        <a href="javascript:;"><?php _e('Frecuencias');?></a><br> 
@@ -26,7 +25,7 @@
         <br class="cf">
        </div><!--end site-->
 	<div id="footer">
-  		<p>® <?php _e('Derechos reservados. 2014 - 2017. Dirección General de Bibliotecas, Universidad Nacional Autónoma de México (UNAM). Esta página y sus contenidos pueden ser utilizados y reproducidos con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica. De otra forma, requiere permiso previo por escrito de la institución.');?> <a href="<?=site_url('creditos');?>"><?php _e('CRÉDITOS');?></a></p>
+  		<p><?php _printf('® Derechos reservados. 2009 - %d. Dirección General de Bibliotecas, Universidad Nacional Autónoma de México (UNAM). Esta página y sus contenidos pueden ser utilizados y reproducidos con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica. De otra forma, requiere permiso previo por escrito de la institución.', date('Y'));?> <a href="<?=site_url('creditos');?>"><?php _e('CRÉDITOS');?></a></p>
 	</div><!--end footer-->
 <?php if(ENVIRONMENT === "production"):?>
 <!-- Piwik -->

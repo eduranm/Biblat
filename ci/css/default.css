@@ -18,9 +18,9 @@ body {
 	width: 1024px;
 	height: auto;
 	vertical-align: top;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-size: 14px;
-	color: #505050;
+	color: #606060;
 }
 
 /*-----Sliders de index-----*/
@@ -28,7 +28,6 @@ body {
 	width: 1022px;
 	height: 300px;
 	float: left;
-	border: 1px solid green;
 	margin-bottom: 8px;
 }
 
@@ -37,19 +36,18 @@ body {
 	height: 200px;
 	border: 1px solid green;
 }
+
 /*-----Fin sliders index-----*/
 
-/*-----Disciplinas index-----*/
-.tagCloud {
-	margin-right: 10px;
-}
 
+/*-----Disciplinas index-----*/
 .tagCloud text {
     cursor: pointer;
 }
 .tagCloud text:hover {
     opacity: 0.7 !important;
 }
+
 /*-----Fin disciplinas index-----*/
 
 #content_izq {
@@ -116,7 +114,7 @@ body {
 	height: 45px;
 	vertical-align: center; 
 	margin-right: 42px;
-	margin-bottom: 1px; 
+	margin-bottom: 5px; 
 }
 
 .menu a:link, 
@@ -139,7 +137,7 @@ body {
     float: left;
     position: relative;
     text-shadow: 0 0 2px #000000;
-    top: 1px;
+    top: -2px;
     transition: all 0.2s ease 0s;
     -webkit-transition: all 0.2s ease 0s;
     padding: 0px 10px;
@@ -255,7 +253,7 @@ body {
 	height: 24px;
 	box-shadow: none;
 	resize: none;
-	font-family: Verdana,Geneva,sans-serif,FontAwesome;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 }
 
 .searchform textarea:focus, .searchform textarea::-moz-focus-inner,
@@ -442,9 +440,9 @@ body {
 	width: 100%;
 	height: auto;
 	background: #FFF;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-size: 14px;
-	color: #505050;
+	color: #606060;
 	margin: 0;
 	padding: 0;
 }
@@ -477,7 +475,7 @@ body {
 }
 
 #migas p {
-	color: #505050;
+	color: #606060;
 	font-size: 11px;
 	padding-left: 20px;
 	font-family: inherit;
@@ -542,17 +540,16 @@ cite a {
 }
 
 .titulo_int{
-	width:540px;
+	width:700px;
 	background:#fff;
 	border-bottom:#808080 1px solid;
 	border-top:#808080 1px solid;
 	float:left;
 	margin-left:20px;
-	margin-bottom: 5px;
 }
 
 .titulo_int h1{
-	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-size:20px;
 	color:#df6521;
 	margin-bottom: 5px;
@@ -566,13 +563,20 @@ cite a {
 	background:url(../img/sombra_content.jpg) no-repeat top left;
 	padding:15px;
 	margin: auto;
+	float: left;
 }
 
-#content_txt p{
+#content_txt p {
 	line-height:1.5;
-	color:#505050;
+	color:#606060;
 	font-size:14px;
 	text-align: justify;
+}
+
+#content_txt table {
+	margin: auto;
+	width: 90%;
+	margin-top: 10px;
 }
 	
 .cien{ 
@@ -665,21 +669,25 @@ a:hover{
 
 li{
 	line-height:1.5;
-	color:#505050;
+	color:#606060;
 	font-size:14px;
 	text-align: justify;
 }
 
 .tablaMetodologia {
 	border-width: 1px;
-	font-family: verdana, arial;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
 	font-size: 10pt;
 	border-collapse: collapse;
 	text-align: justify;
 }
 
 .tablaMetodologia td,th {
-	border: 1pt dotted #000000; 
+	border: 1pt dotted #000000;
+}
+
+table {
+	margin-top: 10px;r
 }
 
 .biblat {
@@ -792,6 +800,7 @@ div.pq-grid-title{
 .pagination {
 	margin-top: 30px;
 	text-align: center;
+	height: 50px;
 }
 
 /*--- General styles ---*/
@@ -799,6 +808,224 @@ div.pq-grid-title{
 	clear: both;
 }
 
+
+/*-----Estilos anteriores de biblat-----*/
+#gridTable {
+	margin: 0 auto;
+	text-shadow: none;
+}
+
+#paisesFlags li a{
+	display: inline-block;
+	padding: 0 7px;
+}
+
+
+/*-----Nuevos estilos-----*/
+.nivoSlider {
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.nivoSlider img {
+    left: 0;
+    max-width: none;
+    position: absolute;
+    top: 0;
+}
+.nivo-main-image {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+}
+.nivoSlider a.nivo-imageLink {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 0 none;
+    display: none;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 6;
+}
+.nivo-slice {
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 5;
+}
+.nivo-box {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    z-index: 5;
+}
+.nivo-box img {
+    display: block;
+}
+.nivo-caption {
+    background: none repeat scroll 0 0 #000000;
+    bottom: 0;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    display: none;
+    left: 0;
+    opacity: 0.8;
+    overflow: hidden;
+    padding: 5px 10px;
+    position: absolute;
+    width: 100%;
+    z-index: 8;
+}
+.nivo-caption p {
+    margin: 0;
+    padding: 5px;
+}
+.nivo-caption a {
+    display: inline !important;
+}
+.nivo-html-caption {
+    display: none;
+}
+.nivo-directionNav a {
+    cursor: pointer;
+    position: absolute;
+    top: 45%;
+    z-index: 9;
+}
+.nivo-controlNav {
+    left: 80px;
+    padding: 15px 0;
+    position: absolute;
+    text-align: center;
+    top: 245px;
+    z-index: 12;
+}
+.nivo-controlNav a {
+    cursor: pointer;
+}
+.nivo-controlNav a.active {
+    font-weight: bold;
+}
+.futurico-theme.slider-wrapper {
+    background: none repeat scroll 0 0 #CACBCC;
+    border-radius: 5px;
+    height: 290px;
+    margin: 0;
+    padding: 1px;
+    position: relative;
+    width: 980px;
+}
+.futurico-theme .nivoSlider {
+    height: 290px;
+    position: relative;
+    width: 980px;
+}
+.futurico-theme .nivoSlider img {
+    display: none;
+    height: 290px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 980px;
+}
+.futurico-theme .nivo-controlNav a {
+    background: none repeat scroll 0 0 #505050;
+    border-radius: 16px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5) inset, 0 1px 1px rgba(255, 255, 255, 0.05);
+    display: block;
+    float: left;
+    height: 16px;
+    margin-right: 5px;
+    text-indent: -9999px;
+    width: 16px;
+}
+.futurico-theme .nivo-controlNav a.active, .futurico-theme .nivo-caption span {
+    background: -moz-linear-gradient(center top , #FF8001 0%, #FF4800 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.4) inset, 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+.futurico-theme .nivo-directionNav a {
+    color: #DAD5D1;
+    display: block;
+    font-family: 'Consolas',sans-serif;
+    font-size: 40px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.05);
+    top: 60px;
+}
+.futurico-theme a.nivo-prevNav {
+    left: 5px;
+    top: 120px;
+}
+.futurico-theme a.nivo-nextNav {
+    right: 5px;
+    top: 120px;
+}
+#img1 {
+    background: url("../img/slide1.jpg") no-repeat scroll left top rgba(0, 0, 0, 0);
+    height: 290px;
+    width: 980px;
+}
+#img2 {
+    background: url("../img/slide2.jpg") no-repeat scroll left top rgba(0, 0, 0, 0);
+    height: 290px;
+    width: 980px;
+}
+#img3 {
+    background: url("../img/slide3.jpg") no-repeat scroll left top rgba(0, 0, 0, 0);
+    height: 290px;
+    width: 980px;
+}
+#img4 {
+    background: url("../img/slide4.jpg") no-repeat scroll left top rgba(0, 0, 0, 0);
+    height: 290px;
+    width: 980px;
+}
+#s7 {
+    background-color: #FFFFFF;
+}
+#s7 div {
+    color: #333333;
+    font-size: 14px;
+    overflow: hidden;
+    padding: 15px;
+    text-align: left;
+}
+#big {
+    text-align: left;
+    width: 500px;
+}
+td a {
+    margin: 5px;
+}
+.nav {
+    margin: 5px 0;
+}
+#nav a, #s7 strong {
+    background: none repeat scroll 0 0 #F6F6F6;
+    border: 1px solid #CCCCCC;
+    margin: 0 5px;
+    padding: 0 5px;
+    text-decoration: none;
+}
+#nav a.activeSlide {
+    background: none repeat scroll 0 0 #EEAA00;
+}
+#nav a:focus {
+    outline: medium none;
+}
+#output {
+    text-align: left;
+}
+.amarillo {
+    color: #EF7E00;
+    font-size: 14px;
+}
 a.indiA {
     color: #505050;
     font-family: inherit;
@@ -812,17 +1039,45 @@ a.indiB {
     line-height: 1;
 }
 
-/*-----Estilos anteriores de biblat-----*/
-#gridTable {
-	margin: 0 auto;
-	text-shadow: none;
+#tablaresultados{
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
+	font-size:12px;
+        border-bottom: 1px solid #ffffff;
+        border-collape:collapse;
+        width: 80%;
+	-webkit-box-shadow: 1px 0 2px black;
+        -moz-box-shadow: 1px 0 2px black;
+        box-shadow: 2px 0 2px #999;	
+        border-radius: 8px;
+}
+#tablaresultados td{
+	border-bottom:1px dotted #999;
 }
 
-#paisesFlags li a{
-	display: inline-block;
-	padding: 0 7px;
+#tablaresultados td:hover{
+	background-color:#cccccc;
+	border-bottom:1px dotted #CCC;
 }
 
-* {
-	margin-right: 0;
+.acumuladas{
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
+	font-size:12px;
+	text-align:right;	
+        color:#cc6600;
+        font-weight:bold;
+}
+
+.indicadores{
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
+        font-size:12px;
+        text-align:center;
+}
+
+.articulo {
+    color: #666666;
+    font-size: 0.8em;
+    margin: 0 auto;
+    padding: 10px 18px;
+    text-align: center;
+    z-index: 100;
 }
