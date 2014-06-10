@@ -105,7 +105,7 @@ class Frecuencias extends CI_Controller {
 		$args['slug'] = $slug;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vAutorDocumentos\" WHERE \"autorSlug\"='{$slug}'";
 		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vAutorDocumentos\" WHERE \"autorSlug\"='{$slug}'";
-		$args['paginationURL'] = site_url("frecuencias/autor/{$slug}");
+		$args['paginationURL'] = site_url("frecuencias/autor/{$slug}/documento");
 		/*Datos del autor*/
 		$this->load->database();
 		$queryAutor = "SELECT e_100a AS autor FROM autor WHERE slug='{$slug}' LIMIT 1";
