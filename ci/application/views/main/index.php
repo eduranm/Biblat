@@ -1,29 +1,11 @@
     <div id="mainSlider">
         <img src="<?=base_url('/img/slider.jpg');?>">
     </div>
-
 	<div id="content_izq">
-		<div id="titulo_index">
-        	<p><?php _e('UN POCO DE NOSOTROS');?></p>
+        <div id="titulo_index">
+            <p><?php _e('REVISTAS POR DISCIPLINA');?></p>
         </div>
-        <div id="info_index">
-            <p><?php _printf('%s es un portal especializado en revistas científicas y académicas publicadas en América Latina y el Caribe, que ofrece los siguientes servicios:','<span class="biblat"><acronym title="'._sprintf('Bibliografía Latinoamericana').'">Biblat</acronym></span>');?></p>
-            <ul>
-				<li><?php _printf('Referencias bibliográficas y texto completo de los artículos y documentos publicados en más de 3,000 revistas indizadas en %s y %s.','<a href="http://clase.unam.mx" target="_blank"><acronym title="'._sprintf('Citas Latinoamericanas en Ciencias Sociales y Humanidades').'">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="'._sprintf('Índice de Revistas Latinoamericanas en Ciencias').'">PERIÓDICA</acronym></a>');?></li>
-			</ul>
-			<ul>
-				<li><?php _printf('Visualización gráfica de indicadores extraídos de %s , %s, %s y de otras bases de datos.','<a href="http://clase.unam.mx" target="_blank"><acronym title="'._sprintf('Citas Latinoamericanas en Ciencias Sociales y Humanidades').'">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="'._sprintf('Índice de Revistas Latinoamericanas en Ciencias').'">PERIÓDICA</acronym></a>','<a href="http://www.scielo.org" target="_blank"><acronym title="Scientific Electronic Library Online">SciELO</acronym></a>');?></li>
-			</ul>
-           	<ul>
-        		<li><?php _printf('Información sobre las %s de las revistas indizadas en %s , %s.','<a href="javascript:;">Políticas de acceso abierto</a>','<a href="http://clase.unam.mx" target="_blank"><acronym title="'._sprintf('Citas Latinoamericanas en Ciencias Sociales y Humanidades').'">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="'._sprintf('Índice de Revistas Latinoamericanas en Ciencias').'">PERIÓDICA</acronym></a>');?></li>
-            </ul> 
-
-            <p></p>
-
-            <p align="right"><a class="leer_mas" href="<?=site_url('sobre-biblat');?>"><?php _e('Leer más');?><img src="<?=base_url('img/bt_mas.jpg');?>" alt="<?php _e('leer más');?>" height="17" width="18"> </a></p>
-        </div>
-
-
+        <div class="tagCloud"></div><br>
         <div id="titulo_index">
         	<p><?php _e('REVISTA POR ORDEN ALFABÉTICO');?></p>
         </div>
@@ -134,9 +116,23 @@
 
 	<div id="content_der">
 		<div id="titulo_index">
-        	<p><?php _e('REVISTAS POR DISCIPLINA');?></p>
+            <p><?php _e('UN POCO DE NOSOTROS');?></p>
         </div>
-		<div class="tagCloud"></div><br>
+        <div id="info_index">
+            <p><?php _printf('%s es un portal especializado en revistas científicas y académicas publicadas en América Latina y el Caribe, que ofrece los siguientes servicios:','<span class="biblat"><acronym title="'._sprintf('Bibliografía Latinoamericana').'">Biblat</acronym></span>');?></p>
+            <ul>
+                <li><?php _printf('Referencias bibliográficas y texto completo de los artículos y documentos publicados en más de 3,000 revistas indizadas en %s y %s.','<a href="http://clase.unam.mx" target="_blank"><acronym title="'._sprintf('Citas Latinoamericanas en Ciencias Sociales y Humanidades').'">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="'._sprintf('Índice de Revistas Latinoamericanas en Ciencias').'">PERIÓDICA</acronym></a>');?></li>
+            </ul>
+            <ul>
+                <li><?php _printf('Visualización gráfica de indicadores extraídos de %s , %s, %s y de otras bases de datos.','<a href="http://clase.unam.mx" target="_blank"><acronym title="'._sprintf('Citas Latinoamericanas en Ciencias Sociales y Humanidades').'">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="'._sprintf('Índice de Revistas Latinoamericanas en Ciencias').'">PERIÓDICA</acronym></a>','<a href="http://www.scielo.org" target="_blank"><acronym title="Scientific Electronic Library Online">SciELO</acronym></a>');?></li>
+            </ul>
+            <ul>
+                <li><?php _printf('Información sobre las %s de las revistas indizadas en %s , %s.','<a href="javascript:;">Políticas de acceso abierto</a>','<a href="http://clase.unam.mx" target="_blank"><acronym title="'._sprintf('Citas Latinoamericanas en Ciencias Sociales y Humanidades').'">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="'._sprintf('Índice de Revistas Latinoamericanas en Ciencias').'">PERIÓDICA</acronym></a>');?></li>
+            </ul> 
+
+            <p></p>
+            <p align="right"><a class="leer_mas" href="<?=site_url('sobre-biblat');?>"><?php _e('Leer más');?><img src="<?=base_url('img/bt_mas.jpg');?>" alt="<?php _e('leer más');?>" height="17" width="18"> </a></p>
+        </div>
 
         <div id="titulo_index">
             <p><?php _e('REVISTAS POR PAÍS');?></p>
@@ -173,6 +169,3 @@
             </map>
         <br class="cf">
 	</div><!--end content_der-->
-
-<br class="cf">
-</div><!--end content_int-->

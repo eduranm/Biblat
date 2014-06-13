@@ -41,8 +41,10 @@ body {
 
 
 /*-----Disciplinas index-----*/
+
 .tagCloud text {
     cursor: pointer;
+    text-align: left;
 }
 .tagCloud text:hover {
     opacity: 0.7 !important;
@@ -134,13 +136,12 @@ body {
 	border-right: 1px solid rgba(255, 255, 255, 0.70);
 	cursor: pointer;
     display: inline-block;
-    float: left;
     position: relative;
     text-shadow: 0 0 2px #000000;
     top: -2px;
     transition: all 0.2s ease 0s;
     -webkit-transition: all 0.2s ease 0s;
-    padding: 0px 10px;
+    padding: 0px 6px;
     color: #FFFFFF;
     font-size: 16px;
     text-align: left;
@@ -220,12 +221,12 @@ body {
 	margin: 0 1px;
 	padding: 7px 3px;
 	float: right;
+	height: auto;
 }
 
 .searchform {
 	background: none;
 	-webkit-box-shadow: inset 0 0 2px rgba(0,0,0, 0.4), rgba(255,255,255,0.1) 0 1px 0;
-	box-shadow: inset 0 0 2px rgba(0,0,0, 0.4), rgba(255,255,255,0.1) 0 1px 0;
 	border-radius: 4px;
 	border: 1px solid rgba(0,0,0,0.25);
 	color: #000000;
@@ -238,6 +239,7 @@ body {
 	position: relative;
 	margin: 0 auto;
 	background-color: #E6E6E6;
+	height: auto;
 }
 
 .searchform textarea, .autosizejs {
@@ -254,6 +256,8 @@ body {
 	box-shadow: none;
 	resize: none;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
+	text-align: center;
+	vertical-align: center;
 }
 
 .searchform textarea:focus, .searchform textarea::-moz-focus-inner,
@@ -445,6 +449,7 @@ body {
 	color: #606060;
 	margin: 0;
 	padding: 0;
+	float: left;
 }
 
 #content {
@@ -487,13 +492,28 @@ body {
 	float: right;
 	background: #fff;
 	color: #FFF;
+	font-family: FontAwesome;
+	font-size: 22px;
+	text-align: center;
+	vertical-align: top;
+	border: 1px solid green;
+	float: right;
 }
 
-#share1{
-	width:100%;
-	height:40px;
-	background:#b1b2b4;
-	vertical-align:top;
+#share1 a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+#share2 a {
+	color: #B1B2B4;
+	text-decoration: none;
+}
+#share1 {
+	width: 100%;
+	height: 40px;
+	background: #b1b2b4;
+	vertical-align: top;
 }
 
 .materiales {
@@ -546,6 +566,7 @@ cite a {
 	border-top:#808080 1px solid;
 	float:left;
 	margin-left:20px;
+	margin-top: 10px;
 }
 
 .titulo_int h1{
@@ -561,7 +582,7 @@ cite a {
 	width:890px;
 	height:auto;
 	background:url(../img/sombra_content.jpg) no-repeat top left;
-	padding:15px;
+	padding:25px;
 	margin: auto;
 	float: left;
 }
@@ -576,9 +597,11 @@ cite a {
 #content_txt table {
 	margin: auto;
 	width: 90%;
-	margin-top: 10px;
 }
-	
+
+#content_txt table a {
+	text-decoration: underline;
+}
 .cien{ 
 width:752px;
 background:#FFF;
@@ -591,33 +614,34 @@ margin:0;
 }
 	
 /*---- SITE -----*/
-#site{
-	width:100%;
+#site {
+	width: 100%;
 	background: url(../img/px_site.jpg) repeat-x top left #cacaca;
-	height:137px;
+	height: 137px;
+	float: left;
 }
 
-.site_col{
-	width:28%;
-	height:auto;
-	vertical-align:top;
-	margin:0;
-	padding-top:10px;
-	padding-left:20px;
-	float:left;
+.site_col {
+	width: 28%;
+	height: auto;
+	vertical-align: top;
+	margin: 0;
+	padding-top: 10px;
+	padding-left: 20px;
+	float: left;
 }
 
-.site_col a:link{
-	color:#6a6a6a;
-	font-size:12px;
-	text-align:left;
+.site_col a:link {
+	color: #6a6a6a;
+	font-size: 12px;
+	text-align: left;
 	padding:5px 10px;
-	text-decoration:none;
+	text-decoration: none;
 }
 
-.site_col a:hover{
-	color:#333;
-	text-decoration:underline;
+.site_col a:hover {
+	color: #333;
+	text-decoration: underline;
 }
 
 /*----FOOTER-----*/
@@ -803,11 +827,18 @@ div.pq-grid-title{
 	height: 50px;
 }
 
+.pagination .navbar {
+	letter-spacing: 8px;
+}
+
+#content_txt #frecuencia {
+	width: 75%;
+	margin: auto;
+}
 /*--- General styles ---*/
 .cf {
 	clear: both;
 }
-
 
 /*-----Estilos anteriores de biblat-----*/
 #gridTable {

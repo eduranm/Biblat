@@ -1,9 +1,5 @@
 	<div id="content">
             <div id="encabezado">
-               <div id="migas"> 
-                 <p><a href="<?=base_url('');?>"><?php _e('Inicio');?></a> / <?php _e('Bibliometría');?> / <?php _e('Metodología');?></p>
-               </div><!--end migas-->
-               
               <div id="share">
                   <div id="share1"> 
                   <a href="#" target="_blank"><img src="<?=base_url('/img/bt_face_int.jpg');?>" width="22" height="37" alt="facebook"></a>
@@ -446,5 +442,3 @@
     </div><!--end content_txt-->
               
   </div><!--end content-->
-  <br class="cf">
-</div><!--end content_int-->

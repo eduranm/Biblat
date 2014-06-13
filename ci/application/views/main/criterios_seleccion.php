@@ -1,9 +1,5 @@
-  <div id="content">
+<div id="content">
     <div id="encabezado">
-      <div id="migas"> 
-        <p><a href="<?=base_url('');?>"><?php _e('Inicio');?></a> / <?php _e('Criterios de selección');?></p>
-      </div><!--end migas-->
-                 
       <div id="share">
         <div id="share1"> 
           <a href="#" target="_blank"><img src="<?=base_url('/img/bt_face_int.jpg');?>" width="22" height="37" alt="facebook"></a>
@@ -21,8 +17,7 @@
           <a href="#"><img src="<?=base_url('/img/bt_dismin_int.jpg');?>" width="39" height="40" alt="Disminuir tipografía"></a>
           <a href="javascript:window.print();"><img src="<?=base_url('/img/bt_print_int.jpg');?>" width="44" height="40" alt="imprimir pagina"></a>
         </div>
-      </div><!--end share-->  
-
+      </div><!--end share-->
       <div class="titulo_int">
         <h1><?php _e('Criterios de selección de revistas para CLASE y PERIÓDICA');?></h1>
       </div><!--end titulo_int-->
@@ -233,7 +228,4 @@
 		<p><?php _e('En cuanto a la autorización solicitada al editor para el depósito de los archivos electrónicos en la colección Hemeroteca Virtual Latinoamericana así como para el acceso libre al texto completo de los artículos, solicitamos el envío del siguiente formato:');?></p>
     
     </div><!--end content_txt-->
-              
-  </div><!--end content-->
-  <br class="cf">
-</div><!--end content_int-->
+</div><!--end content-->

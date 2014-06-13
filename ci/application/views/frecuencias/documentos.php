@@ -1,9 +1,5 @@
 <div id="content">
-	<div id="encabezado">
-    	<div id="migas"> 
-        	<p><a href="<?=base_url('');?>"><?php _e('Inicio');?></a> / <?php _e('Bibliometría');?> / <?php _e('Frecuencias');?></p>
-      	</div><!--end migas-->
-                 
+	<div id="encabezado">                 
       	<div id="share">
         	<div id="share1"> 
 	          	<a href="#" target="_blank"><img src="<?=base_url('/img/bt_face_int.jpg');?>" width="22" height="37" alt="facebook"></a>
@@ -36,7 +32,7 @@
 				<?php _printf('Páginas: %s', $links);?>
 			</div>
 		<?php 	endif;?>
-			<div>
+			<div  class="centrado">
 				<table cellspacing="5" cellpadding="5" border="0">
 		<?php 	foreach ($resultados as $key => $resultado):?>
 						<tr>
@@ -58,7 +54,4 @@
 		<?php 	endif;?>
 			</div>
 
-   	</div><!--end content_txt-->           
-
-  	<br class="cf">
-</div><!--end content-->
+   	</div><!--end content_txt-->

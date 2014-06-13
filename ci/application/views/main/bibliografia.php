@@ -1,26 +1,23 @@
 <div id="content">
-	<div id="encabezado">
-		<div id="migas"> 
-			<p><a href="<?=base_url('');?>"><?php _e('Inicio');?></a> / <?php _e('Documentos');?> / <?php _e('Bibliografía');?></p>
-		</div><!--end migas-->
-               
-		<div id="share">
-			<div id="share1"> 
-				<a href="#" target="_blank"><img src="<?=base_url('/img/bt_face_int.jpg');?>" width="22" height="37" alt="facebook"></a>
-				<a href="#" target="_blank"><img src="<?=base_url('/img/bt_twit_int.jpg');?>" width="22" height="37" alt="twitter"></a>
-				<a href="#" target="_blank"><img src="<?=base_url('/img/bt_ayuda_int.jpg');?>" width="22" height="37" alt="ayuda"></a>
-				<a href="mailto:scielo@dgb.unam.mx" target="_blank"><img src="<?=base_url('/img/bt_contact_int.jpg');?>" width="25" height="37" alt="contacto"></a>
-				<div><a class="share" href="#">Español</a></div>      
-			</div>
-                 
-			<div id="share2">
-				<a href="#"><img src="<?=base_url('/img/bt_share_int.jpg');?>" width="23" height="40" alt="share"></a>
-				<a href="#"><img src="<?=base_url('/img/bt_aument_int.jpg');?>" width="39" height="40" alt="Aumentar tipografía"></a>
-				<a href="#"><img src="<?=base_url('/img/bt_dismin_int.jpg');?>" width="39" height="40" alt="Disminuir tipografía"></a>
-				<a href="javascript:window.print();"><img src="<?=base_url('/img/bt_print_int.jpg');?>" width="44" height="40" alt="imprimir pagina"></a>
-			</div>
-		</div><!--end share-->
-               
+    <div id="encabezado">
+      <div id="share">
+        <div id="share1"> 
+          <a href="#" target="_blank"><img src="<?=base_url('/img/bt_face_int.jpg');?>" width="22" height="37" alt="facebook"></a>
+          <a href="#" target="_blank"><img src="<?=base_url('/img/bt_twit_int.jpg');?>" width="22" height="37" alt="twitter"></a>
+          <a href="#" target="_blank"><img src="<?=base_url('/img/bt_ayuda_int.jpg');?>" width="22" height="37" alt="ayuda"></a>
+          <a href="mailto:scielo@dgb.unam.mx" target="_blank"><img src="<?=base_url('/img/bt_contact_int.jpg');?>" width="25" height="37" alt="contacto"></a>
+          <div>
+            <a class="share" href="#">Español</a>
+          </div>            
+        </div>
+
+        <div id="share2"> 
+          <a href="#"><img src="<?=base_url('/img/bt_share_int.jpg');?>" width="23" height="40" alt="share"></a>
+          <a href="#"><img src="<?=base_url('/img/bt_aument_int.jpg');?>" width="39" height="40" alt="Aumentar tipografía"></a>
+          <a href="#"><img src="<?=base_url('/img/bt_dismin_int.jpg');?>" width="39" height="40" alt="Disminuir tipografía"></a>
+          <a href="javascript:window.print();"><img src="<?=base_url('/img/bt_print_int.jpg');?>" width="44" height="40" alt="imprimir pagina"></a>
+        </div>
+      </div><!--end share-->
 		<div class="titulo_int">
 			<h1><?php _e('Bibliografía');?></h1>
 		</div><!--end titulo_int-->
@@ -106,5 +103,6 @@
 		<p><cite>Sandoval, A. (1978). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Sandoval_1978.pdf" target="_blank">Centro de información Científica y Humanística: un centro de información universitario del tercer mundo</a>. Boletín de la Unesco para<b></b>las<b> </b>Bibliotecas, 32(1), 45-52</cite></p>
 				
 		<p><cite>Sandoval, A. (1956, diciembre) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Sandoval_1956.pdf" target="_blank">El centro de Documentación científica y técnica de México y la bibliografía científica en América Latina</a>. Ponencia presentada en las Primeras Jornadas de Biblioteconomía, Bibliografía y Canje de la AMBAC. México
-
+	
 	</div><!--end content_txt-->
+</div><!--end content-->
