@@ -29,6 +29,7 @@ body {
 	height: 300px;
 	float: left;
 	margin-bottom: 8px;
+	border: 1px solid green;
 }
 
 #sliderPais {
@@ -205,6 +206,24 @@ body {
 
 
 /* Search Bar */
+#mainSearchContainer {
+	width: 1020px;
+	background-color: transparent;
+	margin: 0 1px;
+	padding: 7px 3px;
+	display: inline-block;
+	height: auto;
+}
+
+#mainSearchContainer .searchform {
+	height: 40px;
+	width: 700px;
+}
+
+#mainSearchContainer .optionsMenu {
+	top: 30px;
+}
+
 .optionsMenu li .fa {
 	width: 18px;
 	text-align: center;
@@ -496,7 +515,6 @@ body {
 	font-size: 22px;
 	text-align: center;
 	vertical-align: top;
-	border: 1px solid green;
 	float: right;
 }
 
@@ -511,9 +529,10 @@ body {
 }
 #share1 {
 	width: 100%;
-	height: 40px;
+	height: 34px;
 	background: #b1b2b4;
-	vertical-align: top;
+	text-align: center;
+	padding-top: 6px;
 }
 
 .materiales {
@@ -524,6 +543,10 @@ body {
 	float: left;
 	margin: 2px;
 
+}
+
+.space {
+	letter-spacing: 7px;
 }
 
 cite {
@@ -557,6 +580,8 @@ cite a {
 	width:100%;
 	height:40px;
 	background:#fff;
+	letter-spacing: 7px;
+	text-align: center;
 }
 
 .titulo_int{
@@ -609,7 +634,7 @@ margin:0;
 }
 
 .cien h1 {
-	font-size: 18px;
+	font-size: 17px;
 	margin-bottom: 5px;
 }
 	
@@ -800,11 +825,6 @@ table {
 
 #floatTableContainer {
 	display: none;
-}
-
-#gridTable {
-	margin: 0 auto;
-	text-shadow: none;
 }
 
 div.pq-grid-title{
@@ -1111,4 +1131,99 @@ a.indiB {
     padding: 10px 18px;
     text-align: center;
     z-index: 100;
+}
+
+.pq-link .pq-td-div {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.columns {
+	width: 100%;
+	height: auto;
+}
+
+.leftColumn, .rightColumn {
+	width: 440px;
+	padding-bottom: 15px;
+	display: inline-block;
+}
+
+.dataTable {
+    padding: 20px !important;
+    width: 910px !important;
+}
+
+.textoTitulo {
+    color: #666666;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px;
+}
+
+.centrado {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.select2-results {
+    font-size: 13px;
+    line-height: 14px;
+}
+.goog-tooltip {
+    z-index: 12;
+}
+.sliderPeriodo {
+    padding: 11px 0 20px;
+}
+.select2-container {
+    display: block;
+    margin: 0 auto;
+}
+.select2-container-multi .select2-choices {
+    border-radius: 4px;
+}
+#google-visualization-errors-all-1 {
+    display: none !important;
+}
+.blockMsg {
+    border-radius: 10px;
+}
+#chartContainer, #bradfodContainer, #prattContainer {
+    height: 550px;
+    left: -25px;
+    position: relative;
+    width: 1000px;
+}
+
+#grid {
+    height: 100%;
+}
+#gridContainer {
+    position: relative;
+    width: 100%;
+}
+#gridContainer .dataTable div div {
+    overflow: auto;
+}
+#gridContainer table {
+    margin: 0 auto;
+}
+#chartContainer {
+    left: 0;
+}
+
+.texto {
+	font-size: 13px;
+	max-width: 85%;
+	margin: 0 auto;
+	text-align: justify;
+	vertical-align: bottom;
+}
+
+.disponibles {
+    color: #990000;
+    font-size: 15px;
+    font-weight: bold;
 }

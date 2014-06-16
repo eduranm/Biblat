@@ -1,4 +1,9 @@
 	<link rel="stylesheet" href="<?=base_url('css/flag-stylesheet.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url('js/anythingslider/css/anythingslider.css');?>" />
+	<link rel="stylesheet" href="<?=base_url('css/theme-anythingslider-scielo.css');?>" />
+	<link rel="stylesheet" href="<?=base_url('css/jquery.slider.min.css');?>" />
+	<script type="text/javascript" src="<?=base_url('js/jquery.slider.min.js');?>"></script>
+	<script type="text/javascript" src="<?=base_url('js/anythingslider/js/jquery.anythingslider.min.js');?>"></script>
 	<script src="<?=base_url('js/d3.js');?>"></script>
 	<script src="<?=base_url('js/d3.layout.cloud.js');?>"></script>
 	<script type="text/javascript" language="javascript">

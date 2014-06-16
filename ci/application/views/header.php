@@ -22,7 +22,12 @@
 	<script type="text/javascript" src="<?=base_url('js/pnotify/jquery.pnotify.min.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/select2/select2.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/advancedsearch/js/evol.advancedSearch.min.js');?>"></script>
-
+	<script type="text/javascript">
+    $(function(){
+            // Accordion
+            $("#accordion").accordion({ header: "h3", collapsible: true, autoHeight: true, navigation: true });
+    });
+</script>
 	<script type="text/javascript">
 		var addthis_config = addthis_config||{};
 		addthis_config.data_track_addressbar = false;

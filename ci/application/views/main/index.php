@@ -1,6 +1,39 @@
     <div id="mainSlider">
-        <img src="<?=base_url('/img/slider.jpg');?>">
+        <div class="anythingSlider anythingSlider-scielo activeSlider" style="height: 300px; width: 900px;">
+            <div class="anythingWindow" style="width: 900px; height: 300px;">
+                <ul type="none">
+
+                </ul>
+            </div>
+        </div>
     </div>
+    <div id="mainSearchContainer">
+        <form action="<?=site_url('buscar');?>" class="searchform" method="post">
+            <button id="options" class="icon-<?=(empty($filtro)? 'todos':$filtro);?>"></button>
+            <ul class="optionsMenu">
+                <li rel="todos"><i class="fa fa-cloud"></i><?php _e('Buscar en todos los campos');?></li>
+                <li rel="palabra-clave"><i class="fa fa fa-key"></i><?php _e('Buscar por palabra clave');?></li>
+                <li rel="autor"><i class="fa fa-user"></i><?php _e('Buscar por autor');?></li>
+                <li rel="revista"><i class="fa fa-book"></i><?php _e('Buscar por revista');?></li>
+                <li rel="institucion"><i class="fa fa fa-building-o"></i><?php _e('Buscar por institución');?></li>
+                <li rel="articulo"><i class="fa fa-file-text-o"></i><?php _e('Buscar por artículo');?></li>
+                <li rel="avanzada"><i class="fa fa-search-plus"></i><?php _e('Búsqueda avanzada');?></li>
+            </ul>
+            <button class="icon-search" type="submit"><span class="visuallyhidden">buscar</span></button>
+            <input type="hidden" name="disciplina" value=""/>
+            <input type="hidden" name="filtro" id="filtro" value="todos"/>
+            <div id="advsearch"></div>
+            <label>
+                <span class="visuallyhidden"><?php _e('Buscar en Biblat');?></span>
+    <?php if (isset($search['slug'])) :?>
+                <textarea autocomplete="off" placeholder="<?php _e('Buscar en Biblat');?>" name="slug" id="slug"><?=$search['slug'];?></textarea>
+    <?php else:?>
+                <textarea autocomplete="off" placeholder="<?php _e('Buscar en Biblat');?>" value="" name="slug" id="slug"></textarea>
+    <?php endif;?>
+            </label>
+        </form>
+    </div><!--end main search container-->
+
 	<div id="content_izq">
         <div id="titulo_index">
             <p><?php _e('REVISTAS POR DISCIPLINA');?></p>
@@ -27,49 +60,49 @@
                     <div class="body" style="float: none; position: estatic;">
                         <h3 tabindex="0" aria-expanded="true" aria-selected="false" aria-controls="ui-accordion-accordion-panel-0" id="ui-accordion-accordion-header-0" role="tab" class="ui-accordion-header ui-helper-reset ui-state-default ui-accordion-icons ui-corner-all"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span><?php _e('Por autor');?></h3>
                         <div aria-hidden="true" role="tabpanel" aria-labelledby="ui-accordion-accordion-header-0" id="ui-accordion-accordion-panel-0" style="display: none; height: 91px;" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por autor');?></a>
+                            <a href="<?=site_url("frecuencias/autor");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por autor');?></a>
                         </div>
                     </div>
 
                     <div class="body" style="float: none; position: estatic;">
                         <h3 tabindex="-1" aria-expanded="false" aria-selected="false" aria-controls="ui-accordion-accordion-panel-1" id="ui-accordion-accordion-header-1" role="tab" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span><?php _e('Por institución de afiliación del autor');?></h3>
                         <div aria-hidden="true" role="tabpanel" aria-labelledby="ui-accordion-accordion-header-1" id="ui-accordion-accordion-panel-1" style="display: none; height: 91px;" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por institución');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por institución según el país de la revista');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por institución según la revista de publicación');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por autor según su institución de afiliación');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por disciplina según la institución');?></a>
+                            <a href="<?=site_url("frecuencias/institucion");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por institución');?></a><br>
+                            <a href="<?=site_url("frecuencias/institucion");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por institución según el país de la revista');?></a><br>
+                            <a href="<?=site_url("frecuencias/institucion");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por institución según la revista de publicación');?></a><br>
+                            <a href="<?=site_url("frecuencias/institucion");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por autor según su institución de afiliación');?></a><br>
+                            <a href="<?=site_url("frecuencias/institucion");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por disciplina según la institución');?></a>
                         </div>
                     </div>
 
                     <div class="body" style="float: none; position: estatic;">
                         <h3 tabindex="-1" aria-expanded="false" aria-selected="false" aria-controls="ui-accordion-accordion-panel-2" id="ui-accordion-accordion-header-2" role="tab" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span><?php _e('Por país de institución de afiliación del autor');?></h3>
                         <div aria-hidden="true" role="tabpanel" aria-labelledby="ui-accordion-accordion-header-2" id="ui-accordion-accordion-panel-2" style="display: none; height: 91px;" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por país de la institución de afiliación del autor');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos por institución de afiliación por país');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos por autor según país de institución de afiliación');?></a><br>                    
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos por disciplina según país de la institución del autor');?></a>
+                            <a href="<?=site_url("frecuencias/pais-afiliacion");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por país de la institución de afiliación del autor');?></a><br>
+                            <a href="<?=site_url("frecuencias/pais-afiliacion");?>"><span class="amarillo">•</span> <?php _e('Número de documentos por institución de afiliación por país');?></a><br>
+                            <a href="<?=site_url("frecuencias/pais-afiliacion");?>"><span class="amarillo">•</span> <?php _e('Número de documentos por autor según país de institución de afiliación');?></a><br>                    
+                            <a href="<?=site_url("frecuencias/pais-afiliacion");?>"><span class="amarillo">•</span> <?php _e('Número de documentos por disciplina según país de la institución del autor');?></a>
                         </div>
                     </div>
 
                     <div class="body" style="float: none; position: estatic;">
                         <h3 tabindex="-1" aria-expanded="false" aria-selected="false" aria-controls="ui-accordion-accordion-panel-3" id="ui-accordion-accordion-header-3" role="tab" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span><?php _e('Por disciplina');?></h3>                      
                         <div aria-hidden="true" role="tabpanel" aria-labelledby="ui-accordion-accordion-header-3" id="ui-accordion-accordion-panel-3" style="display: none; height: 91px;" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por disciplina');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por disciplina y revista');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por disciplina e institución de afiliación del autor');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por disciplina y país de la revista');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por disciplina y país de la institución de afiliación del autor');?></a>
+                            <a href="<?=site_url("frecuencias/disciplina");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por disciplina');?></a><br>
+                            <a href="<?=site_url("frecuencias/disciplina");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por disciplina y revista');?></a><br>
+                            <a href="<?=site_url("frecuencias/disciplina");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por disciplina e institución de afiliación del autor');?></a><br>
+                            <a href="<?=site_url("frecuencias/disciplina");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por disciplina y país de la revista');?></a><br>
+                            <a href="<?=site_url("frecuencias/disciplina");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por disciplina y país de la institución de afiliación del autor');?></a>
                         </div> 
                     </div>
 
                     <div class="body" style="float: none; position: estatic;">
                         <h3 tabindex="-1" aria-expanded="false" aria-selected="false" aria-controls="ui-accordion-accordion-panel-4" id="ui-accordion-accordion-header-4" role="tab" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all ui-accordion-icons"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span><?php _e('Por revista');?></h3>
                         <div aria-hidden="true" role="tabpanel" aria-labelledby="ui-accordion-accordion-header-4" id="ui-accordion-accordion-panel-4" style="display: none; height: 91px;" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por revista');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por autor y revista');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por institución de afiliación del autor en las revistas');?></a><br>
-                            <a href="javascript:;"><span class="amarillo">•</span> <?php _e('Número de artículos publicados por año');?></a>
+                            <a href="<?=site_url("frecuencias/revista");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por revista');?></a><br>
+                            <a href="<?=site_url("frecuencias/revista");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por autor y revista');?></a><br>
+                            <a href="<?=site_url("frecuencias/revista");?>"><span class="amarillo">•</span> <?php _e('Número de documentos publicados por institución de afiliación del autor en las revistas');?></a><br>
+                            <a href="<?=site_url("frecuencias/revista");?>"><span class="amarillo">•</span> <?php _e('Número de artículos publicados por año');?></a>
                         </div>
                     </div>
                 </div>     
