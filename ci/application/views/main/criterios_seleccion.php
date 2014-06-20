@@ -1,27 +1,28 @@
 <div id="content">
     <div id="encabezado">
-      <div id="share">
-      <div id="share1">
-        <span class="space"><a href="https://www.facebook.com/pages/BIBLAT/188958071154818" target="_blank"><i class="fa fa-facebook"></i>&#Xf09a</a></span>
-        <span class="space"><a href="https://twitter.com/Biblat" target="_blank"><i class="fa fa-twitter"></i>&#Xf099;</i></a></span>
-        <span class="space"><a href="#" target="_blank">?</a></span>
-        <span class="space"><a href="mailto:scielo@dgb.unam.mx"><i class="fa fa-envelope-o"></i></a></span>
-        <div><a class="share" href="#">Español</a></div>
-      </div>
-                  
-      <div id="share2"> 
-        <a href="#"><img src="<?=base_url('/img/bt_share_int.jpg');?>" width="23" height="40" alt="share"></a>
-        <a href="#">A<sup>+</sup></a>
-        <a href="#">A<sup>-</sup></a>
-        <a href="javascript:window.print();"><i class="fa fa-print"></i></a>
-      </div>
-    </div><!--end share-->
-      <div class="titulo_int">
-        <h1><?php _e('Criterios de selección de revistas para CLASE y PERIÓDICA');?></h1>
-      </div><!--end titulo_int-->
+		<div id="migas">
+			<p><a href="<?=site_url('/');?>">Inicio</a> / <?php _e('Postular una revista');?> / <?php _e('Criterios de selección');?></p>
+		</div><!--End migas-->
+		<div id="share">
+			<div id="share1">
+				<span class="space"><a href="https://www.facebook.com/pages/BIBLAT/188958071154818" target="_blank">&#Xf09a;</a></span>
+				<span class="space"><a href="https://twitter.com/Biblat" target="_blank">&#Xf099;</i></i></a></span>
+				<span class="space"><a href="#" target="_blank">?</a></span>
+				<span class="space"><a href="mailto:scielo@dgb.unam.mx"><i class="fa fa-envelope-o"></i></a></span>
+				<div><a class="share" href="#">Español</a></div>
+			</div>
+			<div id="share2">
+				<a href="#">A<sup>+</sup></a>
+				<a href="#">A<sup>-</sup></a>
+				<a href="javascript:window.print();"><i class="fa fa-print"></i></a>
+			</div>
+		</div><!--end share-->
+		<div class="titulo_int">
+			<h1><?php _e('Criterios de selección de revistas para CLASE y PERIÓDICA');?></h1>
+		</div><!--end titulo_int-->
         
-        <br class="cf">
-    </div><!--end encabezado-->
+		<br class="cf">
+	</div><!--end encabezado-->
       
     <div id="content_txt">
 		<p><?php _printf('Para la visualización de los contenidos de una revista en el portal %s, así como para la generación de sus indicadores bibliométricos, toda publicación debe estar indizada en CLASE o PERIÓDICA. Para la generación de indicadores bibliométricos sólo se consideran revistas de investigación y técnico-profesionales, no así las de difusión científica o cultural; además, es requisito contar con, al menos, cinco años de indización consecutivos.','<span class="biblat"><acronym title="'._sprintf('Bibliografía Latinoamericana').'">Biblat</acronym></span>');?></p>
@@ -53,12 +54,12 @@
 		
 		<?php _e('Para ser aprobada la revista deberá obtener 25 puntos como mínimo.');?><br></br>
 
-		<table class="tablaMetodologia" border=1 cellpadding='3' cellspacing='2' summary='<?php _e('Criterios mínimos / OBLIGATORIOS');?>'>
+		<table class="tablaGeneral" border=1 cellpadding='3' cellspacing='2' summary='<?php _e('Criterios mínimos / OBLIGATORIOS');?>'>
 			<thead>
-				<tr>
-					<th scope='col'><?php _e('No.');?></th>
-					<th scope='col'><?php _e('Criterios mínimos / OBLIGATORIOS');?></th>
-					<th scope='col'><?php _e('Puntos');?></th>
+				<tr class="encabezado">
+					<td><?php _e('No.');?></td>
+					<td><?php _e('Criterios mínimos / OBLIGATORIOS');?></td>
+					<td><?php _e('Puntos');?></td>
 				</tr>
 			</thead>
 			<tbody>

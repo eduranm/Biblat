@@ -2,10 +2,39 @@
 	<link rel="stylesheet" href="<?=base_url('js/anythingslider/css/anythingslider.css');?>" />
 	<link rel="stylesheet" href="<?=base_url('css/theme-anythingslider-scielo.css');?>" />
 	<link rel="stylesheet" href="<?=base_url('css/jquery.slider.min.css');?>" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<link href="<?=base_url('css/jquery.bxslider.css');?>" rel="stylesheet" />
+	<script src="<?=base_url('js/jquery.bxslider.min.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/jquery.slider.min.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/anythingslider/js/jquery.anythingslider.min.js');?>"></script>
 	<script src="<?=base_url('js/d3.js');?>"></script>
 	<script src="<?=base_url('js/d3.layout.cloud.js');?>"></script>
+	<script type="text/javascript">
+        $(document).ready(function(){
+            $('#bxsliderPais').bxSlider({
+                minSlides: 2,
+                maxSlides: 2,
+                slideMargin: 100,
+                auto: true,
+                pager: false,
+                slideWidth: 126,
+                slideHeigth: 126,
+                captions: true
+            });
+            $('#bxsliderMain').bxSlider({
+            	auto: true,
+            	randomStart: true,
+            	slideWidth: 980,
+                slideHeigth: 290,
+            });
+            $('#bxsliderIndicadores').bxSlider({
+            	auto: true,
+            	speed: 1000,
+            	pager: false,
+            	useCSS: false
+        	})
+        });
+    </script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function()
 		{
