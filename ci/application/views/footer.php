@@ -5,7 +5,7 @@
     <a href="<?=site_url('sobre-biblat');?>"><?php _e('¿Qué es Biblat?');?></a><br>
     <a href="<?=site_url('clase-y-periodica');?>"><?php _e('Clase y Periódica');?></a><br> 
     <a href="javascript:;"><?php _e('Manual de indización');?></a><br> 
-    <a href="<?=site_url('scielo');?>"><?php _e('ScIELO');?></a><br>
+    <a href="<?=site_url('scielo');?>"><?php _e('SciELO');?></a><br>
     <a href="javascript:;"><?php _e('Tutoriales');?></a><br> 
     <a href="<?=site_url('materiales-de-difusion');?>"><?php _e('Materiales de difusión');?></a><br>
   </div> 
@@ -14,7 +14,7 @@
     <a href="<?=site_url('bibliometria/metodologia-biblat');?>"><?php _e('Metodología');?></a><br> 
     <a href="javascript:;"><?php _e('Frecuencias');?></a><br> 
     <a href="<?=site_url('indicadores');?>"><?php _e('Indicadores');?></a><br>
-    <a href="javascript:;"><?php _e('Indicadores ScIELO');?></a><br> 
+    <a href="javascript:;"><?php _e('Indicadores SciELO');?></a><br> 
     <a href="javascript:;"><?php _e('Indicadores por revista');?></a><br>
   </div> 
   <div class="site_col">
