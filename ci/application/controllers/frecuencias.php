@@ -1156,7 +1156,7 @@ class Frecuencias extends CI_Controller {
 		$args = $this->uri->ruri_to_assoc();
 		$args['defaultOrder'] = "documentos";
 		$args['orderDir'] = "DESC";
-		$args['sortBy'] = array('pais', 'paisSlug', 'revista' , 'documentos');
+		$args['sortBy'] = array('pais', 'paisSlug' , 'documentos');
 		/*Columnas de la tabla*/
 		$args['cols'][] = array(
 				'editable' => false,
@@ -1167,11 +1167,6 @@ class Frecuencias extends CI_Controller {
 				'editable' => false,
 				'hidden' => true,
 				'title' => 'paisSlug',
-				'width' => 200
-			);
-		$args['cols'][] = array(
-				'editable' => false,
-				'title' => 'Revista',
 				'width' => 200
 			);
 		$args['cols'][] = array(
@@ -1195,7 +1190,7 @@ class Frecuencias extends CI_Controller {
 		$data['main']['breadcrumb'] = sprintf('%s / %s / %s/País', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/disciplina', _('Disciplina'), _('title="Disciplina"')), $disciplina);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('País'), _('Documentos'));
-		$args['xls']['query'] = "SELECT pais, revista, documentos FROM \"mvFrecuenciaDisciplinaPais\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' ORDER BY documentos DESC, pais";
+		$args['xls']['query'] = "SELECT pais, documentos FROM \"mvFrecuenciaDisciplinaPais\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' ORDER BY documentos DESC, pais";
 		$args['xls']['fileName'] = "Frecuencia-{$disciplina}-Paises.csv";
 		return $this->_renderFrecuency($args, $data);
 	}

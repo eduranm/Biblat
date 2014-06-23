@@ -1,5 +1,8 @@
 <div id="content">
-	<div id="encabezado">                
+	<div id="encabezado">
+		<div id="migas">
+			<p><a href="<?=site_url('/');?>">Inicio</a> / <?php _e('Bibliometría');?> / <?php _e('Indicadores');?></p>
+		</div><!--End migas-->
       	<div id="share">
 			<div id="share1">
 				<span class="space"><a href="https://www.facebook.com/pages/BIBLAT/188958071154818" target="_blank">&#Xf09a;</a></span>
