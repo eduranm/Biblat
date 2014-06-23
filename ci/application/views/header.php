@@ -13,7 +13,8 @@
 	<link rel="stylesheet" href="<?=base_url('js/pnotify/jquery.pnotify.default.css');?>" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url('js/select2/select2.css');?>" />
 	<link rel="stylesheet" href="<?=base_url('css/advancedsearch.css');?>" />
-	<link rel="stylesheet" href="<?=base_url('css/default.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url('css/default.css');?>" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('css/jquery-ui-1.10.4.css');?>">
 	<script type="text/javascript" src="<?=base_url('js/jquery.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/jquery.validate.min.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/jquery.autosize.min.js');?>"></script>
@@ -23,11 +24,15 @@
 	<script type="text/javascript" src="<?=base_url('js/select2/select2.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/advancedsearch/js/evol.advancedSearch.min.js');?>"></script>
 	<script type="text/javascript">
-    $(function(){
-            // Accordion
-            $("#accordion").accordion({ header: "h3", collapsible: true, autoHeight: true, navigation: true });
-    });
-</script>
+    jQuery(document).ready(function($){
+		// Accordion
+		$("#accordion").accordion({
+			header: "h3",
+			collapsible: true,
+			autoHeight: true,
+			navigation: true });
+	});
+	</script>
 	<script type="text/javascript">
 		var addthis_config = addthis_config||{};
 		addthis_config.data_track_addressbar = false;

@@ -1,5 +1,8 @@
 <div id="content">
-  <div id="encabezado">              
+  <div id="encabezado"> 
+    <div id="migas">
+      <p><a href="<?=site_url('/');?>">Inicio</a> / <?php _e('Bibliometría');?> / <?=$breadcrumb;?></p>
+    </div><!--End migas-->             
     <div id="share">
       <div id="share1">
         <span class="space"><a href="https://www.facebook.com/pages/BIBLAT/188958071154818" target="_blank">&#Xf09a;</a></span>
@@ -10,7 +13,7 @@
       </div>
                   
       <div id="share2"> 
-        <a href="#"><img src="<?=base_url('/img/bt_share_int.jpg');?>" width="23" height="40" alt="share"></a>
+        
         <a href="#">A<sup>+</sup></a>
         <a href="#">A<sup>-</sup></a>
         <a href="javascript:window.print();"><i class="fa fa-print"></i></a>
