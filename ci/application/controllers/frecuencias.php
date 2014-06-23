@@ -47,6 +47,7 @@ class Frecuencias extends CI_Controller {
 	{
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias');
+		$data['header']['content'] =  $this->load->view('frecuencias/header_index', $data['header'], TRUE);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);
 		$this->load->view('frecuencias/index', $data['main']);
