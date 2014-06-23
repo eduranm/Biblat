@@ -147,29 +147,9 @@
     <div id="sliderPais">
         <ul id="bxsliderPais">
             <li><a href="<?=site_url("indice/pais/internacional");?>"><img src="<?=base_url('img/america.jpg');?>" title="<?php _e('Internacional');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/argentina");?>"><img src="<?=base_url('img/argentina.jpg');?>" title="<?php _e('Argentina');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/barbados");?>"><img src="<?=base_url('img/barbados.jpg');?>" title="<?php _e('Barbados');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/bolivia");?>"><img src="<?=base_url('img/bolivia.jpg');?>" title="<?php _e('Bolivia');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/brasil");?>"><img src="<?=base_url('img/brasil.jpg');?>" title="<?php _e('Brasil');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/chile");?>"><img src="<?=base_url('img/chile.jpg');?>" title="<?php _e('Chile');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/colombia");?>"><img src="<?=base_url('img/colombia.jpg');?>" title="<?php _e('Colombia');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/costarica");?>"><img src="<?=base_url('img/costarica.jpg');?>" title="<?php _e('Costa Rica');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/cuba");?>"><img src="<?=base_url('img/cuba.jpg');?>" title="<?php _e('Cuba');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/ecuador");?>"><img src="<?=base_url('img/ecuador.jpg');?>" title="<?php _e('Ecuador');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/elsalvador");?>"><img src="<?=base_url('img/elsalvador.jpg');?>" title="<?php _e('El Salvador');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/guatemala");?>"><img src="<?=base_url('img/guatemala.jpg');?>" title="<?php _e('Guatemala');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/haiti");?>"><img src="<?=base_url('img/haiti.jpg');?>" title="<?php _e('Haití');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/honduras");?>"><img src="<?=base_url('img/honduras.jpg');?>" title="<?php _e('Honduras');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/jamaica");?>"><img src="<?=base_url('img/jamaica.jpg');?>" title="<?php _e('Jamaica');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/mexico");?>"><img src="<?=base_url('img/mexico.jpg');?>" title="<?php _e('México');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/nicaragua");?>"><img src="<?=base_url('img/nicaragua.jpg');?>" title="<?php _e('Nicaragua');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/panama");?>"><img src="<?=base_url('img/panama.jpg');?>" title="<?php _e('Panamá');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/paraguay");?>"><img src="<?=base_url('img/paraguay.jpg');?>" title="<?php _e('Paraguay');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/peru");?>"><img src="<?=base_url('img/peru.jpg');?>" title="<?php _e('Perú');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/puertorico");?>"><img src="<?=base_url('img/puertorico.jpg');?>" title="<?php _e('Puerto Rico');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/republica-dominicana");?>"><img src="<?=base_url('img/repdominicana.jpg');?>" title="<?php _e('República Dominicana');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/uruguay");?>"><img src="<?=base_url('img/uruguay.jpg');?>" title="<?php _e('Uruguay');?>"></a></li>
-            <li><a href="<?=site_url("indice/pais/venezuela");?>"><img src="<?=base_url('img/venezuela.jpg');?>" title="<?php _e('Venezuela');?>"></a></li>
+<?php foreach ($paises as $pais):?>
+            <li><a href="<?=site_url("indice/pais/{$pais['paisSlug']}");?>"><img src="<?=base_url("img/{$pais['paisSlug']}.jpg");?>" title="<?=$pais['pais'];?>"></a></li>
+<?php endforeach;?>
         </ul>
     </div>
 
