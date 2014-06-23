@@ -109,7 +109,12 @@
 <?php else:?>
 	<div id="banner">
 		<div id="mainSlider">
-			<a href="javascript:;"><img src="<?=base_url('img/slide1.jpg');?>"></a>
+			<ul id="bxsliderMain">
+				<li><a href="javascript:;"><img src="<?=base_url('img/slide1.jpg');?>"></a></li>
+				<li><a href="javascript:;"><img src="<?=base_url('img/slide2.jpg');?>"></a></li>
+				<li><a href="javascript:;"><img src="<?=base_url('img/slide3.jpg');?>"></a></li>
+				<li><a href="javascript:;"><img src="<?=base_url('img/slide4.jpg');?>"></a></li>
+			</ul>
 		</div>
 	</div><!--end banner-->    
 <div id="content_int">

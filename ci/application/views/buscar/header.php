@@ -22,10 +22,9 @@
 				transition:"fade", 
 				data: {ajax:true}, 
 				height:"90%", 
-				current:"<?php _printf('Artículo %s de %s', '{current}', '{total}');?>",
-
+				current:"<?php _printf('Artículo %s de %s', '{current}', '{total}');?>"
 			});
-			jQuery(document).bind('cbox_complete', function(){
+			jQuery(document).rebind('cbox_complete', function(){
 				addthis.toolbox('.addthis_toolbox');
 				jQuery('#formSolicitudDocumento').validate();
 			});

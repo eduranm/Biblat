@@ -24,13 +24,12 @@
             $('#bxsliderMain').bxSlider({
             	auto: true,
             	randomStart: true,
-            	slideWidth: 980,
-                slideHeigth: 290,
+                pager: false,
+                responsive: true
             });
             $('#bxsliderIndicadores').bxSlider({
             	auto: true,
-            	speed: 1000,
-            	pager: false,
+            	speed: 1500,
             	useCSS: false
         	})
         });
