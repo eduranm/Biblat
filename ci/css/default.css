@@ -245,7 +245,7 @@ body {
 	box-shadow: none;
 	resize: none;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
-	text-align: center;
+	text-align: left;
 	vertical-align: center;
 }
 
@@ -305,7 +305,7 @@ body {
 	box-shadow: none;
 	resize: none;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
-	text-align: center;
+	text-align: left;
 	vertical-align: center;
 }
 
@@ -1201,12 +1201,12 @@ a.indiB {
 	padding: 6px 7px 0;
 	display: inline-block;
 	position: relative;
-    color: #114D66;
+    color: #606060;
     font-size: 12px;
 }
 
 .navbar span a{
-	color: #114D66;
+	color: #cc6600;
     font-size: 12px;
 }
 
@@ -1321,4 +1321,32 @@ a.indiB {
 	left: 665px;
 	z-index: 100;
 	opacity: 0.70;
+}
+
+#manual {
+	background-color: #D8D8D8;
+}
+
+.tituloMan {
+	color: #df6521;
+	text-align: center;
+	font-size: 25px !important;
+	font-style: bold;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
+}
+
+.descripcionMan {
+	text-align: right;
+	font-style: italic;
+	font-size: 14px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
+	color: #606060;
+	font-weight: bold;
+}
+
+.textoMan {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome;
+	font-size: 14px;
+	text-align: justify;
+	color: #606060;
 }
