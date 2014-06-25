@@ -64,13 +64,12 @@
 			jQuery('#bxsliderMain').bxSlider({
 				auto: true,
 				randomStart: true,
-				pager: false,
-				responsive: true
+				pager: false
 				});
 			jQuery('#bxsliderIndicadores').bxSlider({
 				auto: true,
 				speed: 1500,
-				useCSS: false
+				controls: false
 			});
 			jQuery("#accordion").accordion({
 				header: "h3",

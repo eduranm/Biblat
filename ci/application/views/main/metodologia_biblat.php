@@ -1,7 +1,7 @@
 <div id="content">
 	<div id="encabezado">
 		<div id="migas">
-			<p><a href="<?=site_url('/');?>">Inicio</a> / <?php _e('Bibliometría');?> / <?php _e('Metodología');?></p>
+			<p><a href="<?=site_url('/');?>"><?php _e('Inicio');?></a> / <?php _e('Bibliometría');?> / <?php _e('Metodología');?></p>
 		</div><!--End migas-->
 		<div id="share">
 			<div id="share1">

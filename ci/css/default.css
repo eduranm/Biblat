@@ -5,7 +5,7 @@
 
 /*-----Main structure-----*/
 * {
-font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome !important;	
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome !important;	
 }
 
 body {
@@ -29,11 +29,10 @@ body {
 
 /*-----Sliders de index-----*/
 #mainSlider {
-	width: 95%;
-	height: 300px;
+	width: 100%;
+	height: 291px;
 	float: left;
-	margin-top: 5px;
-	margin-left: 40px;
+	background: transparent;
 }
 
 #sliderPais {
@@ -1353,4 +1352,33 @@ a.indiB {
 	font-size: 14px;
 	text-align: justify;
 	color: #606060;
+}
+
+fieldset {
+	border-radius: 10px;
+}
+
+form.contacto input[type=text], form.contacto textarea{
+	width: 100%;
+}
+form.contacto input[type=submit]{
+	display: block;
+	margin: 0 auto;
+}
+
+#solicitudDocumento{
+	cursor: pointer;
+}
+.solicitudDocumento, #sd-disable{
+	display: none;
+}
+
+/*-----Plugins-----*/
+.ui-pnotify {
+	top: 0;
+	left: 0;
+}
+
+.bx-wrapper img {
+    margin: 0 auto !important;
 }

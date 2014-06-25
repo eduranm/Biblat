@@ -1,7 +1,7 @@
 <div id="content">
   <div id="encabezado"> 
     <div id="migas">
-      <p><a href="<?=site_url('/');?>">Inicio</a> / <?php _e('Bibliometría');?> / <?=$breadcrumb;?></p>
+      <p><a href="<?=site_url('/');?>"><?php _e('Inicio');?></a> / <?php _e('Bibliometría');?> / <?=$breadcrumb;?></p>
     </div><!--End migas-->             
     <div id="share">
       <div id="share1">
@@ -31,5 +31,4 @@
 		  <div id="gridTable"></div>
     </div>
 	</div><!--end content_txt-->
-	              
 </div><!--end content-->
