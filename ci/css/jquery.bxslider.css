@@ -18,12 +18,10 @@
 	position: relative;
 	margin: 0 auto 60px;
 	padding: 0;
-
-	height: auto !important;
 }
 
 #bxsliderMain {
-	
+	height: 90%;
 }
 
 .bx-wrapper img {
@@ -35,11 +33,7 @@
 ===================================*/
 
 .bx-wrapper .bx-viewport {
-	-moz-box-shadow: 0 0 5px #ccc;
-	-webkit-box-shadow: 0 0 5px #ccc;
-	box-shadow: 0 0 5px #ccc;
 	left: -5px;
-	background: #fff;
 	height: 100% !important;
 	
 	/*fix other elements on the page moving (on Chrome)*/

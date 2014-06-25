@@ -4,6 +4,10 @@
 
 
 /*-----Main structure-----*/
+* {
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif, FontAwesome !important;	
+}
+
 body {
 	background: url(../img/px_body.jpg) repeat-x top #e7e7e7;
 	margin: 0px auto;
