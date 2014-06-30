@@ -1369,6 +1369,7 @@ form.contacto input[type=submit]{
 #solicitudDocumento{
 	cursor: pointer;
 }
+
 .solicitudDocumento, #sd-disable{
 	display: none;
 }
@@ -1381,4 +1382,74 @@ form.contacto input[type=submit]{
 
 .bx-wrapper img {
     margin: 0 auto !important;
+}
+
+/*-----Accordion-----*/
+.ui-widget-content a {
+    color: #333333;
+}
+
+.ui-accordion .ui-accordion-header {
+	display: block;
+	cursor: pointer;
+	position: relative;
+	margin-top: 2px;
+	padding: .5em .5em .5em .7em;
+	min-height: 0; /* support: IE7 */
+	border-top-left-radius: 14px;
+	border-top-right-radius: 14px;
+	color: #1c94c4;
+	font-weight: bold;
+}
+
+.ui-accordion .ui-accordion-icons {
+	padding: 13px 0 13px 25px;
+}
+
+.ui-accordion .ui-accordion-noicons {
+	padding-left: .7em;
+}
+
+.ui-accordion .ui-accordion-icons .ui-accordion-icons {
+	padding-left: 2.2em;
+}
+
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon {
+	position: absolute;
+	left: .5em;
+	top: 50%;
+	margin-top: -8px;
+}
+
+.ui-accordion .ui-accordion-content {
+	padding: 10px;
+	border-top: 0;
+	overflow: auto;
+	font-size:14px;
+	
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    background: #fdf5ce;
+    border: 1px solid #fbcb09;
+    color: #c77405;
+    font-weight: bold;
+}
+
+.ui-state-hover a, .ui-state-hover a:hover, .ui-state-hover a:link, .ui-state-hover a:visited, .ui-state-focus a, .ui-state-focus a:hover, .ui-state-focus a:link, .ui-state-focus a:visited {
+    color: #c77405;
+    text-decoration: none;
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active {
+    background: #ffffff;
+    border: 1px solid #fbd850;
+    color: #eb8f00;
+    font-weight: bold;
+}
+
+.ui-widget-content {
+    background: #eeeeee;
+    border: 1px solid #dddddd;
+    color: #333333;
 }

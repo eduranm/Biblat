@@ -23,17 +23,6 @@ a{
 	font-size:12px;
 }
 
-a:link {
-	color:#cc6600;
-}
-
-
-a:hover {
-	color:#3e3690;
-}
-
-
-
 /* ------------------ LAYOUT GENERAL------------------*/
 html {
 	background-image:url(../img/fondo.jpg);
