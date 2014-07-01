@@ -1453,3 +1453,10 @@ form.contacto input[type=submit]{
     border: 1px solid #dddddd;
     color: #333333;
 }
+
+.temporal {
+	color: #c77405;
+	font-weight: bold;
+	font-size: 25px;
+	text-align: center;
+}
