@@ -146,7 +146,7 @@
 				<tr class="solicitudDocumento">
 					<td colspan="2">
 						<?php if(date('Y-m-d') > strtotime("02/07/2014") && date('Y-m-d') < strtotime("28/07/2014")):?>
-							<p class="temporal"><?php _e('Debido al período vacacional, el servicio de solicitud de documentos se reanudará el día 28 de Julio de 2014.');?></p>
+							<p class="temporal"><?php _e('Debido al período vacacional, el servicio de solicitud de documentos se suspenderá a partir del día 3 de Julio de 2014 y se reanudará el día 28 de Julio de 2014.');?></p>
 						<?php else:?>
 						<form id="formSolicitudDocumento" action="<?php echo site_url('revista/solicitud/documento');?>" method="POST" class="contacto">
 							<fieldset>
