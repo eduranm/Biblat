@@ -92,8 +92,6 @@ FROM '/home/herz/Sites/biblat/periodica/keyword.txt'
 (FORMAT 'csv', DELIMITER ';', NULL 'NULL', QUOTE '"', ESCAPE E'\\', ENCODING 'UTF8');
 
 --Actualizacion de datos
-
-
 TRUNCATE TABLE aleph_tags;
 	COPY aleph_tags(
 		"008",
@@ -120,3 +118,17 @@ TRUNCATE TABLE aleph_tags;
 		"698",
 		"856") 
 	FROM '/home/herz/Sites/biblat/claperJSON.txt' (FORMAT 'csv', DELIMITER ',', NULL 'NULL', QUOTE '''', ESCAPE E'\\', ENCODING 'UTF8');
+
+
+TRUNCATE TABLE article;
+	COPY article
+	FROM '/home/herz/Sites/biblat/articuloCLAPER.txt' (FORMAT 'csv', DELIMITER ',', NULL 'NULL', QUOTE '''', ESCAPE E'\\', ENCODING 'UTF8');
+
+#egrep -v ".+?,('[0-9]+?'|NULL)$" autorCLAPER.txt > autorCLAPER_error.txt && sed -i.bak -E -e "/.+?,('[0-9]+?'|NULL)$/\!d" autorCLAPER.txt && rm autorCLAPER.txt.bak
+TRUNCATE TABLE author;
+	COPY author
+	FROM '/home/herz/Sites/biblat/autorCLAPER.txt' (FORMAT 'csv', DELIMITER ',', NULL 'NULL', QUOTE '''', ESCAPE E'\\', ENCODING 'UTF8');
+#egrep -v "'.+?','[0-9]+?',.+?$" institucionCLAPER.txt > institucionCLAPER_error.txt
+TRUNCATE TABLE institution;
+	COPY institution
+	FROM '/home/herz/Sites/biblat/institucionCLAPER.txt' (FORMAT 'csv', DELIMITER ',', NULL 'NULL', QUOTE '''', ESCAPE E'\\', ENCODING 'UTF8');

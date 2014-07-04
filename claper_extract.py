@@ -179,10 +179,11 @@ def parse_database(database):
 					resultTag = re.match(r'(.)(.*?$)', element)
 					'''Si existe el patron y tiene un valor agregamos el elemento y su valor al diccionario'''
 					if result and resultTag.group(2) != '':
-						subtag.update({resultTag.group(1):re.sub(",$","",resultTag.group(2))})
+						subtag.update({resultTag.group(1):re.sub("[.,]$","",resultTag.group(2))})
 				'''Incrementamos el valor de z cuando existe en la etiqueta 120'''
-				if etiqueta == '120' and 'z' in subtag:
+				if etiqueta == '120':
 					z += 1
+					subtag.update({'z':'(%d)'%z})
 				'''Ajustamos el valor de la etiqueta 120 cuando esta dentro de la etiqueta 100'''
 				if etiqueta == '100' and any(key in subtag for key in ['u', 'v', 'w', 'x']) and any(key in subtag for key in ['a', '6']):
 					'''pprint(current)
