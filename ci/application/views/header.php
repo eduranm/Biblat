@@ -13,7 +13,8 @@
 	<link rel="stylesheet" href="<?=base_url('js/pnotify/jquery.pnotify.default.css');?>" type="text/css" />
 	<link rel="stylesheet" href="<?=base_url('js/select2/select2.css');?>" />
 	<link rel="stylesheet" href="<?=base_url('css/advancedsearch.css');?>" />
-	<link rel="stylesheet" href="<?=base_url('css/default.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url('css/default.css');?>" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="<?=base_url('css/jquery-ui-1.10.4.css');?>">
 	<script type="text/javascript" src="<?=base_url('js/jquery.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/jquery.validate.min.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/jquery.autosize.min.js');?>"></script>
@@ -28,7 +29,9 @@
 		addthis_config.data_track_clickback = false;
 		addthis_config.ui_language = "<?=lang_iso_code();?>";
 	</script>
+<?php if(ENVIRONMENT === "production"):?>
 	<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=herz"></script>
+<?php endif;?>
 	<script type="text/javascript" language="javascript">
 		loading = {
 			start: function(){
@@ -231,4 +234,4 @@ endif;
 ?>
 </head>
 <body>
-	<div class="wrapper">
+	<div id="wrapper">

@@ -49,7 +49,7 @@ class Revista extends CI_Controller{
 		/*Vistas*/
 		$data['header']['content'] =  $this->load->view('buscar/header', $data['header'], TRUE);
 		$data['header']['title'] = _sprintf('Biblat - Revista: %s', $data['main']['revista']);
-		$breadcrumb = sprintf('%s > %s (%%d documentos)', anchor('revista', _('Revistas'), _('title="Revistas"')), $data['main']['revista']);
+		$breadcrumb = sprintf('%s / %s (%%d documentos)', anchor('revista', _('Revistas'), _('title="Revistas"')), $data['main']['revista']);
 		$data['main']['breadcrumb'] = sprintf($breadcrumb, $articulosResultado['totalRows']);
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu', $data['header']);

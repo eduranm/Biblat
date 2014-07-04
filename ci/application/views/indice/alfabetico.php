@@ -1,14 +1,32 @@
-<div class="contenido">
-	<div class="flagContainer">
-		<p class="flag">
-			<em>
-				<?php _printf('Revistas por orden alfabético: %s', strtoupper($letra));?>
-			</em>
-		</p>
-	</div>
-	<div>
-		<table class="resultados centrado" border=0 cellpadding='0' cellspacing='0' summary='<?php _e('Revistas en orden alfabético');?>'>
-			<caption title="<?php _e('Revistas indizadas en CLASE y PERIÓDICA según orden alfabético y número de documentos de cada revista');?>"></caption>
+<div id="content">
+  <div id="encabezado">
+    <div id="migas">
+      <p><a href="<?=site_url('/');?>"><?php _e('Inicio');?></a> / <?php _e('Índice');?> / <?php _e('Alfabético');?> / <?=strtoupper($letra);?></p>
+    </div><!--End migas-->
+    <div id="share">
+      <div id="share1">
+        <span class="space"><a href="https://www.facebook.com/pages/BIBLAT/188958071154818" target="_blank">&#Xf09a;</a></span>
+        <span class="space"><a href="https://twitter.com/Biblat" target="_blank">&#Xf099;</i></i></a></span>
+        <span class="space"><a href="#" target="_blank">?</a></span>
+        <span class="space"><a href="mailto:scielo@dgb.unam.mx"><i class="fa fa-envelope-o"></i></a></span>
+        <div><a class="share" href="#">Español</a></div>
+      </div>
+      <div id="share2"> 
+        <a href="#">A<sup>+</sup></a>
+        <a href="#">A<sup>-</sup></a>
+        <a href="javascript:window.print();"><i class="fa fa-print"></i></a>
+      </div>
+    </div><!--end share-->
+
+    <div class="titulo_int">
+      <h1><?php _printf('Revistas por orden alfabético: %s', strtoupper($letra));?></h1>
+    </div><!--end titulo_int-->
+    <br class="cf">
+  </div><!--end encabezado-->
+      
+  <div id="content_txt">
+    <table class="resultados centrado" border=0 cellpadding='0' cellspacing='0' summary='<?php _e('Revistas en orden alfabético');?>'>
+      <caption title="<?php _e('Revistas indizadas en CLASE y PERIÓDICA según orden alfabético y número de documentos de cada revista');?>"></caption>
 			<colgroup>
 				<col id='noCol' />
 				<col id='indbibCol' />
@@ -32,5 +50,5 @@
 				<tr><td class='acumuladas' colspan=2><?php _e('Total:');?></td><td class='acumuladas'><?=number_format($registrosTotalArticulos);?></td></tr>
 			</tbody>
 		</table>
-	</div>
-</div>
+  </div><!--end content_txt-->
+</div><!--end content-->

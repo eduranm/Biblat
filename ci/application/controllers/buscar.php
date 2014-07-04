@@ -36,7 +36,8 @@ class Buscar extends CI_Controller{
 				foreach ($filters as $filter):
 					if(isset($filter['andor'])):
 						$filter['andor']['value'] = strtoupper($filter['andor']['value']);
-						$where .= " {$filter['andor']['value']} ";
+						$where .= " 
+						{$filter['andor']['value']} ";
 					endif;
 					switch ($filter['operator']['value']):
 						case 'eq':
@@ -126,34 +127,32 @@ class Buscar extends CI_Controller{
 			$data['main']['title'] = _('Resultados de la búsqueda');
 		endif;
 
-		$queryFields="SELECT 
-					DISTINCT (s.sistema, 
-					s.iddatabase) as \"sitemaIdDatabase\", 
-					articulo, 
-					\"articuloSlug\", 
-					revista, 
-					\"revistaSlug\", 
-					pais, 
-					anio, 
-					volumen, 
-					numero, 
-					periodo, 
-					paginacion, 
-					url, 
-					\"autoresSecJSON\",
-					\"autoresSecInstitucionJSON\",
-					\"autoresJSON\",
-					\"institucionesSecJSON\",
-					\"institucionesJSON\"";
+		$queryFields="SELECT s.sistema, 
+			s.iddatabase, 
+			articulo, 
+			\"articuloSlug\", 
+			revista, 
+			\"revistaSlug\", 
+			pais, 
+			anio, 
+			volumen, 
+			numero, 
+			periodo, 
+			paginacion, 
+			url, 
+			\"autoresSecJSON\",
+			\"autoresSecInstitucionJSON\",
+			\"autoresJSON\",
+			\"institucionesSecJSON\",
+			\"institucionesJSON\"";
 		$queryFrom="FROM \"mvSearch\" s 
 				WHERE  {$slugQuerySearch[where]} {$whereTextoCompleto} {$whereDisciplina}";
 		$query = "{$queryFields} 
-				{$queryFrom} 
+		{$queryFrom} 
 				ORDER BY anio DESC, volumen DESC, numero DESC, articulo";
 		
 
-		$queryCount = "SELECT count (DISTINCT (s.sistema, 
-					s.iddatabase)) as total {$queryFrom}";
+		$queryCount = "SELECT count (*) as total {$queryFrom}";
 		
 		/*Creando paginacion*/
 		if($disciplina == "null"):

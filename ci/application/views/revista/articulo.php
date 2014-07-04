@@ -145,6 +145,9 @@
 				</tr>
 				<tr class="solicitudDocumento">
 					<td colspan="2">
+						<?php if(strtotime('now') > strtotime('2014-07-02 23:59:59.0') && strtotime('now') < strtotime('2014-07-28')):?>
+							<p class="temporal"><?php _e('Debido al período vacacional, el servicio de solicitud de documentos se suspenderá a partir del día 3 de Julio de 2014 y se reanudará el día 28 de Julio de 2014.');?></p>
+						<?php else:?>
 						<form id="formSolicitudDocumento" action="<?php echo site_url('revista/solicitud/documento');?>" method="POST" class="contacto">
 							<fieldset>
 								<b><?php _e('Nota:');?></b> <?php _e('El envío del documento tiene costo.');?><br/><br/>
@@ -166,6 +169,7 @@
 								<input class="fa" type="submit" value="<?php _e('Enviar');?>   &#xf0e0;"/>
 							</fieldset>
 						</form>
+						<?php 	endif;?>
 					</td>
 				</tr>
 <?php 	endif;?>

@@ -251,7 +251,9 @@ if ( ! function_exists('articulosResultado') ):
 			$row = htmlspecialchars_deep($row);
 			/*Creando valores para el checkbox*/
 			$row['checkBoxValue'] = "{$row['iddatabase']}|{$row['sistema']}";
-			$row['checkBoxId'] = "cbox_{$row['checkBoxValue']}";
+			$row['checkBoxId'] = "chk_{$row['checkBoxValue']}";
+			/*Enlace para agregar referencia*/
+			$row['addRef'] = "<a class=\"add-ref\" id=\"{$row['checkBoxId']}\" href=\"javascript:;\">"._("Agregar referencia.")."</a>";
 			/*Creando link en caso de que exista texto completo*/
 			$row['articuloLink'] = anchor("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}", $row['articulo'], "title=\"{$row['articulo']}\" class=\"registro\"");
 			if( $row['url'] != NULL):

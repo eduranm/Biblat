@@ -1,6 +1,6 @@
-	<link rel="stylesheet" href="<?=base_url('css/estiloBiblatresultados.css');?>" />
-	<link rel="stylesheet" href="<?=base_url('css/colorbox.css');?>" />
-	<link rel="stylesheet" href="<?=base_url('css/colorboxIndices.css');?>" />
+	<link rel="stylesheet" href="<?=base_url('css/estiloBiblatresultados.css');?>"/>
+	<link rel="stylesheet" href="<?=base_url('css/colorbox.css');?>"/>
+	<link rel="stylesheet" href="<?=base_url('css/colorboxIndices.css');?>"/>
 	<script type="text/javascript" src="<?=base_url('js/colorbox.js');?>"></script>
 	<script type="text/javascript" src="<?=base_url('js/jquery.highlight.js');?>"></script>
 	<script type="text/javascript">
@@ -24,8 +24,7 @@
 				transition:"fade", 
 				data: {ajax:true}, 
 				height:"90%", 
-				current:"<?php _printf('Artículo %s de %s', '{current}', '{total}');?>",
-
+				current:"<?php _printf('Artículo %s de %s', '{current}', '{total}');?>"
 			});
 			jQuery(document).bind('cbox_complete', function(){
 				addthis.toolbox('.addthis_toolbox');

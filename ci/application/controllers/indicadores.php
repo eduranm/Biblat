@@ -4,8 +4,8 @@ class Indicadores extends CI_Controller {
 
 	public $indicadores = array();
 	public $disciplinas = array();
-	public $queryFields="DISTINCT (sistema, 
-					iddatabase) AS \"sitemaIdDatabase\",
+	public $queryFields="sistema, 
+					iddatabase,
 					articulo, 
 					\"articuloSlug\", 
 					revista, 
@@ -932,12 +932,12 @@ class Indicadores extends CI_Controller {
 		$result['table']['cols'][] = array('id' => '','label' => _('Documentos'),'type' => 'number');
 		foreach ($query->result_array() as $row):
 			$c = array();
-			$c[] = array('v' => $row['autor']);
+			$c[] = array('v' => "<a href='".site_url(sprintf('frecuencias/autor/%s/documento', slug($row['autor'])))."'>{$row['autor']}</a>");
 			$c[] = array('v' => $row['documentos']);
 			$result['table']['rows'][]['c'] = $c;
 		endforeach;
 		/*Opciones para la tabla*/
-		$data['tableOptions'] = array(
+		$result['tableOptions'] = array(
 				'allowHtml' => true,
 				'showRowNumber' => false
 			);
@@ -948,7 +948,7 @@ class Indicadores extends CI_Controller {
 	public function bradfordDocumentos($slug, $ajax=false){
 		$args['slug'] = $slug;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vDocumentosBradfordFull\" WHERE \"revistaSlug\"='{$slug}'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vDocumentosBradfordFull\" WHERE \"revistaSlug\"='{$slug}'";
+		$args['queryCount'] = "SELECT count(*) AS total FROM \"vDocumentosBradfordFull\" WHERE \"revistaSlug\"='{$slug}'";
 		$args['paginationURL'] = site_url("indicadores/bradfordDocumentos/{$slug}");
 		if(isset($_POST['ajax']) || $ajax):
 			$args['paginationURL'] = site_url("indicadores/bradfordDocumentos/{$slug}/ajax");

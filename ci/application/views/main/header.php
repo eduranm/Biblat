@@ -1,4 +1,11 @@
 	<link rel="stylesheet" href="<?=base_url('css/flag-stylesheet.css');?>" type="text/css" />
+	<link rel="stylesheet" href="<?=base_url('js/anythingslider/css/anythingslider.css');?>" />
+	<link rel="stylesheet" href="<?=base_url('css/theme-anythingslider-scielo.css');?>" />
+	<link rel="stylesheet" href="<?=base_url('css/jquery.slider.min.css');?>" />
+	<link href="<?=base_url('css/jquery.bxslider.css');?>" rel="stylesheet" />
+	<script src="<?=base_url('js/jquery.bxslider.min.js');?>"></script>
+	<script type="text/javascript" src="<?=base_url('js/jquery.slider.min.js');?>"></script>
+	<script type="text/javascript" src="<?=base_url('js/anythingslider/js/jquery.anythingslider.min.js');?>"></script>
 	<script src="<?=base_url('js/d3.js');?>"></script>
 	<script src="<?=base_url('js/d3.layout.cloud.js');?>"></script>
 	<script type="text/javascript" language="javascript">
@@ -44,6 +51,32 @@
 					.attr("transform", function(d) { return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")"; })
 					.text(function(d) { return d.text; });
 			}
+			jQuery('#bxsliderPais').bxSlider({
+				minSlides: 2,
+				maxSlides: 2,
+				slideMargin: 100,
+				auto: true,
+				pager: false,
+				slideWidth: 126,
+				slideHeigth: 126,
+				captions: true
+			});
+			jQuery('#bxsliderMain').bxSlider({
+				auto: true,
+				randomStart: true,
+				pager: false
+				});
+			jQuery('#bxsliderIndicadores').bxSlider({
+				auto: true,
+				speed: 1500,
+				controls: false
+			});
+			jQuery("#accordion").accordion({
+				header: "h3",
+				collapsible: true,
+				autoHeight: true,
+				navigation: true 
+			});
 		});
 	</script>
 	
