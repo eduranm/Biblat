@@ -6,8 +6,9 @@
 	<script type="text/javascript">
 		jQuery.noConflict();
 		jQuery(document).ready(function() {
-			jQuery(".saveCheck").click(function(){
-				formBuscador = jQuery("#buscador").serialize();
+			jQuery(".add-ref").click(function(){
+				console.log(jQuery(this).attr("id"));
+				/*formBuscador = jQuery("#buscador").serialize();
 				jQuery.ajax({
 					type: "POST",
 					async: false,
@@ -15,7 +16,8 @@
 					data: formBuscador
 				}).done(function( msg ) {
 					//alert( "Data Saved: " + msg );
-				});
+				});*/
+				return false;
 			});
 			jQuery(".registro").colorbox({
 				rel:'registro', 

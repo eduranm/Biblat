@@ -1537,9 +1537,9 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por revista: %s, autores', $query['revista']);
 		$data['header']['gridTitle'] = _sprintf('Cobertura por años de la revista:<br/> %s', $query['revista']);
-		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Autor', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), $query['revista']);
+		$data['main']['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s/Año', anchor('frecuencias', _('Frecuencias'), _('title="Frecuencias"')), anchor('frecuencias/revista', _('Revista'), _('title="Revista"')), $query['revista']);
 		/*XML vars*/
-		$args['xls']['cols'] = array( ('Autor'), _('Documentos') );
+		$args['xls']['cols'] = array( ('Año'), _('Documentos') );
 		$args['xls']['query'] = "SELECT autor, documentos FROM \"mvFrecuenciaRevistaAutor\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' ORDER BY documentos DESC, autor";
 		$args['xls']['fileName'] = "Frecuencia-{$query['revista']}-Años.csv";
 		return $this->_renderFrecuency($args, $data);

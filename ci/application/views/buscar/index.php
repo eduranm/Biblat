@@ -45,6 +45,8 @@
 			if ($resultado['institucionesHTML'] != ""):  echo $resultado['institucionesHTML'];?><br/>
 <?php 		endif;
 			if ($resultado['detalleRevista'] != ""): echo $resultado['detalleRevista'];?><br/>
+<?php 		endif;
+			//if ($resultado['addRef'] != ""): echo $resultado['addRef'];?><br/>
 <?php 		endif;?>	
 					</td>
 				</tr>
