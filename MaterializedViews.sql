@@ -1663,10 +1663,11 @@ FROM "mvSearch" s INNER JOIN autor a ON s.sistema=a.sistema AND s.iddatabase=a.i
 WHERE "revistaSlug" IS NOT NULL GROUP BY "revistaSlug", "autorSlug";
 
 --Frecuencia de documentos por revista -> años
+--DROP MATERIALIZED VIEW "mvFrecuenciaRevistaAnio";
 CREATE MATERIALIZED VIEW "mvFrecuenciaRevistaAnio" AS
 SELECT 
   "revistaSlug",
-  anio,
+  substr(anio, 1, 4) AS anio,
   count(DISTINCT(s.sistema, s.iddatabase)) AS documentos
 FROM "mvSearch" s 
 WHERE "revistaSlug" IS NOT NULL
