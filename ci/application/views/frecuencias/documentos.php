@@ -46,7 +46,7 @@
 				if ($resultado['detalleRevista'] != ""): echo $resultado['detalleRevista'];?><br/>
 		<?php 		endif;
 				//if ($resultado['addRef'] != ""): echo $resultado['addRef'];?><br/>
-		<?php           endif;?>
+		<?php           //endif;?>
 					
 							</td>
 						</tr>
