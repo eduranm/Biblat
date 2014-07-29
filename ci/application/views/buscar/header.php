@@ -27,7 +27,9 @@
 				current:"<?php _printf('Artículo %s de %s', '{current}', '{total}');?>"
 			});
 			jQuery(document).bind('cbox_complete', function(){
+<?php if(ENVIRONMENT === "production"):?>
 				addthis.toolbox('.addthis_toolbox');
+<?php endif;?>
 				jQuery('#formSolicitudDocumento').validate();
 			});
 			jQuery(".resultados").highlight([<?=$slugHighLight;?>]);
