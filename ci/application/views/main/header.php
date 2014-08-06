@@ -62,8 +62,10 @@
 				captions: true
 			});
 			jQuery('#bxsliderMain').bxSlider({
+				pause: 6000,
 				auto: true,
 				randomStart: true,
+				speed: 500,
 				pager: false
 				});
 			jQuery('#bxsliderIndicadores').bxSlider({

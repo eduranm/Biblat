@@ -1,9 +1,17 @@
 <div id="mainSlider">
     <ul id="bxsliderMain">
-        <li><a href="javascript:;"><img src="<?=base_url('img/slide1.jpg');?>"></a></li>
-        <li><a href="<?=site_url('frecuencias');?>"><img src="<?=base_url('img/slide2.jpg');?>"></a></li>
-        <li><a href="<?=site_url('indicadores');?>"><img src="<?=base_url('img/slide3.jpg');?>"></a></li>
-        <li><a href="javascript:;"><img src="<?=base_url('img/slide4.jpg');?>"></a></li>
+        <li id="slide-totales">
+            <a href="javascript:;">
+                <img src="<?=base_url('img/slides/banners_01.jpg');?>"/>
+                <div class="vertical-text" id="total-hevila"><?php echo _sprintf('%s textos completos en HEVILA', number_format($totales['hevila'], 0, '.', ','));?></div>
+                <div class="vertical-text" id="total-enlaces"><?php echo _sprintf('%s textos completos', number_format($totales['enlaces'], 0, '.', ','));?></div>
+                <div class="vertical-text" id="total-documentos"><?php echo _sprintf('%s documentos', number_format($totales['documentos'], 0, '.', ','));?></div>
+                <div class="vertical-text" id="total-revistas"><?php echo _sprintf('%s revistas', number_format($totales['revistas'], 0, '.', ','));?></div>
+            </a>
+        </li>
+        <li><a href="javascript:;"><img src="<?=base_url('img/slides/banners_02.jpg');?>"/></a></li>
+        <li><a href="<?php echo site_url('indicadores');?>"><img src="<?=base_url('img/slides/banners_03.jpg');?>"/></a></li>
+        <li><a href="<?php echo site_url('frecuencias');?>"><img src="<?=base_url('img/slides/banners_04.jpg');?>"/></a></li>
     </ul>
 </div>
 <div id="mainSearchContainer">

@@ -27,21 +27,9 @@ class Main extends CI_Controller{
 		endforeach;
 		$query->free_result();
 		/*Obtención de totales*/
-		$query = "SELECT count(*) AS documentos FROM \"mvSearch\"";
+		$query = "SELECT * FROM \"mvTotales\"";
 		$query = $this->db->query($query);
 		$data['index']['totales'] = $query->row_array();
-		$query->free_result();
-		$query = "SELECT count(DISTINCT revista) AS revistas FROM \"mvRevistaDisciplina\"";
-		$query = $this->db->query($query);
-		$data['index']['totales'] = array_merge($data['index']['totales'], $query->row_array());
-		$query->free_result();
-		$query = "SELECT count(*) AS enlaces FROM \"mvSearch\" WHERE url IS NOT NULL";
-		$query = $this->db->query($query);
-		$data['index']['totales'] = array_merge($data['index']['totales'], $query->row_array());
-		$query->free_result();
-		$query = "SELECT count(*) AS hevila FROM \"mvSearch\" WHERE url ~~ '%hevila%'";
-		$query = $this->db->query($query);
-		$data['index']['totales'] = array_merge($data['index']['totales'], $query->row_array());
 		$query->free_result();
 		/*Obteniendo lista de paises*/
 		if(! $this->session->userdata('paises')){
