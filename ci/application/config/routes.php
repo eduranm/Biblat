@@ -39,8 +39,12 @@
 */
 $langs = "^(?:es|en|fr|pt|ca)";
 
+
 $route['default_controller'] = "main";
 $route['404_override'] = '';
+
+$route['api/([^/]+?)/([^/]+?)\.(xml|json|csv|html|php|serialize)(.*?$)'] = "api/$1/$2/format/$3$4";
+$route['api/([^/]+?)\.(xml|json|csv|html|php|serialize)(.*?$)'] = "api/$1/index/format/$2$3";
 
 $route[$langs.'$'] = $route['default_controller'];
 
