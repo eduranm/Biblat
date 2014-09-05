@@ -1764,6 +1764,27 @@ CREATE MATERIALIZED VIEW "mvFrecuenciaDisciplinaRevista" AS
     count(DISTINCT ROW(iddatabase, sistema)) AS documentos
    FROM "mvSearch"
   GROUP BY "disciplinaSlug", "revistaSlug";
+
+CREATE MATERIALIZED VIEW "mvTotales" AS 
+SELECT 
+  count(*) AS documentos,
+  count(DISTINCT revista) AS revistas,
+  count(DISTINCT url) AS enlaces,
+  count(DISTINCT (CASE WHEN url ~~ '%hevila%' THEN url ELSE NULL END)) AS hevila
+FROM "mvSearch";
+
+DROP MATERIALIZED VIEW "mvInstitucion";
+CREATE MATERIALIZED VIEW "mvInstitucion" AS 
+SELECT 
+  institucion.e_100u,
+  slug_space(institucion.e_100u) AS slug,
+  institucion.e_100w,
+  institucion.e_100x,
+  slug(institucion.e_100x) AS "slugPais"
+ FROM institucion
+WHERE institucion.e_100u IS NOT NULL
+GROUP BY institucion.e_100u, institucion.e_100w, institucion.e_100x;
+CREATE INDEX ON "mvInstitucion" USING gin(slug gin_trgm_ops);
   
 --Drops
 --SELECT drop_matview('"mvIndiceCoautoriaPricePais"');
