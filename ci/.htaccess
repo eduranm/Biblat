@@ -1,5 +1,5 @@
 RewriteEngine on
-RewriteCond $1 !^(index\.php|js|css|img|images|files|robots\.txt)
+RewriteCond $1 !^(index\.php|assets|js|css|img|images|files|robots\.txt)
 RewriteRule ^(.*)$ /index.php/$1 [L]
 Options -Indexes -FollowSymLinks +SymLinksIfOwnerMatch
 <IfModule mod_geoip.c>
