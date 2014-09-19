@@ -23,196 +23,219 @@
 {/foreach}
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-            <![endif]-->
+        <![endif]-->
     </head>
     <body>
-        <header class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 col-lg-10 col-lg-offset-1">
-                    <div class="row">
-                    	<div id="biblat-logo" class="col-md-4 hidden-xs hidden-sm">
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div id="biblat-logo" class="col-md-4 hidden-xs hidden-sm">
+                        <a href="{site_url('/')}" title="{_('Bibliografía Latinoamericana')}">
                             <span class="bl-single"></span><br/>
                             <span class="bl-large"></span><br/>
                             <span class="bl-sub"></span><br/>
-                        </div>
-                        <div id="menu" class="col-md-8">
-                            <div class="row">
-                            	<div id="dgb-unam" class="col-sm-3 col-sm-offset-9 col-md-4 col-md-offset-8 hidden-xs hidden-sm text-right">
-                                    <span class="bl-dgb fa-5x"></span> <span class="bl-unam fa-5x"></span>
-                                </div>
-                                <div class="col-md-12">
-                                    <nav class="navbar navbar-default" role="navigation">
-                                        <div class="container-fluid">
-                                            <div class="navbar-header hidden-md hidden-lg">
-                                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
-                                                    <span class="sr-only">Toggle navigation</span>
-                                                    <span class="icon-bar"></span>
-                                                    <span class="icon-bar"></span>
-                                                    <span class="icon-bar"></span>
-                                                </button>
-                                                <a class="navbar-brand" href="{base_url()}" title="{_('Bibliografía Latinoamericana')}"><span class="bl-single"></span></a>
+                        </a>
+                    </div>
+                    <div id="menu" class="col-md-8">
+                        <div class="row">
+                            <div id="dgb-unam" class="col-md-12 text-right hidden-xs hidden-sm">
+                                <a href="http://dgb.unam.mx" title="{_('Dirección General de Bibliotecas')}" target="_blank"><span class="bl-dgb fa-5x"></a></span> 
+                                <a href="http://www.unam.mx" title="{_('Universidad Nacional Autónoma de México')}" target="_blank"><span class="bl-unam fa-5x"></a></span>
+                            </div>
+                            <div class="col-md-12 navbar-main">
+                                <nav class="navbar navbar-default" role="navigation">
+                                    <div class="container-fluid">
+                                        <div class="navbar-header hidden-md hidden-lg">
+                                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>
+                                            <a class="navbar-brand" href="{base_url()}" title="{_('Bibliografía Latinoamericana')}"><span class="bl-single"></span></a>
+                                        </div>
+                                        <div class="collapse navbar-collapse navbar-right" id="bs-navbar-collapse-1">
+                                            <ul class="nav navbar-nav">
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_('Sobre Biblat')}<span class="caret"></span></a>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="{site_url('sobre-biblat')}">{_('¿Qué es Biblat?')}</a></li>
+                                                        <li><a href="{site_url('clase-y-periodica')}">{_('Clase y Periódica')}</a></li>
+                                                        <li><a href="{site_url('manual-de-indizacion')}">{_('Manual de indización')}</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="{site_url('scielo')}">{_('SciELO')}</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="#">{_('Tutoriales')}</a></li>
+                                                        <li><a href="{site_url('materiales-de-difusion')}">{_('Materiales de difusión')}</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_('Bibliometría')}<span class="caret"></span></a>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="{site_url('bibliometria/descripcion-biblat')}">{_('Descripción')}</a></li>
+                                                        <li><a href="{site_url('bibliometria/metodologia-biblat')}">{_('Metodología')}</a></li>
+                                                        <li><a href="{site_url('frecuencias')}">{_('Frecuencias')}</a></li>
+                                                        <li><a href="{site_url('indicadores')}">{_('Indicadores')}</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="#">{_('Indicadores SciELO')}</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="#">{_('Indicadores por revista')}</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_('Postular una revista')}<span class="caret"></span></a>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="{site_url('postular-revista/criterios-de-seleccion')}">{_('Criterios de selección de revistas')}</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">{_('Políticas de acceso')}</a></li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_('Documentos')}<span class="caret"></span></a>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="{site_url('documentos/bibliografia')}">{_('Bibliografía')}</a></li>
+                                                        <li><a href="#">{_('Presentaciones PPT')}</a></li>
+                                                        <li><a href="#">{_('Archivos multimedia')}</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <ul class="nav navbar-nav visible-xs-block">
+                                                <li><a href="#"><span class="fa fa-facebook-square"></span>  Facebook</a></li>
+                                                <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
+                                                <li><a href="#"><span class="fa fa-question-circle"></span> {_('Ayuda')}</a></li>
+                                                <li><a href="#"><span class="fa fa-envelope-o"></span> {_('Contacto')}</a></li>
+                                                <li><a href="#"><span class="fa fa-print"></span> {_('Imprimir')}</a></li>
+                                                <li class="dropdown">
+                                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-language"></span> {_('Idioma')}<span class="caret"></span></a>
+                                                  <ul class="dropdown-menu" role="menu">
+{foreach supported_langs() key curlang}
+                                                    <li><a href="{site_url($lang->switch_uri($key))}">{$curlang.title}</a></li>
+{/foreach}
+                                                  </ul>
+                                                </li>
+                                            </ul>
+                                        </div><!-- /.navbar-collapse -->
+                                    </div><!-- /.container -->
+                                </nav>
+                            </div><!--col-md-12-->
+                            <div class="col-md-12 hidden-xs hidden-sm">
+                                <form role="search">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-search dropdown-toggle" data-toggle="dropdown">
+                                                        <span id="search-type" class="fa fa-cloud"> </span><span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="#"><span class="fa fa-cloud fa-fw"></span> {_('Buscar en todos los campos')}</a></li>
+                                                    <li><a href="#"><span class="fa fa-key fa-fw"></span> {_('Buscar por palabra clave')}</a></li>
+                                                    <li><a href="#"><span class="fa fa-user fa-fw"></span> {_('Buscar por autor')}</a></li>
+                                                    <li><a href="#"><span class="fa fa-book fa-fw"></span> {_('Buscar por revista')}</a></li>
+                                                    <li><a href="#"><span class="fa fa-building fa-fw"></span> {_('Buscar por institución')}</a></li>
+                                                    <li><a href="#"><span class="fa fa-file-text-o fa-fw"></span> {_('Buscar por artículo')}</a></li>
+                                                    <li><a href="#"><span class="fa fa-search-plus fa-fw"></span> {_('Búsqueda avanzada')}</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div class="collapse navbar-collapse navbar-right" id="bs-navbar-collapse-1">
-                                                <ul class="nav navbar-nav">
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_('Sobre Biblat')}<span class="caret"></span></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="{site_url('sobre-biblat')}">{_('¿Qué es Biblat?')}</a></li>
-                                                            <li><a href="{site_url('clase-y-periodica')}">{_('Clase y Periódica')}</a></li>
-                                                            <li><a href="{site_url('manual-de-indizacion')}">{_('Manual de indización')}</a></li>
-                                                            <li class="divider"></li>
-                                                            <li><a href="{site_url('scielo')}">{_('SciELO')}</a></li>
-                                                            <li class="divider"></li>
-                                                            <li><a href="#">{_('Tutoriales')}</a></li>
-                                                            <li><a href="{site_url('materiales-de-difusion')}">{_('Materiales de difusión')}</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_('Bibliometría')}<span class="caret"></span></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="{site_url('bibliometria/descripcion-biblat')}">{_('Descripción')}</a></li>
-                                                            <li><a href="{site_url('bibliometria/metodologia-biblat')}">{_('Metodología')}</a></li>
-                                                            <li><a href="{site_url('frecuencias')}">{_('Frecuencias')}</a></li>
-                                                            <li><a href="{site_url('indicadores')}">{_('Indicadores')}</a></li>
-                                                            <li class="divider"></li>
-                                                            <li><a href="#">{_('Indicadores SciELO')}</a></li>
-                                                            <li class="divider"></li>
-                                                            <li><a href="#">{_('Indicadores por revista')}</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_('Postular una revista')}<span class="caret"></span></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="{site_url('postular-revista/criterios-de-seleccion')}">{_('Criterios de selección de revistas')}</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">{_('Políticas de acceso')}</a></li>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_('Documentos')}<span class="caret"></span></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="{site_url('documentos/bibliografia')}">{_('Bibliografía')}</a></li>
-                                                            <li><a href="#">{_('Presentaciones PPT')}</a></li>
-                                                            <li><a href="#">{_('Archivos multimedia')}</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                                <ul class="nav navbar-nav visible-xs-block">
-                                                    <li><a href="#"><span class="fa fa-facebook-square"></span>  Facebook</a></li>
-                                                    <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
-                                                    <li><a href="#"><span class="fa fa-question-circle"></span> {_('Ayuda')}</a></li>
-                                                    <li><a href="#"><span class="fa fa-envelope-o"></span> {_('Contacto')}</a></li>
-                                                    <li><a href="#"><span class="fa fa-print"></span> {_('Imprimir')}</a></li>
-                                                    <li class="dropdown">
-                                                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-language"></span> {_('Idioma')}<span class="caret"></span></a>
-                                                      <ul class="dropdown-menu" role="menu">
-                                                        {foreach supported_langs() langKey curlang}
-                                                        <li><a href="{site_url($lang->switch_uri($langKey))}">{$curlang.title}</a></li>
-                                                        {/foreach}
-                                                      </ul>
-                                                    </li>
-                                                </ul>
-                                            </div><!-- /.navbar-collapse -->
-                                        </div><!-- /.container -->
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!--row-->
-                </div><!--cols-->
-            </div><!--row-->
+                                            <input type="text" class="form-control" placeholder="{_('Buscar en Biblat')}">
+                                            <div class="input-group-addon">
+                                                <button type="submit" class="btn btn-search"><span class="fa fa-search"></span></button>
+                                            </div>
+                                        </div><!--input-group-->
+                                    </div><!--form-group-->
+                                </form>
+                            </div><!--col-md-12 search-->
+                        </div><!--row-->
+                    </div><!--menu--> 
+                </div><!--row--> 
+            </div><!--container--> 
         </header>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12 col-lg-10 col-lg-offset-1">
-                    <div id="heading" class="row">
-                        <div class="col-sm-9">
-                            <ol class="breadcrumb">
-                                <li><a href="#">{_('Inicio')}</a></li>
-                                <li><a href="#">{_('Sobre Biblat')}</a></li>
-                            </ol>
-                            <div id="title">
-                                <hr/>
-                                <h4 id="title">{_('¿Qué es Biblat?')}</h4>
-                                <hr/>
-                            </div>
-                        </div>
-                        <div class="col-xs-offset-0 col-sm-2 col-sm-offset-1 col-md-3 col-md-offset-0 hidden-xs">
-                            <nav class="navbar navbar-default navbar-right" role="navigation">
-                                <div class="collapse navbar-collapse">
-                                    <ul class="nav navbar-nav">
-                                        <li><a href="#"><span class="fa fa-facebook-square"></span><span class="visible-xs-inline"> Facebook</span></a></li>
-                                        <li><a href="#"><span class="fa fa-twitter"></span><span class="visible-xs-inline"> Twitter</span></a></li>
-                                        <li><a href="#"><span class="fa fa-question-circle"></span><span class="visible-xs-inline"> {_('Ayuda')}</span></a></li>
-                                        <li><a href="#"><span class="fa fa-envelope-o"></span><span class="visible-xs-inline"> {_('Contacto')}</span></a></li>
-                                        <li><a href="#"><span class="fa fa-print"></span><span class="visible-xs-inline"> {_('Imprimir')}</span></a></li>
-                                        <li class="dropdown">
-                                          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-language"></span><span class="visible-xs-inline"> {_('Idioma')}</span><span class="caret"></span></a>
-                                          <ul class="dropdown-menu" role="menu">
-                                            {foreach supported_langs() langKey curlang}
-                                            <li><a href="{site_url($lang->switch_uri($langKey))}">{$curlang.title}</a></li>
-                                            {/foreach}
-                                          </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                    </div><!--heading-->
+        <div class="container">
+            <div id="heading" class="row">
+                <div class="col-sm-9">
+                    <ol class="breadcrumb">
+                        <li><a href="#">{_('Inicio')}</a></li>
+                        <li>{_('Sobre Biblat')}</li>
+                    </ol>
+                    <div id="title">
+                        <hr/>
+                        <h4>{_('¿Qué es Biblat?')}</h4>
+                        <hr/>
+                    </div>
                 </div>
-            </div>
+                <div class="col-sm-3 hidden-xs">
+                    <nav class="navbar navbar-default navbar-right" role="navigation">
+                        <div class="container-fluid">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#" title="Facebook"><span class="fa fa-facebook-square"></span><span class="visible-xs-inline"> Facebook</span></a></li>
+                                <li><a href="#" title="Twitter"><span class="fa fa-twitter"></span><span class="visible-xs-inline"> Twitter</span></a></li>
+                                <li><a href="#" title="{_('Ayuda')}"><span class="fa fa-question-circle"></span><span class="visible-xs-inline"> {_('Ayuda')}</span></a></li>
+                                <li><a href="#" title="{_('Contacto')}"><span class="fa fa-envelope-o"></span><span class="visible-xs-inline"> {_('Contacto')}</span></a></li>
+                                <li><a href="#" title="{_('Imprimir')}"><span class="fa fa-print"></span><span class="visible-xs-inline"> {_('Imprimir')}</span></a></li>
+                                <li class="dropdown">
+                                  <a href="#" title="{_('Idioma')}" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-language"></span><span class="visible-xs-inline"> {_('Idioma')}</span><span class="caret"></span></a>
+                                  <ul class="dropdown-menu" role="menu">
+{foreach supported_langs() key curlang}
+                                    <li><a href="{site_url($lang->switch_uri($key))}">{$curlang.title}</a></li>
+{/foreach}
+                                  </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div><!--heading-->
         </div><!--container-fluid-->
-        <div class="container-fluid">
-            <div class="row">
-                <div id="main" class="col-md-12 col-lg-10 col-lg-offset-1">
-                    {$template.body}
-                    <div class="clearfix"></div>
-                </div><!--main-->
+        <div id="main" class="container">
+            {$template.body}
+            <div class="clearfix"></div>
+        </div><!--container-fluid-->
+        <footer class="container">
+            <div id="sitemap" class="row hidden-xs">
+                <div class="col-xs-9 col-xs-offset-3 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1">
+                    <ul class="list-unstyled">
+                      <li><a href="{site_url('sobre-biblat')}">{_('¿Qué es Biblat?')}</a></li>
+                      <li><a href="{site_url('clase-y-periodica')}">{_('Clase y Periódica')}</a></li>
+                      <li><a href="{site_url('manual-de-indizacion')}">{_('Manual de indización')}</a></li>
+                      <li><a href="{site_url('scielo')}">{_('SciELO')}</a></li>
+                      <li><a href="#">{_('Tutoriales')}</a></li>
+                      <li><a href="{site_url('materiales-de-difusion')}">{_('Materiales de difusión')}</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-9 col-xs-offset-3 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1">
+                    <ul class="list-unstyled">
+                      <li><a href="{site_url('bibliometria/descripcion-biblat')}">{_('Descripción')}</a></li>
+                      <li><a href="{site_url('bibliometria/metodologia-biblat')}">{_('Metodología')}</a></li>
+                      <li><a href="{site_url('frecuencias')}">{_('Frecuencias')}</a></li>
+                      <li><a href="{site_url('indicadores')}">{_('Indicadores')}</a></li>
+                      <li><a href="#">{_('Indicadores SciELO')}</a></li>
+                      <li><a href="#">{_('Indicadores por revista')}</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-9 col-xs-offset-3 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1">
+                    <ul class="list-unstyled">
+                      <li><a href="{site_url('postular-revista/criterios-de-seleccion')}">{_('Criterios de selección de revistas')}</a></li>
+                      <li><a href="#">{_('Políticas de acceso')}</a></li>
+                      <li><a href="{site_url('documentos/bibliografia')}">{_('Bibliografía')}</a></li>
+                      <li><a href="#">{_('Presentaciones PPT')}</a></li>
+                      <li><a href="#">{_('Archivos multimedia')}</a></li>
+                    </ul>
+                </div>
             </div><!--row-->
-        </div><!--container-fluid-->
-        <footer class="container-fluid">
             <div class="row">
-                <div id="sitemap" class="col-md-12 col-lg-10 col-lg-offset-1 hidden-xs">
-                    <div class="row">
-                        <div class="col-xs-9 col-xs-offset-3 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1">
-                            <ul class="list-unstyled">
-                              <li><a href="{site_url('sobre-biblat')}">{_('¿Qué es Biblat?')}</a></li>
-                              <li><a href="{site_url('clase-y-periodica')}">{_('Clase y Periódica')}</a></li>
-                              <li><a href="{site_url('manual-de-indizacion')}">{_('Manual de indización')}</a></li>
-                              <li><a href="{site_url('scielo')}">{_('SciELO')}</a></li>
-                              <li><a href="#">{_('Tutoriales')}</a></li>
-                              <li><a href="{site_url('materiales-de-difusion')}">{_('Materiales de difusión')}</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-xs-9 col-xs-offset-3 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1">
-                            <ul class="list-unstyled">
-                              <li><a href="{site_url('bibliometria/descripcion-biblat')}">{_('Descripción')}</a></li>
-                              <li><a href="{site_url('bibliometria/metodologia-biblat')}">{_('Metodología')}</a></li>
-                              <li><a href="{site_url('frecuencias')}">{_('Frecuencias')}</a></li>
-                              <li><a href="{site_url('indicadores')}">{_('Indicadores')}</a></li>
-                              <li><a href="#">{_('Indicadores SciELO')}</a></li>
-                              <li><a href="#">{_('Indicadores por revista')}</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-xs-9 col-xs-offset-3 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1">
-                            <ul class="list-unstyled">
-                              <li><a href="{site_url('postular-revista/criterios-de-seleccion')}">{_('Criterios de selección de revistas')}</a></li>
-                              <li><a href="#">{_('Políticas de acceso')}</a></li>
-                              <li><a href="{site_url('documentos/bibliografia')}">{_('Bibliografía')}</a></li>
-                              <li><a href="#">{_('Presentaciones PPT')}</a></li>
-                              <li><a href="#">{_('Archivos multimedia')}</a></li>
-                            </ul>
-                        </div>
-                    </div><!--row-->
-                </div><!--sitemap-->
-                <div id="copyright" class="col-md-12 col-lg-10 col-lg-offset-1 text-center">
+                <div id="copyright" class="text-center">
                     {_sprintf('® Derechos reservados. 2009 - %d. Dirección General de Bibliotecas, Universidad Nacional Autónoma de México (UNAM). Esta página y sus contenidos pueden ser utilizados y reproducidos con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica. De otra forma, requiere permiso previo por escrito de la institución.', date('Y'))} <a href="{site_url('creditos')}">{_('CRÉDITOS')}</a>
                 </div>
-            </div><!--row-->
+            </div>
+        </div><!--sitemap-->
         </footer>
         <script src="{base_url('assets/themes/default/js/jquery.js')}"></script>
         <script src="{base_url('assets/themes/default/js/bootstrap.min.js')}"></script>
-        {foreach $js file}
+        <script>
+            {$template.partials.biblat_js}
+        </script>
+{foreach $js file}
         <script src="{$file}"></script>
-        {/foreach}
+{/foreach}
     </body>
 </html>
