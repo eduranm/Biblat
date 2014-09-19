@@ -1,0 +1,266 @@
+@font-face {
+	font-family: 'Biblat';
+	src:url('../fonts/Biblat.eot?-l0vgxa');
+	src:url('../fonts/Biblat.eot?#iefix-l0vgxa') format('embedded-opentype'),
+		url('../fonts/Biblat.woff?-l0vgxa') format('woff'),
+		url('../fonts/Biblat.ttf?-l0vgxa') format('truetype'),
+		url('../fonts/Biblat.svg?-l0vgxa#Biblat') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="bl-"], [class*=" bl-"] {
+	font-family: 'Biblat';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.bl-sub:before {
+	content: "\e600";
+}
+.bl-large:before {
+	content: "\e601";
+}
+.bl-single:before {
+	content: "\e602";
+}
+.bl-logo:before {
+	content: "\e603";
+}
+.bl-unam:before {
+	content: "\e604";
+}
+.bl-dgb:before {
+	content: "\e605";
+}
+.bl-all:before {
+	content: "\e606";
+}
+
+
+body{
+	background-color: #E7E7E7;
+}
+
+a {
+    color: #ff8000;
+}
+
+header{
+	background: url("../img/px_header.jpg") repeat-x scroll;
+	background-color: #555555;
+}
+
+header {
+	color: #FAFAFA;
+}
+header #biblat-logo {
+	padding-top: 34px;
+	padding-bottom: 34px;
+	letter-spacing: 10px;
+}
+header #biblat-logo .bl-single{
+	font-size: 77px;
+}
+
+header #biblat-logo .bl-large{
+	color: #A5A5A5;
+	font-size: 20px;
+}
+
+header #biblat-logo .bl-sub{
+	color: #E17636;
+	font-size: 16.8px;
+}
+
+header #biblat-logo a {
+  color: #FAFAFA;
+  text-decoration: none;
+  outline: 0;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+header #dgb-unam {
+	color: #D5D5D5;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	letter-spacing: 10px;
+}
+
+header #dgb-unam a {
+  color: #D5D5D5;
+  text-decoration: none;
+  outline: 0;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 991px) {
+  header .navbar-main{
+	background-color: #FF8000;
+  }
+}
+
+.navbar-main .dropdown-menu {
+	background-color: #FF8000;
+}
+
+.navbar-main .dropdown-menu > li > a:hover,
+.navbar-main .dropdown-menu > li > a:focus {
+	background-color: #555555;
+	background-image: none;
+}
+
+header .nav > li > a {
+	padding: 15px 5px;
+}
+
+header .navbar{
+    border-bottom: 0 none;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 991px) {
+  header .navbar{
+    margin-bottom: 0;
+  }
+}
+
+header .navbar-default{
+	background-color: #FF8000;
+	background-image: none;
+	border-color: #FF8000;
+}
+
+header .navbar-default .navbar-nav > li > a{
+	color: #FAFAFA;
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+	header .navbar-default .caret{
+		border-left: 3px solid transparent;
+		border-right: 3px solid transparent;
+		border-top: 4px solid;
+		margin-left: 1px;
+	}
+}
+
+header .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #FAFAFA;
+}
+
+header .navbar-brand {
+    padding: 9px 10px;
+}
+
+header .navbar-default .navbar-brand {
+    color: #FAFAFA;
+}
+
+header .navbar-brand .bl-single {
+	font-size: 1.7em;
+}
+
+header .navbar-default .navbar-toggle {
+	color: #FAFAFA;
+}
+
+header .navbar-default .navbar-toggle .icon-bar {
+    background-color: #FAFAFA;
+}
+
+header .form-group {
+	margin-bottom: 10px;
+}
+
+.btn-group > .btn-search:first-child {
+	margin-left: -10px;
+}
+
+.btn-search {
+	padding: 5px 10px;
+	margin: -5px -10px;
+	border: 0 none;
+}
+
+#heading {
+	background-color: #FAFAFA;
+}
+
+#heading .breadcrumb{
+	color: #606060;
+    font-size: 12px;
+}
+
+#heading #title hr {
+	border-color: #555555;
+}
+
+#heading #title h4 {
+	margin-left: 20px;
+	color: #DF6521;
+}
+
+#heading .nav > li > a {
+	padding: 15px 5px;
+	font-size: 20px;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+	#heading .nav > li > a {
+		padding: 15px 8px;
+		font-size: 20px;
+	}
+}
+
+#heading .navbar-default{
+	background-color: #B1B2B4;
+	background-image: none;
+	border-color: #B1B2B4;
+}
+
+#heading .navbar-default .navbar-nav > li > a{
+	color: #FAFAFA;
+}
+
+#heading .navbar-default .navbar-nav > li > a:hover {
+	color: #0A0A0A;
+}
+
+#heading .navbar-default .navbar-nav > .open > a, 
+#heading .navbar-default .navbar-nav > .open > a:hover, 
+#heading .navbar-default .navbar-nav > .open > a:focus {
+	color: #0A0A0A;
+}
+
+#main {
+	background-color: #FAFAFA;
+}
+
+footer a {
+	color: #555555;
+}
+
+
+#sitemap {
+	background: url("../img/px_site.jpg") repeat-x scroll #D4D4D4;
+	padding-top: 10px;
+	font-size: 12px;
+}
+
+#copyright {
+	background-color: #FF8000;
+	color: #FAFAFA;
+	font-size: 11px;
+	padding: 15px;
+}
