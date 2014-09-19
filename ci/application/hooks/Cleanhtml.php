@@ -11,7 +11,8 @@ class Cleanhtml {
 		$buffer = $CI->output->get_output();
 		/*Remove debug console log in production*/
 		if(ENVIRONMENT === "production"):
-			$buffer = preg_replace('/console.log(.+?);/', "", $buffer);
+			$buffer = preg_replace('/console.log\(.+?\);/', "", $buffer);
+			$buffer = preg_replace('/<!--.+?-->/', "", $buffer);
 		endif;
 		
 		$CI->output->set_output($buffer);
