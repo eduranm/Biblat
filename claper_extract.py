@@ -7,7 +7,7 @@ from pprint import pprint, pformat
 '''Inicializando variables para almacenar las etiquetas del registro y el registro actual'''
 registro = {}
 current = ""
-tags = ['008', '022', '024', '035', '036', '039', '041', '100', '110', '120', '222', '245', '260', '300', '504', '520', '546', '590', '650', '653', '654', '698', '856']
+tags = ['008', '022', '024', '035', '036', '039', '041', '100', '110', '120', '222', '245', '260', '300', '504', '520', '546', '590', '650', '653', '654', '698', '856', 'CAT']
 jsonTags = ('100', '110', '120', '300', '520', '590')
 fieldsArticle = [
 	('sistema', '035'),
@@ -27,7 +27,7 @@ fieldsArticle = [
 	('disciplinas', '650'),
 	('palabraClave', '653'),
 	('keyword', '654'),
-	('url', '865')
+	('url', '856')
 ]
 fieldsAuthor = [
 	('nombre', 'a'),
@@ -41,13 +41,20 @@ fieldsInstitution = [
 	('ciudad', 'w'),
 	('pais', 'x')
 ]
+fieldsCatalogador = [
+	('nombre', 'a'),
+	('nivel', 'b'),
+	('fechaEdicion', 'c'),
+	('horaEdicion', 'h')
+]
 lenTags = len(tags)
 '''Abrimos archivos para guradar los resultados'''
-detalles = open('../claperDetalles.txt', 'w')
-fClaPerJSON = open('../claperJSON.txt', 'w')
-fArticle = open('../articuloCLAPER.txt', 'w')
-fAuthor = open('../autorCLAPER.txt', 'w')
-fInstitution = open('../institucionCLAPER.txt', 'w')
+detalles = open('./database/claperDetalles.txt', 'w')
+fClaPerJSON = open('./database/claperJSON.txt', 'w')
+fArticle = open('./database/articuloCLAPER.txt', 'w')
+fAuthor = open('./database/autorCLAPER.txt', 'w')
+fInstitution = open('./database/institucionCLAPER.txt', 'w')
+fCatalogador = open('./database/catalogadorCLAPER.txt', 'w')
 '''Funcion para comparar la afiliación del autor esta duplicada'''
 def duplicate_aff(tag, compare):
 	del compare['z']
@@ -140,6 +147,22 @@ def add_record():
 				tagOffset += 1
 			fInstitution.write(csv + "\n")
 
+	'''Agregamos el registro del catalogador'''
+	lenFields = len(fieldsCatalogador)
+	if 'CAT' in registro:
+		catalogador = registro['CAT'][0]
+		csv = "'%s',"%registro['035']
+		tagOffset=1
+		for field, tag in fieldsCatalogador:
+			if tag in catalogador:
+				csv += "'"+ re.sub(r"^\(([0-9]+?)\)$", r"\1", re.sub(r"'", "\\'", catalogador[tag])) + "'"
+			else:
+				csv += "NULL"
+			if tagOffset < lenFields:
+				csv += ","
+			tagOffset += 1
+		fCatalogador.write(csv + "\n")
+
 	registro = {}
 
 '''Abrimos el archivo con que contiene el resultado de p_print_03 de aleph'''
@@ -157,7 +180,7 @@ def parse_database(database):
 			if line == "EOF":
 				add_record()
 			'''Con una expresion regular separamos cada linea en sitema, etiqueta y valor'''
-			result = re.match(r'(^[0-9]+?)\s([0-9]+?)\s.+?L\s(.+?$)', line)
+			result = re.match(r'(^[0-9]+?)\s([0-9]+?|CAT)\s.+?L\s(.+?$)', line)
 			'''Si existe el patron en la linea la procesamos'''
 			if result:
 				sistema = result.group(1)
@@ -202,6 +225,9 @@ def parse_database(database):
 					registro['120in100'] = True
 					if lastTag == '100':
 						registro['100'][-1].update({'z':'(%d)'%z})
+				elif etiqueta == 'CAT':
+					if 'a' in subtag and etiqueta not in registro:
+						subtags[etiqueta] = subtag
 				elif len(subtag) > 0:
 					subtags[etiqueta] = subtag
 
@@ -243,8 +269,8 @@ def add_claper():
 		else:
 			fArticle.write("\n")
 		fieldOffset += 1'''
-	parse_database('../clase_valid.txt')
-	parse_database('../periodica_valid.txt')
+	parse_database('./database/clase_valid.txt')
+	parse_database('./database/periodica_valid.txt')
 
 add_claper()
 
