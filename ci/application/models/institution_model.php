@@ -28,7 +28,7 @@ class Institution_model extends CI_Model {
 		$this->db->select('e_100u, e_100w, e_100x, registros');
 		$this->db->from('mvInstitucion');
 		$this->db->where('slug ~~', $slug);
-		$this->db->order_by('e_100u');
+		$this->db->order_by('registros DESC, e_100u');
 		if($country && $country != "-"):
 			$this->db->where('slugPais', $country);
 		endif;
