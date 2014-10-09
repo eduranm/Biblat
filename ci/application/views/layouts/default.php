@@ -8,24 +8,27 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-{foreach $meta name content}
+{foreach $template.meta name content}
         <meta name="{$name}" content="{$content}" />
 {/foreach}
-        <link rel="icon" href="{base_url('assets/themes/default/img/favicon.ico')}" type="image/x-icon"/>
-        <link rel="stylesheet" href="{base_url('assets/themes/default/css/bootstrap.min.css')}" type="text/css" />
-        <link rel="stylesheet" href="{base_url('assets/themes/default/css/font-awesome.min.css')}" type="text/css" />
-        <link rel="stylesheet" href="{base_url('assets/themes/default/css/biblat.css')}" type="text/css" />
+        <link rel="icon" href="{base_url('assets/img/favicon.ico')}" type="image/x-icon"/>
+        <link rel="stylesheet" href="{base_url('assets/css/bootstrap.min.css')}" type="text/css" />
+        <link rel="stylesheet" href="{base_url('css/jquery-ui.min.css')}" type="text/css" />
+        <link rel="stylesheet" href="{base_url('assets/css/font-awesome.min.css')}" type="text/css" />
+        <link rel="stylesheet" href="{base_url('js/pnotify/jquery.pnotify.default.css')}" type="text/css" />
+        <link rel="stylesheet" href="{base_url('js/select2/select2.css')}" />
+        <link rel="stylesheet" href="{base_url('assets/css/biblat.css')}" type="text/css" />
 {if $canonical}
         <link rel="canonical" href="{$canonical}" />
 {/if}
-{foreach $css file}
+{foreach $template.css file}
         <link rel="stylesheet" href="{$file}" type="text/css" />
 {/foreach}
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
     </head>
-    <body>
+      <body>
         <header>
             <div class="container">
                 <div class="row">
@@ -98,50 +101,41 @@
                                                     </ul>
                                                 </li>
                                             </ul>
-                                            <ul class="nav navbar-nav visible-xs-block">
-                                                <li><a href="#"><span class="fa fa-facebook-square"></span>  Facebook</a></li>
-                                                <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
-                                                <li><a href="#"><span class="fa fa-question-circle"></span> {_('Ayuda')}</a></li>
-                                                <li><a href="#"><span class="fa fa-envelope-o"></span> {_('Contacto')}</a></li>
-                                                <li><a href="#"><span class="fa fa-print"></span> {_('Imprimir')}</a></li>
-                                                <li class="dropdown">
-                                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-language"></span> {_('Idioma')}<span class="caret"></span></a>
-                                                  <ul class="dropdown-menu" role="menu">
-{foreach supported_langs() key curlang}
-                                                    <li><a href="{site_url($lang->switch_uri($key))}">{$curlang.title}</a></li>
-{/foreach}
-                                                  </ul>
-                                                </li>
-                                            </ul>
+                                            <div class="visible-xs-block">
+                                                {$template.partials.submenu}
+                                            </div>
                                         </div><!-- /.navbar-collapse -->
                                     </div><!-- /.container -->
                                 </nav>
                             </div><!--col-md-12-->
                             <div class="col-md-12 hidden-xs hidden-sm">
-                                <form role="search">
+                                <form action="<?=site_url('buscar');?>" id="searchform" method="post" role="search" autocomplete="off">
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-addon">
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-search dropdown-toggle" data-toggle="dropdown">
-                                                        <span id="search-type" class="fa fa-cloud"> </span><span class="caret"></span>
+                                                        <span id="search-type" class="fa fa-cloud fa-fw"> </span><span class="caret"></span>
                                                     </button>
-                                                    <ul class="dropdown-menu" role="menu">
-                                                    <li><a href="#"><span class="fa fa-cloud fa-fw"></span> {_('Buscar en todos los campos')}</a></li>
-                                                    <li><a href="#"><span class="fa fa-key fa-fw"></span> {_('Buscar por palabra clave')}</a></li>
-                                                    <li><a href="#"><span class="fa fa-user fa-fw"></span> {_('Buscar por autor')}</a></li>
-                                                    <li><a href="#"><span class="fa fa-book fa-fw"></span> {_('Buscar por revista')}</a></li>
-                                                    <li><a href="#"><span class="fa fa-building fa-fw"></span> {_('Buscar por institución')}</a></li>
-                                                    <li><a href="#"><span class="fa fa-file-text-o fa-fw"></span> {_('Buscar por artículo')}</a></li>
-                                                    <li><a href="#"><span class="fa fa-search-plus fa-fw"></span> {_('Búsqueda avanzada')}</a></li>
+                                                    <ul id="search-opts" class="dropdown-menu" role="menu">
+                                                    <li rel="todos"><a href="#"><span id="todos" class="fa fa-cloud fa-fw"></span> {_('Buscar en todos los campos')}</a></li>
+                                                    <li rel="palabra-clave"><a href="#"><span id="palabra-clave" class="fa fa-key fa-fw"></span> {_('Buscar por palabra clave')}</a></li>
+                                                    <li rel="autor"><a href="#"><span id="autor" class="fa fa-user fa-fw"></span> {_('Buscar por autor')}</a></li>
+                                                    <li rel="revista"><a href="#"><span id="revista" class="fa fa-book fa-fw"></span> {_('Buscar por revista')}</a></li>
+                                                    <li rel="institucion"><a href="#"><span id="institucion" class="fa fa-building fa-fw"></span> {_('Buscar por institución')}</a></li>
+                                                    <li rel="articulo"><a href="#"><span id="articulo" class="fa fa-file-text-o fa-fw"></span> {_('Buscar por artículo')}</a></li>
+                                                    <li rel="avanzada"><a href="#"><span id="avanzada" class="fa fa-search-plus fa-fw"></span> {_('Búsqueda avanzada')}</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="{_('Buscar en Biblat')}">
+                                            <textarea class="form-control" id="slug" name="slug" placeholder="{_('Buscar en Biblat')}"></textarea>
+                                            <div id="advsearch" class="form-control"></div>
                                             <div class="input-group-addon">
                                                 <button type="submit" class="btn btn-search"><span class="fa fa-search"></span></button>
                                             </div>
                                         </div><!--input-group-->
+                                        <input type="hidden" name="disciplina" value=""/>
+                                        <input type="hidden" name="filtro" id="filtro" value="todos"/>
                                     </div><!--form-group-->
                                 </form>
                             </div><!--col-md-12 search-->
@@ -166,21 +160,7 @@
                 <div class="col-sm-3 hidden-xs">
                     <nav class="navbar navbar-default navbar-right" role="navigation">
                         <div class="container-fluid">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#" title="Facebook"><span class="fa fa-facebook-square"></span><span class="visible-xs-inline"> Facebook</span></a></li>
-                                <li><a href="#" title="Twitter"><span class="fa fa-twitter"></span><span class="visible-xs-inline"> Twitter</span></a></li>
-                                <li><a href="#" title="{_('Ayuda')}"><span class="fa fa-question-circle"></span><span class="visible-xs-inline"> {_('Ayuda')}</span></a></li>
-                                <li><a href="#" title="{_('Contacto')}"><span class="fa fa-envelope-o"></span><span class="visible-xs-inline"> {_('Contacto')}</span></a></li>
-                                <li><a href="#" title="{_('Imprimir')}"><span class="fa fa-print"></span><span class="visible-xs-inline"> {_('Imprimir')}</span></a></li>
-                                <li class="dropdown">
-                                  <a href="#" title="{_('Idioma')}" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-language"></span><span class="visible-xs-inline"> {_('Idioma')}</span><span class="caret"></span></a>
-                                  <ul class="dropdown-menu" role="menu">
-{foreach supported_langs() key curlang}
-                                    <li><a href="{site_url($lang->switch_uri($key))}">{$curlang.title}</a></li>
-{/foreach}
-                                  </ul>
-                                </li>
-                            </ul>
+{$template.partials.submenu}
                         </div>
                     </nav>
                 </div>
@@ -229,13 +209,19 @@
             </div>
         </div><!--sitemap-->
         </footer>
-        <script src="{base_url('assets/themes/default/js/jquery.js')}"></script>
-        <script src="{base_url('assets/themes/default/js/bootstrap.min.js')}"></script>
+        <script src="{base_url('assets/js/jquery.js')}"></script>
+        <script src="{base_url('assets/js/bootstrap.min.js')}"></script>
+        <script src="{base_url('js/jquery-ui.min.js')}"></script>
+        <script src="{base_url('js/jquery.autosize.min.js')}"></script>
+        <script src="{base_url('js/jquery.validate.min.js')}"></script>
+        <script src="{base_url('js/pnotify/jquery.pnotify.min.js')}"></script>
+        <script src="{base_url('js/select2/select2.js')}"></script>
+        <script src="{base_url('js/advancedsearch/js/evol.advancedSearch.min.js')}"></script>
+{foreach $template.js file}
+        <script src="{$file}"></script>
+{/foreach}
         <script>
             {$template.partials.biblat_js}
         </script>
-{foreach $js file}
-        <script src="{$file}"></script>
-{/foreach}
     </body>
 </html>

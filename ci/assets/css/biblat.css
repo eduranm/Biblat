@@ -45,7 +45,6 @@
 	content: "\e606";
 }
 
-
 body{
 	background-color: #E7E7E7;
 }
@@ -184,6 +183,110 @@ header .form-group {
 	margin-bottom: 10px;
 }
 
+#searchform #slug, .autosizejs {
+    height: 34px;
+    resize: none;
+    background-color: #EEEEEE;
+}
+
+/*  Advanced Search for jQuery UI  */
+#searchform #advsearch{
+	background: #EEEEEE;
+	padding-top: 5px;
+	display: none;
+}
+.evo-advSearch{
+	height: auto;
+}
+
+#searchform .ui-button-icon-only {
+	margin-top: 1px;
+    width: 1.6em;
+    height: 22px;
+}
+
+.evo-advSearch{
+	min-height:20px;
+	padding:2px;
+}
+
+.evo-bNew, .evo-bAdd, .evo-bDel, .evo-bSubmit, .evo-searchFilters a{
+	margin:1px 6px 2px 1px;
+}
+.evo-lBold{
+	font-weight: bold;
+}
+.evo-lLight{
+	font-weight: normal;
+}
+
+.lLight-Red{
+	font-weight: normal;
+	color: #FF0000;
+}
+
+.evo-searchFilters a span.ui-button-text{
+	padding: 0px 33px 4px 12px;
+}
+
+.evo-editFilter{
+	vertical-align: middle;
+    display: inline-block;
+}
+.evo-editFilter select, .evo-editFilter input{
+	margin: 2px 6px 2px 1px;
+	font-size: 14px; 
+}
+.evo-editFilter span#value {
+	margin-right:5px;
+}
+.evo-editFilter #value input[type="checkbox"] {
+	margin-left:5px;
+}
+.evo-editFilter input[type="number"]#value,
+.evo-editFilter input[type="time"]#value,
+.evo-editFilter input[type="time"]#value2 {
+	width:6em;
+}
+
+.evo-editFilter input.hasDatepicker{
+	width:7em;
+}
+
+.evo-editFilter > input,
+.evo-editFilter > select {
+    padding: 2px 12px 4px;
+    font-size: 13px;
+    line-height: 14px;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+.evo-editFilter > .select2-container{
+	display: inline-block;
+	margin: 0;
+	position: relative;
+	vertical-align: middle;
+	margin:1px 6px 2px 1px;
+	font-size: 13px; 
+}
+
+.evo-editFilter > .select2-container .select2-choice, .evo-editFilter > .select2-container .select2-choices{
+	height: 22px;
+	line-height: 22px;
+}
+
+.evo-editFilter > .select2-container-multi *{
+	font-size: 11px;
+	line-height: 11px;
+}
+.evo-advSearch a{
+	outline: 0;
+}
+
 .btn-group > .btn-search:first-child {
 	margin-left: -10px;
 }
@@ -192,6 +295,7 @@ header .form-group {
 	padding: 5px 10px;
 	margin: -5px -10px;
 	border: 0 none;
+	background: none;
 }
 
 #heading {
@@ -263,4 +367,13 @@ footer a {
 	color: #FAFAFA;
 	font-size: 11px;
 	padding: 15px;
+}
+
+/*plugins*/
+.ui-widget {
+	font-family: inherit;
+}
+.ui-pnotify.stack-bar-top {
+    right: 0;
+    top: 0;
 }
