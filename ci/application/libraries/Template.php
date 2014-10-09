@@ -38,6 +38,7 @@ class Template
 
 	private $_parser_enabled = TRUE;
 	private $_parser_body_enabled = TRUE;
+	private $_minify_enabled = TRUE;
 
 	private $_theme_locations = array();
 
@@ -106,6 +107,11 @@ class Template
 		if ($this->_parser_enabled === TRUE)
 		{
 			$this->_ci->load->library('parser');
+		}
+
+		if ($this->_minify_enabled === TRUE)
+		{
+			$this->_ci->load->driver('minify');
 		}
 
 		// Modular Separation / Modular Extensions has been detected
@@ -240,6 +246,8 @@ class Template
 
 				$template['partials'][$name] = $partial['string'];
 			}
+			if($this->_minify_enabled && $partial['minify'])
+				$template['partials'][$name] = $this->_ci->minify->js->min($template['partials'][$name]);
 		}
 
 		// Disable sodding IE7's constant cacheing!!
@@ -480,9 +488,9 @@ class Template
 	 * @param	boolean
 	 * @return	void
 	 */
-	public function set_partial($name, $view, $data = array())
+	public function set_partial($name, $view, $data = array(), $minify = FALSE)
 	{
-		$this->_partials[$name] = array('view' => $view, 'data' => $data);
+		$this->_partials[$name] = array('view' => $view, 'data' => $data, 'minify' => $minify);
 		return $this;
 	}
 
@@ -495,9 +503,9 @@ class Template
 	 * @param	boolean
 	 * @return	void
 	 */
-	public function inject_partial($name, $string, $data = array())
+	public function inject_partial($name, $string, $data = array(), $minify = FALSE)
 	{
-		$this->_partials[$name] = array('string' => $string, 'data' => $data);
+		$this->_partials[$name] = array('string' => $string, 'data' => $data, 'minify' => $minify);
 		return $this;
 	}
 
