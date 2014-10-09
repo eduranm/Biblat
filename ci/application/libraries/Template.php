@@ -26,6 +26,9 @@ class Template
 
 	private $_title = '';
 	private $_metadata = array();
+	private $_css = array();
+	private $_javascript = array();
+	private $_meta = array("keywords"=>array(), "description"=>null);
 
 	private $_partials = array();
 
@@ -209,6 +212,9 @@ class Template
 		$template['breadcrumbs'] = $this->_breadcrumbs;
 		$template['metadata']	= implode("\n\t\t", $this->_metadata);
 		$template['partials']	= array();
+		$template['js'] = $this->_javascript;
+		$template['css'] = $this->_css;
+		$template['meta'] = $this->_meta;
 
 		// Assign by reference, as all loaded views will need access to partials
 		$this->_data['template'] =& $template;
@@ -350,7 +356,60 @@ class Template
 		return $this;
 	}
 
+	function css(){
+		$css_files = func_get_args();
+		foreach($css_files as $css_file){
+			$css_file = substr($css_file,0,1) == '/' ? substr($css_file,1) : $css_file;
+			$is_external = false;
+			if(is_bool($css_file))
+				continue;
+			$is_external = preg_match("/^https?:\/\//", trim($css_file)) > 0 ? true : false;
+			if(!$is_external)
+				if(!file_exists($css_file))
+					show_error("Cannot locate stylesheet file: {$css_file}.");
+			$css_file = $is_external == FALSE ? base_url() . $css_file : $css_file;
+			if(!in_array($css_file, $this->_css))
+				$this->_css[] = $css_file;
+		}
+		return;
+	}
 
+	function js(){
+		$script_files = func_get_args();
+		foreach($script_files as $script_file){
+			$script_file = substr($script_file,0,1) == '/' ? substr($script_file,1) : $script_file;
+			$is_external = false;
+			if(is_bool($script_file))
+				continue;
+			$is_external = preg_match("/^https?:\/\//", trim($script_file)) > 0 ? true : false;
+			if(!$is_external)
+				if(!file_exists($script_file))
+					show_error("Cannot locate javascript file: {$script_file}.");
+			$script_file = $is_external == FALSE ? base_url() . $script_file : $script_file;
+			if(!in_array($script_file, $this->_javascript))
+				$this->_javascript[] = $script_file ;
+		}
+		return;
+	}
+
+	public function set_common_meta($title, $description, $keywords)
+	{
+		$this->set_meta("description", $description);
+		$this->set_meta("keywords", $keywords);
+		$this->title($title);
+	}
+	/**
+	* Adds meta tags.
+	*
+	* @access public
+	* @param string $name the name of the meta tag
+	* @param string $content the content of the meta tag
+	* @return bool
+	*/
+	public function set_meta($name, $content){
+		$this->_meta[$name] = $content;
+		return true;
+	}
 	/**
 	 * Which theme are we using here?
 	 *
