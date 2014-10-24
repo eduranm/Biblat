@@ -53,6 +53,11 @@ a {
     color: #ff8000;
 }
 
+ol.nested { counter-reset: item; }
+ol.nested li { display: block;}
+ol.nested li:before { content: counters(item, ".") ". "; counter-increment: item }
+ol.nested ol li:before { content: counters(item, ".") " "; counter-increment: item }
+
 header{
 	background: url("../img/px_header.jpg") repeat-x scroll;
 	background-color: #555555;
@@ -307,11 +312,11 @@ header .form-group {
     font-size: 12px;
 }
 
-#heading #title hr {
+#heading .page_title hr {
 	border-color: #555555;
 }
 
-#heading #title h4 {
+.page_title h4, .page_title h5 {
 	margin-left: 20px;
 	color: #DF6521;
 }
@@ -377,3 +382,58 @@ footer a {
     right: 0;
     top: 0;
 }
+/*Formulas*/
+.formula{
+	font-weight: bold;
+	font-size: 16px;
+	text-align: center;
+}
+
+.fraction {
+	display: inline-block;
+	position: relative;
+	vertical-align: middle; 
+	letter-spacing: 0.01em;
+	text-align: center;
+	}
+.fraction > span { 
+	display: block; 
+	padding: 0.2em; 
+	}
+.fraction span.fdn {border-top: thin solid black;}
+.fraction span.bar {display: none;}
+
+.n-root {
+	position: relative;
+	top: -1.3em;
+	left: 1.9ex;
+	font-size: 45%;
+	}
+.radical {
+	font-size: 1.7em;
+	vertical-align: middle;
+	}
+.radicand { 
+	padding: 0.5ex;
+	border-top: thin black solid;
+	}
+
+.intsuma {
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+	text-align: center;
+	margin-bottom: 0.5ex;
+	}
+.intsuma .lim, .intsuma .lim-up {
+	display: block;
+	font-size: 75%;
+	text-align: center;
+	}
+.intsuma .lim-up {
+	margin-bottom: 0;
+	margin-left: 0.8ex;
+	}
+.intsuma .lim {margin-bottom: -0.6ex;}
+.intsuma .sum {font-size: 1.2em;}
+.intsuma .sum-frac {font-size: 2em;}

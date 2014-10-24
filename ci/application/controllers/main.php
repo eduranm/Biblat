@@ -5,6 +5,9 @@ class Main extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
+		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
+		$this->template->set_partial('submenu', 'layouts/submenu');
+		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
 	}
 	public function index(){
 		$data = array();
@@ -52,37 +55,34 @@ class Main extends CI_Controller{
 
 	public function creditos(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - Créditos");
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu');
-		$this->load->view('main/creditos');
-		$this->load->view('footer');
+		$data['page_title'] = _('Créditos');
+		$this->template->title(_('Biblat - Créditos'));
+		$this->template->set_meta('description', _('Créditos'));
+		$this->template->build('main/creditos', $data);
 	}
 
 	public function bibliografia(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - Bibliografía");
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu');
-		$this->load->view('main/bibliografia');
-		$this->load->view('footer');
+		$data['page_title'] = _('Bibliografía');
+		$this->template->title(_('Biblat - Bibliografía'));
+		$this->template->set_breadcrumb(_('Documentos'));
+		$this->template->set_meta('description', _('Bibliografía'));
+		$this->template->build('main/bibliografia', $data);
 	}
 
 	public function sobreBiblat(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - ¿Qué es Biblat?");
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu');
-		$this->load->view('main/info_biblat');
-		$this->load->view('footer');
-		$this->load->helper('url');
+		$data['page_title'] = _('¿Qué es Biblat?');
+		$this->template->title(_('Biblat - ¿Qué es Biblat?'));
+		$this->template->set_breadcrumb(_('Sobre Biblat'));
+		$this->template->set_meta('description', _('¿Qué es Biblat?'));
+		$this->template->build('main/info_biblat', $data);
 	}
 
 	public function clasePeriodica(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - CLASE y PERIÓDICA");
 		$this->load->database();
-		$query = "SELECT * FROM \"vDisciplinasBase\" ORDER BY iddatabase, disciplina";
+		$query = "SELECT * FROM \"mvDisciplinasBase\" ORDER BY iddatabase, disciplina";
 		$query = $this->db->query($query);
 		$data[ 'disciplina' ] = array();
 		foreach ($query->result_array() as $row):
@@ -91,58 +91,62 @@ class Main extends CI_Controller{
 				$disciplina['slug'] = $row['slug'];
    				$data[ 'disciplina' ][ $row[ 'iddatabase' ] ][] = $disciplina;	
 		endforeach;
-		$this->db->close();
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu');
-		$this->load->view('main/info_clase_periodica', $data);
-		$this->load->view('footer');
+		$data['page_title'] = _('CLASE y PERIÓDICA');
+		$this->template->title(_('Biblat - CLASE y PERIÓDICA'));
+		$this->template->set_breadcrumb(_('Sobre Biblat'));
+		$this->template->set_meta('description', _('CLASE y PERIÓDICA'));
+		$this->template->build('main/info_clase_periodica', $data);
 	}
 
 	public function scielo(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - Sobre SciELO");
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu');
-		$this->load->view('main/info_scielo');
-		$this->load->view('footer');
+		$data['page_title'] = _('Sobre SciELO');
+		$this->template->title(_('Biblat - Sobre SciELO'));
+		$this->template->set_breadcrumb(_('Sobre Biblat'));
+		$this->template->set_meta('description', _('Sobre SciELO'));
+		$this->template->build('main/info_scielo', $data);
 	}
 
 	public function manualIndizacion(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - Manual de indización");
-		$data['header']['content'] = $this->load->view('header_metodologia', $data['header'],TRUE);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu');
-		$this->load->view('main/manual_indizacion');
-		$this->load->view('footer');
+		$data['page_title'] = _('Manual de indización');
+		$this->template->set_partial('view_js', 'header_metodologia', array(), TRUE);
+		$this->template->title(_('Biblat - Manual de indización'));
+		$this->template->css('assets/css/colorbox.css');
+		$this->template->js('assets/js/colorbox.js');
+		$this->template->set_breadcrumb(_('Sobre Biblat'));
+		$this->template->set_meta('description', _('Manual de indización'));
+		$this->template->build('main/manual_indizacion', $data);
 	}
 
 	public function materialesDifusion(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - Materiales de difusión");
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu');
-		$this->load->view('main/materiales_difusion');
-		$this->load->view('footer');
+		$data['page_title'] = _('Materiales de difusión');
+		$this->template->title(_('Biblat - Materiales de difusión'));
+		$this->template->set_breadcrumb(_('Sobre Biblat'));
+		$this->template->set_meta('description', _('Materiales de difusión'));
+		$this->template->build('main/materiales_difusion', $data);
 	}
 
 	public function descripcionBiblat(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - Descripción");
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu');
-		$this->load->view('main/descripcion_biblat');
-		$this->load->view('footer');
+		$data['page_title'] = _('Descripción');
+		$this->template->title(_('Biblat - Descripción'));
+		$this->template->set_breadcrumb(_('Bibliometría'));
+		$this->template->set_meta('description', _('Descripción'));
+		$this->template->build('main/descripcion_biblat', $data);
 	}
 
 	public function metodologiaBiblat(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - Metodología");
-		$data['header']['content'] = $this->load->view('header_metodologia', $data['header'],TRUE);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu');
-		$this->load->view('main/metodologia_biblat');
-		$this->load->view('footer');
+		$data['page_title'] = _('Metodología');
+		$this->template->set_partial('view_js', 'header_metodologia', array(), TRUE);
+		$this->template->title(_('Biblat - Metodología'));
+		$this->template->css('assets/css/colorbox.css');
+		$this->template->js('assets/js/colorbox.js');
+		$this->template->set_breadcrumb(_('Bibliometría'));
+		$this->template->set_meta('description', _('Metodología'));
+		$this->template->build('main/metodologia_biblat', $data);
 	}
 
 	public function indicadoresScielo(){
@@ -165,11 +169,11 @@ class Main extends CI_Controller{
 
 	public function criteriosSeleccion(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - Criterios de selección");
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu');
-		$this->load->view('main/criterios_seleccion');
-		$this->load->view('footer');
+		$data['page_title'] = _('Criterios de selección');
+		$this->template->title(_('Biblat - Criterios de selección'));
+		$this->template->set_breadcrumb(_('Postular una revista'));
+		$this->template->set_meta('description', _('Criterios de selección'));
+		$this->template->build('main/criterios_seleccion', $data);
 	}
 
 	public function sitemap(){
