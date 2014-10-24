@@ -148,12 +148,17 @@
             <div id="heading" class="row">
                 <div class="col-sm-9">
                     <ol class="breadcrumb">
-                        <li><a href="#">{_('Inicio')}</a></li>
-                        <li>{_('Sobre Biblat')}</li>
+{foreach $template.breadcrumbs breadcrumb}
+{if $breadcrumb.uri != ''}
+                        <li><a href="{$breadcrumb.uri}">{$breadcrumb.name}</a></li>
+{else}
+                        <li>{$breadcrumb.name}</li>
+{/if}
+{/foreach}
                     </ol>
-                    <div id="title">
+                    <div class="page_title">
                         <hr/>
-                        <h4>{_('¿Qué es Biblat?')}</h4>
+                        <h4>{$page_title}</h4>
                         <hr/>
                     </div>
                 </div>
@@ -166,7 +171,7 @@
                 </div>
             </div><!--heading-->
         </div><!--container-fluid-->
-        <div id="main" class="container">
+        <div id="main" class="container text-justify">
             {$template.body}
             <div class="clearfix"></div>
         </div><!--container-fluid-->
@@ -222,6 +227,7 @@
 {/foreach}
         <script>
             {$template.partials.biblat_js}
+            {$template.partials.view_js}
         </script>
     </body>
 </html>
