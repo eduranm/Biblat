@@ -2,8 +2,8 @@
 	<table class="table table-striped <?php if ($ajax):?>articulo<?php endif;?>" <?php if ($mail):?> border="1" style="border-collapse:collapse; width:650px;"<?php endif;?>>
 <?php 	if (!$mail):?>
 		<caption class="text-center"> 
-			<?php echo $articulo['articulo'];?>
-			<div class="addthis_toolbox addthis_default_style" addthis:url="<?php echo site_url("revista/{$articulo['revistaSlug']}/articulo/{$articulo['articuloSlug']}")?>" addthis:title="<?php echo $title;?>">
+			<?php if ($ajax):?><?php echo $articulo['articulo'];?><?php endif;?>
+			<div class="addthis_toolbox addthis_default_style center-block" addthis:url="<?php echo site_url("revista/{$articulo['revistaSlug']}/articulo/{$articulo['articuloSlug']}")?>" addthis:title="<?php echo $title;?>">
 				<a class="addthis_button_mendeley" style="cursor:pointer"></a>
 				<a class="addthis_button_facebook" style="cursor:pointer"></a>
 				<a class="addthis_button_twitter" style="cursor:pointer"></a>
@@ -12,6 +12,7 @@
 				<a class="addthis_button_compact"></a>
 				<a class="addthis_counter addthis_bubble_style"></a>
 			</div>
+			<br/>
 		</caption>
 <?php 	endif;?>
 		<tbody>

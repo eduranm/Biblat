@@ -61,6 +61,9 @@ class Revista extends CI_Controller{
 		$this->template->css('assets/css/colorboxIndices.css');
 		$this->template->js('assets/js/colorbox.js');
 		$this->template->js('assets/js/jquery.highlight.js');
+		if(ENVIRONMENT === "production"):
+			$this->template->js('//s7.addthis.com/js/300/addthis_widget.js#pubid=herz');
+		endif;
 		$this->template->set_meta('description', $data['main']['page_title']);
 		$this->template->build('revista/index', $data['main']);
 	}
