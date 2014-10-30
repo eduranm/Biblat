@@ -385,14 +385,15 @@ class Template
 	function js(){
 		$script_files = func_get_args();
 		foreach($script_files as $script_file){
-			$script_file = substr($script_file,0,1) == '/' ? substr($script_file,1) : $script_file;
-			$is_external = false;
-			if(is_bool($script_file))
-				continue;
-			$is_external = preg_match("/^https?:\/\//", trim($script_file)) > 0 ? true : false;
-			if(!$is_external)
+			$is_external = preg_match("/(^https?:\/\/|^\/\/)/m", trim($script_file)) > 0 ? true : false;
+			if(!$is_external){
+				$script_file = substr($script_file,0,1) == '/' ? substr($script_file,1) : $script_file;
+				$is_external = false;
+				if(is_bool($script_file))
+					continue;
 				if(!file_exists($script_file))
 					show_error("Cannot locate javascript file: {$script_file}.");
+			}
 			$script_file = $is_external == FALSE ? base_url() . $script_file : $script_file;
 			if(!in_array($script_file, $this->_javascript))
 				$this->_javascript[] = $script_file ;
