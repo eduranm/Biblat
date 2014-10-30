@@ -202,24 +202,24 @@ if ( ! function_exists('articulosResultado') ):
 		if($firstPageNumber):
 			$config['first_url'] = "$paginationURL/1";
 		endif;
-		$config['first_link'] = "<img src=\"".base_url()."img/first.png\" border=\"0\"/>";
-		$config['last_link'] = "<img src=\"".base_url()."img/last.png\" border=\"0\"/>";
-		$config['next_link'] = "<img src=\"".base_url()."img/next.png\" border=\"0\"/>";
-		$config['prev_link'] = "<img src=\"".base_url()."img/prev.png\" border=\"0\"/>";
-		$config['cur_tag_open'] = '<span class="currentPage">';
-		$config['cur_tag_close'] = '</span>';
-		$config['num_tag_open'] = '<span class="page">';
-		$config['num_tag_close'] = '</span>';
-		$config['prev_tag_open'] = '<span>';
-		$config['prev_tag_close'] = '</span>';
-		$config['next_tag_open'] = '<span>';
-		$config['next_tag_close'] = '</span>';
-		$config['first_tag_open'] = '<span>';
-		$config['first_tag_close'] = '</span>';
-		$config['last_tag_open'] = '<span>';
-		$config['last_tag_close'] = '</span>';
-		$config['full_tag_open'] = '<div class="navbar">';
-		$config['full_tag_close'] = '</div>';
+		$config['first_link'] = "&laquo;";
+		$config['last_link'] = "&raquo;";
+		$config['next_link'] = "&rsaquo;";
+		$config['prev_link'] = "&lsaquo;";
+		$config['cur_tag_open'] = '<li class="active"><a href="javascript:;">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
 		$config['use_page_numbers'] = TRUE;
 		$ci->pagination->initialize($config);
 		
@@ -255,15 +255,15 @@ if ( ! function_exists('articulosResultado') ):
 			/*Enlace para agregar referencia*/
 			$row['addRef'] = "<a class=\"add-ref\" id=\"{$row['checkBoxId']}\" href=\"javascript:;\">"._("Agregar referencia.")."</a>";
 			/*Creando link en caso de que exista texto completo*/
-			$row['articuloLink'] = anchor("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}", $row['articulo'], "title=\"{$row['articulo']}\" class=\"registro\"");
+			$row['articuloLink'] = anchor("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}", $row['articulo'], array('title' => $row['articulo'], 'class' => 'registro'));
 			if( $row['url'] != NULL):
-				$img = "<img src=\"".base_url("img/html.png")."\" border=\"0\"/>";
+				$img = '<i class="fa fa-file-text-o fa-lg"></i>';
 				if(preg_match('/.*pdf.*/', $row['url'])):
-					$img = "<img src=\"".base_url("img/pdf.png")."\" border=\"0\"/>";
+					$img = '<span class="fa fa-file-pdf-o fa-lg"></span>';
 				endif;
-				$row['downloadLink'] = "<a href=\"{$row['url']}\" target=\"_blank\" title=\""._('Mostrar artículo en texto completo')."\">{$img}</a>";
+				$row['downloadLink'] = "<a href=\"{$row['url']}\" target=\"_blank\" title=\""._('Mostrar artículo en texto completo')."\" class=\"text\">{$img}</a>";
 			endif;
-			$row['mendeleyLink'] = "<a target=\"_blank\" href=\"http://www.mendeley.com/import/?url=".urlencode(site_url("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}"))."\" title=\""._('Agregue este articulo a su biblioteca Mendeley')."\"><img src=\"http://www.mendeley.com/graphics/mendeley.png\" border=\"0\"></a>";
+			$row['mendeleyLink'] = "<a target=\"_blank\" href=\"http://www.mendeley.com/import/?url=".urlencode(site_url("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}"))."\" title=\""._('Agregue este artículo a su biblioteca Mendeley')."\"><img src=\"http://www.mendeley.com/graphics/mendeley.png\" border=\"0\"></a>";
 
 			/*Creando lista de autores en html*/
 			$row['autoresHTML'] = "";

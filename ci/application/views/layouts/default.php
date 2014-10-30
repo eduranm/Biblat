@@ -128,7 +128,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                            <textarea class="form-control" id="slug" name="slug" placeholder="{_('Buscar en Biblat')}"></textarea>
+                                            <textarea class="form-control" id="slug" name="slug" placeholder="{_('Buscar en Biblat')}">{if $search.slug}{$search.slug}{/if}</textarea>
                                             <div id="advsearch" class="form-control"></div>
                                             <div class="input-group-addon">
                                                 <button type="submit" class="btn btn-search"><span class="fa fa-search"></span></button>

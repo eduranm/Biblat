@@ -4,6 +4,10 @@ class Buscar extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
+		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
+		$this->template->set_partial('submenu', 'layouts/submenu');
+		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
+		$this->template->set_breadcrumb(_('Buscar'));
 	}
 	
 	public function index($filtro="", $disciplina="", $slug="", $textoCompleto=""){
@@ -81,7 +85,7 @@ class Buscar extends CI_Controller{
 		/*Header title*/
 		$data['header']['title'] = _sprintf('Biblat - Búsqueda %s: "%s"', strtolower($indiceArray[$indice]['descripcion']), slugSearchClean($slug));
 		/*Result title*/
-		$data['main']['title'] = _sprintf('Resultados de la búsqueda: %s', slugSearchClean($slug));
+		$data['main']['page_title'] = _sprintf('Resultados de la búsqueda: %s', slugSearchClean($slug));
 		/*Consultas*/
 		$this->load->database();
 		/*Creando la consulta para los resultados*/
@@ -106,7 +110,7 @@ class Buscar extends CI_Controller{
 		if( $filtro != "null"):
 			$slugQuerySearch = slugQuerySearch($slug, $indiceArray[$filtro]['sql']);
 			$data['header']['title'] = _sprintf('Biblat - Búsqueda por %s: "%s"', strtolower($indiceArray[$filtro]['descripcion']), slugSearchClean($slug));
-			$data['main']['title'] = _sprintf('Resultados de la búsqueda por %s: %s', strtolower($indiceArray[$filtro]['descripcion']), slugSearchClean($slug));
+			$data['main']['page_title'] = _sprintf('Resultados de la búsqueda por %s: %s', strtolower($indiceArray[$filtro]['descripcion']), slugSearchClean($slug));
 		endif;
 		if($filtro == "avanzada"):
 			if ( ! $this->session->userdata('search{'.$slug.'}')):
@@ -124,7 +128,7 @@ class Buscar extends CI_Controller{
 			$data['main']['search']['json'] = json_encode($advancedSearch['search']);
 			$data['header']['title'] = _('Biblat - Búsqueda avanzada');
 			$data['main']['search']['filtro'] = $filtro;
-			$data['main']['title'] = _('Resultados de la búsqueda');
+			$data['main']['page_title'] = _('Resultados de la búsqueda');
 		endif;
 
 		$queryFields="SELECT s.sistema, 
@@ -180,17 +184,21 @@ class Buscar extends CI_Controller{
 		$data['main']['search']['disciplina'] = $disciplina['disciplina'];
 		$data['main']['search']['total'] = $articulosResultado['totalRows'];
 		$data['main']['search']['totalCompleto'] = $articulosResultado['totalCompleto'];
-		$data['header']['search'] = $data['main']['search'];
+		$data['main']['search'] = $data['main']['search'];
 		$data['header']['slugHighLight']=slugHighLight($slug);
 		/*Resultados de la página*/
 		$data['main']['resultados']=$articulosResultado['articulos'];
 		$this->db->close();
 		/*Vistas*/
-		$data['header']['content'] =  $this->load->view('buscar/header', $data['header'], TRUE);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('buscar/index', $data['main']);
-		$this->load->view('footer');
+		$this->template->set_partial('view_js', 'buscar/header', $data['header'], TRUE);
+		$this->template->title($data['header']['title']);
+		$this->template->css('assets/css/colorbox.css');
+		$this->template->css('assets/css/colorboxIndices.css');
+		$this->template->js('assets/js/colorbox.js');
+		$this->template->js('assets/js/jquery.highlight.js');
+		$this->template->set_meta('description', $data['main']['page_title']);
+		$this->template->set_partial('view_article', 'revista/index');
+		$this->template->build('buscar/index', $data['main']);
 	}
 
 	public function getList(){

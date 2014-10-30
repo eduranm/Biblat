@@ -53,6 +53,10 @@ a {
     color: #ff8000;
 }
 
+a.text {
+	color: #333;
+}
+
 ol.nested { counter-reset: item; }
 ol.nested li { display: block;}
 ol.nested li:before { content: counters(item, ".") ". "; counter-increment: item }
@@ -437,3 +441,13 @@ footer a {
 .intsuma .lim {margin-bottom: -0.6ex;}
 .intsuma .sum {font-size: 1.2em;}
 .intsuma .sum-frac {font-size: 2em;}
+/*Generales*/
+.nowrap {
+	white-space: nowrap;
+}
+table.articulo{
+	width: 650px;
+}
+.solicitudDocumento, #sd-disable{
+	display: none;
+}

@@ -112,18 +112,6 @@ $('#advsearch').advancedSearch({
 }).on('submit.search change.search', function(evt){
 	advsearch.updateData();
 });
-	
-<?php if($search['filtro'] == "avanzada"):?>
-	$('#options').attr('class', $('#avanzada').attr('class'));
-	$('#filtro').val('avanzada');
-	$('#slug').hide();
-	$('#advsearch').show();
-	$('#advsearch').advancedSearch('val', $.parseJSON('<?=$search['json']?>'));
-<?php endif;?>
-	$("#options").click(function(e) {
-		$(".optionsMenu").toggle();
-		return false;
-	}).data('last', 'todos');
 	$("#search-opts li").click(function(e) {
 		var button = $(this).attr('rel');
 		$('#search-type').attr('class', $('#'+button).attr('class'));
@@ -139,9 +127,16 @@ $('#advsearch').advancedSearch({
 		if($('#search-opts').data('last') == "avanzada"){
 			$('#advsearch').advancedSearch("clear");
 			$('#slug').val('');
+			$('#slug').height(20);
 		}
 		$('#search-opts').data('last', button);
 	});
+<?php if($search['filtro'] == "avanzada"):?>
+	$("#search-opts li[rel='avanzada']").trigger("click");
+	$('#advsearch').advancedSearch('val', $.parseJSON('<?=$search['json']?>'));
+	$('.evo-bDel').trigger("click");
+<?php endif;?>
+
 	$('#searchform #slug').keypress(function(e) {
 		if(e.which == 13) {
 			$('#searchform').submit();

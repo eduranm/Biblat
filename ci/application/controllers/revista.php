@@ -4,6 +4,10 @@ class Revista extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
+	    $this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
+		$this->template->set_partial('submenu', 'layouts/submenu');
+		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
+		$this->template->set_breadcrumb(_('Revista'));
 	}
 
 	public function index($revistaSlug){
@@ -47,14 +51,18 @@ class Revista extends CI_Controller{
 		$data['main']['revista'] = current($articulosResultado['articulos']);
 		$data['main']['revista'] = $data['main']['revista']['revista'];
 		/*Vistas*/
-		$data['header']['content'] =  $this->load->view('buscar/header', $data['header'], TRUE);
 		$data['header']['title'] = _sprintf('Biblat - Revista: %s', $data['main']['revista']);
-		$breadcrumb = sprintf('%s / %s (%%d documentos)', anchor('revista', _('Revistas'), _('title="Revistas"')), $data['main']['revista']);
-		$data['main']['breadcrumb'] = sprintf($breadcrumb, $articulosResultado['totalRows']);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('revista/index', $data['main']);
-		$this->load->view('footer');
+		$breadcrumb = sprintf('%s (%%d documentos)', $data['main']['revista']);
+		$data['main']['page_title'] = sprintf($breadcrumb, $articulosResultado['totalRows']);
+
+		$this->template->set_partial('view_js', 'buscar/header', $data['header'], TRUE);
+		$this->template->title($data['header']['title']);
+		$this->template->css('assets/css/colorbox.css');
+		$this->template->css('assets/css/colorboxIndices.css');
+		$this->template->js('assets/js/colorbox.js');
+		$this->template->js('assets/js/jquery.highlight.js');
+		$this->template->set_meta('description', $data['main']['page_title']);
+		$this->template->build('revista/index', $data['main']);
 	}
 
 	public function articulo($revista='', $articulo='', $mail=''){
@@ -247,11 +255,12 @@ class Revista extends CI_Controller{
 		$data['main']['articulo'] = $articulo;
 		$data['header']['articulo'] = $data['main']['articulo'];
 		$data['header']['title'] = _sprintf('Biblat - Revista: %s - Artículo: %s', $articulo['revista'], $articulo['articulo']);
-		$data['main']['title'] = $data['header']['title'];
+		$data['main']['page_title'] = $articulo['articulo'];
 		$data['main']['mail'] = FALSE;
 		/*Vistas*/
 		if(isset($_POST['ajax'])):
 			$this->output->enable_profiler(FALSE);
+			$data['main']['ajax'] = TRUE;
 			$this->load->view('revista/articulo', $data['main']);
 			return;
 		endif;
@@ -260,12 +269,66 @@ class Revista extends CI_Controller{
 			$data['main']['mail'] = TRUE;
 			return $this->load->view('revista/articulo', $data['main'], TRUE);
 		endif;
-		$data['header']['content'] =  $this->load->view('revista/articulo_header', $data['header'], TRUE);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$data['main']['content'] = $this->load->view('revista/articulo', $data['header'], TRUE);
-		$this->load->view('revista/articulo_content', $data['main']);
-		$this->load->view('footer');
+
+		$this->template->set_partial('view_js', 'revista/articulo_header', array(), TRUE);
+		$this->template->title($data['header']['title']);
+		$this->template->set_breadcrumb(_('Artículo'));
+		if(ENVIRONMENT === "production"):
+			$this->template->js('//s7.addthis.com/js/300/addthis_widget.js#pubid=herz');
+		endif;
+		$this->template->set_meta('description', $data['main']['page_title']);
+		/*Article meta*/
+		if(isset($articulo)):
+			$this->template->set_meta('citation_title', $articulo['articulo']);
+			$this->template->set_meta('eprints.title', $articulo['articulo']);
+			$this->template->set_meta('citation_journal_title', $articulo['revista']);
+			$this->template->set_meta('citation_issn', $articulo['issn']);
+			$this->template->set_meta('eprints.type', "article");
+			$this->template->set_meta('eprints.ispublished', "pub");
+			$this->template->set_meta('eprints.date_type', "published");
+			$this->template->set_meta('eprints.publication', $articulo['revista']);
+			$this->template->set_meta('prism.publicationName', $articulo['revista']);
+			$this->template->set_meta('prism.issn', $articulo['issn']);
+			$this->template->set_meta('dc.title', $articulo['articulo']);
+			if(isset($articulo['numero'])):
+				$this->template->set_meta('citation_issue', $articulo['numero']);
+				$this->template->set_meta('prism.number', $articulo['numero']);
+			endif;
+			if(isset($articulo['volumen'])):
+				$this->template->set_meta('citation_volume', $articulo['volumen']);
+				$this->template->set_meta('eprints.volume', $articulo['volumen']);
+			endif;
+			if(isset($articulo['paginacion'])):
+				$this->template->set_meta('citation_firstpage', $articulo['paginacionFirst']);
+				$this->template->set_meta('citation_lastpage', $articulo['paginacionLast']);
+				$this->template->set_meta('eprints.pagerange', $articulo['paginacion']);
+				$this->template->set_meta('prism.startingPage', $articulo['paginacionFirst']);
+				$this->template->set_meta('prism.endingPage', $articulo['paginacionLast']);
+			endif;
+			if(isset($articulo['anio'])):
+				$this->template->set_meta('citation_date', $articulo['anio']);
+				$this->template->set_meta('eprints.date', $articulo['anio']);
+				$this->template->set_meta('prism.publicationDate', $articulo['anio']);
+				$this->template->set_meta('dc.date', $articulo['anio']);
+			endif;
+			if(isset($articulo['autores'])):
+				$autoresTotal = count($articulo['autores']);
+				$autorIndex = 1;
+				$citation_authors = "";
+				foreach ($articulo['autores'] as $autor):
+					$citation_authors .= "{$autor}";
+					if($autorIndex < $autoresTotal):
+						$citation_authors .= "; ";
+					endif;
+					$autorIndex++;
+					$this->template->set_meta('eprints.creators_name', $autor);
+					$this->template->set_meta('dc.creator', $autor);
+				endforeach;
+				$this->template->set_meta('citation_authors', $citation_authors);
+			endif;
+		endif;
+		/*Article meta*/
+		$this->template->build('revista/articulo', $data['main']);
 	}
 
 	public function solicitudDocumento(){

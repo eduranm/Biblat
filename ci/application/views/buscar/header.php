@@ -1,37 +1,31 @@
-	<link rel="stylesheet" href="<?=base_url('css/estiloBiblatresultados.css');?>"/>
-	<link rel="stylesheet" href="<?=base_url('css/colorbox.css');?>"/>
-	<link rel="stylesheet" href="<?=base_url('css/colorboxIndices.css');?>"/>
-	<script type="text/javascript" src="<?=base_url('js/colorbox.js');?>"></script>
-	<script type="text/javascript" src="<?=base_url('js/jquery.highlight.js');?>"></script>
-	<script type="text/javascript">
-		jQuery.noConflict();
-		jQuery(document).ready(function() {
-			jQuery(".add-ref").click(function(){
-				console.log(jQuery(this).attr("id"));
-				/*formBuscador = jQuery("#buscador").serialize();
-				jQuery.ajax({
-					type: "POST",
-					async: false,
-					url: "<?=base_url('saveCheck.php')?>",
-					data: formBuscador
-				}).done(function( msg ) {
-					//alert( "Data Saved: " + msg );
-				});*/
-				return false;
-			});
-			jQuery(".registro").colorbox({
-				rel:'registro', 
-				transition:"fade", 
-				data: {ajax:true}, 
-				height:"90%", 
-				current:"<?php _printf('Artículo %s de %s', '{current}', '{total}');?>"
-			});
-			jQuery(document).bind('cbox_complete', function(){
-<?php if(ENVIRONMENT === "production"):?>
-				addthis.toolbox('.addthis_toolbox');
-<?php endif;?>
-				jQuery('#formSolicitudDocumento').validate();
-			});
-			jQuery(".resultados").highlight([<?=$slugHighLight;?>]);
+{literal}
+	$(document).ready(function() {
+		$(".add-ref").click(function(){
+			console.log($(this).attr("id"));
+			/*formBuscador = $("#buscador").serialize();
+			$.ajax({
+				type: "POST",
+				async: false,
+				url: "<?=base_url('saveCheck.php')?>",
+				data: formBuscador
+			}).done(function( msg ) {
+				//alert( "Data Saved: " + msg );
+			});*/
+			return false;
 		});
-	</script>
+		$(".registro").colorbox({
+			rel:'registro', 
+			transition:"fade", 
+			data: {ajax:true}, 
+			height:"90%", 
+			current:"<?php _printf('Artículo %s de %s', '{current}', '{total}');?>"
+		});
+		$(document).bind('cbox_complete', function(){
+<?php if(ENVIRONMENT === "production"):?>
+			addthis.toolbox('.addthis_toolbox');
+<?php endif;?>
+			$('#formSolicitudDocumento').validate();
+		});
+		$("#resultados").highlight([<?=$slugHighLight;?>], { element: 'mark'});
+	});
+{/literal}
