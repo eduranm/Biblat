@@ -3,6 +3,10 @@ class Indice extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
+		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
+		$this->template->set_partial('submenu', 'layouts/submenu');
+		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
+		$this->template->set_breadcrumb(_('Índice'));
 	}
 	public function index(){
 
@@ -27,11 +31,11 @@ class Indice extends CI_Controller{
 		$this->db->close();
 		$data['alfabetico']['letra'] = $letra;
 		/*Vistas*/
-		$data['header']['content'] =  $this->load->view('indice/alfabetico_header', $data['header'], TRUE);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('indice/alfabetico', $data['alfabetico']);
-		$this->load->view('footer');
+		$data['alfabetico']['page_title'] = sprintf('Revistas por orden alfabético: %s', strtoupper($letra));
+		$this->template->title($data['header']['title']);
+		$this->template->set_meta('description', $data['main']['page_title']);
+		$this->template->set_breadcrumb(_('Alfabético'));
+		$this->template->build('indice/alfabetico', $data['alfabetico']);
 	}
 
 	public function disciplina($disciplina){
@@ -59,12 +63,11 @@ class Indice extends CI_Controller{
 		endforeach;
 		$this->db->close();
 		/*Vistas*/
-		$data['header']['title'] = _sprintf('Biblat - Indice por disciplina "%s"', $data['disciplina']['current']['disciplina']);
-		$data['header']['content'] =  $this->load->view('indice/disciplina_header', $data['header'], TRUE);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('indice/disciplina', $data['disciplina']);
-		$this->load->view('footer');
+		$data['disciplina']['page_title'] = sprintf('Revistas del área de "%s"', $data['disciplina']['current']['disciplina']);
+		$this->template->title($data['header']['title']);
+		$this->template->set_meta('description', $data['main']['page_title']);
+		$this->template->set_breadcrumb(_('Disciplina'));
+		$this->template->build('indice/disciplina', $data['disciplina']);
 	}
 
 	public function pais($pais){
@@ -92,11 +95,10 @@ class Indice extends CI_Controller{
 		endforeach;
 		$this->db->close();
 		/*Vistas*/
-		$data['header']['title'] = _sprintf('Biblat - Indice por país: "%s"', $data['pais']['paises'][$pais]['pais']);
-		$data['header']['content'] =  $this->load->view('indice/disciplina_header', $data['header'], TRUE);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('indice/pais', $data['pais']);
-		$this->load->view('footer');
+		$data['pais']['page_title'] = sprintf('Revistas por país: "%s"', $data['pais']['current']['pais']);
+		$this->template->title($data['header']['title']);
+		$this->template->set_meta('description', $data['main']['page_title']);
+		$this->template->set_breadcrumb(_('País'));
+		$this->template->build('indice/pais', $data['pais']);
 	}
 }
