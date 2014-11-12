@@ -77,8 +77,33 @@
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li><a href="{site_url('bibliometria/descripcion-biblat')}">{_('Descripción')}</a></li>
                                                         <li><a href="{site_url('bibliometria/metodologia-biblat')}">{_('Metodología')}</a></li>
-                                                        <li><a href="{site_url('frecuencias')}">{_('Frecuencias')}</a></li>
-                                                        <li><a href="{site_url('indicadores')}">{_('Indicadores')}</a></li>
+                                                        <li class="divider"></li>
+                                                        <li class="dropdown">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_('Frecuencias')}<span class="caret"></span></a>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li><a href="{site_url('frecuencias/autor')}">{_('Autor')}</a></li>
+                                                                <li><a href="{site_url('frecuencias/institucion')}">{_('Institución')}</a></li>
+                                                                <li><a href="{site_url('frecuencias/pais-afiliacion')}">{_('País de afiliación')}</a></li>
+                                                                <li><a href="{site_url('frecuencias/revista')}">{_('Revista')}</a></li>
+                                                                <li><a href="{site_url('frecuencias/disciplina')}">{_('Disciplina')}</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li class="dropdown">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_('Indicadores')}<span class="caret"></span></a>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li><a href="{site_url('indicadores/indice-coautoria')}">{_('Índice de coautoría')}</a></li>
+                                                                <li><a href="{site_url('indicadores/tasa-documentos-coautorados')}">{_('Tasa de documentos coautorados')}</a></li>
+                                                                <li><a href="{site_url('indicadores/grado-colaboracion')}">{_('Grado de colaboración')}</a></li>
+                                                                <li><a href="{site_url('indicadores/indice-colaboracion')}">{_('Índice de colaboración')}</a></li>
+                                                                <li><a href="{site_url('indicadores/modelo-elitismo')}">{_('Modelo de elitismo')}</a></li>
+                                                                <li><a href="{site_url('indicadores/indice-densidad-documentos')}">{_('Índice de densidad de documentos')}</a></li>
+                                                                <li><a href="{site_url('indicadores/indice-concentracion')}">{_('Índice de concentración')}</a></li>
+                                                                <li><a href="{site_url('indicadores/modelo-bradford-revista')}">{_('Modelo de Bradford por revista')}</a></li>
+                                                                <li><a href="{site_url('indicadores/modelo-bradford-institucion')}">{_('Modelo de Bradford por institución')}</a></li>
+                                                                <li><a href="{site_url('indicadores/productividad-exogena')}">{_('Tasa de autoría exógena')}</a></li>
+                                                            </ul>
+                                                        </li>
                                                         <li class="divider"></li>
                                                         <li><a href="#">{_('Indicadores SciELO')}</a></li>
                                                         <li class="divider"></li>
