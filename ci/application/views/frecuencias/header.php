@@ -1,14 +1,4 @@
-	<link rel="stylesheet" href="<?=site_url("css/jquery-ui.min.css");?>" />
-	<link rel="stylesheet" href="<?=site_url("js/pqgrid/pqgrid.dev.css");?>" />
-	<link rel="stylesheet" href="<?=site_url("js/pqgrid/themes/Office/pqgrid.css");?>" />
-	<link rel="stylesheet" href="<?=site_url("css/jquery.contextMenu.css");?>" />
-	<link rel="stylesheet" href="<?=site_url("js/prettify/prettify.sunburst.css");?>" />
-	<script type="text/javascript" src="<?=site_url("js/jquery-ui.min.js")?>"></script>
-	<script type="text/javascript" src="<?=site_url("js/pqgrid/pqgrid.dev.js")?>"></script>
-	<script type="text/javascript" src="<?=site_url("js/pqgrid/localize/pq-localize-es.js")?>"></script>
-	<script type="text/javascript" src="<?=site_url("js/jquery.contextMenu.js")?>"></script>
-	<script type="text/javascript" src="<?=site_url("js/prettify/prettify.js")?>"></script>
-	<script type="text/javascript">
+{literal}
 		jQuery(document).ready(function(){
 			var colM = <?=$colModel?>;
 			var dataModel = {
@@ -97,4 +87,4 @@
 				}
 			});
 		});
-	</script>
+{/literal}

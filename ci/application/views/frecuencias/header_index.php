@@ -1,4 +1,3 @@
-<script type="text/javascript">
 	jQuery(document).ready(function(){
 		jQuery("#accordion").accordion({
 			header: "h3",
@@ -7,4 +6,3 @@
 			navigation: true 
 		});
 	});
-</script>
