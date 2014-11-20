@@ -114,7 +114,7 @@ $('#advsearch').advancedSearch({
 });
 	$("#search-opts li").click(function(e) {
 		var button = $(this).attr('rel');
-		$('#search-type').attr('class', $('#'+button).attr('class'));
+		$('#search-type').attr('class', $('#op-'+button).attr('class'));
 		$('#filtro').val(button);
 		$('#slug').show();
 		$('#advsearch').hide();
@@ -127,7 +127,11 @@ $('#advsearch').advancedSearch({
 		if($('#search-opts').data('last') == "avanzada"){
 			$('#advsearch').advancedSearch("clear");
 			$('#slug').val('');
+<?php if($class_method != "mainindex"):?>
 			$('#slug').height(20);
+<?php else:?>
+			$('#slug').height(30);
+<?php endif;?>
 		}
 		$('#search-opts').data('last', button);
 	});

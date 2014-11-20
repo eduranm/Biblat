@@ -7,7 +7,9 @@ class Main extends CI_Controller{
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
 		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
 		$this->template->set_partial('submenu', 'layouts/submenu');
+		$this->template->set_partial('search', 'layouts/search');
 		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
+		$this->template->set('class_method', $this->router->fetch_class().$this->router->fetch_method());
 	}
 	public function index(){
 		$data = array();
@@ -45,12 +47,14 @@ class Main extends CI_Controller{
 		}
 		$data['index']['paises'] = json_decode($this->session->userdata('paises'), TRUE);
 		/*Vistas*/
-		$data['header']['disciplinas'] = $data['index']['disciplinas'];
-		$data['header']['content'] =  $this->load->view('main/header', $data['header'], TRUE);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('main/index', $data['index']);
-		$this->load->view('footer');
+		$this->template->set_partial('view_js', 'main/header', array(), TRUE);
+		$this->template->set_partial('frecuencias_accordion', 'frecuencias/index', array(), TRUE);
+		$this->template->title(_('Biblat - Bibliografía latinoamericana'));
+		$this->template->js('js/d3.js');
+		$this->template->js('js/d3.layout.cloud.js');
+		$this->template->set_breadcrumb(_('Sobre Biblat'));
+		$this->template->set_meta('description', _('Bibliografía latinoamericana'));
+		$this->template->build('main/index', $data['index']);
 	}
 
 	public function creditos(){

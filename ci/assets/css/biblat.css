@@ -72,7 +72,6 @@ header {
 }
 header #biblat-logo {
 	padding-top: 34px;
-	padding-bottom: 34px;
 	letter-spacing: 10px;
 }
 header #biblat-logo .bl-single{
@@ -96,6 +95,10 @@ header #biblat-logo a {
   &:hover {
     text-decoration: none;
   }
+}
+
+header .biblat-logo-main{
+	padding-top: 20px !important;
 }
 
 header #dgb-unam {
@@ -279,7 +282,7 @@ header .form-group {
 	margin: 0;
 	position: relative;
 	vertical-align: middle;
-	margin:1px 6px 2px 1px;
+	margin:2px 6px 3px 1px;
 	font-size: 13px; 
 }
 
@@ -305,6 +308,32 @@ header .form-group {
 	margin: -5px -10px;
 	border: 0 none;
 	background: none;
+}
+
+#main-search {
+	padding: 15px 0;
+}
+
+#main-search .btn-search, #main-search textarea, #main-search #advsearch, #main-search .select2-default{
+	font-size: 1.5em;
+}
+
+#main-search .input-group-addon{
+	background: #FF8000;
+	border: 1px solid #CCCCCC;
+}
+
+#main-search #searchform #advsearch {
+    padding-bottom: 6px;
+    padding-top: 4px;
+}
+
+#main-search #searchform .ui-button-icon-only {
+    margin-top: 6px;
+}
+
+#main-search .evo-editFilter > input, #main-search .evo-editFilter > select {
+    padding: 4px 12px 2px;
 }
 
 #heading {
@@ -468,4 +497,100 @@ table.articulo{
 	-webkit-box-shadow: none;
 	box-shadow:none;
 	background-clip: padding-box;
+}
+
+#alfabetico {
+	background: #F5F5F5;
+	padding: 10px;
+}
+
+#alfabetico p {
+	margin: 0px;
+}
+
+#alfabetico	p:first-child{
+	border-top: 2px solid #D9D9D9;
+	border-left: 2px solid #D9D9D9;
+	border-right: 2px solid #D9D9D9;
+	height: 1em;
+}
+#alfabetico	p:last-child{
+	border-bottom: 2px solid #D9D9D9;
+	border-left: 2px solid #D9D9D9;
+	border-right: 2px solid #D9D9D9;
+	height: 1em;
+}
+#alfabetico p a{
+	color: #606060;
+	font-size: 1.1em;
+	margin: -3px;
+	padding: 4px;
+}
+
+#alfabetico p a:hover{
+	color: #FAFAFA;
+	text-decoration: none;
+	background: #FF8000;
+}
+
+#main-sections h3{
+	color: #606060;
+	padding-bottom: 12px;
+	text-align: left;
+	background: url("../img/plk_h.png") repeat-x scroll left bottom;
+}
+
+.tagCloud text {
+    cursor: pointer;
+}
+.tagCloud text:hover {
+    opacity: 0.7 !important;
+}
+
+.orange-list {
+	padding-left: 15px;
+}
+.orange-list li{
+	list-style-type: none;
+}
+
+.orange-list li:before {
+	content: "•";
+	font-size: 1.2em;
+	color: #EF7E00;
+	margin-right: 7px;
+    font-weight: bold;
+}
+.orange-list > li a {
+	color: #333;
+}
+
+.list-striped > li:nth-child(odd) a {
+	color: #757575;
+}
+#carousel-pais .carousel-caption {
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, .001) 0%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, .001) 100%);
+  background-image: 	 -o-linear-gradient(left, rgba(0, 0, 0, .001) 0%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1) 50%, rgba(0 ,0, 0, .001) 100%);
+  background-image: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,0,0,.001)), color-stop(50%, rgba(0,0,0,1)), color-stop(50%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,.001)));
+  background-image:         linear-gradient(to right, rgba(0, 0, 0, .001) 0%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, .001) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+  background-repeat: repeat-x;
+  left: 10%;
+  right: 10%;
+  bottom: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#carousel-scielo {
+	padding-bottom: 20px;
+}
+#carousel-scielo .carousel-indicators{
+	bottom: 0px;
+}
+#carousel-scielo .carousel-indicators li{
+	border: 1px solid #333;
+}
+#carousel-scielo .carousel-indicators .active{
+	background-color: #333;
 }
