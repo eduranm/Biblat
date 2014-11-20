@@ -6,8 +6,10 @@ class Buscar extends CI_Controller{
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
 		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
 		$this->template->set_partial('submenu', 'layouts/submenu');
+		$this->template->set_partial('search', 'layouts/search');
 		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
 		$this->template->set_breadcrumb(_('Buscar'));
+		$this->template->set('class_method', $this->router->fetch_class().$this->router->fetch_method());
 	}
 	
 	public function index($filtro="", $disciplina="", $slug="", $textoCompleto=""){
