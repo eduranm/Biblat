@@ -1,8 +1,8 @@
-	jQuery(document).ready(function(){
-		jQuery("#accordion").accordion({
-			header: "h3",
+	$(document).ready(function(){
+		$("#frecuencias-accordion").accordion({
+			header: "h4",
 			collapsible: true,
-			autoHeight: true,
+			heightStyle: "content",
 			navigation: true 
 		});
 	});
