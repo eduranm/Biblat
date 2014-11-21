@@ -17,13 +17,14 @@
         <link rel="stylesheet" href="{base_url('assets/css/font-awesome.min.css')}" type="text/css" />
         <link rel="stylesheet" href="{base_url('js/pnotify/jquery.pnotify.default.css')}" type="text/css" />
         <link rel="stylesheet" href="{base_url('js/select2/select2.css')}" />
-        <link rel="stylesheet" href="{base_url('assets/css/biblat.css')}" type="text/css" />
+        <link rel="stylesheet" href="{base_url('js/select2/select2-bootstrap.css')}" />
 {if $canonical}
         <link rel="canonical" href="{$canonical}" />
 {/if}
 {foreach $template.css file}
         <link rel="stylesheet" href="{$file}" type="text/css" />
 {/foreach}
+        <link rel="stylesheet" href="{base_url('assets/css/biblat.css')}" type="text/css" />
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
