@@ -7,13 +7,13 @@
                             <span id="search-type" class="fa fa-cloud fa-fw"> </span><span class="caret"></span>
                         </button>
                         <ul id="search-opts" class="dropdown-menu" role="menu">
-                        <li rel="todos"><a href="#"><span id="todos" class="fa fa-cloud fa-fw"></span> {_('Buscar en todos los campos')}</a></li>
-                        <li rel="palabra-clave"><a href="#"><span id="palabra-clave" class="fa fa-key fa-fw"></span> {_('Buscar por palabra clave')}</a></li>
-                        <li rel="autor"><a href="#"><span id="autor" class="fa fa-user fa-fw"></span> {_('Buscar por autor')}</a></li>
-                        <li rel="revista"><a href="#"><span id="revista" class="fa fa-book fa-fw"></span> {_('Buscar por revista')}</a></li>
-                        <li rel="institucion"><a href="#"><span id="institucion" class="fa fa-building fa-fw"></span> {_('Buscar por institución')}</a></li>
-                        <li rel="articulo"><a href="#"><span id="articulo" class="fa fa-file-text-o fa-fw"></span> {_('Buscar por artículo')}</a></li>
-                        <li rel="avanzada"><a href="#"><span id="avanzada" class="fa fa-search-plus fa-fw"></span> {_('Búsqueda avanzada')}</a></li>
+                        <li rel="todos"><a href="#"><span id="op-todos" class="fa fa-cloud fa-fw"></span> {_('Buscar en todos los campos')}</a></li>
+                        <li rel="palabra-clave"><a href="#"><span id="op-palabra-clave" class="fa fa-key fa-fw"></span> {_('Buscar por palabra clave')}</a></li>
+                        <li rel="autor"><a href="#"><span id="op-autor" class="fa fa-user fa-fw"></span> {_('Buscar por autor')}</a></li>
+                        <li rel="revista"><a href="#"><span id="op-revista" class="fa fa-book fa-fw"></span> {_('Buscar por revista')}</a></li>
+                        <li rel="institucion"><a href="#"><span id="op-institucion" class="fa fa-building fa-fw"></span> {_('Buscar por institución')}</a></li>
+                        <li rel="articulo"><a href="#"><span id="op-articulo" class="fa fa-file-text-o fa-fw"></span> {_('Buscar por artículo')}</a></li>
+                        <li rel="avanzada"><a href="#"><span id="op-avanzada" class="fa fa-search-plus fa-fw"></span> {_('Búsqueda avanzada')}</a></li>
                         </ul>
                     </div>
                 </div>
