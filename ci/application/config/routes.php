@@ -79,6 +79,7 @@ $route[$langs.'/buscar/(.*)'] = 'buscar/index/null/null/$1';
 $route[$langs.'/revista/(.+)/articulo/(.+)'] = "revista/articulo/revista/$1/articulo/$2";
 $route[$langs.'/revista/(.*)'] = "revista/index/$1";
 
+$route[$langs.'/indicadores/modelo-bradford-revista/disciplina/(.*)/revista/(.*)/documentos(.*)'] = "indicadores/bradfordDocumentos/$1$2";
 $route[$langs.'/indicadores/(indice-coautoria|tasa-documentos-coautorados|grado-colaboracion|modelo-elitismo|indice-colaboracion|indice-densidad-documentos|indice-concentracion|modelo-bradford-revista|modelo-bradford-institucion|productividad-exogena)(.*)'] = "indicadores/index/$1";
 
 /*≠≠≠≠≠≠≠≠ Frecuencias por autor ≠≠≠≠≠≠≠≠*/

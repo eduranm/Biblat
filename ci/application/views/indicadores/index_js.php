@@ -1,4 +1,4 @@
-
+{literal}
 google.load("visualization", "1", {packages:["corechart", "table"], 'language': 'en'});
 var chart = {normal: null, bradford:null, group1:null, group2:null, pratt:null, data:null};
 chart.data = {normal: null, bradford:null, group1:null, group2:null, pratt:null, prattJ:null};
@@ -12,6 +12,9 @@ var asyncAjax=false;
 var soloDisciplina = ['indice-concentracion', 'modelo-bradford-revista', 'modelo-bradford-institucion', 'productividad-exogena'];
 var soloPaisAutor = ['indice-coautoria', 'tasa-documentos-coautorados', 'indice-colaboracion'];
 jQuery(document).ready(function(){
+	$('.carousel').carousel({
+	  interval: false
+	})
 	jQuery("#indicador").select2({
 		allowClear: true
 	});
@@ -71,7 +74,7 @@ jQuery(document).ready(function(){
 				loading.start();
 			}
 			jQuery("#orPaisRevistaColumn").show();
-			jQuery("#paisRevistaDiv").show("slow");
+			jQuery("#paisRevistaDiv").removeClass("hidden").slideDown("slow");
 			jQuery("#periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
 			jQuery.ajax({
 				url: '<?=site_url("indicadores/getRevistasPaises");?>',
@@ -233,32 +236,6 @@ jQuery(document).ready(function(){
 
 	jQuery("#sliderPeriodo").jslider();
 
-	jQuery("#prattSlide").anythingSlider({
-				theme: 'scielo',
-				mode: 'fade',
-				expand: true,
-				easing: "linear",
-				buildNavigation: true,
-				buildStartStop: false,
-				hashTags: false,
-				animationTime: 1200,
-				navigationFormatter : function(index, panel){
-					return "<?php _e('Gráfica ')?>" + index;
-				}
-			});
-	jQuery("#bradfordSlide").anythingSlider({
-				theme: 'scielo',
-				mode: 'fade',
-				expand: true,
-				easing: "linear",
-				buildNavigation: true,
-				buildStartStop: false,
-				hashTags: false,
-				animationTime: 1200,
-				navigationFormatter : function(index, panel){
-					return ['<?php _e("Modelo matemático de Bradford")?>', '<?php _e("Zona núcleo de revistas más productivas")?>', '<?php _e("Zona 2 de revistas más productivas")?>'][index - 1];
-				}
-			});
 	jQuery("#tabs").tabs({ 
 		show: { effect: "fade", duration: 800 },
 		activate: function(){
@@ -313,7 +290,6 @@ jQuery(document).ready(function(){
 				case "modelo-bradford-revista":
 				case "modelo-bradford-institucion":
 					//jQuery("#gridContainer").accordion("destroy");
-					jQuery("#bradfordSlide").anythingSlider(1);
 					jQuery("#tabs, #bradfodContainer").slideDown("slow");
 					brfLim = data.grupos;
 					chart.data.bradford = new google.visualization.DataTable(data.chart.bradford);
@@ -375,7 +351,12 @@ jQuery(document).ready(function(){
 					chart.data.pratt = new Array();
 					chart.data.prattJ = data.journal; 
 					jQuery.each(data.chart, function(key, grupo) {
-						jQuery("#prattSlide").append('<li>' + data.chartTitle + ' <div id="chartPratt' + key +'"></div></li>').anythingSlider();
+						active='';
+						if(key == 0){
+							active='active';
+						}
+						jQuery("#carousel-pratt .carousel-indicators").append('<li data-target="#carousel-pratt" data-slide-to="' + key + '" class="' + active + '"></li>');
+						jQuery("#carousel-pratt .carousel-inner").append('<div class="item ' + active + '">' + data.chartTitle + ' <div id="chartPratt' + key +'" class="chart_data"></div></div>');
 						chart.data.pratt[key] = new google.visualization.DataTable(grupo);
 						chart.pratt[key] = new google.visualization.ColumnChart(document.getElementById('chartPratt' + key));
 						chart.pratt[key].draw(chart.data.pratt[key], data.options);
@@ -456,7 +437,7 @@ setPeridos = function(){
 	if(!loading.status){
 		loading.start();
 	}
-	jQuery("#periodos").slideDown("slow");
+	jQuery("#periodos").removeClass("hidden").slideDown("slow");
 	jQuery.ajax({
 		url: '<?=site_url("indicadores/getPeriodos");?>',
 		type: 'POST',
@@ -586,13 +567,23 @@ updateData = function(data){
 
 chooseZone = function () {
 	var selection = chart.bradford.getSelection();
+	console.log(selection);
 	if (selection[0] != null && selection[0].row != null){
 		var value = chart.data.bradford.getFormattedValue(selection[0].row, 0);
 		if (value <= brfLim[1].lim.x){
-			jQuery("#bradfordSlide").anythingSlider(2);
+			$("#carousel-bradford").carousel(1);
 		}
 		else if (value > brfLim[1].lim.x && value <= brfLim[2].lim.x) {
-			jQuery("#bradfordSlide").anythingSlider(3);
+			$("#carousel-bradford").carousel(2);
+		}else{
+			jQuery("#tabs").tabs("option", "active", 1);
+			jQuery("#gridContainer").accordion("option", "active", 3);
+		}
+	}else if  (selection[0] != null && selection[0].column != null){
+		if(selection[0].column == 2){
+			$("#carousel-bradford").carousel(1);
+		}else if (selection[0].column == 3){
+			$("#carousel-bradford").carousel(2);
 		}else{
 			jQuery("#tabs").tabs("option", "active", 1);
 			jQuery("#gridContainer").accordion("option", "active", 3);
@@ -628,7 +619,8 @@ bradfordArticles = function (group) {
 	indicadorValue = jQuery("#indicador").val();
 	if (selection && indicadorValue == "modelo-bradford-revista"){
 		var revista = chart.data[group].getColumnId(selection.column);
-		jQuery.colorbox({href:"<?=site_url("indicadores/bradfordDocumentos");?>/" + revista + "/ajax", data: {ajax:true}, transition:"fade", height:"90%", width: "1000px", iframe: true});
+		var disciplina=jQuery('#disciplina').val();
+		location.href = "<?=site_url("indicadores/modelo-bradford-revista/disciplina");?>/"+ disciplina + "/revista/"+ revista + "/documentos"
 	}
 }
 
@@ -654,3 +646,4 @@ getFrecuencias = function (key) {
 		console.log(revista);
 	}
 }
+{/literal}

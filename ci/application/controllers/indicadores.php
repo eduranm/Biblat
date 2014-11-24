@@ -33,7 +33,7 @@ class Indicadores extends CI_Controller {
 		/*Variables globles*/
 		$data = array();
 		/*Lista de indicadores*/
-		$data['indicadores'] = array(
+		$this->indicadores = array(
 								'indice-coautoria' => _('Índice de coautoría'),
 								'tasa-documentos-coautorados' => _('Tasa de documentos coautorados'),
 								'grado-colaboracion' => _('Grado de colaboración (Índice Subramanyan)'),
@@ -45,7 +45,6 @@ class Indicadores extends CI_Controller {
 								'modelo-bradford-institucion' => _('Modelo de Bradford por institución (Afiliación del autor)'),
 								'productividad-exogena' => _('Tasa de autoría exógena') 
 							);
-		$this->indicadores = $data['indicadores'];
 		/*Disciplinas*/
 		$this->load->database();
 		$query = "SELECT id_disciplina, disciplina, slug FROM \"mvDisciplina\"";
@@ -60,30 +59,37 @@ class Indicadores extends CI_Controller {
 			$this->session->set_userdata('query{'.md5($query).'}', json_encode($disciplinas));
 		endif;
 		$this->disciplinas = json_decode($this->session->userdata('query{'.md5($query).'}'), true);
-		$data['disciplinas'] = $this->disciplinas;
 		$this->db->close();
 
 		$this->load->vars($data);
 
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
+		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
+		$this->template->set_partial('submenu', 'layouts/submenu');
+		$this->template->set_partial('search', 'layouts/search');
+		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
+		$this->template->set_breadcrumb(_('Bibliometría'));
+		$this->template->set('class_method', $this->router->fetch_class().$this->router->fetch_method());
+		$this->template->set('disciplinas', $this->disciplinas);
+		$this->template->set('indicadores', $this->indicadores);
 	}
 
 	public function index($indicador="")
 	{
 		$data = array();
-		$data['main']['indicador'] = $indicador;
-
 		/*Vistas*/
-		$js = $this->load->view('indicadores/index_js', $data['header'], TRUE);
-		$data['header']['js'] = $this->minify->js->min($js);
-		//$data['header']['js'] = $js;
-		$data['header']['content'] =  $this->load->view('indicadores/header', $data['header'], TRUE);
-		unset($data['header']['js']);
-		$data['header']['title'] = _sprintf('Biblat - Indicador: %s', $this->indicadores[$data['main']['indicador']]);
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu', $data['header']);
-		$this->load->view('indicadores/index', $data['main']);
-		$this->load->view('footer');
+		$data['main']['page_title'] = $this->indicadores[$indicador];
+		$this->template->set_partial('view_js', 'indicadores/index_js', $data['header'], TRUE);
+		$this->template->title($data['header']['title']);
+		$this->template->css('css/jquery.slider.min.css');
+		$this->template->css('css/colorbox.css');
+		$this->template->js('js/jquery.slider.min.js');
+		$this->template->js('js/jquery.serializeJSON.min.js');
+		$this->template->js('js/colorbox.js');
+		$this->template->js('//www.google.com/jsapi');
+		$this->template->set_meta('description', $this->indicadores[$data['main']['indicador']]);
+		$this->template->set_breadcrumb(_('Indicadores bibliométricos'));
+		$this->template->build('indicadores/index', $data['main']);
 	}
 
 	public function getChartData(){
@@ -99,9 +105,9 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-coautoria'] = array(
 			'campoTabla' => "coautoria AS valor FROM \"mvIndiceCoautoriaPrice",
 			'title' => array(
-					'revista' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Promedio de autores por artículo en la revista').'</div>',
-					'paisRevista' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Promedio de autores por articulo en las revistas del país').'</div>',
-					'paisAutor' => '<div class="centrado"><b>'._('Índice de Coautoría').'</b><br/>'._('Promedio de autores por articulo en el país').'</div>'
+					'revista' => '<div class="text-center nowrap"><b>'._('Índice de Coautoría').'</b><br/>'._('Promedio de autores por artículo en la revista').'</div>',
+					'paisRevista' => '<div class="text-center nowrap"><b>'._('Índice de Coautoría').'</b><br/>'._('Promedio de autores por articulo en las revistas del país').'</div>',
+					'paisAutor' => '<div class="text-center nowrap"><b>'._('Índice de Coautoría').'</b><br/>'._('Promedio de autores por articulo en el país').'</div>'
 				),
 			'vTitle' => _('Índice de Coautoría'),
 			'hTitle' => _('Año'),
@@ -114,9 +120,9 @@ class Indicadores extends CI_Controller {
 		$indicador['tasa-documentos-coautorados'] = array(
 			'campoTabla' => "\"tasaCoautoria\" AS valor FROM \"mvTasaCoautoria",
 			'title' => array(
-					'revista' => '<div class="centrado"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple por revista').'</div>',
-					'paisRevista' => '<div class="centrado"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple en las revistas del país').'</div>',
-					'paisAutor' => '<div class="centrado"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple en el país').'</div>',
+					'revista' => '<div class="text-center nowrap"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple por revista').'</div>',
+					'paisRevista' => '<div class="text-center nowrap"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple en las revistas del país').'</div>',
+					'paisAutor' => '<div class="text-center nowrap"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple en el país').'</div>',
 				),
 			'vTitle' => _('Tasa de documentos'),
 			'hTitle' => _('Año'),
@@ -129,8 +135,8 @@ class Indicadores extends CI_Controller {
 		$indicador['grado-colaboracion'] = array(
 			'campoTabla' => "subramayan AS valor FROM \"mvSubramayan",
 			'title' => array(
-					'revista' => '<div class="centrado"><b>'._('Grado de Colaboración (Índice de Subramanyan)').'</b><br/>'._('Proporción de artículos con autoría múltiple').'</div>',
-					'paisRevista' => '<div class="centrado"><b>'._('Grado de Colaboración (Índice de Subramanyan)').'</b><br/>'._('Proporción de artículos con autoría múltiple en las revistas del país').'</div>',
+					'revista' => '<div class="text-center nowrap"><b>'._('Grado de Colaboración (Índice de Subramanyan)').'</b><br/>'._('Proporción de artículos con autoría múltiple').'</div>',
+					'paisRevista' => '<div class="text-center nowrap"><b>'._('Grado de Colaboración (Índice de Subramanyan)').'</b><br/>'._('Proporción de artículos con autoría múltiple en las revistas del país').'</div>',
 				),
 			'vTitle' => _('Grado de Colaboración'),
 			'hTitle' => _('Año'),
@@ -142,8 +148,8 @@ class Indicadores extends CI_Controller {
 		$indicador['modelo-elitismo'] = array(
 			'campoTabla' => "price AS valor FROM \"mvIndiceCoautoriaPrice",
 			'title' => array(
-					'revista' => '<div class="centrado"><b>'._('Modelo de Elitismo (Price)').'</b><br/>'._('Grupo de autores más productivos por revista').'</div>',
-					'paisRevista' => '<div class="centrado"><b>Modelo de Elitismo (Price)</b><br/>Grupo de autores más productivos por revista</div>',
+					'revista' => '<div class="text-center nowrap"><b>'._('Modelo de Elitismo (Price)').'</b><br/>'._('Grupo de autores más productivos por revista').'</div>',
+					'paisRevista' => '<div class="text-center nowrap"><b>Modelo de Elitismo (Price)</b><br/>Grupo de autores más productivos por revista</div>',
 				),
 			'vTitle' => _('Cantidad de autores'),
 			'hTitle' => _('Año'),
@@ -155,9 +161,9 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-colaboracion'] = array(
 			'campoTabla' => "lawani AS valor FROM \"mvLawani",
 			'title' => array(
-					'revista' => '<div class="centrado"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio de autores por artículo.').'</div>',
-					'paisRevista' => '<div class="centrado"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio del número de autores por artículo en las revistas del país').'</div>',
-					'paisAutor' => '<div class="centrado"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio del número de autores por artículo en el país').'</div>'
+					'revista' => '<div class="text-center nowrap"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio de autores por artículo.').'</div>',
+					'paisRevista' => '<div class="text-center nowrap"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio del número de autores por artículo en las revistas del país').'</div>',
+					'paisAutor' => '<div class="text-center nowrap"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio del número de autores por artículo en el país').'</div>'
 				),
 			'vTitle' => _('Índice de Colaboración'),
 			'hTitle' => _('Año'),
@@ -170,7 +176,7 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-densidad-documentos'] = array(
 			'campoTabla' => "zakutina AS valor FROM \"mvZakutina",
 			'title' => array(
-					'revista' => '<div class="centrado"><b>'._('Índice de Densidad de Documentos Zakutina y Priyenikova').'</b><br/>'._('Títulos con mayor cantidad de artículos').'</div>'
+					'revista' => '<div class="text-center nowrap"><b>'._('Índice de Densidad de Documentos Zakutina y Priyenikova').'</b><br/>'._('Títulos con mayor cantidad de artículos').'</div>'
 				),
 			'vTitle' => _('Índice de densidad'),
 			'hTitle' => _('Año'),
@@ -248,7 +254,7 @@ class Indicadores extends CI_Controller {
 					'v' => $vindicador[$periodo]
 				);
 				$c[] = array(
-					'v' => _sprintf("<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">{$indicador[$_POST['indicador']]['tooltip'][$selection]}</div>", $kindicador, $periodo, $vindicador[$periodo])
+					'v' => _sprintf("<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">{$indicador[$_POST['indicador']]['tooltip'][$selection]}</div>", $kindicador, $periodo, $vindicador[$periodo])
 				);
 				/*dataTable rows*/
 				if( ! $setDataTableRows ):
@@ -294,6 +300,9 @@ class Indicadores extends CI_Controller {
 							'top' => 40,
 							'width' => 675,
 							'height' => "80%"
+							),
+						'backgroundColor' => array(
+							'fill' => 'transparent'
 							)
 						);
 		/*Opciones para la tabla*/
@@ -312,20 +321,20 @@ class Indicadores extends CI_Controller {
 		$this->output->enable_profiler(false);
 		$indicador['modelo-bradford-revista'] = array(
 				'sufix' => "Revista",
-				'title' => '<div class="centrado"><b>'._('Modelo matemático de Bradford').'</b><br/>'._('Distribución de artículos por revista').'</div>',
+				'title' => '<div class="text-center nowrap"><b>'._('Modelo matemático de Bradford').'</b><br/>'._('Distribución de artículos por revista').'</div>',
 				'tableTitle' => '<h3>'._('Modelo matemático de Bradford').'</h3>',
 				'hAxisTitle' => _('Logaritmo de la cantidad acumulada de títulos de revista'),
 				'hAxisTitleGroup' => _('Títulos de revista'),
-				'titleGroup' => '<div class="centrado"><b>'._('Modelo matemático de Bradford').'</b><br/>'._('Zona %s de revistas más productivas').'</div>',
+				'titleGroup' => '<div class="text-center nowrap"><b>'._('Modelo matemático de Bradford').'</b><br/>'._('Zona %s de revistas más productivas').'</div>',
 				'tableTitleGroup' => '<h3>'._('Zona %s de revistas más productivas').'</h3>'
 			);
 		$indicador['modelo-bradford-institucion'] = array(
 				'sufix' => "Institucion",
-				'title' => '<div class="centrado"><b>'._('Modelo matemático de Bradford').'</b><br/>'._('Distribución de artículos por instituciones.').'</div>',
+				'title' => '<div class="text-center nowrap"><b>'._('Modelo matemático de Bradford').'</b><br/>'._('Distribución de artículos por instituciones.').'</div>',
 				'tableTitle' => '<h3>'._('Modelo matemático de Bradford por institución (afiliación del autor)').'</h3>',
 				'hAxisTitle' => _('Logaritmo de la cantidad acumulada de instituciones'),
 				'hAxisTitleGroup' => _('Institución'),
-				'titleGroup' => '<div class="centrado"><b>'._('Modelo matemático de Bradford por institución (afiliación del autor)').'</b><br/>'._('Zona %s de instituciones más productivas por disciplina').'</div>',
+				'titleGroup' => '<div class="text-center nowrap"><b>'._('Modelo matemático de Bradford por institución (afiliación del autor)').'</b><br/>'._('Zona %s de instituciones más productivas por disciplina').'</div>',
 				'tableTitleGroup' => '<h3>'._('Zona %s de instituciones más productivas por disciplina').'</h3>'
 			);
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
@@ -456,8 +465,8 @@ class Indicadores extends CI_Controller {
 							),
 						'width' => '925',
 						'chartArea' => array(
-							'left' => 120,
-							'top' => 50,
+							'left' => 100,
+							'top' => 40,
 							'width' => 675,
 							'height' => "80%"
 							),
@@ -475,6 +484,9 @@ class Indicadores extends CI_Controller {
 							),
 						'tooltip' => array(
 								'isHtml' => true
+							),
+						'backgroundColor' => array(
+							'fill' => 'transparent'
 							)
 						);
 		/*Creando lista de revistas con su total de articulos agrupados según los límites calculados anteriormente*/
@@ -582,13 +594,16 @@ class Indicadores extends CI_Controller {
 							),
 						'width' => '925',
 						'chartArea' => array(
-							'left' => 120,
-							'top' => 50,
+							'left' => 100,
+							'top' => 40,
 							'width' => 675,
 							'height' => "80%"
 							),
 						'tooltip' => array(
 								'isHtml' => true
+							),
+						'backgroundColor' => array(
+							'fill' => 'transparent'
 							)
 						);
 
@@ -622,14 +637,14 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-concentracion'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", pratt AS indicador FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
 				'title' => _('Índice de concentración temática'), 
-				'chartTitle' => '<div id="chartTitle"><div class="centrado"><b>'._('Índice de concentración (Índice de Pratt)').'</b><br/>'._('Distribución decreciente de las revistas considerando su grado de concentración temática').'</div></div>',
-				'tooltip' => "<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">Nivel de especialización de la revista: %s</div>"
+				'chartTitle' => '<div id="chartTitle"><div class="text-center nowrap"><b>'._('Índice de concentración (Índice de Pratt)').'</b><br/>'._('Distribución decreciente de las revistas considerando su grado de concentración temática').'</div></div>',
+				'tooltip' => "<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">Nivel de especialización de la revista: %s</div>"
 			);
 		$indicador['productividad-exogena'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", exogena AS indicador FROM \"mvProductividadExogena\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
 				'title' => _('Proporción de autoría exógena'), 
-				'chartTitle' => '<div id="chartTitle" class="centrado"><b>'._('Tasa de autoría exógena').'</b><br/>'._('Distribución decreciente de las revistas considerando la proporción de autoría exógena').'</div>',
-				'tooltip' => "<div class=\"centrado\"><b>%s</b></div><div class=\"centrado\">Proporción de autores extranjeros: %s</div>"
+				'chartTitle' => '<div id="chartTitle" class="text-center nowrap"><b>'._('Tasa de autoría exógena').'</b><br/>'._('Distribución decreciente de las revistas considerando la proporción de autoría exógena').'</div>',
+				'tooltip' => "<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">Proporción de autores extranjeros: %s</div>"
 			);
 		$query = $indicador[$_POST['indicador']]['sql'];
 		$query = $this->db->query($query);
@@ -698,10 +713,13 @@ class Indicadores extends CI_Controller {
 							),
 						'width' => '925',
 						'chartArea' => array(
-							'left' => 120,
-							'top' => 50,
-							'width' => 580,
+							'left' => 100,
+							'top' => 40,
+							'width' => 675,
 							'height' => "80%"
+							),
+						'backgroundColor' => array(
+							'fill' => 'transparent'
 							)
 						);
 		/*Opciones para la tabla*/
@@ -945,22 +963,25 @@ class Indicadores extends CI_Controller {
 		echo json_encode($result, true);
 	}
 
-	public function bradfordDocumentos($slug, $ajax=false){
-		$args['slug'] = $slug;
-		$args['query'] = "SELECT {$this->queryFields} FROM \"vDocumentosBradfordFull\" WHERE \"revistaSlug\"='{$slug}'";
-		$args['queryCount'] = "SELECT count(*) AS total FROM \"vDocumentosBradfordFull\" WHERE \"revistaSlug\"='{$slug}'";
-		$args['paginationURL'] = site_url("indicadores/bradfordDocumentos/{$slug}");
+	public function bradfordDocumentos(){
+		$uri_args = $this->uri->uri_to_assoc(2);
+		$args['slug'] = $uri_args['revista'];
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vDocumentosBradfordFull\" WHERE \"revistaSlug\"='{$uri_args['revista']}'";
+		$args['queryCount'] = "SELECT count(*) AS total FROM \"vDocumentosBradfordFull\" WHERE \"revistaSlug\"='{$uri_args['revista']}'";
+		$args['paginationURL'] = site_url("indicadores/modelo-bradford-revista/disciplina/{$uri_args['disciplina']}/revista/{$uri_args['revista']}/documentos");
 		if(isset($_POST['ajax']) || $ajax):
-			$args['paginationURL'] = site_url("indicadores/bradfordDocumentos/{$slug}/ajax");
+			$args['paginationURL'] = site_url("indicadores/modelo-bradford-revista/disciplina/{$uri_args['disciplina']}/revista/{$uri_args['revista']}/documentos/ajax");
 			$args['ajax'] = true;
 		endif;
 		/*Datos de la revista*/
 		$this->load->database();
-		$queryRevista = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$slug}' LIMIT 1";
+		$queryRevista = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$uri_args['revista']}' LIMIT 1";
 		$queryRevista = $this->db->query($queryRevista);
 		$this->db->close();
 		$queryRevista = $queryRevista->row_array();
-		$args['breadcrumb'] = sprintf('%s<i class="separador"></i> %s<i class="separador"></i> %s (%%d documentos)', anchor('indicadores', _('Indicadores'), _('title="Indicadores"')), anchor('indicadores/modelo-bradford-revista', _('Modelo de Bradford por revista'), _('title="Modelo de Bradford por revista"')), $queryRevista['revista']);
+		$args['breadcrumb'][] = array('title' => _('Modelo de Bradford por revista'), 'link' => 'indicadores/modelo-bradford-revista');
+		$args['breadcrumb'][] = array('title' => $this->disciplinas[$uri_args['disciplina']]['disciplina'], 'link' => "indicadores/modelo-bradford-revista/disciplina/{$uri_args['disciplina']}");
+		$args['page_title'] = sprintf('%s (%%d documentos)', $queryRevista['revista']);
 		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $queryRevista['revista']);
 		return $this->_renderDocuments($args);
 	}
@@ -975,19 +996,26 @@ class Indicadores extends CI_Controller {
 		$data['main']['resultados']=$articulosResultado['articulos'];
 		$data['header']['title'] = sprintf($args['title'], $articulosResultado['totalRows']);
 		$data['header']['slugHighLight']=slugHighLight($args['slug']);
-		$data['header']['content'] =  $this->load->view('buscar/header', $data['header'], TRUE);
-		$data['main']['breadcrumb'] = sprintf($args['breadcrumb'], $articulosResultado['totalRows']);
-		if(isset($args['ajax'])):
-			$data['header']['content'] .=  $this->load->view('header_ajax', $data['header'], TRUE);
-			$this->load->view('header', $data['header']);
-		else:
-			$this->load->view('header', $data['header']);
-			$this->load->view('menu', $data['header']);
+		$data['header']['content'] =  $this->parser->parse_string('buscar/header', $data['header'], TRUE);
+		$data['main']['page_title'] = sprintf($args['page_title'], $articulosResultado['totalRows']);
+		$data['page_title'] = $data['main']['page_title'];
+		$this->template->set_partial('view_js', 'buscar/header', $data['header'], TRUE);
+		$this->template->css('assets/css/colorbox.css');
+		$this->template->css('assets/css/colorboxIndices.css');
+		$this->template->js('assets/js/colorbox.js');
+		$this->template->js('assets/js/jquery.highlight.js');
+		if(ENVIRONMENT === "production"):
+			$this->template->js('//s7.addthis.com/js/300/addthis_widget.js#pubid=herz');
 		endif;
-		$this->load->view('frecuencias/documentos', $data['main']);
-		if(! isset($args['ajax'])):
-			$this->load->view('footer');
+		$this->template->title($data['header']['title']);
+		$this->template->set_breadcrumb(_('Indicadores'), site_url('indicadores'));
+		if(isset($args['breadcrumb'])):
+			foreach ($args['breadcrumb'] as $breadcrumb) {
+				$this->template->set_breadcrumb($breadcrumb['title'], site_url($breadcrumb['link']));
+			}
 		endif;
+		$this->template->set_meta('description', _('Frecuencias'));
+		$this->template->build('revista/index', $data['main']);
 	}
 
 }

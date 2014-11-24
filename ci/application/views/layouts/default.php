@@ -223,6 +223,7 @@
         <script src="{base_url('js/jquery.validate.min.js')}"></script>
         <script src="{base_url('js/pnotify/jquery.pnotify.min.js')}"></script>
         <script src="{base_url('js/select2/select2.js')}"></script>
+        <script src="{base_url('js/jquery.blockUI.js')}"></script>
         <script src="{base_url('js/advancedsearch/js/evol.advancedSearch.min.js')}"></script>
 {foreach $template.js file}
         <script src="{$file}"></script>

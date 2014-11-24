@@ -415,6 +415,14 @@ footer a {
     right: 0;
     top: 0;
 }
+
+.jslider {
+	height: 2em;
+}
+
+.jslider .jslider-value {
+	background: none;
+}
 /*Formulas*/
 .formula{
 	font-weight: bold;
@@ -593,4 +601,50 @@ table.articulo{
 }
 #carousel-scielo .carousel-indicators .active{
 	background-color: #333;
+}
+#floatTableContainer {
+	display: none;
+}
+#tab-chars .ui-widget-content{
+	border: 0px;
+	background: transparent;
+}
+#tab-chars .ui-widget-header{
+	border: 0px;
+	border-bottom: 1px solid #CCC;
+	background: transparent;
+}
+#tab-chars .ui-tabs .ui-tabs-nav, #tab-chars .ui-tabs .ui-tabs-panel{
+	padding: 0px;
+}
+
+#tab-chars .carousel-control{
+	width: 20px;
+}
+#tab-chars .carousel-control:hover,
+#tab-chars .carousel-control:focus {
+  color: #222;
+}
+#tab-chars .carousel-control.left{
+	background: none;
+}
+#tab-chars .carousel-control.right{
+	background: none;
+}
+#tab-chars .glyphicon-chevron-left:before,
+#tab-chars .glyphicon-chevron-right:before{
+	content: "";
+}
+#tab-chars .carousel-control .icon-prev,
+#tab-chars .carousel-control .glyphicon-chevron-left {
+  margin-left: -10px;
+}
+
+#tab-chars .carousel-control .icon-next,
+#tab-chars .carousel-control .glyphicon-chevron-right {
+  margin-right: -10px;
+}
+
+.chart_data div{
+	margin: 0 auto;
 }
