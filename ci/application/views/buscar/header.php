@@ -26,6 +26,8 @@
 <?php endif;?>
 			$('#formSolicitudDocumento').validate();
 		});
+<?php if(isset($slugHighLight)):?>
 		$("#resultados").highlight([<?=$slugHighLight;?>], { element: 'mark'});
+<?php endif;?>
 	});
 {/literal}
