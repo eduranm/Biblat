@@ -319,27 +319,33 @@ jQuery(document).ready(function(){
 					var tableData = new google.visualization.DataTable(data.table.bradford);
 					jQuery("#gridContainer").empty();
 					jQuery("#gridContainer").append(data.table.title.bradford);
-					jQuery("#gridContainer").append('<div class="dataTable" id="table0"></div>');
+					jQuery("#gridContainer").append('<div id="table0"></div>');
 					tables.bradford = new google.visualization.Table(document.getElementById('table0'));
 					tables.bradford.draw(tableData, data.tableOptions);
+					google.visualization.events.addListener(tables.bradford , 'sort', changeTableClass);
+
 
 					var tableData = new google.visualization.DataTable(data.table.group1);
 					jQuery("#gridContainer").append(data.table.title.group1);
-					jQuery("#gridContainer").append('<div class="dataTable groupTable" id="table1"></div>');
+					jQuery("#gridContainer").append('<div class="groupTable" id="table1"></div>');
 					tables.group1 = new google.visualization.Table(document.getElementById('table1'));
 					tables.group1.draw(tableData, data.tblGrpOpt);
+					google.visualization.events.addListener(tables.group1 , 'sort', changeTableClass);
 
 					var tableData = new google.visualization.DataTable(data.table.group2);
 					jQuery("#gridContainer").append(data.table.title.group2);
-					jQuery("#gridContainer").append('<div class="dataTable groupTable" id="table2"></div>');
+					jQuery("#gridContainer").append('<div class="groupTable" id="table2"></div>');
 					tables.group2 = new google.visualization.Table(document.getElementById('table2'));
 					tables.group2.draw(tableData, data.tblGrpOpt);
+					google.visualization.events.addListener(tables.group2 , 'sort', changeTableClass);
 
 					var tableData = new google.visualization.DataTable(data.table.group3);
 					jQuery("#gridContainer").append(data.table.title.group3);
-					jQuery("#gridContainer").append('<div class="dataTable groupTable" id="table3"></div>');
+					jQuery("#gridContainer").append('<div class="groupTable" id="table3"></div>');
 					tables.group3 = new google.visualization.Table(document.getElementById('table3'));
 					tables.group3.draw(tableData, data.tblGrpOpt);
+					changeTableClass();
+					google.visualization.events.addListener(tables.group3 , 'sort', changeTableClass);
 
 					jQuery("#gridContainer").accordion( "refresh" );
 					break;
@@ -366,9 +372,11 @@ jQuery(document).ready(function(){
 					var tableData = new google.visualization.DataTable(data.table);
 					jQuery("#gridContainer").empty();
 					jQuery("#gridContainer").append(data.tableTitle);
-					jQuery("#gridContainer").append('<div class="dataTable" id="table0"></div>');
+					jQuery("#gridContainer").append('<div id="table0"></div>');
 					tables.pratt = new google.visualization.Table(document.getElementById('table0'));
 					tables.pratt.draw(tableData, data.tableOptions);
+					changeTableClass();
+					google.visualization.events.addListener(tables.pratt , 'sort', changeTableClass);
 					console.log(chart);	
 					break;
 				default:
@@ -384,9 +392,11 @@ jQuery(document).ready(function(){
 					var tableData = new google.visualization.DataTable(data.dataTable);
 					jQuery("#gridContainer").empty();
 					jQuery("#gridContainer").append(data.tableTitle);
-					jQuery("#gridContainer").append('<div class="dataTable" id="table0"></div>');
+					jQuery("#gridContainer").append('<div id="table0"></div>');
 					tables.normal = new google.visualization.Table(document.getElementById('table0'));
 					tables.normal.draw(tableData, data.tableOptions);
+					changeTableClass();
+					google.visualization.events.addListener(tables.normal , 'sort', changeTableClass);
 					
 
 					break;
@@ -608,6 +618,8 @@ choosePoint = function () {
 				var tableData = new google.visualization.DataTable(data.table);
 				var table = new google.visualization.Table(document.getElementById('floatTable'));
 				table.draw(tableData, data.tableOptions);
+				changeTableClass();
+				google.visualization.events.addListener(table , 'sort', changeTableClass);
 				jQuery.colorbox({inline: true, href: jQuery('#floatTable'), height:"90%",});
 			}
 		});
@@ -639,11 +651,19 @@ getFrecuencias = function (key) {
 				var tableData = new google.visualization.DataTable(data.table);
 				var table = new google.visualization.Table(document.getElementById('floatTable'));
 				table.draw(tableData, data.tableOptions);
+				changeTableClass();
+				google.visualization.events.addListener(table , 'sort', changeTableClass);
 				jQuery.colorbox({inline: true, href: jQuery('#floatTable'), height:"90%",});
 			}
 		});
 		
 		console.log(revista);
 	}
+}
+changeTableClass = function (argument) {
+	$('.google-visualization-table-table')
+	.removeClass('google-visualization-table-table')
+	.addClass('table table-bordered table-condensed table-striped')
+	.parent().addClass('table-responsive');
 }
 {/literal}

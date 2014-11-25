@@ -62,6 +62,11 @@ ol.nested li { display: block;}
 ol.nested li:before { content: counters(item, ".") ". "; counter-increment: item }
 ol.nested ol li:before { content: counters(item, ".") " "; counter-increment: item }
 
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #f0f0f0;
+}
+
 header{
 	background: url("../img/px_header.jpg") repeat-x scroll;
 	background-color: #555555;
@@ -645,6 +650,23 @@ table.articulo{
   margin-right: -10px;
 }
 
+#tab-chars .carousel-indicators {
+  bottom: 0px;
+  left: 90%;
+}
+
+#tab-chars .carousel-indicators li {
+  border: 1px solid #333;
+}
+
+#tab-chars .carousel-indicators .active {
+  background-color: #333;
+}
+
 .chart_data div{
 	margin: 0 auto;
+}
+
+.bold {
+	font-weight: bold;
 }

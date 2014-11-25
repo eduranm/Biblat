@@ -105,9 +105,9 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-coautoria'] = array(
 			'campoTabla' => "coautoria AS valor FROM \"mvIndiceCoautoriaPrice",
 			'title' => array(
-					'revista' => '<div class="text-center nowrap"><b>'._('Índice de Coautoría').'</b><br/>'._('Promedio de autores por artículo en la revista').'</div>',
-					'paisRevista' => '<div class="text-center nowrap"><b>'._('Índice de Coautoría').'</b><br/>'._('Promedio de autores por articulo en las revistas del país').'</div>',
-					'paisAutor' => '<div class="text-center nowrap"><b>'._('Índice de Coautoría').'</b><br/>'._('Promedio de autores por articulo en el país').'</div>'
+					'revista' => '<div class="text-center nowrap"><h4>'._('Índice de Coautoría').'</h4><br/>'._('Promedio de autores por artículo en la revista').'</div>',
+					'paisRevista' => '<div class="text-center nowrap"><h4>'._('Índice de Coautoría').'</h4><br/>'._('Promedio de autores por articulo en las revistas del país').'</div>',
+					'paisAutor' => '<div class="text-center nowrap"><h4>'._('Índice de Coautoría').'</h4><br/>'._('Promedio de autores por articulo en el país').'</div>'
 				),
 			'vTitle' => _('Índice de Coautoría'),
 			'hTitle' => _('Año'),
@@ -120,9 +120,9 @@ class Indicadores extends CI_Controller {
 		$indicador['tasa-documentos-coautorados'] = array(
 			'campoTabla' => "\"tasaCoautoria\" AS valor FROM \"mvTasaCoautoria",
 			'title' => array(
-					'revista' => '<div class="text-center nowrap"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple por revista').'</div>',
-					'paisRevista' => '<div class="text-center nowrap"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple en las revistas del país').'</div>',
-					'paisAutor' => '<div class="text-center nowrap"><b>'._('Tasa de Documentos Coautorados').'</b><br/>'._('Media de documentos con autoría múltiple en el país').'</div>',
+					'revista' => '<div class="text-center nowrap"><h4>'._('Tasa de Documentos Coautorados').'</h4><br/>'._('Media de documentos con autoría múltiple por revista').'</div>',
+					'paisRevista' => '<div class="text-center nowrap"><h4>'._('Tasa de Documentos Coautorados').'</h4><br/>'._('Media de documentos con autoría múltiple en las revistas del país').'</div>',
+					'paisAutor' => '<div class="text-center nowrap"><h4>'._('Tasa de Documentos Coautorados').'</h4><br/>'._('Media de documentos con autoría múltiple en el país').'</div>',
 				),
 			'vTitle' => _('Tasa de documentos'),
 			'hTitle' => _('Año'),
@@ -135,8 +135,8 @@ class Indicadores extends CI_Controller {
 		$indicador['grado-colaboracion'] = array(
 			'campoTabla' => "subramayan AS valor FROM \"mvSubramayan",
 			'title' => array(
-					'revista' => '<div class="text-center nowrap"><b>'._('Grado de Colaboración (Índice de Subramanyan)').'</b><br/>'._('Proporción de artículos con autoría múltiple').'</div>',
-					'paisRevista' => '<div class="text-center nowrap"><b>'._('Grado de Colaboración (Índice de Subramanyan)').'</b><br/>'._('Proporción de artículos con autoría múltiple en las revistas del país').'</div>',
+					'revista' => '<div class="text-center nowrap"><h4>'._('Grado de Colaboración (Índice de Subramanyan)').'</h4><br/>'._('Proporción de artículos con autoría múltiple').'</div>',
+					'paisRevista' => '<div class="text-center nowrap"><h4>'._('Grado de Colaboración (Índice de Subramanyan)').'</h4><br/>'._('Proporción de artículos con autoría múltiple en las revistas del país').'</div>',
 				),
 			'vTitle' => _('Grado de Colaboración'),
 			'hTitle' => _('Año'),
@@ -148,8 +148,8 @@ class Indicadores extends CI_Controller {
 		$indicador['modelo-elitismo'] = array(
 			'campoTabla' => "price AS valor FROM \"mvIndiceCoautoriaPrice",
 			'title' => array(
-					'revista' => '<div class="text-center nowrap"><b>'._('Modelo de Elitismo (Price)').'</b><br/>'._('Grupo de autores más productivos por revista').'</div>',
-					'paisRevista' => '<div class="text-center nowrap"><b>Modelo de Elitismo (Price)</b><br/>Grupo de autores más productivos por revista</div>',
+					'revista' => '<div class="text-center nowrap"><h4>'._('Modelo de Elitismo (Price)').'</h4><br/>'._('Grupo de autores más productivos por revista').'</div>',
+					'paisRevista' => '<div class="text-center nowrap"><h4>'._('Modelo de Elitismo (Price)').'</h4><br/>Grupo de autores más productivos por revista</div>',
 				),
 			'vTitle' => _('Cantidad de autores'),
 			'hTitle' => _('Año'),
@@ -161,9 +161,9 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-colaboracion'] = array(
 			'campoTabla' => "lawani AS valor FROM \"mvLawani",
 			'title' => array(
-					'revista' => '<div class="text-center nowrap"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio de autores por artículo.').'</div>',
-					'paisRevista' => '<div class="text-center nowrap"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio del número de autores por artículo en las revistas del país').'</div>',
-					'paisAutor' => '<div class="text-center nowrap"><b>'._('Índice de Colaboración (Índice de Lawani)').'</b><br/>'._('Peso promedio del número de autores por artículo en el país').'</div>'
+					'revista' => '<div class="text-center nowrap"><h4>'._('Índice de Colaboración (Índice de Lawani)').'</h4><br/>'._('Peso promedio de autores por artículo.').'</div>',
+					'paisRevista' => '<div class="text-center nowrap"><h4>'._('Índice de Colaboración (Índice de Lawani)').'</h4><br/>'._('Peso promedio del número de autores por artículo en las revistas del país').'</div>',
+					'paisAutor' => '<div class="text-center nowrap"><h4>'._('Índice de Colaboración (Índice de Lawani)').'</h4><br/>'._('Peso promedio del número de autores por artículo en el país').'</div>'
 				),
 			'vTitle' => _('Índice de Colaboración'),
 			'hTitle' => _('Año'),
@@ -176,7 +176,7 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-densidad-documentos'] = array(
 			'campoTabla' => "zakutina AS valor FROM \"mvZakutina",
 			'title' => array(
-					'revista' => '<div class="text-center nowrap"><b>'._('Índice de Densidad de Documentos Zakutina y Priyenikova').'</b><br/>'._('Títulos con mayor cantidad de artículos').'</div>'
+					'revista' => '<div class="text-center nowrap"><h4>'._('Índice de Densidad de Documentos Zakutina y Priyenikova').'</h4><br/>'._('Títulos con mayor cantidad de artículos').'</div>'
 				),
 			'vTitle' => _('Índice de densidad'),
 			'hTitle' => _('Año'),
@@ -308,11 +308,21 @@ class Indicadores extends CI_Controller {
 		/*Opciones para la tabla*/
 		$data['tableOptions'] = array(
 				'allowHtml' => true,
-				'showRowNumber' => false
+				'showRowNumber' => false,
+				'cssClassNames' => array(
+					'headerRow' => 'bold',
+					'tableRow'	=> ' ',
+					'oddTableRow' => ' ',
+					'selectedTableRow' => ' ',
+					'hoverTableRow' => ' ',
+					'headerCell' => ' ',
+					'tableCell' => ' ',
+					'rowNumberCell' => ' '
+					)
 			);
 		/*Titulo de la gráfica*/
 		$data['chartTitle'] = $indicador[$_POST['indicador']]['title'][$selection];
-		$data['tableTitle'] = "<div class=\"textoTitulo centrado\">{$this->indicadores[$_POST['indicador']]}</div>";
+		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]}</h4>";
 		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}
@@ -321,21 +331,21 @@ class Indicadores extends CI_Controller {
 		$this->output->enable_profiler(false);
 		$indicador['modelo-bradford-revista'] = array(
 				'sufix' => "Revista",
-				'title' => '<div class="text-center nowrap"><b>'._('Modelo matemático de Bradford').'</b><br/>'._('Distribución de artículos por revista').'</div>',
+				'title' => '<div class="text-center nowrap"><h4>'._('Modelo matemático de Bradford').'</h4><br/>'._('Distribución de artículos por revista').'</div>',
 				'tableTitle' => '<h3>'._('Modelo matemático de Bradford').'</h3>',
 				'hAxisTitle' => _('Logaritmo de la cantidad acumulada de títulos de revista'),
 				'hAxisTitleGroup' => _('Títulos de revista'),
-				'titleGroup' => '<div class="text-center nowrap"><b>'._('Modelo matemático de Bradford').'</b><br/>'._('Zona %s de revistas más productivas').'</div>',
+				'titleGroup' => '<div class="text-center nowrap"><h4>'._('Modelo matemático de Bradford').'</h4><br/>'._('Zona %s de revistas más productivas').'</div>',
 				'tableTitleGroup' => '<h3>'._('Zona %s de revistas más productivas').'</h3>'
 			);
 		$indicador['modelo-bradford-institucion'] = array(
 				'sufix' => "Institucion",
-				'title' => '<div class="text-center nowrap"><b>'._('Modelo matemático de Bradford').'</b><br/>'._('Distribución de artículos por instituciones.').'</div>',
+				'title' => '<div class="text-center nowrap"><h4>'._('Modelo matemático de Bradford').'</h4><br/>'._('Distribución de artículos por instituciones.').'</div>',
 				'tableTitle' => '<h3>'._('Modelo matemático de Bradford por institución (afiliación del autor)').'</h3>',
 				'hAxisTitle' => _('Logaritmo de la cantidad acumulada de instituciones'),
 				'hAxisTitleGroup' => _('Institución'),
-				'titleGroup' => '<div class="text-center nowrap"><b>'._('Modelo matemático de Bradford por institución (afiliación del autor)').'</b><br/>'._('Zona %s de instituciones más productivas por disciplina').'</div>',
-				'tableTitleGroup' => '<h3>'._('Zona %s de instituciones más productivas por disciplina').'</h3>'
+				'titleGroup' => '<div class="text-center nowrap"><h4>'._('Modelo matemático de Bradford por institución (afiliación del autor)').'</h4><br/>'._('Zona %s de instituciones más productivas por disciplina').'</div>',
+				'tableTitleGroup' => '<h4>'._('Zona %s de instituciones más productivas por disciplina').'</h4>'
 			);
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
 		$query = "SELECT articulos, frecuencia, \"articulosXfrecuenciaAcumulado\", \"logFrecuenciaAcumulado\" FROM \"vBradford{$indicador[$_POST['indicador']]['sufix']}\" WHERE id_disciplina={$idDisciplina}";
@@ -620,11 +630,31 @@ class Indicadores extends CI_Controller {
 		/*Opciones para la tabla*/
 		$result['tableOptions'] = array(
 				'allowHtml' => true,
-				'showRowNumber' => false
+				'showRowNumber' => false,
+				'cssClassNames' => array(
+					'headerRow' => 'bold',
+					'tableRow'	=> ' ',
+					'oddTableRow' => ' ',
+					'selectedTableRow' => ' ',
+					'hoverTableRow' => ' ',
+					'headerCell' => ' ',
+					'tableCell' => ' ',
+					'rowNumberCell' => ' '
+					)
 			);
 		$result['tblGrpOpt'] = array(
 				'allowHtml' => true,
-				'showRowNumber' => true
+				'showRowNumber' => true,
+				'cssClassNames' => array(
+					'headerRow' => 'bold',
+					'tableRow'	=> ' ',
+					'oddTableRow' => ' ',
+					'selectedTableRow' => ' ',
+					'hoverTableRow' => ' ',
+					'headerCell' => ' ',
+					'tableCell' => ' ',
+					'rowNumberCell' => ' '
+					)
 			);
 		header('Content-Type: application/json');
 		echo json_encode($result, true);
@@ -637,13 +667,13 @@ class Indicadores extends CI_Controller {
 		$indicador['indice-concentracion'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", pratt AS indicador FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
 				'title' => _('Índice de concentración temática'), 
-				'chartTitle' => '<div id="chartTitle"><div class="text-center nowrap"><b>'._('Índice de concentración (Índice de Pratt)').'</b><br/>'._('Distribución decreciente de las revistas considerando su grado de concentración temática').'</div></div>',
+				'chartTitle' => '<div id="chartTitle"><div class="text-center nowrap"><h4>'._('Índice de concentración (Índice de Pratt)').'</h4><br/>'._('Distribución decreciente de las revistas considerando su grado de concentración temática').'</div></div>',
 				'tooltip' => "<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">Nivel de especialización de la revista: %s</div>"
 			);
 		$indicador['productividad-exogena'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", exogena AS indicador FROM \"mvProductividadExogena\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
 				'title' => _('Proporción de autoría exógena'), 
-				'chartTitle' => '<div id="chartTitle" class="text-center nowrap"><b>'._('Tasa de autoría exógena').'</b><br/>'._('Distribución decreciente de las revistas considerando la proporción de autoría exógena').'</div>',
+				'chartTitle' => '<div id="chartTitle" class="text-center nowrap"><h4>'._('Tasa de autoría exógena').'</h4><br/>'._('Distribución decreciente de las revistas considerando la proporción de autoría exógena').'</div>',
 				'tooltip' => "<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">Proporción de autores extranjeros: %s</div>"
 			);
 		$query = $indicador[$_POST['indicador']]['sql'];
@@ -723,12 +753,22 @@ class Indicadores extends CI_Controller {
 							)
 						);
 		/*Opciones para la tabla*/
-		$data['tableOptions'] = array(
+		$result['tableOptions'] = array(
 				'allowHtml' => true,
-				'showRowNumber' => false
+				'showRowNumber' => false,
+				'cssClassNames' => array(
+					'headerRow' => 'bold',
+					'tableRow'	=> ' ',
+					'oddTableRow' => ' ',
+					'selectedTableRow' => ' ',
+					'hoverTableRow' => ' ',
+					'headerCell' => ' ',
+					'tableCell' => ' ',
+					'rowNumberCell' => ' '
+					)
 			);
 		$result['chartTitle'] = $indicador[$_POST['indicador']]['chartTitle'];
-		$result['tableTitle'] = "<div class=\"textoTitulo centrado\">{$this->indicadores[$_POST['indicador']]}</div>";
+		$result['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]}</h4>";
 		header('Content-Type: application/json');	
 		echo json_encode($result, true);
 
@@ -771,9 +811,19 @@ class Indicadores extends CI_Controller {
 				break;
 		endswitch;
 		/*Opciones para la tabla*/
-		$data['tableOptions'] = array(
+		$result['tableOptions'] = array(
 				'allowHtml' => true,
-				'showRowNumber' => false
+				'showRowNumber' => false,
+				'cssClassNames' => array(
+					'headerRow' => 'bold',
+					'tableRow'	=> ' ',
+					'oddTableRow' => ' ',
+					'selectedTableRow' => ' ',
+					'hoverTableRow' => ' ',
+					'headerCell' => ' ',
+					'tableCell' => ' ',
+					'rowNumberCell' => ' '
+					)
 			);
 		header('Content-Type: application/json');
 		echo json_encode($result, true);
@@ -957,7 +1007,17 @@ class Indicadores extends CI_Controller {
 		/*Opciones para la tabla*/
 		$result['tableOptions'] = array(
 				'allowHtml' => true,
-				'showRowNumber' => false
+				'showRowNumber' => false,
+				'cssClassNames' => array(
+					'headerRow' => 'bold',
+					'tableRow'	=> ' ',
+					'oddTableRow' => ' ',
+					'selectedTableRow' => ' ',
+					'hoverTableRow' => ' ',
+					'headerCell' => ' ',
+					'tableCell' => ' ',
+					'rowNumberCell' => ' '
+					)
 			);
 		header('Content-Type: application/json');
 		echo json_encode($result, true);
