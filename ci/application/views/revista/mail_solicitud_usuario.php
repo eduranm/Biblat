@@ -16,7 +16,7 @@
 
 <?php _e('Atentamente:');?><br/>
 
-<?php _e('Mtra. Araceli Noguez O.');?><br/>
+<?php _e('Dra. Araceli Noguez O.');?><br/>
 
 <?php _e('Correo electrónico:');?> <a target="_blank" href="mailto:anoguez@dgb.unam.mx">anoguez@dgb.unam.mx</a><br/>
 
