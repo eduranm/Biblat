@@ -73,20 +73,23 @@ END;
 $$
   LANGUAGE plpgsql;
 
+-- Función para convertir un arreglo json a una cadena slug para búsqueda
+
+CREATE OR REPLACE FUNCTION json_slug(source json)
+  RETURNS character varying AS
+$$
+DECLARE
+    result varchar;
+BEGIN
+    result := (SELECT array_to_string(ARRAY(SELECT slug_space(('['||json_array_elements(source)||']')::json->>0)), ' | ') || '  |');
+    RETURN NULLIF(result, '');
+END;
+$$
+  LANGUAGE plpgsql IMMUTABLE;
+
 /*Actualización de datos*/
 /*articulo*/
-UPDATE articulo SET e_008=NULL WHERE e_008='';
-UPDATE articulo SET e_022=NULL WHERE e_022='';
-UPDATE articulo SET e_041=NULL WHERE e_041='';
-UPDATE articulo SET e_300a=NULL WHERE e_300a='';
-UPDATE articulo SET e_300b=NULL WHERE e_300b='';
-UPDATE articulo SET e_300c=NULL WHERE e_300c='';
-UPDATE articulo SET e_300e=NULL WHERE e_300e='';
-UPDATE articulo SET e_504=NULL WHERE e_504='';
-UPDATE articulo SET e_546=NULL WHERE e_546='';
-UPDATE articulo SET e_856u=NULL WHERE e_856u='';
-UPDATE articulo SET e_222=NULL WHERE e_222='';
-UPDATE articulo SET id_disciplina=NULL WHERE id_disciplina<1;
+
 UPDATE articulo SET e_222='Psicologia: reflexao e critica' WHERE e_222 in ('Psicologia: Reflexao e critica', 'Psicologia: Reflexão e Crítica');
 UPDATE articulo SET e_222='Revista de economía política' WHERE e_222='Revista de economia politica';
 UPDATE articulo SET e_222='Revista de la Facultad de Farmacia de la Universidad de los Andes' WHERE e_222='Revista de la Facultad de Farmacia de la Universidad de Los Andes';
@@ -135,23 +138,14 @@ UPDATE articulo SET e_008='Internacional' WHERE e_222='Revista interamericana de
 UPDATE articulo SET e_008='México' WHERE e_008='Mexico' OR e_008='Mèxico';
 ALTER TABLE articulo ADD COLUMN "revistaSlug" varchar;
 ALTER TABLE articulo ADD COLUMN "e_698" varchar;
-UPDATE articulo SET "revistaSlug"=slug(e_222);
-UPDATE articulo a SET id_disciplina=d.id_disciplina 
-  FROM disciplinas d WHERE slug(a.e_698)=d.slug;
 /*Indices para optimizar las consultas*/
 CREATE INDEX "articuloTextoCompleto_idx" ON articulo(e_856u);	
 CREATE INDEX "articuloAlfabetico_idx" ON articulo(substring(LOWER(e_222), 1, 1));
 CREATE INDEX "articuloHevila_idx" ON articulo USING gin(e_856u gin_trgm_ops);
 
-REINDEX TABLE articulo;
-
-VACUUM (VERBOSE, FULL) articulo;
-
 /*autor*/
-UPDATE autor SET e_1006=NULL WHERE e_1006='';
-UPDATE autor SET e_100a=NULL WHERE e_100a='';
 ALTER TABLE	autor ADD COLUMN slug varchar;
-UPDATE autor SET slug=slug(e_100a);
+
 
 CREATE INDEX "autorSlug_idx" ON autor(slug);
 CREATE INDEX "autorSlugE100a_idx" ON autor(slug, e_100a);
@@ -167,18 +161,15 @@ VACUUM (VERBOSE, FULL) disciplinas;
 
 /*Instituciones*/
 
-UPDATE institucion SET e_100x=NULL WHERE e_100x='';
-UPDATE institucion SET e_100u=NULL WHERE e_100u='';
+
 UPDATE institucion SET e_100x='México' WHERE e_100x='Mëxico';
 UPDATE institucion SET e_100x='Japón' WHERE e_100x='Japòn';
 UPDATE institucion SET e_100u=regexp_replace(e_100u, '(.+?)(,$|$)', '\1');
 UPDATE institucion SET e_100x=regexp_replace(e_100x, '(.+?)(,$|\.$|$)', '\1');
 
 ALTER TABLE institucion ADD COLUMN slug varchar;
-UPDATE institucion SET slug=slug(e_100u);
-
 ALTER TABLE institucion ADD COLUMN "paisInstitucionSlug" varchar;
-UPDATE institucion SET "paisInstitucionSlug"=slug(e_100x);
+
 
 CREATE INDEX "idx_institucionDSAI" ON institucion(iddatabase, sistema, sec_autor, sec_institucion);
 CREATE INDEX ON institucion(iddatabase, sistema);
@@ -216,3 +207,13 @@ anio,
 count(*) AS articulos 
 FROM "vArticulos" GROUP BY "revistaSlug", anio HAVING count(*) > 4) tb1 
 GROUP BY "revistaSlug") tb2 WHERE anios_continuos > 4
+
+--article
+CREATE INDEX ON article(sistema);
+CREATE INDEX ON article USING gin((url::text) gin_trgm_ops);
+
+--institution
+CREATE INDEX ON institution(sistema);
+
+--author
+CREATE INDEX ON author(sistema);
