@@ -177,7 +177,7 @@ if ( ! function_exists('articulosResultado') ):
 			$ci->session->set_userdata('query{'.md5($queryCount).'}', $queryTotalRows['total']);
 		endif;
 		if($countCompleto):
-			$queryCountCompleto = "{$queryCount} AND url <> ''";
+			$queryCountCompleto = "{$queryCount} AND url IS NOT NULL";
 			if ( ! $ci->session->userdata('query{'.md5($queryCountCompleto).'}')):
 				$queryTotalCompleto = $ci->db->query($queryCountCompleto);
 				$queryTotalCompleto = $queryTotalCompleto->row_array();
@@ -250,7 +250,7 @@ if ( ! function_exists('articulosResultado') ):
 			/*Limpiando caracteres html*/
 			$row = htmlspecialchars_deep($row);
 			/*Creando valores para el checkbox*/
-			$row['checkBoxValue'] = "{$row['iddatabase']}|{$row['sistema']}";
+			$row['checkBoxValue'] = "{$row['sistema']}";
 			$row['checkBoxId'] = "chk_{$row['checkBoxValue']}";
 			/*Enlace para agregar referencia*/
 			$row['addRef'] = "<a class=\"add-ref\" id=\"{$row['checkBoxId']}\" href=\"javascript:;\">"._("Agregar referencia.")."</a>";
@@ -307,7 +307,7 @@ if ( ! function_exists('articulosResultado') ):
 			if(!empty($row['paginacion'])):
 				$row['paginacion'] = _sprintf('Pág. %s', $row['paginacion']);
 			endif;
-			$row['detalleRevista'] = "[{$row['revista']}, {$row['pais']}, {$row['anio']} {$row['volumen']} {$row['numero']} {$row['periodo']}, {$row['paginacion']}]";
+			$row['detalleRevista'] = "[{$row['revista']}, {$row['paisRevista']}, {$row['anioRevista']} {$row['volumen']} {$row['numero']} {$row['periodo']}, {$row['paginacion']}]";
 
 			$resultado['articulos'][++$offset] = $row;
 		endforeach;

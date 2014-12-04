@@ -19,7 +19,7 @@ class Buscar extends CI_Controller{
 		$indiceArray['autor'] = array('sql' => 'autoresSlug', 'descripcion' => _('Autor'));
 		$indiceArray['institucion'] = array('sql' => 'institucionesSlug', 'descripcion' => _('Institución'));
 		$indiceArray['revista'] = array('sql' => 'revistaSlug', 'descripcion' => _('Revista'));
-		$indiceArray['pais'] = array('sql' => 'paisSlug', 'descripcion' => _('País'));
+		$indiceArray['pais'] = array('sql' => 'paisRevistaSlug', 'descripcion' => _('País'));
 		$indiceArray['disciplina'] = array('sql' => 'id_disciplina', 'descripcion' => _('Disciplina'));
 		/*Si se hizo una consulta con POST redirigimos a una url correcta*/
 		if(isset($_POST['disciplina']) && isset($_POST['slug'])):
@@ -94,7 +94,7 @@ class Buscar extends CI_Controller{
 		$whereTextoCompleto = "";
 		$data['main']['textoCompleto'] = FALSE;
 		if ($textoCompleto == "texto-completo"):
-			$whereTextoCompleto = "AND url <> ''";
+			$whereTextoCompleto = "AND url IS NOT NULL";
 			$data['main']['textoCompleto'] = TRUE;
 		endif;
 
@@ -133,29 +133,28 @@ class Buscar extends CI_Controller{
 			$data['main']['page_title'] = _('Resultados de la búsqueda');
 		endif;
 
-		$queryFields="SELECT s.sistema, 
-			s.iddatabase, 
+		$queryFields="SELECT s.sistema,
 			articulo, 
 			\"articuloSlug\", 
 			revista, 
 			\"revistaSlug\", 
-			pais, 
-			anio, 
+			\"paisRevista\", 
+			\"anioRevista\", 
 			volumen, 
 			numero, 
 			periodo, 
 			paginacion, 
-			url, 
+			url->>0 AS url, 
 			\"autoresSecJSON\",
 			\"autoresSecInstitucionJSON\",
 			\"autoresJSON\",
 			\"institucionesSecJSON\",
 			\"institucionesJSON\"";
-		$queryFrom="FROM \"mvSearch\" s 
+		$queryFrom="FROM \"vSearchFull\" s 
 				WHERE  {$slugQuerySearch[where]} {$whereTextoCompleto} {$whereDisciplina}";
 		$query = "{$queryFields} 
 		{$queryFrom} 
-				ORDER BY anio DESC, volumen DESC, numero DESC, articulo";
+				ORDER BY \"anioRevista\" DESC, volumen DESC, numero DESC, articulo";
 		
 
 		$queryCount = "SELECT count (*) as total {$queryFrom}";
@@ -219,7 +218,7 @@ class Buscar extends CI_Controller{
 		$this->output->enable_profiler(FALSE);
 		if(! $this->session->userdata('paises')){
 			$this->load->database();
-			$query = "SELECT * FROM \"mvPais\" WHERE \"paisSlug\" <> 'internacional'";
+			$query = "SELECT * FROM \"mvPais\" WHERE \"paisRevistaSlug\" <> 'internacional'";
 			$query = $this->db->query($query);
 			$paises = $query->result_array();
 			$query->free_result();
@@ -229,7 +228,7 @@ class Buscar extends CI_Controller{
 		$paises = json_decode($this->session->userdata('paises'), TRUE);
 		$result = array();
 		foreach ($paises as $pais):
-			$row['id'] = $pais['paisSlug'];
+			$row['id'] = $pais['paisRevistaSlug'];
 			$row['label'] = $pais['pais'];
 			$result[] = $row;
 		endforeach;

@@ -3,19 +3,18 @@
 class Frecuencias extends CI_Controller {
 
 	public $disciplinas = array();
-	public $queryFields="DISTINCT (sistema, 
-					iddatabase) AS \"sitemaIdDatabase\",
+	public $queryFields="DISTINCT(sistema) AS sistema,
 					articulo, 
 					\"articuloSlug\", 
 					revista, 
 					\"revistaSlug\", 
-					pais, 
-					anio, 
+					\"paisRevista\", 
+					\"anioRevista\", 
 					volumen, 
 					numero, 
 					periodo, 
 					paginacion, 
-					url, 
+					url->>0 AS url,
 					\"autoresSecJSON\",
 					\"autoresSecInstitucionJSON\",
 					\"autoresJSON\",
@@ -67,7 +66,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaAutorDocumentos\"";
 		$args['sortBy'] = array('autor', 'autorSlug', 'coautorias','documentos');
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaAutorDocumentos\"";
-		$args['querySlug'] = "SELECT e_100a AS unslug FROM autor WHERE slug='{$args['slug']}' LIMIT 1";
+		$args['querySlug'] = "SELECT nombre AS unslug FROM author WHERE slug='{$args['slug']}' LIMIT 1";
 		$args['where'] = "WHERE \"autorSlug\"='{$args['slug']}'";
 		$args['breadcrumbSlug'][] = array('title' => _('Autor'), 'link' => 'frecuencias/autor');
 		$args['cols'][] = array(
@@ -111,11 +110,11 @@ class Frecuencias extends CI_Controller {
 	public function autorDocumentos($slug){
 		$args['slug'] = $slug;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vAutorDocumentos\" WHERE \"autorSlug\"='{$slug}'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vAutorDocumentos\" WHERE \"autorSlug\"='{$slug}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vAutorDocumentos\" WHERE \"autorSlug\"='{$slug}'";
 		$args['paginationURL'] = site_url("frecuencias/autor/{$slug}/documento");
 		/*Datos del autor*/
 		$this->load->database();
-		$queryAutor = "SELECT e_100a AS autor FROM autor WHERE slug='{$slug}' LIMIT 1";
+		$queryAutor = "SELECT nombre AS autor FROM author WHERE slug='{$slug}' LIMIT 1";
 		$queryAutor = $this->db->query($queryAutor);
 		$this->db->close();
 		$queryAutor = $queryAutor->row_array();
@@ -153,7 +152,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaAutorCoautoria\" WHERE \"autorSlug\"='{$args['autorSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaAutorCoautoria\" WHERE \"autorSlug\"='{$args['autorSlug']}'";
 		$this->load->database();
-		$query = "SELECT e_100a AS autor FROM autor WHERE slug='{$args['autorSlug']}' LIMIT 1";
+		$query = "SELECT nombre AS autor FROM author WHERE slug='{$args['autorSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$autor = $query['autor'];
@@ -174,11 +173,11 @@ class Frecuencias extends CI_Controller {
 	public function autorCoautoriaDocumentos($autor, $coautor){
 		$args['slug'] = $coautor;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vAutorCoautoriaDocumentos\" WHERE \"autorSlug\"='{$autor}' AND \"autorCoSlug\"='$coautor'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vAutorCoautoriaDocumentos\" WHERE \"autorSlug\"='{$autor}' AND \"autorCoSlug\"='{$coautor}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vAutorCoautoriaDocumentos\" WHERE \"autorSlug\"='{$autor}' AND \"autorCoSlug\"='{$coautor}'";
 		$args['paginationURL'] = site_url("frecuencias/autor/{$autor}/coautoria/{$coautor}");
 		/*Datos del autor*/
 		$this->load->database();
-		$query = "SELECT e_100a AS autor FROM autor WHERE slug='{$autor}' LIMIT 1";
+		$query = "SELECT nombre AS autor FROM author WHERE slug='{$autor}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$autor = array(
@@ -186,7 +185,7 @@ class Frecuencias extends CI_Controller {
 				'autor' => $query['autor']
 			);
 		/*Datos del coautor*/
-		$query = "SELECT e_100a AS coautor FROM autor WHERE slug='{$coautor}' LIMIT 1";
+		$query = "SELECT nombre AS coautor FROM author WHERE slug='{$coautor}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$coautor = array(
@@ -209,7 +208,7 @@ class Frecuencias extends CI_Controller {
 		$args['sortBy'] = array('institucion', 'institucionSlug', 'paises', 'revistas', 'autores', 'disciplinas', 'coautorias','documentos');
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionDARP\" {$where}";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionDARP\"";
-		$args['querySlug'] = "SELECT e_100u AS unslug FROM institucion WHERE slug='{$args['slug']}' LIMIT 1";
+		$args['querySlug'] = "SELECT institucion AS unslug FROM institution WHERE slug='{$args['slug']}' LIMIT 1";
 		$args['where'] = "WHERE \"institucionSlug\"='{$args['slug']}'";
 		$args['breadcrumbSlug'][] = array('title' => _('Institución'), 'link' => 'frecuencias/institucion');
 		/*Columnas de la tabla*/
@@ -282,11 +281,11 @@ class Frecuencias extends CI_Controller {
 	public function institucionDocumentos($slug){
 		$args['slug'] = $slug;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$slug}'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$slug}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$slug}'";
 		$args['paginationURL'] = site_url("frecuencias/institucion/{$slug}/documento");
 		/*Datos de la institucion*/
 		$this->load->database();
-		$queryInstitucion = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$slug}' LIMIT 1";
+		$queryInstitucion = "SELECT institucion FROM institution WHERE slug='{$slug}' LIMIT 1";
 		$queryInstitucion = $this->db->query($queryInstitucion);
 		$this->db->close();
 		$queryInstitucion = $queryInstitucion->row_array();
@@ -301,7 +300,7 @@ class Frecuencias extends CI_Controller {
 		$args = $this->uri->ruri_to_assoc();
 		$args['defaultOrder'] = "documentos";
 		$args['orderDir'] = "DESC";
-		$args['sortBy'] = array('pais', 'paisSlug', 'documentos');
+		$args['sortBy'] = array('paisRevista', 'paisRevistaSlug', 'documentos');
 		/*Columnas de la tabla*/
 		$args['cols'][] = array(
 				'editable' => false,
@@ -311,7 +310,7 @@ class Frecuencias extends CI_Controller {
 		$args['cols'][] = array(
 				'editable' => false,
 				'hidden' => true,
-				'title' => 'paisSlug',
+				'title' => 'paisRevistaSlug',
 				'width' => 200
 			);
 		$args['cols'][] = array(
@@ -324,7 +323,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$this->load->database();
-		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$args['institucionSlug']}' LIMIT 1";
+		$query = "SELECT institucion FROM institution WHERE slug='{$args['institucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = $query['institucion'];
@@ -332,25 +331,24 @@ class Frecuencias extends CI_Controller {
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por institución "%s", países de publicación', $institucion);
 		$data['header']['gridTitle'] = _sprintf('Número de documentos por país de publicación de la revista de la institución:<br/> %s', $institucion);
-		$data['main']['breadcrumb'] = sprintf('%s / %s/País', $institucion);
 		$data['main']['breadcrumb'][] = array('title' => _('Institución'), 'link' => "frecuencias/institucion");
 		$data['main']['breadcrumb'][] = array('title' => $institucion, 'link' => "frecuencias/institucion/{$args['institucionSlug']}");
 		$data['main']['page_title'] = sprintf('%s/País', $institucion);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('País'), _('Documentos'));
-		$args['xls']['query'] = "SELECT pais, documentos FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY documentos DESC, pais";
+		$args['xls']['query'] = "SELECT \"paisRevista\", documentos FROM \"mvFrecuenciaInstitucionPais\" WHERE \"institucionSlug\"='{$args['institucionSlug']}' ORDER BY documentos DESC, pais";
 		$args['xls']['fileName'] = "Frecuencia-{$institucion}-Paises.csv";
 		return $this->_renderFrecuency($args, $data);
 	}
 
 	public function institucionPaisDocumentos($institucion, $pais){
 		$args['slug'] = $pais;
-		$args['query'] = "SELECT {$this->queryFields} FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"paisSlug\"='$pais'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"paisSlug\"='{$pais}'";
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"paisRevistaSlug\"='$pais'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"paisRevistaSlug\"='{$pais}'";
 		$args['paginationURL'] = site_url("frecuencias/institucion/{$institucion}/pais/{$pais}");
 		/*Datos de la institucion*/
 		$this->load->database();
-		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = "SELECT institucion FROM institution WHERE slug='{$institucion}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = array(
@@ -358,18 +356,18 @@ class Frecuencias extends CI_Controller {
 				'institucion' => $query['institucion']
 			);
 		/*Datos del país*/
-		$query = "SELECT pais FROM \"mvSearch\" WHERE \"paisSlug\"='{$pais}' LIMIT 1";
+		$query = "SELECT \"paisRevista\" FROM \"vSearchFull\" WHERE \"paisRevistaSlug\"='{$pais}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$pais = array(
 				'slug' => $pais,
-				'pais' => $query['pais']
+				'paisRevista' => $query['paisRevista']
 			);
 		$this->db->close();
 		$args['breadcrumb'][] = array('title' => _('Institución'), 'link' => "frecuencias/institucion");
 		$args['breadcrumb'][] = array('title' => $institucion['institucion'], 'link' => "frecuencias/institucion/{$institucion['slug']}");
 		$args['breadcrumb'][] = array('title' => _('País'), 'link' => "frecuencias/institucion/{$institucion['slug']}/pais");
-		$args['page_title'] = sprintf('%s (%%d documentos)', $pais['pais']);
+		$args['page_title'] = sprintf('%s (%%d documentos)', $pais['paisRevista']);
 		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $institucion['institucion']);
 		return $this->_renderDocuments($args);
 	}
@@ -401,7 +399,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionRevista\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$this->load->database();
-		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$args['institucionSlug']}' LIMIT 1";
+		$query = "SELECT institucion FROM institution WHERE slug='{$args['institucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = $query['institucion'];
@@ -421,11 +419,11 @@ class Frecuencias extends CI_Controller {
 	public function institucionRevistaDocumentos($institucion, $revista){
 		$args['slug'] = $revista;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"revistaSlug\"='$revista'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"revistaSlug\"='{$revista}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"revistaSlug\"='{$revista}'";
 		$args['paginationURL'] = site_url("frecuencias/institucion/{$institucion}/revista/{$revista}");
 		/*Datos de la institucion*/
 		$this->load->database();
-		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = "SELECT institucion FROM institution WHERE slug='{$institucion}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = array(
@@ -433,7 +431,7 @@ class Frecuencias extends CI_Controller {
 				'institucion' => $query['institucion']
 			);
 		/*Datos del país*/
-		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
+		$query = "SELECT revista FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$revista = array(
@@ -476,7 +474,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionAutor\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$this->load->database();
-		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$args['institucionSlug']}' LIMIT 1";
+		$query = "SELECT institucion FROM institution WHERE slug='{$args['institucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = $query['institucion'];
@@ -497,11 +495,11 @@ class Frecuencias extends CI_Controller {
 	public function institucionAutorDocumentos($institucion, $autor){
 		$args['slug'] = $autor;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vInstitucionAutorDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"autorSlug\"='$autor'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vInstitucionAutorDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"autorSlug\"='{$autor}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vInstitucionAutorDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"autorSlug\"='{$autor}'";
 		$args['paginationURL'] = site_url("frecuencias/institucion/{$institucion}/autor/{$autor}");
 		/*Datos de la institucion*/
 		$this->load->database();
-		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = "SELECT institucion FROM institution WHERE slug='{$institucion}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = array(
@@ -509,7 +507,7 @@ class Frecuencias extends CI_Controller {
 				'institucion' => $query['institucion']
 			);
 		/*Datos del país*/
-		$query = "SELECT e_100a AS autor FROM autor WHERE slug='{$autor}' LIMIT 1";
+		$query = "SELECT nombre AS autor FROM author WHERE slug='{$autor}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$autor = array(
@@ -552,7 +550,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionDisciplina\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionDisciplina\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$this->load->database();
-		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$args['institucionSlug']}' LIMIT 1";
+		$query = "SELECT institucion FROM institution WHERE slug='{$args['institucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = $query['institucion'];
@@ -573,11 +571,11 @@ class Frecuencias extends CI_Controller {
 	public function institucionDisciplinaDocumentos($institucion, $disciplina){
 		$args['slug'] = $disciplina;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"disciplinaSlug\"='$disciplina'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"disciplinaSlug\"='{$disciplina}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vInstitucionDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"disciplinaSlug\"='{$disciplina}'";
 		$args['paginationURL'] = site_url("frecuencias/institucion/{$institucion}/disciplina/{$disciplina}");
 		/*Datos de la institucion*/
 		$this->load->database();
-		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = "SELECT institucion FROM institution WHERE slug='{$institucion}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = array(
@@ -628,7 +626,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaInstitucionCoautoria\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaInstitucionCoautoria\" WHERE \"institucionSlug\"='{$args['institucionSlug']}'";
 		$this->load->database();
-		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$args['institucionSlug']}' LIMIT 1";
+		$query = "SELECT institucion FROM institution WHERE slug='{$args['institucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = $query['institucion'];
@@ -649,11 +647,11 @@ class Frecuencias extends CI_Controller {
 	public function institucionCoautoriaDocumentos($institucion, $coautoria){
 		$args['slug'] = $coautoria;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vInstitucionCoautoriaDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"institucionCoSlug\"='$coautoria'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vInstitucionCoautoriaDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"institucionCoSlug\"='{$coautoria}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vInstitucionCoautoriaDocumentos\" WHERE \"institucionSlug\"='{$institucion}' AND \"institucionCoSlug\"='{$coautoria}'";
 		$args['paginationURL'] = site_url("frecuencias/institucion/{$institucion}/coautoria/{$coautoria}");
 		/*Datos de la institucion*/
 		$this->load->database();
-		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = "SELECT institucion FROM institution WHERE slug='{$institucion}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = array(
@@ -661,7 +659,7 @@ class Frecuencias extends CI_Controller {
 				'institucion' => $query['institucion']
 			);
 		/*Datos de la institucion coautoria*/
-		$query = "SELECT e_100u AS coautoria FROM institucion WHERE slug='{$coautoria}' LIMIT 1";
+		$query = "SELECT institucion AS coautoria FROM institution WHERE slug='{$coautoria}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$coautoria = array(
@@ -684,7 +682,7 @@ class Frecuencias extends CI_Controller {
 		$args['sortBy'] = array('paisInstitucion', 'paisInstitucionSlug', 'instituciones', 'autores', 'disciplinas', 'coautorias','documentos');
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaPaisAfiliacion\" {$where}";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaPaisAfiliacion\"";
-		$args['querySlug'] = $query = "SELECT e_100x AS unslug FROM institucion WHERE \"paisInstitucionSlug\"='{$args['slug']}' LIMIT 1";
+		$args['querySlug'] = $query = "SELECT pais AS unslug FROM institution WHERE \"paisInstitucionSlug\"='{$args['slug']}' LIMIT 1";
 		$args['where'] = "WHERE \"paisInstitucionSlug\"='{$args['slug']}'";
 		$args['breadcrumbSlug'][] = array('title' => _('País de afiliación'), 'link' => 'frecuencias/pais-afiliacion');
 		/*XML vars*/
@@ -750,11 +748,11 @@ class Frecuencias extends CI_Controller {
 	public function paisAfiliacionDocumentos($slug){
 		$args['slug'] = $slug;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$slug}'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$slug}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$slug}'";
 		$args['paginationURL'] = site_url("frecuencias/pais-afiliacion/{$slug}/documento");
 		/*Datos del país de afiliacion*/
 		$this->load->database();
-		$query = "SELECT e_100x AS \"paisInstitucion\" FROM institucion WHERE \"paisInstitucionSlug\"='{$slug}' LIMIT 1";
+		$query = "SELECT pais AS \"paisInstitucion\" FROM institution WHERE \"paisInstitucionSlug\"='{$slug}' LIMIT 1";
 		$query = $this->db->query($query);
 		$this->db->close();
 		$query = $query->row_array();
@@ -811,11 +809,11 @@ class Frecuencias extends CI_Controller {
 	public function paisAfiliacionInstitucionDocumentos($pais, $institucion){
 		$args['slug'] = $institucion;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"institucionSlug\"='{$institucion}'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"institucionSlug\"='{$institucion}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"institucionSlug\"='{$institucion}'";
 		$args['paginationURL'] = site_url("frecuencias/pais-afiliacion/{$pais}/institucion/{$institucion}");
 		/*Datos de la institucion*/
 		$this->load->database();
-		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = "SELECT institucion FROM institution WHERE slug='{$institucion}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = array(
@@ -823,7 +821,7 @@ class Frecuencias extends CI_Controller {
 				'institucion' => $query['institucion']
 			);
 		/*Datos del país*/
-		$query = "SELECT e_100x AS pais FROM institucion WHERE \"paisInstitucionSlug\"='{$pais}' LIMIT 1";
+		$query = "SELECT pais FROM institution WHERE \"paisInstitucionSlug\"='{$pais}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$pais = array(
@@ -886,11 +884,11 @@ class Frecuencias extends CI_Controller {
 	public function paisAfiliacionAutorDocumentos($pais, $autor){
 		$args['slug'] = $autor;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"autorSlug\"='{$autor}'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"autorSlug\"='{$autor}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"autorSlug\"='{$autor}'";
 		$args['paginationURL'] = site_url("frecuencias/pais-afiliacion/{$pais}/autor/{$autor}");
 		/*Datos del autor*/
 		$this->load->database();
-		$query = "SELECT e_100a AS autor FROM autor WHERE slug='{$autor}' LIMIT 1";
+		$query = "SELECT nombre AS autor FROM author WHERE slug='{$autor}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$autor = array(
@@ -898,7 +896,7 @@ class Frecuencias extends CI_Controller {
 				'autor' => $query['autor']
 			);
 		/*Datos del país*/
-		$query = "SELECT e_100x AS pais FROM institucion WHERE \"paisInstitucionSlug\"='{$pais}' LIMIT 1";
+		$query = "SELECT pais FROM institution WHERE \"paisInstitucionSlug\"='{$pais}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$pais = array(
@@ -941,7 +939,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaPaisAfiliacionDisciplina\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaPaisAfiliacionDisciplina\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
 		$this->load->database();
-		$query = "SELECT e_100x AS \"paisInstitucion\" FROM institucion WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' LIMIT 1";
+		$query = "SELECT pais AS \"paisInstitucion\" FROM institution WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$this->db->close();
@@ -961,7 +959,7 @@ class Frecuencias extends CI_Controller {
 	public function paisAfiliacionDisciplinaDocumentos($pais, $disciplina){
 		$args['slug'] = $disciplina;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"disciplinaSlug\"='{$disciplina}'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"disciplinaSlug\"='{$disciplina}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"disciplinaSlug\"='{$disciplina}'";
 		$args['paginationURL'] = site_url("frecuencias/pais-afiliacion/{$pais}/disciplina/{$disciplina}");
 		/*Datos de la disciplina*/
 		$this->load->database();
@@ -973,7 +971,7 @@ class Frecuencias extends CI_Controller {
 				'disciplina' => $query['disciplina']
 			);
 		/*Datos del país*/
-		$query = "SELECT e_100x AS pais FROM institucion WHERE \"paisInstitucionSlug\"='{$pais}' LIMIT 1";
+		$query = "SELECT pais FROM institution WHERE \"paisInstitucionSlug\"='{$pais}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$pais = array(
@@ -1016,7 +1014,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaPaisAfiliacionCoautoria\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaPaisAfiliacionCoautoria\" WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}'";
 		$this->load->database();
-		$query = "SELECT e_100x AS \"paisInstitucion\" FROM institucion WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' LIMIT 1";
+		$query = "SELECT pais AS \"paisInstitucion\" FROM institution WHERE \"paisInstitucionSlug\"='{$args['paisInstitucionSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$this->db->close();
@@ -1036,11 +1034,11 @@ class Frecuencias extends CI_Controller {
 	public function paisAfiliacionCoautoriaDocumentos($pais, $coautoria){
 		$args['slug'] = $coautoria;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vPaisAfiliacionCoautoriaDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"paisInstitucionCoSlug\"='{$coautoria}'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vPaisAfiliacionCoautoriaDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"paisInstitucionCoSlug\"='{$coautoria}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vPaisAfiliacionCoautoriaDocumentos\" WHERE \"paisInstitucionSlug\"='{$pais}' AND \"paisInstitucionCoSlug\"='{$coautoria}'";
 		$args['paginationURL'] = site_url("frecuencias/pais-afiliacion/{$pais}/coautoria/{$coautoria}");
 		/*Datos del país coautor*/
 		$this->load->database();
-		$query = "SELECT e_100x AS coautoria FROM institucion WHERE \"paisInstitucionSlug\"='{$coautoria}' LIMIT 1";
+		$query = "SELECT pais AS coautoria FROM institution WHERE \"paisInstitucionSlug\"='{$coautoria}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$coautoria = array(
@@ -1048,7 +1046,7 @@ class Frecuencias extends CI_Controller {
 				'coautoria' => $query['coautoria']
 			);
 		/*Datos del país*/
-		$query = "SELECT e_100x AS pais FROM institucion WHERE \"paisInstitucionSlug\"='{$pais}' LIMIT 1";
+		$query = "SELECT pais FROM institution WHERE \"paisInstitucionSlug\"='{$pais}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$pais = array(
@@ -1068,11 +1066,11 @@ class Frecuencias extends CI_Controller {
 		$args = $this->uri->ruri_to_assoc();
 		$args['defaultOrder'] = "documentos";
 		$args['orderDir'] = "DESC";
-		$args['sortBy'] = array('disciplina', 'slug', 'instituciones', 'paises', 'revistas', 'documentos');
+		$args['sortBy'] = array('disciplinaRevista', 'disciplinaSlug', 'instituciones', 'paises', 'revistas', 'documentos');
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaDisciplina\" {$where}";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaDisciplina\"";
 		$args['querySlug'] = $query = "SELECT disciplina AS unslug FROM disciplinas WHERE slug='{$args['slug']}' LIMIT 1";
-		$args['where'] = "WHERE slug='{$args['slug']}'";
+		$args['where'] = "WHERE \"disciplinaSlug\"='{$args['slug']}'";
 		$args['breadcrumbSlug'][] = array('title' => _('Disciplina'), 'link' => 'frecuencias/disciplina');
 		/*Columnas de la tabla*/
 		$args['cols'][] = array(
@@ -1129,8 +1127,8 @@ class Frecuencias extends CI_Controller {
 
 	public function disciplinaDocumentos($slug){
 		$args['slug'] = $slug;
-		$args['query'] = "SELECT {$this->queryFields} FROM \"mvSearch\" WHERE \"disciplinaSlug\"='{$slug}'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvSearch\" WHERE \"disciplinaSlug\"='{$slug}'";
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vSearchFull\" WHERE \"disciplinaSlug\"='{$slug}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vSearchFull\" WHERE \"disciplinaSlug\"='{$slug}'";
 		$args['paginationURL'] = site_url("frecuencias/disciplina/{$slug}/documento");
 		/*Datos de la disciplina*/
 		$this->load->database();
@@ -1192,7 +1190,7 @@ class Frecuencias extends CI_Controller {
 	public function disciplinaInstitucionDocumentos($disciplina, $institucion){
 		$args['slug'] = $institucion;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vInstitucionDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"institucionSlug\"='$institucion'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vInstitucionDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"institucionSlug\"='{$institucion}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vInstitucionDocumentos\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"institucionSlug\"='{$institucion}'";
 		$args['paginationURL'] = site_url("frecuencias/disciplina/{$disciplina}/institucion/{$institucion}");
 		/*Datos de la disciplina*/
 		$this->load->database();
@@ -1224,7 +1222,7 @@ class Frecuencias extends CI_Controller {
 		$args = $this->uri->ruri_to_assoc();
 		$args['defaultOrder'] = "documentos";
 		$args['orderDir'] = "DESC";
-		$args['sortBy'] = array('pais', 'paisSlug' , 'documentos');
+		$args['sortBy'] = array('paisRevista', 'paisRevistaSlug' , 'documentos');
 		/*Columnas de la tabla*/
 		$args['cols'][] = array(
 				'editable' => false,
@@ -1234,7 +1232,7 @@ class Frecuencias extends CI_Controller {
 		$args['cols'][] = array(
 				'editable' => false,
 				'hidden' => true,
-				'title' => 'paisSlug',
+				'title' => 'paisRevistaSlug',
 				'width' => 200
 			);
 		$args['cols'][] = array(
@@ -1260,15 +1258,15 @@ class Frecuencias extends CI_Controller {
 		$data['main']['page_title'] = sprintf('%s/País', $disciplina);
 		/*XML vars*/
 		$args['xls']['cols'] = array( _('País'), _('Documentos'));
-		$args['xls']['query'] = "SELECT pais, documentos FROM \"mvFrecuenciaDisciplinaPais\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' ORDER BY documentos DESC, pais";
+		$args['xls']['query'] = "SELECT \"paisRevista\", documentos FROM \"mvFrecuenciaDisciplinaPais\" WHERE \"disciplinaSlug\"='{$args['disciplinaSlug']}' ORDER BY documentos DESC, pais";
 		$args['xls']['fileName'] = "Frecuencia-{$disciplina}-Paises.csv";
 		return $this->_renderFrecuency($args, $data);
 	}
 
 	public function disciplinaPaisDocumentos($disciplina, $pais){
 		$args['slug'] = $pais;
-		$args['query'] = "SELECT {$this->queryFields} FROM \"mvSearch\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"paisSlug\"='$pais'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvSearch\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"paisSlug\"='{$pais}'";
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vSearchFull\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"paisRevistaSlug\"='$pais'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vSearchFull\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"paisRevistaSlug\"='{$pais}'";
 		$args['paginationURL'] = site_url("frecuencias/disciplina/{$disciplina}/pais/{$pais}");
 		/*Datos de la disciplina*/
 		$this->load->database();
@@ -1280,18 +1278,18 @@ class Frecuencias extends CI_Controller {
 				'disciplina' => $query['disciplina']
 			);
 		/*Datos del país*/
-		$query = "SELECT pais FROM \"mvSearch\" WHERE \"paisSlug\"='{$pais}' LIMIT 1";
+		$query = "SELECT \"paisRevista\" FROM \"vSearchFull\" WHERE \"paisRevistaSlug\"='{$pais}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$pais = array(
 				'slug' => $pais,
-				'pais' => $query['pais']
+				'paisRevista' => $query['paisRevista']
 			);
 		$this->db->close();
 		$args['breadcrumb'][] = array('title' => _('Disciplina'), 'link' => "frecuencias/disciplina");
 		$args['breadcrumb'][] = array('title' => $disciplina['disciplina'], 'link' => "frecuencias/disciplina/{$disciplina['slug']}");
 		$args['breadcrumb'][] = array('title' => _('País'), 'link' => "frecuencias/disciplina/{$disciplina['slug']}/pais");
-		$args['page_title'] = sprintf('%s (%%d documentos)', $pais['pais']);
+		$args['page_title'] = sprintf('%s (%%d documentos)', $pais['paisRevista']);
 		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $disciplina['disciplina']);
 		return $this->_renderDocuments($args);
 	}
@@ -1343,8 +1341,8 @@ class Frecuencias extends CI_Controller {
 
 	public function disciplinaRevistaDocumentos($disciplina, $revista){
 		$args['slug'] = $revista;
-		$args['query'] = "SELECT {$this->queryFields} FROM \"mvSearch\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"revistaSlug\"='$revista'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvSearch\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"revistaSlug\"='{$revista}'";
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vSearchFull\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"revistaSlug\"='$revista'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vSearchFull\" WHERE \"disciplinaSlug\"='{$disciplina}' AND \"revistaSlug\"='{$revista}'";
 		$args['paginationURL'] = site_url("frecuencias/disciplina/{$disciplina}/revista/{$revista}");
 		/*Datos de la disciplina*/
 		$this->load->database();
@@ -1356,7 +1354,7 @@ class Frecuencias extends CI_Controller {
 				'disciplina' => $query['disciplina']
 			);
 		/*Datos de la revista*/
-		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
+		$query = "SELECT revista FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$revista = array(
@@ -1516,12 +1514,12 @@ class Frecuencias extends CI_Controller {
 
 	public function revistaDocumentos($slug){
 		$args['slug'] = $slug;
-		$args['query'] = "SELECT {$this->queryFields} FROM \"mvSearch\" WHERE \"revistaSlug\"='{$slug}'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvSearch\" WHERE \"revistaSlug\"='{$slug}'";
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$slug}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$slug}'";
 		$args['paginationURL'] = site_url("frecuencias/revista/{$slug}/documento");
 		/*Datos del país de afiliacion*/
 		$this->load->database();
-		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$slug}' LIMIT 1";
+		$query = "SELECT revista FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$slug}' LIMIT 1";
 		$query = $this->db->query($query);
 		$this->db->close();
 		$query = $query->row_array();
@@ -1558,7 +1556,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaRevistaAutor\" WHERE \"revistaSlug\"='{$args['revistaSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaRevistaAutor\" WHERE \"revistaSlug\"='{$args['revistaSlug']}'";
 		$this->load->database();
-		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' LIMIT 1";
+		$query = "SELECT revista FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$this->db->close();
@@ -1578,11 +1576,11 @@ class Frecuencias extends CI_Controller {
 	public function revistaAutorDocumentos($revista, $autor){
 		$args['slug'] = $autor;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vAutorDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND \"autorSlug\"='$autor'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vAutorDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND \"autorSlug\"='{$autor}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vAutorDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND \"autorSlug\"='{$autor}'";
 		$args['paginationURL'] = site_url("frecuencias/revista/{$revista}/autor/{$autor}");
 		/*Datos de la revista*/
 		$this->load->database();
-		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
+		$query = "SELECT revista FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$revista = array(
@@ -1590,7 +1588,7 @@ class Frecuencias extends CI_Controller {
 				'revista' => $query['revista']
 			);
 		/*Datos del autor*/
-		$query = "SELECT e_100a AS autor FROM autor WHERE slug='{$autor}' LIMIT 1";
+		$query = "SELECT nombre AS autor FROM author WHERE slug='{$autor}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$autor = array(
@@ -1633,7 +1631,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaRevistaAnio\" WHERE \"revistaSlug\"='{$args['revistaSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaRevistaAnio\" WHERE \"revistaSlug\"='{$args['revistaSlug']}'";
 		$this->load->database();
-		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' LIMIT 1";
+		$query = "SELECT revista FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$this->db->close();
@@ -1651,13 +1649,13 @@ class Frecuencias extends CI_Controller {
 
 	public function revistaAnioDocumentos($revista, $anio){
 		$args['slug'] = $anio;
-		$args['query'] = "SELECT {$this->queryFields} FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revista}' AND anio='$anio'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revista}' AND anio='{$anio}'";
+		$args['query'] = "SELECT {$this->queryFields} FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$revista}' AND \"anioRevista\"='$anio'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$revista}' AND \"anioRevista\"='{$anio}'";
 		$args['paginationURL'] = site_url("frecuencias/revista/{$revista}/anio/{$anio}");
 		$args['firstPageNumber'] = TRUE;
 		/*Datos de la revista*/
 		$this->load->database();
-		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
+		$query = "SELECT revista FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$revista = array(
@@ -1705,7 +1703,7 @@ class Frecuencias extends CI_Controller {
 		$args['queryTotal'] = "SELECT count(*) AS total FROM \"mvFrecuenciaRevistaInstitucion\" WHERE \"revistaSlug\"='{$args['revistaSlug']}'";
 		$args['query'] = "SELECT * FROM \"mvFrecuenciaRevistaInstitucion\" WHERE \"revistaSlug\"='{$args['revistaSlug']}'";
 		$this->load->database();
-		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' LIMIT 1";
+		$query = "SELECT revista FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$args['revistaSlug']}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$this->db->close();
@@ -1725,11 +1723,11 @@ class Frecuencias extends CI_Controller {
 	public function revistaInstitucionDocumentos($revista, $institucion){
 		$args['slug'] = $institucion;
 		$args['query'] = "SELECT {$this->queryFields} FROM \"vInstitucionDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND \"institucionSlug\"='$institucion'";
-		$args['queryCount'] = "SELECT count(DISTINCT (iddatabase, sistema)) AS total FROM \"vInstitucionDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND \"institucionSlug\"='{$institucion}'";
+		$args['queryCount'] = "SELECT count(DISTINCT sistema) AS total FROM \"vInstitucionDocumentos\" WHERE \"revistaSlug\"='{$revista}' AND \"institucionSlug\"='{$institucion}'";
 		$args['paginationURL'] = site_url("frecuencias/revista/{$revista}/institucion/{$institucion}");
 		/*Datos de la revista*/
 		$this->load->database();
-		$query = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
+		$query = "SELECT revista FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$revista}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$revista = array(
@@ -1738,7 +1736,7 @@ class Frecuencias extends CI_Controller {
 			);
 		/*Datos de la institucion*/
 		$this->load->database();
-		$query = "SELECT e_100u AS institucion FROM institucion WHERE slug='{$institucion}' LIMIT 1";
+		$query = "SELECT institucion FROM institution WHERE slug='{$institucion}' LIMIT 1";
 		$query = $this->db->query($query);
 		$query = $query->row_array();
 		$institucion = array(
@@ -1756,7 +1754,7 @@ class Frecuencias extends CI_Controller {
 
 	private function _renderDocuments($args){
 		/*Obtniendo los registros con paginación*/
-		$query = "{$args['query']} ORDER BY anio DESC, volumen DESC, numero DESC, articulo";
+		$query = "{$args['query']} ORDER BY \"anioRevista\" DESC, volumen DESC, numero DESC, articulo";
 		if($args['firstPageNumber']):
 			$articulosResultado = articulosResultado($query, $args['queryCount'], $args['paginationURL'], $resultados=20, FALSE, TRUE);
 		else:
@@ -1885,8 +1883,8 @@ class Frecuencias extends CI_Controller {
 	public function test(){
 		$this->load->database();
 		$query="SELECT s.* FROM 
- (SELECT DISTINCT ON(sistema, iddatabase) sistema, iddatabase FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='republica-dominicana') t
- INNER JOIN \"mvSearch\" s on t.sistema=s.sistema AND t.iddatabase=s.iddatabase";
+ (SELECT DISTINCT ON(sistema) sistema FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='republica-dominicana') t
+ INNER JOIN \"vSearchFull\" s on t.sistema=s.sistema";
  		$query = $this->db->query($query);
 
  		header('Content-Type: application/vnd.ms-excel; charset=utf-8');
@@ -1947,7 +1945,7 @@ class Frecuencias extends CI_Controller {
  				endif;
 				$palabraClaveOffset++;
 			endforeach;
-			$result = "\"{$row['articulo']}\", \"{$row['revista']}\", \"{$row['pais']}\", \"{$row['issn']}\", \"{$row['idioma']}\", \"{$row['anio']}\", \"{$row['volumen']}\", \"{$row['numero']}\", \"{$row['periodo']}\", \"{$row['paginacion']}\", \"{$row['url']}\", \"{$row['tipoDocumento']}\", \"{$row['enfoqueDocumento']}\", \"{$autores}\", \"{$instituciones}\", \"{$disciplinas}\", \"{$palabrasClave}\"\n";
+			$result = "\"{$row['articulo']}\", \"{$row['revista']}\", \"{$row['paisRevista']}\", \"{$row['issn']}\", \"{$row['idioma']}\", \"{$row['anioRevista']}\", \"{$row['volumen']}\", \"{$row['numero']}\", \"{$row['periodo']}\", \"{$row['paginacion']}\", \"{$row['url']}\", \"{$row['tipoDocumento']}\", \"{$row['enfoqueDocumento']}\", \"{$autores}\", \"{$instituciones}\", \"{$disciplinas}\", \"{$palabrasClave}\"\n";
  			echo $result; 
  		endforeach;
 	}

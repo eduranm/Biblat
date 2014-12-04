@@ -5,7 +5,6 @@ class Indicadores extends CI_Controller {
 	public $indicadores = array();
 	public $disciplinas = array();
 	public $queryFields="sistema, 
-					iddatabase,
 					articulo, 
 					\"articuloSlug\", 
 					revista, 
@@ -106,8 +105,8 @@ class Indicadores extends CI_Controller {
 			'campoTabla' => "coautoria AS valor FROM \"mvIndiceCoautoriaPrice",
 			'title' => array(
 					'revista' => '<div class="text-center nowrap"><h4>'._('Índice de Coautoría').'</h4><br/>'._('Promedio de autores por artículo en la revista').'</div>',
-					'paisRevista' => '<div class="text-center nowrap"><h4>'._('Índice de Coautoría').'</h4><br/>'._('Promedio de autores por articulo en las revistas del país').'</div>',
-					'paisAutor' => '<div class="text-center nowrap"><h4>'._('Índice de Coautoría').'</h4><br/>'._('Promedio de autores por articulo en el país').'</div>'
+					'paisRevista' => '<div class="text-center nowrap"><h4>'._('Índice de Coautoría').'</h4><br/>'._('Promedio de autores por artículo en las revistas del país').'</div>',
+					'paisAutor' => '<div class="text-center nowrap"><h4>'._('Índice de Coautoría').'</h4><br/>'._('Promedio de autores por artículo en el país').'</div>'
 				),
 			'vTitle' => _('Índice de Coautoría'),
 			'hTitle' => _('Año'),
@@ -169,8 +168,8 @@ class Indicadores extends CI_Controller {
 			'hTitle' => _('Año'),
 			'tooltip' => array(
 					'revista' => _('Proporción de coautores por artículo en el año %s: %s'),
-					'paisRevista' => _('Proporción de coautores por articulo en las revistas del país en el año %s: %s'),
-					'paisAutor' => _('Proporción de coautores por articulo en el país en el año %s: %s')
+					'paisRevista' => _('Proporción de coautores por artículo en las revistas del país en el año %s: %s'),
+					'paisAutor' => _('Proporción de coautores por artículo en el país en el año %s: %s')
 				)
 			);
 		$indicador['indice-densidad-documentos'] = array(
@@ -1035,7 +1034,7 @@ class Indicadores extends CI_Controller {
 		endif;
 		/*Datos de la revista*/
 		$this->load->database();
-		$queryRevista = "SELECT revista FROM \"mvSearch\" WHERE \"revistaSlug\"='{$uri_args['revista']}' LIMIT 1";
+		$queryRevista = "SELECT revista FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$uri_args['revista']}' LIMIT 1";
 		$queryRevista = $this->db->query($queryRevista);
 		$this->db->close();
 		$queryRevista = $queryRevista->row_array();

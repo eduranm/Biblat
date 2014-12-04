@@ -85,7 +85,7 @@
             </div>
     <?php foreach ($paises as $pais):?>
                 <div class="item">
-                    <a href="<?=site_url("indice/pais/{$pais['paisSlug']}");?>"><img class="img-responsive center-block" src="<?=base_url("img/{$pais['paisSlug']}.jpg");?>" title="<?=$pais['pais'];?>"></a>
+                    <a href="<?=site_url("indice/pais/{$pais['paisRevistaSlug']}");?>"><img class="img-responsive center-block" src="<?=base_url("img/{$pais['paisRevistaSlug']}.jpg");?>" title="<?=$pais['pais'];?>"></a>
                     <div class="carousel-caption"><?=$pais['pais'];?></div>
                 </div>
     <?php endforeach;?>

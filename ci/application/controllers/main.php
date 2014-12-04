@@ -38,7 +38,7 @@ class Main extends CI_Controller{
 		$query->free_result();
 		/*Obteniendo lista de paises*/
 		if(! $this->session->userdata('paises')){
-			$query = "SELECT * FROM \"mvPais\" WHERE \"paisSlug\" <> 'internacional'";
+			$query = "SELECT * FROM \"mvPais\" WHERE \"paisRevistaSlug\" <> 'internacional'";
 			$query = $this->db->query($query);
 			$paises = $query->result_array();
 			$query->free_result();
@@ -86,14 +86,14 @@ class Main extends CI_Controller{
 	public function clasePeriodica(){
 		$data = array();
 		$this->load->database();
-		$query = "SELECT * FROM \"mvDisciplinasBase\" ORDER BY iddatabase, disciplina";
+		$query = "SELECT * FROM \"mvDisciplinasBase\" ORDER BY base, \"disciplinaRevista\"";
 		$query = $this->db->query($query);
 		$data[ 'disciplina' ] = array();
 		foreach ($query->result_array() as $row):
 				$disciplina = array();
-				$disciplina['disciplina'] = $row['disciplina'];
+				$disciplina['disciplina'] = $row['disciplinaRevista'];
 				$disciplina['slug'] = $row['slug'];
-   				$data[ 'disciplina' ][ $row[ 'iddatabase' ] ][] = $disciplina;	
+   				$data[ 'disciplina' ][ $row[ 'base' ] ][] = $disciplina;	
 		endforeach;
 		$data['page_title'] = _('CLASE y PERIÓDICA');
 		$this->template->title(_('Biblat - CLASE y PERIÓDICA'));

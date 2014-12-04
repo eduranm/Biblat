@@ -20,7 +20,7 @@
     <p><?php _printf('Las revistas incluidas en %s cumplen con criterios de selección y son analizadas por un equipo multidisciplinario que cubre los siguientes temas:','<a href="http://clase.unam.mx" target="_blank"><acronym title="'._sprintf('Citas Latinoamericanas en Ciencias Sociales y Humanidades').'">CLASE</acronym></a>');?></p>
 
     <ol>
-{foreach $disciplina.0 item}
+{foreach $disciplina.CLA01 item}
     <li><a href="{site_url('indice/disciplina/'.$item['slug'])}">{$item.disciplina}</a></li>
 {/foreach}
 		</ol><br>
@@ -30,7 +30,7 @@
     <p><?php _printf('Las revistas incluidas en %s cumplen con criterios de selección y son analizadas por un equipo multidisciplinario que cubre los siguientes temas:','<a href="http://periodica.unam.mx" target="_blank"><acronym title="'._sprintf('Índice de Revistas Latinoamericanas en Ciencias').'">PERIÓDICA</acronym></a>');?></p>
 
 		<ol>
-{foreach $disciplina.1 item}
+{foreach $disciplina.PER01 item}
     <li><a href="{site_url('indice/disciplina/'.$item['slug'])}">{$item.disciplina}</a></li>
 {/foreach}
 	  </ol><br>

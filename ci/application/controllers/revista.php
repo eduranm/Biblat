@@ -12,35 +12,38 @@ class Revista extends CI_Controller{
 		$this->template->set('class_method', $this->router->fetch_class().$this->router->fetch_method());
 	}
 
+	private $database = array(
+				'CLA01' => 'CLASE',
+				'PER01' => 'PERIÓDICA'
+			);
+
 	public function index($revistaSlug){
 		$data = array();
 		/*Obteniendo articulos de la revista*/
 		$queryFields="SELECT 
-					DISTINCT (sistema, 
-					iddatabase) as \"sitemaIdDatabase\", 
+					DISTINCT sistema, 
 					articulo, 
 					\"articuloSlug\", 
 					revista, 
 					\"revistaSlug\",  
-					pais, 
-					anio, 
+					\"paisRevista\", 
+					\"anioRevista\", 
 					volumen, 
 					numero, 
 					periodo, 
 					paginacion, 
-					url, 
+					url->>0 AS url, 
 					\"autoresSecJSON\",
 					\"autoresSecInstitucionJSON\",
 					\"autoresJSON\",
 					\"institucionesSecJSON\",
 					\"institucionesJSON\"";
-		$queryFrom = "FROM \"mvSearch\" WHERE \"revistaSlug\"='{$revistaSlug}'";
+		$queryFrom = "FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$revistaSlug}'";
 		$query = "{$queryFields} 
 				{$queryFrom} 
-				ORDER BY anio DESC, volumen DESC, numero DESC, articulo";
+				ORDER BY \"anioRevista\" DESC, volumen DESC, numero DESC, articulo";
 		
-		$queryCount = "SELECT count (DISTINCT (sistema, 
-					iddatabase)) as total {$queryFrom}";
+		$queryCount = "SELECT count (DISTINCT sistema) as total {$queryFrom}";
 		
 		/*Paginación y resultados*/
 		$paginationURL = site_url("/revista/{$revistaSlug}");
@@ -82,18 +85,17 @@ class Revista extends CI_Controller{
 		$this->load->database();
 		$query = "SELECT 
 				s.sistema, 
-				s.iddatabase, 
 				s.articulo, 
 				s.\"articuloSlug\",
 				s.revista, 
 				s.\"revistaSlug\", 
 				s.issn, 
-				s.anio, 
+				s.\"anioRevista\", 
 				s.volumen, 
 				s.numero, 
 				s.periodo, 
 				s.paginacion, 
-				s.pais, 
+				s.\"paisRevista\", 
 				s.idioma, 
 				s.\"tipoDocumento\", 
 				s.\"enfoqueDocumento\", 
@@ -102,13 +104,12 @@ class Revista extends CI_Controller{
 				s.\"autoresJSON\", 
 				s.\"institucionesSecJSON\", 
 				s.\"institucionesJSON\", 
-				s.\"idDisciplinasJSON\", 
-				s.\"disciplinasJSON\", 
-				s.\"palabrasClaveJSON\",
-				s.\"keywordJSON\",
-				s.\"resumenJSON\",
+				s.\"disciplinas\", 
+				s.\"palabraClave\",
+				s.\"keyword\",
+				s.\"resumen\",
 				s.url
-			FROM \"fichaDocumento\" s
+			FROM \"vSearchFull\" s
 			WHERE \"revistaSlug\"='{$uriVar['revista']}' AND \"articuloSlug\"='{$uriVar['articulo']}'";
 		$query = $this->db->query($query);
 		$articulo = $query->row_array();
@@ -130,25 +131,24 @@ class Revista extends CI_Controller{
 		endif;
 		unset($articulo['institucionesSecJSON'], $articulo['institucionesJSON']);
 		/*Generando disciplinas*/
-		if($articulo['idDisciplinasJSON'] != NULL && $articulo['disciplinasJSON'] != NULL):
-			$articulo['disciplinas'] = array_combine(json_decode($articulo['idDisciplinasJSON']), json_decode($articulo['disciplinasJSON']));
-		endif;
-		unset($articulo['idDisciplinasJSON'], $articulo['disciplinasJSON']);
+		$articulo['disciplinas'] = json_decode($articulo['disciplinas']);
 		/*Generando palabras clave*/
-		if($articulo['palabrasClaveJSON'] != NULL):
-			$articulo['palabrasClave'] = json_decode($articulo['palabrasClaveJSON']);
+		if($articulo['palabraClave'] != NULL):
+			$articulo['palabraClave'] = json_decode($articulo['palabraClave']);
 		endif;
-		unset($articulo['palabrasClaveJSON']);
 		/*Generando keyword*/
-		if($articulo['keywordJSON'] != NULL):
-			$articulo['keyword'] = json_decode($articulo['keywordJSON']);
+		if($articulo['keyword'] != NULL):
+			$articulo['keyword'] = json_decode($articulo['keyword']);
 		endif;
-		unset($articulo['keywordJSON']);
 		/*Generando resumen*/
-		if($articulo['resumenJSON'] != NULL):
-			$articulo['resumen'] = json_decode($articulo['resumenJSON']);
+		if($articulo['resumen'] != NULL):
+			$articulo['resumen'] = json_decode($articulo['resumen']);
 		endif;
-		unset($articulo['resumenJSON']);
+		/*Generando ulr*/
+		if($articulo['url'] != NULL):
+			$articulo['url'] = json_decode($articulo['url']);
+		endif;
+
 		/*Limpiando caracteres html*/
 		$articulo = htmlspecialchars_deep($articulo);
 		/*Creando lista de autores en html*/
@@ -196,11 +196,11 @@ class Revista extends CI_Controller{
 		endif;
 
 		/*Creando palabras clave HTML*/
-		$articulo['palabrasClaveHTML'] = "";
-		if(isset($articulo['palabrasClave'])):
-			$totalPalabrasClave = count($articulo['palabrasClave']);
+		$articulo['palabraClaveHTML'] = "";
+		if(isset($articulo['palabraClave'])):
+			$totalPalabrasClave = count($articulo['palabraClave']);
 			$indexPalabraClave = 1;
-			foreach ($articulo['palabrasClave'] as $key => $palabraClave):
+			foreach ($articulo['palabraClave'] as $key => $palabraClave):
 				$articulo['palabrasClaveHTML'] .= "{$palabraClave}";
 				if($indexPalabraClave < $totalPalabrasClave):
 					$articulo['palabrasClaveHTML'] .= ",<br/>";
@@ -250,10 +250,10 @@ class Revista extends CI_Controller{
 			$articulo['paginacionLast'] = preg_replace("/[-\s]+/", "", preg_replace('/.*(-\s*\d+\s*?$|^\s*\d+?\s*$).*/m', '\1', $articulo['paginacion']));
 		endif;
 
-		$database[0] = "CLASE";
-		$database[1] = "PERIODICA";
-
-		$articulo['database'] = $database[$articulo['iddatabase']];
+		/*Generando database*/
+		$articulo['database'] = $this->database[substr($articulo['sistema'], 0, 5) ];
+		/*Limpiando número de sistema*/
+		$articulo['sistema'] = substr($articulo['sistema'], 5, 9);
 
 		$articulo = remove_empty($articulo);
 

@@ -137,7 +137,11 @@
 <?php 	if ( isset($articulo['url']) ):?>
 				<tr>
 					<td class="nowrap"><strong><?php _e('Texto completo:');?></strong></td>
-					<td><a href="<?php echo $articulo['url']?>" target="_blank"><?php echo $articulo['url']?></a></td>
+					<td>
+<?php foreach ($articulo['url'] as $url):?>
+						<a href="<?php echo $url?>" target="_blank"><?php echo $url?></a>
+<?php endforeach;?>
+					</td>
 				</tr>
 <?php 	elseif (!$mail && !isset($articulo['url'])):?>
 				<tr id="solicitudDocumento">

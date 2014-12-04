@@ -14,17 +14,17 @@ class Indice extends CI_Controller{
 
 	}
 
-	public function alfabetico($letra){
+	public function alfabetico($letra="a"){
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Indice alfabético "%s"', strtoupper($letra));
 		/*Consultas*/
 		$this->load->database();
-		$query = "SELECT revista, \"revistaSlug\", count(revista) AS articulos FROM \"mvSearch\" WHERE SUBSTRING(LOWER(revista), 1, 1)='{$letra}' GROUP BY revista, \"revistaSlug\" ORDER BY revista;";
+		$query = "SELECT revista, \"revistaSlug\", count(revista) AS articulos FROM \"vSearchFull\" WHERE SUBSTRING(LOWER(revista), 1, 1)='{$letra}' GROUP BY revista, \"revistaSlug\" ORDER BY revista;";
 		$query = $this->db->query($query);
 		$data['alfabetico']['registrosTotalArticulos'] = 0;
 		foreach ($query->result_array() as $row):
 			if($row['revista'] == ""):
-				$row['revista'] = "[Título no definido]";
+				$row['revista'] = _("[Título no definido]");
 			endif;
 			$data['alfabetico']['registros'][] = $row;
 			$data['alfabetico']['registrosTotalArticulos'] += $row['articulos'];
@@ -53,7 +53,7 @@ class Indice extends CI_Controller{
 		$query->free_result();
 		$data['disciplina']['current'] = $data['disciplina']['disciplinas'][$disciplina];
 		/*Obteniendo registros*/
-		$query = "SELECT revista, \"revistaSlug\", count(revista) AS articulos FROM \"mvSearch\" WHERE id_disciplina = '{$data['disciplina']['current']['id_disciplina']}' GROUP BY revista, \"revistaSlug\" ORDER BY articulos DESC";
+		$query = "SELECT revista, \"revistaSlug\", count(revista) AS articulos FROM \"vSearchFull\" WHERE id_disciplina = '{$data['disciplina']['current']['id_disciplina']}' GROUP BY revista, \"revistaSlug\" ORDER BY articulos DESC";
 		$query = $this->db->query($query);
 		$data['disciplina']['registrosTotalArticulos'] = 0;
 		foreach ($query->result_array() as $row):
@@ -80,12 +80,12 @@ class Indice extends CI_Controller{
 		$query = "SELECT * FROM \"mvPais\"";
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row):
-			$data['pais']['paises'][$row['paisSlug']] = $row;
+			$data['pais']['paises'][$row['paisRevistaSlug']] = $row;
 		endforeach;
 		$query->free_result();
 		$data['pais']['current'] = $data['pais']['paises'][$pais];
 		/*Obteniendo registros*/
-		$query = "SELECT revista, \"revistaSlug\", count(revista) AS articulos FROM \"mvSearch\" WHERE \"paisSlug\"='{$pais}' GROUP BY revista, \"revistaSlug\" ORDER BY articulos DESC";
+		$query = "SELECT revista, \"revistaSlug\", count(revista) AS articulos FROM \"vSearchFull\" WHERE \"paisRevistaSlug\"='{$pais}' GROUP BY revista, \"revistaSlug\" ORDER BY articulos DESC";
 		$query = $this->db->query($query);
 		$data['pais']['registrosTotalArticulos'] = 0;
 		foreach ($query->result_array() as $row):
@@ -97,7 +97,7 @@ class Indice extends CI_Controller{
 		endforeach;
 		$this->db->close();
 		/*Vistas*/
-		$data['pais']['page_title'] = sprintf('Revistas por país: "%s"', $data['pais']['current']['pais']);
+		$data['pais']['page_title'] = sprintf('Revistas por país: "%s"', $data['pais']['current']['paisRevista']);
 		$this->template->title($data['header']['title']);
 		$this->template->set_meta('description', $data['main']['page_title']);
 		$this->template->set_breadcrumb(_('País'));
