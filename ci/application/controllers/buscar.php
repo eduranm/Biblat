@@ -217,22 +217,22 @@ class Buscar extends CI_Controller{
 	public function getPaises(){
 		$this->output->enable_profiler(FALSE);
 		$this->load->database();
-		$query = "SELECT * FROM \"mvPais\" WHERE \"paisRevistaSlug\" <> 'internacional'";
+		$query = "SELECT \"paisRevistaSlug\", \"paisRevista\" FROM \"mvPais\" WHERE \"paisRevistaSlug\" <> 'internacional'";
 		$query = $this->db->query($query);
 		$paises = $query->result_array();
 		$result = array();
 		foreach ($paises as $pais):
 			$row['id'] = $pais['paisRevistaSlug'];
-			$row['label'] = $pais['pais'];
+			$row['label'] = $pais['paisRevista'];
 			$result[] = $row;
-		endforeach;
+		endforeach; 
 		return $result;
 	}
 	public function getDisciplinas(){
 		$this->output->enable_profiler(FALSE);
 		if(! $this->session->userdata('discipliasBusqueda') ){
 			$this->load->database();
-			$query = "SELECT * FROM \"mvDisciplina\" WHERE id_disciplina <> '23'";
+			$query = "SELECT id_disciplina, disciplina FROM \"mvDisciplina\" WHERE id_disciplina <> '23'";
 			$query = $this->db->query($query);
 			$disciplinas = $query->result_array();
 			$query->free_result();

@@ -58,13 +58,29 @@ advsearch = {
 	updateData: function(){
 		$('#slug').val(JSON.stringify($('#advsearch').advancedSearch("val")));
 	},
-	getList: function(){
-		var json;
+	start: function(){
 		$.ajax({async: false,type: "POST",url: "<?php echo site_url('buscar/getList');?>",dataType: "json",data:{request:'clients'},
-			success: function(data){ json = data; }
+			success: function(data){ 
+				$('#advsearch').advancedSearch({
+					fields:[
+						{ type:"text", id:"palabra-clave", label:"<?=_e('Palabra clave');?>", opDefault: 'lk', opHide: true},
+						{ type:"text", id:"autor", label:"<?=_e('Autor');?>", opDefault: 'lk', opHide: true},
+						{ type:"text", id:"revista", label:"<?=_e('Revista');?>", opDefault: 'lk', opHide: true},
+						{ type:"text", id:"institucion", label:"<?=_e('Institución');?>", opDefault: 'lk', opHide: true},
+						{ type:"text", id:"articulo", label:"<?=_e('Artículo');?>", opDefault: 'lk', opHide: true},
+						{ type:"lov", id:"pais", label:"<?=_e('País de la revista');?>", list: data.paises, listPlaceholder: "<?php _e('Seleccione país');?>"},
+						{ type:"lov", id:"disciplina", label:"<?=_e('Disciplina');?>", list: data.disciplinas, listPlaceholder: "<?php _e('Seleccione disciplina');?>"}
+					],
+					lang: {sEqual: '=', sLike: '&asymp;', sInList: "<?=_e('cualquiera de');?>"},
+					enableSelect2: true,
+					placeholder: "<?=_e('Seleccione filtro');?>"
+				}).on('submit.search change.search', function(evt){
+					advsearch.updateData();
+				});
+			}
 		});
-		return json;
-	}
+	},
+	enabled: false
 };
 $.pnotify.defaults.history = true;
 $.pnotify.defaults.styling = "bootstrap";
@@ -95,23 +111,6 @@ $(document).on('click', '.translate', function(e) {
 	location = '<?=site_url($this->lang->switch_uri($broserLang));?>';
 });
 <?php endif;?>
-lists = advsearch.getList();
-$('#advsearch').advancedSearch({
-	fields:[
-		{ type:"text", id:"palabra-clave", label:"<?=_e('Palabra clave');?>", opDefault: 'lk', opHide: true},
-		{ type:"text", id:"autor", label:"<?=_e('Autor');?>", opDefault: 'lk', opHide: true},
-		{ type:"text", id:"revista", label:"<?=_e('Revista');?>", opDefault: 'lk', opHide: true},
-		{ type:"text", id:"institucion", label:"<?=_e('Institución');?>", opDefault: 'lk', opHide: true},
-		{ type:"text", id:"articulo", label:"<?=_e('Artículo');?>", opDefault: 'lk', opHide: true},
-		{ type:"lov", id:"pais", label:"<?=_e('País de la revista');?>", list: lists.paises, listPlaceholder: "<?php _e('Seleccione país');?>"},
-		{ type:"lov", id:"disciplina", label:"<?=_e('Disciplina');?>", list: lists.disciplinas, listPlaceholder: "<?php _e('Seleccione disciplina');?>"}
-	],
-	lang: {sEqual: '=', sLike: '&asymp;', sInList: "<?=_e('cualquiera de');?>"},
-	enableSelect2: true,
-	placeholder: "<?=_e('Seleccione filtro');?>"
-}).on('submit.search change.search', function(evt){
-	advsearch.updateData();
-});
 	$("#search-opts li").click(function(e) {
 		var button = $(this).attr('rel');
 		$('#search-type').attr('class', $('#op-'+button).attr('class'));
@@ -120,6 +119,9 @@ $('#advsearch').advancedSearch({
 		$('#advsearch').hide();
 		console.log(button);
 		if(button == "avanzada"){
+			if(advsearch.enabled == false){
+				advsearch.start();
+			}
 			$('#slug').hide();
 			$('#advsearch').show();
 			$('.evo-bNew').trigger('click');
