@@ -216,16 +216,10 @@ class Buscar extends CI_Controller{
 
 	public function getPaises(){
 		$this->output->enable_profiler(FALSE);
-		if(! $this->session->userdata('paises')){
-			$this->load->database();
-			$query = "SELECT * FROM \"mvPais\" WHERE \"paisRevistaSlug\" <> 'internacional'";
-			$query = $this->db->query($query);
-			$paises = $query->result_array();
-			$query->free_result();
-			$this->db->close();
-			$this->session->set_userdata('paises', json_encode($paises));
-		}
-		$paises = json_decode($this->session->userdata('paises'), TRUE);
+		$this->load->database();
+		$query = "SELECT * FROM \"mvPais\" WHERE \"paisRevistaSlug\" <> 'internacional'";
+		$query = $this->db->query($query);
+		$paises = $query->result_array();
 		$result = array();
 		foreach ($paises as $pais):
 			$row['id'] = $pais['paisRevistaSlug'];

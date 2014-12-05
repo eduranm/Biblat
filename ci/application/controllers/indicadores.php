@@ -47,17 +47,14 @@ class Indicadores extends CI_Controller {
 		/*Disciplinas*/
 		$this->load->database();
 		$query = "SELECT id_disciplina, disciplina, slug FROM \"mvDisciplina\"";
-		if ( ! $this->session->userdata('query{'.md5($query).'}')):
-			$queryResult = $this->db->query($query);
-			$disciplina = array();
-			foreach ($queryResult->result_array() as $row):
-				$disciplina['disciplina'] = $row['disciplina'];
-				$disciplina['id_disciplina'] = $row['id_disciplina'];
-				$disciplinas[$row['slug']] = $disciplina;
-			endforeach;
-			$this->session->set_userdata('query{'.md5($query).'}', json_encode($disciplinas));
-		endif;
-		$this->disciplinas = json_decode($this->session->userdata('query{'.md5($query).'}'), true);
+		$queryResult = $this->db->query($query);
+		$disciplina = array();
+		foreach ($queryResult->result_array() as $row):
+			$disciplina['disciplina'] = $row['disciplina'];
+			$disciplina['id_disciplina'] = $row['id_disciplina'];
+			$disciplinas[$row['slug']] = $disciplina;
+		endforeach;
+		$this->disciplinas = $disciplinas;
 		$this->db->close();
 
 		$this->load->vars($data);
