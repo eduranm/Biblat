@@ -37,15 +37,12 @@ class Main extends CI_Controller{
 		$data['index']['totales'] = $query->row_array();
 		$query->free_result();
 		/*Obteniendo lista de paises*/
-		if(! $this->session->userdata('paises')){
-			$query = "SELECT * FROM \"mvPais\" WHERE \"paisRevistaSlug\" <> 'internacional'";
-			$query = $this->db->query($query);
-			$paises = $query->result_array();
-			$query->free_result();
-			$this->db->close();
-			$this->session->set_userdata('paises', json_encode($paises));
-		}
-		$data['index']['paises'] = json_decode($this->session->userdata('paises'), TRUE);
+		$query = "SELECT * FROM \"mvPais\" WHERE \"paisRevistaSlug\" <> 'internacional'";
+		$query = $this->db->query($query);
+		$paises = $query->result_array();
+		$query->free_result();
+		$this->db->close();
+		$data['index']['paises'] = $paises;
 		/*Vistas*/
 		$this->template->set_partial('view_js', 'main/header', array(), TRUE);
 		$this->template->set_partial('frecuencias_accordion', 'frecuencias/index', array(), TRUE);
