@@ -154,7 +154,7 @@ class Buscar extends CI_Controller{
 				WHERE  {$slugQuerySearch[where]} {$whereTextoCompleto} {$whereDisciplina}";
 		$query = "{$queryFields} 
 		{$queryFrom} 
-				ORDER BY \"anioRevista\" DESC, volumen DESC, numero DESC, articulo";
+				ORDER BY \"anioRevista\" DESC, volumen DESC, numero DESC, \"articuloSlug\"";
 		
 
 		$queryCount = "SELECT count (*) as total {$queryFrom}";

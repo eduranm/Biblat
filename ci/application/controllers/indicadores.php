@@ -1044,7 +1044,7 @@ class Indicadores extends CI_Controller {
 
 	private function _renderDocuments($args){
 		/*Obtniendo los registros con paginación*/
-		$query = "{$args['query']} ORDER BY anio DESC, volumen DESC, numero DESC, articulo";
+		$query = "{$args['query']} ORDER BY \"anioRevista\" DESC, volumen DESC, numero DESC, \"articuloSlug\"";
 		$articulosResultado = articulosResultado($query, $args['queryCount'], $args['paginationURL'], $resultados=20);
 		/*Vistas*/
 		$data = array();

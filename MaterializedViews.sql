@@ -229,6 +229,8 @@ FROM article t
 
 CREATE INDEX ON "mvSearch"(sistema);
 CREATE INDEX ON "mvSearch"(id_disciplina);
+CREATE INDEX ON "mvSearch"(volumen);
+CREATE INDEX ON "mvSearch"(numero);
 CREATE INDEX ON "mvSearch"("articuloSlug");
 CREATE INDEX ON "mvSearch"("revistaSlug");
 CREATE INDEX ON "mvSearch"("disciplinaSlug");
@@ -1374,7 +1376,21 @@ SELECT
     INNER JOIN institution i ON ia.sistema=i.sistema AND ia.slug<>i.slug
     GROUP BY ia.slug, i.slug ORDER BY "institucionSlug", documentos DESC;
 
+
+
 --Institucion documentos
+
+--DROP CREATE MATERIALIZED VIEW "mvInstitucionSI";
+CREATE MATERIALIZED VIEW "mvInstitucionSI" AS
+SELECT
+  sistema,
+  slug AS "institucionSlug"
+FROM institution
+GROUP BY sistema, slug;
+
+CREATE INDEX ON "mvInstitucionSI"(sistema);
+CREATE INDEX ON "mvInstitucionSI"("institucionSlug");
+
 --DROP VIEW "vInstitucionDocumentos";
 CREATE VIEW "vInstitucionDocumentos" AS
 SELECT 
@@ -1392,14 +1408,13 @@ SELECT
   paginacion, 
   url, 
   "disciplinaSlug",
-  i.institucion,
-  i.slug AS "institucionSlug",
+  i."institucionSlug",
   "autoresSecJSON",
   "autoresSecInstitucionJSON",
   "autoresJSON",
   "institucionesSecJSON",
   "institucionesJSON" 
-FROM institution i 
+FROM "mvInstitucionSI" i 
 INNER JOIN "vSearchFull" s ON i.sistema=s.sistema;
 
 --Institucion->autor documentos--
@@ -1579,20 +1594,12 @@ GROUP BY pa."paisInstitucionSlug", i."paisInstitucionSlug";
 CREATE MATERIALIZED VIEW "mvPaisAfiliacionSI" AS
 SELECT
   i.sistema,
-  i."paisInstitucionSlug",
-  i.slug AS "institucionSlug",
-  a.slug AS "autorSlug"
+  i."paisInstitucionSlug"
 FROM institution i
-LEFT JOIN author a ON
-  i.sistema=a.sistema AND
-  i.id=a."institucionId" AND
-  a.slug IS NOT NULL
-WHERE i.slug IS NOT NULL;
+GROUP BY i.sistema, "paisInstitucionSlug";
 
 CREATE INDEX ON "mvPaisAfiliacionSI"(sistema);
 CREATE INDEX ON "mvPaisAfiliacionSI"("paisInstitucionSlug");
-CREATE INDEX ON "mvPaisAfiliacionSI"("institucionSlug");
-CREATE INDEX ON "mvPaisAfiliacionSI"("autorSlug");
 
 --DROP VIEW "vPaisAfiliacionDocumentos";
 CREATE VIEW "vPaisAfiliacionDocumentos" AS
@@ -1611,14 +1618,97 @@ SELECT
   url, 
   "disciplinaSlug",
   pi."paisInstitucionSlug",
-  pi."institucionSlug",
-  pi."autorSlug",
   "autoresSecJSON",
   "autoresSecInstitucionJSON",
   "autoresJSON",
   "institucionesSecJSON",
   "institucionesJSON" 
 FROM "mvPaisAfiliacionSI" pi
+INNER JOIN "vSearchFull" s ON pi.sistema=s.sistema;
+
+--Pais de afiliacion/institucion documentos
+--DROP MATERIALIZED VIEW "mvPaisAfiliacionInstitucionSI";
+CREATE MATERIALIZED VIEW "mvPaisAfiliacionInstitucionSI" AS
+SELECT
+  i.sistema,
+  i."paisInstitucionSlug",
+  i.slug AS "institucionSlug"
+FROM institution i
+GROUP BY i.sistema, "paisInstitucionSlug", "institucionSlug";
+
+CREATE INDEX ON "mvPaisAfiliacionInstitucionSI"(sistema);
+CREATE INDEX ON "mvPaisAfiliacionInstitucionSI"("paisInstitucionSlug");
+CREATE INDEX ON "mvPaisAfiliacionInstitucionSI"("institucionSlug");
+
+--DROP VIEW "vPaisAfiliacionInstitucionDocumentos";
+CREATE VIEW "vPaisAfiliacionInstitucionDocumentos" AS
+SELECT 
+  s.sistema,
+  articulo, 
+  "articuloSlug", 
+  revista, 
+  "revistaSlug", 
+  "paisRevista", 
+  "anioRevista", 
+  volumen, 
+  numero, 
+  periodo, 
+  paginacion, 
+  url, 
+  "disciplinaSlug",
+  pi."paisInstitucionSlug",
+  pi."institucionSlug",
+  "autoresSecJSON",
+  "autoresSecInstitucionJSON",
+  "autoresJSON",
+  "institucionesSecJSON",
+  "institucionesJSON" 
+FROM "mvPaisAfiliacionInstitucionSI" pi
+INNER JOIN "vSearchFull" s ON pi.sistema=s.sistema;
+
+--Pais de afiliacion/autor documentos
+--DROP MATERIALIZED VIEW "mvPaisAfiliacionAutorSI";
+CREATE MATERIALIZED VIEW "mvPaisAfiliacionAutorSI" AS
+SELECT
+  i.sistema,
+  i."paisInstitucionSlug",
+  a.slug AS "autorSlug"
+FROM institution i
+LEFT JOIN author a ON
+  i.sistema=a.sistema AND
+  i.id=a."institucionId" AND
+  a.slug IS NOT NULL
+WHERE i.slug IS NOT NULL
+GROUP BY i.sistema, "paisInstitucionSlug", "autorSlug";
+
+CREATE INDEX ON "mvPaisAfiliacionAutorSI"(sistema);
+CREATE INDEX ON "mvPaisAfiliacionAutorSI"("paisInstitucionSlug");
+CREATE INDEX ON "mvPaisAfiliacionAutorSI"("autorSlug");
+
+--DROP VIEW "vPaisAfiliacionAutorDocumentos";
+CREATE VIEW "vPaisAfiliacionAutorDocumentos" AS
+SELECT 
+  s.sistema,
+  articulo, 
+  "articuloSlug", 
+  revista, 
+  "revistaSlug", 
+  "paisRevista", 
+  "anioRevista", 
+  volumen, 
+  numero, 
+  periodo, 
+  paginacion, 
+  url, 
+  "disciplinaSlug",
+  pi."paisInstitucionSlug",
+  pi."autorSlug",
+  "autoresSecJSON",
+  "autoresSecInstitucionJSON",
+  "autoresJSON",
+  "institucionesSecJSON",
+  "institucionesJSON" 
+FROM "mvPaisAfiliacionAutorSI" pi
 INNER JOIN "vSearchFull" s ON pi.sistema=s.sistema;
 
 --Documentos en coautoria por país de afiliación

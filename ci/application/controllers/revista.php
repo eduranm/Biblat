@@ -41,7 +41,7 @@ class Revista extends CI_Controller{
 		$queryFrom = "FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$revistaSlug}'";
 		$query = "{$queryFields} 
 				{$queryFrom} 
-				ORDER BY \"anioRevista\" DESC, volumen DESC, numero DESC, articulo";
+				ORDER BY \"anioRevista\" DESC, volumen DESC, numero DESC, \"articuloSlug\"";
 		
 		$queryCount = "SELECT count (DISTINCT sistema) as total {$queryFrom}";
 		
