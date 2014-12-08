@@ -42,11 +42,11 @@ class Institution_model extends CI_Model {
 	}
 
 	public function countrys(){
-		$this->db->select('slugPais');
+		$this->db->select('paisInstitucionSlug');
 		$this->db->select_max('pais');
 		$this->db->from('mvInstitucion');
-		$this->db->order_by('slugPais');
-		$this->db->group_by('slugPais');
+		$this->db->order_by('paisInstitucionSlug');
+		$this->db->group_by('paisInstitucionSlug');
 		$this->db->where('pais IS NOT NULL');
 		$query = $this->db->get();
 		
