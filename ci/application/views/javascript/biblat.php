@@ -202,6 +202,10 @@ $(document).on('click', '.translate', function(e) {
 		return false;
 	});
 });
+
+$(window).bind('beforeunload', function() {
+	loading.start();
+});
 /* ========================================================================
 * Bootstrap: bootstrap-dropdown-multilevel.js v1.0.0
 * http://getbootstrap.com/javascript/#dropdowns
