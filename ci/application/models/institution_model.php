@@ -13,7 +13,7 @@ class Institution_model extends CI_Model {
 	public function get_all($limit, $offset){
 		$this->db->select('*');
 		$this->db->from('mvInstitucion');
-		$this->db->order_by('e_100u');
+		$this->db->order_by('institucion');
 		if($limit):
 			$this->db->limit($limit, $offset);
 		endif;
@@ -30,7 +30,7 @@ class Institution_model extends CI_Model {
 		$this->db->where('slug ~~', $slug);
 		$this->db->order_by('registros DESC, institucion');
 		if($country && $country != "-"):
-			$this->db->where('slugPais', $country);
+			$this->db->where('paisInstitucionSlug', $country);
 		endif;
 		if($limit):
 			$this->db->limit($limit, $offset);
