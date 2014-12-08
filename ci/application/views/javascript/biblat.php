@@ -137,11 +137,6 @@ $(document).on('click', '.translate', function(e) {
 		}
 		$('#search-opts').data('last', button);
 	});
-<?php if($search['filtro'] == "avanzada"):?>
-	$("#search-opts li[rel='avanzada']").trigger("click");
-	$('#advsearch').advancedSearch('val', $.parseJSON('<?=$search['json']?>'));
-	$('.evo-bDel').trigger("click");
-<?php endif;?>
 
 	$('#searchform #slug').keypress(function(e) {
 		if(e.which == 13) {

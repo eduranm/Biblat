@@ -29,5 +29,10 @@
 <?php if(isset($slugHighLight)):?>
 		$("#resultados").highlight([<?=$slugHighLight;?>], { element: 'mark'});
 <?php endif;?>
+		$("#search-opts li[rel='<?=$search['filtro']?>']").trigger("click");
+<?php if($search['filtro'] == "avanzada"):?>
+		$('#advsearch').advancedSearch('val', $.parseJSON('<?=$search['json']?>'));
+		$('.evo-bDel').trigger("click");
+<?php endif;?>
 	});
 {/literal}

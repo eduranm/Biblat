@@ -129,9 +129,9 @@ class Buscar extends CI_Controller{
 			$slugQuerySearch['where'] = $advancedSearch['query'];
 			$data['main']['search']['json'] = json_encode($advancedSearch['search']);
 			$data['header']['title'] = _('Biblat - Búsqueda avanzada');
-			$data['main']['search']['filtro'] = $filtro;
 			$data['main']['page_title'] = _('Resultados de la búsqueda');
 		endif;
+		$data['main']['search']['filtro'] = $filtro;
 
 		$queryFields="SELECT s.sistema,
 			articulo, 
