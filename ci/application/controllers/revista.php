@@ -310,11 +310,11 @@ class Revista extends CI_Controller{
 				$this->template->set_meta('prism.startingPage', $articulo['paginacionFirst']);
 				$this->template->set_meta('prism.endingPage', $articulo['paginacionLast']);
 			endif;
-			if(isset($articulo['anio'])):
-				$this->template->set_meta('citation_date', $articulo['anio']);
-				$this->template->set_meta('eprints.date', $articulo['anio']);
-				$this->template->set_meta('prism.publicationDate', $articulo['anio']);
-				$this->template->set_meta('dc.date', $articulo['anio']);
+			if(isset($articulo['anioRevista'])):
+				$this->template->set_meta('citation_date', $articulo['anioRevista']);
+				$this->template->set_meta('eprints.date', $articulo['anioRevista']);
+				$this->template->set_meta('prism.publicationDate', $articulo['anioRevista']);
+				$this->template->set_meta('dc.date', $articulo['anioRevista']);
 			endif;
 			if(isset($articulo['autores'])):
 				$autoresTotal = count($articulo['autores']);

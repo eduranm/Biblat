@@ -54,10 +54,10 @@
 					<td><?php echo $articulo['institucionesHTML']?></td>
 				</tr>
 <?php 	endif;?>
-<?php 	if ( isset($articulo['anio']) ):?>
+<?php 	if ( isset($articulo['anioRevista']) ):?>
 				<tr>
 					<td class="nowrap"><strong><?php _e('Año:');?></strong></td>
-					<td><?php echo $articulo['anio']?></td>
+					<td><?php echo $articulo['anioRevista']?></td>
 				</tr>
 <?php 	endif;?>
 <?php 	if ( isset($articulo['periodo']) ):?>
@@ -84,10 +84,10 @@
 					<td><?php echo $articulo['paginacion']?></td>
 				</tr>
 <?php 	endif;?>
-<?php 	if ( isset($articulo['pais']) ):?>
+<?php 	if ( isset($articulo['paisRevista']) ):?>
 				<tr>
 					<td class="nowrap"><strong><?php _e('País:');?></strong></td>
-					<td><?php echo $articulo['pais']?></td>
+					<td><?php echo $articulo['paisRevista']?></td>
 				</tr>
 <?php 	endif;?>
 <?php 	if ( isset($articulo['idioma']) ):?>
