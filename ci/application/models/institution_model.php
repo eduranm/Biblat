@@ -25,10 +25,10 @@ class Institution_model extends CI_Model {
 
 	public function find($slug, $country, $limit, $offset){
 		$slug = preg_replace("/%+/", "%", $slug);
-		$this->db->select('e_100u, e_100w, e_100x, registros');
+		$this->db->select('institucion, pais, ciudad, registros');
 		$this->db->from('mvInstitucion');
 		$this->db->where('slug ~~', $slug);
-		$this->db->order_by('registros DESC, e_100u');
+		$this->db->order_by('registros DESC, institucion');
 		if($country && $country != "-"):
 			$this->db->where('slugPais', $country);
 		endif;
@@ -43,11 +43,11 @@ class Institution_model extends CI_Model {
 
 	public function countrys(){
 		$this->db->select('slugPais');
-		$this->db->select_max('e_100x');
+		$this->db->select_max('pais');
 		$this->db->from('mvInstitucion');
 		$this->db->order_by('slugPais');
 		$this->db->group_by('slugPais');
-		$this->db->where('e_100x IS NOT NULL');
+		$this->db->where('pais IS NOT NULL');
 		$query = $this->db->get();
 		
 		return $query;
