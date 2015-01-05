@@ -112,7 +112,7 @@
 			foreach ($articulo['resumenHTML'] as $resumen):?>
 				<tr>
 					<td class="nowrap"><strong><?php echo $resumen['title'];?></strong></td>
-					<td class="justify"><?php echo $resumen['body'];?></td>
+					<td class="text-justify"><?php echo $resumen['body'];?></td>
 				</tr>
 <?php 		endforeach;
 		endif;?>
