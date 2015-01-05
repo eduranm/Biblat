@@ -263,7 +263,7 @@ if ( ! function_exists('articulosResultado') ):
 				endif;
 				$row['downloadLink'] = "<a href=\"{$row['url']}\" target=\"_blank\" title=\""._('Mostrar artículo en texto completo')."\" class=\"text\">{$img}</a>";
 			endif;
-			$row['mendeleyLink'] = "<a target=\"_blank\" href=\"http://www.mendeley.com/import/?url=".urlencode(site_url("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}"))."\" title=\""._('Agregue este artículo a su biblioteca Mendeley')."\"><img src=\"http://www.mendeley.com/graphics/mendeley.png\" border=\"0\"></a>";
+			$row['mendeleyLink'] = "<a class=\"text\" target=\"_blank\" href=\"http://www.mendeley.com/import/?url=".urlencode(site_url("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}"))."\" title=\""._('Agregue este artículo a su biblioteca Mendeley')."\"><span class=\"ai ai-mendeley-square fa-lg\"></span></a>";
 
 			/*Creando lista de autores en html*/
 			$row['autoresHTML'] = "";

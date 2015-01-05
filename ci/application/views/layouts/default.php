@@ -14,6 +14,7 @@
         <link rel="icon" href="{base_url('assets/img/favicon.ico')}" type="image/x-icon"/>
         <link rel="stylesheet" href="{base_url('assets/css/bootstrap.min.css')}" type="text/css" />
         <link rel="stylesheet" href="{base_url('css/jquery-ui.min.css')}" type="text/css" />
+        <link rel="stylesheet" href="{base_url('assets/css/academicons.css')}" type="text/css" />
         <link rel="stylesheet" href="{base_url('assets/css/font-awesome.min.css')}" type="text/css" />
         <link rel="stylesheet" href="{base_url('js/pnotify/jquery.pnotify.default.css')}" type="text/css" />
         <link rel="stylesheet" href="{base_url('js/select2/select2.css')}" />
