@@ -51,6 +51,7 @@ body{
 
 a {
     color: #ff8000;
+    outline: 0 !important;
 }
 
 a.text {
@@ -688,4 +689,9 @@ table.articulo{
 	-webkit-overflow-scrolling: touch;
 	-ms-overflow-style: -ms-autohiding-scrollbar;
 	border: 1px solid #ddd;
+}
+
+#i-journals a {
+    color: #ff8000;
+    outline: 0 !important;
 }

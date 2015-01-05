@@ -108,7 +108,7 @@
                                                         <li class="divider"></li>
                                                         <li><a href="#">{_('Indicadores SciELO')}</a></li>
                                                         <li class="divider"></li>
-                                                        <li><a href="#">{_('Indicadores por revista')}</a></li>
+                                                        <li><a href="{site_url('bibliometria/indicadores-por-revista')}">{_('Indicadores por revista')}</a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="dropdown">

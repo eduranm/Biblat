@@ -159,13 +159,45 @@ class Main extends CI_Controller{
 		$this->load->view('footer');
 	}
 
-	public function indicadoresRevista(){
+	public function indicadoresRevista($alpha="a"){
+		$this->load->library('pagination');
+		$config['base_url'] = site_url('bibliometria/indicadores-por-revista');
+		$config['uri_segment'] = 4;
+		$config['first_link'] = "&laquo;";
+		$config['last_link'] = "&raquo;";
+		$config['next_link'] = "&rsaquo;";
+		$config['prev_link'] = "&lsaquo;";
+		$config['cur_tag_open'] = '<li class="active text-uppercase"><a href="javascript:;">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="text-uppercase">';
+		$config['num_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['full_tag_open'] = '<ul class="pagination hidden-md hidden-lg">';
+		$config['full_tag_close'] = '</ul>';
+		$this->pagination->initialize($config);
+
+		$this->load->database();
+		$query = "SELECT * FROM \"vIndicadoresRevista\" WHERE substr(\"revistaSlug\", 1 , 1)='{$alpha}'";
+		$query = $this->db->query($query);
+		$this->db->close();
+
 		$data = array();
-		$data['header']['title'] = _("Biblat - Indicadores por revista");
-		$this->load->view('header', $data['header']);
-		$this->load->view('menu');
-		$this->load->view('main/indicadores_por_revista');
-		$this->load->view('footer');
+		$data['revistas'] = $query->result_array();
+		$data['alpha_links'] = $this->pagination->create_alpha_links();
+		$data['alpha'] = strtoupper($alpha);
+		$data['page_title'] = _('Indicadores por revista');
+		$this->template->set_partial('view_js', 'main/indicadores_por_revista_js', array(), TRUE);
+		$this->template->title(_('Biblat - Indicadores por revista'));
+		$this->template->set_breadcrumb(_('Bibliometría'));
+		$this->template->set_meta('description', _('Metodología'));
+		$this->template->build('main/indicadores_por_revista', $data);
 	}
 
 	public function criteriosSeleccion(){
@@ -204,7 +236,7 @@ class Main extends CI_Controller{
 	public function lang_notification(){
 		$browserLang = browser_lang_array();
 		$data['message'] = _sprintf('Deacuerdo al idioma de su navegador le sugerimos cambiar el idioma de la página a %s', $browserLang['title']);
-		$data['button'] = '<button class="translate">'._('Traducir').'</button>';
+		$data['button'] = '<button class="btn btn-warning translate">'._('Traducir').'</button>';
 		echo json_encode($data, TRUE); exit(0);
 	}
 }
