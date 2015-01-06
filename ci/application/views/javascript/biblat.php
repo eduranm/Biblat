@@ -31,7 +31,7 @@ addthis_config.ui_language = "<?=lang_iso_code();?>";
 loading = {
 	start: function(){
 		$.blockUI({ 
-			message: '<h2 style="white-space:nowrap;"><img src="<?=base_url('img/loading.gif');?>" /><br/><?php _e('Espere un momento...');?></h2>',
+			message: $('#loading'),
 			css: { 
 				color: '#000', 
 				backgroundColor:'#FBFCEF', 

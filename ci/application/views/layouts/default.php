@@ -217,6 +217,11 @@
             </div>
         </div><!--sitemap-->
         </footer>
+        <div id="loading" style="display:none;">
+            <h2 style="white-space:nowrap;">
+                <img src="<?=base_url('img/loading.gif');?>" /><br/>{_('Espere un momento...')}
+            </h2>
+        </div>
         <script src="{base_url('assets/js/jquery.js')}"></script>
         <script src="{base_url('assets/js/bootstrap.min.js')}"></script>
         <script src="{base_url('js/jquery-ui.min.js')}"></script>
