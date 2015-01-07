@@ -1,3 +1,14 @@
+<div class="text-center">
+	<nav>
+	  <ul class="pagination hidden-xs hidden-sm">
+<?php foreach (range('A', 'Z') as $i):?>
+		<li <?if($i == $letra):?>class="active" <?endif;?>><a href="<?=site_url("indice/alfabetico/".strtolower($i));?>"><?=$i;?></a></li>
+<?php endforeach;?>
+	  </ul>
+	  {$alpha_links}
+	</nav>
+</div>
+
     <table class="table table-striped table-hover">
       <caption title="{_('Revistas indizadas en CLASE y PERIÓDICA según orden alfabético y número de documentos de cada revista')}"></caption>
 			<thead>

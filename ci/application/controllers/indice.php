@@ -15,6 +15,29 @@ class Indice extends CI_Controller{
 	}
 
 	public function alfabetico($letra="a"){
+		$this->load->library('pagination');
+		$config['base_url'] = site_url('indice/alfabetico');
+		$config['uri_segment'] = 4;
+		$config['first_link'] = "&laquo;";
+		$config['last_link'] = "&raquo;";
+		$config['next_link'] = "&rsaquo;";
+		$config['prev_link'] = "&lsaquo;";
+		$config['cur_tag_open'] = '<li class="active text-uppercase"><a href="javascript:;">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li class="text-uppercase">';
+		$config['num_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['full_tag_open'] = '<ul class="pagination hidden-md hidden-lg">';
+		$config['full_tag_close'] = '</ul>';
+		$this->pagination->initialize($config);
+
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Indice alfabético "%s"', strtoupper($letra));
 		/*Consultas*/
@@ -31,7 +54,8 @@ class Indice extends CI_Controller{
 		endforeach;
 		$query->free_result();
 		$this->db->close();
-		$data['alfabetico']['letra'] = $letra;
+		$data['alfabetico']['letra'] = strtoupper($letra);
+		$data['alfabetico']['alpha_links'] = $this->pagination->create_alpha_links();
 		/*Vistas*/
 		$data['alfabetico']['page_title'] = sprintf('Revistas por orden alfabético: %s', strtoupper($letra));
 		$this->template->title($data['header']['title']);
