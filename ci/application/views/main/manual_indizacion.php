@@ -57,7 +57,7 @@
         <td class="text-center">041a</td>
         <td class="text-center">X</td>
         <td></td>
-        <td><a href="{base_url('files/manual_idiomas.pdf')}" target="_blank">{_('Idioma')}</a></td>
+        <td><a href="{base_url('archivos/manual_idiomas.pdf')}" target="_blank">{_('Idioma')}</a></td>
       </tr>
       <tr>
         <td><a class="manual" href="#autor-personal-nombre">{_('Autor personal:  Nombre')}</a></td>
@@ -99,7 +99,7 @@
         <td class="text-center">110c</td>
         <td></td>
         <td></td>
-        <td><a href="{base_url('files/anexo6-codigosgeograficos.pdf')}">{_('Nombres geográficos')}</a></td>
+        <td><a href="{base_url('archivos/anexo6-codigosgeograficos.pdf')}">{_('Nombres geográficos')}</a></td>
       </tr>
       <tr>
         <td><a class="manual" href="#adscripcion-referencia">{_('Adscripción del autor: Referencia')}</a></td>
@@ -134,7 +134,7 @@
         <td class="text-center">120x</td>
         <td></td>
         <td></td>
-        <td><a href="{base_url('files/anexo6-codigosgeograficos.pdf')}" target="_blank">{_('Nombres geográficos')}</a></td>
+        <td><a href="{base_url('archivos/anexo6-codigosgeograficos.pdf')}" target="_blank">{_('Nombres geográficos')}</a></td>
       </tr>
       <tr>
         <td><a class="manual" href="#_revista">{_('Revista')}</a></td>
@@ -246,35 +246,35 @@
         <td class="text-center">590a</td>
         <td class="text-center">X</td>
         <td></td>
-        <td><a href="{base_url('files/anexo2-tiposdedocumento.pdf')}" target="_blank">{_('Tipo de documento')}</a></td>
+        <td><a href="{base_url('archivos/anexo2-tiposdedocumento.pdf')}" target="_blank">{_('Tipo de documento')}</a></td>
       </tr>
       <tr>
         <td><a class="manual" href="#enfoque-documento">{_('Tipo de documento: Enfoque')}</a></td>
         <td class="text-center">590b</td>
         <td class="text-center">X</td>
         <td></td>
-        <td><a href="{base_url('files/anexo3-enfoque.pdf')}" target="_blank">{_('Enfoque')}</a></td>
+        <td><a href="{base_url('archivos/anexo3-enfoque.pdf')}" target="_blank">{_('Enfoque')}</a></td>
       </tr>
       <tr>
         <td><a class="manual" href="#disciplinas">{_('Disciplinas')}</a></td>
         <td class="text-center">650a</td>
         <td class="text-center">X</td>
         <td class="text-center">X</td>
-        <td><a href="{base_url('files/anexo4-disciplinas.pdf')}" target="_blank">{_('Disciplinas')}</a></td>
+        <td><a href="{base_url('archivos/anexo4-disciplinas.pdf')}" target="_blank">{_('Disciplinas')}</a></td>
       </tr>
       <tr>
         <td><a class="manual" href="#_palabra-clave">{_('Palabra clave')}</a></td>
         <td class="text-center">653a</td>
         <td class="text-center">X</td>
         <td class="text-center">X</td>
-        <td><a href="{base_url('files/anexo5-subdisciplinas.pdf')}" target="_blank">{_('Subdisciplinas')}</a> / <a href="{base_url('files/anexo6-codigosgeograficos.pdf')}" target="_blank">{_('Nombres geográficos')}</a></td>
+        <td><a href="{base_url('archivos/anexo5-subdisciplinas.pdf')}" target="_blank">{_('Subdisciplinas')}</a> / <a href="{base_url('archivos/anexo6-codigosgeograficos.pdf')}" target="_blank">{_('Nombres geográficos')}</a></td>
       </tr>
       <tr>
         <td><a class="manual" href="#keyword">{_('Keyword')}</a></td>
         <td class="text-center">654a</td>
         <td class="text-center">X</td>
         <td class="text-center">X</td>
-        <td><a href="{base_url('files/anexo5-subdisciplinas.pdf')}" target="_blank">{_('Subdisciplinas')}</a> / <a href="{base_url('files/anexo6-codigosgeograficos.pdf')}" target="_blank">{_('Nombres geográficos')}</a></td>
+        <td><a href="{base_url('archivos/anexo5-subdisciplinas.pdf')}" target="_blank">{_('Subdisciplinas')}</a> / <a href="{base_url('archivos/anexo6-codigosgeograficos.pdf')}" target="_blank">{_('Nombres geográficos')}</a></td>
       </tr>
       <tr>
         <td><a class="manual" href="#texto-completo">{_('Texto completo')}</a></td>
@@ -288,7 +288,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td><a href="{base_url('files/anexo7-tesaurosyglosarios.pdf')}" target="_blank">{_('Tesauros y Glosarios disponibles en línea')}</a></td>
+        <td><a href="{base_url('archivos/anexo7-tesaurosyglosarios.pdf')}" target="_blank">{_('Tesauros y Glosarios disponibles en línea')}</a></td>
       </tr>
       </tbody>
     </table>
