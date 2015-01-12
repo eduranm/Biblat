@@ -37,6 +37,21 @@ class Conacyt extends CI_Controller {
 		$this->template->build('conacyt/index', $data);
 	}
 
+	public function get_report($neumonic=NULL){
+		$this->output->enable_profiler(FALSE);
+		$data = array(
+				'result' => FALSE
+			);
+		$report = strtoupper($neumonic)."_Reporte_bibliometrico_DIC2014.pdf";
+		if(file_exists("archivos/conacyt/reportes/revista/{$report}")):
+			$data = array(
+					'result' => TRUE,
+					'url' => base_url("archivos/conacyt/reportes/revista/${report}")
+				);
+		endif;
+		$this->load->view('conacyt/get_report', $data);
+	}
+
 }
 
 /* End of file scielo.php */
