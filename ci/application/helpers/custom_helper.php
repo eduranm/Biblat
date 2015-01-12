@@ -5,7 +5,7 @@ if ( ! function_exists('slug')):
 
 		$sname = trim($name); //remover espacios vacios
 
-		$sname = strtolower(preg_replace('/\s+/','-',$sname)); // pasamos todo a minusculas y cambiamos todos los espacios por -
+		$sname = mb_strtolower(preg_replace('/\s+/','-',$sname), 'UTF-8'); // pasamos todo a minusculas y cambiamos todos los espacios por -
 
 		if($utf){ // si el texto no viene en formato utf8 se le manda a codificar como tal.
 			$sname = utf8_decode($sname);
@@ -37,7 +37,7 @@ if ( ! function_exists('slugSearch')):
 
 		$sname = trim($name); //remover espacios vacios
 
-		$sname = strtolower(preg_replace('/\s+/','-',$sname)); // pasamos todo a minusculas y cambiamos todos los espacios por -
+		$sname = mb_strtolower(preg_replace('/\s+/','-',$sname), 'UTF-8'); // pasamos todo a minusculas y cambiamos todos los espacios por -
 
 		if($utf){ // si el texto no viene en formato utf8 se le manda a codificar como tal.
 			$sname = utf8_decode($sname);
@@ -339,7 +339,7 @@ endif;
 
 if ( ! function_exists('ucname') ):
 	function ucname($string) {
-		$string =ucwords(strtolower($string));
+		$string =ucwords(mb_strtolower($string, 'UTF-8'));
 
 		foreach (array('-', '\'') as $delimiter) :
 			if (strpos($string, $delimiter)!==false):
