@@ -79,5 +79,21 @@ $db['biblat']['dbcollat'] = 'utf8_general_ci';
 $db['biblat']['swap_pre'] = '';
 $db['biblat']['autoinit'] = TRUE;
 $db['biblat']['stricton'] = FALSE;
+
+$db['scielo']['hostname'] = 'localhost';
+$db['scielo']['username'] = 'postgres';
+$db['scielo']['password'] = '';
+$db['scielo']['database'] = 'scielo';
+$db['scielo']['dbdriver'] = 'postgre';
+$db['scielo']['dbprefix'] = '';
+$db['scielo']['pconnect'] = TRUE;
+$db['scielo']['db_debug'] = TRUE;
+$db['scielo']['cache_on'] = FALSE;
+$db['scielo']['cachedir'] = 'application/cache';
+$db['scielo']['char_set'] = 'utf8';
+$db['scielo']['dbcollat'] = 'utf8_general_ci';
+$db['scielo']['swap_pre'] = '';
+$db['scielo']['autoinit'] = TRUE;
+$db['scielo']['stricton'] = FALSE;
 /* End of file database.php */
 /* Location: ./application/config/database.php */
