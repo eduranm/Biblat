@@ -18,7 +18,7 @@ class Conacyt extends CI_Controller {
 		$data = array();
 		$data['page_title'] = _('Reporte bibliométrico CONACYT');
 		$scieloDB = $this->load->database('scielo', TRUE);
-		$query = "SELECT * FROM \"vJournal\" WHERE \"networkId\"=5";
+		$query = "SELECT * FROM \"vJournalConacyt\" WHERE \"networkId\"=5";
 		$query = $scieloDB->query($query);
 		$scieloDB->close();
 		$data['areas'] = array();
