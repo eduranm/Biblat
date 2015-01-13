@@ -43,7 +43,7 @@
 		<div class="col-md-12" id="tab-chars">
 			<div id="tabs" style="display:none;">
 				<ul>
-					<li><a href="#charts"><i class="fa fa-area-chart"></i> {_('Gráfica')}</a></a></li>
+					<li><a href="#charts"><i class="fa fa-line-chart"></i> {_('Gráfica')}</a></a></li>
 					<li><a href="#grid"><i class="fa fa-table"></i> {_('Tabla')}</a></li>
 					<li><a href="#info"><i class="fa fa-cogs"></i> {_('Metodología')}</a></li>
 				</ul>
