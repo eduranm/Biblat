@@ -2,7 +2,15 @@
 # -*- coding: utf-8 -*-
 import re
 import json
+import argparse
 from pprint import pprint, pformat
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-range', action='store_true', default=False, dest='scielo_range', help='Print scielo range list')
+parser.add_argument('-noclase', action='store_false', default=True, dest='clase', help='No parse clase db')
+parser.add_argument('-noperiodica', action='store_false', default=True, dest='periodica', help='No parse periodica db')
+parser.add_argument('-scielo', action='store_true', default=False, dest='scielo', help='Parse sciel rage in periodica')
+arguments = parser.parse_args()
 
 '''Inicializando variables para almacenar las etiquetas del registro y el registro actual'''
 registro = {}
@@ -48,6 +56,14 @@ fieldsCatalogador = [
 	('horaEdicion', 'h')
 ]
 lenTags = len(tags)
+
+'''Patrones compilados'''
+recordPattern = re.compile(r'(^[0-9]+?)\s([0-9]+?|CAT)\s.+?L\s(.+?$)')
+elValPattern = re.compile(r'(.)(.*?$)')
+quotePattern = re.compile(r"'")
+bslashPattern = re.compile(r"\\")
+secuencePattern = re.compile(r"^\(([0-9]+?)\)$")
+
 '''Abrimos archivos para guradar los resultados'''
 detalles = open('./database/claperDetalles.txt', 'w')
 fClaPerJSON = open('./database/claperJSON.txt', 'w')
@@ -97,9 +113,9 @@ def add_record():
 			if len(registro[tag]) == 1 and tag not in ('100', '110', '120', '520', '650', '653', '654', '856'):
 				registro[tag] = registro[tag].pop()
 			if type(registro[tag]) in [type({}), type([])]:
-				csv += "'"+ re.sub(r"'", r"\\'", re.sub(r"\\", r"\\\\", json.dumps(registro[tag], ensure_ascii=True, sort_keys=True))) + "'"
+				csv += "'"+ quotePattern.sub(r"\\'", bslashPattern.sub(r"\\\\", json.dumps(registro[tag], ensure_ascii=True, sort_keys=True))) + "'"
 			else:
-				csv += "'"+ re.sub(r"'", "\\'", registro[tag]) + "'"
+				csv += "'"+ quotePattern.sub("\\'", registro[tag]) + "'"
 		else:
 			csv += "NULL"
 		if tagOffset < lenFields:
@@ -107,10 +123,7 @@ def add_record():
 		tagOffset += 1
 	'''Transformamos el diccionario en JSON'''
 	'''jsonResult = re.sub(r"\\\\\\", "\\\\", json.dumps(registro, ensure_ascii=False, sort_keys=True))'''
-	'''Almacenamos la cadena JSON en el archivo'''
-	if registro['035'] == "CLA01000006501A":
-		pprint(registro)
-		raw_input("Press Enter to continue...")
+	'''Almacenamos la cadena csv en el archivo'''
 	fArticle.write(csv + "\n")
 	csv = None
 
@@ -123,7 +136,7 @@ def add_record():
 			tagOffset=1
 			for field, tag in fieldsAuthor:
 				if tag in autor:
-					csv += "'"+ re.sub(r"^\(([0-9]+?)\)$", r"\1", re.sub(r"'", "\\'", autor[tag])) + "'"
+					csv += "'"+ secuencePattern.sub(r"\1", quotePattern.sub("\\'", autor[tag])) + "'"
 				else:
 					csv += "NULL"
 				if tagOffset < lenFields:
@@ -139,7 +152,7 @@ def add_record():
 			tagOffset=1
 			for field, tag in fieldsInstitution:
 				if tag in institucion:
-					csv += "'"+ re.sub(r"^\(([0-9]+?)\)$", r"\1", re.sub(r"'", "\\'", institucion[tag])) + "'"
+					csv += "'"+ secuencePattern.sub(r"\1", quotePattern.sub("\\'", institucion[tag])) + "'"
 				else:
 					csv += "NULL"
 				if tagOffset < lenFields:
@@ -150,18 +163,18 @@ def add_record():
 	'''Agregamos el registro del catalogador'''
 	lenFields = len(fieldsCatalogador)
 	if 'CAT' in registro:
-		catalogador = registro['CAT'][0]
-		csv = "'%s',"%registro['035']
-		tagOffset=1
-		for field, tag in fieldsCatalogador:
-			if tag in catalogador:
-				csv += "'"+ re.sub(r"^\(([0-9]+?)\)$", r"\1", re.sub(r"'", "\\'", catalogador[tag])) + "'"
-			else:
-				csv += "NULL"
-			if tagOffset < lenFields:
-				csv += ","
-			tagOffset += 1
-		fCatalogador.write(csv + "\n")
+		for catalogador in registro['CAT']:
+			csv = "'%s',"%registro['035']
+			tagOffset=1
+			for field, tag in fieldsCatalogador:
+				if tag in catalogador:
+					csv += "'"+ quotePattern.sub("\\'", catalogador[tag]) + "'"
+				else:
+					csv += "NULL"
+				if tagOffset < lenFields:
+					csv += ","
+				tagOffset += 1
+			fCatalogador.write(csv + "\n")
 
 	registro = {}
 
@@ -179,8 +192,10 @@ def parse_database(database):
 			'''Si es la ultima linea agregamos el registro'''
 			if line == "EOF":
 				add_record()
+				current = ""
+				return
 			'''Con una expresion regular separamos cada linea en sitema, etiqueta y valor'''
-			result = re.match(r'(^[0-9]+?)\s([0-9]+?|CAT)\s.+?L\s(.+?$)', line)
+			result = recordPattern.match(line)
 			'''Si existe el patron en la linea la procesamos'''
 			if result:
 				sistema = result.group(1)
@@ -199,7 +214,7 @@ def parse_database(database):
 				'''Dividimos cada elemento del valor correspondiente a la etiqueta'''
 				for element in valor.split('$$')[1:]:
 					'''Con una expresion regular separamos el elmento de su valor'''
-					resultTag = re.match(r'(.)(.*?$)', element)
+					resultTag = elValPattern.match(element)
 					'''Si existe el patron y tiene un valor agregamos el elemento y su valor al diccionario'''
 					if result and resultTag.group(2) != '':
 						subtag.update({resultTag.group(1):re.sub("[.,]$","",resultTag.group(2))})
@@ -248,30 +263,15 @@ def parse_database(database):
 					'''Asignamos el valor de la última etiqueta agregada'''
 					lastTag = etiqueta
 
-'''Funcion para agregar los registros de clase y periodica'''
-def add_claper():
-	'''Escribimos encabezados de los archivos'''
-	'''tagOffset=1
-	for tag in tags:
-		fClaPerJSON.write("'" + tag + "'")
-		if tagOffset < lenTags:
-			fClaPerJSON.write(",")
-		else:
-			fClaPerJSON.write("\n")
-		tagOffset += 1
-
-	fieldOffset=1
-	lenFields = len(fieldsArticle)
-	for field in fieldsArticle:
-		fArticle.write("'" + field + "'")
-		if fieldOffset < lenFields:
-			fArticle.write(",")
-		else:
-			fArticle.write("\n")
-		fieldOffset += 1'''
-	parse_database('./database/clase_valid.txt')
-	parse_database('./database/periodica_valid.txt')
-
-add_claper()
+print arguments
+if arguments.clase:
+	parse_database('./database/cla01_valid.txt')
+	print registro
+if arguments.periodica:
+	parse_database('./database/per01_valid.txt')
+	print registro
+if arguments.scielo:
+	parse_database('./database/scielo_valid.txt')
+	print registro
 
 print sorted(tags)
