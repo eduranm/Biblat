@@ -28,7 +28,7 @@ var addthis_config = addthis_config||{};
 addthis_config.data_track_addressbar = false;
 addthis_config.data_track_clickback = false;
 addthis_config.ui_language = "<?=lang_iso_code();?>";
-loading = {
+var loading = {
 	start: function(){
 		$.blockUI({ 
 			message: $('#loading'),
@@ -54,7 +54,7 @@ loading = {
 	status: false
 };
 
-advsearch = {
+var advsearch = {
 	updateData: function(){
 		$('#slug').val(JSON.stringify($('#advsearch').advancedSearch("val")));
 	},
