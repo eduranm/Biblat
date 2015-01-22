@@ -216,7 +216,7 @@ class Template
 		// Output template variables to the template
 		$template['title']	= $this->_title;
 		$template['breadcrumbs'] = $this->_breadcrumbs;
-		$template['metadata']	= implode("\n\t\t", $this->_metadata);
+		$template['metadata']	= $this->_metadata;
 		$template['partials']	= array();
 		$template['js'] = $this->_javascript;
 		$template['css'] = $this->_css;
@@ -358,6 +358,9 @@ class Template
 
 			case 'link':
 				$this->_metadata[$content] = '<link rel="'.$name.'" href="'.$content.'" />';
+			case 'application/l10n':
+				$this->_metadata[$name] = '<link rel="'.$name.'" type="application/l10n" href="'.$content.'" />';
+				break;
 			break;
 		}
 

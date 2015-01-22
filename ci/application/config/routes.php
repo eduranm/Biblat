@@ -66,6 +66,10 @@ $route[$langs.'/bibliometria/indicadores-scielo'] = 'main/indicadoresScielo';
 $route[$langs.'/bibliometria/indicadores-por-revista(.*)'] = 'main/indicadoresRevista$1';
 $route[$langs.'/manual-de-indizacion'] = 'main/manualIndizacion';
 
+$route[$langs.'/conacyt/revista(.*)'] = 'conacyt/pdf_viewer/revista$1';
+$route[$langs.'/conacyt/area(.*)'] = 'conacyt/pdf_viewer/area$1';
+$route[$langs.'/conacyt/reporte(.*)'] = 'conacyt/pdf_viewer/reporte$1';
+
 $route[$langs.'/buscar/getList'] = 'buscar/getList';
 $route[$langs.'/buscar/(autor|articulo|institucion|revista|palabra-clave|avanzada)/(.+)/(texto-completo)(.*)'] = 'buscar/index/$1/null/$2/$3$4';
 $route[$langs.'/buscar/(.*)/(.*)/(texto-completo)(.*)'] = 'buscar/index/null/$1/$2/$3$4';

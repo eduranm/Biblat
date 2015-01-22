@@ -11,6 +11,9 @@
 {foreach $template.meta name content}
         <meta name="{$name}" content="{$content}" />
 {/foreach}
+{foreach $template.metadata key metadata }
+        {$metadata}
+{/foreach}
         <link rel="icon" href="{base_url('assets/img/favicon.ico')}" type="image/x-icon"/>
         <link rel="stylesheet" href="{base_url('assets/css/bootstrap.min.css')}" type="text/css" />
         <link rel="stylesheet" href="{base_url('css/jquery-ui.min.css')}" type="text/css" />
@@ -158,11 +161,13 @@
 {/if}
 {/foreach}
                     </ol>
+{if $page_title}
                     <div class="page_title">
                         <hr/>
                         <h4>{$page_title}</h4>
                         <hr/>
                     </div>
+{/if}
                 </div>
                 <div class="col-sm-3 hidden-xs">
                     <nav class="navbar navbar-default navbar-right" role="navigation">

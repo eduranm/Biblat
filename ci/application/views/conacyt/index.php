@@ -2,7 +2,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-parent="#accordion" href="{base_url('archivos/conacyt/reportes/CONACYT-TODAS-LAS-AREAS.pdf')}">
+				<a data-parent="#accordion" href="{site_url('conacyt/reporte/conacyt-todas-las-areas')}">
 					<span class="glyphicon fa fa-file-pdf-o"></span> Reporte bibliométrico completo
 				</a>
 			</h4>
@@ -11,7 +11,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a data-parent="#accordion" href="{base_url('archivos/conacyt/reportes/REPORTE-POSICIONAMIENTO-CUARTILES-JCR-SCImago.pdf')}">
+				<a data-parent="#accordion" href="{site_url('conacyt/reporte/reporte-posicionamiento-cuartiles-jcr-scimago')}">
 					<span class="glyphicon fa fa-file-pdf-o"></span> Reporte de posicionamiento por cuartiles
 				</a>
 			</h4>
@@ -33,13 +33,13 @@
 					<a data-toggle="collapse" data-parent="#collapseArea" href="#{$area.journals.0.areaConacytSlug}">
 						<span class="glyphicon fa fa-plus-square-o"></span> {$area.journals.0.areaConacytName}
 					</a>
-					<a href="{base_url('archivos/conacyt/reportes/area/$area.report.2014')}" target="_blank"><span class="glyphicon fa fa-file-pdf-o"></span></a>
+					<a href="{base_url('conacyt/area/$area.journals.0.areaConacytSlug')}"><span class="glyphicon fa fa-file-pdf-o"></span></a>
 				</li>
 			</ul>
 			<div id="{$area.journals.0.areaConacytSlug}" class="panel-collapse collapse list-group">
 				<div class="list-group">
 {foreach $area.journals journal}
-					<a href="{base_url('archivos/conacyt/reportes/revista/$journal.report.2014')}" target="_blank" class="list-group-item"><span class="glyphicon fa fa-file-pdf-o"></span> {$journal.name}</a>
+					<a href="{site_url('conacyt/revista/$journal.slug')}" class="list-group-item"><span class="glyphicon fa fa-file-pdf-o"></span> {$journal.name}</a>
 {/foreach}
 				</div>	
 			</div>
