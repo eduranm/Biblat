@@ -6192,12 +6192,8 @@ function webViewerInitialized() {
   fileInput.oncontextmenu = noContextMenuHandler;
   document.body.appendChild(fileInput);
 
-  if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
-    document.getElementById('openFile').setAttribute('hidden', 'true');
-    document.getElementById('secondaryOpenFile').setAttribute('hidden', 'true');
-  } else {
-    document.getElementById('fileInput').value = null;
-  }
+  document.getElementById('openFile').setAttribute('hidden', 'true');
+  document.getElementById('secondaryOpenFile').setAttribute('hidden', 'true');
 
   var locale = PDFJS.locale || navigator.language;
 
