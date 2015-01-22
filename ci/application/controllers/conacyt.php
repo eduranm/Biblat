@@ -30,8 +30,6 @@ class Conacyt extends CI_Controller {
 			endif;
 		endforeach;
 		//print_r($query->result_array());
-
-		$this->template->set_partial('frecuencias_accordion', 'frecuencias/index', array(), TRUE);
 		$this->template->title(_('Biblat - Reporte bibliométrico CONACYT'));
 		$this->template->set_meta('description', _('Reporte bibliométrico CONACYT'));
 		$this->template->build('conacyt/index', $data);

@@ -1,22 +1,31 @@
 <div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-parent="#accordion" href="#">
-	        <span class="glyphicon fa fa-file-pdf-o"></span> Reporte bibliométrico completo
-        </a>
-      </h4>
-    </div>
-  </div>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseArea">
-        	<span class="glyphicon fa fa-plus-square-o"></span> Reporte bibliométrico por área del conocimiento
-        </a>
-      </h4>
-    </div>
-    <div id="collapseArea" class="panel-collapse collapse">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-parent="#accordion" href="{base_url('archivos/conacyt/reportes/CONACYT-TODAS-LAS-AREAS.pdf')}">
+					<span class="glyphicon fa fa-file-pdf-o"></span> Reporte bibliométrico completo
+				</a>
+			</h4>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-parent="#accordion" href="{base_url('archivos/conacyt/reportes/REPORTE-POSICIONAMIENTO-CUARTILES-JCR-SCImago.pdf')}">
+					<span class="glyphicon fa fa-file-pdf-o"></span> Reporte de posicionamiento por cuartiles
+				</a>
+			</h4>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseArea">
+					<span class="glyphicon fa fa-plus-square-o"></span> Reporte bibliométrico por área del conocimiento
+				</a>
+			</h4>
+		</div>
+		<div id="collapseArea" class="panel-collapse collapse">
 {foreach $areas area}
 		<div class="panel">
 			<ul class="list-group">
