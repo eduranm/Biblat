@@ -111,7 +111,7 @@ class Main extends CI_Controller{
 	public function manualIndizacion(){
 		$data = array();
 		$data['page_title'] = _('Manual de indización');
-		$this->template->set_partial('view_js', 'header_metodologia', array(), TRUE);
+		$this->template->set_partial('view_js', 'main/header_metodologia', array(), TRUE);
 		$this->template->title(_('Biblat - Manual de indización'));
 		$this->template->css('assets/css/colorbox.css');
 		$this->template->js('assets/js/colorbox.js');
@@ -141,7 +141,7 @@ class Main extends CI_Controller{
 	public function metodologiaBiblat(){
 		$data = array();
 		$data['page_title'] = _('Metodología');
-		$this->template->set_partial('view_js', 'header_metodologia', array(), TRUE);
+		$this->template->set_partial('view_js', 'main/header_metodologia', array(), TRUE);
 		$this->template->title(_('Biblat - Metodología'));
 		$this->template->css('assets/css/colorbox.css');
 		$this->template->js('assets/js/colorbox.js');

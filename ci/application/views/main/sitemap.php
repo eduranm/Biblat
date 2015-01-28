@@ -1,7 +1,7 @@
 <div id="content">
 	<div id="encabezado">
     <div id="migas">
-      <p><a href="<?=site_url('/');?>"><?php _e('Inicio');?></a> / <?php _e('Mapa del sitio');?></p>
+      <p><a href="<?=site_url('/');?>">{_('Inicio')}</a> / {_('Mapa del sitio')}</p>
     </div><!--End migas-->
 		<div id="share">
       <div id="share1">
@@ -19,7 +19,7 @@
     </div><!--end share-->
 
 		<div class="titulo_int">
-			<h1><?php _e('Mapa del sitio');?></h1>
+			<h1>{_('Mapa del sitio')}</h1>
 		</div><!--end titulo_int-->
 		<br class="cf">
 	</div><!--end encabezado-->

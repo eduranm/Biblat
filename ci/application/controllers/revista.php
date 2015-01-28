@@ -266,13 +266,13 @@ class Revista extends CI_Controller{
 		if(isset($_POST['ajax'])):
 			$this->output->enable_profiler(FALSE);
 			$data['main']['ajax'] = TRUE;
-			$this->load->view('revista/articulo', $data['main']);
+			$this->parser->parse('revista/articulo', $data['main']);
 			return;
 		endif;
 		if($uriVar['mail'] == "true"):
 			$this->output->enable_profiler(FALSE);
 			$data['main']['mail'] = TRUE;
-			return $this->load->view('revista/articulo', $data['main'], TRUE);
+			return $this->parser->parse('revista/articulo', $data['main'], TRUE);
 		endif;
 
 		$this->template->set_partial('view_js', 'revista/articulo_header', array(), TRUE);
@@ -350,7 +350,7 @@ class Revista extends CI_Controller{
 			$this->email->subject('Solicitud de documento Biblat');
 			$data = $_POST;
 			$data['fichaDocumento'] = $this->articulo($data['revista'], $data['articulo'], 'true');
-			$body = $this->load->view('revista/mail_solicitud', $data, TRUE);
+			$body = $this->parser->parse('revista/mail_solicitud', $data, TRUE);
 			$this->email->message($body);
 			$this->email->send();
 			$this->email->clear();
@@ -358,7 +358,7 @@ class Revista extends CI_Controller{
 			$this->email->from('anoguez@dgb.unam.mx', 'Dra. Araceli Noguez O.');
 			$this->email->to($_POST['email']);
 			$this->email->subject('Solicitud de documento Biblat');
-			$body = $this->load->view('revista/mail_solicitud_usuario', $data, TRUE);
+			$body = $this->parser->parse('revista/mail_solicitud_usuario', $data, TRUE);
 			$this->email->message($body);
 			$this->email->send();
 			/*Almacenando registro en la bitácora*/

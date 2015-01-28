@@ -1,8 +1,8 @@
-<?php if (isset($articulo)):?>
-	<table class="table table-striped <?php if ($ajax):?>articulo<?php endif;?>" <?php if ($mail):?> border="1" style="border-collapse:collapse; width:650px;"<?php endif;?>>
-<?php 	if (!$mail):?>
+{if $articulo}
+	<table class="table table-striped {if $ajax}articulo{/if}" {if $mail} border="1" style="border-collapse:collapse; width:650px;"{/if}>
+{if !$mai}
 		<caption class="text-center"> 
-			<?php if ($ajax):?><?php echo $articulo['articulo'];?><?php endif;?>
+			{if $ajax}{$articulo.articulo}{/if}
 			<div class="addthis_toolbox addthis_default_style center-block" addthis:url="<?php echo site_url("revista/{$articulo['revistaSlug']}/articulo/{$articulo['articuloSlug']}")?>" addthis:title="<?php echo $title;?>">
 				<a class="addthis_button_mendeley" style="cursor:pointer"></a>
 				<a class="addthis_button_facebook" style="cursor:pointer"></a>
@@ -14,170 +14,170 @@
 			</div>
 			<br/>
 		</caption>
-<?php 	endif;?>
+{/if}
 		<tbody>
-<?php 	if ($mail):?>
+{if $mail}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Título del documento:');?></strong></td>
-					<td><a href="<?php echo site_url("revista/{$articulo['revistaSlug']}/articulo/{$articulo['articuloSlug']}")?>" title="<?php echo $articulo['revista']?>"><?php echo $articulo['articulo']?></a></td>
+					<td class="nowrap"><strong>{_('Título del documento:')}</strong></td>
+					<td><a href="<?php echo site_url("revista/{$articulo['revistaSlug']}/articulo/{$articulo['articuloSlug']}")?>" title="{$articulo.revista}">{$articulo.articulo}</a></td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['revista']) ):?>
+{/if}
+{if $articulo.revista}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Revista:');?></strong></td>
-					<td><a href="<?php echo site_url("revista/{$articulo['revistaSlug']}")?>" title="<?php echo $articulo['revista']?>"><?php echo $articulo['revista']?></a></td>
+					<td class="nowrap"><strong>{_('Revista:')}</strong></td>
+					<td><a href="<?php echo site_url("revista/{$articulo['revistaSlug']}")?>" title="{$articulo.revista}">{$articulo.revista}</a></td>
 				</tr>
-<?php 	endif;?>
+{/if}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Base de datos:');?></strong></td>
-					<td><?php echo $articulo['database']?></td>
+					<td class="nowrap"><strong>{_('Base de datos:')}</strong></td>
+					<td>{$articulo.database}</td>
 				</tr>
 				<tr>
-					<td class="nowrap"><strong><?php _e('Número de sistema:');?></strong></td>
-					<td><?php echo $articulo['sistema']?></td>
+					<td class="nowrap"><strong>{_('Número de sistema:')}</strong></td>
+					<td>{$articulo.sistema}</td>
 				</tr>
-<?php 	if ( isset($articulo['issn']) ):?>
+{if $articulo.issn}
 				<tr>
-					<td class="nowrap"><strong><?php _e('ISSN:');?></strong></td>
-					<td><?php echo $articulo['issn']?></td>
+					<td class="nowrap"><strong>{_('ISSN:')}</strong></td>
+					<td>{$articulo.issn}</td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['autoresHTML']) ):?>
+{/if}
+{if $articulo.autoresHTML}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Autores:');?></strong></td>
-					<td><?php echo $articulo['autoresHTML']?></td>
+					<td class="nowrap"><strong>{_('Autores:')}</strong></td>
+					<td>{$articulo.autoresHTML}</td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['institucionesHTML']) ):?>
+{/if}
+{if $articulo.institucionesHTML}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Instituciones:');?></strong></td>
-					<td><?php echo $articulo['institucionesHTML']?></td>
+					<td class="nowrap"><strong>{_('Instituciones:')}</strong></td>
+					<td>{$articulo.institucionesHTML}</td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['anioRevista']) ):?>
+{/if}
+{if $articulo.anioRevista}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Año:');?></strong></td>
-					<td><?php echo $articulo['anioRevista']?></td>
+					<td class="nowrap"><strong>{_('Año:')}</strong></td>
+					<td>{$articulo.anioRevista}</td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['periodo']) ):?>
+{/if}
+{if $articulo.periodo}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Periodo:');?></strong></td>
+					<td class="nowrap"><strong>{_('Periodo:')}</strong></td>
 					<td><?php echo ucname($articulo['periodo'])?></td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['volumen']) ):?>
+{/if}
+{if $articulo.volumen}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Volumen:');?></strong></td>
-					<td><?php echo $articulo['volumen']?></td>
+					<td class="nowrap"><strong>{_('Volumen:')}</strong></td>
+					<td>{$articulo.volumen}</td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['numero']) ):?>
+{/if}
+{if $articulo.numero}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Número:');?></strong></td>
-					<td><?php echo $articulo['numero']?></td>
+					<td class="nowrap"><strong>{_('Número:')}</strong></td>
+					<td>{$articulo.numero}</td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['paginacion']) ):?>
+{/if}
+{if $articulo.paginacion}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Paginación:');?></strong></td>
-					<td><?php echo $articulo['paginacion']?></td>
+					<td class="nowrap"><strong>{_('Paginación:')}</strong></td>
+					<td>{$articulo.paginacion}</td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['paisRevista']) ):?>
+{/if}
+{if $articulo.paisRevista}
 				<tr>
-					<td class="nowrap"><strong><?php _e('País:');?></strong></td>
-					<td><?php echo $articulo['paisRevista']?></td>
+					<td class="nowrap"><strong>{_('País:')}</strong></td>
+					<td>{$articulo.paisRevista}</td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['idioma']) ):?>
+{/if}
+{if $articulo.idioma}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Idioma:');?></strong></td>
-					<td><?php echo $articulo['idioma']?></td>
+					<td class="nowrap"><strong>{_('Idioma:')}</strong></td>
+					<td>{$articulo.idioma}</td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['tipoDocumento']) ):?>
+{/if}
+{if $articulo.tipoDocumento}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Tipo de documento:');?></strong></td>
-					<td><?php echo $articulo['tipoDocumento'];?></td>
+					<td class="nowrap"><strong>{_('Tipo de documento:')}</strong></td>
+					<td>{$articulo.tipoDocumento}</td>
 				</tr>
-<?php endif;?>
-<?php 	if ( isset($articulo['enfoqueDocumento']) ):?>
+{/if}
+{if $articulo.enfoqueDocumento}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Enfoque:');?></strong></td>
-					<td><?php echo $articulo['enfoqueDocumento'];?></td>
+					<td class="nowrap"><strong>{_('Enfoque:')}</strong></td>
+					<td>{$articulo.enfoqueDocumento}</td>
 				</tr>
-<?php endif;?>
-<?php 	if ( isset($articulo['resumenHTML']) ):
-			foreach ($articulo['resumenHTML'] as $resumen):?>
+{/if}
+{if $articulo.resumenHTML}
+			{foreach $articulo.resumenHTML resumen}
 				<tr>
-					<td class="nowrap"><strong><?php echo $resumen['title'];?></strong></td>
-					<td class="text-justify"><?php echo $resumen['body'];?></td>
+					<td class="nowrap"><strong>{$resumen.title}</strong></td>
+					<td class="text-justify">{$resumen.body}</td>
 				</tr>
-<?php 		endforeach;
-		endif;?>
-<?php 	if ( isset($articulo['disciplinasHTML']) ):?>
+			{/foreach}
+{/if}
+{if $articulo.disciplinasHTML}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Disciplinas:');?></strong></td>
-					<td><?php echo $articulo['disciplinasHTML']?></td>
+					<td class="nowrap"><strong>{_('Disciplinas:')}</strong></td>
+					<td>{$articulo.disciplinasHTML}</td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['palabrasClaveHTML']) ):?>
+{/if}
+{if $articulo.palabrasClaveHTML}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Palabras clave:');?></strong></td>
-					<td><?php echo $articulo['palabrasClaveHTML']?></td>
+					<td class="nowrap"><strong>{_('Palabras clave:')}</strong></td>
+					<td>{$articulo.palabrasClaveHTML}</td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['keywordHTML']) ):?>
+{/if}
+{if $articulo.keywordHTML}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Keyword:');?></strong></td>
-					<td><?php echo $articulo['keywordHTML']?></td>
+					<td class="nowrap"><strong>{_('Keyword:')}</strong></td>
+					<td>{$articulo.keywordHTML}</td>
 				</tr>
-<?php 	endif;?>
-<?php 	if ( isset($articulo['url']) ):?>
+{/if}
+{if $articulo.url}
 				<tr>
-					<td class="nowrap"><strong><?php _e('Texto completo:');?></strong></td>
+					<td class="nowrap"><strong>{_('Texto completo:')}</strong></td>
 					<td>
-<?php foreach ($articulo['url'] as $url):?>
-						<a href="<?php echo $url?>" target="_blank"><?php echo $url?></a>
-<?php endforeach;?>
+{foreach $articulo.url url}
+						<a href="{$url}" target="_blank">{$url}</a>
+{/foreach}
 					</td>
 				</tr>
-<?php 	elseif (!$mail && !isset($articulo['url'])):?>
+{elseif !$mail AND ! $articulo.url}
 				<tr id="solicitudDocumento">
 					<td colspan="2"><b><?php _e('Solicitud del documento')?></b> <span id="sd-enable" class="fa fa-caret-right "></span> <span id="sd-disable" class="fa fa-caret-down "></span></td>
 				</tr>
 				<tr class="solicitudDocumento">
 					<td colspan="2">
-						<?php if(strtotime('now') > strtotime('2014-12-05 23:59:59.0') && strtotime('now') < strtotime('2015-01-05')):?>
-							<p class="temporal"><?php _e('Debido al período vacacional, el servicio de solicitud de documentos se suspenderá a partir del día 5 de diciembre de 2014 y se reanudará el día 5 de enero de 2015.');?></p>
-						<?php else:?>
+						{if strtotime('now') > strtotime('2014-12-05 23:59:59.0') AND strtotime('now') < strtotime('2015-01-05')}
+						<p class="temporal">{_('Debido al período vacacional, el servicio de solicitud de documentos se suspenderá a partir del día 5 de diciembre de 2014 y se reanudará el día 5 de enero de 2015.')}</p>
+						{else}
 						<form id="formSolicitudDocumento" action="<?php echo site_url('revista/solicitud/documento');?>" method="POST" class="contacto">
 							<fieldset>
-								<b><?php _e('Nota:');?></b> <?php _e('El envío del documento tiene costo.');?><br/><br/>
-								<label><?php _e('Nombre');?></label><br/>
-								<input class="form-control" type="text" name="from" required data-msg-required="<?php _e('El nombre es requerido');?>"/><br/>
-								<label><?php _e('Dirección de correo electrónico');?></label><br/>
-								<input class="form-control" type="text" name="email" placeholder="me@domain.com" required data-msg-required="<?php _e('El correo electrónico es requerido');?>"/><br/>
-								<label><?php _e('Instituto');?></label><br/>
+								<b>{_('Nota:')}</b> {_('El envío del documento tiene costo.')}<br/><br/>
+								<label>{_('Nombre')}</label><br/>
+								<input class="form-control" type="text" name="from" required data-msg-required="{_('El nombre es requerido')}"/><br/>
+								<label>{_('Dirección de correo electrónico')}</label><br/>
+								<input class="form-control" type="text" name="email" placeholder="me@domain.com" required data-msg-required="{_('El correo electrónico es requerido')}"/><br/>
+								<label>{_('Instituto')}</label><br/>
 								<input class="form-control" type="text" name="instituto"/><br/>
-								<label><?php _e('Teléfono');?></label><br/>
+								<label>{_('Teléfono')}</label><br/>
 								<input class="form-control" type="text" name="telefono"/><br/>
-								<input type="hidden" name="database" value="<?php echo $articulo['database'];?>"/>
-								<input type="hidden" name="sistema" value="<?php echo $articulo['sistema'];?>"/>
-								<input type="hidden" name="revista" value="<?php echo $articulo['revistaSlug'];?>"/>
-								<input type="hidden" name="articulo" value="<?php echo $articulo['articuloSlug'];?>"/>
+								<input type="hidden" name="database" value="{$articulo.database}"/>
+								<input type="hidden" name="sistema" value="{$articulo.sistema}"/>
+								<input type="hidden" name="revista" value="{$articulo.revistaSlug}"/>
+								<input type="hidden" name="articulo" value="{$articulo.articuloSlug}"/>
 								<input type="hidden" name="url" value="<?php echo current_url();?>"/>
 								<div class="text-justify">
-								<?php _e('Los documentos originales pueden ser consultados en el Departamento de Información y Servicios Documentales, ubicado en el Anexo de la Dirección General de Bibliotecas (DGB), circuito de la Investigación Científica a un costado del Auditorio Nabor Carrillo, zona de Institutos entre Física y Astronomía. Ciudad Universitaria UNAM.');?> <a id="showmap" href="javascript:;"><?php _e('Ver mapa');?></a><br/><img id="mapa-anexo" style="display:none" src="<?php echo base_url('img/mapa-anexo.jpg');?>" border="0" width="100%"/><?php _e('Mayores informes: Departamento de Información y Servicios Documentales, Tels. (5255) 5622-3960, 5622-3964, e-mail: sinfo@dgb.unam.mx, Horario: Lunes a viernes (8 a 16 hrs.)');?><br/><br/></div>
-								<div class="text-center"><input class="fa btn btn-default" type="submit" value="<?php _e('Enviar');?>   &#xf0e0;"/></div>
+								{_('Los documentos originales pueden ser consultados en el Departamento de Información y Servicios Documentales, ubicado en el Anexo de la Dirección General de Bibliotecas (DGB), circuito de la Investigación Científica a un costado del Auditorio Nabor Carrillo, zona de Institutos entre Física y Astronomía. Ciudad Universitaria UNAM.')} <a id="showmap" href="javascript:;">{_('Ver mapa')}</a><br/><img id="mapa-anexo" style="display:none" src="<?php echo base_url('img/mapa-anexo.jpg');?>" border="0" width="100%"/>{_('Mayores informes: Departamento de Información y Servicios Documentales, Tels. (5255) 5622-3960, 5622-3964, e-mail: sinfo@dgb.unam.mx, Horario: Lunes a viernes (8 a 16 hrs.)')}<br/><br/></div>
+								<div class="text-center"><input class="fa btn btn-default" type="submit" value="{_('Enviar')}   &#xf0e0;"/></div>
 								
 							</fieldset>
 						</form>
-						<?php 	endif;?>
+						{/if}
 					</td>
 				</tr>
-<?php 	endif;?>
+{/if}
 		</tbody>
 	</table>
-<?php endif;?>
+{/if}

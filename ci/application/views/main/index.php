@@ -45,7 +45,7 @@
 </div>
 <div class="row" id="main-sections">
     <div class="col-md-6">
-        <h3><?php _e('UN POCO DE NOSOTROS');?></h3>
+        <h3>{_('UN POCO DE NOSOTROS')}</h3>
         <p><?php _printf('%s es un portal especializado en revistas científicas y académicas publicadas en América Latina y el Caribe, que ofrece los siguientes servicios:','<span class="biblat"><acronym title="'._sprintf('Bibliografía Latinoamericana').'">Biblat</acronym></span>');?></p>
         <ul>
             <li><?php _printf('Referencias bibliográficas y texto completo de los artículos y documentos publicados en más de 3,000 revistas indizadas en %s y %s.','<a href="http://clase.unam.mx" target="_blank"><acronym title="'._sprintf('Citas Latinoamericanas en Ciencias Sociales y Humanidades').'">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="'._sprintf('Índice de Revistas Latinoamericanas en Ciencias').'">PERIÓDICA</acronym></a>');?></li><br/>
@@ -54,15 +54,15 @@
         </ul> 
 
         <p></p>
-        <p class="text-right"><a class="leer_mas" href="<?=site_url('sobre-biblat');?>"><?php _e('Leer más');?> <i class="fa fa-angle-double-right"></i></a></p>
+        <p class="text-right"><a class="leer_mas" href="<?=site_url('sobre-biblat');?>">{_('Leer más')} <i class="fa fa-angle-double-right"></i></a></p>
     </div><!-- Un poco de nosotros -->
     <div class="col-md-6">
-        <h3><?php _e('REVISTAS POR DISCIPLINA');?></h3>
+        <h3>{_('REVISTAS POR DISCIPLINA')}</h3>
         <div class="tagCloud"></div>
     </div><!-- Revistas por disciplina -->
     <div class="clearfix hidden-sm"></div>
     <div class="col-md-6">
-        <h3><?php _e('REVISTA POR ORDEN ALFABÉTICO');?></h3>
+        <h3>{_('REVISTA POR ORDEN ALFABÉTICO')}</h3>
         <div id="alfabetico">
             <p></p>
             <p class="text-center">
@@ -74,14 +74,14 @@
         </div>
     </div><!-- Revistas por ordern alfabético -->
     <div class="col-md-6">
-        <h3><?php _e('REVISTAS POR PAÍS');?></h3>
+        <h3>{_('REVISTAS POR PAÍS')}</h3>
 
         <div id="carousel-pais" class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
           <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <a href="<?=site_url("indice/pais/internacional");?>"><img class="img-responsive center-block" src="<?=base_url('img/america.jpg');?>" title="<?php _e('Internacional');?>"></a>
-                <div class="carousel-caption"><?php _e('Internacional');?></div>
+                <a href="<?=site_url("indice/pais/internacional");?>"><img class="img-responsive center-block" src="<?=base_url('img/america.jpg');?>" title="{_('Internacional')}"></a>
+                <div class="carousel-caption">{_('Internacional')}</div>
             </div>
     <?php foreach ($paises as $pais):?>
                 <div class="item">
@@ -104,29 +104,29 @@
     </div><!-- Revistas por país -->
     <div class="clearfix hidden-sm"></div>
     <div class="col-md-6">
-        <h3><?php _e('FRECUENCIAS (CLASE y PERIÓDICA)');?></h3>
+        <h3>{_('FRECUENCIAS (CLASE y PERIÓDICA)')}</h3>
         {$template.partials.frecuencias_accordion} 
     </div><!-- Frecuencias CLAPER -->
     <div class="col-md-6">
-        <h3><?php _e('INDICADORES BIBLIOMÉTRICOS');?></h3>
+        <h3>{_('INDICADORES BIBLIOMÉTRICOS')}</h3>
         <ul class="orange-list list-striped">
-            <li><a href="{site_url('indicadores/indice-coautoria')}"><?php _e('Índice de coautoría');?></a></li>
-            <li><a href="{site_url('indicadores/tasa-documentos-coautorados')}"><?php _e('Tasa de documentos coautorados');?></a></li>
-            <li><a href="{site_url('indicadores/grado-colaboracion')}"><?php _e('Grado de colaboración (Índice de Subramanyan)');?></a></li>
-            <li><a href="{site_url('indicadores/indice-colaboracion')}"><?php _e('Índice de colaboración (Índice de Lawani)');?></a></li>
-            <li><a href="{site_url('indicadores/modelo-elitismo')}"><?php _e('Modelo de Elitismo (Price)');?></a></li>
-            <li><a href="{site_url('indicadores/indice-densidad-documentos')}"><?php _e('Índice de densidad de documentos de Zakutina y Priyenikova');?></a></li>
-            <li><a href="{site_url('indicadores/indice-concentracion')}"><?php _e('Índice de concentración temática (Pratt)');?></a></li>
-            <li><a href="{site_url('indicadores/modelo-bradford-revista')}"><?php _e('Modelo de Bradford por revista');?></a></li>
-            <li><a href="{site_url('indicadores/modelo-bradford-institucion')}"><?php _e('Modelo de Bradford (Productividad institucional)');?></a></li>
-            <li><a href="{site_url('indicadores/productividad-exogena')}"><?php _e('Productividad exógena por título de revista');?></a></li>
-            <li><a href="javascript:;"><?php _e('Regionalización de la producción institucional');?></a></li>
-            <li><a href="javascript:;"><?php _e('Coautoría según país de la institución de afiliación del autor');?></a></li>
+            <li><a href="{site_url('indicadores/indice-coautoria')}">{_('Índice de coautoría')}</a></li>
+            <li><a href="{site_url('indicadores/tasa-documentos-coautorados')}">{_('Tasa de documentos coautorados')}</a></li>
+            <li><a href="{site_url('indicadores/grado-colaboracion')}">{_('Grado de colaboración (Índice de Subramanyan)')}</a></li>
+            <li><a href="{site_url('indicadores/indice-colaboracion')}">{_('Índice de colaboración (Índice de Lawani)')}</a></li>
+            <li><a href="{site_url('indicadores/modelo-elitismo')}">{_('Modelo de Elitismo (Price)')}</a></li>
+            <li><a href="{site_url('indicadores/indice-densidad-documentos')}">{_('Índice de densidad de documentos de Zakutina y Priyenikova')}</a></li>
+            <li><a href="{site_url('indicadores/indice-concentracion')}">{_('Índice de concentración temática (Pratt)')}</a></li>
+            <li><a href="{site_url('indicadores/modelo-bradford-revista')}">{_('Modelo de Bradford por revista')}</a></li>
+            <li><a href="{site_url('indicadores/modelo-bradford-institucion')}">{_('Modelo de Bradford (Productividad institucional)')}</a></li>
+            <li><a href="{site_url('indicadores/productividad-exogena')}">{_('Productividad exógena por título de revista')}</a></li>
+            <li><a href="javascript:;">{_('Regionalización de la producción institucional')}</a></li>
+            <li><a href="javascript:;">{_('Coautoría según país de la institución de afiliación del autor')}</a></li>
         </ul>
     </div><!-- Indicadores bibliometricos -->
     <div class="clearfix"></div>
     <div class="col-md-6">
-        <h3><?php _e('INDICADORES SCIELO');?></h3>
+        <h3>{_('INDICADORES SCIELO')}</h3>
         <div id="carousel-scielo" class="carousel slide" data-ride="carousel">
           <!-- Indicators -->
           <ol class="carousel-indicators">
@@ -137,37 +137,37 @@
           <div class="carousel-inner" role="listbox">
             <div class="item active">
                 <ul class="orange-list list-striped">
-                    <li><a href="javascript:;"><?php _e('Indicadores bibliométricos anuales de las revistas de la red SciELO');?></a> </li>
-                    <li><a href="javascript:;"><?php _e('Número de revistas incluidas en las colecciones de la red SciELO');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número de artículos publicados por revistas SciELO');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número y tipo de documento publicados en las revistas de las colecciones SciELO');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número de artículos incluidos en las colecciones SciELO por área del conocimiento');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número de artículos incluidos por área del conocimiento en las colecciones SciELO');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número de artículos incluidos en la red SciELO según país de la afiliación del autor');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número de artículos publicados por revistas SciELO según el país de la afiliación del autor');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número de artículos publicados por revistas SciELO según el país de publicación de la revista y país de la afiliación del autor');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número de artículos publicados por revistas SciELO según área del conocimiento y país de la afiliación del autor');?></a></li>
+                    <li><a href="javascript:;">{_('Indicadores bibliométricos anuales de las revistas de la red SciELO')}</a> </li>
+                    <li><a href="javascript:;">{_('Número de revistas incluidas en las colecciones de la red SciELO')}</a></li>
+                    <li><a href="javascript:;">{_('Número de artículos publicados por revistas SciELO')}</a></li>
+                    <li><a href="javascript:;">{_('Número y tipo de documento publicados en las revistas de las colecciones SciELO')}</a></li>
+                    <li><a href="javascript:;">{_('Número de artículos incluidos en las colecciones SciELO por área del conocimiento')}</a></li>
+                    <li><a href="javascript:;">{_('Número de artículos incluidos por área del conocimiento en las colecciones SciELO')}</a></li>
+                    <li><a href="javascript:;">{_('Número de artículos incluidos en la red SciELO según país de la afiliación del autor')}</a></li>
+                    <li><a href="javascript:;">{_('Número de artículos publicados por revistas SciELO según el país de la afiliación del autor')}</a></li>
+                    <li><a href="javascript:;">{_('Número de artículos publicados por revistas SciELO según el país de publicación de la revista y país de la afiliación del autor')}</a></li>
+                    <li><a href="javascript:;">{_('Número de artículos publicados por revistas SciELO según área del conocimiento y país de la afiliación del autor')}</a></li>
                 </ul>
             </div>
             <div class="item">
                 <ul class="orange-list list-striped">
-                    <li><a href="javascript:;"><?php _e('Número de citas recibidas por revista SciELO según área del conocimiento de la revista citante');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número de citas recibidas por revista SciELO según país de la afiliación del autor citante');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número de artículos citados según la edad de citación en artículos incluidos en todas las colecciones SciELO');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número de artículos citados según la edad de citación por título de revista');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número de artículos citados según la edad de citación por área del conocimiento de las revistas citantes');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Número de artículos citados según la edad de citación por país de la afiliación del autor citante');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Tipo de documento citado por los artículos incluidos en todas las colecciones SciELO');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Tipo de documento citado por revista citante');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Tipo de documento citado por área del conocimiento de la revista citante');?></a></li>
-                    <li><a href="javascript:;"><?php _e('Tipo de documento citado por país de la afiliación del autor citante');?></a> </li>
+                    <li><a href="javascript:;">{_('Número de citas recibidas por revista SciELO según área del conocimiento de la revista citante')}</a></li>
+                    <li><a href="javascript:;">{_('Número de citas recibidas por revista SciELO según país de la afiliación del autor citante')}</a></li>
+                    <li><a href="javascript:;">{_('Número de artículos citados según la edad de citación en artículos incluidos en todas las colecciones SciELO')}</a></li>
+                    <li><a href="javascript:;">{_('Número de artículos citados según la edad de citación por título de revista')}</a></li>
+                    <li><a href="javascript:;">{_('Número de artículos citados según la edad de citación por área del conocimiento de las revistas citantes')}</a></li>
+                    <li><a href="javascript:;">{_('Número de artículos citados según la edad de citación por país de la afiliación del autor citante')}</a></li>
+                    <li><a href="javascript:;">{_('Tipo de documento citado por los artículos incluidos en todas las colecciones SciELO')}</a></li>
+                    <li><a href="javascript:;">{_('Tipo de documento citado por revista citante')}</a></li>
+                    <li><a href="javascript:;">{_('Tipo de documento citado por área del conocimiento de la revista citante')}</a></li>
+                    <li><a href="javascript:;">{_('Tipo de documento citado por país de la afiliación del autor citante')}</a> </li>
                 </ul>
             </div>
           </div>
         </div><!-- carousel-scielo -->
     </div><!-- Indicadore SciELO -->
     <div class="col-md-6">
-        <h3><?php _e('OTROS INDICADORES');?></h3>
+        <h3>{_('OTROS INDICADORES')}</h3>
         <img class="img-responsive center-block" src="<?=base_url('/img/indicadores.jpg');?>" usemap="#Map" height="299" width="416">
             <map name="Map">
                 <area shape="rect" coords="12,3,137,305" href="{site_url('bibliometria/indicadores-por-revista')}">
