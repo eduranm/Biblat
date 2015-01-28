@@ -19,9 +19,9 @@
         <link rel="stylesheet" href="{base_url('css/jquery-ui.min.css')}" type="text/css" />
         <link rel="stylesheet" href="{base_url('assets/css/academicons.css')}" type="text/css" />
         <link rel="stylesheet" href="{base_url('assets/css/font-awesome.min.css')}" type="text/css" />
-        <link rel="stylesheet" href="{base_url('js/pnotify/jquery.pnotify.default.css')}" type="text/css" />
-        <link rel="stylesheet" href="{base_url('js/select2/select2.css')}" />
-        <link rel="stylesheet" href="{base_url('js/select2/select2-bootstrap.css')}" />
+        <link rel="stylesheet" href="{base_url('assets/js/pnotify/jquery.pnotify.default.css')}" type="text/css" />
+        <link rel="stylesheet" href="{base_url('assets/js/select2/select2.css')}" />
+        <link rel="stylesheet" href="{base_url('assets/js/select2/select2-bootstrap.css')}" />
 {if $canonical}
         <link rel="canonical" href="{$canonical}" />
 {/if}
@@ -233,10 +233,10 @@
         <script src="{base_url('js/jquery-ui.min.js')}"></script>
         <script src="{base_url('js/jquery.autosize.min.js')}"></script>
         <script src="{base_url('js/jquery.validate.min.js')}"></script>
-        <script src="{base_url('js/pnotify/jquery.pnotify.min.js')}"></script>
-        <script src="{base_url('js/select2/select2.js')}"></script>
+        <script src="{base_url('assets/js/pnotify/jquery.pnotify.min.js')}"></script>
+        <script src="{base_url('assets/js/select2/select2.js')}"></script>
         <script src="{base_url('js/jquery.blockUI.js')}"></script>
-        <script src="{base_url('js/advancedsearch/js/evol.advancedSearch.min.js')}"></script>
+        <script src="{base_url('assets/js/advancedsearch/js/evol.advancedSearch.min.js')}"></script>
 {foreach $template.js file}
         <script src="{$file}"></script>
 {/foreach}

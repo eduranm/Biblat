@@ -1428,13 +1428,13 @@ class Frecuencias extends CI_Controller {
 		$data['page_title'] = $data['main']['page_title'];
 		$this->template->set_partial('view_js', 'frecuencias/header', $data['header'], TRUE);
 		$this->template->css('css/jquery-ui.min.css');
-		$this->template->css('js/pqgrid/pqgrid.dev.css');
-		$this->template->css('js/pqgrid/themes/Office/pqgrid.css');
+		$this->template->css('assets/js/pqgrid/pqgrid.dev.css');
+		$this->template->css('assets/js/pqgrid/themes/Office/pqgrid.css');
 		$this->template->css('css/jquery.contextMenu.css');
 		$this->template->css('js/prettify/prettify.sunburst.css');
 		$this->template->js('js/jquery-ui.min.js');
-		$this->template->js('js/pqgrid/pqgrid.dev.js');
-		$this->template->js('js/pqgrid/localize/pq-localize-es.js');
+		$this->template->js('assets/js/pqgrid/pqgrid.dev.js');
+		$this->template->js('assets/js/pqgrid/localize/pq-localize-es.js');
 		$this->template->js('js/jquery.contextMenu.js');
 		$this->template->js('js/prettify/prettify.js');
 		$this->template->title($data['header']['title']);
