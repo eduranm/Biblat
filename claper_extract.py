@@ -4,6 +4,8 @@ import re
 import json
 import argparse
 from pprint import pprint, pformat
+from progressbar import *
+import subprocess
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-range', action='store_true', default=False, dest='scielo_range', help='Print scielo range list')
@@ -13,6 +15,8 @@ parser.add_argument('-scielo', action='store_true', default=False, dest='scielo'
 arguments = parser.parse_args()
 
 '''Inicializando variables para almacenar las etiquetas del registro y el registro actual'''
+pbar = None
+progress = 0
 registro = {}
 current = ""
 tags = ['008', '022', '024', '035', '036', '039', '041', '100', '110', '120', '222', '245', '260', '300', '504', '520', '546', '590', '650', '653', '654', '698', '856', 'CAT']
@@ -83,7 +87,8 @@ def duplicate_aff(tag, compare):
 	return False
 '''Funcion para agregar el registro'''
 def add_record():
-	global registro
+	global registro, pbar, progress
+
 	csv = ""
 	'''Ajustamos los autores con su institución'''
 	if '100' in registro and '120' in registro and '120in100' in registro and len(registro['100']) > 1: 
@@ -177,6 +182,8 @@ def add_record():
 			fCatalogador.write(csv + "\n")
 
 	registro = {}
+	progress += 1
+	pbar.update(progress)
 
 '''Abrimos el archivo con que contiene el resultado de p_print_03 de aleph'''
 def parse_database(database):
@@ -263,15 +270,33 @@ def parse_database(database):
 					'''Asignamos el valor de la última etiqueta agregada'''
 					lastTag = etiqueta
 
+def set_progress(path, dlib):
+	global pbar, progress
+	progress = 0
+	widgets = ['Parsing %s: ' % dlib, Percentage(), ' ', Bar(), ' ', ETA(), ' ', ' ']
+	tail = subprocess.Popen(["tail", "-1", path],
+		shell=False,
+		stdout=subprocess.PIPE,
+		stderr=subprocess.PIPE)
+	result = tail.stdout.readlines()
+	registros = int(result[0])
+	if pbar != None:
+		pbar.finish()
+	pbar = ProgressBar(widgets=widgets, maxval=registros).start()
+
 print arguments
 if arguments.clase:
-	parse_database('./database/cla01_valid.txt')
-	print registro
+	path = './database/cla01_valid.txt'
+	set_progress(path, "CLASE")
+	parse_database(path)
 if arguments.periodica:
-	parse_database('./database/per01_valid.txt')
-	print registro
+	path = './database/per01_valid.txt'
+	set_progress(path, "PERIODICA")
+	parse_database(path)
 if arguments.scielo:
-	parse_database('./database/scielo_valid.txt')
-	print registro
+	dlib = "SciELO"
+	path = './database/scielo_valid.txt'
+	set_progress(path)
+	parse_database(path)
 
 print sorted(tags)
