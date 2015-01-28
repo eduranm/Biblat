@@ -1,15 +1,15 @@
 [submodule "ci/js/select2"]
-	path = ci/js/select2
+	path = ci/assets/js/select2
 	url = git://github.com/ivaynberg/select2.git
 [submodule "ci/js/anythingslider"]
-	path = ci/js/anythingslider
+	path = ci/assets/js/anythingslider
 	url = https://github.com/CSS-Tricks/AnythingSlider.git
 [submodule "ci/js/pqgrid"]
-	path = ci/js/pqgrid
+	path = ci/assets/js/pqgrid
 	url = https://github.com/swarzesherz/grid.git
 [submodule "ci/js/pnotify"]
-	path = ci/js/pnotify
+	path = ci/assets/js/pnotify
 	url = https://github.com/sciactive/pnotify
 [submodule "ci/js/advancedsearch"]
-	path = ci/js/advancedsearch
+	path = ci/assets/js/advancedsearch
 	url = https://github.com/swarzesherz/advancedSearch.git
