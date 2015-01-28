@@ -170,7 +170,7 @@
         <h3><?php _e('OTROS INDICADORES');?></h3>
         <img class="img-responsive center-block" src="<?=base_url('/img/indicadores.jpg');?>" usemap="#Map" height="299" width="416">
             <map name="Map">
-                <area shape="rect" coords="12,3,137,305" href="javascript:;">
+                <area shape="rect" coords="12,3,137,305" href="{site_url('bibliometria/indicadores-por-revista')}">
                 <area shape="rect" coords="143,3,273,296" href="{site_url('conacyt')}">
                 <area shape="rect" coords="282,2,407,298" href="javascript:;">
             </map>
