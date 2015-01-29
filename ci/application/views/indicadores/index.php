@@ -3,17 +3,17 @@
 		<div class="col-md-6 form-group">
 			<select name="indicador" id="indicador" class="form-control" data-placeholder="{_('Seleccione indicador')}">
 			<option></option>
-<?php foreach ($indicadores as $key => $value): ?>
-				<option value="<?=$key;?>" <?php if($key == $indicador) echo "selected";?>><?=$value;?></option>
-<?php endforeach;?>
+{foreach $indicadores key value}
+				<option value="{$key}" {if $key == $indicador}selected{/if}>{$value}</option>
+{/foreach}
 			</select>
 		</div>
 		<div class="col-md-6 form-group">
 			<select name="disciplina" id="disciplina" class="form-control" data-placeholder="{_('Seleccione una disciplina')}" <?php if($indicador == "") echo "disabled";?>>
 			<option></option>
-<?php foreach ($disciplinas as $kdisciplina => $disciplina):?>
-				<option value="<?=$kdisciplina;?>"><?=$disciplina['disciplina'];?></option>
-<?php endforeach;?>
+{foreach $disciplinas kdisciplina disciplina}
+				<option value="{$kdisciplina}">{$disciplina.disciplina}</option>
+{/foreach}
 			</select>
 		</div>
 		<div class="clearfix"></div>

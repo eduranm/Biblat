@@ -1,9 +1,9 @@
 <div class="text-center">
 	<nav>
 	  <ul class="pagination hidden-xs hidden-sm">
-<?php foreach (range('A', 'Z') as $i):?>
-		<li <?if($i == $alpha):?>class="active" <?endif;?>><a href="<?=site_url("bibliometria/indicadores-por-revista/".strtolower($i));?>"><?=$i;?></a></li>
-<?php endforeach;?>
+{foreach range('A', 'Z') i}	  
+		<li {if $i == $letra}class="active" {/if}><a href="{$il=lower($i) site_url('bibliometria/indicadores-por-revista/$il')}">{$i}</a></li>
+{/foreach}
 	  </ul>
 	  {$alpha_links}
 	</nav>
