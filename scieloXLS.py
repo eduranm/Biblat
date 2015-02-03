@@ -524,12 +524,14 @@ def open_file(path):
 	nrows = sheet.nrows
 	ncols = sheet.ncols
 
-def parse_number(value):
+def parse_number(value, pfloat = False):
 	if value == '>10,0':
 		return '\'{0}\''.format(value)
 	if re.match(r'(^$|nan|-|inf)', '{0}'.format(value)) != None:
 		return 'NULL'
-	return float(value)
+	if pfloat:
+		return float(value)
+	return int(value)
 
 def parse_null(value):
 	if value == '':
@@ -543,13 +545,12 @@ def parse_a01a(path):
 	while row_index < nrows:
 		row_values = sheet.row_values(row_index)
 		year=2000
-		if discartRow.match(row_values[1]) == None:
-			network = row_values[1].strip()
+		network = row_values[1].strip()
+		if discartRow.match(network) == None and network in networkId:
 			row_index += 1
 			row_values_other = sheet.row_values(row_index)
 			for (value, value2) in zip(row_values[3:-1], row_values_other[3:-1]):
-				if isinstance(value, float) or isinstance(value2, float):
-					print "INSERT INTO \"networkDistribution\" VALUES ('{0}', '{1}', '{2:.0f}', '{3:.0f}');".format(networkId[network], year, parse_number(value), parse_number(value2))
+				print "INSERT INTO \"networkDistribution\" VALUES ({0}, {1}, {2}, {3});".format(networkId[network], year, parse_number(value), parse_number(value2))
 				year += 1
 		row_index += 1
 
@@ -560,11 +561,10 @@ def parse_a01b(path):
 	while row_index < nrows:
 		row_values = sheet.row_values(row_index)
 		year=2000
-		if discartRow.match(row_values[1]) == None:
-			network = row_values[1].strip()
-			for value in row_values[2:-1]:
-				if isinstance(value, float):
-					print "UPDATE \"networkDistribution\" SET revistas='{2:.0f}' WHERE \"networkId\"='{0}' AND anio='{1}';".format(networkId[network], year, parse_number(value))
+		network = row_values[1].strip()
+		if discartRow.match(network) == None and network in networkId:
+			for value in row_values[2:]:
+				print "UPDATE \"networkDistribution\" SET revistas={2} WHERE \"networkId\"={0} AND anio={1};".format(networkId[network], year, parse_number(value))
 				year += 1
 		row_index += 1
 
@@ -583,7 +583,7 @@ def parse_a01c(path):
 				area = row_values[2].strip()
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"networkArea\" VALUES ('{0}', '{1}', '{2}', '{3:.0f}');".format(networkId[network], areaId[area], year, parse_number(value))
+						print "INSERT INTO \"networkArea\" VALUES ({0}, {1}, {2}, {3});".format(networkId[network], areaId[area], year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -602,7 +602,7 @@ def parse_a01d(path):
 				country = row_values[2].strip()
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"networkAffiliation\" VALUES ('{0}', '{1}', '{2}', '{3:.0f}');".format(networkId[network], affiliationCountry[country], year, parse_number(value))
+						print "INSERT INTO \"networkAffiliation\" VALUES ({0}, '{1}', {2}, {3});".format(networkId[network], affiliationCountry[country], year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -617,7 +617,7 @@ def parse_a02a(path):
 			country = row_values[1].strip()
 			for value in row_values[2:-1]:
 				if isinstance(value, float):
-					print "INSERT INTO \"affiliationDistribution\" VALUES('{0}', '{1}', '{2:.0f}');".format(affiliationCountry[country], year, parse_number(value))
+					print "INSERT INTO \"affiliationDistribution\" VALUES('{0}', {1}, {2});".format(affiliationCountry[country], year, parse_number(value))
 				year += 1
 		row_index += 1
 
@@ -636,7 +636,7 @@ def parse_a02b(path):
 				country = row_values[2].strip()
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"journalAffiliation\" VALUES (E'{0}', '{1}', '{2}', '{3:.0f}');".format(journal, affiliationCountry[country], year, parse_number(value))
+						print "INSERT INTO \"journalAffiliation\" VALUES (E'{0}', '{1}', {2}, {3});".format(journal, affiliationCountry[country], year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -655,7 +655,7 @@ def parse_a02c(path):
 				affiliation = row_values[2].strip()
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"publicationAffiliation\" VALUES ('{0}', '{1}', '{2}', '{3:.0f}');".format(affiliationCountry[publication], affiliationCountry[affiliation], year, parse_number(value))
+						print "INSERT INTO \"publicationAffiliation\" VALUES ('{0}', '{1}', {2}, {3});".format(affiliationCountry[publication], affiliationCountry[affiliation], year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -674,7 +674,7 @@ def parse_a02d(path):
 				country = row_values[2].strip()
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"publicationAffiliation\" VALUES ('{0}', '{1}', '{2}', '{3:.0f}');".format(areaId[area], affiliationCountry[country], year, parse_number(value))
+						print "INSERT INTO \"publicationAffiliation\" VALUES ({0}, '{1}', {2}, {3});".format(areaId[area], affiliationCountry[country], year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -693,7 +693,7 @@ def parse_a03b(path):
 				coautors = int(row_values[2])
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"areaCoautor\" VALUES ('{0}', '{1}', '{2}', '{3:.0f}');".format(areaId[area], coautors, year, parse_number(value))
+						print "INSERT INTO \"areaCoautor\" VALUES ({0}, {1}, {2}, {3});".format(areaId[area], coautors, year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -712,7 +712,7 @@ def parse_b01a(path):
 				journal = row_values[2].strip().replace('\'', '\\\'')
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"networkJournal\" VALUES ('{0}', E'{1}', '{2}', '{3:.0f}');".format(networkId[network], journal, year, parse_number(value))
+						print "INSERT INTO \"networkJournal\" VALUES ({0}, E'{1}', {2}, {3});".format(networkId[network], journal, year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -741,7 +741,7 @@ def parse_b01b(path):
 				journal = journal.replace('\'', '\\\'')
 				for value in row_values[4:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"networkAreasJournal\" VALUES ('{0}', '{1}', {2}, E'{3}', {4}, {5}, {6:.0f});".format(networkId[network], areaId[area], areaConacytIdL, journal, neumonic, year, parse_number(value))
+						print "INSERT INTO \"networkAreasJournal\" VALUES ({0}, {1}, {2}, E'{3}', {4}, {5}, {6});".format(networkId[network], areaId[area], areaConacytIdL, journal, neumonic, year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -755,14 +755,14 @@ def parse_b01c(path):
 			'year': int(row_values[0]),
 			'journal': row_values[1].strip().replace('\'', '\\\''),
 			'networkId': 0,
-			'fasciculos': int(parse_number(row_values[4])) if isinstance(row_values[4], float) else parse_number(row_values[4]),
-			'articulos': int(parse_number(row_values[5])) if isinstance(row_values[5], float) else parse_number(row_values[5]),
-			'referencias': int(parse_number(row_values[6])) if isinstance(row_values[6], float) else parse_number(row_values[6]),
-			'citas': int(parse_number(row_values[7])) if isinstance(row_values[7], float) else parse_number(row_values[7]),
-			'autocitacion': parse_number(row_values[8]),
-			'factorImpacto': parse_number(row_values[9]),
-			'inmediates': parse_number(row_values[10]),
-			'vidaMedia': parse_number(row_values[11]),
+			'fasciculos': parse_number(row_values[4]),
+			'articulos': parse_number(row_values[5]),
+			'referencias': parse_number(row_values[6]),
+			'citas': parse_number(row_values[7]),
+			'autocitacion': parse_number(row_values[8], True),
+			'factorImpacto': parse_number(row_values[9], True),
+			'inmediates': parse_number(row_values[10], True),
+			'vidaMedia': parse_number(row_values[11], True),
 		}
 		query = "INSERT INTO \"indicadoresRevistaAnual\" VALUES(%(networkId)d, E'%(journal)s', %(year)d, %(fasciculos)s, %(articulos)s, %(referencias)s, %(citas)s, %(autocitacion)s, %(factorImpacto)s, %(inmediates)s, %(vidaMedia)s);"
 		if row_values[2] in networkId:
@@ -784,7 +784,7 @@ def parse_c01a(path):
 			rango = row_values[1].strip()
 			for value in row_values[2:-1]:
 				if isinstance(value, float):
-					print "INSERT INTO \"ageCitationDoc\" VALUES('{0}', '{1}', '{2:.0f}');".format(rango, year, parse_number(value))
+					print "INSERT INTO \"ageCitationDoc\" VALUES('{0}', {1}, {2});".format(rango, year, parse_number(value))
 				year += 1
 		row_index += 1
 
@@ -799,7 +799,7 @@ def parse_c01b(path):
 			docType = row_values[1].strip()
 			for value in row_values[2:-1]:
 				if isinstance(value, float):
-					print "INSERT INTO \"typeCitationDoc\" VALUES({0}, {1}, {2:.0f});".format(docTypeDct[docType], year, parse_number(value))
+					print "INSERT INTO \"typeCitationDoc\" VALUES({0}, {1}, {2});".format(docTypeDct[docType], year, parse_number(value))
 				year += 1
 		row_index += 1
 
@@ -818,7 +818,7 @@ def parse_c02a(path):
 				rango = row_values[2].strip()
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"journalAgeCitationDoc\" VALUES (E'{0}', '{1}', {2}, {3:.0f});".format(journal, rango, year, parse_number(value))
+						print "INSERT INTO \"journalAgeCitationDoc\" VALUES (E'{0}', '{1}', {2}, {3});".format(journal, rango, year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -837,7 +837,7 @@ def parse_c02b(path):
 				docType = row_values[2].strip()
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"journalTypeCitationDoc\" VALUES (E'{0}', {1}, {2}, {3:.0f});".format(journal, docTypeDct[docType], year, parse_number(value))
+						print "INSERT INTO \"journalTypeCitationDoc\" VALUES (E'{0}', {1}, {2}, {3});".format(journal, docTypeDct[docType], year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -856,7 +856,7 @@ def parse_c03a(path):
 				rango = row_values[2].strip()
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"areaAgeCitationDoc\" VALUES ({0}, '{1}', {2}, {3:.0f});".format(areaId[area], rango, year, parse_number(value))
+						print "INSERT INTO \"areaAgeCitationDoc\" VALUES ({0}, '{1}', {2}, {3});".format(areaId[area], rango, year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -875,7 +875,7 @@ def parse_c03b(path):
 				docType = row_values[2].strip()
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"areaTypeCitationDoc\" VALUES ({0}, {1}, {2}, {3:.0f});".format(areaId[area], docTypeDct[docType], year, parse_number(value))
+						print "INSERT INTO \"areaTypeCitationDoc\" VALUES ({0}, {1}, {2}, {3});".format(areaId[area], docTypeDct[docType], year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -894,7 +894,7 @@ def parse_c03c(path):
 				journal = row_values[2].strip().replace('\'', '\\\'')
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"areaCiatationJournal\" VALUES ({0}, E'{1}', {2}, {3:.0f});".format(areaId[area], journal, year, parse_number(value))
+						print "INSERT INTO \"areaCiatationJournal\" VALUES ({0}, E'{1}', {2}, {3});".format(areaId[area], journal, year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -913,7 +913,7 @@ def parse_c04a(path):
 				rango = row_values[2].strip()
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"affiliationAgeCitationDoc\" VALUES ('{0}', '{1}', {2}, {3:.0f});".format(affiliationCountry[country], rango, year, parse_number(value))
+						print "INSERT INTO \"affiliationAgeCitationDoc\" VALUES ('{0}', '{1}', {2}, {3});".format(affiliationCountry[country], rango, year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -932,7 +932,7 @@ def parse_c04b(path):
 				docType = row_values[2].strip()
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "INSERT INTO \"affiliationTypeCiationDoc\" VALUES ('{0}', {1}, {2}, {3:.0f});".format(affiliationCountry[country], docTypeDct[docType], year, parse_number(value))
+						print "INSERT INTO \"affiliationTypeCiationDoc\" VALUES ('{0}', {1}, {2}, {3});".format(affiliationCountry[country], docTypeDct[docType], year, parse_number(value))
 					year += 1
 		row_index += 1
 
@@ -952,7 +952,7 @@ def parse_c04c(path):
 				journal = row_values[2].strip().replace('\'', '\\\'')
 				for value in row_values[3:-1]:
 					if isinstance(value, float):
-						print "\tVALUES ('{0}', E'{1}', {2}, {3:.0f}),".format(affiliationCountry[country], journal, year, parse_number(value))
+						print "\tVALUES ('{0}', E'{1}', {2}, {3}),".format(affiliationCountry[country], journal, year, parse_number(value))
 					year += 1
 		row_index += 1
 basePath = ""
