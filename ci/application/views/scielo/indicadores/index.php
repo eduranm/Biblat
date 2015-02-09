@@ -12,31 +12,31 @@
 {/foreach}
 			</select>
 		</div>
-		<div class="col-md-6 form-group">
+		<div class="col-md-6 form-group" style="display:none;">
 			<select name="coleccion[]" id="coleccion" class="form-control" multiple="" data-placeholder="{_('Seleccione una o varias colecciones')}" <?php if($indicador == "") echo "disabled";?>>
 {foreach $colecciones coleccion}
 				<option value="{$coleccion.slug}">{$coleccion.name}</option>
 {/foreach}
 			</select>
 		</div>
-		<div class="col-md-6 form-group">
+		<div class="col-md-6 form-group" style="display:none;">
 			<select name="area[]" id="area" class="form-control" multiple="" data-placeholder="{_('Seleccione una o varias areas')}" <?php if($indicador == "") echo "disabled";?>>
 {foreach $areas area}
 				<option value="{$area.slug}">{$area.name}</option>
 {/foreach}
 			</select>
 		</div>
-		<div class="col-md-6 form-group">
+		<div class="col-md-6 form-group" style="display:none;">
 			<select name="revista[]" id="revista" class="form-control" disabled multiple data-placeholder="{_('Seleccione una o varias revistas')}">
 				<option></option>
 			</select>
 		</div>
-		<div class="col-md-6 form-group">
+		<div class="col-md-6 form-group" style="display:none;">
 			<select name="paisRevista[]" id="paisRevista" class="form-control" disabled multiple data-placeholder="{_('Seleccione uno o varios países de la revista')}">
 				<option></option>
 			</select>
 		</div>
-		<div class="col-md-6 form-group">
+		<div class="col-md-6 form-group" style="display:none;">
 			<select name="paisAutor[]" id="paisAutor" class="form-control" disabled multiple data-placeholder="{_('Seleccione uno o varios países de la afiliación del autor')}">
 				<option></option>
 			</select>

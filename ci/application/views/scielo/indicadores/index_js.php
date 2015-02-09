@@ -72,8 +72,11 @@ $(document).ready(function(){
 			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + indicador + coleccionURL);
 		}
 		$("#chartContainer, #bradfodContainer, #prattContainer").hide();
-		switch (indicador){
+		switch (realIndicator){
 			case 'distribucion-articulos-coleccion':
+			case 'distribucion-articulos-coleccion-area':
+			case 'distribucion-articulos-coleccion-revista':
+			case 'distribucion-articulos-coleccion-afiliacion':
 				realIndicator = indicador;
 				$('#tabs, #prattContainer').show();
 				if(coleccion != "" && coleccion != null){
@@ -137,6 +140,11 @@ $(document).ready(function(){
 				if(paisAutor !== "" && paisAutor != null){
 					$('#paisAutor').trigger('change');
 				}
+				break;
+			case 'distribucion-articulos-coleccion-area-revista':
+				revista = $("#revista").val();
+				$('#area').trigger('change');
+				break;
 			default:
 				break;
 		}
@@ -152,16 +160,18 @@ $(document).ready(function(){
 			areaURL='/area/' + area.join('/');
 		}
 		if(typeof history.pushState === "function" && !popState.area){
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + indicador + coleccionURL + areaURL);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + indicador + coleccionURL + areaURL + revistaURL);
 		}
 		$("#chartContainer, #bradfodContainer, #prattContainer").hide();
 		switch (realIndicator){
 			case 'distribucion-articulos-coleccion':
 			case 'distribucion-articulos-coleccion-area':
+			case 'distribucion-articulos-coleccion-area-revista':
 				$('#tabs, #chartContainer').show();
 				if(area != "" && area != null){
 					$('#paisAutor').select2("enable", false).parent().hide();
-					realIndicator = 'distribucion-articulos-coleccion-area';
+					if (revista == null || revista == '')
+						realIndicator = 'distribucion-articulos-coleccion-area';
 					$.ajax({
 						url: '<?=site_url("scielo/indicadores/getOptionData");?>',
 						type: 'POST',
@@ -187,11 +197,14 @@ $(document).ready(function(){
 								});
 								if(revista != null && revista != '')
 									$("#revista").val(revista);
+								revista = $("#revista").val();
 								$("#revista").show().select2({allowClear: true, closeOnSelect: true}).select2("enable", true)
 								.parent().show();
 							}
 						}
 					});
+					if (revista == null || revista == '')
+						realIndicator = 'distribucion-articulos-coleccion-area';
 					updateInfo();
 					if(urlData == null || typeof urlData.revista === "undefined")
 						setPeriodos();

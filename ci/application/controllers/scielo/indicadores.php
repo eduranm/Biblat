@@ -22,7 +22,6 @@ class Indicadores extends CI_Controller {
 					'distribucion-coautor-area-afiliacion' => _('Distribución de artículos por área y número de co-autores'),
 				),
 			_('Colección') => array(
-					'distribucion-articulos-coleccion-area-revista' => _('Distribución de artículos por colección, área y revista'),
 					'generales' => _('Indicadores generales por revista')
 				),
 			_('Citación') => array(
@@ -136,6 +135,7 @@ class Indicadores extends CI_Controller {
 				$this->getRevistaAfiliacionCollection();
 				break;
 			case 'distribucion-articulos-coleccion-area':
+			case 'distribucion-articulos-coleccion-area-revista':
 				$this->getRevistaCollectionArea();
 				break;
 			default:
