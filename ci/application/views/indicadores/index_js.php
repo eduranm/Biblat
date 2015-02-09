@@ -70,7 +70,7 @@ jQuery(document).ready(function(){
 		} else if (jQuery.inArray(indicadorValue, soloDisciplina) > -1) {
 			jQuery("#generarIndicador").submit();
 		} else {
-			if(!loading.status){
+			if(!loading.status && !popState.disciplina){
 				loading.start();
 			}
 			jQuery("#orPaisRevistaColumn").show();
@@ -126,6 +126,8 @@ jQuery(document).ready(function(){
 							sticker: false
 						});
 					}
+				},
+				complete: function(){
 					loading.end();
 				}
 			});
@@ -401,7 +403,9 @@ jQuery(document).ready(function(){
 
 					break;
 			}
-			loading.end();
+		  },
+		  complete: function(){
+		  	loading.end();
 		  }
 		});
 		return false;
@@ -498,7 +502,9 @@ setPeridos = function(){
 				jQuery("#generate").prop('disabled', true);
 				console.log(data.error);
 			}
-			//loading.end();
+		},
+		complete: function(){
+			loading.end();
 		}
 	});
 };

@@ -83,7 +83,7 @@ class Indicadores extends CI_Controller {
 		$this->template->js('js/jquery.serializeJSON.min.js');
 		$this->template->js('js/colorbox.js');
 		$this->template->js('//www.google.com/jsapi');
-		$this->template->set_meta('description', $this->indicadores[$data['main']['indicador']]);
+		$this->template->set_meta('description', $this->indicadores[$indicador]);
 		$this->template->set_breadcrumb(_('Indicadores bibliométricos'));
 		$this->template->build('indicadores/index', $data['main']);
 	}
