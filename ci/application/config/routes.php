@@ -86,6 +86,8 @@ $route[$langs.'/revista/(.*)'] = "revista/index/$1";
 
 $route[$langs.'/indicadores/modelo-bradford-revista/disciplina/(.*)/revista/(.*)/documentos(.*)'] = "indicadores/bradfordDocumentos/$1$2";
 $route[$langs.'/indicadores/(indice-coautoria|tasa-documentos-coautorados|grado-colaboracion|modelo-elitismo|indice-colaboracion|indice-densidad-documentos|indice-concentracion|modelo-bradford-revista|modelo-bradford-institucion|productividad-exogena)(.*)'] = "indicadores/index/$1";
+/*≠≠≠≠≠≠≠≠ Indicadores scielo ≠≠≠≠≠≠≠≠*/
+$route[$langs.'/scielo/indicadores/(distribucion-(articulos|revista|articulos-area|articulos-afiliacion)-coleccion)(.*)'] = "scielo/indicadores/index/$1";
 
 /*≠≠≠≠≠≠≠≠ Frecuencias por autor ≠≠≠≠≠≠≠≠*/
 $route[$langs.'/frecuencias/autor/([^/]+)'] = "frecuencias/autor/slug/$1";

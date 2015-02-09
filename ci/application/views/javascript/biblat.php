@@ -45,7 +45,8 @@ var loading = {
 			},
 			onUnblock: function(){
 				loading.status=false;
-			}
+			},
+			ignoreIfBlocked: true
 		});
 	},
 	end: function(){

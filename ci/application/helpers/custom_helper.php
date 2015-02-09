@@ -375,3 +375,10 @@ if ( ! function_exists('pqgrid_args') ):
 		return $args;
 	}
 endif;
+
+if ( ! function_exists('array_unchunk') ):
+	function array_unchunk($array)
+	{
+		return call_User_Func_Array('array_Merge',$array);
+	}
+endif;
