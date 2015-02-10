@@ -1,4 +1,3 @@
-{literal}
 		jQuery(document).ready(function(){
 			var colM = <?=$colModel?>;
 			var dataModel = {
@@ -87,4 +86,3 @@
 				}
 			});
 		});
-{/literal}

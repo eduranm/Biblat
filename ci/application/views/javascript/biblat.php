@@ -1,4 +1,3 @@
-{literal}
 <?php if(ENVIRONMENT === "production"):?>
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-33940112-1']);
@@ -323,4 +322,3 @@ $(document)
 .on('click.bs.dropdown.data-api', toggle, Dropdown.prototype.toggle)
 .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu], [role=listbox]', Dropdown.prototype.keydown)
 }(jQuery);
-{/literal}

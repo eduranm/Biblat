@@ -4,7 +4,7 @@ class Buscar extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
-		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
+		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE, FALSE);
 		$this->template->set_partial('submenu', 'layouts/submenu');
 		$this->template->set_partial('search', 'layouts/search');
 		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
@@ -191,7 +191,7 @@ class Buscar extends CI_Controller{
 		$data['main']['resultados']=$articulosResultado['articulos'];
 		$this->db->close();
 		/*Vistas*/
-		$this->template->set_partial('view_js', 'buscar/header', $data['header'], TRUE);
+		$this->template->set_partial('view_js', 'buscar/header', $data['header'], TRUE, FALSE);
 		$this->template->title($data['header']['title']);
 		$this->template->css('assets/css/colorbox.css');
 		$this->template->css('assets/css/colorboxIndices.css');

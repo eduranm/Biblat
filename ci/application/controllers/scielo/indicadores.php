@@ -80,7 +80,7 @@ class Indicadores extends CI_Controller {
 		$this->db->close();
 
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
-		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
+		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE, FALSE);
 		$this->template->set_partial('submenu', 'layouts/submenu');
 		$this->template->set_partial('search', 'layouts/search');
 		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
@@ -97,7 +97,7 @@ class Indicadores extends CI_Controller {
 		$data['indicador'] = $indicador;
 		/*Vistas*/
 		$data['page_title'] = $this->indicadores[$indicador] == '' ? _('Indicadores bibliométricos') : $this->indicadores[$indicador];
-		$this->template->set_partial('view_js', 'scielo/indicadores/index_js', $data, FALSE);
+		$this->template->set_partial('view_js', 'scielo/indicadores/index_js', $data, TRUE, FALSE);
 		$this->template->title($data['header']['title']);
 		$this->template->css('css/jquery.slider.min.css');
 		$this->template->css('css/colorbox.css');

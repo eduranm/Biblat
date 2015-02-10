@@ -38,7 +38,7 @@ class Frecuencias extends CI_Controller {
 		$data['disciplinas'] = $this->disciplinas;
 		$this->db->close();
 
-		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
+		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE, FALSE);
 		$this->template->set_partial('submenu', 'layouts/submenu');
 		$this->template->set_partial('search', 'layouts/search');
 		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
@@ -1423,10 +1423,9 @@ class Frecuencias extends CI_Controller {
 		$data['header']['sortDir'] = $args['orderDir'];
 		$data['header']['sortIndx'] = array_search($args['defaultOrder'], $args['sortBy']);
 		$data['header']['args'] = pqgrid_args($args);
-		$data['header']['content'] =  $this->load->view('frecuencias/header', $data['header'], TRUE);
 
 		$data['page_title'] = $data['main']['page_title'];
-		$this->template->set_partial('view_js', 'frecuencias/header', $data['header'], TRUE);
+		$this->template->set_partial('view_js', 'frecuencias/header', $data['header'], TRUE, FALSE);
 		$this->template->css('css/jquery-ui.min.css');
 		$this->template->css('assets/js/pqgrid/pqgrid.dev.css');
 		$this->template->css('assets/js/pqgrid/themes/Office/pqgrid.css');
@@ -1766,10 +1765,9 @@ class Frecuencias extends CI_Controller {
 		$data['main']['resultados']=$articulosResultado['articulos'];
 		$data['header']['title'] = sprintf($args['title'], $articulosResultado['totalRows']);
 		$data['header']['slugHighLight']=slugHighLight($args['slug']);
-		$data['header']['content'] =  $this->load->view('buscar/header', $data['header'], TRUE);
 		$data['main']['page_title'] = sprintf($args['page_title'], $articulosResultado['totalRows']);
 		$data['page_title'] = $data['main']['page_title'];
-		$this->template->set_partial('view_js', 'buscar/header', $data['header'], TRUE);
+		$this->template->set_partial('view_js', 'buscar/header', $data['header'], TRUE, FALSE);
 		$this->template->css('assets/css/colorbox.css');
 		$this->template->css('assets/css/colorboxIndices.css');
 		$this->template->js('assets/js/colorbox.js');

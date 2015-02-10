@@ -1,4 +1,3 @@
-{literal}
 		jQuery(document).ready(function()
 		{
 			var w = 480,
@@ -50,4 +49,3 @@
 				navigation: true
 			});
 		});
-{/literal}

@@ -60,7 +60,7 @@ class Indicadores extends CI_Controller {
 		$this->load->vars($data);
 
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
-		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
+		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE, FALSE);
 		$this->template->set_partial('submenu', 'layouts/submenu');
 		$this->template->set_partial('search', 'layouts/search');
 		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
@@ -75,7 +75,7 @@ class Indicadores extends CI_Controller {
 		$data = array();
 		/*Vistas*/
 		$data['main']['page_title'] = $this->indicadores[$indicador];
-		$this->template->set_partial('view_js', 'indicadores/index_js', $data['header'], TRUE);
+		$this->template->set_partial('view_js', 'indicadores/index_js', $data['header'], TRUE, FALSE);
 		$this->template->title($data['header']['title']);
 		$this->template->css('css/jquery.slider.min.css');
 		$this->template->css('css/colorbox.css');
@@ -1052,10 +1052,9 @@ class Indicadores extends CI_Controller {
 		$data['main']['resultados']=$articulosResultado['articulos'];
 		$data['header']['title'] = sprintf($args['title'], $articulosResultado['totalRows']);
 		$data['header']['slugHighLight']=slugHighLight($args['slug']);
-		$data['header']['content'] =  $this->parser->parse_string('buscar/header', $data['header'], TRUE);
 		$data['main']['page_title'] = sprintf($args['page_title'], $articulosResultado['totalRows']);
 		$data['page_title'] = $data['main']['page_title'];
-		$this->template->set_partial('view_js', 'buscar/header', $data['header'], TRUE);
+		$this->template->set_partial('view_js', 'buscar/header', $data['header'], TRUE, FALSE);
 		$this->template->css('assets/css/colorbox.css');
 		$this->template->css('assets/css/colorboxIndices.css');
 		$this->template->js('assets/js/colorbox.js');

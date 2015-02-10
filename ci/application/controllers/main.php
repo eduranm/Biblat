@@ -5,7 +5,7 @@ class Main extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
-		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
+		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE, FALSE);
 		$this->template->set_partial('submenu', 'layouts/submenu');
 		$this->template->set_partial('search', 'layouts/search');
 		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
@@ -44,7 +44,7 @@ class Main extends CI_Controller{
 		$this->db->close();
 		$data['index']['paises'] = $paises;
 		/*Vistas*/
-		$this->template->set_partial('view_js', 'main/header', array(), TRUE);
+		$this->template->set_partial('view_js', 'main/header', array(), TRUE, FALSE);
 		$this->template->set_partial('frecuencias_accordion', 'frecuencias/index', array(), TRUE);
 		$this->template->title(_('Biblat - Bibliografía latinoamericana'));
 		$this->template->js('js/d3.js');

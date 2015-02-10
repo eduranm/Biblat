@@ -1,4 +1,3 @@
-{literal}
 google.load("visualization", "1", {packages:["corechart", "table"], 'language': 'en'});
 var chart = {normal: null, bradford:null, group1:null, group2:null, pratt:null, data:null};
 chart.data = {normal: null, bradford:null, group1:null, group2:null, pratt:null, prattJ:null};
@@ -672,4 +671,3 @@ changeTableClass = function (argument) {
 	.addClass('table table-bordered table-condensed table-striped')
 	.parent().addClass('table-responsive');
 }
-{/literal}

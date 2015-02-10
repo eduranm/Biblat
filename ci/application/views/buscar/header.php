@@ -1,4 +1,3 @@
-{literal}
 	$(document).ready(function() {
 		$(".add-ref").click(function(){
 			console.log($(this).attr("id"));
@@ -35,4 +34,3 @@
 		$('.evo-bDel').trigger("click");
 <?php endif;?>
 	});
-{/literal}

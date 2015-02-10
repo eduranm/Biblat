@@ -6,7 +6,7 @@ class Conacyt extends CI_Controller {
 	{
 		parent::__construct();
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
-		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE);
+		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE, FALSE);
 		$this->template->set_partial('submenu', 'layouts/submenu');
 		$this->template->set_partial('search', 'layouts/search');
 		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
@@ -89,7 +89,7 @@ class Conacyt extends CI_Controller {
 			endswitch;
 		endforeach;
 
-		$this->template->set_partial('view_js', 'javascript/pdf_viewer', $data, FALSE);
+		$this->template->set_partial('view_js', 'javascript/pdf_viewer', $data, TRUE, FALSE);
 		$this->template->title(_('Biblat - Reporte bibliométrico CONACYT').$data['name']);
 		$this->template->set_meta('description', _('Reporte bibliométrico CONACYT'));
 		$this->template->set_meta('google', _('notranslate'));
