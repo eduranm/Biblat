@@ -24,7 +24,7 @@ $config['parser_enabled'] = TRUE;
 |
 */
 
-$config['minify_enabled'] = TRUE;
+$config['minify_enabled'] = ENVIRONMENT === "production" ? TRUE : FALSE;
 
 /*
 |--------------------------------------------------------------------------
