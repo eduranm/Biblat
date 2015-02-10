@@ -9,7 +9,7 @@
 			</select>
 		</div>
 		<div class="col-md-6 form-group">
-			<select name="disciplina" id="disciplina" class="form-control" data-placeholder="{_('Seleccione una disciplina')}" <?php if($indicador == "") echo "disabled";?>>
+			<select name="disciplina" id="disciplina" class="form-control" data-placeholder="{_('Seleccione una disciplina')}" {if $indicador == ""}disabled{/if}>
 			<option></option>
 {foreach $disciplinas kdisciplina disciplina}
 				<option value="{$kdisciplina}">{$disciplina.disciplina}</option>
@@ -52,7 +52,7 @@
 						<div id="chartTitle"></div>
 						<div id="chart" class="chart_data"></div>
 						<div class="chartCopyright">
-							{_('Fuente:')} <a href="<?=base_url();?>">biblat.unam.mx</a>
+							{_('Fuente:')} <a href="{base_url()}">biblat.unam.mx</a>
 						</div>
 					</div>
 					<div id="bradfodContainer" style="display:none;">
@@ -91,7 +91,7 @@
 						  </a>
 						</div>
 						<div class="chartCopyright">
-							{_('Fuente:')} <a href="<?=base_url();?>">biblat.unam.mx</a>
+							{_('Fuente:')} <a href="{base_url()}">biblat.unam.mx</a>
 						</div>
 					</div>
 					<div id="prattContainer" style="display:none;">
@@ -115,7 +115,7 @@
 						  </a>
 						</div>
 						<div class="chartCopyright">
-							{_('Fuente:')} <a href="<?=base_url();?>">biblat.unam.mx</a>
+							{_('Fuente:')} <a href="{base_url()}">biblat.unam.mx</a>
 						</div>
 					</div>
 				</div>
@@ -203,7 +203,7 @@
 						</div>
 						<p class="text-left ident1">
 							{_('Donde:')}<br/>
-							<i>E</i> = <?php _printf('Elite de autores que publican el 50%% de los trabajos.');?><br/>
+							<i>E</i> = {_('Elite de autores que publican el 50% de los trabajos.')}<br/>
 							<i>N</i> = {_('Población total de autores.')}
 						</p>					
 					</div>

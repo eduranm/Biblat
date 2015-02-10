@@ -305,7 +305,7 @@
       {_('Etiqueta del campo: 008e')}<br/>
       {_('Tipo de campo: obligatorio, alfabético')}<br/>
       </em></strong></p>
-      <p class="text-justify"><?php _printf('El país en este campo corresponde al lugar en donde se edita la revista. También es anotado por la persona responsable de la circulación del material y en el caso de títulos editados por organismos internacionales, con sede en países de fuera de América Latina y el Caribe, se asienta: Internacional. En el sistema en línea, el analista seleccionará de la tabla correspondiente, el nombre completo del país indicado en la hoja de %s.','<em>Reporte de precodificación</em>');?></p>
+      <p class="text-justify">{_('El país en este campo corresponde al lugar en donde se edita la revista. También es anotado por la persona responsable de la circulación del material y en el caso de títulos editados por organismos internacionales, con sede en países de fuera de América Latina y el Caribe, se asienta: Internacional. En el sistema en línea, el analista seleccionará de la tabla correspondiente, el nombre completo del país indicado en la hoja de <em>Reporte de precodificación</em>.')}</p>
     </div>
 
     <div id="issn">
@@ -1202,7 +1202,7 @@
       </div><br/>
       <div class="textoMan">
         <p><strong>{_('Volumen, número, mes, parte y paginación')}</strong></p>
-        <p><?php _printf('La descripción bibliográfica o colación, consta de los siguientes elementos relativos al fascículo de una revista: %s.','<em>volumen, número, mes, parte y paginación</em>');?></p>
+        <p>{_('La descripción bibliográfica o colación, consta de los siguientes elementos relativos al fascículo de una revista: <em>volumen, número, mes, parte y paginación</em>.')}</p>
         <p>{_('Estos datos serán codificados de acuerdo con la información contenida en el fascículo y cada elemento se ingresará en el subcampo correspondiente, sin punto final, ni espacios entre las letras que anteceden a cada uno de ellos.')}</p>
         <p>{_('El volumen será ingresado en el subcampo a y deberá antecederle la letra V; el número en el subcampo b antecedido de la letra N; los meses en el subcampo c abreviados, en letras minúsculas y sin punto; la parte (suplementos, números especiales, estaciones del año, etc.) en el subcampo d sin abreviar, también en minúsculas y sin punto. Finalmente, la paginación siempre en el subcampo e antecedida de la letra P.')}</p>
         <p class="text-center"><img src="{base_url('img/descrbibliogr.jpg')}"/></p><br/>

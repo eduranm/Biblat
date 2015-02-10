@@ -1,7 +1,7 @@
 <div id="content">
 	<div id="encabezado">
     <div id="migas">
-      <p><a href="<?=site_url('/');?>">{_('Inicio')}</a> / {_('Mapa del sitio')}</p>
+      <p><a href="{site_url('/')}">{_('Inicio')}</a> / {_('Mapa del sitio')}</p>
     </div><!--End migas-->
 		<div id="share">
       <div id="share1">

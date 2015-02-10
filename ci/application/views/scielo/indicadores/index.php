@@ -13,14 +13,14 @@
 			</select>
 		</div>
 		<div class="col-md-6 form-group" style="display:none;">
-			<select name="coleccion[]" id="coleccion" class="form-control" multiple="" data-placeholder="{_('Seleccione una o varias colecciones')}" <?php if($indicador == "") echo "disabled";?>>
+			<select name="coleccion[]" id="coleccion" class="form-control" multiple="" data-placeholder="{_('Seleccione una o varias colecciones')}">
 {foreach $colecciones coleccion}
 				<option value="{$coleccion.slug}">{$coleccion.name}</option>
 {/foreach}
 			</select>
 		</div>
 		<div class="col-md-6 form-group" style="display:none;">
-			<select name="area[]" id="area" class="form-control" multiple="" data-placeholder="{_('Seleccione una o varias areas')}" <?php if($indicador == "") echo "disabled";?>>
+			<select name="area[]" id="area" class="form-control" multiple="" data-placeholder="{_('Seleccione una o varias areas')}">
 {foreach $areas area}
 				<option value="{$area.slug}">{$area.name}</option>
 {/foreach}
@@ -41,6 +41,13 @@
 				<option></option>
 			</select>
 		</div>
+		<div class="col-md-6 form-group" style="display:none;">
+			<select name="edad[]" id="edad" class="form-control" multiple="" data-placeholder="{_('Seleccione el rango de edad del documento')}">
+{foreach $ageRanges v}
+				<option value="{$v.rango}">{$v.rango} {_('años')}</option>
+{/foreach}
+			</select>
+		</div>
 		<div class="clearfix"></div>
 		<div id="periodos" class="col-md-12 form-group hidden">
 			<input id="sliderPeriodo" type="slider" name="periodo" value="0;0" disabled/>
@@ -57,7 +64,7 @@
 						<div id="chartTitle"></div>
 						<div id="chart" class="chart_data"></div>
 						<div class="chartCopyright">
-							{_('Fuente:')} <a href="<?=base_url();?>">biblat.unam.mx</a>
+							{_('Fuente:')} <a href="{base_url()}">biblat.unam.mx</a>
 						</div>
 					</div>
 					<div id="bradfodContainer" style="display:none;">
@@ -96,7 +103,7 @@
 						  </a>
 						</div>
 						<div class="chartCopyright">
-							{_('Fuente:')} <a href="<?=base_url();?>">biblat.unam.mx</a>
+							{_('Fuente:')} <a href="{base_url()}">biblat.unam.mx</a>
 						</div>
 					</div>
 					<div id="prattContainer" style="display:none;">
@@ -120,7 +127,7 @@
 						  </a>
 						</div>
 						<div class="chartCopyright">
-							{_('Fuente:')} <a href="<?=base_url();?>">biblat.unam.mx</a>
+							{_('Fuente:')} <a href="{base_url()}">biblat.unam.mx</a>
 						</div>
 						<div id="chart1"></div>
 					</div>

@@ -1,8 +1,8 @@
-<?php       if ($links != ""):?>
+{if $links != ""}
     <div class="text-center">
       {$links}
     </div>
-<?php   endif;?>
+{/if}
       <table id="resultados" class="table table-striped table-hover">
       <tbody>
 {foreach $resultados key resultado}
@@ -30,8 +30,8 @@
 {/foreach}
       </tbody>
       </table>
-<?php   if ($links != ""):?>
+{if $links != ""}
     <div class="text-center">
       {$links}
     </div>
-<?php   endif;?>
+{/if}
