@@ -1,4 +1,4 @@
-    <form action="<?=site_url('buscar');?>" id="searchform" method="post" role="search" autocomplete="off">
+    <form action="{site_url('buscar')}" id="searchform" method="post" role="search" autocomplete="off">
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-addon">
