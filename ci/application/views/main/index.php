@@ -11,21 +11,21 @@
   <div class="carousel-inner" role="listbox">
     <div class="item active">
       <svg class="img-responsive center-block" version="1.1" id="banners_01" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 235.2 69.6" enable-background="new 0 0 235.2 69.6" xml:space="preserve" width="980" height="290">
-        <image overflow="visible" width="980" height="290" xlink:href="<?=base_url('img/slides/banners_01.jpg');?>"  transform="matrix(0.24 0 0 0.24 0 0)"></image>
-        <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 138.3335 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.7"><?php echo _sprintf('%s textos completos en HEVILA', number_format($totales['hevila'], 0, '.', ','));?></text>
-        <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 148.8335 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.6"><?php echo _sprintf('%s textos completos', number_format($totales['enlaces'], 0, '.', ','));?></text>
-        <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 159.557 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.6"><?php echo _sprintf('%s documentos', number_format($totales['documentos'], 0, '.', ','));?></text>
-        <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 170.3335 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.6"><?php echo _sprintf('%s revistas', number_format($totales['revistas'], 0, '.', ','));?></text>
+        <image overflow="visible" width="980" height="290" xlink:href="{base_url('img/slides/banners_01.jpg')}"  transform="matrix(0.24 0 0 0.24 0 0)"></image>
+        <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 138.3335 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.7">{_sprintf('%s textos completos en HEVILA', number_format($totales['hevila'], 0, '.', ','))}</text>
+        <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 148.8335 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.6">{_sprintf('%s textos completos', number_format($totales['enlaces'], 0, '.', ','))}</text>
+        <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 159.557 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.6">{_sprintf('%s documentos', number_format($totales['documentos'], 0, '.', ','))}</text>
+        <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 170.3335 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.6">{_sprintf('%s revistas', number_format($totales['revistas'], 0, '.', ','))}</text>
     </svg>
     </div>
     <div class="item">
-      <img class="img-responsive center-block" src="<?=base_url('img/slides/banners_02.jpg');?>"/>
+      <img class="img-responsive center-block" src="{base_url('img/slides/banners_02.jpg')}"/>
     </div>
     <div class="item">
-      <a href="<?php echo site_url('indicadores');?>"><img class="img-responsive center-block" src="<?=base_url('img/slides/banners_03.jpg');?>"/></a>
+      <a href="{site_url('indicadores')}"><img class="img-responsive center-block" src="{base_url('img/slides/banners_03.jpg')}"/></a>
     </div>
     <div class="item">
-      <a href="<?php echo site_url('frecuencias');?>"><img class="img-responsive center-block" src="<?=base_url('img/slides/banners_04.jpg');?>"/></a>
+      <a href="{site_url('frecuencias')}"><img class="img-responsive center-block" src="{base_url('img/slides/banners_04.jpg')}"/></a>
     </div>
   </div>
 
@@ -46,15 +46,15 @@
 <div class="row" id="main-sections">
     <div class="col-md-6">
         <h3>{_('UN POCO DE NOSOTROS')}</h3>
-        <p><?php _printf('%s es un portal especializado en revistas científicas y académicas publicadas en América Latina y el Caribe, que ofrece los siguientes servicios:','<span class="biblat"><acronym title="'._sprintf('Bibliografía Latinoamericana').'">Biblat</acronym></span>');?></p>
+        <p>{$biblat=_sprintf('Bibliografía Latinoamericana') _sprintf('%s es un portal especializado en revistas científicas y académicas publicadas en América Latina y el Caribe, que ofrece los siguientes servicios:','<span class="biblat"><acronym title="$biblat">Biblat</acronym></span>')}</p>
         <ul>
-            <li><?php _printf('Referencias bibliográficas y texto completo de los artículos y documentos publicados en más de 3,000 revistas indizadas en %s y %s.','<a href="http://clase.unam.mx" target="_blank"><acronym title="'._sprintf('Citas Latinoamericanas en Ciencias Sociales y Humanidades').'">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="'._sprintf('Índice de Revistas Latinoamericanas en Ciencias').'">PERIÓDICA</acronym></a>');?></li><br/>
-            <li><?php _printf('Visualización gráfica de indicadores extraídos de %s, %s, %s y de otras bases de datos.','<a href="http://clase.unam.mx" target="_blank"><acronym title="'._sprintf('Citas Latinoamericanas en Ciencias Sociales y Humanidades').'">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="'._sprintf('Índice de Revistas Latinoamericanas en Ciencias').'">PERIÓDICA</acronym></a>','<a href="http://www.scielo.org" target="_blank"><acronym title="Scientific Electronic Library Online">SciELO</acronym></a>');?></li><br/>
-            <li><?php _printf('Información sobre las %s de las revistas indizadas en %s , %s.','<a href="javascript:;">Políticas de acceso abierto</a>','<a href="http://clase.unam.mx" target="_blank"><acronym title="'._sprintf('Citas Latinoamericanas en Ciencias Sociales y Humanidades').'">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="'._sprintf('Índice de Revistas Latinoamericanas en Ciencias').'">PERIÓDICA</acronym></a>');?></li>
+            <li>{$clase=_sprintf('Citas Latinoamericanas en Ciencias Sociales y Humanidades') $periodica=_sprintf('Índice de Revistas Latinoamericanas en Ciencias') _sprintf('Referencias bibliográficas y texto completo de los artículos y documentos publicados en más de 3,000 revistas indizadas en %s y %s.','<a href="http://clase.unam.mx" target="_blank"><acronym title="$clase">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="$periodica">PERIÓDICA</acronym></a>')}</li><br/>
+            <li>{_sprintf('Visualización gráfica de indicadores extraídos de %s, %s, %s y de otras bases de datos.','<a href="http://clase.unam.mx" target="_blank"><acronym title="$clase">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="$periodica">PERIÓDICA</acronym></a>','<a href="http://www.scielo.org" target="_blank"><acronym title="Scientific Electronic Library Online">SciELO</acronym></a>')}</li><br/>
+            <li>{_sprintf('Información sobre las %s de las revistas indizadas en %s , %s.','<a href="javascript:;">Políticas de acceso abierto</a>','<a href="http://clase.unam.mx" target="_blank"><acronym title="$clase">CLASE</acronym></a>','<a href="http://periodica.unam.mx" target="_blank"><acronym title="$periodica">PERIÓDICA</acronym></a>')}</li>
         </ul> 
 
         <p></p>
-        <p class="text-right"><a class="leer_mas" href="<?=site_url('sobre-biblat');?>">{_('Leer más')} <i class="fa fa-angle-double-right"></i></a></p>
+        <p class="text-right"><a class="leer_mas" href="{site_url('sobre-biblat')}">{_('Leer más')} <i class="fa fa-angle-double-right"></i></a></p>
     </div><!-- Un poco de nosotros -->
     <div class="col-md-6">
         <h3>{_('REVISTAS POR DISCIPLINA')}</h3>
@@ -66,9 +66,9 @@
         <div id="alfabetico">
             <p></p>
             <p class="text-center">
-    <?php foreach (range('A', 'Z') as $i):?>
-                <a class="abc" href="<?=site_url("indice/alfabetico/".strtolower($i));?>"><?=$i;?></a>
-    <?php endforeach;?>
+{foreach range('A', 'Z') i}
+                <a class="abc" href="{$il=lower($i) site_url('indice/alfabetico/$il')}">{$i}</a>
+{/foreach}
             </p>
             <p></p>
         </div>
@@ -80,15 +80,15 @@
           <!-- Wrapper for slides -->
           <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <a href="<?=site_url("indice/pais/internacional");?>"><img class="img-responsive center-block" src="<?=base_url('img/america.jpg');?>" title="{_('Internacional')}"></a>
+                <a href="{site_url("indice/pais/internacional")}"><img class="img-responsive center-block" src="{base_url('img/america.jpg')}" title="{_('Internacional')}"></a>
                 <div class="carousel-caption">{_('Internacional')}</div>
             </div>
-    <?php foreach ($paises as $pais):?>
+{foreach $paises pais}
                 <div class="item">
-                    <a href="<?=site_url("indice/pais/{$pais['paisRevistaSlug']}");?>"><img class="img-responsive center-block" src="<?=base_url("img/{$pais['paisRevistaSlug']}.jpg");?>" title="<?=$pais['paisRevista'];?>"></a>
-                    <div class="carousel-caption"><?=$pais['paisRevista'];?></div>
+                    <a href="{site_url("indice/pais/$pais.paisRevistaSlug")}"><img class="img-responsive center-block" src="{base_url("img/$pais.paisRevistaSlug")}.jpg" title="{$pais.paisRevista}"></a>
+                    <div class="carousel-caption">{$pais.paisRevista}</div>
                 </div>
-    <?php endforeach;?>
+{/foreach}
           </div>
 
           <!-- Controls -->
@@ -168,7 +168,7 @@
     </div><!-- Indicadore SciELO -->
     <div class="col-md-6">
         <h3>{_('OTROS INDICADORES')}</h3>
-        <img class="img-responsive center-block" src="<?=base_url('/img/indicadores.jpg');?>" usemap="#Map" height="299" width="416">
+        <img class="img-responsive center-block" src="{base_url('/img/indicadores.jpg')}" usemap="#Map" height="299" width="416">
             <map name="Map">
                 <area shape="rect" coords="12,3,137,305" href="{site_url('bibliometria/indicadores-por-revista')}">
                 <area shape="rect" coords="143,3,273,296" href="{site_url('conacyt')}">
