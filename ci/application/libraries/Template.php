@@ -233,7 +233,7 @@ class Template
 			// If it uses a view, load it
 			if (isset($partial['view']))
 			{
-				$template['partials'][$name] = $this->_find_view($partial['view'], $partial['data']);
+				$template['partials'][$name] = $this->_find_view($partial['view'], $partial['data'], $partial['parse_view']);
 			}
 
 			// Otherwise the partial must be a string
@@ -492,9 +492,9 @@ class Template
 	 * @param	boolean
 	 * @return	void
 	 */
-	public function set_partial($name, $view, $data = array(), $minify = FALSE)
+	public function set_partial($name, $view, $data = array(), $minify = FALSE, $parse_view = TRUE)
 	{
-		$this->_partials[$name] = array('view' => $view, 'data' => $data, 'minify' => $minify);
+		$this->_partials[$name] = array('view' => $view, 'data' => $data, 'minify' => $minify, 'parse_view' => $parse_view);
 		return $this;
 	}
 
@@ -507,9 +507,9 @@ class Template
 	 * @param	boolean
 	 * @return	void
 	 */
-	public function inject_partial($name, $string, $data = array(), $minify = FALSE)
+	public function inject_partial($name, $string, $data = array(), $minify = FALSE, $parse_view = TRUE)
 	{
-		$this->_partials[$name] = array('string' => $string, 'data' => $data, 'minify' => $minify);
+		$this->_partials[$name] = array('string' => $string, 'data' => $data, 'minify' => $minify, 'parse_view' => $parse_view);
 		return $this;
 	}
 
