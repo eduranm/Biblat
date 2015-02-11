@@ -1,6 +1,6 @@
 <div class="contenido">
 	<div class="textoJ">
-		<form action="<?php echo site_url('contacto/submit');?>" method="POST" class="contacto">
+		<form action="{site_url('contacto/submit')}" method="POST" class="contacto">
 			<fieldset>
 				<label>{_('Nombre')}</label><br/>
 				<input type="text" name="from"/><br/>
@@ -10,7 +10,7 @@
 				<input type="text" name="subject"/><br/>
 				<label>{_('Mensaje')}</label><br/>
 				<textarea name="message"></textarea>
-				<?php echo $recaptcha_html;?> <input class="fa" type="submit" value="Enviar   &#xf0e0;"/>
+				{$recaptcha_html} <input class="fa" type="submit" value="Enviar   &#xf0e0;"/>
 			</fieldset>
 		</form>
 	</div>
