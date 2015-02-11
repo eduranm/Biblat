@@ -1,16 +1,11 @@
-google.load("visualization", "1.1", {packages:['corechart', 'table', 'bar', 'line'], 'language': 'en'});
-var indicador = null;
+google.load('visualization', '1.1', {packages:['corechart', 'table', 'bar', 'line'], 'language': 'en'});
 var realIndicator = null;
-var coleccion = null;
-var area = null;
-var revista = null;
-var paisAutor = null;
-var paisRevista = null;
-var chart = {normal: null, bradford:null, group1:null, group2:null, pratt:null, data:null};
-chart.data = {normal: null, bradford:null, group1:null, group2:null, pratt:null, prattJ:null};
-var tables = {normal: null, bradford:null, group1:null, group2:null, group3:null, pratt:null};
+var val = {indicador: null, coleccion: null, area: null, revista: null, paisAutor: null, paisRevista: null, edad: null, tipodoc}
+var chart = {normal: null, bradford:null, group1:null, group2:null, bargrp:null, data:null};
+chart.data = {normal: null, bradford:null, group1:null, group2:null, bargrp:null, bargrpJ:null};
+var tables = {normal: null, bradford:null, group1:null, group2:null, group3:null, bargrp:null};
 var brfLim = null;
-var popState = {indicador:false, coleccion:false, revista:false, paisRevista:false, paisAutor:false, periodo:false, area:false};
+var popState = {indicador:false, coleccion:false, revista:false, paisRevista:false, paisAutor:false, periodo:false, area:false, edad: false, tipodoc: false};
 var rangoPeriodo="0-0";
 var dataPeriodo="0-0";
 var coleccionURL="";
@@ -18,6 +13,8 @@ var areaURL="";
 var revistaURL="";
 var paisAutorURL="";
 var paisRevistaURL="";
+var edadURL="";
+var tipodocURL=""
 var asyncAjax=false;
 var urlData = null;
 $(document).ready(function(){
@@ -29,41 +26,48 @@ $(document).ready(function(){
 	$('.carousel').carousel({
 	  interval: false
 	})
-	$("#indicador, #coleccion, #area, #revista, #paisRevista, #paisAutor").select2({
+	$('#indicador, #coleccion, #area, #revista, #paisRevista, #paisAutor, #edad, #tipodoc').select2({
 		allowClear: true,
 		closeOnSelect: true
 	});
 
 	$("#indicador").on("change", function(e){
 		console.log('indicador change');
-		indicador = $(this).val();
-		$('#coleccion, #area, #revista, #paisRevista, #paisAutor').parent().hide();
-		$("#periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
-		$("#coleccion").select2("val", "");
+		$.each(val, function(k,v){val[k]=null;});
+		val.indicador = $(this).val();
+		$('#coleccion, #area, #revista, #paisRevista, #paisAutor, #edad, #tipodoc').select2('val', '').select2('enable', false).parent().hide();
+		$('#revista, #paisRevista, #paisAutor').empty().append('<option></option>').select2('destroy');
+		$("#periodos, #tabs, #chartContainer, #bradfodContainer, #group-container").hide('slow');
 		$("#sliderPeriodo").prop('disabled', true);
-		switch (indicador){
+		switch (val.indicador){
 			case 'distribucion-articulos-coleccion':
-				realIndicator = indicador;
+				realIndicator = val.indicador;
 				updateInfo();
-				$("#coleccion").select2("enable", true).parent().show();
+				$("#coleccion").select2('enable', true).parent().show();
 				if(urlData == null || typeof urlData.coleccion === "undefined")
 					setPeriodos();
 				break;
 			case 'distribucion-revista-coleccion':
-				realIndicator = indicador;
+				realIndicator = val.indicador;
 				updateInfo();
-				$("#coleccion").select2("enable", true).parent().show();
+				$("#coleccion").select2('enable', true).parent().show();
 				break;
 			case 'distribucion-articulos-edad':
+				realIndicator = val.indicador;
+				updateInfo();
+				$("#edad").select2('enable', true).parent().show();
+				break;
+			case 'distribucion-articulos-tipo':
+				realIndicator = val.indicador;
+				updateInfo();
+				$('#tipodoc').select2('enable', true).parent().show();
 				break;
 			default:
-				$("#coleccion, #area, #revista, #paisRevista, #paisAutor").select2("enable", false);
-				$("#revista, #paisRevista, #paisAutor").empty().append('<option></option>').select2("destroy");
 				break;
 		}
 
 		if(typeof history.pushState === "function" && !popState.indicador){
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + indicador);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador);
 		}
 		popState.indicador=false;
 		console.log(e);
@@ -71,26 +75,26 @@ $(document).ready(function(){
 
 	$("#coleccion").on("change", function(e){
 		console.log('coleccion change');
-		coleccion = $(this).val();
-		console.log(coleccion);
+		val.coleccion = $(this).val();
+		console.log(val.coleccion);
 		coleccionURL = "";
-		if(coleccion != "" && coleccion != null){
-			coleccionURL='/coleccion/' + coleccion.join('/');
+		if(val.coleccion != "" && val.coleccion != null){
+			coleccionURL='/coleccion/' + val.coleccion.join('/');
 		}
 		if(typeof history.pushState === "function" && !popState.coleccion){
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + indicador + coleccionURL);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + coleccionURL);
 		}
-		$("#chartContainer, #bradfodContainer, #prattContainer").hide();
+		$("#chartContainer, #bradfodContainer, #group-container").hide();
 		switch (realIndicator){
 			case 'distribucion-articulos-coleccion':
 			case 'distribucion-articulos-coleccion-area':
 			case 'distribucion-articulos-coleccion-revista':
 			case 'distribucion-articulos-coleccion-afiliacion':
-				realIndicator = indicador;
-				$('#tabs, #prattContainer').show();
-				if(coleccion != "" && coleccion != null){
+				realIndicator = val.indicador;
+				$('#tabs, #group-container').show();
+				if(val.coleccion != "" && val.coleccion != null){
 					$('#area, #revista, #paisAutor').parent().show();
-					$("#area, #revista, #paisAutor").select2("enable", true);
+					$("#area, #revista, #paisAutor").select2('enable', true);
 					$.ajax({
 						url: '<?=site_url("scielo/indicadores/getOptionData");?>',
 						type: 'POST',
@@ -101,7 +105,7 @@ $(document).ready(function(){
 							console.log(data);
 							$("#revista, #paisAutor").empty()
 							.append('<option></option>')
-							.select2("destroy")
+							.select2('destroy');
 							$("#revista, #paisAutor").parent().hide();
 							if(typeof data.revistas !== "undefined"){
 								$.each(data.revistas, function(key, revista) {
@@ -111,57 +115,57 @@ $(document).ready(function(){
 									});
 									$("#revista").append(optgroup);
 								});
-								if(revista != null && revista != '')
-									$("#revista").val(revista);
-								$("#revista").show().select2({allowClear: true, closeOnSelect: true}).select2("enable", false);
-								$("#revista").select2("enable", true).parent().show();
+								if(val.revista != null && val.revista != '')
+									$("#revista").val(val.revista);
+								$("#revista").show().select2({allowClear: true, closeOnSelect: true}).select2('enable', false);
+								$("#revista").select2('enable', true).parent().show();
 							}
 							if(typeof data.paises !== "undefined"){
 								$.each(data.paises, function(k, v) {
 									$("#paisAutor").append('<option value="' + k +'">' + v + '</option>');
 								});
-								if(paisAutor != null && paisAutor != '')
-									$("#paisAutor").val(paisAutor);
-								$("#paisAutor").show().select2({allowClear: true, closeOnSelect: true}).select2("enable", false);
-								$("#paisAutor").select2("enable", true).parent().show();
+								if(val.paisAutor != null && val.paisAutor != '')
+									$("#paisAutor").val(val.paisAutor);
+								$("#paisAutor").show().select2({allowClear: true, closeOnSelect: true}).select2('enable', false);
+								$("#paisAutor").select2('enable', true).parent().show();
 							}
 						}
 					});
 				}
-				if((urlData == null || (typeof urlData.area === "undefined" && typeof urlData.revista === "undefined" && typeof urlData.paisAutor === "undefined")) && (area === "" || area == null) && (revista === "" || revista == null) && (paisAutor === "" || paisAutor == null)){
+				if((urlData == null || (typeof urlData.area === "undefined" && typeof urlData.revista === "undefined" && typeof urlData.paisAutor === "undefined")) && (val.area === "" || val.area == null) && (val.revista === "" || val.revista == null) && (val.paisAutor === "" || val.paisAutor == null)){
 					setPeriodos();
 				}
-				if (coleccion === "" || coleccion == null) {
+				if (val.coleccion === "" || val.coleccion == null) {
 					$('#area, #revista, #paisRevista, #paisAutor').parent().hide();
 					$("#revista, #paisRevista, #paisAutor")
 					.empty()
 					.append('<option></option>')
-					.select2("destroy")
+					.select2('destroy')
 					.select2({allowClear: true, closeOnSelect: true});
-					$("#area, #revista, #paisRevista, #paisAutor").select2("enable", false);
+					$("#area, #revista, #paisRevista, #paisAutor").select2('enable', false);
 				}
-				if(area !== "" && area != null){
+				if(val.area !== "" && val.area != null){
 					$('#area').trigger('change');
 				}
-				if(revista !== "" && revista != null){
+				if(val.revista !== "" && val.revista != null){
 					$('#revista').trigger('change');
 				}
-				if(paisAutor !== "" && paisAutor != null){
+				if(val.paisAutor !== "" && val.paisAutor != null){
 					$('#paisAutor').trigger('change');
 				}
 				break;
 			case 'distribucion-articulos-coleccion-area-revista':
-				revista = $("#revista").val();
+				val.revista = $("#revista").val();
 				$('#area').trigger('change');
 				break;
 			case 'distribucion-revista-coleccion':
-				$('#tabs, #periodos, #chartContainer, #bradfodContainer, #prattContainer').hide();
-				if(coleccion != "" && coleccion != null){
+				$('#tabs, #periodos, #chartContainer, #bradfodContainer, #group-container').hide();
+				if(val.coleccion != "" && val.coleccion != null){
 					setPeriodos();
 				}
 				break;
 			default:
-				$('#tabs, #periodos, #chartContainer, #bradfodContainer, #prattContainer').hide();
+				$('#tabs, #periodos, #chartContainer, #bradfodContainer, #group-container').hide();
 				break;
 		}
 		popState.coleccion=false;
@@ -170,23 +174,23 @@ $(document).ready(function(){
 
 	$('#area').on('change', function(e){
 		console.log('area change');
-		area = $(this).val();
+		val.area = $(this).val();
 		areaURL="";
-		if(area != "" && area != null){
-			areaURL='/area/' + area.join('/');
+		if(val.area != "" && val.area != null){
+			areaURL='/area/' + val.area.join('/');
 		}
 		if(typeof history.pushState === "function" && !popState.area){
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + indicador + coleccionURL + areaURL + revistaURL);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + coleccionURL + areaURL + revistaURL);
 		}
-		$("#chartContainer, #bradfodContainer, #prattContainer").hide();
+		$("#chartContainer, #bradfodContainer, #group-container").hide();
 		switch (realIndicator){
 			case 'distribucion-articulos-coleccion':
 			case 'distribucion-articulos-coleccion-area':
 			case 'distribucion-articulos-coleccion-area-revista':
 				$('#tabs, #chartContainer').show();
-				if(area != "" && area != null){
-					$('#paisAutor').select2("enable", false).parent().hide();
-					if (revista == null || revista == '')
+				if(val.area != "" && val.area != null){
+					$('#paisAutor').select2('enable', false).parent().hide();
+					if (val.revista == null || val.revista == '')
 						realIndicator = 'distribucion-articulos-coleccion-area';
 					$.ajax({
 						url: '<?=site_url("scielo/indicadores/getOptionData");?>',
@@ -198,7 +202,7 @@ $(document).ready(function(){
 							console.log(data);
 							$("#revista").empty()
 							.append('<option></option>')
-							.select2("destroy").parent().hide();
+							.select2('destroy').parent().hide();
 							if(typeof data.revistas !== "undefined"){
 								$.each(data.revistas, function(key, area) {
 									optgroup = $('<optgroup label="'+key+'"></optgroup>');
@@ -211,23 +215,25 @@ $(document).ready(function(){
 									});
 									$("#revista").append(optgroup);
 								});
-								if(revista != null && revista != '')
-									$("#revista").val(revista);
-								revista = $("#revista").val();
-								$("#revista").show().select2({allowClear: true, closeOnSelect: true}).select2("enable", true)
+								if(val.revista != null && val.revista != '')
+									$("#revista").val(val.revista);
+								val.revista = $("#revista").val();
+								$("#revista").show().select2({allowClear: true, closeOnSelect: true}).select2('enable', true)
 								.parent().show();
 							}
 						}
 					});
-					if (revista == null || revista == '')
+					if (val.revista == null || val.revista == '')
 						realIndicator = 'distribucion-articulos-coleccion-area';
 					updateInfo();
 					if(urlData == null || typeof urlData.revista === "undefined")
 						setPeriodos();
 					break;
 				}else if(!popState.coleccion){
-					$('#area, #revista, #paisAutor').parent().show();
-					$("#area, #revista, #paisAutor").select2("enable", true);
+					realIndicator = val.indicador
+					$('#revista, #paisAutor').select2('val', '?').select2('enable', true)
+					.parent().show();
+					val.revista = null;
 					$('#coleccion').trigger('change');
 				}
 			default:
@@ -239,36 +245,36 @@ $(document).ready(function(){
 
 	$("#revista").on("change", function(e){
 		console.log('revista change');
-		revista = $(this).val();
+		val.revista = $(this).val();
 		revistaURL="";
-		if(revista != "" && revista != null){
-			revistaURL='/revista/' + revista.join('/');
+		if(val.revista != "" && val.revista != null){
+			revistaURL='/revista/' + val.revista.join('/');
 		}
 		if(typeof history.pushState === "function" && !popState.revista){
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + indicador + coleccionURL + areaURL + revistaURL);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + coleccionURL + areaURL + revistaURL);
 		}
-		$("#chartContainer, #bradfodContainer, #prattContainer").hide();
+		$("#chartContainer, #bradfodContainer, #group-container").hide();
 		switch (realIndicator){
 			case 'distribucion-articulos-coleccion':
 			case 'distribucion-articulos-coleccion-revista':
 				$('#tabs, #chartContainer').show();
-				if(revista != "" && revista != null){
+				if(val.revista != "" && val.revista != null){
 					$('#area, #paisAutor').parent().hide();
-					$("#area, #paisAutor").select2("enable", false);
+					$("#area, #paisAutor").select2('enable', false);
 					realIndicator = 'distribucion-articulos-coleccion-revista';
 					updateInfo();
 					setPeriodos();
 				}else if(!popState.coleccion){
 					$('#area, #revista, #paisAutor').parent().show();
-					$("#area, #revista, #paisAutor").select2("enable", true);
+					$("#area, #revista, #paisAutor").select2('enable', true);
 					$('#coleccion').trigger('change');
 				}
 				break;
 			case 'distribucion-articulos-coleccion-area':
 			case 'distribucion-articulos-coleccion-area-revista':
 				$('#tabs, #chartContainer').show();
-				if(revista != "" && revista != null){
-					$('#paisAutor').select2("enable", false)
+				if(val.revista != "" && val.revista != null){
+					$('#paisAutor').select2('enable', false)
 					.parent().hide();
 					realIndicator = 'distribucion-articulos-coleccion-area-revista';
 					updateInfo();
@@ -287,27 +293,27 @@ $(document).ready(function(){
 
 	$("#paisAutor").on("change", function(e){
 		console.log('paisAutor change');
-		paisAutor = $(this).val();
+		val.paisAutor = $(this).val();
 		paisAutorURL="";
-		if(paisAutor != "" && paisAutor != null){
-			paisAutorURL='/pais-autor/' + paisAutor.join('/');
+		if(val.paisAutor != "" && val.paisAutor != null){
+			paisAutorURL='/pais-autor/' + val.paisAutor.join('/');
 		}
 		if(typeof history.pushState === "function" && !popState.paisAutor){
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + indicador + coleccionURL + paisAutorURL);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + coleccionURL + paisAutorURL);
 		}
-		$("#chartContainer, #bradfodContainer, #prattContainer").hide();
-		switch (indicador){
+		$("#chartContainer, #bradfodContainer, #group-container").hide();
+		switch (val.indicador){
 			case 'distribucion-articulos-coleccion':
 				$('#tabs, #chartContainer').show();
-				if(paisAutor != "" && paisAutor != null){
+				if(val.paisAutor != "" && val.paisAutor != null){
 					$('#revista, #area').parent().hide();
-					$("#revista, #area").select2("enable", false);
+					$("#revista, #area").select2('enable', false);
 					realIndicator = 'distribucion-articulos-coleccion-afiliacion';
 					updateInfo();
 					setPeriodos();
 				}else if(!popState.coleccion){
 					$('#area, #revista, #paisAutor').parent().show();
-					$("#area, #revista, #paisAutor").select2("enable", true);
+					$("#area, #revista, #paisAutor").select2('enable', true);
 					$('#coleccion').trigger('change');
 				}
 			default:
@@ -323,13 +329,13 @@ $(document).ready(function(){
 		coleccionValue = $("#coleccion").val();
 		$("#sliderPeriodo").prop("disabled", true);
 		if (value != "" && value != null) {
-			$("#revista").select2("enable", false);
-			$("#paisAutor").select2("enable", false);
+			$("#revista").select2('enable', false);
+			$("#paisAutor").select2('enable', false);
 			setPeriodos();
 		}else{
-			$("#periodos, #tabs, #chartContainer").hide("slow");
-			$("#revista").select2("enable", true);
-			$("#paisAutor").select2("enable", true);
+			$("#periodos, #tabs, #chartContainer").hide('slow');
+			$("#revista").select2('enable', true);
+			$("#paisAutor").select2('enable', true);
 		}
 		if(typeof history.pushState === "function" && !popState.paisRevista){
 			paisRevistaURL="";
@@ -341,6 +347,58 @@ $(document).ready(function(){
 			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + indicadorValue + '/coleccion/' + coleccionValue + paisRevistaURL);
 		}
 		popState.paisRevista=false;
+		console.log(e);
+	});
+
+	$('#edad').on('change', function(e){
+		console.log('edad change');
+		val.edad = $(this).val();
+		edadURL="";
+		if(val.edad != "" && val.edad != null){
+			edadURL='/edad/' + val.edad.join('/');
+		}
+		if(typeof history.pushState === "function" && !popState.edad){
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + edadURL);
+		}
+		$("#tabs, #periodos, #chartContainer, #bradfodContainer, #group-container").hide();
+		$('#area, #revista, #paisRevista, #paisAutor').select2('enable', false);
+		switch(realIndicator){
+			case 'distribucion-articulos-edad':
+				if(val.edad != "" && val.edad != null){
+					$('#tabs, #chartContainer').show();
+					setPeriodos();
+				}
+				break;
+			default:
+				break;
+		}
+		popState.edad=false;
+		console.log(e);
+	});
+
+	$('#tipodoc').on('change', function(e){
+		console.log('tipodoc change');
+		val.tipodoc = $(this).val();
+		tipodocURL="";
+		if(val.tipodoc != "" && val.tipodoc != null){
+			tipodocURL='/tipo-documento/' + val.tipodoc.join('/');
+		}
+		if(typeof history.pushState === "function" && !popState.tipodoc){
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + tipodocURL);
+		}
+		$('#tabs, #periodos, #chartContainer, #bradfodContainer, #group-container').hide();
+		$('#area, #revista, #paisRevista, #paisAutor').select2('enable', false);
+		switch(realIndicator){
+			case 'distribucion-articulos-tipo':
+				if(val.tipodoc != "" && val.tipodoc != null){
+					$('#tabs, #chartContainer').show();
+					setPeriodos();
+				}
+				break;
+			default:
+				break;
+		}
+		popState.tipodoc=false;
 		console.log(e);
 	});
 
@@ -385,43 +443,43 @@ $(document).ready(function(){
 		  	$("#tabs").tabs("option", "active", 0);
 			switch(realIndicator){
 				case "distribucion-articulos-coleccion":
-					$("#tabs, #prattContainer").slideDown("slow");
-					$("#prattSlide").empty();
-					chart.pratt = new Array();
-					chart.data.pratt = new Array();
-					chart.data.prattJ = data.journal;
-					$("#carousel-pratt .carousel-indicators, #carousel-pratt .carousel-inner").empty();
+					$("#tabs, #group-container").slideDown('slow');
+					$("#bargrpSlide").empty();
+					chart.bargrp = new Array();
+					chart.data.bargrp = new Array();
+					chart.data.bargrpJ = data.journal;
+					$("#carousel-chargrp .carousel-indicators, #carousel-chargrp .carousel-inner").empty();
 					jQuery.each(data.chart, function(key, grupo) {
 						if(key == 0){
-							$("#carousel-pratt .carousel-indicators").append('<li data-target="#carousel-pratt" data-slide-to="' + key + '" class="active"></li>');
+							$("#carousel-chargrp .carousel-indicators").append('<li data-target="#carousel-chargrp" data-slide-to="' + key + '" class="active"></li>');
 						}else{
-							$("#carousel-pratt .carousel-indicators").append('<li id="chartLi' + key + '" data-target="#carousel-pratt" data-slide-to="' + key + '"></li>');
+							$("#carousel-chargrp .carousel-indicators").append('<li id="chartLi' + key + '" data-target="#carousel-chargrp" data-slide-to="' + key + '"></li>');
 						}
-						$("#carousel-pratt .carousel-inner").append('<div id="chartParent' + key + '" class="item active">' + data.chartTitle + ' <div id="chartPratt' + key +'" class="chart_data"></div></div>');
-						chart.data.pratt[key] = new google.visualization.DataTable(grupo);
-						chart.pratt[key] = new google.charts.Bar(document.getElementById('chartPratt' + key));
-						chart.pratt[key].draw(chart.data.pratt[key], google.charts.Bar.convertOptions(data.options));
+						$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item active">' + data.chartTitle + ' <div id="chartPratt' + key +'" class="chart_data"></div></div>');
+						chart.data.bargrp[key] = new google.visualization.DataTable(grupo);
+						chart.bargrp[key] = new google.charts.Bar(document.getElementById('chartPratt' + key));
+						chart.bargrp[key].draw(chart.data.bargrp[key], google.charts.Bar.convertOptions(data.options));
 						if(key > 0){
-							google.visualization.events.addListener(chart.pratt[key], 'ready', function(){
+							google.visualization.events.addListener(chart.bargrp[key], 'ready', function(){
 								$('#chartParent' + key).removeClass("active");
 							});
 						}
 					});
-					$("#carousel-pratt").carousel(0);
+					$("#carousel-chargrp").carousel(0);
 					var tableData = new google.visualization.DataTable(data.table);
 					$("#gridContainer").empty();
 					$("#gridContainer").append(data.tableTitle);
 					$("#gridContainer").append('<div id="table0"></div>');
-					tables.pratt = new google.visualization.Table(document.getElementById('table0'));
-					tables.pratt.draw(tableData, data.tableOptions);
+					tables.bargrp = new google.visualization.Table(document.getElementById('table0'));
+					tables.bargrp.draw(tableData, data.tableOptions);
 					changeTableClass();
-					google.visualization.events.addListener(tables.pratt , 'sort', changeTableClass);
+					google.visualization.events.addListener(tables.bargrp , 'sort', changeTableClass);
 					console.log(chart);	
 					break;
 				case "modelo-bradford-revista":
 				case "modelo-bradford-institucion":
-					//$("#gridContainer").accordion("destroy");
-					$("#tabs, #bradfodContainer").slideDown("slow");
+					//$("#gridContainer").accordion('destroy');
+					$("#tabs, #bradfodContainer").slideDown('slow');
 					brfLim = data.grupos;
 					chart.data.bradford = new google.visualization.DataTable(data.chart.bradford);
 					if(chart.bradford == null){
@@ -482,36 +540,36 @@ $(document).ready(function(){
 					break;
 				case "indice-concentracion":
 				case "productividad-exogena":
-					$("#tabs, #prattContainer").slideDown("slow");
-					$("#prattSlide").empty();
-					chart.pratt = new Array();
-					chart.data.pratt = new Array();
-					chart.data.prattJ = data.journal; 
+					$("#tabs, #group-container").slideDown('slow');
+					$("#bargrpSlide").empty();
+					chart.bargrp = new Array();
+					chart.data.bargrp = new Array();
+					chart.data.bargrpJ = data.journal; 
 					jQuery.each(data.chart, function(key, grupo) {
 						active='';
 						if(key == 0){
 							active='active';
 						}
-						$("#carousel-pratt .carousel-indicators").append('<li data-target="#carousel-pratt" data-slide-to="' + key + '" class="' + active + '"></li>');
-						$("#carousel-pratt .carousel-inner").append('<div class="item ' + active + '">' + data.chartTitle + ' <div id="chartPratt' + key +'" class="chart_data"></div></div>');
-						chart.data.pratt[key] = new google.visualization.DataTable(grupo);
-						chart.pratt[key] = new google.visualization.ColumnChart(document.getElementById('chartPratt' + key));
-						chart.pratt[key].draw(chart.data.pratt[key], data.options);
-						google.visualization.events.addListener(chart.pratt[key], 'select', function(){getFrecuencias(key)});
+						$("#carousel-chargrp .carousel-indicators").append('<li data-target="#carousel-chargrp" data-slide-to="' + key + '" class="' + active + '"></li>');
+						$("#carousel-chargrp .carousel-inner").append('<div class="item ' + active + '">' + data.chartTitle + ' <div id="chartPratt' + key +'" class="chart_data"></div></div>');
+						chart.data.bargrp[key] = new google.visualization.DataTable(grupo);
+						chart.bargrp[key] = new google.visualization.ColumnChart(document.getElementById('chartPratt' + key));
+						chart.bargrp[key].draw(chart.data.bargrp[key], data.options);
+						google.visualization.events.addListener(chart.bargrp[key], 'select', function(){getFrecuencias(key)});
 					});
 
 					var tableData = new google.visualization.DataTable(data.table);
 					$("#gridContainer").empty();
 					$("#gridContainer").append(data.tableTitle);
 					$("#gridContainer").append('<div id="table0"></div>');
-					tables.pratt = new google.visualization.Table(document.getElementById('table0'));
-					tables.pratt.draw(tableData, data.tableOptions);
+					tables.bargrp = new google.visualization.Table(document.getElementById('table0'));
+					tables.bargrp.draw(tableData, data.tableOptions);
 					changeTableClass();
-					google.visualization.events.addListener(tables.pratt , 'sort', changeTableClass);
+					google.visualization.events.addListener(tables.bargrp , 'sort', changeTableClass);
 					console.log(chart);	
 					break;
 				default:
-					$("#tabs, #chartContainer").show("slow");
+					$("#tabs, #chartContainer").show('slow');
 					chart.data.normal = new google.visualization.DataTable(data.data);
 					if(chart.normal == null){
 						chart.normal = new google.visualization.LineChart(document.getElementById('chart'));
@@ -557,16 +615,16 @@ $(document).ready(function(){
 <?php 	if (preg_match('%.*?/pais-autor/(.+?)(/.*|$)%', uri_string())):?>
 		paisAutor:"<?=preg_replace('%.*?/pais-autor/(.+?)(/area.*|/revista.*|/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
+<?php 	if (preg_match('%.*?/edad/(.+?)(/.*|$)%', uri_string())):?>
+		edad:"<?=preg_replace('%.*?/edad/(.+?)(/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
+<?php 	endif;?>
+<?php 	if (preg_match('%.*?/tipo-documento/(.+?)(/.*|$)%', uri_string())):?>
+		tipodoc:"<?=preg_replace('%.*?/tipo-documento/(.+?)(/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
+<?php 	endif;?>
 <?php 	if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%', uri_string())):?>
 		periodo:"<?=preg_replace('%.*?/([0-9]{4})-([0-9]{4})%', '\1;\2', uri_string());?>"
 <?php 	endif;?>
 	}
-<?php 	if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-	paisRevistaURL="/revista/<?=preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
-<?php 	endif;?>
-<?php 	if (preg_match('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-	paisRevistaURL="/pais/<?=preg_replace('%.*?/pais/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>";
-<?php 	endif;?>
 	if(typeof urlData.indicador !== "undefined"){
 		updateData();
 	}
@@ -588,7 +646,7 @@ getSerializedForm = function () {
 
 setPeriodos = function(){
 	loading.start();
-	$("#periodos").removeClass("hidden").slideDown("slow");
+	$("#periodos").removeClass("hidden").slideDown('slow');
 	jQuery.ajax({
 		url: '<?=site_url("scielo/indicadores/getPeriodos");?>',
 		type: 'POST',
@@ -622,7 +680,7 @@ setPeriodos = function(){
 							$("#sliderPeriodo").val(value);
 							rango=value.replace(';', '-');
 							if(typeof history.pushState === "function"){
-								history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + indicador + coleccionURL + areaURL + revistaURL + paisAutor + '/' + rango);
+								history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + coleccionURL + areaURL + revistaURL + edadURL + '/' + rango);
 							}
 							$("#revista, #paisRevista").select2("close");
 							$("#generarIndicador").submit();
@@ -692,12 +750,24 @@ updateData = function(){
 		actualForm = $("#generarIndicador").serializeJSON();
 	}
 
-	// if(typeof urlData.periodo !== "undefined"){
-	// 	$("#sliderPeriodo").prop("disabled", false);
-	// 	$("#sliderPeriodo").jslider("value", urlData.periodo.substring(0, 4), urlData.periodo.substring(5));
-	// 	$("#sliderPeriodo").val(urlData.periodo);
-	// 	$("#generarIndicador").submit();
-	// }
+	if(typeof urlData.edad !== "undefined"){
+		popState.edad=true;
+		$('#edad').val(urlData.edad).trigger("change");
+		actualForm = $("#generarIndicador").serializeJSON();
+	}
+
+	if(typeof urlData.tipodoc !== "undefined"){
+		popState.tipodoc=true;
+		$('#tipodoc').val(urlData.tipodoc).trigger("change");
+		actualForm = $("#generarIndicador").serializeJSON();
+	}
+
+	if(typeof urlData.periodo !== "undefined"){
+		$("#sliderPeriodo").prop("disabled", false);
+		$("#sliderPeriodo").jslider("value", urlData.periodo.substring(0, 4), urlData.periodo.substring(5));
+		$("#sliderPeriodo").val(urlData.periodo);
+		$("#generarIndicador").submit();
+	}
 	$.each(popState, function(k,v){popState[k]=false;});
 	asyncAjax=true;
 	urlData=null;
@@ -765,10 +835,10 @@ bradfordArticles = function (group) {
 }
 
 getFrecuencias = function (key) {
-	var selection = chart.pratt[key].getSelection();
+	var selection = chart.bargrp[key].getSelection();
 	if (selection[0] != null && selection[0].column != null){
 		disciplina=$('#coleccion').val();
-		revista=chart.data.prattJ[key][(selection[0].column+1)/2 -1];
+		revista=chart.data.bargrpJ[key][(selection[0].column+1)/2 -1];
 		jQuery.ajax({
 			url: '<?=site_url("scielo/indicadores/getFrecuencias");?>/'+ revista,
 			type: 'POST',

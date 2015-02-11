@@ -48,6 +48,13 @@
 {/foreach}
 			</select>
 		</div>
+		<div class="col-md-6 form-group" style="display:none;">
+			<select name="tipodoc[]" id="tipodoc" class="form-control" multiple="" data-placeholder="{_('Seleccione el tipo de documento citado')}">
+{foreach $docTypes docType}
+				<option value="{$docType.slug}">{$docType.name}</option>
+{/foreach}
+			</select>
+		</div>
 		<div class="clearfix"></div>
 		<div id="periodos" class="col-md-12 form-group hidden">
 			<input id="sliderPeriodo" type="slider" name="periodo" value="0;0" disabled/>
@@ -106,8 +113,8 @@
 							{_('Fuente:')} <a href="{base_url()}">biblat.unam.mx</a>
 						</div>
 					</div>
-					<div id="prattContainer" style="display:none;">
-						<div id="carousel-pratt" class="carousel slide" data-ride="carousel">
+					<div id="group-container" style="display:none;">
+						<div id="carousel-chargrp" class="carousel slide" data-ride="carousel">
 						  <!-- Indicators -->
 						  <ol class="carousel-indicators">
 						  </ol>
@@ -117,11 +124,11 @@
 						  </div>
 
 						  <!-- Controls -->
-						  <a class="left carousel-control" href="#carousel-pratt" role="button" data-slide="prev">
+						  <a class="left carousel-control" href="#carousel-chargrp" role="button" data-slide="prev">
 						    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"><i class="fa fa-chevron-circle-left"></i></span>
 						    <span class="sr-only">Previous</span>
 						  </a>
-						  <a class="right carousel-control" href="#carousel-pratt" role="button" data-slide="next">
+						  <a class="right carousel-control" href="#carousel-chargrp" role="button" data-slide="next">
 						    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"><i class="fa fa-chevron-circle-right"></i></span>
 						    <span class="sr-only">Next</span>
 						  </a>

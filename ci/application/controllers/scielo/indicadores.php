@@ -6,6 +6,8 @@ class Indicadores extends CI_Controller {
 	public $indicadoresSite = array();
 	public $areas = array();
 	public $colecciones = array();
+	public $ageRanges = array();
+	public $docTypes = array();
 	
 	public function __construct()
 	{
@@ -14,53 +16,53 @@ class Indicadores extends CI_Controller {
 			_('Publicación') => array(
 					'distribucion-articulos-coleccion' => _('Distribución de artículos por colección'),
 					'distribucion-revista-coleccion' => _('Distribución de revistas por colección'),
-					'distribucion-articulos-afiliacion' => _('Distribución de artículos por país de afiliación'),
-					'distribucion-articulos-revista-afiliacion' => _('Distribución de artículos por revista y país de afiliación'),
-					'distribucion-articulos-publicacion-afiliacion' => _('Distribución de artículos por país de publicación y país de afiliación'),
-					'distribucion-articulos-area-afiliacion' => _('Distribución de artículos por área y país de afiliación'),
-					'distribucion-coautor-revista-afiliacion' => _('Distribución de artículos por revista y número de co-autores'),
-					'distribucion-coautor-area-afiliacion' => _('Distribución de artículos por área y número de co-autores'),
+					// 'distribucion-articulos-afiliacion' => _('Distribución de artículos por país de afiliación'),
+					// 'distribucion-articulos-revista-afiliacion' => _('Distribución de artículos por revista y país de afiliación'),
+					// 'distribucion-articulos-publicacion-afiliacion' => _('Distribución de artículos por país de publicación y país de afiliación'),
+					// 'distribucion-articulos-area-afiliacion' => _('Distribución de artículos por área y país de afiliación'),
+					// 'distribucion-coautor-revista-afiliacion' => _('Distribución de artículos por revista y número de co-autores'),
+					// 'distribucion-coautor-area-afiliacion' => _('Distribución de artículos por área y número de co-autores'),
 				),
 			_('Colección') => array(
-					'generales' => _('Indicadores generales por revista')
+					// 'generales' => _('Indicadores generales por revista')
 				),
 			_('Citación') => array(
 					'distribucion-articulos-edad' => _('Distribución de artículos por edad del documento citado'),
 					'distribucion-articulos-tipo' => _('Distribución de artículos por tipo del documento citado'),
-					'distribucion-articulos-revista-edad' => _('Distribución de artículos por revista y edad del documento citado'),
-					'distribucion-articulos-revista-tipo' => _('Distribución de artículos por revista y tipo del documento citado'),
-					'distribucion-articulos-area-edad' => _('Distribución de artículos por área y edad del documento citado'),
-					'distribucion-articulos-area-tipo' => _('Distribución de artículos por área y tipo del documento citado'),
-					'distribucion-articulos-area-revista' => _('Distribución de artículos por área y revista ciatda'),
-					'distribucion-articulos-afiliacion-edad' => _('Distribución de artículos por páis de afiliación y edad del documento citado'),
-					'distribucion-articulos-afiliacion-tipo' => _('Distribución de artículos por páis de afiliación y tipo del documento citado'),
-					'distribucion-articulos-afiliacion-revista' => _('Distribución de artículos por páis de afiliación y revista ciatda'),
+					// 'distribucion-articulos-revista-edad' => _('Distribución de artículos por revista y edad del documento citado'),
+					// 'distribucion-articulos-revista-tipo' => _('Distribución de artículos por revista y tipo del documento citado'),
+					// 'distribucion-articulos-area-edad' => _('Distribución de artículos por área y edad del documento citado'),
+					// 'distribucion-articulos-area-tipo' => _('Distribución de artículos por área y tipo del documento citado'),
+					// 'distribucion-articulos-area-revista' => _('Distribución de artículos por área y revista ciatda'),
+					// 'distribucion-articulos-afiliacion-edad' => _('Distribución de artículos por páis de afiliación y edad del documento citado'),
+					// 'distribucion-articulos-afiliacion-tipo' => _('Distribución de artículos por páis de afiliación y tipo del documento citado'),
+					// 'distribucion-articulos-afiliacion-revista' => _('Distribución de artículos por páis de afiliación y revista ciatda'),
 				)
 		);
 		$this->indicadores = array(
+			'distribucion-articulos-afiliacion' => _('Distribución de artículos por país de afiliación'),
+			'distribucion-articulos-afiliacion-edad' => _('Distribución de artículos por páis de afiliación y edad del documento citado'),
+			'distribucion-articulos-afiliacion-revista' => _('Distribución de artículos por páis de afiliación y revista ciatda'),
+			'distribucion-articulos-afiliacion-tipo' => _('Distribución de artículos por páis de afiliación y tipo del documento citado'),
+			'distribucion-articulos-area-afiliacion' => _('Distribución de artículos por área y país de afiliación'),
+			'distribucion-articulos-area-edad' => _('Distribución de artículos por área y edad del documento citado'),
+			'distribucion-articulos-area-revista' => _('Distribución de artículos por área y revista ciatda'),
+			'distribucion-articulos-area-tipo' => _('Distribución de artículos por área y tipo del documento citado'),
 			'distribucion-articulos-coleccion' => _('Distribución de artículos por colección'),
+			'distribucion-articulos-coleccion-afiliacion' => _('Distribución de artículos por colección y país de afiliación'),
 			'distribucion-articulos-coleccion-area' => _('Distribución de artículos por colección y área'),
 			'distribucion-articulos-coleccion-area-revista' => _('Distribución de artículos por colección, área y revista'),
 			'distribucion-articulos-coleccion-revista' => _('Distribución de artículos por colección y revista'),
-			'distribucion-articulos-coleccion-afiliacion' => _('Distribución de artículos por colección y país de afiliación'),
-			'distribucion-revista-coleccion' => _('Distribución de revistas por colección'),
-			'distribucion-articulos-afiliacion' => _('Distribución de artículos por país de afiliación'),
-			'distribucion-articulos-revista-afiliacion' => _('Distribución de artículos por revista y país de afiliación'),
-			'distribucion-articulos-publicacion-afiliacion' => _('Distribución de artículos por país de publicación y país de afiliación'),
-			'distribucion-articulos-area-afiliacion' => _('Distribución de artículos por área y país de afiliación'),
-			'distribucion-coautor-revista-afiliacion' => _('Distribución de artículos por revista y número de co-autores'),
-			'distribucion-coautor-area-afiliacion' => _('Distribución de artículos por área y número de co-autores'),
-			'generales' => _('Indicadores generales ()'),
 			'distribucion-articulos-edad' => _('Distribución de artículos por edad del documento citado'),
-			'distribucion-articulos-tipo' => _('Distribución de artículos por tipo del documento citado'),
+			'distribucion-articulos-publicacion-afiliacion' => _('Distribución de artículos por país de publicación y país de afiliación'),
+			'distribucion-articulos-revista-afiliacion' => _('Distribución de artículos por revista y país de afiliación'),
 			'distribucion-articulos-revista-edad' => _('Distribución de artículos por revista y edad del documento citado'),
 			'distribucion-articulos-revista-tipo' => _('Distribución de artículos por revista y tipo del documento citado'),
-			'distribucion-articulos-area-edad' => _('Distribución de artículos por área y edad del documento citado'),
-			'distribucion-articulos-area-tipo' => _('Distribución de artículos por área y tipo del documento citado'),
-			'distribucion-articulos-area-revista' => _('Distribución de artículos por área y revista ciatda'),
-			'distribucion-articulos-afiliacion-edad' => _('Distribución de artículos por páis de afiliación y edad del documento citado'),
-			'distribucion-articulos-afiliacion-tipo' => _('Distribución de artículos por páis de afiliación y tipo del documento citado'),
-			'distribucion-articulos-afiliacion-revista' => _('Distribución de artículos por páis de afiliación y revista ciatda'),
+			'distribucion-articulos-tipo' => _('Distribución de artículos por tipo del documento citado'),
+			'distribucion-coautor-area-afiliacion' => _('Distribución de artículos por área y número de co-autores'),
+			'distribucion-coautor-revista-afiliacion' => _('Distribución de artículos por revista y número de co-autores'),
+			'distribucion-revista-coleccion' => _('Distribución de revistas por colección'),
+			'generales' => _('Indicadores generales ()'),
 		);
 		/*Colecciones*/
 		$this->load->database('scielo');
@@ -76,7 +78,16 @@ class Indicadores extends CI_Controller {
 			$this->areas['slug'][$row['slug']] = $row;
 			$this->areas['id'][$row['id']] = $row;
 		endforeach;
-
+		$query = "SELECT rango FROM \"vAgeRange\"";
+		$queryResult = $this->db->query($query);
+		$this->ageRanges = $queryResult->result_array();
+		$query = "SELECT id, name, slug FROM \"docType\" ORDER BY slug";
+		$queryResult = $this->db->query($query);
+		foreach ($queryResult->result_array() as $row):
+			$this->docTypes['slug'][$row['slug']] = $row;
+			$this->docTypes['id'][$row['id']] = $row;
+		endforeach;
+		
 		$this->db->close();
 
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
@@ -89,6 +100,8 @@ class Indicadores extends CI_Controller {
 		$this->template->set('indicadores', $this->indicadoresSite);
 		$this->template->set('colecciones', $this->colecciones['slug']);
 		$this->template->set('areas', $this->areas['slug']);
+		$this->template->set('ageRanges', $this->ageRanges);
+		$this->template->set('docTypes', $this->docTypes['slug']);
 	}
 
 	public function index($indicador="")
@@ -120,10 +133,12 @@ class Indicadores extends CI_Controller {
 			case 'distribucion-articulos-coleccion-area-revista':
 			case 'distribucion-articulos-coleccion-revista':
 			case 'distribucion-articulos-coleccion-afiliacion':
+			case 'distribucion-revista-coleccion':
+			case 'distribucion-articulos-edad':
+			case 'distribucion-articulos-tipo':
 				$this->getChartCollectionSub();
 				break;
 			default:
-
 				break;
 		endswitch;
 	}
@@ -296,6 +311,8 @@ class Indicadores extends CI_Controller {
 	public function getChartCollectionSub()
 	{
 		$this->output->enable_profiler(false);
+		$data = array();
+		$labels = array();
 		$data['data']['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
 		$this->load->database();
 		/*Convirtiendo el periodo en dos fechas*/
@@ -328,21 +345,46 @@ class Indicadores extends CI_Controller {
 			'hTitle' => _('Año'),
 			'tooltip' => _('Número de artículos en el año <b>%s</b>: <b>%s</b>')
 			);
+		$indicador['distribucion-revista-coleccion'] = array(
+			'sql' => "SELECT \"networkName\" AS title, anio, revistas as valor FROM \"vNetworkDistributionJ\"",
+			'vTitle' => _('Revistas por coleccion'),
+			'hTitle' => _('Año'),
+			'tooltip' => _('Número de revistas en el año <b>%s</b>: <b>%s</b>')
+			);
+		$indicador['distribucion-articulos-edad'] = array(
+			'sql' => "SELECT \"rango\"||' "._('Años')."' AS title, anio, articulos as valor FROM \"ageCitationDoc\"",
+			'vTitle' => _('Artículos citados por edad del documento'),
+			'hTitle' => _('Año'),
+			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
+			);
+
+		$indicador['distribucion-articulos-tipo'] = array(
+			'sql' => "SELECT \"docTypeName\" AS title, anio, articulos as valor FROM \"vDocTypeDistribution\"",
+			'vTitle' => _('Artículos citados por tipo de documento'),
+			'hTitle' => _('Año'),
+			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
+			);
+
 		$query = $indicador[$_POST['indicador']]['sql'];
-		$query .= " WHERE \"networkId\" IN (";
-		$coleccionOffset=1;
-		$coleccionTotal= count($_POST['coleccion']);
-		foreach ($_POST['coleccion'] as $coleccion):
-			$query .= "'{$this->colecciones['slug'][$coleccion]['id']}'";
-			if($coleccionOffset < $coleccionTotal):
-				$query .=",";
-			endif;
-			$coleccionOffset++;
-		endforeach;
-		$query .= ")";
+		$query .= " WHERE anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}'";
+
+		if (isset($_POST['coleccion'])):
+			$labels[] = _('Colección');
+			$query .= " AND \"networkId\" IN (";
+			$offset=1;
+			$total= count($_POST['coleccion']);
+			foreach ($_POST['coleccion'] as $coleccion):
+				$query .= "'{$this->colecciones['slug'][$coleccion]['id']}'";
+				if($offset < $total):
+					$query .=",";
+				endif;
+				$offset++;
+			endforeach;
+			$query .= ")";
+		endif;
 		
 		if (isset($_POST['area'])):
-			$data['dataTable']['cols'][] = array('id' => '', 'label' => _('Área/Año'), 'type' => 'string');
+			$labels[] = _('Area');
 			$query .= " AND \"areaId\" IN (";
 			$offset=1;
 			$total= count($_POST['area']);
@@ -357,7 +399,7 @@ class Indicadores extends CI_Controller {
 		endif;
 
 		if (isset($_POST['revista'])):
-			$data['dataTable']['cols'][] = array('id' => '', 'label' => _('Revista/Año'), 'type' => 'string');
+			$labels[] = _('Revista');
 			$query .= " AND \"revistaSlug\" IN (";
 			$offset=1;
 			$total= count($_POST['revista']);
@@ -372,7 +414,7 @@ class Indicadores extends CI_Controller {
 		endif;
 
 		if (isset($_POST['paisAutor'])):
-			$data['dataTable']['cols'][] = array('id' => '', 'label' => _('Afiliación/Año'), 'type' => 'string');
+			$labels[] = _('Afiliación');
 			$query .= " AND \"paisSlug\" IN (";
 			$offset=1;
 			$total= count($_POST['paisAutor']);
@@ -386,7 +428,37 @@ class Indicadores extends CI_Controller {
 			$query .= ")";
 		endif;
 
-		$query .= " AND anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}'";
+		if (isset($_POST['edad'])):
+			$data['dataTable']['cols'][] = array('id' => '', 'label' => _('Edad/Año'), 'type' => 'string');
+			$query .= " AND \"rango\" IN (";
+			$offset=1;
+			$total= count($_POST['edad']);
+			foreach ($_POST['edad'] as $edad):
+				$query .= "'{$edad}'";
+				if($offset < $total):
+					$query .=",";
+				endif;
+				$offset++;
+			endforeach;
+			$query .= ")";
+		endif;
+
+		if (isset($_POST['tipodoc'])):
+			$labels[] = _('Tipo de documento');
+			$query .= " AND \"docTypeId\" IN (";
+			$offset=1;
+			$total= count($_POST['tipodoc']);
+			foreach ($_POST['tipodoc'] as $tipodoc):
+				$query .= "'{$this->docTypes['slug'][$tipodoc]['id']}'";
+				if($offset < $total):
+					$query .=",";
+				endif;
+				$offset++;
+			endforeach;
+			$query .= ")";
+		endif;
+
+		$data['dataTable']['cols'][] = array('id' => '', 'label' => implode(', ', $labels).'/'._('Año'), 'type' => 'string');
 		$query = $this->db->query($query);
 		$indicadores = array();
 		foreach ($query->result_array() as $row ):
@@ -491,7 +563,71 @@ class Indicadores extends CI_Controller {
 		endif;
 
 		$data = array();
+		$query = NULL;
+		
+		switch ($_POST['indicador']) :
+			case 'distribucion-articulos-coleccion':
+			case 'distribucion-articulos-coleccion-area':
+			case 'distribucion-articulos-coleccion-area-revista':
+			case 'distribucion-articulos-coleccion-revista':
+			case 'distribucion-articulos-coleccion-afiliacion':
+			case 'distribucion-revista-coleccion':
+				$query = $this->getPeriodosCollection();
+				break;
+			case 'distribucion-articulos-edad':
+				$query = $this->getPeriodosEdad();
+				break;
+			case 'distribucion-articulos-tipo':
+				$query = $this->getPeriodosTipoDoc();
+				break;
+			default:
+				# code...
+				break;
+		endswitch;
+
+		/*Realizando consulta*/
 		$this->load->database('scielo');
+		$query = $this->db->query($query);
+		$rango = $query->row_array();
+		$this->db->close();
+		$anioBase = $rango['anioBase'];
+		$anioFinal = $rango['anioFinal'];
+
+		$data['result'] = true;
+		$data['anioBase'] = (int)$anioBase;
+		$data['anioFinal'] = (int)$anioFinal;
+
+		/*Generando escala*/
+		$scale = array();
+		$offset = $data['anioBase'];
+		while ( $offset < $data['anioFinal']):	
+			$scale[] = $offset;
+			if($offset % 5 > 0):
+				$offset += (5 - $offset % 5);
+			else:
+				$offset += 5;
+				if($offset <= $data['anioFinal']):
+					$scale[] = "|";
+				endif;
+			endif;
+		endwhile;
+		$scale[] = $data['anioFinal'];
+		$data['scale'] = json_encode($scale, true);
+		$heterogeneity = array();
+		$scales = count($scale) - 1;
+		foreach ($scale as $key => $value):
+			if($value != $data['anioFinal'] && $value != $data['anioBase'] && $value != "|" && is_numeric($value)):
+				$indice = $key;
+				$porcentaje = number_format((($indice/$scales) * 100), 1, '.', '');
+				$heterogeneity[] = "{$porcentaje}/{$value}";
+			endif;
+		endforeach;
+		$data['heterogeneity'] = json_encode($heterogeneity, true);
+		header('Content-Type: application/json');
+		echo json_encode($data, true);
+	}
+
+	public function getPeriodosCollection(){
 		$query = "";
 		/*Periodos por revista*/
 		/*Consulta para cada indicador*/
@@ -500,17 +636,18 @@ class Indicadores extends CI_Controller {
 		$indicadorTabla['distribucion-articulos-coleccion-area-revista']="networkAreaJournalDistribution";
 		$indicadorTabla['distribucion-articulos-coleccion-revista']="networkJournalDistribution";
 		$indicadorTabla['distribucion-articulos-coleccion-afiliacion']="networkAffiliationDistribution";
+		$indicadorTabla['distribucion-revista-coleccion']="networkDistribution";
 		$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"{$indicadorTabla[$_POST['indicador']]}\"";
 		if (isset($_POST['coleccion']) && count($_POST['coleccion']) > 0):
 			$query .= " WHERE \"networkId\" IN (";
-			$coleccionOffset=1;
-			$coleccionTotal= count($_POST['coleccion']);
+			$offset=1;
+			$total= count($_POST['coleccion']);
 			foreach ($_POST['coleccion'] as $coleccion):
 				$query .= "'{$this->colecciones['slug'][$coleccion]['id']}'";
-				if($coleccionOffset < $coleccionTotal):
+				if($offset < $total):
 					$query .=",";
 				endif;
-				$coleccionOffset++;
+				$offset++;
 			endforeach;
 			$query .= ")";
 		endif;
@@ -557,57 +694,58 @@ class Indicadores extends CI_Controller {
 			$query .= ")";
 		endif;
 
-		$query = $this->db->query($query);
-		$rango = $query->row_array();
-		$this->db->close();
-		$anioBase = $rango['anioBase'];
-		$anioFinal = $rango['anioFinal'];
+		return $query;
+	}
 
-		$data['result'] = true;
-		$data['anioBase'] = (int)$anioBase;
-		$data['anioFinal'] = (int)$anioFinal;
-
-		/*Generando escala*/
-		$scale = array();
-		$scaleOffset = $data['anioBase'];
-		while ( $scaleOffset < $data['anioFinal']):	
-			$scale[] = $scaleOffset;
-			if($scaleOffset % 5 > 0):
-				$scaleOffset += (5 - $scaleOffset % 5);
-			else:
-				$scaleOffset += 5;
-				if($scaleOffset <= $data['anioFinal']):
-					$scale[] = "|";
+	public function getPeriodosEdad(){
+		$query = "";
+		$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"ageCitationDoc\"";
+		if (isset($_POST['edad']) && count($_POST['edad']) > 0):
+			$query .= " WHERE \"rango\" IN (";
+			$offset=1;
+			$total= count($_POST['edad']);
+			foreach ($_POST['edad'] as $edad):
+				$query .= "'{$edad}'";
+				if($offset < $total):
+					$query .=",";
 				endif;
-			endif;
-		endwhile;
-		$scale[] = $data['anioFinal'];
-		$data['scale'] = json_encode($scale, true);
-		$heterogeneity = array();
-		$scales = count($scale) - 1;
-		foreach ($scale as $key => $value):
-			if($value != $data['anioFinal'] && $value != $data['anioBase'] && $value != "|" && is_numeric($value)):
-				$indice = $key;
-				$porcentaje = number_format((($indice/$scales) * 100), 1, '.', '');
-				$heterogeneity[] = "{$porcentaje}/{$value}";
-			endif;
-		endforeach;
-		$data['heterogeneity'] = json_encode($heterogeneity, true);
-		header('Content-Type: application/json');
-		echo json_encode($data, true);
+				$offset++;
+			endforeach;
+			$query .= ")";
+		endif;
+		return $query;
+	}
+
+	public function getPeriodosTipoDoc(){
+		$query = "";
+		$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"docTypeDistribution\"";
+		if (isset($_POST['tipodoc']) && count($_POST['tipodoc']) > 0):
+			$query .= " WHERE \"docTypeId\" IN (";
+			$offset=1;
+			$total= count($_POST['tipodoc']);
+			foreach ($_POST['tipodoc'] as $tipodoc):
+				$query .= "'{$this->docTypes['slug'][$tipodoc]['id']}'";
+				if($offset < $total):
+					$query .=",";
+				endif;
+				$offset++;
+			endforeach;
+			$query .= ")";
+		endif;
+		return $query;
 	}
 
 	public function getRevistaAfiliacionCollection(){
 		$this->load->database();
-		$coleccionOffset=1;
-		$coleccionTotal= count($_POST['coleccion']);
+		$offset=1;
+		$total= count($_POST['coleccion']);
 		$coleccionIN = "";
 		foreach ($_POST['coleccion'] as $coleccion):
 			$coleccionIN .= "'{$this->colecciones['slug'][$coleccion]['id']}'";
-			if($coleccionOffset < $coleccionTotal):
+			if($offset < $total):
 				$coleccionIN .=",";
 			endif;
-			$coleccionOffset++;
+			$offset++;
 		endforeach;
 		$query = "SELECT \"networkId\", name, slug FROM \"vNetworkJournals\" WHERE \"networkId\" IN(${coleccionIN})";
 		$query = $this->db->query($query);
