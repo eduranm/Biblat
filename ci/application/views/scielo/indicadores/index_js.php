@@ -7,14 +7,7 @@ var tables = {normal: null, bradford:null, group1:null, group2:null, group3:null
 var brfLim = null;
 var popState = {indicador:false, coleccion:false, revista:false, paisRevista:false, paisAutor:false, periodo:false, area:false, edad: false, tipodoc: false};
 var rangoPeriodo="0-0";
-var dataPeriodo="0-0";
-var coleccionURL="";
-var areaURL="";
-var revistaURL="";
-var paisAutorURL="";
-var paisRevistaURL="";
-var edadURL="";
-var tipodocURL=""
+var urls = {coleccion:'', area:'', revista:'', paisAutor:'', paisRevista:'', edad:'', tipodoc:''}
 var asyncAjax=false;
 var urlData = null;
 $(document).ready(function(){
@@ -77,12 +70,12 @@ $(document).ready(function(){
 		console.log('coleccion change');
 		val.coleccion = $(this).val();
 		console.log(val.coleccion);
-		coleccionURL = "";
+		urls.coleccion = "";
 		if(val.coleccion != "" && val.coleccion != null){
-			coleccionURL='/coleccion/' + val.coleccion.join('/');
+			urls.coleccion='/coleccion/' + val.coleccion.join('/');
 		}
 		if(typeof history.pushState === "function" && !popState.coleccion){
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + coleccionURL);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + urls.coleccion);
 		}
 		$("#chartContainer, #bradfodContainer, #group-container").hide();
 		switch (realIndicator){
@@ -175,12 +168,12 @@ $(document).ready(function(){
 	$('#area').on('change', function(e){
 		console.log('area change');
 		val.area = $(this).val();
-		areaURL="";
+		urls.area="";
 		if(val.area != "" && val.area != null){
-			areaURL='/area/' + val.area.join('/');
+			urls.area='/area/' + val.area.join('/');
 		}
 		if(typeof history.pushState === "function" && !popState.area){
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + coleccionURL + areaURL + revistaURL);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + urls.coleccion + urls.area + urls.revista);
 		}
 		$("#chartContainer, #bradfodContainer, #group-container").hide();
 		switch (realIndicator){
@@ -246,12 +239,12 @@ $(document).ready(function(){
 	$("#revista").on("change", function(e){
 		console.log('revista change');
 		val.revista = $(this).val();
-		revistaURL="";
+		urls.revista="";
 		if(val.revista != "" && val.revista != null){
-			revistaURL='/revista/' + val.revista.join('/');
+			urls.revista='/revista/' + val.revista.join('/');
 		}
 		if(typeof history.pushState === "function" && !popState.revista){
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + coleccionURL + areaURL + revistaURL);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + urls.coleccion + urls.area + urls.revista);
 		}
 		$("#chartContainer, #bradfodContainer, #group-container").hide();
 		switch (realIndicator){
@@ -294,12 +287,12 @@ $(document).ready(function(){
 	$("#paisAutor").on("change", function(e){
 		console.log('paisAutor change');
 		val.paisAutor = $(this).val();
-		paisAutorURL="";
+		urls.paisAutor="";
 		if(val.paisAutor != "" && val.paisAutor != null){
-			paisAutorURL='/pais-autor/' + val.paisAutor.join('/');
+			urls.paisAutor='/pais-autor/' + val.paisAutor.join('/');
 		}
 		if(typeof history.pushState === "function" && !popState.paisAutor){
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + coleccionURL + paisAutorURL);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + urls.coleccion + urls.paisAutor);
 		}
 		$("#chartContainer, #bradfodContainer, #group-container").hide();
 		switch (val.indicador){
@@ -338,13 +331,13 @@ $(document).ready(function(){
 			$("#paisAutor").select2('enable', true);
 		}
 		if(typeof history.pushState === "function" && !popState.paisRevista){
-			paisRevistaURL="";
+			urls.paisRevista="";
 			if(value != "" && value != null){
-				paisRevistaURL='/pais-revista/' + value.join('/');
+				urls.paisRevista='/pais-revista/' + value.join('/');
 			}
 			console.log('pushState');
-			console.log(paisRevistaURL);
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + indicadorValue + '/coleccion/' + coleccionValue + paisRevistaURL);
+			console.log(urls.paisRevista);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + indicadorValue + '/coleccion/' + coleccionValue + urls.paisRevista);
 		}
 		popState.paisRevista=false;
 		console.log(e);
@@ -353,12 +346,12 @@ $(document).ready(function(){
 	$('#edad').on('change', function(e){
 		console.log('edad change');
 		val.edad = $(this).val();
-		edadURL="";
+		urls.edad="";
 		if(val.edad != "" && val.edad != null){
-			edadURL='/edad/' + val.edad.join('/');
+			urls.edad='/edad/' + val.edad.join('/');
 		}
 		if(typeof history.pushState === "function" && !popState.edad){
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + edadURL);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + urls.edad);
 		}
 		$("#tabs, #periodos, #chartContainer, #bradfodContainer, #group-container").hide();
 		$('#area, #revista, #paisRevista, #paisAutor').select2('enable', false);
@@ -379,12 +372,12 @@ $(document).ready(function(){
 	$('#tipodoc').on('change', function(e){
 		console.log('tipodoc change');
 		val.tipodoc = $(this).val();
-		tipodocURL="";
+		urls.tipodoc="";
 		if(val.tipodoc != "" && val.tipodoc != null){
-			tipodocURL='/tipo-documento/' + val.tipodoc.join('/');
+			urls.tipodoc='/tipo-documento/' + val.tipodoc.join('/');
 		}
 		if(typeof history.pushState === "function" && !popState.tipodoc){
-			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + tipodocURL);
+			history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + urls.tipodoc);
 		}
 		$('#tabs, #periodos, #chartContainer, #bradfodContainer, #group-container').hide();
 		$('#area, #revista, #paisRevista, #paisAutor').select2('enable', false);
@@ -680,7 +673,7 @@ setPeriodos = function(){
 							$("#sliderPeriodo").val(value);
 							rango=value.replace(';', '-');
 							if(typeof history.pushState === "function"){
-								history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + coleccionURL + areaURL + revistaURL + edadURL + '/' + rango);
+								history.pushState($("#generarIndicador").serializeJSON(), null, '<?=site_url('scielo/indicadores')."/"?>' + val.indicador + urls.coleccion + urls.area + urls.revista + urls.edad + '/' + rango);
 							}
 							$("#revista, #paisRevista").select2("close");
 							$("#generarIndicador").submit();
