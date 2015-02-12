@@ -36,14 +36,15 @@ $(document).ready(function(){
 			case 'distribucion-articulos-coleccion':
 				realIndicator = val.indicador;
 				updateInfo();
-				$("#coleccion").select2('enable', true).parent().show();
+				$('#coleccion').select2('enable', true).parent().show();
 				if(urlData == null || typeof urlData.coleccion === "undefined")
 					setPeriodos();
 				break;
 			case 'distribucion-revista-coleccion':
+			case 'indicadores-generales-revista':
 				realIndicator = val.indicador;
 				updateInfo();
-				$("#coleccion").select2('enable', true).parent().show();
+				$('#coleccion').select2('enable', true).parent().show();
 				break;
 			case 'distribucion-articulos-edad':
 				realIndicator = val.indicador;
@@ -66,7 +67,7 @@ $(document).ready(function(){
 		console.log(e);
 	});
 
-	$("#coleccion").on("change", function(e){
+	$('#coleccion').on("change", function(e){
 		console.log('coleccion change');
 		val.coleccion = $(this).val();
 		console.log(val.coleccion);
@@ -87,7 +88,7 @@ $(document).ready(function(){
 				$('#tabs, #group-container').show();
 				if(val.coleccion != "" && val.coleccion != null){
 					$('#area, #revista, #paisAutor').parent().show();
-					$("#area, #revista, #paisAutor").select2('enable', true);
+					$('#area, #revista, #paisAutor').select2('enable', true);
 					$.ajax({
 						url: '<?=site_url("scielo/indicadores/getOptionData");?>',
 						type: 'POST',
@@ -96,22 +97,22 @@ $(document).ready(function(){
 						async: false,
 						success: function(data) {
 							console.log(data);
-							$("#revista, #paisAutor").empty()
+							$('#revista, #paisAutor').empty()
 							.append('<option></option>')
 							.select2('destroy');
-							$("#revista, #paisAutor").parent().hide();
+							$('#revista, #paisAutor').parent().hide();
 							if(typeof data.revistas !== "undefined"){
 								$.each(data.revistas, function(key, revista) {
 									optgroup = $('<optgroup label="'+key+'"></optgroup>');
 									$.each(revista, function(k, v){
 										optgroup.append('<option value="' + k +'">' + v + '</option>');
 									});
-									$("#revista").append(optgroup);
+									$('#revista').append(optgroup);
 								});
 								if(val.revista != null && val.revista != '')
-									$("#revista").val(val.revista);
-								$("#revista").show().select2({allowClear: true, closeOnSelect: true}).select2('enable', false);
-								$("#revista").select2('enable', true).parent().show();
+									$('#revista').val(val.revista);
+								$('#revista').show().select2({allowClear: true, closeOnSelect: true}).select2('enable', false);
+								$('#revista').select2('enable', true).parent().show();
 							}
 							if(typeof data.paises !== "undefined"){
 								$.each(data.paises, function(k, v) {
@@ -130,7 +131,7 @@ $(document).ready(function(){
 				}
 				if (val.coleccion === "" || val.coleccion == null) {
 					$('#area, #revista, #paisRevista, #paisAutor').parent().hide();
-					$("#revista, #paisRevista, #paisAutor")
+					$('#revista, #paisRevista, #paisAutor')
 					.empty()
 					.append('<option></option>')
 					.select2('destroy')
@@ -148,13 +149,56 @@ $(document).ready(function(){
 				}
 				break;
 			case 'distribucion-articulos-coleccion-area-revista':
-				val.revista = $("#revista").val();
+				val.revista = $('#revista').val();
 				$('#area').trigger('change');
 				break;
 			case 'distribucion-revista-coleccion':
 				$('#tabs, #periodos, #chartContainer, #bradfodContainer, #group-container').hide();
 				if(val.coleccion != "" && val.coleccion != null){
 					setPeriodos();
+				}
+				break;
+			case 'indicadores-generales-revista':
+				if(val.coleccion != "" && val.coleccion != null){
+					$('#revista').parent().show();
+					$('#revista').select2('enable', true);
+					$.ajax({
+						url: '<?=site_url("scielo/indicadores/getOptionData");?>',
+						type: 'POST',
+						dataType: 'json',
+						data: getSerializedForm(),
+						async: false,
+						success: function(data) {
+							console.log(data);
+							$('#revista').empty()
+							.append('<option></option>')
+							.select2('destroy')
+							.parent().hide();
+							if(typeof data.revistas !== "undefined"){
+								$.each(data.revistas, function(key, revista) {
+									optgroup = $('<optgroup label="'+key+'"></optgroup>');
+									$.each(revista, function(k, v){
+										optgroup.append('<option value="' + k +'">' + v + '</option>');
+									});
+									$('#revista').append(optgroup);
+								});
+								if(val.revista != null && val.revista != '')
+									$('#revista').val(val.revista);
+								$('#revista').select2({allowClear: true, closeOnSelect: true})
+								.select2('enable', true)
+								.parent().show();
+							}
+						}
+					});
+					if(val.revista !== "" && val.revista != null){
+						$('#revista').trigger('change');
+					}
+				}else{
+					$('#tabs, #group-container, #periodos').hide();
+					$('#revista').select2('val', '?')
+					.select2('enable', false)
+					.parent().hide();
+					val.revista = null;
 				}
 				break;
 			default:
@@ -193,7 +237,7 @@ $(document).ready(function(){
 						async: false,
 						success: function(data) {
 							console.log(data);
-							$("#revista").empty()
+							$('#revista').empty()
 							.append('<option></option>')
 							.select2('destroy').parent().hide();
 							if(typeof data.revistas !== "undefined"){
@@ -206,12 +250,12 @@ $(document).ready(function(){
 										});
 										optgroup.append(optgroup2);
 									});
-									$("#revista").append(optgroup);
+									$('#revista').append(optgroup);
 								});
 								if(val.revista != null && val.revista != '')
-									$("#revista").val(val.revista);
-								val.revista = $("#revista").val();
-								$("#revista").show().select2({allowClear: true, closeOnSelect: true}).select2('enable', true)
+									$('#revista').val(val.revista);
+								val.revista = $('#revista').val();
+								$('#revista').show().select2({allowClear: true, closeOnSelect: true}).select2('enable', true)
 								.parent().show();
 							}
 						}
@@ -236,7 +280,7 @@ $(document).ready(function(){
 		console.log(e);
 	});
 
-	$("#revista").on("change", function(e){
+	$('#revista').on("change", function(e){
 		console.log('revista change');
 		val.revista = $(this).val();
 		urls.revista="";
@@ -259,7 +303,7 @@ $(document).ready(function(){
 					setPeriodos();
 				}else if(!popState.coleccion){
 					$('#area, #revista, #paisAutor').parent().show();
-					$("#area, #revista, #paisAutor").select2('enable', true);
+					$('#area, #revista, #paisAutor').select2('enable', true);
 					$('#coleccion').trigger('change');
 				}
 				break;
@@ -275,6 +319,14 @@ $(document).ready(function(){
 				}else if(!popState.coleccion){
 					realIndicator = 'distribucion-articulos-coleccion-area';
 					$('#area').trigger('change');
+				}
+				break;
+			case 'indicadores-generales-revista':
+				$('#tabs, #group-container').show();
+				if(val.revista != "" && val.revista != null){
+					setPeriodos();
+				}else{
+					$('#tabs, #group-container, #periodos').hide();
 				}
 				break;
 			default:
@@ -306,7 +358,7 @@ $(document).ready(function(){
 					setPeriodos();
 				}else if(!popState.coleccion){
 					$('#area, #revista, #paisAutor').parent().show();
-					$("#area, #revista, #paisAutor").select2('enable', true);
+					$('#area, #revista, #paisAutor').select2('enable', true);
 					$('#coleccion').trigger('change');
 				}
 			default:
@@ -319,15 +371,15 @@ $(document).ready(function(){
 	$("#paisRevista").on("change", function(e){
 		value = $(this).val();
 		indicadorValue = $("#indicador").val();
-		coleccionValue = $("#coleccion").val();
+		coleccionValue = $('#coleccion').val();
 		$("#sliderPeriodo").prop("disabled", true);
 		if (value != "" && value != null) {
-			$("#revista").select2('enable', false);
+			$('#revista').select2('enable', false);
 			$("#paisAutor").select2('enable', false);
 			setPeriodos();
 		}else{
 			$("#periodos, #tabs, #chartContainer").hide('slow');
-			$("#revista").select2('enable', true);
+			$('#revista').select2('enable', true);
 			$("#paisAutor").select2('enable', true);
 		}
 		if(typeof history.pushState === "function" && !popState.paisRevista){
@@ -467,6 +519,45 @@ $(document).ready(function(){
 					tables.bargrp.draw(tableData, data.tableOptions);
 					changeTableClass();
 					google.visualization.events.addListener(tables.bargrp , 'sort', changeTableClass);
+					console.log(chart);	
+					break;
+				case "indicadores-generales-revista":
+					$("#tabs, #group-container").slideDown('slow');
+					$("#bargrpSlide").empty();
+					chart.bargrp = new Array();
+					chart.data.bargrp = new Array();
+					chart.data.bargrpJ = data.journal;
+					$("#carousel-chargrp .carousel-indicators, #carousel-chargrp .carousel-inner").empty();
+					jQuery.each(data.chart, function(key, grupo) {
+						console.log(key);
+						if(key == 'fasciculos'){
+							$("#carousel-chargrp .carousel-indicators").append('<li data-target="#carousel-chargrp" data-slide-to="' + key + '" class="active"></li>');
+						}else{
+							$("#carousel-chargrp .carousel-indicators").append('<li id="chartLi' + key + '" data-target="#carousel-chargrp" data-slide-to="' + key + '"></li>');
+						}
+						chart.data.bargrp[key] = new google.visualization.DataTable(grupo);
+						switch(key){
+							case 'citas':
+								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item active"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4></div><div id="chartPratt' + key +'" class="chart_data"></div></div>');
+								chart.bargrp[key] = new google.charts.Bar(document.getElementById('chartPratt' + key));
+								chart.bargrp[key].draw(chart.data.bargrp[key], google.charts.Bar.convertOptions(data.options.bar));
+								break;
+							default:
+								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4></div><div id="chartPratt' + key +'" class="chart_data"></div></div>');
+								chart.bargrp[key] = new google.visualization.LineChart(document.getElementById('chartPratt' + key));
+								chart.bargrp[key].draw(chart.data.bargrp[key], data.options.line);
+								break;
+						}
+						if(key == 'citas'){
+							console.log("addListener: "+key);
+							google.visualization.events.addListener(chart.bargrp[key], 'ready', function(){
+								console.log("ready: "+key);
+								$('#chartParent' + key).removeClass("active");
+							});
+						}
+					});
+					$("#carousel-chargrp").carousel(0);
+					$("#gridContainer").hide();
 					console.log(chart);	
 					break;
 				default:
@@ -629,7 +720,7 @@ updateData = function(){
 		popState.area=true;
 		popState.revista=true;
 		popState.paisAutor=true;
-		$("#coleccion").val(urlData.coleccion).trigger("change");
+		$('#coleccion').val(urlData.coleccion).trigger("change");
 		actualForm = $("#generarIndicador").serializeJSON();
 	}
 
@@ -641,7 +732,7 @@ updateData = function(){
 
 	if(typeof urlData.revista !== "undefined"){
 		popState.revista=true;
-		$("#revista").val(urlData.revista).trigger("change");
+		$('#revista').val(urlData.revista).trigger("change");
 		actualForm = $("#generarIndicador").serializeJSON();
 	}
 

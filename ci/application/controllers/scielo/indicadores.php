@@ -24,7 +24,7 @@ class Indicadores extends CI_Controller {
 					// 'distribucion-coautor-area-afiliacion' => _('Distribución de artículos por área y número de co-autores'),
 				),
 			_('Colección') => array(
-					// 'generales' => _('Indicadores generales por revista')
+					'indicadores-generales-revista' => _('Indicadores generales por revista')
 				),
 			_('Citación') => array(
 					'distribucion-articulos-edad' => _('Distribución de artículos por edad del documento citado'),
@@ -62,7 +62,7 @@ class Indicadores extends CI_Controller {
 			'distribucion-coautor-area-afiliacion' => _('Distribución de artículos por área y número de co-autores'),
 			'distribucion-coautor-revista-afiliacion' => _('Distribución de artículos por revista y número de co-autores'),
 			'distribucion-revista-coleccion' => _('Distribución de revistas por colección'),
-			'generales' => _('Indicadores generales ()'),
+			'indicadores-generales-revista' => _('Indicadores generales por revista'),
 		);
 		/*Colecciones*/
 		$this->load->database('scielo');
@@ -138,6 +138,9 @@ class Indicadores extends CI_Controller {
 			case 'distribucion-articulos-tipo':
 				$this->getChartCollectionSub();
 				break;
+			case 'indicadores-generales-revista':
+				$this->getChartGeneral();
+				break;
 			default:
 				break;
 		endswitch;
@@ -153,11 +156,14 @@ class Indicadores extends CI_Controller {
 			case 'distribucion-articulos-coleccion-area-revista':
 				$this->getRevistaCollectionArea();
 				break;
+			case 'indicadores-generales-revista':
+				$this->getRevistasGeneral();
 			default:
 				break;
 		endswitch;
 	}
 
+	/*Gráficas*/
 	public function getChartCollection()
 	{
 		$this->load->database();
@@ -310,7 +316,6 @@ class Indicadores extends CI_Controller {
 	}
 	public function getChartCollectionSub()
 	{
-		$this->output->enable_profiler(false);
 		$data = array();
 		$labels = array();
 		$data['data']['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
@@ -357,7 +362,6 @@ class Indicadores extends CI_Controller {
 			'hTitle' => _('Año'),
 			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
 			);
-
 		$indicador['distribucion-articulos-tipo'] = array(
 			'sql' => "SELECT \"docTypeName\" AS title, anio, articulos as valor FROM \"vDocTypeDistribution\"",
 			'vTitle' => _('Artículos citados por tipo de documento'),
@@ -555,6 +559,207 @@ class Indicadores extends CI_Controller {
 		echo json_encode($data, true);
 	}
 
+	public function getChartGeneral(){
+		$data = array();
+		$charts = array(
+			'fasciculos' => array('title' => 'Número de fasciculos por revista', 'tooltip' => _('Número de fasciculos en el año <b>%s</b>: <b>%s</b>')),
+			'articulos' => array('title' => 'Número de artículos por revista', 'tooltip' => _('Número de artículos en el año <b>%s</b>: <b>%s</b>')), 
+			'referencias' => array('title' => 'Número de referencias por revista', 'tooltip' => _('Número de referencias en el año <b>%s</b>: <b>%s</b>')), 
+			'citas' => array('title' => 'Número de citas/autocitas por revista', 'tooltip' => _('Número de citas/autocitas en el año <b>%s</b>: <b>%s</b>')), 
+			'factorImpacto' => array('title' => 'Factor de impacto por revista', 'tooltip' => _('Factor de impacto en el año <b>%s</b>: <b>%s</b>')),
+			'indiceInmediates' => array('title' => 'Indice de inmediates por revista', 'tooltip' => _('Indice de inmediates en el año <b>%s</b>: <b>%s</b>')),
+			'vidaMedia' => array('title' => 'Vida media por revista', 'tooltip' => _('Vida media en el año <b>%s</b>: <b>%s</b>'))
+		);
+		foreach ($charts as $key => $chart):
+			$data['title'][$key] = $charts[$key]['title'];
+			$data['chart'][$key]['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
+		endforeach;
+
+		/*Convirtiendo el periodo en dos fechas*/
+		$_POST['periodo'] = explode(";", $_POST['periodo']);
+		/*Generamos el arreglo de periodos*/
+		$periodos = $this->getPeriodos($_POST);
+
+		$query = "SELECT * FROM \"indicadoresGeneralesRevista\" WHERE anio BETWEEN '{$_POST['periodo'][0]}' AND '{$_POST['periodo'][1]}'";
+		if (isset($_POST['coleccion']) && count($_POST['coleccion']) > 0):
+			$query .= " AND \"networkId\" IN (";
+			$offset=1;
+			$total= count($_POST['coleccion']);
+			foreach ($_POST['coleccion'] as $coleccion):
+				$query .= "'{$this->colecciones['slug'][$coleccion]['id']}'";
+				if($offset < $total):
+					$query .=",";
+				endif;
+				$offset++;
+			endforeach;
+			$query .= ")";
+		endif;
+		if (isset($_POST['revista']) && count($_POST['revista']) > 0):
+			$query .= " AND \"revistaSlug\" IN (";
+			$offset=1;
+			$total= count($_POST['revista']);
+			foreach ($_POST['revista'] as $revista):
+				$query .= "'{$revista}'";
+				if($offset < $total):
+					$query .=",";
+				endif;
+				$offset++;
+			endforeach;
+			$query .= ")";
+		endif;
+		$this->load->database();
+		$query = $this->db->query($query);
+		$this->db->close();
+
+		$indicadores = array();
+		foreach ($query->result_array() as $row ):
+			$indicadores[$row['journal']][$row['anio']] = $row;
+		endforeach;
+
+		/*Generando columnas*/
+		foreach ($indicadores as $kindicador => $vindicador):
+			foreach ($charts as $key => $chart):
+				switch ($key):
+					case 'citas':
+						$data['chart'][$key]['cols'][] = array('id' => slug($kindicador)."-autocitacion",'label' => $kindicador._(' (autocitas)'), 'type' => 'number');
+						$data['chart'][$key]['cols'][] = array('id' => slug($kindicador)."-tooltip",'label' => $kindicador, 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
+					default:
+						$data['chart'][$key]['cols'][] = array('id' => slug($kindicador),'label' => $kindicador, 'type' => 'number');
+						$data['chart'][$key]['cols'][] = array('id' => slug($kindicador)."-tooltip",'label' => $kindicador, 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
+				endswitch;
+			endforeach;
+		endforeach;
+
+		/*Generando filas para gráficas y columnas para la tabla*/
+		$setDataTableRows = false;
+		foreach ($periodos as $periodo):
+			foreach ($charts as $key => $chart):
+				$c = array();
+				$c[] = array(
+						'v' => $periodo
+					);
+				foreach ($indicadores as $kindicador => $vindicador):
+					$value = $vindicador[$periodo][$key];
+					$tooltipv = $value;
+					switch ($key):
+						case 'citas':
+							// print_r($vindicador[$periodo]);die();
+							$porcentajeAutocita = $vindicador[$periodo]['porcentajeAutoCita'] != NULL ? $vindicador[$periodo]['porcentajeAutoCita'] : 0;
+							$citas = round($value * (1 - ($porcentajeAutocita / 100)));
+							$autocitas = round($value * ($porcentajeAutocita / 100));
+							$c[] = array(
+								'v' => $autocitas
+							);
+							$c[] = array(
+								'v' => _sprintf("<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">{$charts[$key]['tooltip']}</div>", $kindicador, $periodo, $autocitas)
+							);
+							$c[] = array(
+								'v' => $citas
+							);
+							$c[] = array(
+								'v' => _sprintf("<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">{$charts[$key]['tooltip']}</div>", $kindicador, $periodo, $citas)
+							);
+							break;
+						case 'vidaMedia':
+							$value = $value == '>10,0' ? 10.1 : $value;
+							$tooltipv = $value == 10.1 ? '>10.0' : $value;
+						default:
+							$c[] = array(
+								'v' => $value
+							);
+							$c[] = array(
+								'v' => _sprintf("<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">{$charts[$key]['tooltip']}</div>", $kindicador, $periodo, $tooltipv)
+							);
+					endswitch;
+				endforeach;
+				$data['chart'][$key]['rows'][]['c'] = $c;
+			endforeach;
+		endforeach;
+		/*Opciones de la gráfica*/
+		$data['options']['bar'] = array(
+						'animation' => array(
+								'duration' => 1000
+							),
+						'bars' => 'vertical',
+						// 'bar' => array(
+						// 		'groupWidth' => '85%'
+						// 	),
+						'height' => '550',
+						'hAxis' => array(
+								'title' => _('Año')
+							), 
+						'isStacked' => TRUE,
+						'legend' => array(
+								'position' => 'right'
+							),
+						'pointSize' => 1, 
+						'tooltip' => array(
+								'isHtml' => true
+							),
+						'vAxis' => array(
+								'title' => _('Número de citas recibidas'),
+								'minValue' => 0
+							),
+						'series' => array(),
+						'width' => '95%',
+						'chartArea' => array(
+							'left' => 100,
+							'top' => 40,
+							'width' => 550,
+							'height' => "80%"
+							),
+						'backgroundColor' => array(
+							'fill' => 'transparent'
+							)
+						);
+		for ($i=1; $i < $query->num_rows(); $i++):
+			$data['options']['bar']['vAxes'][$i] = array(
+				'title' => '',
+				'textStyle' => array(
+					'fontSize' => 0
+					)
+				);
+			$data['options']['bar']['axes']['y'][$i] = array(
+				'side' => 'right'
+				);
+			$data['options']['bar']['series'][$i*2] = array('targetAxisIndex' => $i);
+			$data['options']['bar']['series'][($i*2)+1] = array('targetAxisIndex' => $i);
+		endfor;
+		$data['options']['line'] = array(
+						'animation' => array(
+								'duration' => 1000
+							), 
+						'height' => '500',
+						'hAxis' => array(
+								'title' => _('Año')
+							), 
+						'legend' => array(
+								'position' => 'right'
+							),
+						'pointSize' => 3,
+						'tooltip' => array(
+								'isHtml' => true
+							),
+						'vAxis' => array(
+								'title' => $indicador[$_POST['indicador']]['vTitle'],
+								'minValue' => 0
+							),
+						'width' => '925',
+						'chartArea' => array(
+							'left' => 100,
+							'top' => 40,
+							'width' => 675,
+							'height' => "80%"
+							),
+						'backgroundColor' => array(
+							'fill' => 'transparent'
+							)
+						);
+		header('Content-Type: application/json');
+		echo json_encode($data, true);
+	}
+
+	/*Periodos*/
 	public function getPeriodos($request=null){
 		$this->output->enable_profiler(false);
 		if($request != null):
@@ -580,8 +785,10 @@ class Indicadores extends CI_Controller {
 			case 'distribucion-articulos-tipo':
 				$query = $this->getPeriodosTipoDoc();
 				break;
+			case 'indicadores-generales-revista':
+				$query = $this->getPeriodosGeneral();
+				break;
 			default:
-				# code...
 				break;
 		endswitch;
 
@@ -735,6 +942,39 @@ class Indicadores extends CI_Controller {
 		return $query;
 	}
 
+	public function getPeriodosGeneral(){
+		$query = "";
+		$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"indicadoresGeneralesRevista\"";
+		if (isset($_POST['coleccion']) && count($_POST['coleccion']) > 0):
+			$query .= " WHERE \"networkId\" IN (";
+			$offset=1;
+			$total= count($_POST['coleccion']);
+			foreach ($_POST['coleccion'] as $coleccion):
+				$query .= "'{$this->colecciones['slug'][$coleccion]['id']}'";
+				if($offset < $total):
+					$query .=",";
+				endif;
+				$offset++;
+			endforeach;
+			$query .= ")";
+		endif;
+		if (isset($_POST['revista']) && count($_POST['revista']) > 0):
+			$query .= " AND \"revistaSlug\" IN (";
+			$offset=1;
+			$total= count($_POST['revista']);
+			foreach ($_POST['revista'] as $revista):
+				$query .= "'{$revista}'";
+				if($offset < $total):
+					$query .=",";
+				endif;
+				$offset++;
+			endforeach;
+			$query .= ")";
+		endif;
+		return $query;
+	}
+
+	/*Opciones*/
 	public function getRevistaAfiliacionCollection(){
 		$this->load->database();
 		$offset=1;
@@ -792,6 +1032,30 @@ class Indicadores extends CI_Controller {
 			$networkName = $this->colecciones['id'][$row['networkId']]['name'];
 			$areaName = $this->areas['id'][$row['areaId']]['name'];
 			$data['revistas'][$networkName][$areaName][$row['slug']] = htmlspecialchars($row['name']);
+		endforeach;
+
+		$this->db->close();
+		header('Content-Type: application/json');
+		echo json_encode($data, true);
+	}
+
+	public function getRevistasGeneral(){
+		$this->load->database();
+		$offset=1;
+		$total= count($_POST['coleccion']);
+		$coleccionIN = "";
+		foreach ($_POST['coleccion'] as $coleccion):
+			$coleccionIN .= "'{$this->colecciones['slug'][$coleccion]['id']}'";
+			if($offset < $total):
+				$coleccionIN .=",";
+			endif;
+			$offset++;
+		endforeach;
+		$query = "SELECT \"networkId\", journal, \"revistaSlug\" FROM \"indicadoresGeneralesRevista\" WHERE \"networkId\" IN({$coleccionIN})";
+		$query = $this->db->query($query);
+		foreach ($query->result_array() as $row ):
+			$networkName = $this->colecciones['id'][$row['networkId']]['name'];
+			$data['revistas'][$networkName][$row['revistaSlug']] = htmlspecialchars($row['journal']);
 		endforeach;
 
 		$this->db->close();
