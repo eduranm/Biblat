@@ -429,6 +429,7 @@ $(document).ready(function(){
 					if(!popState.coleccion)
 						$('#coleccion').trigger('change');
 				}
+				break;
 			case 'distribucion-articulos-edad':
 			case 'distribucion-articulos-edad-afiliacion':
 				$('#tabs, #chartContainer').show();

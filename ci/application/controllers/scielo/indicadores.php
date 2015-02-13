@@ -234,6 +234,7 @@ class Indicadores extends CI_Controller {
 				break;
 			case 'indicadores-generales-revista':
 				$this->getRevistasGeneral();
+				break;
 			case 'distribucion-articulos-edad':
 				$this->getRevistaAfiliacionEdad();
 				break;
