@@ -27,6 +27,7 @@ $(document).ready(function(){
 	$("#indicador").on("change", function(e){
 		console.log('indicador change');
 		$.each(val, function(k,v){val[k]=null;});
+		$.each(urls, function(k,v){urls[k]='';});
 		val.indicador = $(this).val();
 		$('#coleccion, #area, #revista, #paisRevista, #paisAutor, #edad, #tipodoc').select2('val', '').select2('enable', false).parent().hide();
 		$('#revista, #paisRevista, #paisAutor').empty().append('<option></option>').select2('destroy');
@@ -669,7 +670,7 @@ $(document).ready(function(){
 				}
 			}
 			$('html, body').animate({
-				scrollTop: $('#tabs').offset().top
+				scrollTop: $('#tabs').parent().parent().offset().top
 			}, 700);
 		}
 	});
@@ -819,10 +820,10 @@ $(document).ready(function(){
 		paisAutor:"<?=preg_replace('%.*?/pais-autor/(.+?)(/area.*|/revista.*|/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/edad/(.+?)(/.*|$)%', uri_string())):?>
-		edad:"<?=preg_replace('%.*?/edad/(.+?)(/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
+		edad:"<?=preg_replace('%.*?/edad/(.+?)(/area.*|/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/tipo-documento/(.+?)(/.*|$)%', uri_string())):?>
-		tipodoc:"<?=preg_replace('%.*?/tipo-documento/(.+?)(/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
+		tipodoc:"<?=preg_replace('%.*?/tipo-documento/(.+?)(/area.*|/revista/.*|/pais.*|/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%', uri_string())):?>
 		periodo:"<?=preg_replace('%.*?/([0-9]{4})-([0-9]{4})%', '\1;\2', uri_string());?>"
