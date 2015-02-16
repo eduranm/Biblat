@@ -30,7 +30,7 @@ addthis_config.ui_language = "<?=lang_iso_code();?>";
 var loading = {
 	start: function(){
 		$.blockUI({ 
-			message: $('#loading'),
+			message: $('#loading').html(),
 			css: { 
 				color: '#000', 
 				backgroundColor:'#FBFCEF', 
