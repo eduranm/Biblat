@@ -104,7 +104,7 @@ $(document).ready(function(){
 							$('#revista, #paisAutor').parent().hide();
 							if(typeof data.revistas !== "undefined"){
 								$.each(data.revistas, function(key, revista) {
-									optgroup = $('<optgroup label="'+key+'"></optgroup>');
+									optgroup = $('<optgroup label="SciELO '+key+'"></optgroup>');
 									$.each(revista, function(k, v){
 										optgroup.append('<option value="' + k +'">' + v + '</option>');
 									});
@@ -177,7 +177,7 @@ $(document).ready(function(){
 							.parent().hide();
 							if(typeof data.revistas !== "undefined"){
 								$.each(data.revistas, function(key, revista) {
-									optgroup = $('<optgroup label="'+key+'"></optgroup>');
+									optgroup = $('<optgroup label="SciELO '+key+'"></optgroup>');
 									$.each(revista, function(k, v){
 										optgroup.append('<option value="' + k +'">' + v + '</option>');
 									});
@@ -243,7 +243,7 @@ $(document).ready(function(){
 							.select2('destroy').parent().hide();
 							if(typeof data.revistas !== "undefined"){
 								$.each(data.revistas, function(key, area) {
-									optgroup = $('<optgroup label="'+key+'"></optgroup>');
+									optgroup = $('<optgroup label="SciELO '+key+'"></optgroup>');
 									$.each(area, function(key2, revista){
 										optgroup2 = $('<optgroup label="'+key2+'"></optgroup>');
 										$.each(revista, function(k, v){
