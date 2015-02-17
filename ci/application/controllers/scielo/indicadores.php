@@ -29,7 +29,7 @@ class Indicadores extends CI_Controller {
 			_('Citación') => array(
 					'distribucion-articulos-edad' => _('Distribución de artículos por edad del documento citado'),
 					'distribucion-articulos-tipo' => _('Distribución de artículos por tipo del documento citado'),
-					// 'distribucion-articulos-area-revista' => _('Distribución de artículos por área y revista ciatada'),
+					'distribucion-articulos-area-revista' => _('Distribución de artículos por área y revista ciatada'),
 					// 'distribucion-articulos-afiliacion-revista' => _('Distribución de artículos por páis de afiliación y revista ciatada'),
 				)
 		);
@@ -286,9 +286,9 @@ class Indicadores extends CI_Controller {
 			$c = array();
 			$result['chart'][$key]['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
 			foreach ($group as $coleccion):
-				$result['chart'][$key]['cols'][] = array('id' => '','label' => _sprintf('%s artículos', $this->colecciones['slug'][$coleccion]['name']),'type' => 'number');
-				$result['chart'][$key]['cols'][] = array('id' => '','label' => _sprintf('%s artículos', $this->colecciones['slug'][$coleccion]['name']).'-tooltip','type' => 'string', 'role' => 'tooltip');
-				$result['chart'][$key]['cols'][] = array('id' => '','label' => _sprintf('%s otros documentos', $this->colecciones['slug'][$coleccion]['name']),'type' => 'number');
+				$result['chart'][$key]['cols'][] = array('id' => '','label' => _sprintf('SciELO %s artículos', $this->colecciones['slug'][$coleccion]['name']),'type' => 'number');
+				$result['chart'][$key]['cols'][] = array('id' => '','label' => _sprintf('SciELO %s artículos', $this->colecciones['slug'][$coleccion]['name']).'-tooltip','type' => 'string', 'role' => 'tooltip');
+				$result['chart'][$key]['cols'][] = array('id' => '','label' => _sprintf('SciELO %s otros documentos', $this->colecciones['slug'][$coleccion]['name']),'type' => 'number');
 				$queryColeccion .= "'{$this->colecciones['slug'][$coleccion]['id']}'";
 				if($coleccionOffset < $coleccionTotal):
 					$queryColeccion .=",";
@@ -435,7 +435,7 @@ class Indicadores extends CI_Controller {
 			'tooltip' => _('Número de artículos en el año <b>%s</b>: <b>%s</b>')
 			);
 		$indicador['distribucion-revista-coleccion'] = array(
-			'sql' => "SELECT \"networkName\" AS title, anio, revistas as valor FROM \"vNetworkDistributionJ\"",
+			'sql' => "SELECT 'SciELO '||\"networkName\" AS title, anio, revistas as valor FROM \"vNetworkDistributionJ\"",
 			'vTitle' => _('Revistas por coleccion'),
 			'hTitle' => _('Año'),
 			'tooltip' => _('Número de revistas en el año <b>%s</b>: <b>%s</b>')
@@ -508,7 +508,7 @@ class Indicadores extends CI_Controller {
 		endif;
 
 		if (isset($_POST['edad'])):
-			$data['dataTable']['cols'][] = array('id' => '', 'label' => _('Edad/Año'), 'type' => 'string');
+			$labels[] = _('Edad');
 			$query .= " AND \"rango\" IN (";
 			$offset=1;
 			$total= count($_POST['edad']);
