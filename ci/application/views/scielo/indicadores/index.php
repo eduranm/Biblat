@@ -13,6 +13,13 @@
 			</select>
 		</div>
 		<div class="col-md-6 form-group" style="display:none;">
+			<select name="coleccion[]" id="coleccion" class="form-control" multiple="" data-placeholder="{_('Seleccione una o varias colecciones')}">
+{foreach $colecciones coleccion}
+				<option value="{$coleccion.slug}">SciELO {$coleccion.name}</option>
+{/foreach}
+			</select>
+		</div>
+		<div class="col-md-6 form-group" style="display:none;">
 			<select name="edad[]" id="edad" class="form-control" multiple="" data-placeholder="{_('Seleccione el rango de edad del documento')}">
 {foreach $ageRanges v}
 				<option value="{$v.rango}">{$v.rango} {_('años')}</option>
@@ -23,13 +30,6 @@
 			<select name="tipodoc[]" id="tipodoc" class="form-control" multiple="" data-placeholder="{_('Seleccione el tipo de documento citado')}">
 {foreach $docTypes docType}
 				<option value="{$docType.slug}">{$docType.name}</option>
-{/foreach}
-			</select>
-		</div>
-		<div class="col-md-6 form-group" style="display:none;">
-			<select name="coleccion[]" id="coleccion" class="form-control" multiple="" data-placeholder="{_('Seleccione una o varias colecciones')}">
-{foreach $colecciones coleccion}
-				<option value="{$coleccion.slug}">{$coleccion.name}</option>
 {/foreach}
 			</select>
 		</div>

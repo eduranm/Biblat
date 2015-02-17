@@ -807,6 +807,12 @@ $(document).ready(function(){
 <?php 	if (preg_match('%.*?/coleccion/(.+?)(/.*|$)%', uri_string())):?>
 		coleccion:"<?=preg_replace('%.*?/coleccion/(.+?)(/area.*|/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
+<?php 	if (preg_match('%.*?/edad/(.+?)(/.*|$)%', uri_string())):?>
+		edad:"<?=preg_replace('%.*?/edad/(.+?)(/area.*|/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
+<?php 	endif;?>
+<?php 	if (preg_match('%.*?/tipo-documento/(.+?)(/.*|$)%', uri_string())):?>
+		tipodoc:"<?=preg_replace('%.*?/tipo-documento/(.+?)(/area.*|/revista/.*|/pais.*|/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
+<?php 	endif;?>
 <?php 	if (preg_match('%.*?/area/(.+?)(/.*|$)%', uri_string())):?>
 		area:"<?=preg_replace('%.*?/area/(.+?)(/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
@@ -818,12 +824,6 @@ $(document).ready(function(){
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/pais-autor/(.+?)(/.*|$)%', uri_string())):?>
 		paisAutor:"<?=preg_replace('%.*?/pais-autor/(.+?)(/area.*|/revista.*|/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
-<?php 	endif;?>
-<?php 	if (preg_match('%.*?/edad/(.+?)(/.*|$)%', uri_string())):?>
-		edad:"<?=preg_replace('%.*?/edad/(.+?)(/area.*|/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
-<?php 	endif;?>
-<?php 	if (preg_match('%.*?/tipo-documento/(.+?)(/.*|$)%', uri_string())):?>
-		tipodoc:"<?=preg_replace('%.*?/tipo-documento/(.+?)(/area.*|/revista/.*|/pais.*|/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%', uri_string())):?>
 		periodo:"<?=preg_replace('%.*?/([0-9]{4})-([0-9]{4})%', '\1;\2', uri_string());?>"
