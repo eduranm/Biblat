@@ -1,6 +1,6 @@
 google.load('visualization', '1.1', {packages:['corechart', 'table', 'bar', 'line'], 'language': 'en'});
 var realIndicator = null;
-var val = {indicador: null, coleccion: null, area: null, revista: null, paisAutor: null, paisRevista: null, edad: null, tipodoc}
+var val = {indicador: null, coleccion: null, area: null, revista: null, paisAutor: null, paisRevista: null, edad: null, tipodoc: null}
 var chart = {normal: null, bradford:null, group1:null, group2:null, bargrp:null, data:null};
 chart.data = {normal: null, bradford:null, group1:null, group2:null, bargrp:null, bargrpJ:null};
 var tables = {normal: null, bradford:null, group1:null, group2:null, group3:null, bargrp:null};
