@@ -29,7 +29,7 @@ class Indicadores extends CI_Controller {
 			_('Citación') => array(
 					'distribucion-articulos-edad' => _('Distribución de artículos por edad del documento citado'),
 					'distribucion-articulos-tipo' => _('Distribución de artículos por tipo del documento citado'),
-					'distribucion-articulos-area-revista' => _('Distribución de artículos por área y revista ciatada'),
+					// 'distribucion-articulos-area-revista' => _('Distribución de artículos por área y revista citada'),
 					// 'distribucion-articulos-afiliacion-revista' => _('Distribución de artículos por páis de afiliación y revista ciatada'),
 				)
 		);
