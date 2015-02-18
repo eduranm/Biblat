@@ -35,9 +35,9 @@ class Indicadores extends CI_Controller {
 		);
 		$this->indicadores = array(
 			'distribucion-articulos-afiliacion' => _('Distribución de artículos por país de afiliación'),
-			'distribucion-articulos-afiliacion-revista' => _('Distribución de artículos por páis de afiliación y revista ciatda'),
+			'distribucion-articulos-afiliacion-revista' => _('Distribución de artículos por páis de afiliación y revista citada'),
 			'distribucion-articulos-area-afiliacion' => _('Distribución de artículos por área y país de afiliación'),
-			'distribucion-articulos-area-revista' => _('Distribución de artículos por área y revista ciatda'),
+			'distribucion-articulos-area-revista' => _('Distribución de artículos por área y revista citada'),
 			'distribucion-articulos-coleccion' => _('Distribución de artículos por colección'),
 			'distribucion-articulos-coleccion-afiliacion' => _('Distribución de artículos por colección y país de afiliación'),
 			'distribucion-articulos-coleccion-area' => _('Distribución de artículos por colección y área'),
@@ -241,6 +241,9 @@ class Indicadores extends CI_Controller {
 			case 'distribucion-articulos-tipo':
 				$this->getRevistaAfiliacionTipoDoc();
 				break;
+			case 'distribucion-articulos-area-revista':
+				$this->getRevistaArea();
+				break;
 			default:
 				break;
 		endswitch;
@@ -274,10 +277,12 @@ class Indicadores extends CI_Controller {
 		$result['journal'] = array();
 		$groups = array_chunk($colecciones, $limit, TRUE);
 		$vAxisMax = 0;
-		$result['table']['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
-		$result['table']['cols'][] = array('id' => '','label' => $indicador[$_POST['indicador']]['title'],'type' => 'number');
+		$result['table']['cols'][] = array('id' => 'year','label' => _('Colección/Año'),'type' => 'string');
 		$anioActual = 0;
 		$grupo = 0;
+		foreach ($periodos as $periodo):
+			$result['table']['cols'][] = array('id' => '','label' => $periodo, 'type' => 'number');
+		endforeach;
 		foreach ($groups as $key => $group):
 			$queryColeccion = " AND \"networkId\" IN (";
 			$coleccionOffset=1;
@@ -298,6 +303,7 @@ class Indicadores extends CI_Controller {
 			$queryColeccion .= ")";
 			$queryRS = $this->db->query($query.$queryColeccion.$queryOrder);
 			$totalRows = $queryRS->num_rows();
+			$tableRows = array();
 			foreach ($queryRS->result_array() as $row):
 				if($anioActual != $row['anio'] || !isset($result['chart'][$grupo])):
 					if(count($c) > 0):
@@ -306,6 +312,11 @@ class Indicadores extends CI_Controller {
 					$c = array();
 					$c[] = array('v' => $row['anio']);
 					$anioActual = $row['anio'];
+				endif;
+				if(!isset($tableRows[$row['networkId']])):
+					$tableRows[$row['networkId']] = array();
+					$tableRows[$row['networkId']]['ca'][] = array('v' => _sprintf('SciELO %s artículos', $this->colecciones['id'][$row['networkId']]['name']));
+					$tableRows[$row['networkId']]['cb'][] = array('v' => _sprintf('SciELO %s otros documentos', $this->colecciones['id'][$row['networkId']]['name']));
 				endif;
 				$vAxisMax = ($row['articulo'] + $row['otroDocumento']) < $vAxisMax ? $vAxisMax : ($row['articulo'] + $row['otroDocumento']); 
 				$c[] = array(
@@ -317,12 +328,18 @@ class Indicadores extends CI_Controller {
 				$c[] = array(
 						'v' => $row['otroDocumento']
 					);
+				$tableRows[$row['networkId']]['ca'][] = array('v' => $row['articulo']);
+				$tableRows[$row['networkId']]['cb'][] = array('v' => $row['otroDocumento']);
 				$offset++;
 				if($offset == $totalRows):
 					$result['chart'][$grupo]['rows'][]['c'] = $c;
 				endif;
 			endforeach;
 			$grupo++;
+		endforeach;
+		foreach ($tableRows as $row):
+			$result['table']['rows'][]['c'] = $row['ca'];
+			$result['table']['rows'][]['c'] = $row['cb'];
 		endforeach;
 		/*Opciones de la gráfica*/
 		$result['options'] = array(
@@ -392,7 +409,7 @@ class Indicadores extends CI_Controller {
 					'rowNumberCell' => ' '
 					)
 			);
-		$result['chartTitle'] = "<div class=\"text-center nowrap\"><h4>{$indicador[$_POST['indicador']]['chartTitle']}</h4></div>";
+		$result['chartTitle'] = "<div class=\"text-center nowrap\"><h4>{$this->indicadores[$_POST['indicador']]}</h4></div>";
 		$result['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]}</h4>";
 		header('Content-Type: application/json');	
 		echo json_encode($result, true);

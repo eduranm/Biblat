@@ -33,9 +33,9 @@ $(document).ready(function(){
 		$('#revista, #paisRevista, #paisAutor').empty().append('<option></option>').select2('destroy');
 		$("#periodos, #tabs, #chartContainer, #bradfodContainer, #group-container").hide('slow');
 		$('#sliderPeriodo').prop('disabled', true);
+		realIndicator = val.indicador;
 		switch (val.indicador){
 			case 'distribucion-articulos-coleccion':
-				realIndicator = val.indicador;
 				updateInfo();
 				$('#coleccion').select2('enable', true).parent().show();
 				if(urlData == null || typeof urlData.coleccion === "undefined")
@@ -43,19 +43,20 @@ $(document).ready(function(){
 				break;
 			case 'distribucion-revista-coleccion':
 			case 'indicadores-generales-revista':
-				realIndicator = val.indicador;
 				updateInfo();
 				$('#coleccion').select2('enable', true).parent().show();
 				break;
 			case 'distribucion-articulos-edad':
-				realIndicator = val.indicador;
 				updateInfo();
 				$("#edad").select2('enable', true).parent().show();
 				break;
 			case 'distribucion-articulos-tipo':
-				realIndicator = val.indicador;
 				updateInfo();
 				$('#tipodoc').select2('enable', true).parent().show();
+				break;
+			case 'distribucion-articulos-area-revista':
+				updateInfo();
+				$('#area').select2('enable', true).parent().show();
 				break;
 			default:
 				break;
@@ -150,7 +151,7 @@ $(document).ready(function(){
 				}
 				break;
 			case 'distribucion-articulos-coleccion-area-revista':
-				val.revista = $('#revista').val();
+				val.revista = $('#revista').val() == null ? null : $.unique($('#revista').val());
 				$('#area').trigger('change');
 				break;
 			case 'distribucion-revista-coleccion':
@@ -255,7 +256,7 @@ $(document).ready(function(){
 								});
 								if(val.revista != null && val.revista != '')
 									$('#revista').val(val.revista);
-								val.revista = $('#revista').val();
+								val.revista = $('#revista').val() == null ? null : $.unique($('#revista').val());
 								$('#revista').show().select2({allowClear: true, closeOnSelect: true}).select2('enable', true)
 								.parent().show();
 							}
@@ -307,6 +308,39 @@ $(document).ready(function(){
 						$('#tipodoc').trigger('change');
 				}
 				break;
+			case 'distribucion-articulos-area-revista':
+				$('#tabs, #chartContainer').show();
+				if(val.area != "" && val.area != null){
+					$('#paisAutor').select2('enable', false).parent().hide();
+					$.ajax({
+						url: '<?=site_url("scielo/indicadores/getOptionData");?>',
+						type: 'POST',
+						dataType: 'json',
+						data: getSerializedForm(),
+						async: false,
+						success: function(data) {
+							console.log(data);
+							$('#revista').empty()
+							.append('<option></option>')
+							.select2('destroy').parent().hide();
+							if(typeof data.revistas !== "undefined"){
+								$.each(data.revistas, function(key, revista) {
+									$('#revista').append('<option value="' + key +'">' + revista + '</option>');
+								});
+								if(val.revista != null && val.revista != '')
+									$('#revista').val(val.revista);
+								val.revista = $('#revista').val();
+								$('#revista').show().select2({allowClear: true, closeOnSelect: true}).select2('enable', true)
+								.parent().show();
+							}
+						}
+					});
+				}else{
+					$('#revista').select2('val', '?').select2('enable', false)
+					.parent().hide();
+					val.revista = null;
+				}
+				break;
 			default:
 				break;
 		}
@@ -316,9 +350,9 @@ $(document).ready(function(){
 
 	$('#revista').on("change", function(e){
 		console.log('revista change');
-		val.revista = $(this).val();
+		val.revista = $(this).val() == null ? null : $.unique($(this).val());
 		urls.revista="";
-		if(val.revista != "" && val.revista != null){
+		if(val.revista != null){
 			urls.revista='/revista/' + val.revista.join('/');
 		}
 		if(typeof history.pushState === "function" && !popState.revista){
@@ -698,6 +732,7 @@ $(document).ready(function(){
 		  success: function(data) {
 		  	console.log(data);
 		  	$('#tabs').tabs("option", "active", 0);
+		  	$('#tabs a[href="#grid"]').show();
 			switch(realIndicator){
 				case "distribucion-articulos-coleccion":
 					$("#tabs, #group-container").slideDown('slow');
@@ -731,6 +766,7 @@ $(document).ready(function(){
 					tables.bargrp.draw(tableData, data.tableOptions);
 					changeTableClass();
 					google.visualization.events.addListener(tables.bargrp , 'sort', changeTableClass);
+					$('#tabs a[href="#grid"]').show();
 					console.log(chart);	
 					break;
 				case "indicadores-generales-revista":
@@ -769,7 +805,7 @@ $(document).ready(function(){
 						}
 					});
 					$("#carousel-chargrp").carousel(0);
-					$("#gridContainer").hide();
+					$('#tabs a[href="#grid"]').hide();
 					console.log(chart);	
 					break;
 				default:
