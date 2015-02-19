@@ -749,7 +749,7 @@ class Indicadores extends CI_Controller {
 								'title' => $indicador[$_POST['indicador']]['vTitle'],
 								'minValue' => 0
 							),
-						'width' => '1000px',
+						'width' => '1000',
 						'chartArea' => array(
 							'left' => 10,
 							'top' => 40,
@@ -978,7 +978,7 @@ class Indicadores extends CI_Controller {
 						'tooltip' => array(
 								'isHtml' => true
 							),
-						'width' => '1000px',
+						'width' => '1000',
 						'chartArea' => array(
 							'left' => 10,
 							'top' => 40,
