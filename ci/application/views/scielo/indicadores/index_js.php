@@ -733,8 +733,8 @@ $(document).ready(function(){
 		  	console.log(data);
 		  	$('#tabs').tabs("option", "active", 0);
 		  	$('#tabs a[href="#grid"]').show();
-		  	$('.download-chart').hide();
-		  	$('#carousel-chargrp').off('slide.bs.carousel');
+			$('.download-chart').hide();
+			$('#carousel-chargrp').off('slide.bs.carousel');
 			switch(realIndicator){
 				case "distribucion-articulos-coleccion":
 					$("#tabs, #group-container").slideDown('slow');

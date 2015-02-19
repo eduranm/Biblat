@@ -290,15 +290,15 @@ class Indicadores extends CI_Controller {
 								'title' => $indicador[$_POST['indicador']]['vTitle'],
 								'minValue' => 0
 							),
-						'width' => '925',
+						'width' => '1000',
 						'chartArea' => array(
 							'left' => 100,
 							'top' => 40,
-							'width' => 675,
+							'width' => "70%",
 							'height' => "80%"
 							),
 						'backgroundColor' => array(
-							'fill' => 'transparent'
+							'fill' => '#FAFAFA'
 							)
 						);
 		/*Opciones para la tabla*/
@@ -469,11 +469,11 @@ class Indicadores extends CI_Controller {
 								'title' => _('Cantidad acumulada de artículos'),
 								'minValue' => 0
 							),
-						'width' => '925',
+						'width' => '1000',
 						'chartArea' => array(
 							'left' => 100,
 							'top' => 40,
-							'width' => 675,
+							'width' => "70%",
 							'height' => "80%"
 							),
 						'seriesType' => 'area',
@@ -492,7 +492,7 @@ class Indicadores extends CI_Controller {
 								'isHtml' => true
 							),
 						'backgroundColor' => array(
-							'fill' => 'transparent'
+							'fill' => '#FAFAFA'
 							)
 						);
 		/*Creando lista de revistas con su total de articulos agrupados según los límites calculados anteriormente*/
@@ -598,18 +598,18 @@ class Indicadores extends CI_Controller {
 								'title' => _('Cantidad de artículos'),
 								'minValue' => 0
 							),
-						'width' => '925',
+						'width' => '1000',
 						'chartArea' => array(
 							'left' => 100,
 							'top' => 40,
-							'width' => 675,
+							'width' => "70%",
 							'height' => "80%"
 							),
 						'tooltip' => array(
 								'isHtml' => true
 							),
 						'backgroundColor' => array(
-							'fill' => 'transparent'
+							'fill' => '#FAFAFA'
 							)
 						);
 
@@ -737,15 +737,15 @@ class Indicadores extends CI_Controller {
 								'viewWindow' => array('max' => $vAxisMax),
 								'minValue' => 0
 							),
-						'width' => '925',
+						'width' => '1000',
 						'chartArea' => array(
 							'left' => 100,
 							'top' => 40,
-							'width' => 675,
+							'width' => "70%",
 							'height' => "80%"
 							),
 						'backgroundColor' => array(
-							'fill' => 'transparent'
+							'fill' => '#FAFAFA'
 							)
 						);
 		/*Opciones para la tabla*/
