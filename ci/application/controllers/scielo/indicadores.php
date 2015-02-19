@@ -27,36 +27,105 @@ class Indicadores extends CI_Controller {
 					'indicadores-generales-revista' => _('Indicadores generales por revista')
 				),
 			_('Citación') => array(
-					'distribucion-articulos-edad' => _('Distribución de artículos por edad del documento citado'),
-					'distribucion-articulos-tipo' => _('Distribución de artículos por tipo del documento citado'),
-					// 'distribucion-articulos-area-revista' => _('Distribución de artículos por área y revista citada'),
-					// 'distribucion-articulos-afiliacion-revista' => _('Distribución de artículos por páis de afiliación y revista ciatada'),
+					'citacion-articulos-edad' => _('Distribución de artículos por edad del documento citado'),
+					'citacion-articulos-tipo' => _('Distribución de artículos por tipo del documento citado'),
+					'citaction-articulos-area-revista' => _('Distribución de artículos por área y revista citada'),
+					// 'citacion-articulos-afiliacion-revista' => _('Distribución de artículos por páis de afiliación y revista ciatada'),
 				)
 		);
 		$this->indicadores = array(
-			'distribucion-articulos-afiliacion' => _('Distribución de artículos por país de afiliación'),
-			'distribucion-articulos-afiliacion-revista' => _('Distribución de artículos por páis de afiliación y revista citada'),
-			'distribucion-articulos-area-afiliacion' => _('Distribución de artículos por área y país de afiliación'),
-			'distribucion-articulos-area-revista' => _('Distribución de artículos por área y revista citada'),
-			'distribucion-articulos-coleccion' => _('Distribución de artículos por colección'),
-			'distribucion-articulos-coleccion-afiliacion' => _('Distribución de artículos por colección y país de afiliación'),
-			'distribucion-articulos-coleccion-area' => _('Distribución de artículos por colección y área'),
-			'distribucion-articulos-coleccion-area-revista' => _('Distribución de artículos por colección, área y revista'),
-			'distribucion-articulos-coleccion-revista' => _('Distribución de artículos por colección y revista'),
-			'distribucion-articulos-edad' => _('Distribución de artículos por edad del documento citado'),
-			'distribucion-articulos-edad-afiliacion' => _('Distribución de artículos según edad del documento y país de afiliación citante'),
-			'distribucion-articulos-edad-area' => _('Distribución de artículos según edad del documento y área citante'),
-			'distribucion-articulos-edad-revista' => _('Distribución de artículos según edad del documento y revista citante'),
-			'distribucion-articulos-publicacion-afiliacion' => _('Distribución de artículos por país de publicación y país de afiliación'),
-			'distribucion-articulos-revista-afiliacion' => _('Distribución de artículos por revista y país de afiliación'),
-			'distribucion-articulos-tipo' => _('Distribución de artículos por tipo del documento citado'),
-			'distribucion-articulos-tipo-afiliacion' => _('Distribución de artículos según tipo de documento y país de afiliación citante'),
-			'distribucion-articulos-tipo-area' => _('Distribución de artículos según tipo de documento y área citante'),
-			'distribucion-articulos-tipo-revista' => _('Distribución de artículos según tipo de documento y revista citante'),
-			'distribucion-coautor-area-afiliacion' => _('Distribución de artículos por área y número de co-autores'),
-			'distribucion-coautor-revista-afiliacion' => _('Distribución de artículos por revista y número de co-autores'),
-			'distribucion-revista-coleccion' => _('Distribución de revistas por colección'),
-			'indicadores-generales-revista' => _('Indicadores generales por revista'),
+			'distribucion-articulos-afiliacion' => array(
+				'title' => _('Distribución de artículos por país de afiliación'),
+				'update' => '08/12/2014'
+				),
+			'citacion-articulos-afiliacion-revista' => array(
+				'title' => _('Distribución de artículos por páis de afiliación y revista citada'),
+				'update' => '08/12/2014'
+				),
+			'distribucion-articulos-area-afiliacion' => array(
+				'title' => _('Distribución de artículos por área y país de afiliación'),
+				'update' => '08/12/2014'
+				),
+			'citaction-articulos-area-revista' => array(
+				'title' => _('Distribución de artículos por área y revista citada'),
+				'update' => '08/12/2014'
+				),
+			'distribucion-articulos-coleccion' => array(
+				'title' => _('Distribución de artículos por colección'),
+				'update' => '08/12/2014'
+				),
+			'distribucion-articulos-coleccion-afiliacion' => array(
+				'title' => _('Distribución de artículos por colección y país de afiliación'),
+				'update' => '08/12/2014'
+				),
+			'distribucion-articulos-coleccion-area' => array(
+				'title' => _('Distribución de artículos por colección y área'),
+				'update' => '18/06/2013'
+				),
+			'distribucion-articulos-coleccion-area-revista' => array(
+				'title' => _('Distribución de artículos por colección, área y revista'),
+				'update' => '08/12/2014'
+				),
+			'distribucion-articulos-coleccion-revista' => array(
+				'title' => _('Distribución de artículos por colección y revista'),
+				'update' => '08/12/2014'
+				),
+			'citacion-articulos-edad' => array(
+				'title' => _('Distribución de artículos por edad del documento citado'),
+				'update' => '08/12/2014'
+				),
+			'citacion-articulos-edad-afiliacion' => array(
+				'title' => _('Distribución de artículos según edad del documento y país de afiliación citante'),
+				'update' => '08/12/2014'
+				),
+			'citacion-articulos-edad-area' => array(
+				'title' => _('Distribución de artículos según edad del documento y área citante'),
+				'update' => '08/12/2014'
+				),
+			'citacion-articulos-edad-revista' => array(
+				'title' => _('Distribución de artículos según edad del documento y revista citante'),
+				'update' => '08/12/2014'
+				),
+			'distribucion-articulos-publicacion-afiliacion' => array(
+				'title' => _('Distribución de artículos por país de publicación y país de afiliación'),
+				'update' => '08/12/2014'
+				),
+			'distribucion-articulos-revista-afiliacion' => array(
+				'title' => _('Distribución de artículos por revista y país de afiliación'),
+				'update' => '08/12/2014'
+				),
+			'citacion-articulos-tipo' => array(
+				'title' => _('Distribución de artículos por tipo del documento citado'),
+				'update' => '08/12/2014'
+				),
+			'citacion-articulos-tipo-afiliacion' => array(
+				'title' => _('Distribución de artículos según tipo de documento y país de afiliación citante'),
+				'update' => '08/12/2014'
+				),
+			'citacion-articulos-tipo-area' => array(
+				'title' => _('Distribución de artículos según tipo de documento y área citante'),
+				'update' => '08/12/2014'
+				),
+			'citacion-articulos-tipo-revista' => array(
+				'title' => _('Distribución de artículos según tipo de documento y revista citante'),
+				'update' => '08/12/2014'
+				),
+			'distribucion-coautor-area-afiliacion' => array(
+				'title' => _('Distribución de artículos por área y número de co-autores'),
+				'update' => '08/12/2014'
+				),
+			'distribucion-coautor-revista-afiliacion' => array(
+				'title' => _('Distribución de artículos por revista y número de co-autores'),
+				'update' => '08/12/2014'
+				),
+			'distribucion-revista-coleccion' => array(
+				'title' => _('Distribución de revistas por colección'),
+				'update' => '08/12/2014'
+				),
+			'indicadores-generales-revista' => array(
+				'title' => _('Indicadores generales por revista'),
+				'update' => '08/12/2014'
+				),
 		);
 		/*Colecciones*/
 		$this->load->database('scielo');
@@ -103,7 +172,7 @@ class Indicadores extends CI_Controller {
 		$data = array();
 		$data['indicador'] = $indicador;
 		/*Vistas*/
-		$data['page_title'] = $this->indicadores[$indicador] == '' ? _('Indicadores bibliométricos') : $this->indicadores[$indicador];
+		$data['page_title'] = $this->indicadores[$indicador]['title'] == '' ? _('Indicadores bibliométricos') : $this->indicadores[$indicador]['title'];
 		$this->template->set_partial('view_js', 'scielo/indicadores/index_js', $data, TRUE, FALSE);
 		$this->template->title($data['header']['title']);
 		$this->template->css('css/jquery.slider.min.css');
@@ -112,7 +181,7 @@ class Indicadores extends CI_Controller {
 		$this->template->js('js/jquery.serializeJSON.min.js');
 		$this->template->js('js/colorbox.js');
 		$this->template->js('//www.google.com/jsapi');
-		$this->template->set_meta('description', $this->indicadores[$indicador]);
+		$this->template->set_meta('description', $this->indicadores[$indicador]['title']);
 		$this->template->set_breadcrumb(_('Indicadores bibliométricos'));
 		$this->template->build('scielo/indicadores/index', $data);
 	}
@@ -134,14 +203,14 @@ class Indicadores extends CI_Controller {
 			case 'distribucion-articulos-coleccion-revista':
 			case 'distribucion-articulos-coleccion-afiliacion':
 			case 'distribucion-revista-coleccion':
-			case 'distribucion-articulos-edad':
-			case 'distribucion-articulos-edad-area':
-			case 'distribucion-articulos-edad-revista':
-			case 'distribucion-articulos-edad-afiliacion':
-			case 'distribucion-articulos-tipo':
-			case 'distribucion-articulos-tipo-area':
-			case 'distribucion-articulos-tipo-revista':
-			case 'distribucion-articulos-tipo-afiliacion':
+			case 'citacion-articulos-edad':
+			case 'citacion-articulos-edad-area':
+			case 'citacion-articulos-edad-revista':
+			case 'citacion-articulos-edad-afiliacion':
+			case 'citacion-articulos-tipo':
+			case 'citacion-articulos-tipo-area':
+			case 'citacion-articulos-tipo-revista':
+			case 'citacion-articulos-tipo-afiliacion':
 				$query = $this->getPeriodosCollectionEdadTipoDoc();
 				break;
 			case 'indicadores-generales-revista':
@@ -204,14 +273,14 @@ class Indicadores extends CI_Controller {
 			case 'distribucion-articulos-coleccion-revista':
 			case 'distribucion-articulos-coleccion-afiliacion':
 			case 'distribucion-revista-coleccion':
-			case 'distribucion-articulos-edad':
-			case 'distribucion-articulos-edad-area':
-			case 'distribucion-articulos-edad-revista':
-			case 'distribucion-articulos-edad-afiliacion':
-			case 'distribucion-articulos-tipo':
-			case 'distribucion-articulos-tipo-area':
-			case 'distribucion-articulos-tipo-revista':
-			case 'distribucion-articulos-tipo-afiliacion':
+			case 'citacion-articulos-edad':
+			case 'citacion-articulos-edad-area':
+			case 'citacion-articulos-edad-revista':
+			case 'citacion-articulos-edad-afiliacion':
+			case 'citacion-articulos-tipo':
+			case 'citacion-articulos-tipo-area':
+			case 'citacion-articulos-tipo-revista':
+			case 'citacion-articulos-tipo-afiliacion':
 				$this->getChartCollectionSub();
 				break;
 			case 'indicadores-generales-revista':
@@ -235,13 +304,13 @@ class Indicadores extends CI_Controller {
 			case 'indicadores-generales-revista':
 				$this->getRevistasGeneral();
 				break;
-			case 'distribucion-articulos-edad':
+			case 'citacion-articulos-edad':
 				$this->getRevistaAfiliacionEdad();
 				break;
-			case 'distribucion-articulos-tipo':
+			case 'citacion-articulos-tipo':
 				$this->getRevistaAfiliacionTipoDoc();
 				break;
-			case 'distribucion-articulos-area-revista':
+			case 'citaction-articulos-area-revista':
 				$this->getRevistaArea();
 				break;
 			default:
@@ -277,7 +346,8 @@ class Indicadores extends CI_Controller {
 		$result['journal'] = array();
 		$groups = array_chunk($colecciones, $limit, TRUE);
 		$vAxisMax = 0;
-		$result['table']['cols'][] = array('id' => 'year','label' => _('Colección/Año'),'type' => 'string');
+		$result['table']['cols'][] = array('id' => 'year','label' => _('Colección'),'type' => 'string');
+		$result['table']['cols'][] = array('id' => 'year','label' => _('Tipo'),'type' => 'string');
 		$anioActual = 0;
 		$grupo = 0;
 		foreach ($periodos as $periodo):
@@ -315,8 +385,10 @@ class Indicadores extends CI_Controller {
 				endif;
 				if(!isset($tableRows[$row['networkId']])):
 					$tableRows[$row['networkId']] = array();
-					$tableRows[$row['networkId']]['ca'][] = array('v' => _sprintf('SciELO %s artículos', $this->colecciones['id'][$row['networkId']]['name']));
-					$tableRows[$row['networkId']]['cb'][] = array('v' => _sprintf('SciELO %s otros documentos', $this->colecciones['id'][$row['networkId']]['name']));
+					$tableRows[$row['networkId']]['ca'][] = array('v' => _sprintf('SciELO %s', $this->colecciones['id'][$row['networkId']]['name']));
+					$tableRows[$row['networkId']]['ca'][] = array('v' => _('Artículos originales'));
+					$tableRows[$row['networkId']]['cb'][] = array('v' => '');
+					$tableRows[$row['networkId']]['cb'][] = array('v' => _('Otro tipo de documetos'));
 				endif;
 				$vAxisMax = ($row['articulo'] + $row['otroDocumento']) < $vAxisMax ? $vAxisMax : ($row['articulo'] + $row['otroDocumento']); 
 				$c[] = array(
@@ -328,8 +400,8 @@ class Indicadores extends CI_Controller {
 				$c[] = array(
 						'v' => $row['otroDocumento']
 					);
-				$tableRows[$row['networkId']]['ca'][] = array('v' => $row['articulo']);
-				$tableRows[$row['networkId']]['cb'][] = array('v' => $row['otroDocumento']);
+				$tableRows[$row['networkId']]['ca'][] = array('v' => (int)$row['articulo']);
+				$tableRows[$row['networkId']]['cb'][] = array('v' => (int)$row['otroDocumento']);
 				$offset++;
 				if($offset == $totalRows):
 					$result['chart'][$grupo]['rows'][]['c'] = $c;
@@ -357,6 +429,12 @@ class Indicadores extends CI_Controller {
 						'isStacked' => TRUE,
 						'legend' => array(
 								'position' => 'right'
+							),
+						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
+						'titlePosition' => 'in',
+						'titleTextStyle' => array(
+							'bold' => FALSE,
+							'italic' => TRUE
 							),
 						'pointSize' => 1, 
 						'tooltip' => array(
@@ -409,8 +487,8 @@ class Indicadores extends CI_Controller {
 					'rowNumberCell' => ' '
 					)
 			);
-		$result['chartTitle'] = "<div class=\"text-center nowrap\"><h4>{$this->indicadores[$_POST['indicador']]}</h4></div>";
-		$result['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]}</h4>";
+		$result['chartTitle'] = "<div class=\"text-center nowrap\"><h4>{$this->indicadores[$_POST['indicador']]['title']}</h4><h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5></div>";
+		$result['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]['title']}</h4>";
 		header('Content-Type: application/json');	
 		echo json_encode($result, true);
 	}
@@ -457,49 +535,49 @@ class Indicadores extends CI_Controller {
 			'hTitle' => _('Año'),
 			'tooltip' => _('Número de revistas en el año <b>%s</b>: <b>%s</b>')
 			);
-		$indicador['distribucion-articulos-edad'] = array(
+		$indicador['citacion-articulos-edad'] = array(
 			'sql' => "SELECT \"rango\"||' "._('Años')."' AS title, anio, articulos as valor FROM \"ageDocCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
 			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
 			);
-		$indicador['distribucion-articulos-edad-area'] = array(
+		$indicador['citacion-articulos-edad-area'] = array(
 			'sql' => "SELECT \"areaName\"||' ('||rango||' "._('Años').")' AS title, anio, articulos as valor FROM \"vAgeDocAreaCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
 			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
 			);
-		$indicador['distribucion-articulos-edad-revista'] = array(
+		$indicador['citacion-articulos-edad-revista'] = array(
 			'sql' => "SELECT revista||' ('||rango||' "._('Años').")' AS title, anio, articulos as valor FROM \"ageDocJournalCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
 			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
 			);
-		$indicador['distribucion-articulos-edad-afiliacion'] = array(
+		$indicador['citacion-articulos-edad-afiliacion'] = array(
 			'sql' => "SELECT pais||' ('||rango||' "._('Años').")' AS title, anio, articulos as valor FROM \"ageDocAffiliationCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
 			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
 			);
-		$indicador['distribucion-articulos-tipo'] = array(
+		$indicador['citacion-articulos-tipo'] = array(
 			'sql' => "SELECT \"docTypeName\" AS title, anio, articulos as valor FROM \"vDocTypeDistribution\"",
 			'vTitle' => _('Artículos citados por tipo de documento'),
 			'hTitle' => _('Año'),
 			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
 			);
-		$indicador['distribucion-articulos-tipo-area'] = array(
+		$indicador['citacion-articulos-tipo-area'] = array(
 			'sql' => "SELECT \"areaName\"||' ('||\"docTypeName\"||')' AS title, anio, articulos as valor FROM \"vDocTypeAreaCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
 			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
 			);
-		$indicador['distribucion-articulos-tipo-revista'] = array(
+		$indicador['citacion-articulos-tipo-revista'] = array(
 			'sql' => "SELECT revista||' ('||\"docTypeName\"||')' AS title, anio, articulos as valor FROM \"vDocTypeJournalCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
 			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
 			);
-		$indicador['distribucion-articulos-tipo-afiliacion'] = array(
+		$indicador['citacion-articulos-tipo-afiliacion'] = array(
 			'sql' => "SELECT pais||' ('||\"docTypeName\"||')' AS title, anio, articulos as valor FROM \"vDocTypeAffiliationCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
@@ -633,7 +711,7 @@ class Indicadores extends CI_Controller {
 					);
 					foreach ($periodos as $periodoDT):
 						$cc[] = array(
-							'v' => $vindicador[$periodoDT] != null ? number_format($vindicador[$periodoDT], 0, '.', ',') : null
+							'v' => $vindicador[$periodoDT] != null ? $vindicador[$periodoDT] : null
 						);
 					endforeach;
 					$data['dataTable']['rows'][]['c'] = $cc;
@@ -697,8 +775,8 @@ class Indicadores extends CI_Controller {
 					)
 			);
 		/*Titulo de la gráfica*/
-		$data['chartTitle'] = "<div class=\"text-center nowrap\"><h4>{$this->indicadores[$_POST['indicador']]}</h4></div>";
-		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]}</h4>";
+		$data['chartTitle'] = "<div class=\"text-center nowrap\"><h4>{$this->indicadores[$_POST['indicador']]['title']}</h4><h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5></div>";
+		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]['title']}</h4>";
 		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}
@@ -706,16 +784,18 @@ class Indicadores extends CI_Controller {
 	public function getChartGeneral(){
 		$data = array();
 		$charts = array(
-			'fasciculos' => array('title' => 'Número de fasciculos por revista', 'tooltip' => _('Número de fasciculos en el año <b>%s</b>: <b>%s</b>')),
-			'articulos' => array('title' => 'Número de artículos por revista', 'tooltip' => _('Número de artículos en el año <b>%s</b>: <b>%s</b>')), 
-			'referencias' => array('title' => 'Número de referencias por revista', 'tooltip' => _('Número de referencias en el año <b>%s</b>: <b>%s</b>')), 
-			'citas' => array('title' => 'Número de citas/autocitas por revista', 'tooltip' => _('Número de citas/autocitas en el año <b>%s</b>: <b>%s</b>')), 
-			'factorImpacto' => array('title' => 'Factor de impacto por revista', 'tooltip' => _('Factor de impacto en el año <b>%s</b>: <b>%s</b>')),
-			'indiceInmediates' => array('title' => 'Indice de inmediates por revista', 'tooltip' => _('Indice de inmediates en el año <b>%s</b>: <b>%s</b>')),
-			'vidaMedia' => array('title' => 'Vida media por revista', 'tooltip' => _('Vida media en el año <b>%s</b>: <b>%s</b>'))
+			'fasciculos' => array('title' => 'Número de fasciculos por revista', 'vTitle' => 'Fasciculos por revista', 'tooltip' => _('Número de fasciculos en el año <b>%s</b>: <b>%s</b>')),
+			'articulos' => array('title' => 'Número de artículos por revista', 'vTitle' => 'Artículos por revista', 'tooltip' => _('Número de artículos en el año <b>%s</b>: <b>%s</b>')), 
+			'referencias' => array('title' => 'Número de referencias por revista', 'vTitle' => 'Referencias por revista', 'tooltip' => _('Número de referencias en el año <b>%s</b>: <b>%s</b>')), 
+			'citas' => array('title' => 'Número de citas/autocitas por revista', 'vTitle' => 'Citas por revista', 'tooltip' => _('Número de citas/autocitas en el año <b>%s</b>: <b>%s</b>')), 
+			'factorImpacto' => array('title' => 'Factor de impacto por revista', 'vTitle' => 'Factor de impacto', 'tooltip' => _('Factor de impacto en el año <b>%s</b>: <b>%s</b>')),
+			'indiceInmediates' => array('title' => 'Indice de inmediates por revista', 'vTitle' => 'Indice de inmediates', 'tooltip' => _('Indice de inmediates en el año <b>%s</b>: <b>%s</b>')),
+			'vidaMedia' => array('title' => 'Vida media por revista', 'vTitle' => 'Vida media', 'tooltip' => _('Vida media en el año <b>%s</b>: <b>%s</b>'))
 		);
+		$data['update'] = "<h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5>";
 		foreach ($charts as $key => $chart):
 			$data['title'][$key] = $charts[$key]['title'];
+			$data['vTitle'][$key] = array('vAxis' => array('title' => $charts[$key]['vTitle'], 'minValue' => 0));
 			$data['chart'][$key]['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
 		endforeach;
 
@@ -922,14 +1002,14 @@ class Indicadores extends CI_Controller {
 		$indicadorTabla['distribucion-articulos-coleccion-revista']="networkJournalDistribution";
 		$indicadorTabla['distribucion-articulos-coleccion-afiliacion']="networkAffiliationDistribution";
 		$indicadorTabla['distribucion-revista-coleccion']="networkDistribution";
-		$indicadorTabla['distribucion-articulos-edad']="ageDocCitation";
-		$indicadorTabla['distribucion-articulos-edad-area']="ageDocAreaCitation";
-		$indicadorTabla['distribucion-articulos-edad-revista']="ageDocJournalCitation";
-		$indicadorTabla['distribucion-articulos-edad-afiliacion']="ageDocAffiliationCitation";
-		$indicadorTabla['distribucion-articulos-tipo']="docTypeCitation";
-		$indicadorTabla['distribucion-articulos-tipo-area']="docTypeAreaCitation";
-		$indicadorTabla['distribucion-articulos-tipo-revista']="docTypeJournalCitation";
-		$indicadorTabla['distribucion-articulos-tipo-afiliacion']="docTypeAffiliationCitation";
+		$indicadorTabla['citacion-articulos-edad']="ageDocCitation";
+		$indicadorTabla['citacion-articulos-edad-area']="ageDocAreaCitation";
+		$indicadorTabla['citacion-articulos-edad-revista']="ageDocJournalCitation";
+		$indicadorTabla['citacion-articulos-edad-afiliacion']="ageDocAffiliationCitation";
+		$indicadorTabla['citacion-articulos-tipo']="docTypeCitation";
+		$indicadorTabla['citacion-articulos-tipo-area']="docTypeAreaCitation";
+		$indicadorTabla['citacion-articulos-tipo-revista']="docTypeJournalCitation";
+		$indicadorTabla['citacion-articulos-tipo-afiliacion']="docTypeAffiliationCitation";
 		$query = "SELECT min(anio) AS \"anioBase\", max(anio) AS \"anioFinal\" FROM \"{$indicadorTabla[$_POST['indicador']]}\"";
 		if (isset($_POST['coleccion']) && count($_POST['coleccion']) > 0):
 			$query .= " WHERE \"networkId\" IN (";
@@ -1185,7 +1265,7 @@ class Indicadores extends CI_Controller {
 			endif;
 			$offset++;
 		endforeach;
-		$query = "SELECT \"networkId\", journal, \"revistaSlug\" FROM \"indicadoresGeneralesRevista\" WHERE \"networkId\" IN({$coleccionIN})";
+		$query = "SELECT \"networkId\", journal, \"revistaSlug\" FROM \"indicadoresGeneralesRevista\" WHERE \"networkId\" IN({$coleccionIN}) ORDER BY \"revistaSlug\"";
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row ):
 			$networkName = $this->colecciones['id'][$row['networkId']]['name'];
