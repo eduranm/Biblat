@@ -353,6 +353,7 @@ class Indicadores extends CI_Controller {
 		foreach ($periodos as $periodo):
 			$result['table']['cols'][] = array('id' => '','label' => $periodo, 'type' => 'number');
 		endforeach;
+		$tableRows = array();
 		foreach ($groups as $key => $group):
 			$queryColeccion = " AND \"networkId\" IN (";
 			$coleccionOffset=1;
@@ -373,7 +374,6 @@ class Indicadores extends CI_Controller {
 			$queryColeccion .= ")";
 			$queryRS = $this->db->query($query.$queryColeccion.$queryOrder);
 			$totalRows = $queryRS->num_rows();
-			$tableRows = array();
 			foreach ($queryRS->result_array() as $row):
 				if($anioActual != $row['anio'] || !isset($result['chart'][$grupo])):
 					if(count($c) > 0):
@@ -400,8 +400,8 @@ class Indicadores extends CI_Controller {
 				$c[] = array(
 						'v' => $row['otroDocumento']
 					);
-				$tableRows[$row['networkId']]['ca'][] = array('v' => (int)$row['articulo']);
-				$tableRows[$row['networkId']]['cb'][] = array('v' => (int)$row['otroDocumento']);
+				$tableRows[$row['networkId']]['ca'][] = array('v' => parse_number($row['articulo']), 'f' => _number_format($row['articulo']));
+				$tableRows[$row['networkId']]['cb'][] = array('v' => parse_number($row['otroDocumento']), 'f' => _number_format($row['otroDocumento']));
 				$offset++;
 				if($offset == $totalRows):
 					$result['chart'][$grupo]['rows'][]['c'] = $c;
@@ -451,8 +451,6 @@ class Indicadores extends CI_Controller {
 							),
 						'width' => '1000px',
 						'chartArea' => array(
-							'left' => 100,
-							'top' => 40,
 							'width' => "70%",
 							'height' => "80%"
 							),
@@ -484,7 +482,7 @@ class Indicadores extends CI_Controller {
 					'selectedTableRow' => ' ',
 					'hoverTableRow' => ' ',
 					'headerCell' => ' ',
-					'tableCell' => ' ',
+					'tableCell' => 'text-left',
 					'rowNumberCell' => ' '
 					)
 			);
@@ -712,7 +710,8 @@ class Indicadores extends CI_Controller {
 					);
 					foreach ($periodos as $periodoDT):
 						$cc[] = array(
-							'v' => $vindicador[$periodoDT] != null ? $vindicador[$periodoDT] : null
+							'v' => parse_number($vindicador[$periodoDT]),
+							'f' => _number_format($vindicador[$periodoDT]),
 						);
 					endforeach;
 					$data['dataTable']['rows'][]['c'] = $cc;
@@ -751,8 +750,7 @@ class Indicadores extends CI_Controller {
 							),
 						'width' => '1000',
 						'chartArea' => array(
-							'left' => 10,
-							'top' => 40,
+							'left' => 100,
 							'width' => "70%",
 							'height' => "80%"
 							),
@@ -771,7 +769,7 @@ class Indicadores extends CI_Controller {
 					'selectedTableRow' => ' ',
 					'hoverTableRow' => ' ',
 					'headerCell' => ' ',
-					'tableCell' => ' ',
+					'tableCell' => 'text-left',
 					'rowNumberCell' => ' '
 					)
 			);
@@ -934,8 +932,6 @@ class Indicadores extends CI_Controller {
 						'series' => array(),
 						'width' => '1000px',
 						'chartArea' => array(
-							'left' => 100,
-							'top' => 40,
 							'width' => "70%",
 							'height' => "80%"
 							),
@@ -980,8 +976,7 @@ class Indicadores extends CI_Controller {
 							),
 						'width' => '1000',
 						'chartArea' => array(
-							'left' => 10,
-							'top' => 40,
+							'left' => 100,
 							'width' => "70%",
 							'height' => "80%"
 							),

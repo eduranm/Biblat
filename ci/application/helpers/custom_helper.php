@@ -382,3 +382,24 @@ if ( ! function_exists('array_unchunk') ):
 		return call_User_Func_Array('array_Merge',$array);
 	}
 endif;
+
+if ( ! function_exists('_number_format') ):
+	function _number_format($value){
+		if ($value == NULL)
+			return NULL;
+		if (preg_match('/[0-9]*\.[0-9]/', $value))
+			return number_format($value, 2, '.', ',');
+		return number_format($value, 0, '.', ',');
+	}
+endif;
+
+if ( ! function_exists('parse_number') ):
+	function parse_number($value){
+		if ($value == NULL)
+			return NULL;
+		if (preg_match('/[0-9]*\.[0-9]/', $value))
+			(float)$value;
+		return (int)$value;
+	}
+endif;
+
