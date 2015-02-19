@@ -127,9 +127,6 @@
 						    <span class="sr-only">Next</span>
 						  </a>
 						</div>
-						<div class="chartCopyright">
-							{_('Fuente:')} <a href="{base_url()}">biblat.unam.mx</a>
-						</div>
 						<div id="chart1"></div>
 					</div>
 				</div>

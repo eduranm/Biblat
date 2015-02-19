@@ -428,7 +428,8 @@ class Indicadores extends CI_Controller {
 							), 
 						'isStacked' => TRUE,
 						'legend' => array(
-								'position' => 'right'
+								'position' => 'right',
+								'maxLines' => 2
 							),
 						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
 						'titlePosition' => 'in',
@@ -456,7 +457,7 @@ class Indicadores extends CI_Controller {
 							'height' => "80%"
 							),
 						'backgroundColor' => array(
-							'fill' => 'transparent'
+							'fill' => '#FAFAFA'
 							)
 						);
 		for ($i=1; $i < $limit; $i++):
@@ -732,7 +733,7 @@ class Indicadores extends CI_Controller {
 							), 
 						'legend' => array(
 								'position' => 'right',
-								'maxLines' => 1
+								'maxLines' => 2
 							),
 						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
 						'titlePosition' => 'in',
@@ -750,7 +751,7 @@ class Indicadores extends CI_Controller {
 							),
 						'width' => '1000',
 						'chartArea' => array(
-							'left' => 100,
+							'left' => 10,
 							'top' => 40,
 							'width' => "70%",
 							'height' => "80%"
@@ -931,15 +932,15 @@ class Indicadores extends CI_Controller {
 								'minValue' => 0
 							),
 						'series' => array(),
-						'width' => '95%',
+						'width' => '1000px',
 						'chartArea' => array(
 							'left' => 100,
 							'top' => 40,
-							'width' => 550,
+							'width' => "70%",
 							'height' => "80%"
 							),
 						'backgroundColor' => array(
-							'fill' => 'transparent'
+							'fill' => '#FAFAFA'
 							)
 						);
 		for ($i=1; $i < $query->num_rows(); $i++):
@@ -964,7 +965,8 @@ class Indicadores extends CI_Controller {
 								'title' => _('Año')
 							), 
 						'legend' => array(
-								'position' => 'right'
+								'position' => 'right',
+								'maxLines' => 2
 							),
 						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
 						'titlePosition' => 'in',
@@ -976,15 +978,15 @@ class Indicadores extends CI_Controller {
 						'tooltip' => array(
 								'isHtml' => true
 							),
-						'width' => '925',
+						'width' => '1000',
 						'chartArea' => array(
-							'left' => 100,
+							'left' => 10,
 							'top' => 40,
-							'width' => 675,
+							'width' => "70%",
 							'height' => "80%"
 							),
 						'backgroundColor' => array(
-							'fill' => 'transparent'
+							'fill' => '#FAFAFA'
 							)
 						);
 		header('Content-Type: application/json');
