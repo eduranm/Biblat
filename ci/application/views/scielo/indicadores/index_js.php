@@ -127,32 +127,29 @@ $(document).ready(function(){
 							}
 						}
 					});
-				}
-				if((urlData == null || (typeof urlData.area === "undefined" && typeof urlData.revista === "undefined" && typeof urlData.paisAutor === "undefined")) && (val.area === "" || val.area == null) && (val.revista === "" || val.revista == null) && (val.paisAutor === "" || val.paisAutor == null)){
-					setPeriodos();
-				}
-				if (val.coleccion === "" || val.coleccion == null) {
-					$('#area, #revista, #paisRevista, #paisAutor').parent().hide();
-					$('#revista, #paisRevista, #paisAutor')
-					.empty()
-					.append('<option></option>')
-					.select2('destroy')
-					.select2({allowClear: true, closeOnSelect: true});
-					$("#area, #revista, #paisRevista, #paisAutor").select2('enable', false);
-				}
-				if(val.area !== "" && val.area != null){
-					$('#area').trigger('change');
-				}
-				if(val.revista !== "" && val.revista != null){
-					$('#revista').trigger('change');
-				}
-				if(val.paisAutor !== "" && val.paisAutor != null){
-					$('#paisAutor').trigger('change');
+					if(val.area !== "" && val.area != null){
+						$('#area').trigger('change');
+					}
+					if(val.revista !== "" && val.revista != null){
+						$('#revista').trigger('change');
+					}
+					if(val.paisAutor !== "" && val.paisAutor != null){
+						$('#paisAutor').trigger('change');
+					}
+					if((urlData == null || (typeof urlData.area === "undefined" && typeof urlData.revista === "undefined" && typeof urlData.paisAutor === "undefined")) && (val.area === "" || val.area == null) && (val.revista === "" || val.revista == null) && (val.paisAutor === "" || val.paisAutor == null)){
+						setPeriodos();
+					}
+				}else{
+					$('#indicador').trigger('change');
 				}
 				break;
 			case 'distribucion-articulos-coleccion-area-revista':
-				val.revista = $('#revista').val() == null ? null : $.unique($('#revista').val());
-				$('#area').trigger('change');
+				if(val.coleccion != "" && val.coleccion != null){
+					val.revista = $('#revista').val() == null ? null : $.unique($('#revista').val());
+					$('#area').trigger('change');
+				}else{
+					$('#indicador').trigger('change');
+				}
 				break;
 			case 'distribucion-revista-coleccion':
 				$('#tabs, #periodos, #chartContainer, #bradfodContainer, #group-container').hide();
