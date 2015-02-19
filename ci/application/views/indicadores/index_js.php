@@ -667,7 +667,8 @@ changeTableClass = function (argument) {
 	$('.google-visualization-table-table')
 	.removeClass('google-visualization-table-table')
 	.addClass('table table-bordered table-condensed table-striped')
-	.parent().addClass('table-responsive');
+	.parent().addClass('table-responsive')
+	.parent().attr('style', 'position: relative;').removeClass('google-visualization-table content');
 }
 
 $('.download-chart').on('click', function(e){
