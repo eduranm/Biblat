@@ -48,9 +48,9 @@
                     <div id="menu" class="col-md-8">
                         <div class="row">
                             <div id="dgb-unam" class="col-md-12 text-right hidden-xs hidden-sm">
-                                {if $uri->segment(2) == "scielo"}<a href="http://scielo.org" title="Scientific Electronic Library Online" target="_blank"><span class="bl-scielo fa-5x"></a></span>{/if}
-                                <a href="http://dgb.unam.mx" title="{_('Dirección General de Bibliotecas')}" target="_blank"><span class="bl-dgb fa-5x"></a></span> 
-                                <a href="http://www.unam.mx" title="{_('Universidad Nacional Autónoma de México')}" target="_blank"><span class="bl-unam fa-5x"></a></span>
+                                {if $uri->segment(2) == "scielo"}<a href="http://scielo.org" title="Scientific Electronic Library Online" target="_blank"><span class="bl-scielo fa-5x"></span></a>{/if}
+                                <a href="http://dgb.unam.mx" title="{_('Dirección General de Bibliotecas')}" target="_blank"><span class="bl-dgb fa-5x"></span></a>
+                                <a href="http://www.unam.mx" title="{_('Universidad Nacional Autónoma de México')}" target="_blank"><span class="bl-unam fa-5x"></span></a>
                             </div>
                             <div class="col-md-12 navbar-main">
                                 <nav class="navbar navbar-default" role="navigation">
