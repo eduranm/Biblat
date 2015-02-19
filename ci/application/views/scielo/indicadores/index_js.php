@@ -777,12 +777,13 @@ $(document).ready(function(){
 					chart.data.bargrp = new Array();
 					chart.data.bargrpJ = data.journal;
 					$("#carousel-chargrp .carousel-indicators, #carousel-chargrp .carousel-inner").empty();
+					nav = 0;
 					jQuery.each(data.chart, function(key, grupo) {
 						console.log(key);
 						if(key == 'fasciculos'){
-							$("#carousel-chargrp .carousel-indicators").append('<li data-target="#carousel-chargrp" data-slide-to="' + key + '" class="active"></li>');
+							$("#carousel-chargrp .carousel-indicators").append('<li data-target="#carousel-chargrp" data-slide-to="' + nav + '" class="active"></li>');
 						}else{
-							$("#carousel-chargrp .carousel-indicators").append('<li id="chartLi' + key + '" data-target="#carousel-chargrp" data-slide-to="' + key + '"></li>');
+							$("#carousel-chargrp .carousel-indicators").append('<li id="chartLi' + key + '" data-target="#carousel-chargrp" data-slide-to="' + nav + '"></li>');
 						}
 						chart.data.bargrp[key] = new google.visualization.DataTable(grupo);
 						switch(key){
@@ -804,6 +805,7 @@ $(document).ready(function(){
 								$('#chartParent' + key).removeClass("active");
 							});
 						}
+						nav++;
 					});
 					$("#carousel-chargrp").carousel(0);
 					$('#tabs a[href="#grid"]').hide();
