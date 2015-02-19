@@ -29,11 +29,11 @@ $(document).ready(function(){
 		$.each(val, function(k,v){val[k]=null;});
 		$.each(urls, function(k,v){urls[k]='';});
 		val.indicador = $(this).val();
+		realIndicator = val.indicador;
 		$('#coleccion, #area, #revista, #paisRevista, #paisAutor, #edad, #tipodoc').select2('val', '').select2('enable', false).parent().hide();
 		$('#revista, #paisRevista, #paisAutor').empty().append('<option></option>').select2('destroy');
 		$("#periodos, #tabs, #chartContainer, #bradfodContainer, #group-container").hide('slow');
 		$('#sliderPeriodo').prop('disabled', true);
-		realIndicator = val.indicador;
 		switch (val.indicador){
 			case 'distribucion-articulos-coleccion':
 				updateInfo();
@@ -46,15 +46,15 @@ $(document).ready(function(){
 				updateInfo();
 				$('#coleccion').select2('enable', true).parent().show();
 				break;
-			case 'distribucion-articulos-edad':
+			case 'citacion-articulos-edad':
 				updateInfo();
 				$("#edad").select2('enable', true).parent().show();
 				break;
-			case 'distribucion-articulos-tipo':
+			case 'citacion-articulos-tipo':
 				updateInfo();
 				$('#tipodoc').select2('enable', true).parent().show();
 				break;
-			case 'distribucion-articulos-area-revista':
+			case 'citaction-articulos-area-revista':
 				updateInfo();
 				$('#area').select2('enable', true).parent().show();
 				break;
@@ -276,13 +276,13 @@ $(document).ready(function(){
 						$('#coleccion').trigger('change');
 				}
 				break;
-			case 'distribucion-articulos-edad':
-			case 'distribucion-articulos-edad-area':
+			case 'citacion-articulos-edad':
+			case 'citacion-articulos-edad-area':
 				$('#tabs, #chartContainer').show();
 				if(val.area != "" && val.area != null){
 					$('#revista, #paisAutor').select2('enable', false)
 					.parent().hide();
-					realIndicator = 'distribucion-articulos-edad-area';
+					realIndicator = 'citacion-articulos-edad-area';
 					updateInfo();
 					setPeriodos();
 				}else{
@@ -292,13 +292,13 @@ $(document).ready(function(){
 						$('#edad').trigger('change');
 				}
 				break;
-			case 'distribucion-articulos-tipo':
-			case 'distribucion-articulos-tipo-area':
+			case 'citacion-articulos-tipo':
+			case 'citacion-articulos-tipo-area':
 				$('#tabs, #chartContainer').show();
 				if(val.area != "" && val.area != null){
 					$('#revista, #paisAutor').select2('enable', false)
 					.parent().hide();
-					realIndicator = 'distribucion-articulos-tipo-area';
+					realIndicator = 'citacion-articulos-tipo-area';
 					updateInfo();
 					setPeriodos();
 				}else{
@@ -308,7 +308,7 @@ $(document).ready(function(){
 						$('#tipodoc').trigger('change');
 				}
 				break;
-			case 'distribucion-articulos-area-revista':
+			case 'citaction-articulos-area-revista':
 				$('#tabs, #chartContainer').show();
 				if(val.area != "" && val.area != null){
 					$('#paisAutor').select2('enable', false).parent().hide();
@@ -398,13 +398,13 @@ $(document).ready(function(){
 					$('#tabs, #group-container, #periodos').hide();
 				}
 				break;
-			case 'distribucion-articulos-edad':
-			case 'distribucion-articulos-edad-revista':
+			case 'citacion-articulos-edad':
+			case 'citacion-articulos-edad-revista':
 				$('#tabs, #chartContainer').show();
 				if(val.revista != "" && val.revista != null){
 					$('#area, #paisAutor').select2('enable', false)
 					.parent().hide();
-					realIndicator = 'distribucion-articulos-edad-revista';
+					realIndicator = 'citacion-articulos-edad-revista';
 					updateInfo();
 					setPeriodos();
 				}else{
@@ -414,13 +414,13 @@ $(document).ready(function(){
 						$('#edad').trigger('change')
 				};
 				break;
-			case 'distribucion-articulos-tipo':
-			case 'distribucion-articulos-tipo-revista':
+			case 'citacion-articulos-tipo':
+			case 'citacion-articulos-tipo-revista':
 				$('#tabs, #chartContainer').show();
 				if(val.revista != "" && val.revista != null){
 					$('#area, #paisAutor').select2('enable', false)
 					.parent().hide();
-					realIndicator = 'distribucion-articulos-tipo-revista';
+					realIndicator = 'citacion-articulos-tipo-revista';
 					updateInfo();
 					setPeriodos();
 				}else{
@@ -465,13 +465,13 @@ $(document).ready(function(){
 						$('#coleccion').trigger('change');
 				}
 				break;
-			case 'distribucion-articulos-edad':
-			case 'distribucion-articulos-edad-afiliacion':
+			case 'citacion-articulos-edad':
+			case 'citacion-articulos-edad-afiliacion':
 				$('#tabs, #chartContainer').show();
 				if(val.paisAutor != "" && val.paisAutor != null){
 					$('#area, #revista').select2('enable', false)
 					.parent().hide();
-					realIndicator = 'distribucion-articulos-edad-afiliacion';
+					realIndicator = 'citacion-articulos-edad-afiliacion';
 					updateInfo();
 					setPeriodos();
 				}else{
@@ -481,13 +481,13 @@ $(document).ready(function(){
 						$('#edad').trigger('change');
 				}
 				break;
-			case 'distribucion-articulos-tipo':
-			case 'distribucion-articulos-tipo-afiliacion':
+			case 'citacion-articulos-tipo':
+			case 'citacion-articulos-tipo-afiliacion':
 				$('#tabs, #chartContainer').show();
 				if(val.paisAutor != "" && val.paisAutor != null){
 					$('#area, #revista').select2('enable', false)
 					.parent().hide();
-					realIndicator = 'distribucion-articulos-tipo-afiliacion';
+					realIndicator = 'citacion-articulos-tipo-afiliacion';
 					updateInfo();
 					setPeriodos();
 				}else{
@@ -544,10 +544,10 @@ $(document).ready(function(){
 		$("#tabs, #periodos, #chartContainer, #bradfodContainer, #group-container").hide();
 		$('#area, #revista, #paisRevista, #paisAutor').select2('enable', false);
 		switch(realIndicator){
-			case 'distribucion-articulos-edad':
-			case 'distribucion-articulos-edad-area':
-			case 'distribucion-articulos-edad-revista':
-			case 'distribucion-articulos-edad-afiliacion':
+			case 'citacion-articulos-edad':
+			case 'citacion-articulos-edad-area':
+			case 'citacion-articulos-edad-revista':
+			case 'citacion-articulos-edad-afiliacion':
 				realIndicator = val.indicador;
 				if(val.edad != "" && val.edad != null){
 					$('#area, #revista, #paisAutor').select2('enable', true)
@@ -625,10 +625,10 @@ $(document).ready(function(){
 		$('#tabs, #periodos, #chartContainer, #bradfodContainer, #group-container').hide();
 		$('#area, #revista, #paisRevista, #paisAutor').select2('enable', false);
 		switch(realIndicator){
-			case 'distribucion-articulos-tipo':
-			case 'distribucion-articulos-tipo-area':
-			case 'distribucion-articulos-tipo-revista':
-			case 'distribucion-articulos-tipo-afiliacion':
+			case 'citacion-articulos-tipo':
+			case 'citacion-articulos-tipo-area':
+			case 'citacion-articulos-tipo-revista':
+			case 'citacion-articulos-tipo-afiliacion':
 				realIndicator = val.indicador;
 				if(val.tipodoc != "" && val.tipodoc != null){
 					$('#area, #revista, #paisAutor').select2('enable', true)
@@ -733,6 +733,8 @@ $(document).ready(function(){
 		  	console.log(data);
 		  	$('#tabs').tabs("option", "active", 0);
 		  	$('#tabs a[href="#grid"]').show();
+		  	$('.download-chart').hide();
+		  	$('#carousel-chargrp').off('slide.bs.carousel');
 			switch(realIndicator){
 				case "distribucion-articulos-coleccion":
 					$("#tabs, #group-container").slideDown('slow');
@@ -767,7 +769,6 @@ $(document).ready(function(){
 					changeTableClass();
 					google.visualization.events.addListener(tables.bargrp , 'sort', changeTableClass);
 					$('#tabs a[href="#grid"]').show();
-					console.log(chart);	
 					break;
 				case "indicadores-generales-revista":
 					$("#tabs, #group-container").slideDown('slow');
@@ -786,14 +787,14 @@ $(document).ready(function(){
 						chart.data.bargrp[key] = new google.visualization.DataTable(grupo);
 						switch(key){
 							case 'citas':
-								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item active"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4></div><div id="chartPratt' + key +'" class="chart_data"></div></div>');
+								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item active"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="chartPratt' + key +'" class="chart_data"></div></div>');
 								chart.bargrp[key] = new google.charts.Bar(document.getElementById('chartPratt' + key));
 								chart.bargrp[key].draw(chart.data.bargrp[key], google.charts.Bar.convertOptions(data.options.bar));
 								break;
 							default:
-								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4></div><div id="chartPratt' + key +'" class="chart_data"></div></div>');
+								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="chartPratt' + key +'" class="chart_data"></div></div>');
 								chart.bargrp[key] = new google.visualization.LineChart(document.getElementById('chartPratt' + key));
-								chart.bargrp[key].draw(chart.data.bargrp[key], data.options.line);
+								chart.bargrp[key].draw(chart.data.bargrp[key], $.extend({}, data.options.line, data.vTitle[key]));
 								break;
 						}
 						if(key == 'citas'){
@@ -806,7 +807,13 @@ $(document).ready(function(){
 					});
 					$("#carousel-chargrp").carousel(0);
 					$('#tabs a[href="#grid"]').hide();
-					console.log(chart);	
+					$('.download-chart').show();
+					$('#carousel-chargrp').on('slide.bs.carousel', function (e) {
+						var current_chart = e.relatedTarget.id.replace('chartParent', '')
+						$('.download-chart').show();
+						if(current_chart === 'citas')
+							$('.download-chart').hide();
+					});
 					break;
 				default:
 					$("#tabs, #chartContainer").show('slow');
@@ -826,10 +833,10 @@ $(document).ready(function(){
 					tables.normal.draw(tableData, data.tableOptions);
 					changeTableClass();
 					google.visualization.events.addListener(tables.normal , 'sort', changeTableClass);
-					
-
+					$('.download-chart').show();
 					break;
 			}
+			console.log(chart);
 			loading.end();
 		  }
 		});
@@ -1105,3 +1112,27 @@ changeTableClass = function (argument) {
 	.parent().addClass('table-responsive')
 	.parent().attr('style', 'position: relative;').removeClass('google-visualization-table content');
 }
+
+$('.download-chart').on('click', function(e){
+	e.preventDefault();
+	var imgData = '';
+	var fName = '';
+	switch(realIndicator){
+		case 'distribucion-articulos-coleccion':
+			return false;
+			break;
+		case 'indicadores-generales-revista':
+			var current_chart = $('#carousel-chargrp').find('.item.active').attr('id').replace('chartParent', '');
+			imgData = chart.bargrp[current_chart].getImageURI();
+			fName = realIndicator+'-'+current_chart+'.png';
+			break;
+		default:
+			imgData = chart.normal.getImageURI();
+			fName = realIndicator+'.png';
+			break;
+	}
+	tmp=$('<a></a>').attr('href', imgData).attr('download', fName);
+	$('body').append(tmp);
+	tmp.get(0).click();
+	tmp.remove()
+});
