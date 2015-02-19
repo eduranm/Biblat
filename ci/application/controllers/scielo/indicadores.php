@@ -653,7 +653,14 @@ class Indicadores extends CI_Controller {
 								'title' => $indicador[$_POST['indicador']]['hTitle']
 							), 
 						'legend' => array(
-								'position' => 'right'
+								'position' => 'right',
+								'maxLines' => 1
+							),
+						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
+						'titlePosition' => 'in',
+						'titleTextStyle' => array(
+							'bold' => FALSE,
+							'italic' => TRUE
 							),
 						'pointSize' => 3,
 						'tooltip' => array(
@@ -663,15 +670,15 @@ class Indicadores extends CI_Controller {
 								'title' => $indicador[$_POST['indicador']]['vTitle'],
 								'minValue' => 0
 							),
-						'width' => '925',
+						'width' => '1000',
 						'chartArea' => array(
 							'left' => 100,
 							'top' => 40,
-							'width' => 675,
+							'width' => "70%",
 							'height' => "80%"
 							),
 						'backgroundColor' => array(
-							'fill' => 'transparent'
+							'fill' => '#FAFAFA'
 							)
 						);
 		/*Opciones para la tabla*/
@@ -833,6 +840,12 @@ class Indicadores extends CI_Controller {
 						'tooltip' => array(
 								'isHtml' => true
 							),
+						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
+						'titlePosition' => 'in',
+						'titleTextStyle' => array(
+							'bold' => FALSE,
+							'italic' => TRUE
+							),
 						'vAxis' => array(
 								'title' => _('Número de citas recibidas'),
 								'minValue' => 0
@@ -873,13 +886,15 @@ class Indicadores extends CI_Controller {
 						'legend' => array(
 								'position' => 'right'
 							),
+						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
+						'titlePosition' => 'in',
+						'titleTextStyle' => array(
+							'bold' => FALSE,
+							'italic' => TRUE
+							),
 						'pointSize' => 3,
 						'tooltip' => array(
 								'isHtml' => true
-							),
-						'vAxis' => array(
-								'title' => $indicador[$_POST['indicador']]['vTitle'],
-								'minValue' => 0
 							),
 						'width' => '925',
 						'chartArea' => array(

@@ -70,9 +70,6 @@
 					<div id="chartContainer">
 						<div id="chartTitle"></div>
 						<div id="chart" class="chart_data"></div>
-						<div class="chartCopyright">
-							{_('Fuente:')} <a href="{base_url()}">biblat.unam.mx</a>
-						</div>
 					</div>
 					<div id="bradfodContainer" style="display:none;">
 						<div id="carousel-bradford" class="carousel slide" data-ride="carousel">
@@ -108,9 +105,6 @@
 						    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"><i class="fa fa-chevron-circle-right"></i></span>
 						    <span class="sr-only">Next</span>
 						  </a>
-						</div>
-						<div class="chartCopyright">
-							{_('Fuente:')} <a href="{base_url()}">biblat.unam.mx</a>
 						</div>
 					</div>
 					<div id="group-container" style="display:none;">
