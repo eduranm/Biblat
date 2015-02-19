@@ -353,7 +353,7 @@ $(document).ready(function(){
 				case "indice-concentracion":
 				case "productividad-exogena":
 					$("#tabs, #prattContainer").slideDown("slow");
-					$("#prattSlide").empty();
+					$("#carousel-pratt .carousel-inner, #carousel-pratt .carousel-indicators").empty();
 					chart.pratt = new Array();
 					chart.data.pratt = new Array();
 					chart.data.prattJ = data.journal; 

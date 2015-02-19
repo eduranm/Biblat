@@ -738,7 +738,6 @@ $(document).ready(function(){
 			switch(realIndicator){
 				case "distribucion-articulos-coleccion":
 					$("#tabs, #group-container").slideDown('slow');
-					$("#bargrpSlide").empty();
 					chart.bargrp = new Array();
 					chart.data.bargrp = new Array();
 					chart.data.bargrpJ = data.journal;
@@ -772,7 +771,6 @@ $(document).ready(function(){
 					break;
 				case "indicadores-generales-revista":
 					$("#tabs, #group-container").slideDown('slow');
-					$("#bargrpSlide").empty();
 					chart.bargrp = new Array();
 					chart.data.bargrp = new Array();
 					chart.data.bargrpJ = data.journal;
