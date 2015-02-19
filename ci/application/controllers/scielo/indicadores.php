@@ -29,7 +29,7 @@ class Indicadores extends CI_Controller {
 			_('Citación') => array(
 					'citacion-articulos-edad' => _('Distribución de artículos por edad del documento citado'),
 					'citacion-articulos-tipo' => _('Distribución de artículos por tipo del documento citado'),
-					'citaction-articulos-area-revista' => _('Distribución de artículos por área y revista citada'),
+					// 'citaction-articulos-area-revista' => _('Distribución de artículos por área y revista citada'),
 					// 'citacion-articulos-afiliacion-revista' => _('Distribución de artículos por páis de afiliación y revista ciatada'),
 				)
 		);
@@ -449,11 +449,11 @@ class Indicadores extends CI_Controller {
 						'series' => array(
 							1 =>  array('visibleInLegend' => FALSE)
 							),
-						'width' => '95%',
+						'width' => '1000px',
 						'chartArea' => array(
 							'left' => 100,
 							'top' => 40,
-							'width' => 550,
+							'width' => "70%",
 							'height' => "80%"
 							),
 						'backgroundColor' => array(
@@ -749,7 +749,7 @@ class Indicadores extends CI_Controller {
 								'title' => $indicador[$_POST['indicador']]['vTitle'],
 								'minValue' => 0
 							),
-						'width' => '1000',
+						'width' => '1000px',
 						'chartArea' => array(
 							'left' => 10,
 							'top' => 40,
@@ -978,7 +978,7 @@ class Indicadores extends CI_Controller {
 						'tooltip' => array(
 								'isHtml' => true
 							),
-						'width' => '1000',
+						'width' => '1000px',
 						'chartArea' => array(
 							'left' => 10,
 							'top' => 40,
