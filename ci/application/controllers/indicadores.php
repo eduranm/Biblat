@@ -297,6 +297,12 @@ class Indicadores extends CI_Controller {
 							'width' => "70%",
 							'height' => "80%"
 							),
+						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
+						'titlePosition' => 'in',
+						'titleTextStyle' => array(
+							'bold' => FALSE,
+							'italic' => TRUE
+							),
 						'backgroundColor' => array(
 							'fill' => '#FAFAFA'
 							)
@@ -491,6 +497,12 @@ class Indicadores extends CI_Controller {
 						'tooltip' => array(
 								'isHtml' => true
 							),
+						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
+						'titlePosition' => 'in',
+						'titleTextStyle' => array(
+							'bold' => FALSE,
+							'italic' => TRUE
+							),
 						'backgroundColor' => array(
 							'fill' => '#FAFAFA'
 							)
@@ -607,6 +619,12 @@ class Indicadores extends CI_Controller {
 							),
 						'tooltip' => array(
 								'isHtml' => true
+							),
+						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
+						'titlePosition' => 'in',
+						'titleTextStyle' => array(
+							'bold' => FALSE,
+							'italic' => TRUE
 							),
 						'backgroundColor' => array(
 							'fill' => '#FAFAFA'
@@ -743,6 +761,12 @@ class Indicadores extends CI_Controller {
 							'top' => 40,
 							'width' => "70%",
 							'height' => "80%"
+							),
+						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
+						'titlePosition' => 'in',
+						'titleTextStyle' => array(
+							'bold' => FALSE,
+							'italic' => TRUE
 							),
 						'backgroundColor' => array(
 							'fill' => '#FAFAFA'
