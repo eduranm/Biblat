@@ -726,3 +726,9 @@ table.articulo{
     margin-top: 0px;
 }
 
+.download-chart {
+	cursor: pointer !important;
+}
+.scielo-update .bl-scielo{
+	vertical-align: middle;
+}
