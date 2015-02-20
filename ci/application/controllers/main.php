@@ -71,6 +71,24 @@ class Main extends CI_Controller{
 		$this->template->build('main/bibliografia', $data);
 	}
 
+		public function presentaciones(){
+		$data = array();
+		$data['page_title'] = _('Presentaciones PPT');
+		$this->template->title(_('Biblat - Presentaciones PPT'));
+		$this->template->set_breadcrumb(_('Documentos'));
+		$this->template->set_meta('description', _('Presentaciones PPT'));
+		$this->template->build('main/presentaciones', $data);
+	}
+
+	public function multimedia(){
+		$data = array();
+		$data['page_title'] = _('Multimedia');
+		$this->template->title(_('Biblat - Multimedia'));
+		$this->template->set_breadcrumb(_('Documentos'));
+		$this->template->set_meta('description', _('Multimedia'));
+		$this->template->build('main/multimedia', $data);
+	}
+
 	public function sobreBiblat(){
 		$data = array();
 		$data['page_title'] = _('¿Qué es Biblat?');

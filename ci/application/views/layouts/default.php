@@ -128,8 +128,8 @@
                                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_('Documentos')}<span class="caret"></span></a>
                                                     <ul class="dropdown-menu" role="menu">
                                                         <li><a href="{site_url('documentos/bibliografia')}">{_('Bibliografía')}</a></li>
-                                                        <li><a href="#">{_('Presentaciones PPT')}</a></li>
-                                                        <li><a href="#">{_('Archivos multimedia')}</a></li>
+                                                        <li><a href="{site_url('presentaciones')}">{_('Presentaciones PPT')}</a></li>
+                                                        <li><a href="{site_url('multimedia')}">{_('Archivos multimedia')}</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
