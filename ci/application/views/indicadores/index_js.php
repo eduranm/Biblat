@@ -676,26 +676,41 @@ $('.download-chart').on('click', function(e){
 	var indicador = $("#indicador").val();
 	var imgData = '';
 	var fName = '';
+	var $elem = null;
 	switch(indicador){
 		case "modelo-bradford-revista":
 		case "modelo-bradford-institucion":
-			var current_chart = $('#carousel-bradford').find('.item.active .chart_data').attr('id').replace('chart', '').toLowerCase();
-			imgData = chart[current_chart].getImageURI();	
+			var current_chart = $('#carousel-bradford').find('.item.active .chart_data').attr('id').replace('chart', '');
+			$elem = $('#chart'+current_chart).parent().clone(true);
+			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', chart[current_chart.toLowerCase()].getImageURI()));
+			$elem.appendTo('#charts');
 			fName = indicador+'-'+current_chart+'.png';
 			break;
 		case "indice-concentracion":
 		case "productividad-exogena":
 			var current_chart = $('#carousel-pratt').find('.item.active .chart_data').attr('id').replace('chartPratt', '');
-			imgData = chart.pratt[current_chart].getImageURI();	
+			$elem = $('#chartPratt'+current_chart).parent().clone(true);
+			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', chart.pratt[current_chart].getImageURI()));
+			$elem.appendTo('#charts');
 			fName = indicador+'-group'+current_chart+'.png';
 			break;
 		default:
-			imgData = chart.normal.getImageURI();
+			$elem = $('#chartContainer').clone(true);
+			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', chart.normal.getImageURI()));
+			$elem.appendTo('#charts');
 			fName = indicador+'.png';
 			break;
 	}
-	tmp=$('<a></a>').attr('href', imgData).attr('download', fName);
-	$('body').append(tmp);
-	tmp.get(0).click();
-	tmp.remove()
+	html2canvas($elem, {
+		background: '#FAFAFA',
+		onrendered: function(canvas) {
+			console.log("rendered");
+			var imgData = canvas.toDataURL("image/png");
+			$elem.remove();
+			tmp=$('<a></a>').attr('href', imgData).attr('download', fName);
+			$('body').append(tmp);
+			tmp.get(0).click();
+			tmp.remove();
+		}
+	});
 });

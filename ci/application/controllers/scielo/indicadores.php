@@ -180,6 +180,7 @@ class Indicadores extends CI_Controller {
 		$this->template->js('js/jquery.slider.min.js');
 		$this->template->js('js/jquery.serializeJSON.min.js');
 		$this->template->js('js/colorbox.js');
+		$this->template->js('assets/js/html2canvas.js');
 		$this->template->js('//www.google.com/jsapi');
 		$this->template->set_meta('description', $this->indicadores[$indicador]['title']);
 		$this->template->set_breadcrumb(_('Indicadores bibliométricos'));
@@ -455,7 +456,7 @@ class Indicadores extends CI_Controller {
 							'height' => "80%"
 							),
 						'backgroundColor' => array(
-							'fill' => '#FAFAFA'
+							'fill' => 'transparent'
 							)
 						);
 		for ($i=1; $i < $limit; $i++):
@@ -755,7 +756,7 @@ class Indicadores extends CI_Controller {
 							'height' => "80%"
 							),
 						'backgroundColor' => array(
-							'fill' => '#FAFAFA'
+							'fill' => 'transparent'
 							)
 						);
 		/*Opciones para la tabla*/
@@ -936,7 +937,7 @@ class Indicadores extends CI_Controller {
 							'height' => "80%"
 							),
 						'backgroundColor' => array(
-							'fill' => '#FAFAFA'
+							'fill' => 'transparent'
 							)
 						);
 		for ($i=1; $i < $query->num_rows(); $i++):
@@ -981,7 +982,7 @@ class Indicadores extends CI_Controller {
 							'height' => "80%"
 							),
 						'backgroundColor' => array(
-							'fill' => '#FAFAFA'
+							'fill' => 'transparent'
 							)
 						);
 		header('Content-Type: application/json');

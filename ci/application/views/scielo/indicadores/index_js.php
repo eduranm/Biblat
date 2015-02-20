@@ -730,7 +730,7 @@ $(document).ready(function(){
 		  	console.log(data);
 		  	$('#tabs').tabs("option", "active", 0);
 		  	$('#tabs a[href="#grid"]').show();
-			$('.download-chart').hide();
+			$('#tabs .download-chart').hide();
 			$('#carousel-chargrp').off('slide.bs.carousel');
 			switch(realIndicator){
 				case "distribucion-articulos-coleccion":
@@ -745,9 +745,9 @@ $(document).ready(function(){
 						}else{
 							$("#carousel-chargrp .carousel-indicators").append('<li id="chartLi' + key + '" data-target="#carousel-chargrp" data-slide-to="' + key + '"></li>');
 						}
-						$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item active">' + data.chartTitle + ' <div id="chartPratt' + key +'" class="chart_data"></div></div>');
+						$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item active">' + data.chartTitle + ' <div id="groupChart' + key +'" class="chart_data"></div></div>');
 						chart.data.bargrp[key] = new google.visualization.DataTable(grupo);
-						chart.bargrp[key] = new google.charts.Bar(document.getElementById('chartPratt' + key));
+						chart.bargrp[key] = new google.charts.Bar(document.getElementById('groupChart' + key));
 						chart.bargrp[key].draw(chart.data.bargrp[key], google.charts.Bar.convertOptions(data.options));
 						if(key > 0){
 							google.visualization.events.addListener(chart.bargrp[key], 'ready', function(){
@@ -783,13 +783,13 @@ $(document).ready(function(){
 						chart.data.bargrp[key] = new google.visualization.DataTable(grupo);
 						switch(key){
 							case 'citas':
-								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item active"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="chartPratt' + key +'" class="chart_data"></div></div>');
-								chart.bargrp[key] = new google.charts.Bar(document.getElementById('chartPratt' + key));
+								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item active"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="groupChart' + key +'" class="chart_data"></div></div>');
+								chart.bargrp[key] = new google.charts.Bar(document.getElementById('groupChart' + key));
 								chart.bargrp[key].draw(chart.data.bargrp[key], google.charts.Bar.convertOptions(data.options.bar));
 								break;
 							default:
-								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="chartPratt' + key +'" class="chart_data"></div></div>');
-								chart.bargrp[key] = new google.visualization.LineChart(document.getElementById('chartPratt' + key));
+								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="groupChart' + key +'" class="chart_data"></div></div>');
+								chart.bargrp[key] = new google.visualization.LineChart(document.getElementById('groupChart' + key));
 								chart.bargrp[key].draw(chart.data.bargrp[key], $.extend({}, data.options.line, data.vTitle[key]));
 								break;
 						}
@@ -804,12 +804,12 @@ $(document).ready(function(){
 					});
 					$("#carousel-chargrp").carousel(0);
 					$('#tabs a[href="#grid"]').hide();
-					$('.download-chart').show();
+					$('#tabs .download-chart').show();
 					$('#carousel-chargrp').on('slide.bs.carousel', function (e) {
 						var current_chart = e.relatedTarget.id.replace('chartParent', '')
-						$('.download-chart').show();
+						$('#tabs .download-chart').show();
 						if(current_chart === 'citas')
-							$('.download-chart').hide();
+							$('#tabs .download-chart').hide();
 					});
 					break;
 				default:
@@ -830,7 +830,7 @@ $(document).ready(function(){
 					tables.normal.draw(tableData, data.tableOptions);
 					changeTableClass();
 					google.visualization.events.addListener(tables.normal , 'sort', changeTableClass);
-					$('.download-chart').show();
+					$('#tabs .download-chart').show();
 					break;
 			}
 			console.log(chart);
@@ -1114,22 +1114,36 @@ $('.download-chart').on('click', function(e){
 	e.preventDefault();
 	var imgData = '';
 	var fName = '';
+	var $elem = null;
 	switch(realIndicator){
 		case 'distribucion-articulos-coleccion':
 			return false;
 			break;
 		case 'indicadores-generales-revista':
 			var current_chart = $('#carousel-chargrp').find('.item.active').attr('id').replace('chartParent', '');
-			imgData = chart.bargrp[current_chart].getImageURI();
+			$elem = $('#chartParent'+current_chart).clone(true);
+			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', chart.bargrp[current_chart].getImageURI()));
+			$elem.appendTo('#charts');
 			fName = realIndicator+'-'+current_chart+'.png';
 			break;
 		default:
-			imgData = chart.normal.getImageURI();
+			$elem = $('#chartContainer').clone(true);
+			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', chart.normal.getImageURI()));
+			$elem.appendTo('#charts');
 			fName = realIndicator+'.png';
 			break;
 	}
-	tmp=$('<a></a>').attr('href', imgData).attr('download', fName);
-	$('body').append(tmp);
-	tmp.get(0).click();
-	tmp.remove()
+	console.log($elem);
+	html2canvas($elem, {
+		background: '#FAFAFA',
+		onrendered: function(canvas) {
+			console.log("rendered");
+			var imgData = canvas.toDataURL("image/png");
+			$elem.remove();
+			tmp=$('<a></a>').attr('href', imgData).attr('download', fName);
+			$('body').append(tmp);
+			tmp.get(0).click();
+			tmp.remove();
+		}
+	});
 });

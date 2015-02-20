@@ -82,6 +82,7 @@ class Indicadores extends CI_Controller {
 		$this->template->js('js/jquery.slider.min.js');
 		$this->template->js('js/jquery.serializeJSON.min.js');
 		$this->template->js('js/colorbox.js');
+		$this->template->js('assets/js/html2canvas.js');
 		$this->template->js('//www.google.com/jsapi');
 		$this->template->set_meta('description', $this->indicadores[$indicador]);
 		$this->template->set_breadcrumb(_('Indicadores bibliométricos'));
@@ -304,7 +305,7 @@ class Indicadores extends CI_Controller {
 							'italic' => TRUE
 							),
 						'backgroundColor' => array(
-							'fill' => '#FAFAFA'
+							'fill' => 'transparent'
 							)
 						);
 		/*Opciones para la tabla*/
@@ -504,7 +505,7 @@ class Indicadores extends CI_Controller {
 							'italic' => TRUE
 							),
 						'backgroundColor' => array(
-							'fill' => '#FAFAFA'
+							'fill' => 'transparent'
 							)
 						);
 		/*Creando lista de revistas con su total de articulos agrupados según los límites calculados anteriormente*/
@@ -627,7 +628,7 @@ class Indicadores extends CI_Controller {
 							'italic' => TRUE
 							),
 						'backgroundColor' => array(
-							'fill' => '#FAFAFA'
+							'fill' => 'transparent'
 							)
 						);
 
@@ -769,7 +770,7 @@ class Indicadores extends CI_Controller {
 							'italic' => TRUE
 							),
 						'backgroundColor' => array(
-							'fill' => '#FAFAFA'
+							'fill' => 'transparent'
 							)
 						);
 		/*Opciones para la tabla*/
