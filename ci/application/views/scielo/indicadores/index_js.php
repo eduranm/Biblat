@@ -729,7 +729,7 @@ $(document).ready(function(){
 		  success: function(data) {
 		  	console.log(data);
 		  	$('#tabs').tabs("option", "active", 0);
-		  	$('#tabs a[href="#grid"]').show();
+		  	$('#tabs a[href="#grid"], #tabs a[class="download-table"]').show();
 			$('#tabs .download-chart').hide();
 			$('#carousel-chargrp').off('slide.bs.carousel');
 			switch(realIndicator){
@@ -764,7 +764,6 @@ $(document).ready(function(){
 					tables.bargrp.draw(tableData, data.tableOptions);
 					changeTableClass();
 					google.visualization.events.addListener(tables.bargrp , 'sort', changeTableClass);
-					$('#tabs a[href="#grid"]').show();
 					break;
 				case "indicadores-generales-revista":
 					$("#tabs, #group-container").slideDown('slow');
@@ -803,7 +802,7 @@ $(document).ready(function(){
 						nav++;
 					});
 					$("#carousel-chargrp").carousel(0);
-					$('#tabs a[href="#grid"]').hide();
+					$('#tabs a[href="#grid"], #tabs a[class="download-table"]').hide();
 					$('#tabs .download-chart').show();
 					$('#carousel-chargrp').on('slide.bs.carousel', function (e) {
 						var current_chart = e.relatedTarget.id.replace('chartParent', '')
@@ -1146,4 +1145,9 @@ $('.download-chart').on('click', function(e){
 			tmp.remove();
 		}
 	});
+});
+$('.download-table').on('click', function(e){
+	e.preventDefault();
+	$('#tabs').tabs("option", "active", 1);
+	$('#table0').find('table').table2excel({name: '', fname: realIndicator+'.xls'});
 });

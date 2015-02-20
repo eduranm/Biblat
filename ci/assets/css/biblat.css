@@ -726,7 +726,7 @@ table.articulo{
     margin-top: 0px;
 }
 
-.download-chart {
+.download-chart, .download-table{
 	cursor: pointer !important;
 }
 .scielo-update .bl-scielo{

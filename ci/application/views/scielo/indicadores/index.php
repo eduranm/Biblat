@@ -64,7 +64,7 @@
 			<div id="tabs" style="display:none;">
 				<ul>
 					<li><a href="#charts"><i class="fa fa-line-chart"></i> {_('Gráfica')}</a><a href="" title="{_('Descargar gráfica')}" class="download-chart"><i class="fa fa-download"></i></a></li>
-					<li><a href="#grid"><i class="fa fa-table"></i> {_('Tabla')}</a></li>
+					<li><a href="#grid"><i class="fa fa-table"></i> {_('Tabla')}</a><a href="" title="{_('Descargar tabla')}" class="download-table"><i class="fa fa-download"></i></a></li>
 				</ul>
 				<div id="charts">
 					<div id="chartContainer">
