@@ -732,3 +732,7 @@ table.articulo{
 .scielo-update .bl-scielo{
 	vertical-align: middle;
 }
+
+.chart_data svg, .chart_data img{
+	background: url('../img/watermark.png');
+}
