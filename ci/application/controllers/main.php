@@ -12,7 +12,6 @@ class Main extends CI_Controller{
 		$this->template->set('class_method', $this->router->fetch_class().$this->router->fetch_method());
 	}
 	public function index(){
-		$this->load->library('user_agent');
 		$data = array();
 		$data['header']['title'] = _("Biblat");
 		$data['header']['description'] = _('Biblat ofrece: referencias bibliográficas de documentos publicados en revistas científicas y académicas latinoamericanas indizadas en CLASE y PERIÓDICA, acceso al texto completo de revistas en acceso abierto, indicadores bibliométricos e información sobre los políticas de acceso de las revistas.');
@@ -50,8 +49,6 @@ class Main extends CI_Controller{
 		$this->template->title(_('Biblat - Bibliografía latinoamericana'));
 		$this->template->js('js/d3.js');
 		$this->template->js('js/d3.layout.cloud.js');
-		$this->template->js('assets/js/html2canvas.js');
-		$this->template->js('assets/js/html2canvas.svg.js');
 		$this->template->set_breadcrumb(_('Sobre Biblat'));
 		$this->template->set_meta('description', _('Bibliografía latinoamericana'));
 		$this->template->build('main/index', $data['index']);

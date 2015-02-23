@@ -48,14 +48,4 @@
 				heightStyle: "content",
 				navigation: true
 			});
-<?php if($this->agent->is_mobile()):?>
-			html2canvas($('#banners_01').parent(), {
-				onrendered: function(canvas) {
-					console.log("rendered");
-					var imgData = canvas.toDataURL("image/png");
-					$('#banners_01').parent().append($('<img class="img-responsive center-block" id="#banners_01"></img>').attr('src', imgData));
-					$('#banners_01').remove();
-				}
-<?php endif;?>
-			});
 		});
