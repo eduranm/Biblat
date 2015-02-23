@@ -794,6 +794,24 @@ class Indicadores extends CI_Controller {
 			'vidaMedia' => array('title' => 'Vida media por revista', 'vTitle' => 'Vida media', 'tooltip' => _('Vida media en el año <b>%s</b>: <b>%s</b>'))
 		);
 		$data['update'] = "<h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5>";
+		
+		$tableCols = array(
+				_('Año') => 'number',
+				_('Colección') => 'string',
+				_('Revista') => 'string',
+				_('Fasciculos') => 'number',
+				_('Artículos') => 'number',
+				_('Referencias') => 'number',
+				_('Citaciones') => 'number',
+				_('Porcentaje de autocitación') => 'number',
+				_('Factor de impacto') => 'number',
+				_('Indice de inmediates') => 'number',
+				_('Vida media') => 'string'
+			);
+		foreach ($tableCols as $col => $type):
+			$data['dataTable']['cols'][] = array('id' => '', 'label' => $col, 'type' => $type);
+		endforeach;
+
 		foreach ($charts as $key => $chart):
 			$data['title'][$key] = $charts[$key]['title'];
 			$data['vTitle'][$key] = array('vAxis' => array('title' => $charts[$key]['vTitle'], 'minValue' => 0));
@@ -900,6 +918,23 @@ class Indicadores extends CI_Controller {
 				$data['chart'][$key]['rows'][]['c'] = $c;
 			endforeach;
 		endforeach;
+		foreach ($indicadores as $journal):
+			foreach ($journal as $periodo):
+				$cc = array();
+				$cc[] = array('v' => $periodo['anio']);
+				$cc[] = array('v' =>  "SciELO ".$this->colecciones['id'][$periodo['networkId']]['name']);
+				$cc[] = array('v' => $periodo['journal']);
+				$cc[] = array('v' =>  $periodo['fasciculos']);
+				$cc[] = array('v' =>  $periodo['articulos']);
+				$cc[] = array('v' => $periodo['referencias']);
+				$cc[] = array('v' => $periodo['citas']);
+				$cc[] = array('v' => $periodo['porcentajeAutoCita']);
+				$cc[] = array('v' => $periodo['factorImpacto']);
+				$cc[] = array('v' => $periodo['indiceInmediates']);
+				$cc[] = array('v' => $periodo['vidaMedia']);
+				$data['dataTable']['rows'][]['c'] = $cc;
+			endforeach;
+		endforeach;
 		/*Opciones de la gráfica*/
 		$data['options']['bar'] = array(
 						'animation' => array(
@@ -986,6 +1021,22 @@ class Indicadores extends CI_Controller {
 							'fill' => 'transparent'
 							)
 						);
+		/*Opciones para la tabla*/
+		$data['tableOptions'] = array(
+				'allowHtml' => true,
+				'showRowNumber' => false,
+				'cssClassNames' => array(
+					'headerRow' => 'bold',
+					'tableRow'	=> ' ',
+					'oddTableRow' => ' ',
+					'selectedTableRow' => ' ',
+					'hoverTableRow' => ' ',
+					'headerCell' => 'text-center',
+					'tableCell' => 'text-left',
+					'rowNumberCell' => ' '
+					)
+			);
+		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]['title']}</h4>";
 		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}

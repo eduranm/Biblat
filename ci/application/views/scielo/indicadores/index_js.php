@@ -729,7 +729,6 @@ $(document).ready(function(){
 		  success: function(data) {
 		  	console.log(data);
 		  	$('#tabs').tabs("option", "active", 0);
-		  	$('#tabs a[href="#grid"], #tabs a[class="download-table"]').show();
 			$('#tabs .download-chart').hide();
 			$('#carousel-chargrp').off('slide.bs.carousel');
 			switch(realIndicator){
@@ -802,7 +801,15 @@ $(document).ready(function(){
 						nav++;
 					});
 					$("#carousel-chargrp").carousel(0);
-					$('#tabs a[href="#grid"], #tabs a[class="download-table"]').hide();
+					var tableData = new google.visualization.DataTable(data.dataTable);
+					$("#gridContainer").empty();
+					$("#gridContainer").append(data.tableTitle);
+					$("#gridContainer").append('<div id="table0"></div>');
+					tables.normal = new google.visualization.Table(document.getElementById('table0'));
+					tables.normal.draw(tableData, data.tableOptions);
+					changeTableClass();
+					google.visualization.events.addListener(tables.normal , 'sort', changeTableClass);
+
 					$('#tabs .download-chart').show();
 					$('#carousel-chargrp').on('slide.bs.carousel', function (e) {
 						var current_chart = e.relatedTarget.id.replace('chartParent', '')
