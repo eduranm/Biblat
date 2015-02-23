@@ -10,13 +10,13 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <svg class="img-responsive center-block" version="1.1" id="banners_01" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 235.2 69.6" enable-background="new 0 0 235.2 69.6" xml:space="preserve" width="980" height="290">
-        <image overflow="visible" width="980" height="290" xlink:href="{base_url('img/slides/banners_01.jpg')}"  transform="matrix(0.24 0 0 0.24 0 0)"></image>
-        <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 138.3335 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.7">{_sprintf('%s textos completos en HEVILA', number_format($totales['hevila'], 0, '.', ','))}</text>
-        <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 148.8335 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.6">{_sprintf('%s textos completos', number_format($totales['enlaces'], 0, '.', ','))}</text>
-        <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 159.557 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.6">{_sprintf('%s documentos', number_format($totales['documentos'], 0, '.', ','))}</text>
-        <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 170.3335 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.6">{_sprintf('%s revistas', number_format($totales['revistas'], 0, '.', ','))}</text>
-    </svg>
+        <svg class="img-responsive center-block" version="1.1" id="banners_01" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 235.2 69.6" enable-background="new 0 0 235.2 69.6" xml:space="preserve" width="980" height="290">
+            <image overflow="visible" width="980" height="290" xlink:href="{base_url('img/slides/banners_01.jpg')}"  transform="matrix(0.24 0 0 0.24 0 0)"></image>
+            <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 138.3335 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.7">{_sprintf('%s textos completos en HEVILA', number_format($totales['hevila'], 0, '.', ','))}</text>
+            <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 148.8335 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.6">{_sprintf('%s textos completos', number_format($totales['enlaces'], 0, '.', ','))}</text>
+            <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 159.557 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.6">{_sprintf('%s documentos', number_format($totales['documentos'], 0, '.', ','))}</text>
+            <text transform="matrix(4.489659e-11 -1 1 4.489659e-11 170.3335 63.3335)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="3.6">{_sprintf('%s revistas', number_format($totales['revistas'], 0, '.', ','))}</text>
+        </svg>
     </div>
     <div class="item">
       <img class="img-responsive center-block" src="{base_url('img/slides/banners_02.jpg')}"/>
