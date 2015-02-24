@@ -1,29 +1,29 @@
 <div class="panel-group" id="accordion">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h4 class="panel-title">
+			<h5 class="panel-title">
 				<a data-parent="#accordion" href="{site_url('conacyt/reporte/conacyt-todas-las-areas')}">
 					<span class="glyphicon fa fa-file-pdf-o"></span> {_('Reporte bibliométrico completo')}
 				</a>
-			</h4>
+			</h5>
 		</div>
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h4 class="panel-title">
+			<h5 class="panel-title">
 				<a data-parent="#accordion" href="{site_url('conacyt/reporte/reporte-posicionamiento-cuartiles-jcr-scimago')}">
 					<span class="glyphicon fa fa-file-pdf-o"></span> {_('Reporte de posicionamiento por cuartiles')}
 				</a>
-			</h4>
+			</h5>
 		</div>
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h4 class="panel-title">
+			<h5 class="panel-title">
 				<a data-toggle="collapse" data-parent="#accordion" href="#collapseArea">
 					<span class="glyphicon fa fa-plus-square-o"></span> {_('Reporte bibliométrico por área del conocimiento')}
 				</a>
-			</h4>
+			</h5>
 		</div>
 		<div id="collapseArea" class="panel-collapse collapse">
 {foreach $areas area}
@@ -47,3 +47,5 @@
 {/foreach}
 	</div>
 </div>
+
+<pre>{print_r($areas)}</pre>

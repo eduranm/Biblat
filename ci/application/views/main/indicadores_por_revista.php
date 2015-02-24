@@ -12,11 +12,11 @@
 {foreach $revistas revista}
 	<div class="panel panel-default">
 	    <div class="panel-heading">
-	      <h4 class="panel-title">
+	      <h5 class="panel-title">
 	        <a data-toggle="collapse" data-parent="#accordion" href="#{$revista.revistaSlug}">
 	        	<span class="glyphicon fa fa-book"></span> {$revista.revista}
 	        </a>
-	      </h4>
+	      </h5>
 	    </div>
 	    <div id="{$revista.revistaSlug}" class="panel-collapse collapse">
 	    	<ul class="list-group">
