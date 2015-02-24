@@ -790,7 +790,7 @@ class Indicadores extends CI_Controller {
 			'referencias' => array('title' => 'Número de referencias por revista', 'vTitle' => 'Referencias por revista', 'tooltip' => _('Número de referencias en el año <b>%s</b>: <b>%s</b>')), 
 			'citas' => array('title' => 'Número de citas/autocitas por revista', 'vTitle' => 'Citas por revista', 'tooltip' => _('Número de citas/autocitas en el año <b>%s</b>: <b>%s</b>')), 
 			'factorImpacto' => array('title' => 'Factor de impacto por revista', 'vTitle' => 'Factor de impacto', 'tooltip' => _('Factor de impacto en el año <b>%s</b>: <b>%s</b>')),
-			'indiceInmediates' => array('title' => 'Indice de inmediates por revista', 'vTitle' => 'Indice de inmediates', 'tooltip' => _('Indice de inmediates en el año <b>%s</b>: <b>%s</b>')),
+			'indiceInmediatez' => array('title' => 'Indice de inmediatez por revista', 'vTitle' => 'Indice de inmediatez', 'tooltip' => _('Indice de inmediatez en el año <b>%s</b>: <b>%s</b>')),
 			'vidaMedia' => array('title' => 'Vida media por revista', 'vTitle' => 'Vida media', 'tooltip' => _('Vida media en el año <b>%s</b>: <b>%s</b>'))
 		);
 		$data['update'] = "<h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5>";
@@ -805,7 +805,7 @@ class Indicadores extends CI_Controller {
 				_('Citaciones') => 'number',
 				_('Porcentaje de autocitación') => 'number',
 				_('Factor de impacto') => 'number',
-				_('Indice de inmediates') => 'number',
+				_('Indice de inmediatez') => 'number',
 				_('Vida media') => 'string'
 			);
 		foreach ($tableCols as $col => $type):
@@ -930,7 +930,7 @@ class Indicadores extends CI_Controller {
 				$cc[] = array('v' => $periodo['citas']);
 				$cc[] = array('v' => $periodo['porcentajeAutoCita']);
 				$cc[] = array('v' => $periodo['factorImpacto']);
-				$cc[] = array('v' => $periodo['indiceInmediates']);
+				$cc[] = array('v' => $periodo['indiceInmediatez']);
 				$cc[] = array('v' => $periodo['vidaMedia']);
 				$data['dataTable']['rows'][]['c'] = $cc;
 			endforeach;
