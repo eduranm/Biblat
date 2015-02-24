@@ -3,7 +3,7 @@
 	    <div class="panel-heading">
 	      <h5 class="panel-title">
 	        <a data-toggle="collapse" data-parent="#accordion" href="#fil-xxxvi">
-	        	<span class="glyphicon fa fa-plus"></span> XXXVI Feria Internacional del Libro del Palacio de Minería, México, D.F.
+	        	<span class="glyphicon fa fa-plus-square-o"></span> XXXVI Feria Internacional del Libro del Palacio de Minería, México, D.F.
 	        </a>
 	      </h5>
 	    </div>
