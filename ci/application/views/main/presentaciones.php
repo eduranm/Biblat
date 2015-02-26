@@ -1,15 +1,30 @@
 <div class="panel-group">
 	<div class="panel panel-default">
-	    <div class="panel-heading">
-	      <h5 class="panel-title">
-	        <a data-toggle="collapse" data-parent="#accordion" href="#fil-xxxvi">
-	        	<span class="glyphicon fa fa-plus-square-o"></span> XXXVI Feria Internacional del Libro del Palacio de Minería, México, D.F.
-	        </a>
-	      </h5>
-	    </div>
-	    <div id="fil-xxxvi" class="panel-collapse collapse">
-	    	<ul class="list-group">
+		<div class="panel-heading">
+		  <h5 class="panel-title">
+			<a data-toggle="collapse" data-parent="#accordion" href="#fil-xxxvi">
+				<span class="glyphicon fa fa-plus-square-o"></span> XXXVI Feria Internacional del Libro del Palacio de Minería, México, D.F.
+			</a>
+		  </h5>
+		</div>
+		<div id="fil-xxxvi" class="panel-collapse collapse">
+			<ul class="list-group">
 				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/La_importancia_de_escribir_bien_las_referencias_para_recuperar_la informacion_en_las_bases_de_datos.pptx')}" target="_blank"><span class="glyphicon fa fa-file-powerpoint-o" ></span> Falfán Sánchez, Eugenia (2015, febrero) La importancia de escribir bien las referencias para recuperar la información en las bases de datos</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+		  <h5 class="panel-title">
+			<a data-toggle="collapse" data-parent="#accordion" href="#fil-xxxvi-clase">
+				<span class="glyphicon fa fa-plus-square-o"></span> XXXVI Feria Internacional del Libro del Palacio de Minería, México, D.F. - <b>CLASE 40 Aniversario</b>
+			</a>
+		  </h5>
+		</div>
+		<div id="fil-xxxvi-clase" class="panel-collapse collapse">
+			<ul class="list-group">
+				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/clase/Bases_de_datos_y_revistas_academicas_latinoamericanas_a_40 _anios_de_CLASE.pptx')}" target="_blank"><span class="glyphicon fa fa-file-powerpoint-o" ></span> Sánchez Pereyra, Antonio (2015, febrero) Ponencia en Mesa Redonda: Bases de datos y revistas académicas latinoamericanas: a 40 años de CLASE</a></li>
 			</ul>
 		</div>
 	</div>
