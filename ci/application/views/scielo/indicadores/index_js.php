@@ -803,22 +803,31 @@ $(document).ready(function(){
 										'<?php _e("Autocitas")?>: ' + autocitas.toLocaleString() + ' ('+ ((autocitas/this.point.stackTotal)*100).toFixed(2) +'%)<br/>' +
 										'Total: ' + this.point.stackTotal.toLocaleString();
 								}};
-							default:
-								data.highchart[key].plotOptions.series.events = {legendItemClick: function(){
-										return false;
-									}
-								};
-								data.highchart[key].plotOptions.series.point.events = {click: function(){
-									if (cloneToolTip[key])
-										chart.bargrp[key].container.firstChild.removeChild(cloneToolTip[key]);
-									cloneToolTip[key] = this.series.chart.tooltip.label.element.cloneNode(true);
-									chart.bargrp[key].container.firstChild.appendChild(cloneToolTip[key]);
-
+								break;
+							case 'vidaMedia':
+								data.highchart[key].tooltip = {formatter: function(){
+									var citas, autocitas;
+									value = this.y;
+									if (value > 10)
+										value = '>10.0';
+									return '<b>'+this.series.name+'</b><br/>Vida media en el año '+this.x+': <b>'+value+'</b>';
 								}};
-								$('#groupChart'+key).highcharts(data.highchart[key]);
-								chart.bargrp[key] = $('#groupChart'+key).highcharts();
+							default:
 								break;
 						}
+						data.highchart[key].plotOptions.series.events = {legendItemClick: function(){
+								return false;
+							}
+						};
+						data.highchart[key].plotOptions.series.point.events = {click: function(){
+							if (cloneToolTip[key])
+								chart.bargrp[key].container.firstChild.removeChild(cloneToolTip[key]);
+							cloneToolTip[key] = this.series.chart.tooltip.label.element.cloneNode(true);
+							chart.bargrp[key].container.firstChild.appendChild(cloneToolTip[key]);
+
+						}};
+						$('#groupChart'+key).highcharts(data.highchart[key]);
+						chart.bargrp[key] = $('#groupChart'+key).highcharts();
 						nav++;
 					});
 					$('#carousel-chargrp').on('slid.bs.carousel', function () {

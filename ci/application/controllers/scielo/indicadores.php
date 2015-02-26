@@ -220,7 +220,7 @@ class Indicadores extends CI_Controller {
 					'text' => _sprintf('Fuente: %s', 'biblat.unam.mx')
 				),
 			'yAxis' => array(
-					'allowDecimals' => FALSE,
+					'allowDecimals' => TRUE,
 					'min' => 0,
 					'title' => NULL
 				),
@@ -856,7 +856,6 @@ class Indicadores extends CI_Controller {
 							break;
 						case 'vidaMedia':
 							$value = $value == '>10,0' ? 10.1 : $value;
-							$tooltipv = $value == 10.1 ? '>10.0' : $value;
 						default:
 							$series[$key][$kindicador][] = parse_number($value);
 					endswitch;
