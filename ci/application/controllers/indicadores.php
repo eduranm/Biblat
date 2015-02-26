@@ -9,7 +9,7 @@ class Indicadores extends CI_Controller {
 					\"articuloSlug\", 
 					revista, 
 					\"revistaSlug\", 
-					pais, 
+					\"paisRevista\", 
 					anio, 
 					volumen, 
 					numero, 
