@@ -202,7 +202,7 @@ class Indicadores extends CI_Controller {
 				),
 			'xAxis' => array(
 					'categories' => array(),
-					'title' => array('text' => _('Años'))
+					'title' => array('text' => _('Año'))
 				),
 			'series' => array()
 		);
@@ -236,7 +236,7 @@ class Indicadores extends CI_Controller {
 				),
 			'xAxis' => array(
 					'categories' => array(),
-					'title' => array('text' => _('Años'))
+					'title' => array('text' => _('Año'))
 				),
 			'series' => array(),
 			'tooltip' => array('headerFormat' => '')

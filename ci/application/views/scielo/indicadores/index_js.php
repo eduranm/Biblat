@@ -810,7 +810,7 @@ $(document).ready(function(){
 									value = this.y;
 									if (value > 10)
 										value = '>10.0';
-									return '<b>'+this.series.name+'</b><br/>Vida media en el año '+this.x+': <b>'+value+'</b>';
+									return '<b>'+this.series.name+'</b><br/><?php _e("Vida media en el año")?> '+this.x+': <b>'+value+'</b> <?php _e("Años")?>';
 								}};
 							default:
 								break;
