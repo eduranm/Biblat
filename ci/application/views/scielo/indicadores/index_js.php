@@ -11,6 +11,7 @@ var urls = {coleccion:'', area:'', revista:'', paisAutor:'', paisRevista:'', eda
 var asyncAjax=false;
 var urlData = null;
 var lastGeneralChart = 'fasciculos';
+var cloneToolTip = {};
 $(document).ready(function(){
 	$(window).bind('popstate',  function(event) {
 		console.log('pop:');
@@ -721,6 +722,7 @@ $(document).ready(function(){
 		  	console.log(data);
 		  	$('#tabs').tabs("option", "active", 0);
 			$('#carousel-chargrp').off('slid.bs.carousel');
+			cloneToolTip = {};
 			switch(realIndicator){
 				case "distribucion-articulos-coleccion":
 					$("#tabs, #group-container").slideDown('slow');
@@ -751,6 +753,13 @@ $(document).ready(function(){
 								return false;
 							}
 						};
+						data.highchart[key].plotOptions.series.point.events = {click: function(){
+							if (cloneToolTip[key])
+								chart.bargrp[key].container.firstChild.removeChild(cloneToolTip[key]);
+							cloneToolTip[key] = this.series.chart.tooltip.label.element.cloneNode(true);
+							chart.bargrp[key].container.firstChild.appendChild(cloneToolTip[key]);
+
+						}};
 						$('#groupChart'+key).highcharts(data.highchart[key]);
 						chart.bargrp[key] = $('#groupChart'+key).highcharts();
 					});
@@ -798,6 +807,13 @@ $(document).ready(function(){
 										return false;
 									}
 								};
+								data.highchart.citas.plotOptions.series.point.events = {click: function(){
+									if (cloneToolTip[key])
+										chart.bargrp[key].container.firstChild.removeChild(cloneToolTip[key]);
+									cloneToolTip[key] = this.series.chart.tooltip.label.element.cloneNode(true);
+									chart.bargrp[key].container.firstChild.appendChild(cloneToolTip[key]);
+
+								}};
 								$('#groupChart'+key).highcharts(data.highchart.citas);
 								chart.bargrp[key] = $('#groupChart'+key).highcharts();
 								console.log(data.highchart.citas);
