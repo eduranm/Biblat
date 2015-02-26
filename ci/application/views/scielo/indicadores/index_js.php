@@ -732,6 +732,7 @@ $(document).ready(function(){
 					chart.data.bargrpJ = data.journal;
 					$("#carousel-chargrp .carousel-indicators, #carousel-chargrp .carousel-inner").empty();
 					jQuery.each(data.highchart, function(key, grupo) {
+						cloneToolTip[key] = {};
 						var active = ''
 						if(key == 0)
 							active = 'active' 
@@ -755,11 +756,14 @@ $(document).ready(function(){
 							}
 						};
 						data.highchart[key].plotOptions.series.point.events = {click: function(){
-							if (cloneToolTip[key])
-								chart.bargrp[key].container.firstChild.removeChild(cloneToolTip[key]);
-							cloneToolTip[key] = this.series.chart.tooltip.label.element.cloneNode(true);
-							chart.bargrp[key].container.firstChild.appendChild(cloneToolTip[key]);
-
+							var point = this.series.name+this.x+','+this.y;
+							if (cloneToolTip[key][point]){
+								cloneToolTip[key][point].remove();
+								delete cloneToolTip['normal'][point];
+							}else{
+								cloneToolTip[key][point] = this.series.chart.tooltip.label.element.cloneNode(true);
+								chart.bargrp[key].container.firstChild.appendChild(cloneToolTip[key][point]);
+							}
 						}};
 						$('#groupChart'+key).highcharts(data.highchart[key]);
 						chart.bargrp[key] = $('#groupChart'+key).highcharts();
@@ -782,7 +786,7 @@ $(document).ready(function(){
 					$("#carousel-chargrp .carousel-indicators, #carousel-chargrp .carousel-inner").empty();
 					nav = 0;
 					jQuery.each(data.highchart, function(key, grupo) {
-						console.log(key);
+						cloneToolTip[key] = {};
 						var active = ''
 						if(key == lastGeneralChart)
 							active = 'active' 
@@ -820,11 +824,15 @@ $(document).ready(function(){
 							}
 						};
 						data.highchart[key].plotOptions.series.point.events = {click: function(){
-							if (cloneToolTip[key])
-								chart.bargrp[key].container.firstChild.removeChild(cloneToolTip[key]);
-							cloneToolTip[key] = this.series.chart.tooltip.label.element.cloneNode(true);
-							chart.bargrp[key].container.firstChild.appendChild(cloneToolTip[key]);
-
+							var point = this.series.name+this.x+','+this.y;
+							console.log(cloneToolTip[key][point]);
+							if (cloneToolTip[key][point]){
+								cloneToolTip[key][point].remove();
+								delete cloneToolTip[key][point];
+							}else{
+								cloneToolTip[key][point] = this.series.chart.tooltip.label.element.cloneNode(true);
+								chart.bargrp[key].container.firstChild.appendChild(cloneToolTip[key][point]);
+							}
 						}};
 						$('#groupChart'+key).highcharts(data.highchart[key]);
 						chart.bargrp[key] = $('#groupChart'+key).highcharts();
@@ -844,12 +852,17 @@ $(document).ready(function(){
 					google.visualization.events.addListener(tables.normal , 'sort', changeTableClass);
 					break;
 				default:
+					cloneToolTip[key] = {};
 					$("#tabs, #chartContainer").show('slow');
 					data.highchart.plotOptions.series.point.events = {click: function(){
-						if (cloneToolTip['normal'])
-							chart.normal.container.firstChild.removeChild(cloneToolTip['normal']);
-						cloneToolTip['normal'] = this.series.chart.tooltip.label.element.cloneNode(true);
-						chart.normal.container.firstChild.appendChild(cloneToolTip['normal']);
+						var point = this.series.name+this.x+','+this.y;
+						if (cloneToolTip['normal'][point]){
+							cloneToolTip['normal'][point].remove();
+							delete cloneToolTip['normal'][point];
+						}else{
+							cloneToolTip['normal'][point] = this.series.chart.tooltip.label.element.cloneNode(true);
+							chart.bargrp['normal'].container.firstChild.appendChild(cloneToolTip['normal'][point]);
+						}
 
 					}};
 					$('#chart').highcharts(data.highchart);
