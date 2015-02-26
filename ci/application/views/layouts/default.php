@@ -112,7 +112,16 @@
                                                             </ul>
                                                         </li>
                                                         <li class="divider"></li>
-                                                        <li><a href="#">{_('Indicadores SciELO')}</a></li>
+                                                        <li class="dropdown">
+                                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{_('Indicadores SciELO')}<span class="caret"></span></a>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                <li><a href="{site_url('scielo/indicadores/distribucion-articulos-coleccion')}">{_('Distribución de artículos por colección')}</a></li>
+                                                                <li><a href="{site_url('scielo/indicadores/distribucion-revista-coleccion')}">{_('Distribución de revistas por colección')}</a></li>
+                                                                <li><a href="{site_url('scielo/indicadores/indicadores-generales-revista')}">{_('Indicadores generales por revista')}</a></li>
+                                                                <li><a href="{site_url('scielo/indicadores/citacion-articulos-edad')}">{_('Distribución de artículos por edad del documento citado')}</a></li>
+                                                                <li><a href="{site_url('scielo/indicadores/citacion-articulos-tipo')}">{_('Distribución de artículos por tipo del documento citado')}</a></li>
+                                                            </ul>
+                                                        </li>
                                                         <li class="divider"></li>
                                                         <li><a href="{site_url('bibliometria/indicadores-por-revista')}">{_('Indicadores por revista')}</a></li>
                                                     </ul>
