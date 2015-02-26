@@ -395,10 +395,11 @@ endif;
 
 if ( ! function_exists('parse_number') ):
 	function parse_number($value){
+		setlocale(LC_NUMERIC, 'en_US');
 		if ($value == NULL)
 			return NULL;
 		if (preg_match('/[0-9]*\.[0-9]/', $value))
-			(float)$value;
+			return (float)$value;
 		return (int)$value;
 	}
 endif;
