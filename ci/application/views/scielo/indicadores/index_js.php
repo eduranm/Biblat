@@ -852,7 +852,7 @@ $(document).ready(function(){
 					google.visualization.events.addListener(tables.normal , 'sort', changeTableClass);
 					break;
 				default:
-					cloneToolTip[key] = {};
+					cloneToolTip['normal'] = {};
 					$("#tabs, #chartContainer").show('slow');
 					data.highchart.plotOptions.series.point.events = {click: function(){
 						var point = this.series.name+this.x+','+this.y;
@@ -861,7 +861,7 @@ $(document).ready(function(){
 							delete cloneToolTip['normal'][point];
 						}else{
 							cloneToolTip['normal'][point] = this.series.chart.tooltip.label.element.cloneNode(true);
-							chart.bargrp['normal'].container.firstChild.appendChild(cloneToolTip['normal'][point]);
+							chart.normal.container.firstChild.appendChild(cloneToolTip['normal'][point]);
 						}
 
 					}};
