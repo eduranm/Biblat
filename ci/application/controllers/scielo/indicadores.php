@@ -184,7 +184,6 @@ class Indicadores extends CI_Controller {
 					'href' => site_url('/'),
 					'text' => _sprintf('Fuente: %s', 'biblat.unam.mx')
 				),
-			'title' => $charts['citas']['title'],
 			'yAxis' => array(
 					'allowDecimals' => FALSE,
 					'min' => 0,
@@ -196,13 +195,51 @@ class Indicadores extends CI_Controller {
 				),
 			'plotOptions' => array(
 					'column' => array('stacking' => 'normal'),
-					'series' => array('events' => array())
+					'series' => array(
+						'events' => array(),
+						'point' => array('events' => array())
+					)
 				),
 			'xAxis' => array(
 					'categories' => array(),
 					'title' => array('text' => _('Años'))
 				),
 			'series' => array()
+		);
+
+		$this->highcharts['line'] = array(
+			'chart' => array(
+					'type' => 'line',
+					'width' => 1000,
+					'height' => 550,
+					'backgroundColor' => 'transparent'
+				),
+			'title' => array('text' => null),
+			'credits' => array(
+					'href' => site_url('/'),
+					'text' => _sprintf('Fuente: %s', 'biblat.unam.mx')
+				),
+			'yAxis' => array(
+					'allowDecimals' => FALSE,
+					'min' => 0,
+					'title' => NULL
+				),
+			'legend' => array(
+					'align' => 'right',
+					'verticalAlign' => 'top',
+				),
+			'plotOptions' => array(
+					'series' => array(
+						'events' => array(),
+						'point' => array('events' => array())
+					)
+				),
+			'xAxis' => array(
+					'categories' => array(),
+					'title' => array('text' => _('Años'))
+				),
+			'series' => array(),
+			'tooltip' => array('headerFormat' => '')
 		);
 
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
@@ -482,7 +519,7 @@ class Indicadores extends CI_Controller {
 	{
 		$data = array();
 		$labels = array();
-		$data['data']['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
+		$series = array();
 		$this->load->database();
 		/*Convirtiendo el periodo en dos fechas*/
 		$_POST['periodo'] = explode(";", $_POST['periodo']);
@@ -494,79 +531,79 @@ class Indicadores extends CI_Controller {
 			'sql' => "SELECT \"areaNetwork\" AS title, anio, articulos as valor FROM \"vNetworkAreaDistribution\"",
 			'vTitle' => _('Artículos por área'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de artículos en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['distribucion-articulos-coleccion-area-revista'] = array(
 			'sql' => "SELECT journal AS title, anio, articulos as valor FROM \"networkAreaJournalDistribution\"",
 			'vTitle' => _('Artículos por área'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de artículos en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['distribucion-articulos-coleccion-revista'] = array(
 			'sql' => "SELECT journal AS title, anio, articulos as valor FROM \"networkJournalDistribution\"",
 			'vTitle' => _('Artículos por revista'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de artículos en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['distribucion-articulos-coleccion-afiliacion'] = array(
 			'sql' => "SELECT \"affiliationNetwork\" AS title, anio, articulos as valor FROM \"vNetworkAffiliationDistribution\"",
 			'vTitle' => _('Artículos por país de afiliación'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de artículos en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['distribucion-revista-coleccion'] = array(
 			'sql' => "SELECT 'SciELO '||\"networkName\" AS title, anio, revistas as valor FROM \"vNetworkDistributionJ\"",
 			'vTitle' => _('Revistas por coleccion'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de revistas en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de revistas en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-edad'] = array(
 			'sql' => "SELECT \"rango\"||' "._('Años')."' AS title, anio, articulos as valor FROM \"ageDocCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-edad-area'] = array(
 			'sql' => "SELECT \"areaName\"||' ('||rango||' "._('Años').")' AS title, anio, articulos as valor FROM \"vAgeDocAreaCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-edad-revista'] = array(
 			'sql' => "SELECT revista||' ('||rango||' "._('Años').")' AS title, anio, articulos as valor FROM \"ageDocJournalCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-edad-afiliacion'] = array(
 			'sql' => "SELECT pais||' ('||rango||' "._('Años').")' AS title, anio, articulos as valor FROM \"ageDocAffiliationCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-tipo'] = array(
 			'sql' => "SELECT \"docTypeName\" AS title, anio, articulos as valor FROM \"vDocTypeDistribution\"",
 			'vTitle' => _('Artículos citados por tipo de documento'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-tipo-area'] = array(
 			'sql' => "SELECT \"areaName\"||' ('||\"docTypeName\"||')' AS title, anio, articulos as valor FROM \"vDocTypeAreaCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-tipo-revista'] = array(
 			'sql' => "SELECT revista||' ('||\"docTypeName\"||')' AS title, anio, articulos as valor FROM \"vDocTypeJournalCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-tipo-afiliacion'] = array(
 			'sql' => "SELECT pais||' ('||\"docTypeName\"||')' AS title, anio, articulos as valor FROM \"vDocTypeAffiliationCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('Número de artículos citados en el año <b>%s</b>: <b>%s</b>')
+			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
 			);
 
 		$query = $indicador[$_POST['indicador']]['sql'];
@@ -668,26 +705,16 @@ class Indicadores extends CI_Controller {
 		foreach ($query->result_array() as $row ):
 			$indicadores[$row['title']][$row['anio']] = round($row['valor'], 2);
 		endforeach;
-		/*Generando columnas*/
-		foreach ($indicadores as $kindicador => $vindicador):
-			$data['data']['cols'][] = array('id' => slug($kindicador),'label' => $kindicador, 'type' => 'number');
-			$data['data']['cols'][] = array('id' => slug($kindicador)."-tooltip",'label' => $kindicador, 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
-		endforeach;
 		/*Generando filas para gráfica y columnas para la tabla*/
 		$setDataTableRows = false;
+		$data['highchart'] = $this->highcharts['line'];
+		$data['highchart']['yAxis']['title'] = array('text' => $indicador[$_POST['indicador']]['vTitle']);
+		$data['highchart']['tooltip']['pointFormat'] = $indicador[$_POST['indicador']]['tooltip'];
 		foreach ($periodos as $periodo):
+			$data['highchart']['xAxis']['categories'][] = $periodo;
 			$data['dataTable']['cols'][] = array('id' => '','label' => $periodo, 'type' => 'number');
-			$c = array();
-			$c[] = array(
-					'v' => $periodo
-				);
 			foreach ($indicadores as $kindicador => $vindicador):
-				$c[] = array(
-					'v' => $vindicador[$periodo]
-				);
-				$c[] = array(
-					'v' => _sprintf("<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">{$indicador[$_POST['indicador']]['tooltip']}</div>", $kindicador, $periodo, $vindicador[$periodo])
-				);
+				$series[$kindicador][] = parse_number($vindicador[$periodo]);
 				/*dataTable rows*/
 				if( ! $setDataTableRows ):
 					$cc = array();
@@ -704,47 +731,14 @@ class Indicadores extends CI_Controller {
 				endif;
 			endforeach;
 			$setDataTableRows = true;
-			$data['data']['rows'][]['c'] = $c;
+		endforeach;
+		foreach ($series as $key => $value):
+			$data['highchart']['series'][] = array(
+					'name' => $key,
+					'data' => $value
+				);
 		endforeach;
 
-		/*Opciones de la gráfica*/
-		$data['options'] = array(
-						'animation' => array(
-								'duration' => 1000
-							), 
-						'height' => '500',
-						'hAxis' => array(
-								'title' => $indicador[$_POST['indicador']]['hTitle']
-							), 
-						'legend' => array(
-								'position' => 'right',
-								'maxLines' => 2
-							),
-						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
-						'titlePosition' => 'in',
-						'titleTextStyle' => array(
-							'bold' => FALSE,
-							'italic' => TRUE
-							),
-						'pointSize' => 3,
-						'tooltip' => array(
-								'isHtml' => true,
-								'trigger' => 'both' 
-							),
-						'vAxis' => array(
-								'title' => $indicador[$_POST['indicador']]['vTitle'],
-								'minValue' => 0
-							),
-						'width' => '1000',
-						'chartArea' => array(
-							'left' => 100,
-							'width' => "70%",
-							'height' => "80%"
-							),
-						'backgroundColor' => array(
-							'fill' => 'transparent'
-							)
-						);
 		/*Opciones para la tabla*/
 		$data['tableOptions'] = array(
 				'allowHtml' => true,
@@ -764,18 +758,17 @@ class Indicadores extends CI_Controller {
 
 	public function getChartGeneral(){
 		$data = array();
+		$series = array();
 		$charts = array(
-			'fasciculos' => array('title' => 'Número de fasciculos por revista', 'vTitle' => 'Fasciculos por revista', 'tooltip' => _('Número de fasciculos en el año <b>%s</b>: <b>%s</b>')),
-			'articulos' => array('title' => 'Número de artículos por revista', 'vTitle' => 'Artículos por revista', 'tooltip' => _('Número de artículos en el año <b>%s</b>: <b>%s</b>')), 
-			'referencias' => array('title' => 'Número de referencias por revista', 'vTitle' => 'Referencias por revista', 'tooltip' => _('Número de referencias en el año <b>%s</b>: <b>%s</b>')), 
-			'citas' => array('title' => 'Número de citas/autocitas por revista', 'vTitle' => 'Citas por revista', 'tooltip' => _('Número de citas/autocitas en el año <b>%s</b>: <b>%s</b>')), 
-			'factorImpacto' => array('title' => 'Factor de impacto por revista', 'vTitle' => 'Factor de impacto', 'tooltip' => _('Factor de impacto en el año <b>%s</b>: <b>%s</b>')),
-			'indiceInmediatez' => array('title' => 'Indice de inmediatez por revista', 'vTitle' => 'Indice de inmediatez', 'tooltip' => _('Indice de inmediatez en el año <b>%s</b>: <b>%s</b>')),
-			'vidaMedia' => array('title' => 'Vida media por revista', 'vTitle' => 'Vida media', 'tooltip' => _('Vida media en el año <b>%s</b>: <b>%s</b>'))
+			'fasciculos' => array('title' => 'Número de fasciculos por revista', 'vTitle' => 'Fasciculos por revista', 'tooltip' => _('<b>{series.name}</b><br/>Número de fasciculos en el año {point.category}: <b>{point.y}</b>')),
+			'articulos' => array('title' => 'Número de artículos por revista', 'vTitle' => 'Artículos por revista', 'tooltip' => _('<b>{series.name}</b><br/>Número de artículos en el año {point.category}: <b>{point.y}</b>')), 
+			'referencias' => array('title' => 'Número de referencias por revista', 'vTitle' => 'Referencias por revista', 'tooltip' => _('<b>{series.name}</b><br/>Número de referencias en el año {point.category}: <b>{point.y}</b>')), 
+			'citas' => array('title' => 'Número de citas/autocitas por revista', 'vTitle' => 'Citas por revista', 'tooltip' => _('<b>{series.name}</b><br/>Número de citas/autocitas en el año {point.category}: <b>{point.y}</b>')), 
+			'factorImpacto' => array('title' => 'Factor de impacto por revista', 'vTitle' => 'Factor de impacto', 'tooltip' => _('<b>{series.name}</b><br/>Factor de impacto en el año {point.category}: <b>{point.y}</b>')),
+			'indiceInmediatez' => array('title' => 'Indice de inmediatez por revista', 'vTitle' => 'Indice de inmediatez', 'tooltip' => _('<b>{series.name}</b><br/>Indice de inmediatez en el año {point.category}: <b>{point.y}</b>')),
+			'vidaMedia' => array('title' => 'Vida media por revista', 'vTitle' => 'Vida media', 'tooltip' => _('<b>{series.name}</b><br/>Vida media en el año {point.category}: <b>{point.y}</b>'))
 		);
 		$data['update'] = "<h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5>";
-		$this->highcharts['barstack']['yAxis']['title'] = array('text' => $charts['citas']['vTitle']);
-		$data['highchart']['citas'] = $this->highcharts['barstack'];
 
 		$tableCols = array(
 				_('Año') => 'number',
@@ -796,8 +789,11 @@ class Indicadores extends CI_Controller {
 
 		foreach ($charts as $key => $chart):
 			$data['title'][$key] = $charts[$key]['title'];
-			$data['vTitle'][$key] = array('vAxis' => array('title' => $charts[$key]['vTitle'], 'minValue' => 0));
-			$data['chart'][$key]['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
+			$data['highchart'][$key] = $this->highcharts['line'];
+			if($key == "citas")
+				$data['highchart'][$key] = $this->highcharts['barstack'];
+			$data['highchart'][$key]['yAxis']['title'] = array('text' => $charts[$key]['vTitle']);
+			$data['highchart'][$key]['tooltip']['pointFormat'] = $charts[$key]['tooltip'];
 		endforeach;
 
 		/*Convirtiendo el periodo en dos fechas*/
@@ -841,70 +837,57 @@ class Indicadores extends CI_Controller {
 			$indicadores[$row['journal']][$row['anio']] = $row;
 		endforeach;
 
-		/*Generando columnas*/
-		foreach ($indicadores as $kindicador => $vindicador):
-			foreach ($charts as $key => $chart):
-				if($key != "citas"):
-						$data['chart'][$key]['cols'][] = array('id' => slug($kindicador),'label' => $kindicador, 'type' => 'number');
-						$data['chart'][$key]['cols'][] = array('id' => slug($kindicador)."-tooltip",'label' => $kindicador, 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
-				endif;
-			endforeach;
-		endforeach;
-
 		/*Generando filas para gráficas y columnas para la tabla*/
 		$setDataTableRows = false;
-		$series = array('citas' => array());
 		foreach ($periodos as $periodo):
-			$data['highchart']['citas']['xAxis']['categories'][] = $periodo;
 			foreach ($charts as $key => $chart):
-				$c = array();
-				$c[] = array(
-						'v' => $periodo
-					);
+				if (!in_array($periodo, $data['highchart'][$key]['xAxis']['categories']))  
+					$data['highchart'][$key]['xAxis']['categories'][] = $periodo;
 				foreach ($indicadores as $kindicador => $vindicador):
 					$value = $vindicador[$periodo][$key];
 					$tooltipv = $value;
-
 					switch ($key):
 						case 'citas':
 							$porcentajeAutocita = $vindicador[$periodo]['porcentajeAutoCita'] != NULL ? $vindicador[$periodo]['porcentajeAutoCita'] : 0;
 							$citas = round($value * (1 - ($porcentajeAutocita / 100)));
 							$autocitas = round($value * ($porcentajeAutocita / 100));
-							$series['citas'][$kindicador]['citas'][] = $citas;
-							$series['citas'][$kindicador]['autocitas'][] = $autocitas;
+							$series[$key][$kindicador]['citas'][] = $citas;
+							$series[$key][$kindicador]['autocitas'][] = $autocitas;
 							break;
 						case 'vidaMedia':
 							$value = $value == '>10,0' ? 10.1 : $value;
 							$tooltipv = $value == 10.1 ? '>10.0' : $value;
 						default:
-							$c[] = array(
-								'v' => $value
-							);
-							$c[] = array(
-								'v' => _sprintf("<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">{$charts[$key]['tooltip']}</div>", $kindicador, $periodo, $tooltipv)
-							);
+							$series[$key][$kindicador][] = parse_number($value);
 					endswitch;
 				endforeach;
-				if($key != "citas")
-					$data['chart'][$key]['rows'][]['c'] = $c;
 			endforeach;
 		endforeach;
-		foreach ($series['citas'] as $key => $value):
-			$color = array_shift($this->colors);
-			array_push($this->colors, $color);
-			$data['highchart']['citas']['series'][] = array(
-					'name' => $key."-autocitas",
-					'data' => $value['autocitas'],
-					'stack' => slug($key),
-					'showInLegend' => FALSE,
-					'color' => adjustColorLightenDarken($color, -75)
-				);
-			$data['highchart']['citas']['series'][] = array(
-					'name' => $key,
-					'data' => $value['citas'],
-					'stack' => slug($key),
-					'color' => $color
-				);
+		foreach ($series as $seriek => $chart):
+			foreach ($chart as $key => $value):
+				if($seriek == "citas"):
+					$color = array_shift($this->colors);
+					array_push($this->colors, $color);
+					$data['highchart'][$seriek]['series'][] = array(
+							'name' => $key."-autocitas",
+							'data' => $value['autocitas'],
+							'stack' => slug($key),
+							'showInLegend' => FALSE,
+							'color' => adjustColorLightenDarken($color, -75)
+						);
+					$data['highchart'][$seriek]['series'][] = array(
+							'name' => $key,
+							'data' => $value['citas'],
+							'stack' => slug($key),
+							'color' => $color
+						);
+				else:
+					$data['highchart'][$seriek]['series'][] = array(
+						'name' => $key,
+						'data' => $value
+					);
+				endif;
+			endforeach;
 		endforeach;
 		foreach ($indicadores as $journal):
 			foreach ($journal as $periodo):
@@ -923,94 +906,6 @@ class Indicadores extends CI_Controller {
 				$data['dataTable']['rows'][]['c'] = $cc;
 			endforeach;
 		endforeach;
-		/*Opciones de la gráfica*/
-		$data['options']['bar'] = array(
-						'animation' => array(
-								'duration' => 1000
-							),
-						'bars' => 'vertical',
-						// 'bar' => array(
-						// 		'groupWidth' => '85%'
-						// 	),
-						'height' => '550',
-						'hAxis' => array(
-								'title' => _('Año')
-							), 
-						'isStacked' => TRUE,
-						'legend' => array(
-								'position' => 'right'
-							),
-						'pointSize' => 1, 
-						'tooltip' => array(
-								'isHtml' => true,
-								'trigger' => 'both' 
-							),
-						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
-						'titlePosition' => 'in',
-						'titleTextStyle' => array(
-							'bold' => FALSE,
-							'italic' => TRUE
-							),
-						'vAxis' => array(
-								'title' => _('Número de citas recibidas'),
-								'minValue' => 0
-							),
-						'series' => array(),
-						'width' => '1000px',
-						'chartArea' => array(
-							'width' => "70%",
-							'height' => "80%"
-							),
-						'backgroundColor' => array(
-							'fill' => 'transparent'
-							)
-						);
-		for ($i=1; $i < $query->num_rows(); $i++):
-			$data['options']['bar']['vAxes'][$i] = array(
-				'title' => '',
-				'textStyle' => array(
-					'fontSize' => 0
-					)
-				);
-			$data['options']['bar']['axes']['y'][$i] = array(
-				'side' => 'right'
-				);
-			$data['options']['bar']['series'][$i*2] = array('targetAxisIndex' => $i);
-			$data['options']['bar']['series'][($i*2)+1] = array('targetAxisIndex' => $i);
-		endfor;
-		$data['options']['line'] = array(
-						'animation' => array(
-								'duration' => 1000
-							), 
-						'height' => '500',
-						'hAxis' => array(
-								'title' => _('Año')
-							), 
-						'legend' => array(
-								'position' => 'right',
-								'maxLines' => 2
-							),
-						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
-						'titlePosition' => 'in',
-						'titleTextStyle' => array(
-							'bold' => FALSE,
-							'italic' => TRUE
-							),
-						'pointSize' => 3,
-						'tooltip' => array(
-								'isHtml' => true,
-								'trigger' => 'both' 
-							),
-						'width' => '1000',
-						'chartArea' => array(
-							'left' => 100,
-							'width' => "70%",
-							'height' => "80%"
-							),
-						'backgroundColor' => array(
-							'fill' => 'transparent'
-							)
-						);
 		/*Opciones para la tabla*/
 		$data['tableOptions'] = array(
 				'allowHtml' => true,

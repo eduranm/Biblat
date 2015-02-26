@@ -12,6 +12,7 @@ var asyncAjax=false;
 var urlData = null;
 var lastGeneralChart = 'fasciculos';
 var cloneToolTip = {};
+Highcharts.setOptions({colors: ['#3366CC', '#DC3912', '#FF9900', '#109618', '#990099', '#0099C6', '#DD4477', '#66AA00', '#B82E2E', '#316395', '#22AA99', '#AAAA11', '#6633CC', '#E67300', '#8B0707', '#651067']});
 $(document).ready(function(){
 	$(window).bind('popstate',  function(event) {
 		console.log('pop:');
@@ -780,17 +781,16 @@ $(document).ready(function(){
 					chart.data.bargrpJ = data.journal;
 					$("#carousel-chargrp .carousel-indicators, #carousel-chargrp .carousel-inner").empty();
 					nav = 0;
-					jQuery.each(data.chart, function(key, grupo) {
+					jQuery.each(data.highchart, function(key, grupo) {
 						console.log(key);
 						var active = ''
 						if(key == lastGeneralChart)
 							active = 'active' 
 						$("#carousel-chargrp .carousel-indicators").append('<li data-target="#carousel-chargrp" data-slide-to="' + nav + '" class="' + active + '"></li>');
-						chart.data.bargrp[key] = new google.visualization.DataTable(grupo);
+						$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item ' + active + '"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="groupChart' + key +'" class="chart_data"></div></div>');
 						switch(key){
 							case 'citas':
-								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item ' + active + '"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="groupChart' + key +'" class="chart_data"></div></div>');
-								data.highchart.citas.tooltip = {formatter: function(){
+								data.highchart[key].tooltip = {formatter: function(){
 									var citas, autocitas;
 									citas = this.y;
 									autocitas = this.point.stackTotal - this.y;
@@ -803,25 +803,20 @@ $(document).ready(function(){
 										'<?php _e("Autocitas")?>: ' + autocitas.toLocaleString() + ' ('+ ((autocitas/this.point.stackTotal)*100).toFixed(2) +'%)<br/>' +
 										'Total: ' + this.point.stackTotal.toLocaleString();
 								}};
-								data.highchart.citas.plotOptions.series.events = {legendItemClick: function(){
+							default:
+								data.highchart[key].plotOptions.series.events = {legendItemClick: function(){
 										return false;
 									}
 								};
-								data.highchart.citas.plotOptions.series.point.events = {click: function(){
+								data.highchart[key].plotOptions.series.point.events = {click: function(){
 									if (cloneToolTip[key])
 										chart.bargrp[key].container.firstChild.removeChild(cloneToolTip[key]);
 									cloneToolTip[key] = this.series.chart.tooltip.label.element.cloneNode(true);
 									chart.bargrp[key].container.firstChild.appendChild(cloneToolTip[key]);
 
 								}};
-								$('#groupChart'+key).highcharts(data.highchart.citas);
+								$('#groupChart'+key).highcharts(data.highchart[key]);
 								chart.bargrp[key] = $('#groupChart'+key).highcharts();
-								console.log(data.highchart.citas);
-								break;
-							default:
-								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item ' + active + '"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="groupChart' + key +'" class="chart_data"></div></div>');
-								chart.bargrp[key] = new google.visualization.LineChart(document.getElementById('groupChart' + key));
-								chart.bargrp[key].draw(chart.data.bargrp[key], $.extend({}, data.options.line, data.vTitle[key]));
 								break;
 						}
 						nav++;
@@ -841,12 +836,15 @@ $(document).ready(function(){
 					break;
 				default:
 					$("#tabs, #chartContainer").show('slow');
-					chart.data.normal = new google.visualization.DataTable(data.data);
-					if(chart.normal == null){
-						chart.normal = new google.visualization.LineChart(document.getElementById('chart'));
-						google.visualization.events.addListener(chart.normal, 'select', choosePoint);
-					}
-					chart.normal.draw(chart.data.normal, data.options);
+					data.highchart.plotOptions.series.point.events = {click: function(){
+						if (cloneToolTip['normal'])
+							chart.normal.container.firstChild.removeChild(cloneToolTip['normal']);
+						cloneToolTip['normal'] = this.series.chart.tooltip.label.element.cloneNode(true);
+						chart.normal.container.firstChild.appendChild(cloneToolTip['normal']);
+
+					}};
+					$('#chart').highcharts(data.highchart);
+					chart.normal = $('#chart').highcharts();
 					$("#chartTitle").html(data.chartTitle);
 
 					var tableData = new google.visualization.DataTable(data.dataTable);
@@ -1141,41 +1139,34 @@ $('.download-chart').on('click', function(e){
 	var imgData = '';
 	var fName = '';
 	var $elem = null;
+	$('<canvas id="canvas" width="1000px" height="550px" style="display:none;"></canvas>').appendTo('body');
+	var canvas = document.getElementById("canvas");
 	switch(realIndicator){
 		case 'distribucion-articulos-coleccion':
 			var current_chart = $('#carousel-chargrp').find('.item.active').attr('id').replace('chartParent', '');
 			$elem = $('#chartParent'+current_chart).clone(true);
-			$('<canvas id="canvas" width="1000px" height="550px" style="display:none;"></canvas>').appendTo('body');
-			var canvas = document.getElementById("canvas");
 			canvg(canvas, $('#groupChart'+current_chart+' div').html());
 			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
-			$('#canvas').remove();
 			$elem.appendTo('#charts');
 			fName = realIndicator+'-'+current_chart+'.png';
-			console.log($elem);
 			break;
 		case 'indicadores-generales-revista':
 			var current_chart = $('#carousel-chargrp').find('.item.active').attr('id').replace('chartParent', '');
 			$elem = $('#chartParent'+current_chart).clone(true);
-			if(current_chart === "citas"){
-				$('<canvas id="canvas" width="1000px" height="550px" style="display:none;"></canvas>').appendTo('body');
-				var canvas = document.getElementById("canvas"); 
-				canvg(canvas, $('#groupChartcitas div').html());
-				$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
-				$('#canvas').remove();
-			}else{
-				$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', chart.bargrp[current_chart].getImageURI()));
-			}
+			canvg(canvas, $('#groupChart'+current_chart+' div').html());
+			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
 			$elem.appendTo('#charts');
 			fName = realIndicator+'-'+current_chart+'.png';
 			break;
 		default:
 			$elem = $('#chartContainer').clone(true);
-			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', chart.normal.getImageURI()));
+			canvg(canvas, $('#chart div').html());
+			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
 			$elem.appendTo('#charts');
 			fName = realIndicator+'.png';
 			break;
 	}
+	$('#canvas').remove();
 	console.log($elem);
 	html2canvas($elem, {
 		background: '#FAFAFA',
