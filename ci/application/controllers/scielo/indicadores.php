@@ -8,6 +8,25 @@ class Indicadores extends CI_Controller {
 	public $colecciones = array();
 	public $ageRanges = array();
 	public $docTypes = array();
+	public $colors = array(
+		'#3366CC',
+		'#DC3912',
+		'#FF9900',
+		'#109618',
+		'#990099',
+		'#0099C6',
+		'#DD4477',
+		'#66AA00',
+		'#B82E2E',
+		'#316395',
+		'#22AA99',
+		'#AAAA11',
+		'#6633CC',
+		'#E67300',
+		'#8B0707',
+		'#651067'
+	);
+	public $highcharts = array();
 	
 	public function __construct()
 	{
@@ -153,6 +172,39 @@ class Indicadores extends CI_Controller {
 		
 		$this->db->close();
 
+		$this->highcharts['barstack'] = array(
+			'chart' => array(
+					'type' => 'column',
+					'width' => 1000,
+					'height' => 550,
+					'backgroundColor' => 'transparent'
+				),
+			'title' => array('text' => null),
+			'credits' => array(
+					'href' => site_url('/'),
+					'text' => _sprintf('Fuente: %s', 'biblat.unam.mx')
+				),
+			'title' => $charts['citas']['title'],
+			'yAxis' => array(
+					'allowDecimals' => FALSE,
+					'min' => 0,
+					'title' => NULL
+				),
+			'legend' => array(
+					'align' => 'right',
+					'verticalAlign' => 'top',
+				),
+			'plotOptions' => array(
+					'column' => array('stacking' => 'normal'),
+					'series' => array('events' => array())
+				),
+			'xAxis' => array(
+					'categories' => array(),
+					'title' => array('text' => _('Años'))
+				),
+			'series' => array()
+		);
+
 		$this->output->enable_profiler($this->config->item('enable_profiler'));
 		$this->template->set_partial('biblat_js', 'javascript/biblat', array(), TRUE, FALSE);
 		$this->template->set_partial('submenu', 'layouts/submenu');
@@ -182,6 +234,10 @@ class Indicadores extends CI_Controller {
 		$this->template->js('js/colorbox.js');
 		$this->template->js('assets/js/html2canvas.js');
 		$this->template->js('assets/js/jquery.table2excel.min.js');
+		$this->template->js('assets/js/highcharts/highcharts.js');
+		$this->template->js('assets/js/rgbcolor.js');
+		$this->template->js('assets/js/StackBlur.js');
+		$this->template->js('assets/js/canvg.js');
 		$this->template->js('//www.google.com/jsapi');
 		$this->template->set_meta('description', $this->indicadores[$indicador]['title']);
 		$this->template->set_breadcrumb(_('Indicadores bibliométricos'));
@@ -344,29 +400,19 @@ class Indicadores extends CI_Controller {
 		endif;
 		$limit = 4;
 		$queryOrder = ' ORDER BY anio, "networkId"';
-		$result['chart'] = array();
 		$result['journal'] = array();
 		$groups = array_chunk($colecciones, $limit, TRUE);
-		$vAxisMax = 0;
 		$result['table']['cols'][] = array('id' => 'year','label' => _('Colección'),'type' => 'string');
 		$result['table']['cols'][] = array('id' => 'year','label' => _('Tipo'),'type' => 'string');
-		$anioActual = 0;
-		$grupo = 0;
-		foreach ($periodos as $periodo):
-			$result['table']['cols'][] = array('id' => '','label' => $periodo, 'type' => 'number');
-		endforeach;
 		$tableRows = array();
+		$series = array();
+		$this->highcharts['barstack']['yAxis']['title'] = array('text' =>$indicador[$_POST['indicador']]['vTitle']);
 		foreach ($groups as $key => $group):
+			$result['highchart'][$key] = $this->highcharts['barstack'];
 			$queryColeccion = " AND \"networkId\" IN (";
 			$coleccionOffset=1;
 			$coleccionTotal= count($group);
-			$offset = 0;
-			$c = array();
-			$result['chart'][$key]['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
 			foreach ($group as $coleccion):
-				$result['chart'][$key]['cols'][] = array('id' => '','label' => _sprintf('SciELO %s artículos', $this->colecciones['slug'][$coleccion]['name']),'type' => 'number');
-				$result['chart'][$key]['cols'][] = array('id' => '','label' => _sprintf('SciELO %s artículos', $this->colecciones['slug'][$coleccion]['name']).'-tooltip','type' => 'string', 'role' => 'tooltip');
-				$result['chart'][$key]['cols'][] = array('id' => '','label' => _sprintf('SciELO %s otros documentos', $this->colecciones['slug'][$coleccion]['name']),'type' => 'number');
 				$queryColeccion .= "'{$this->colecciones['slug'][$coleccion]['id']}'";
 				if($coleccionOffset < $coleccionTotal):
 					$queryColeccion .=",";
@@ -377,14 +423,10 @@ class Indicadores extends CI_Controller {
 			$queryRS = $this->db->query($query.$queryColeccion.$queryOrder);
 			$totalRows = $queryRS->num_rows();
 			foreach ($queryRS->result_array() as $row):
-				if($anioActual != $row['anio'] || !isset($result['chart'][$grupo])):
-					if(count($c) > 0):
-						$result['chart'][$grupo]['rows'][]['c'] = $c;
-					endif;
-					$c = array();
-					$c[] = array('v' => $row['anio']);
-					$anioActual = $row['anio'];
-				endif;
+				$series[$key][$row['networkId']]['articulos'][] = parse_number($row['articulo']);
+				$series[$key][$row['networkId']]['otroDocumento'][] = parse_number($row['otroDocumento']);
+				if (!in_array($row['anio'], $result['highchart'][$key]['xAxis']['categories']))  
+					$result['highchart'][$key]['xAxis']['categories'][] = $row['anio'];
 				if(!isset($tableRows[$row['networkId']])):
 					$tableRows[$row['networkId']] = array();
 					$tableRows[$row['networkId']]['ca'][] = array('v' => _sprintf('SciELO %s', $this->colecciones['id'][$row['networkId']]['name']));
@@ -392,100 +434,42 @@ class Indicadores extends CI_Controller {
 					$tableRows[$row['networkId']]['cb'][] = array('v' => '');
 					$tableRows[$row['networkId']]['cb'][] = array('v' => _('Otro tipo de documetos'));
 				endif;
-				$vAxisMax = ($row['articulo'] + $row['otroDocumento']) < $vAxisMax ? $vAxisMax : ($row['articulo'] + $row['otroDocumento']); 
-				$c[] = array(
-					'v' => $row['articulo']
-				);
-				$c[] = array(
-						'v' => _sprintf($indicador[$_POST['indicador']]['tooltip'], "Artículos", $this->colecciones['id'][$row['networkId']]['name'], $row['anio'], $row['articulo'])
-					);
-				$c[] = array(
-						'v' => $row['otroDocumento']
-					);
 				$tableRows[$row['networkId']]['ca'][] = array('v' => parse_number($row['articulo']), 'f' => _number_format($row['articulo']));
 				$tableRows[$row['networkId']]['cb'][] = array('v' => parse_number($row['otroDocumento']), 'f' => _number_format($row['otroDocumento']));
 				$offset++;
-				if($offset == $totalRows):
-					$result['chart'][$grupo]['rows'][]['c'] = $c;
-				endif;
 			endforeach;
-			$grupo++;
+		endforeach;
+		foreach ($series as $groupk => $group):
+			foreach ($group as $networkId => $serie):
+				$color = array_shift($this->colors);
+				array_push($this->colors, $color);
+				$result['highchart'][$groupk]['series'][] = array(
+						'name' => "SciELO {$this->colecciones['id'][$networkId]['name']}-otros",
+						'data' => $serie['otroDocumento'],
+						'stack' => slug($networkId),
+						'showInLegend' => FALSE,
+						'color' => adjustColorLightenDarken($color, -75)
+					);
+				$result['highchart'][$groupk]['series'][] = array(
+						'name' => "SciELO {$this->colecciones['id'][$networkId]['name']}",
+						'data' => $serie['articulos'],
+						'stack' => slug($networkId),
+						'color' => $color
+					);
+			endforeach;
 		endforeach;
 		foreach ($tableRows as $row):
 			$result['table']['rows'][]['c'] = $row['ca'];
 			$result['table']['rows'][]['c'] = $row['cb'];
 		endforeach;
-		/*Opciones de la gráfica*/
-		$result['options'] = array(
-						'animation' => array(
-								'duration' => 1000
-							),
-						'bars' => 'vertical',
-						// 'bar' => array(
-						// 		'groupWidth' => '85%'
-						// 	),
-						'height' => '550',
-						'hAxis' => array(
-								'title' => _('Año')
-							), 
-						'isStacked' => TRUE,
-						'legend' => array(
-								'position' => 'right',
-								'maxLines' => 2
-							),
-						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
-						'titlePosition' => 'in',
-						'titleTextStyle' => array(
-							'bold' => FALSE,
-							'italic' => TRUE
-							),
-						'pointSize' => 1, 
-						'tooltip' => array(
-								'isHtml' => true
-							),
-						'vAxis' => array(
-								'title' => $indicador[$_POST['indicador']]['vTitle'],
-								'viewWindow' => array('max' => $vAxisMax),
-								'minValue' => 0
-							),
-						'series' => array(
-							1 =>  array('visibleInLegend' => FALSE)
-							),
-						'width' => '1000px',
-						'chartArea' => array(
-							'width' => "70%",
-							'height' => "80%"
-							),
-						'backgroundColor' => array(
-							'fill' => 'transparent'
-							)
-						);
-		for ($i=1; $i < $limit; $i++):
-			$result['options']['vAxes'][$i] = array(
-				'title' => '',
-				'textStyle' => array(
-					'fontSize' => 0
-					)
-				);
-			$result['options']['axes']['y'][$i] = array(
-				'side' => 'right'
-				);
-			$result['options']['series'][$i*2] = array('targetAxisIndex' => $i);
-			$result['options']['series'][($i*2)+1] = array('targetAxisIndex' => $i, 'visibleInLegend' => FALSE);
-		endfor;
 		/*Opciones para la tabla*/
 		$result['tableOptions'] = array(
 				'allowHtml' => true,
 				'showRowNumber' => false,
+				'sort' => 'disable',
 				'cssClassNames' => array(
-					'headerRow' => 'bold',
-					'tableRow'	=> ' ',
-					'oddTableRow' => ' ',
-					'selectedTableRow' => ' ',
-					'hoverTableRow' => ' ',
-					'headerCell' => ' ',
-					'tableCell' => 'text-left',
-					'rowNumberCell' => ' '
+					'headerCell' => 'text-center',
+					'tableCell' => 'text-left nowrap',
 					)
 			);
 		$result['chartTitle'] = "<div class=\"text-center nowrap\"><h4>{$this->indicadores[$_POST['indicador']]['title']}</h4><h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5></div>";
@@ -744,7 +728,8 @@ class Indicadores extends CI_Controller {
 							),
 						'pointSize' => 3,
 						'tooltip' => array(
-								'isHtml' => true
+								'isHtml' => true,
+								'trigger' => 'both' 
 							),
 						'vAxis' => array(
 								'title' => $indicador[$_POST['indicador']]['vTitle'],
@@ -764,15 +749,10 @@ class Indicadores extends CI_Controller {
 		$data['tableOptions'] = array(
 				'allowHtml' => true,
 				'showRowNumber' => false,
+				'sort' => 'disable',
 				'cssClassNames' => array(
-					'headerRow' => 'bold',
-					'tableRow'	=> ' ',
-					'oddTableRow' => ' ',
-					'selectedTableRow' => ' ',
-					'hoverTableRow' => ' ',
-					'headerCell' => ' ',
-					'tableCell' => 'text-left',
-					'rowNumberCell' => ' '
+					'headerCell' => 'text-center',
+					'tableCell' => 'text-left nowrap',
 					)
 			);
 		/*Titulo de la gráfica*/
@@ -794,7 +774,9 @@ class Indicadores extends CI_Controller {
 			'vidaMedia' => array('title' => 'Vida media por revista', 'vTitle' => 'Vida media', 'tooltip' => _('Vida media en el año <b>%s</b>: <b>%s</b>'))
 		);
 		$data['update'] = "<h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5>";
-		
+		$this->highcharts['barstack']['yAxis']['title'] = array('text' => $charts['citas']['vTitle']);
+		$data['highchart']['citas'] = $this->highcharts['barstack'];
+
 		$tableCols = array(
 				_('Año') => 'number',
 				_('Colección') => 'string',
@@ -862,20 +844,18 @@ class Indicadores extends CI_Controller {
 		/*Generando columnas*/
 		foreach ($indicadores as $kindicador => $vindicador):
 			foreach ($charts as $key => $chart):
-				switch ($key):
-					case 'citas':
-						$data['chart'][$key]['cols'][] = array('id' => slug($kindicador)."-autocitacion",'label' => $kindicador._(' (autocitas)'), 'type' => 'number');
-						$data['chart'][$key]['cols'][] = array('id' => slug($kindicador)."-tooltip",'label' => $kindicador, 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
-					default:
+				if($key != "citas"):
 						$data['chart'][$key]['cols'][] = array('id' => slug($kindicador),'label' => $kindicador, 'type' => 'number');
 						$data['chart'][$key]['cols'][] = array('id' => slug($kindicador)."-tooltip",'label' => $kindicador, 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
-				endswitch;
+				endif;
 			endforeach;
 		endforeach;
 
 		/*Generando filas para gráficas y columnas para la tabla*/
 		$setDataTableRows = false;
+		$series = array('citas' => array());
 		foreach ($periodos as $periodo):
+			$data['highchart']['citas']['xAxis']['categories'][] = $periodo;
 			foreach ($charts as $key => $chart):
 				$c = array();
 				$c[] = array(
@@ -884,24 +864,14 @@ class Indicadores extends CI_Controller {
 				foreach ($indicadores as $kindicador => $vindicador):
 					$value = $vindicador[$periodo][$key];
 					$tooltipv = $value;
+
 					switch ($key):
 						case 'citas':
-							// print_r($vindicador[$periodo]);die();
 							$porcentajeAutocita = $vindicador[$periodo]['porcentajeAutoCita'] != NULL ? $vindicador[$periodo]['porcentajeAutoCita'] : 0;
 							$citas = round($value * (1 - ($porcentajeAutocita / 100)));
 							$autocitas = round($value * ($porcentajeAutocita / 100));
-							$c[] = array(
-								'v' => $autocitas
-							);
-							$c[] = array(
-								'v' => _sprintf("<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">{$charts[$key]['tooltip']}</div>", $kindicador, $periodo, $autocitas)
-							);
-							$c[] = array(
-								'v' => $citas
-							);
-							$c[] = array(
-								'v' => _sprintf("<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">{$charts[$key]['tooltip']}</div>", $kindicador, $periodo, $citas)
-							);
+							$series['citas'][$kindicador]['citas'][] = $citas;
+							$series['citas'][$kindicador]['autocitas'][] = $autocitas;
 							break;
 						case 'vidaMedia':
 							$value = $value == '>10,0' ? 10.1 : $value;
@@ -915,8 +885,26 @@ class Indicadores extends CI_Controller {
 							);
 					endswitch;
 				endforeach;
-				$data['chart'][$key]['rows'][]['c'] = $c;
+				if($key != "citas")
+					$data['chart'][$key]['rows'][]['c'] = $c;
 			endforeach;
+		endforeach;
+		foreach ($series['citas'] as $key => $value):
+			$color = array_shift($this->colors);
+			array_push($this->colors, $color);
+			$data['highchart']['citas']['series'][] = array(
+					'name' => $key."-autocitas",
+					'data' => $value['autocitas'],
+					'stack' => slug($key),
+					'showInLegend' => FALSE,
+					'color' => adjustColorLightenDarken($color, -75)
+				);
+			$data['highchart']['citas']['series'][] = array(
+					'name' => $key,
+					'data' => $value['citas'],
+					'stack' => slug($key),
+					'color' => $color
+				);
 		endforeach;
 		foreach ($indicadores as $journal):
 			foreach ($journal as $periodo):
@@ -954,7 +942,8 @@ class Indicadores extends CI_Controller {
 							),
 						'pointSize' => 1, 
 						'tooltip' => array(
-								'isHtml' => true
+								'isHtml' => true,
+								'trigger' => 'both' 
 							),
 						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
 						'titlePosition' => 'in',
@@ -1009,7 +998,8 @@ class Indicadores extends CI_Controller {
 							),
 						'pointSize' => 3,
 						'tooltip' => array(
-								'isHtml' => true
+								'isHtml' => true,
+								'trigger' => 'both' 
 							),
 						'width' => '1000',
 						'chartArea' => array(
@@ -1025,15 +1015,10 @@ class Indicadores extends CI_Controller {
 		$data['tableOptions'] = array(
 				'allowHtml' => true,
 				'showRowNumber' => false,
+				'sort' => 'disable',	
 				'cssClassNames' => array(
-					'headerRow' => 'bold',
-					'tableRow'	=> ' ',
-					'oddTableRow' => ' ',
-					'selectedTableRow' => ' ',
-					'hoverTableRow' => ' ',
 					'headerCell' => 'text-center',
-					'tableCell' => 'text-left',
-					'rowNumberCell' => ' '
+					'tableCell' => 'text-left nowrap',
 					)
 			);
 		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]['title']}</h4>";

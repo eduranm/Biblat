@@ -729,7 +729,6 @@ $(document).ready(function(){
 		  success: function(data) {
 		  	console.log(data);
 		  	$('#tabs').tabs("option", "active", 0);
-			$('#tabs .download-chart').hide();
 			$('#carousel-chargrp').off('slide.bs.carousel');
 			switch(realIndicator){
 				case "distribucion-articulos-coleccion":
@@ -738,21 +737,31 @@ $(document).ready(function(){
 					chart.data.bargrp = new Array();
 					chart.data.bargrpJ = data.journal;
 					$("#carousel-chargrp .carousel-indicators, #carousel-chargrp .carousel-inner").empty();
-					jQuery.each(data.chart, function(key, grupo) {
-						if(key == 0){
-							$("#carousel-chargrp .carousel-indicators").append('<li data-target="#carousel-chargrp" data-slide-to="' + key + '" class="active"></li>');
-						}else{
-							$("#carousel-chargrp .carousel-indicators").append('<li id="chartLi' + key + '" data-target="#carousel-chargrp" data-slide-to="' + key + '"></li>');
-						}
-						$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item active">' + data.chartTitle + ' <div id="groupChart' + key +'" class="chart_data"></div></div>');
-						chart.data.bargrp[key] = new google.visualization.DataTable(grupo);
-						chart.bargrp[key] = new google.charts.Bar(document.getElementById('groupChart' + key));
-						chart.bargrp[key].draw(chart.data.bargrp[key], google.charts.Bar.convertOptions(data.options));
-						if(key > 0){
-							google.visualization.events.addListener(chart.bargrp[key], 'ready', function(){
-								$('#chartParent' + key).removeClass("active");
-							});
-						}
+					jQuery.each(data.highchart, function(key, grupo) {
+						var active = ''
+						if(key == 0)
+							active = 'active' 
+						$("#carousel-chargrp .carousel-indicators").append('<li data-target="#carousel-chargrp" data-slide-to="' + key + '" class="' + active + '"></li>');
+						$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item ' + active + '">' + data.chartTitle + ' <div id="groupChart' + key +'" class="chart_data"></div></div>');
+						data.highchart[key].tooltip = {formatter: function(){
+							var articulos, otros;
+							articulos = this.y;
+							otros = this.point.stackTotal - this.y;
+							if (/.*-otros$/m.test(this.series.name)){
+								articulos = this.point.stackTotal - this.y;
+								otros = this.y;
+							}
+							return '<b>' + this.series.name.replace('-otros', '') + ' (' + this.x + ')</b><br/>' +
+								'<?php _e("Artículos originales")?>: ' + articulos.toLocaleString() +'<br/>' +
+								'<?php _e("Otros documentos")?>: ' + otros.toLocaleString() +'<br/>' +
+								'Total: ' + this.point.stackTotal.toLocaleString();
+						}};
+						data.highchart[key].plotOptions.series.events = {legendItemClick: function(){
+								return false;
+							}
+						};
+						$('#groupChart'+key).highcharts(data.highchart[key]);
+						chart.bargrp[key] = $('#groupChart'+key).highcharts();
 					});
 					$("#carousel-chargrp").carousel(0);
 					var tableData = new google.visualization.DataTable(data.table);
@@ -782,8 +791,26 @@ $(document).ready(function(){
 						switch(key){
 							case 'citas':
 								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item active"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="groupChart' + key +'" class="chart_data"></div></div>');
-								chart.bargrp[key] = new google.charts.Bar(document.getElementById('groupChart' + key));
-								chart.bargrp[key].draw(chart.data.bargrp[key], google.charts.Bar.convertOptions(data.options.bar));
+								data.highchart.citas.tooltip = {formatter: function(){
+									var citas, autocitas;
+									citas = this.y;
+									autocitas = this.point.stackTotal - this.y;
+									if (/.*-autocitas$/m.test(this.series.name)){
+										citas = this.point.stackTotal - this.y;
+										autocitas = this.y;
+									}
+									return '<b>' + this.series.name.replace('-autocitas', '') + ' (' + this.x + ')</b><br/>' +
+										'<?php _e("Citas")?>: ' + citas.toLocaleString() + ' ('+ ((citas/this.point.stackTotal)*100).toFixed(2) +'%)<br/>' +
+										'<?php _e("Autocitas")?>: ' + autocitas.toLocaleString() + ' ('+ ((autocitas/this.point.stackTotal)*100).toFixed(2) +'%)<br/>' +
+										'Total: ' + this.point.stackTotal.toLocaleString();
+								}};
+								data.highchart.citas.plotOptions.series.events = {legendItemClick: function(){
+										return false;
+									}
+								};
+								$('#groupChart'+key).highcharts(data.highchart.citas);
+								chart.bargrp[key] = $('#groupChart'+key).highcharts();
+								console.log(data.highchart.citas);
 								break;
 							default:
 								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="groupChart' + key +'" class="chart_data"></div></div>');
@@ -791,32 +818,17 @@ $(document).ready(function(){
 								chart.bargrp[key].draw(chart.data.bargrp[key], $.extend({}, data.options.line, data.vTitle[key]));
 								break;
 						}
-						if(key == 'citas'){
-							console.log("addListener: "+key);
-							google.visualization.events.addListener(chart.bargrp[key], 'ready', function(){
-								console.log("ready: "+key);
-								$('#chartParent' + key).removeClass("active");
-							});
-						}
 						nav++;
 					});
 					$("#carousel-chargrp").carousel(0);
 					var tableData = new google.visualization.DataTable(data.dataTable);
 					$("#gridContainer").empty();
 					$("#gridContainer").append(data.tableTitle);
-					$("#gridContainer").append('<div id="table0"></div>');
+					$("#gridContainer").append($('<div></div>').attr('id', 'table0'));
 					tables.normal = new google.visualization.Table(document.getElementById('table0'));
 					tables.normal.draw(tableData, data.tableOptions);
 					changeTableClass();
 					google.visualization.events.addListener(tables.normal , 'sort', changeTableClass);
-
-					$('#tabs .download-chart').show();
-					$('#carousel-chargrp').on('slide.bs.carousel', function (e) {
-						var current_chart = e.relatedTarget.id.replace('chartParent', '')
-						$('#tabs .download-chart').show();
-						if(current_chart === 'citas')
-							$('#tabs .download-chart').hide();
-					});
 					break;
 				default:
 					$("#tabs, #chartContainer").show('slow');
@@ -836,7 +848,6 @@ $(document).ready(function(){
 					tables.normal.draw(tableData, data.tableOptions);
 					changeTableClass();
 					google.visualization.events.addListener(tables.normal , 'sort', changeTableClass);
-					$('#tabs .download-chart').show();
 					break;
 			}
 			console.log(chart);
@@ -1112,7 +1123,7 @@ changeTableClass = function (argument) {
 	$('.google-visualization-table-table')
 	.removeClass('google-visualization-table-table')
 	.addClass('table table-bordered table-condensed table-striped')
-	.parent().addClass('table-responsive')
+	.parent().removeClass('top-level').addClass('table-responsive')
 	.parent().attr('style', 'position: relative;').removeClass('google-visualization-table content');
 }
 
@@ -1123,12 +1134,29 @@ $('.download-chart').on('click', function(e){
 	var $elem = null;
 	switch(realIndicator){
 		case 'distribucion-articulos-coleccion':
-			return false;
+			var current_chart = $('#carousel-chargrp').find('.item.active').attr('id').replace('chartParent', '');
+			$elem = $('#chartParent'+current_chart).clone(true);
+			$('<canvas id="canvas" width="1000px" height="550px" style="display:none;"></canvas>').appendTo('body');
+			var canvas = document.getElementById("canvas");
+			canvg(canvas, $('#groupChart'+current_chart+' div').html());
+			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
+			$('#canvas').remove();
+			$elem.appendTo('#charts');
+			fName = realIndicator+'-'+current_chart+'.png';
+			console.log($elem);
 			break;
 		case 'indicadores-generales-revista':
 			var current_chart = $('#carousel-chargrp').find('.item.active').attr('id').replace('chartParent', '');
 			$elem = $('#chartParent'+current_chart).clone(true);
-			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', chart.bargrp[current_chart].getImageURI()));
+			if(current_chart === "citas"){
+				$('<canvas id="canvas" width="1000px" height="550px" style="display:none;"></canvas>').appendTo('body');
+				var canvas = document.getElementById("canvas"); 
+				canvg(canvas, $('#groupChartcitas div').html());
+				$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
+				$('#canvas').remove();
+			}else{
+				$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', chart.bargrp[current_chart].getImageURI()));
+			}
 			$elem.appendTo('#charts');
 			fName = realIndicator+'-'+current_chart+'.png';
 			break;
