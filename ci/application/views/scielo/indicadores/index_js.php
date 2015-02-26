@@ -10,6 +10,7 @@ var rangoPeriodo="0-0";
 var urls = {coleccion:'', area:'', revista:'', paisAutor:'', paisRevista:'', edad:'', tipodoc:''}
 var asyncAjax=false;
 var urlData = null;
+var lastGeneralChart = 'fasciculos';
 $(document).ready(function(){
 	$(window).bind('popstate',  function(event) {
 		console.log('pop:');
@@ -729,7 +730,7 @@ $(document).ready(function(){
 		  success: function(data) {
 		  	console.log(data);
 		  	$('#tabs').tabs("option", "active", 0);
-			$('#carousel-chargrp').off('slide.bs.carousel');
+			$('#carousel-chargrp').off('slid.bs.carousel');
 			switch(realIndicator){
 				case "distribucion-articulos-coleccion":
 					$("#tabs, #group-container").slideDown('slow');
@@ -782,15 +783,14 @@ $(document).ready(function(){
 					nav = 0;
 					jQuery.each(data.chart, function(key, grupo) {
 						console.log(key);
-						if(key == 'fasciculos'){
-							$("#carousel-chargrp .carousel-indicators").append('<li data-target="#carousel-chargrp" data-slide-to="' + nav + '" class="active"></li>');
-						}else{
-							$("#carousel-chargrp .carousel-indicators").append('<li id="chartLi' + key + '" data-target="#carousel-chargrp" data-slide-to="' + nav + '"></li>');
-						}
+						var active = ''
+						if(key == lastGeneralChart)
+							active = 'active' 
+						$("#carousel-chargrp .carousel-indicators").append('<li data-target="#carousel-chargrp" data-slide-to="' + nav + '" class="' + active + '"></li>');
 						chart.data.bargrp[key] = new google.visualization.DataTable(grupo);
 						switch(key){
 							case 'citas':
-								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item active"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="groupChart' + key +'" class="chart_data"></div></div>');
+								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item ' + active + '"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="groupChart' + key +'" class="chart_data"></div></div>');
 								data.highchart.citas.tooltip = {formatter: function(){
 									var citas, autocitas;
 									citas = this.y;
@@ -813,14 +813,17 @@ $(document).ready(function(){
 								console.log(data.highchart.citas);
 								break;
 							default:
-								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="groupChart' + key +'" class="chart_data"></div></div>');
+								$("#carousel-chargrp .carousel-inner").append('<div id="chartParent' + key + '" class="item ' + active + '"><div class="text-center nowrap"><h4>' + data.title[key] + '</h4>' + data.update + '</div><div id="groupChart' + key +'" class="chart_data"></div></div>');
 								chart.bargrp[key] = new google.visualization.LineChart(document.getElementById('groupChart' + key));
 								chart.bargrp[key].draw(chart.data.bargrp[key], $.extend({}, data.options.line, data.vTitle[key]));
 								break;
 						}
 						nav++;
 					});
-					$("#carousel-chargrp").carousel(0);
+					$('#carousel-chargrp').on('slid.bs.carousel', function () {
+						lastGeneralChart = $('#carousel-chargrp').find('.item.active').attr('id').replace('chartParent', '');
+						console.log(lastGeneralChart);
+					})
 					var tableData = new google.visualization.DataTable(data.dataTable);
 					$("#gridContainer").empty();
 					$("#gridContainer").append(data.tableTitle);
