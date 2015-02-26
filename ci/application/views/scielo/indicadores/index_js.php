@@ -694,17 +694,7 @@ $(document).ready(function(){
 	$('#sliderPeriodo').jslider();
 
 	$('#tabs').tabs({ 
-		show: { effect: "fade", duration: 800 },
-		activate: function(){
-			if($('#tabs').tabs("option", "active") != 1){
-				if($("#indicador").val() == "modelo-bradford-revista" || $("#indicador").val() == "modelo-bradford-institucion"){
-					$("#gridContainer").accordion("option", "active", false);
-				}
-			}
-			$('html, body').animate({
-				scrollTop: $('#tabs').parent().parent().offset().top
-			}, 700);
-		}
+		show: { effect: "fade", duration: 800 }
 	});
 
 	$("#gridContainer").accordion({
