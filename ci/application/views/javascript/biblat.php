@@ -112,6 +112,7 @@ $(document).on('click', '.translate', function(e) {
 });
 <?php endif;?>
 	$("#search-opts li").click(function(e) {
+		e.preventDefault();
 		var button = $(this).attr('rel');
 		$('#search-type').attr('class', $('#op-'+button).attr('class'));
 		$('#filtro').val(button);
