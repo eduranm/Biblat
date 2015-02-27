@@ -12,7 +12,10 @@ var asyncAjax=false;
 var urlData = null;
 var lastGeneralChart = 'fasciculos';
 var cloneToolTip = {};
-Highcharts.setOptions({colors: ['#3366CC', '#DC3912', '#FF9900', '#109618', '#990099', '#0099C6', '#DD4477', '#66AA00', '#B82E2E', '#316395', '#22AA99', '#AAAA11', '#6633CC', '#E67300', '#8B0707', '#651067']});
+Highcharts.setOptions({
+	colors: ['#3366CC', '#DC3912', '#FF9900', '#109618', '#990099', '#0099C6', '#DD4477', '#66AA00', '#B82E2E', '#316395', '#22AA99', '#AAAA11', '#6633CC', '#E67300', '#8B0707', '#651067'],
+	lang: {decimalPoint: '.', thousandsSep: ','}
+});
 $(document).ready(function(){
 	$(window).bind('popstate',  function(event) {
 		console.log('pop:');
