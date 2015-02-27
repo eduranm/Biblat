@@ -1161,6 +1161,7 @@ changeTableClass = function (argument) {
 
 $('.download-chart').on('click', function(e){
 	e.preventDefault();
+	$('#tabs').tabs("option", "active", 0);
 	var imgData = '';
 	var fName = '';
 	var $elem = null;
@@ -1209,5 +1210,7 @@ $('.download-chart').on('click', function(e){
 $('.download-table').on('click', function(e){
 	e.preventDefault();
 	$('#tabs').tabs("option", "active", 1);
-	$('#table0').find('table').table2excel({name: '', fname: realIndicator+'.xls'});
+	$table = $('#table0').find('table').clone();
+	$table.table2excel({name: '', fname: realIndicator+'.xls'});
+	delete $table;
 });
