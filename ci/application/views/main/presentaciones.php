@@ -24,7 +24,8 @@
 		</div>
 		<div id="fil-xxxvi-clase" class="panel-collapse collapse">
 			<ul class="list-group">
-				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/clase/Bases_de_datos_y_revistas_academicas_latinoamericanas_a_40 _anios_de_CLASE.pptx')}" target="_blank"><span class="glyphicon fa fa-file-powerpoint-o" ></span> Sánchez Pereyra, Antonio (2015, febrero) Ponencia en Mesa Redonda: Bases de datos y revistas académicas latinoamericanas: a 40 años de CLASE</a></li>
+				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/clase/Bases_de_datos_y_revistas_academicas_latinoamericanas_a_40_anios_de_CLASE.pptx')}" target="_blank"><span class="glyphicon fa fa-file-powerpoint-o" ></span> Sánchez Pereyra, Antonio (2015, febrero) Ponencia en Mesa Redonda: Bases de datos y revistas académicas latinoamericanas: a 40 años de CLASE</a></li>
+				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/clase/Bases_de_datos_y_revistas_academicas_latinoamericanas_a_40_anios_de_CLASE.pdf')}" target="_blank"><span class="glyphicon fa fa-file-pdf-o" ></span> Alonso Gamboa, José Octavio (2015, febrero) Ponencia en Mesa Redonda: Bases de datos y revistas académicas latinoamericanas: a 40 años de CLASE</a></li>
 			</ul>
 		</div>
 	</div>
