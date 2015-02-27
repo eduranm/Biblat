@@ -47,5 +47,3 @@
 {/foreach}
 	</div>
 </div>
-
-<pre>{print_r($areas)}</pre>
