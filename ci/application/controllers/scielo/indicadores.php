@@ -192,6 +192,7 @@ class Indicadores extends CI_Controller {
 			'legend' => array(
 					'align' => 'right',
 					'verticalAlign' => 'top',
+					'highlightSeries' => array('enabled' => TRUE)
 				),
 			'plotOptions' => array(
 					'column' => array('stacking' => 'normal'),
@@ -227,6 +228,7 @@ class Indicadores extends CI_Controller {
 			'legend' => array(
 					'align' => 'right',
 					'verticalAlign' => 'top',
+					'highlightSeries' => array('enabled' => TRUE)
 				),
 			'plotOptions' => array(
 					'series' => array(
@@ -272,6 +274,7 @@ class Indicadores extends CI_Controller {
 		$this->template->js('assets/js/html2canvas.js');
 		$this->template->js('assets/js/jquery.table2excel.min.js');
 		$this->template->js('assets/js/highcharts/highcharts.js');
+		$this->template->js('assets/js/highcharts-legend-highlighter.src.js');
 		$this->template->js('assets/js/rgbcolor.js');
 		$this->template->js('assets/js/StackBlur.js');
 		$this->template->js('assets/js/canvg.js');
