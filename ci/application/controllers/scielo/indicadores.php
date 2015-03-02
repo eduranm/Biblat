@@ -444,6 +444,9 @@ class Indicadores extends CI_Controller {
 		$groups = array_chunk($colecciones, $limit, TRUE);
 		$result['table']['cols'][] = array('id' => 'year','label' => _('Colección'),'type' => 'string');
 		$result['table']['cols'][] = array('id' => 'year','label' => _('Tipo'),'type' => 'string');
+		foreach ($periodos as $periodo):
+			$result['table']['cols'][] = array('id' => '','label' => $periodo, 'type' => 'number');
+		endforeach;
 		$tableRows = array();
 		$series = array();
 		$this->highcharts['barstack']['yAxis']['title'] = array('text' =>$indicador[$_POST['indicador']]['vTitle']);
