@@ -715,6 +715,7 @@ $(document).ready(function(){
 
 	$("#generarIndicador").on("submit", function(e){
 		console.log(e);
+		e.preventDefault();
 		loading.start();
 		urlRequest = '<?=site_url("scielo/indicadores/getChartData");?>';
 		jQuery.ajax({
@@ -754,8 +755,8 @@ $(document).ready(function(){
 								'<?php _e("Otros documentos")?>: ' + otros.toLocaleString() +'<br/>' +
 								'Total: ' + this.point.stackTotal.toLocaleString();
 						}};
-						data.highchart[key].plotOptions.series.events = {legendItemClick: function(){
-								return false;
+						data.highchart[key].plotOptions.series.events = {legendItemClick: function(e){
+								e.preventDefault();
 							}
 						};
 						data.highchart[key].plotOptions.series.point.events = {click: function(){
@@ -822,8 +823,8 @@ $(document).ready(function(){
 							default:
 								break;
 						}
-						data.highchart[key].plotOptions.series.events = {legendItemClick: function(){
-								return false;
+						data.highchart[key].plotOptions.series.events = {legendItemClick: function(e){
+								e.preventDefault();
 							}
 						};
 						data.highchart[key].plotOptions.series.point.events = {click: function(){
@@ -886,7 +887,6 @@ $(document).ready(function(){
 			loading.end();
 		  }
 		});
-		return false;
 	});
 <?php if (preg_match('%indicadores/(...+?)%', uri_string())):?>
 	urlData = {
