@@ -1175,29 +1175,20 @@ $('.download-chart').on('click', function(e){
 	var canvas = document.getElementById("canvas");
 	switch(realIndicator){
 		case 'distribucion-articulos-coleccion':
-			var current_chart = $('#carousel-chargrp').find('.item.active').attr('id').replace('chartParent', '');
-			$elem = $('#chartParent'+current_chart).clone(true);
-			canvg(canvas, $('#groupChart'+current_chart+' div').html());
-			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
-			$elem.appendTo('#charts');
-			fName = realIndicator+'-'+current_chart+'.png';
-			break;
 		case 'indicadores-generales-revista':
 			var current_chart = $('#carousel-chargrp').find('.item.active').attr('id').replace('chartParent', '');
 			$elem = $('#chartParent'+current_chart).clone(true);
 			canvg(canvas, $('#groupChart'+current_chart+' div').html());
-			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
-			$elem.appendTo('#charts');
 			fName = realIndicator+'-'+current_chart+'.png';
 			break;
 		default:
 			$elem = $('#chartContainer').clone(true);
 			canvg(canvas, $('#chart div').html());
-			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
-			$elem.appendTo('#charts');
 			fName = realIndicator+'.png';
 			break;
 	}
+	$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
+	$elem.appendTo('#charts');
 	$('#canvas').remove();
 	console.log($elem);
 	html2canvas($elem, {
