@@ -10,6 +10,7 @@
 		<div id="fil-xxxvi" class="panel-collapse collapse">
 			<ul class="list-group">
 				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/La_importancia_de_escribir_bien_las_referencias_para_recuperar_la informacion_en_las_bases_de_datos.pptx')}" target="_blank"><span class="glyphicon fa fa-file-powerpoint-o" ></span> Falfán Sánchez, Eugenia (2015, febrero) La importancia de escribir bien las referencias para recuperar la información en las bases de datos</a></li>
+				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/SciELO_Mexico_y_sus_indicadores_de_impacto_Como_utilizarlos.pptx')}" target="_blank"><span class="glyphicon fa fa-file-powerpoint-o" ></span> Cortés Valtierra, América A. (2015, febrero) SciELO México y sus indicadores de impacto ¿Cómo utilizarlos?</a></li>
 			</ul>
 		</div>
 	</div>
