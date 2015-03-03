@@ -233,7 +233,8 @@ class Indicadores extends CI_Controller {
 			'plotOptions' => array(
 					'series' => array(
 						'events' => array(),
-						'point' => array('events' => array())
+						'point' => array('events' => array()),
+						'dataLabels' => array('enabled' => TRUE)
 					)
 				),
 			'xAxis' => array(
