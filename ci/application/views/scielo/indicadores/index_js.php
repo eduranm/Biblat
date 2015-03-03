@@ -813,6 +813,12 @@ $(document).ready(function(){
 								}};
 								break;
 							case 'vidaMedia':
+								data.highchart[key].plotOptions.series.dataLabels.formatter = function(){
+									value = this.y;
+									if (value > 10)
+										value = '>10.0';
+									return value;
+								};
 								data.highchart[key].tooltip = {formatter: function(){
 									var citas, autocitas;
 									value = this.y;
