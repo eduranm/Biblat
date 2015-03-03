@@ -767,12 +767,12 @@ class Indicadores extends CI_Controller {
 		$data = array();
 		$series = array();
 		$charts = array(
-			'fasciculos' => array('title' => 'Número de fasciculos por revista', 'vTitle' => 'Fasciculos por revista', 'tooltip' => _('<b>{series.name}</b><br/>Número de fasciculos en el año {point.category}: <b>{point.y}</b>')),
+			'fasciculos' => array('title' => 'Número de fascículos por revista', 'vTitle' => 'Fasciculos por revista', 'tooltip' => _('<b>{series.name}</b><br/>Número de fascículos en el año {point.category}: <b>{point.y}</b>')),
 			'articulos' => array('title' => 'Número de artículos por revista', 'vTitle' => 'Artículos por revista', 'tooltip' => _('<b>{series.name}</b><br/>Número de artículos en el año {point.category}: <b>{point.y}</b>')), 
 			'referencias' => array('title' => 'Número de referencias por revista', 'vTitle' => 'Referencias por revista', 'tooltip' => _('<b>{series.name}</b><br/>Número de referencias en el año {point.category}: <b>{point.y}</b>')), 
-			'citas' => array('title' => 'Número de citas/autocitas por revista', 'vTitle' => 'Citas por revista', 'tooltip' => _('<b>{series.name}</b><br/>Número de citas/autocitas en el año {point.category}: <b>{point.y}</b>')), 
+			'citas' => array('title' => 'Número de citas por revista', 'vTitle' => 'Citas por revista', 'tooltip' => _('<b>{series.name}</b><br/>Número de citas/autocitas en el año {point.category}: <b>{point.y}</b>')), 
 			'factorImpacto' => array('title' => 'Factor de impacto por revista', 'vTitle' => 'Factor de impacto', 'tooltip' => _('<b>{series.name}</b><br/>Factor de impacto en el año {point.category}: <b>{point.y}</b>')),
-			'indiceInmediatez' => array('title' => 'Indice de inmediatez por revista', 'vTitle' => 'Indice de inmediatez', 'tooltip' => _('<b>{series.name}</b><br/>Indice de inmediatez en el año {point.category}: <b>{point.y}</b>')),
+			'indiceInmediatez' => array('title' => 'Índice de inmediatez por revista', 'vTitle' => 'Índice de inmediatez', 'tooltip' => _('<b>{series.name}</b><br/>Índice de inmediatez en el año {point.category}: <b>{point.y}</b>')),
 			'vidaMedia' => array('title' => 'Vida media por revista', 'vTitle' => 'Vida media', 'tooltip' => _('<b>{series.name}</b><br/>Vida media en el año {point.category}: <b>{point.y}</b>'))
 		);
 		$data['update'] = "<h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5>";
@@ -787,7 +787,7 @@ class Indicadores extends CI_Controller {
 				_('Citaciones') => 'number',
 				_('Porcentaje de autocitación') => 'number',
 				_('Factor de impacto') => 'number',
-				_('Indice de inmediatez') => 'number',
+				_('Índice de inmediatez') => 'number',
 				_('Vida media') => 'string'
 			);
 		foreach ($tableCols as $col => $type):
