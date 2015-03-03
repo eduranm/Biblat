@@ -148,7 +148,7 @@ class Indicadores extends CI_Controller {
 		);
 		/*Colecciones*/
 		$this->load->database('scielo');
-		$query = "SELECT id, name, slug FROM \"network\"";
+		$query = "SELECT id, name, slug FROM \"vNetwork\"";
 		$queryResult = $this->db->query($query);
 		foreach ($queryResult->result_array() as $row):
 			$this->colecciones['slug'][$row['slug']] = $row;
@@ -427,7 +427,7 @@ class Indicadores extends CI_Controller {
 		$periodos = $this->getPeriodos($_POST);
 		/*Consulta para el indicador*/
 		$indicador['distribucion-articulos-coleccion'] = array(
-			'sql' => 'SELECT "networkId", anio, articulo, "otroDocumento" FROM "networkDistribution"',
+			'sql' => 'SELECT "networkId", anio, articulo, "otroDocumento" FROM "vNetworkDistributionPos"',
 			'title' => '<div class="text-center nowrap"><h4>'._('Distribución de artículos por colección').'</h4></div>',
 			'vTitle' => _('Documentos'),
 			'hTitle' => _('Año'),
@@ -440,7 +440,7 @@ class Indicadores extends CI_Controller {
 			$colecciones = $_POST['coleccion'];
 		endif;
 		$limit = 4;
-		$queryOrder = ' ORDER BY anio, "networkId"';
+		$queryOrder = ' ORDER BY position, anio';
 		$result['journal'] = array();
 		$groups = array_chunk($colecciones, $limit, TRUE);
 		$result['table']['cols'][] = array('id' => 'year','label' => _('Colección'),'type' => 'string');
