@@ -180,6 +180,18 @@ class Indicadores extends CI_Controller {
 					'backgroundColor' => 'transparent'
 				),
 			'title' => array('text' => null),
+			'subtitle' => array(
+					'text' => _sprintf('Patrocinado por %s', '<i class="bl-conacyt"></i>'),
+					'useHTML' => TRUE,
+					'floating' => TRUE,
+					'x' => 70,
+					'y' => 5,
+					'align' => 'left',
+					'verticalAlign' => 'bottom',
+					'style' => array(
+							'fontSize' => '11px'
+						)
+				),
 			'credits' => array(
 					'href' => site_url('/'),
 					'text' => _sprintf('Fuente: %s', 'biblat.unam.mx')
@@ -216,6 +228,18 @@ class Indicadores extends CI_Controller {
 					'backgroundColor' => 'transparent'
 				),
 			'title' => array('text' => null),
+			'subtitle' => array(
+					'text' => _sprintf('Patrocinado por %s', '<i class="bl-conacyt"></i>'),
+					'useHTML' => TRUE,
+					'floating' => TRUE,
+					'x' => 70,
+					'y' => 5,
+					'align' => 'left',
+					'verticalAlign' => 'bottom',
+					'style' => array(
+							'fontSize' => '11px'
+						)
+				),
 			'credits' => array(
 					'href' => site_url('/'),
 					'text' => _sprintf('Fuente: %s', 'biblat.unam.mx')

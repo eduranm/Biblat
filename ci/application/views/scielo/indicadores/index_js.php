@@ -1168,7 +1168,6 @@ changeTableClass = function (argument) {
 $('.download-chart').on('click', function(e){
 	e.preventDefault();
 	$('#tabs').tabs("option", "active", 0);
-	var imgData = '';
 	var fName = '';
 	var $elem = null;
 	$('<canvas id="canvas" width="1000px" height="550px" style="display:none;"></canvas>').appendTo('body');
@@ -1178,16 +1177,16 @@ $('.download-chart').on('click', function(e){
 		case 'indicadores-generales-revista':
 			var current_chart = $('#carousel-chargrp').find('.item.active').attr('id').replace('chartParent', '');
 			$elem = $('#chartParent'+current_chart).clone(true);
-			canvg(canvas, $('#groupChart'+current_chart+' div').html());
+			canvg(canvas, $('#groupChart'+current_chart+' div svg')[0].outerHTML);
 			fName = realIndicator+'-'+current_chart+'.png';
 			break;
 		default:
 			$elem = $('#chartContainer').clone(true);
-			canvg(canvas, $('#chart div').html());
+			canvg(canvas, $('#chart div svg')[0].outerHTML);
 			fName = realIndicator+'.png';
 			break;
 	}
-	$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
+	$elem.find('svg').replaceWith($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
 	$elem.appendTo('#charts');
 	$('#canvas').remove();
 	console.log($elem);
