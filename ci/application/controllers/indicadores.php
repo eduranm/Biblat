@@ -162,7 +162,7 @@ class Indicadores extends CI_Controller {
 
 	public function getChartData(){
 		$this->output->enable_profiler(false);
-		$data['data']['cols'][] = array('id' => 'year','label' => _('Año'),'type' => 'string');
+		$series = array();
 		$this->load->database();
 		/*Convirtiendo el periodo en dos fechas*/
 		$_POST['periodo'] = explode(";", $_POST['periodo']);
@@ -180,9 +180,9 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Índice de Coautoría'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Promedio de autores por artículo en el año %s: %s'),
-					'paisRevista' => _('Promedio de autores por artículo en las revistas del país en el año %s: %s'),
-					'paisAutor' => _('Promedio de autores por artículo según país del autor año %s: %s'),
+					'revista' => _('<b>{series.name}</b><br/>Promedio de autores por artículo en el año {point.category}: <b>{point.y}</b>'),
+					'paisRevista' => _('<b>{series.name}</b><br/>Promedio de autores por artículo en las revistas del país en el año {point.category}: <b>{point.y}</b>'),
+					'paisAutor' => _('<b>{series.name}</b><br/>Promedio de autores por artículo según país del autor año {point.category}: <b>{point.y}</b>'),
 				)
 			);
 		$indicador['tasa-documentos-coautorados'] = array(
@@ -195,9 +195,9 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Tasa de documentos'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Proporción de artículos en coautoría en el año %s: %s'),
-					'paisRevista' => _('Proporción de artículos en coautoría en las revistas del país en el año %s: %s'),
-					'paisAutor' => _('Proporción de artículos en coautoría en el país en el año %s: %s'),
+					'revista' => _('<b>{series.name}</b><br/>Proporción de artículos en coautoría en el año {point.category}: <b>{point.y}</b>'),
+					'paisRevista' => _('<b>{series.name}</b><br/>Proporción de artículos en coautoría en las revistas del país en el año {point.category}: <b>{point.y}</b>'),
+					'paisAutor' => _('<b>{series.name}</b><br/>Proporción de artículos en coautoría en el país en el año {point.category}: <b>{point.y}</b>'),
 				)
 			);
 		$indicador['grado-colaboracion'] = array(
@@ -209,8 +209,8 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Grado de Colaboración'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Proporción de artículos con autoría múltiple en el año %s: %s'),
-					'paisRevista' => _('Proporción de artículos con autoría múltiple en las revistas del país en el año %s: %s')
+					'revista' => _('<b>{series.name}</b><br/>Proporción de artículos con autoría múltiple en el año {point.category}: <b>{point.y}</b>'),
+					'paisRevista' => _('<b>{series.name}</b><br/>Proporción de artículos con autoría múltiple en las revistas del país en el año {point.category}: <b>{point.y}</b>')
 				)
 			);
 		$indicador['modelo-elitismo'] = array(
@@ -222,8 +222,8 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Cantidad de autores'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Cantidad de autores que conforman la elite en el año %s: %s'),
-					'paisRevista' => _('Cantidad de autores que conforman la elite en el año %s: %s')
+					'revista' => _('<b>{series.name}</b><br/>Cantidad de autores que conforman la elite en el año {point.category}: <b>{point.y}</b>'),
+					'paisRevista' => _('<b>{series.name}</b><br/>Cantidad de autores que conforman la elite en el año {point.category}: <b>{point.y}</b>')
 				)
 			);
 		$indicador['indice-colaboracion'] = array(
@@ -236,9 +236,9 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Índice de Colaboración'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Proporción de coautores por artículo en el año %s: %s'),
-					'paisRevista' => _('Proporción de coautores por artículo en las revistas del país en el año %s: %s'),
-					'paisAutor' => _('Proporción de coautores por artículo en el país en el año %s: %s')
+					'revista' => _('<b>{series.name}</b><br/>Proporción de coautores por artículo en el año {point.category}: <b>{point.y}</b>'),
+					'paisRevista' => _('<b>{series.name}</b><br/>Proporción de coautores por artículo en las revistas del país en el año {point.category}: <b>{point.y}</b>'),
+					'paisAutor' => _('<b>{series.name}</b><br/>Proporción de coautores por artículo en el país en el año {point.category}: <b>{point.y}</b>')
 				)
 			);
 		$indicador['indice-densidad-documentos'] = array(
@@ -249,10 +249,9 @@ class Indicadores extends CI_Controller {
 			'vTitle' => _('Índice de densidad'),
 			'hTitle' => _('Año'),
 			'tooltip' => array(
-					'revista' => _('Cantidad de documentos por revista en el año %s: %s'),
+					'revista' => _('<b>{series.name}</b><br/>Cantidad de documentos por revista en el año {point.category}: <b>{point.y}</b>'),
 				)
 			);
-		$indicadorCampoTabla['productividad-exogena']="";
 
 		$selection = 'revista'; 
 		if (isset($_POST['revista'])):
@@ -304,26 +303,16 @@ class Indicadores extends CI_Controller {
 		foreach ($query->result_array() as $row ):
 			$indicadores[$row['title']][$row['anio']] = round($row['valor'], 2);
 		endforeach;
-		/*Generando columnas*/
-		foreach ($indicadores as $kindicador => $vindicador):
-			$data['data']['cols'][] = array('id' => slug($kindicador),'label' => $kindicador, 'type' => 'number');
-			$data['data']['cols'][] = array('id' => slug($kindicador)."-tooltip",'label' => $kindicador, 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
-		endforeach;
 		/*Generando filas para gráfica y columnas para la tabla*/
 		$setDataTableRows = false;
+		$data['highchart'] = $this->highcharts['line'];
+		$data['highchart']['yAxis']['title'] = array('text' => $indicador[$_POST['indicador']]['vTitle']);
+		$data['highchart']['tooltip']['pointFormat'] = $indicador[$_POST['indicador']]['tooltip'][$selection];
 		foreach ($periodos as $periodo):
+			$data['highchart']['xAxis']['categories'][] = $periodo;
 			$data['dataTable']['cols'][] = array('id' => '','label' => $periodo, 'type' => 'string');
-			$c = array();
-			$c[] = array(
-					'v' => $periodo
-				);
 			foreach ($indicadores as $kindicador => $vindicador):
-				$c[] = array(
-					'v' => $vindicador[$periodo]
-				);
-				$c[] = array(
-					'v' => _sprintf("<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">{$indicador[$_POST['indicador']]['tooltip'][$selection]}</div>", $kindicador, $periodo, $vindicador[$periodo])
-				);
+				$series[$kindicador][] = parse_number($vindicador[$periodo]);
 				/*dataTable rows*/
 				if( ! $setDataTableRows ):
 					$cc = array();
@@ -332,14 +321,20 @@ class Indicadores extends CI_Controller {
 					);
 					foreach ($periodos as $periodoDT):
 						$cc[] = array(
-							'v' => $vindicador[$periodoDT] != null ? number_format($vindicador[$periodoDT], 2, '.', '') : null
+							'v' => _number_format($vindicador[$periodoDT])
 						);
 					endforeach;
 					$data['dataTable']['rows'][]['c'] = $cc;
 				endif;
 			endforeach;
 			$setDataTableRows = true;
-			$data['data']['rows'][]['c'] = $c;
+		endforeach;
+		foreach ($series as $key => $value):
+			$data['highchart']['series'][] = array(
+					'id' => slug($key),
+					'name' => $key,
+					'data' => $value
+				);
 		endforeach;
 
 		/*Opciones de la gráfica*/
@@ -384,14 +379,8 @@ class Indicadores extends CI_Controller {
 				'allowHtml' => true,
 				'showRowNumber' => false,
 				'cssClassNames' => array(
-					'headerRow' => 'bold',
-					'tableRow'	=> ' ',
-					'oddTableRow' => ' ',
-					'selectedTableRow' => ' ',
-					'hoverTableRow' => ' ',
-					'headerCell' => ' ',
-					'tableCell' => ' ',
-					'rowNumberCell' => ' '
+					'headerCell' => 'text-center',
+					'tableCell' => 'text-left nowrap'
 					)
 			);
 		/*Titulo de la gráfica*/
@@ -429,17 +418,17 @@ class Indicadores extends CI_Controller {
 		$promedio = $last['articulosXfrecuenciaAcumulado']/3;
 		$grupos = array();
 		/*Variables para las gráficas*/
-		$result = array();
-		$result['chart']['bradford'] = array();
+		$data = array();
+		$data['chart']['bradford'] = array();
 		/*Columnas*/
-		$result['chart']['bradford']['cols'][] = array('id' => '','label' => _('log(fx)'),'type' => 'number');
-		$result['chart']['bradford']['cols'][] = array('id' => '','label' => 'tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
-		$result['chart']['bradford']['cols'][] = array('id' => '','label' => _('Zona núcleo'),'type' => 'number');
-		$result['chart']['bradford']['cols'][] = array('id' => '','label' => _('Zona 2'),'type' => 'number');
-		$result['chart']['bradford']['cols'][] = array('id' => '','label' => _('Zona 3'),'type' => 'number');
+		$data['chart']['bradford']['cols'][] = array('id' => '','label' => _('log(fx)'),'type' => 'number');
+		$data['chart']['bradford']['cols'][] = array('id' => '','label' => 'tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
+		$data['chart']['bradford']['cols'][] = array('id' => '','label' => _('Zona núcleo'),'type' => 'number');
+		$data['chart']['bradford']['cols'][] = array('id' => '','label' => _('Zona 2'),'type' => 'number');
+		$data['chart']['bradford']['cols'][] = array('id' => '','label' => _('Zona 3'),'type' => 'number');
 		/*Columnas de la tabla de bradford*/
-		$result['table']['bradford']['cols'][] = array('id' => '','label' => _('Logaritmo de la cantidad acumulada de títulos de revista'),'type' => 'number');
-		$result['table']['bradford']['cols'][] = array('id' => '','label' => _('Cantidad acumulada de artículos'),'type' => 'number');
+		$data['table']['bradford']['cols'][] = array('id' => '','label' => _('Logaritmo de la cantidad acumulada de títulos de revista'),'type' => 'number');
+		$data['table']['bradford']['cols'][] = array('id' => '','label' => _('Cantidad acumulada de artículos'),'type' => 'number');
 		/*Generando filas*/
 		$firstGroup = array(
 				'2' => false,
@@ -494,7 +483,7 @@ class Indicadores extends CI_Controller {
 					$cc[] = array('v' => $articulosXfrecuenciaAcumulado);
 					$cc[] = array('v' => null);
 					$cc[] = array('v' => null);
-					$result['chart']['bradford']['rows'][]['c'] = $cc;
+					$data['chart']['bradford']['rows'][]['c'] = $cc;
 					$firstGroup['2'] = true;
 					$rowNumber++;
 				endif;
@@ -511,7 +500,7 @@ class Indicadores extends CI_Controller {
 					$cc[] = array('v' => null);
 					$cc[] = array('v' => $articulosXfrecuenciaAcumulado);
 					$cc[] = array('v' => null);
-					$result['chart']['bradford']['rows'][]['c'] = $cc;
+					$data['chart']['bradford']['rows'][]['c'] = $cc;
 					$firstGroup['3'] = true;
 					$rowNumber++;
 				endif;
@@ -521,12 +510,12 @@ class Indicadores extends CI_Controller {
 				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
 				$grupos['3']['lim']['x'] = $c[0]['v'];
 			endif;
-			$result['chart']['bradford']['rows'][]['c'] = $c;
-			$result['table']['bradford']['rows'][]['c'] = $ct;
+			$data['chart']['bradford']['rows'][]['c'] = $c;
+			$data['table']['bradford']['rows'][]['c'] = $ct;
 			$rowNumber++;
 		endforeach;
 		/*Opciones de la gráfica de bradford*/
-		$result['options']['bradford'] = array(
+		$data['options']['bradford'] = array(
 						'animation' => array(
 								'duration' => 1000
 							), 
@@ -601,16 +590,16 @@ class Indicadores extends CI_Controller {
 		//ksort($revistaInstitucion['2']);
 		//ksort($revistaInstitucion['3']);
 		/*Datos para la gráfica del grupo1*/
-		$result['chart']['group1']['cols'][] = array('id' => '','label' => _('Títulos de revista'),'type' => 'string');
+		$data['chart']['group1']['cols'][] = array('id' => '','label' => _('Títulos de revista'),'type' => 'string');
 		$c = array();
 		$c[] = array('v' => '');
 		/*Columnas de la tabla del grupo1*/
-		$result['table']['group1']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
-		$result['table']['group1']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
+		$data['table']['group1']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
+		$data['table']['group1']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
 		foreach ($revistaInstitucion['1'] as $label => $value):
-			$result['chart']['group1']['cols'][] = array('id' => $value['slug'],'label' => $label,'type' => 'number');
-			$result['chart']['group1']['cols'][] = array('id' => '','label' => 'tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
+			$data['chart']['group1']['cols'][] = array('id' => $value['slug'],'label' => $label,'type' => 'number');
+			$data['chart']['group1']['cols'][] = array('id' => '','label' => 'tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
 			$c[] = array(
 					'v' => (int)$value['articulos']
 				);
@@ -621,20 +610,20 @@ class Indicadores extends CI_Controller {
 			$ct = array();
 			$ct[] = array('v' => $label);
 			$ct[] = array('v' => (int)$value['articulos']);
-			$result['table']['group1']['rows'][]['c'] = $ct;
+			$data['table']['group1']['rows'][]['c'] = $ct;
 		endforeach;
-		$result['chart']['group1']['rows'][]['c'] = $c;
+		$data['chart']['group1']['rows'][]['c'] = $c;
 		/*Datos para la gráfica del grupo2*/
-		$result['chart']['group2']['cols'][] = array('id' => '','label' => _('Títulos de revista'),'type' => 'string');
+		$data['chart']['group2']['cols'][] = array('id' => '','label' => _('Títulos de revista'),'type' => 'string');
 		$c = array();
 		$c[] = array('v' => '');
 		/*Columnas de la tabla del grupo2*/
-		$result['table']['group2']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
-		$result['table']['group2']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
+		$data['table']['group2']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
+		$data['table']['group2']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
 		foreach ($revistaInstitucion['2'] as $label => $value):
-			$result['chart']['group2']['cols'][] = array('id' => $value['slug'],'label' => $label,'type' => 'number');
-			$result['chart']['group2']['cols'][] = array('id' => '','label' => 'tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
+			$data['chart']['group2']['cols'][] = array('id' => $value['slug'],'label' => $label,'type' => 'number');
+			$data['chart']['group2']['cols'][] = array('id' => '','label' => 'tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
 			$c[] = array(
 					'v' => (int)$value['articulos']
 				);
@@ -645,22 +634,22 @@ class Indicadores extends CI_Controller {
 			$ct = array();
 			$ct[] = array('v' => $label);
 			$ct[] = array('v' => (int)$value['articulos']);
-			$result['table']['group2']['rows'][]['c'] = $ct;
+			$data['table']['group2']['rows'][]['c'] = $ct;
 		endforeach;
-		$result['chart']['group2']['rows'][]['c'] = $c;
+		$data['chart']['group2']['rows'][]['c'] = $c;
 		/*Columnas de la tabla del grupo3*/
-		$result['table']['group3']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
-		$result['table']['group3']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
+		$data['table']['group3']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
+		$data['table']['group3']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
 		foreach ($revistaInstitucion['3'] as $revista => $articulos):
 			/*Agregando filas a la tabla*/
 			$ct = array();
 			$ct[] = array('v' => $revista);
 			$ct[] = array('v' => (int)$articulos);
-			$result['table']['group3']['rows'][]['c'] = $ct;
+			$data['table']['group3']['rows'][]['c'] = $ct;
 		endforeach;
 		/*Opciones de la gráfica de los grupos*/
-		$result['options']['groups'] = array(
+		$data['options']['groups'] = array(
 						'animation' => array(
 								'duration' => 1000
 							),
@@ -703,32 +692,26 @@ class Indicadores extends CI_Controller {
 							)
 						);
 
-		$result['last'] = $last;
-		$result['grupos'] = $grupos;
-		$result['revistaInstitucion'] = $revistaInstitucion;
-		$result['title']['bradford'] = $indicador[$_POST['indicador']]['title'];
-		$result['title']['group1'] = _sprintf($indicador[$_POST['indicador']]['titleGroup'], "núcleo");
-		$result['title']['group2'] = _sprintf($indicador[$_POST['indicador']]['titleGroup'], "2");
-		$result['table']['title']['bradford'] = $indicador[$_POST['indicador']]['tableTitle'];
-		$result['table']['title']['group1'] = _sprintf($indicador[$_POST['indicador']]['tableTitleGroup'], "núcleo");
-		$result['table']['title']['group2'] = _sprintf($indicador[$_POST['indicador']]['tableTitleGroup'], "2");
-		$result['table']['title']['group3'] = _sprintf($indicador[$_POST['indicador']]['tableTitleGroup'], "3");
+		$data['last'] = $last;
+		$data['grupos'] = $grupos;
+		$data['revistaInstitucion'] = $revistaInstitucion;
+		$data['title']['bradford'] = $indicador[$_POST['indicador']]['title'];
+		$data['title']['group1'] = _sprintf($indicador[$_POST['indicador']]['titleGroup'], "núcleo");
+		$data['title']['group2'] = _sprintf($indicador[$_POST['indicador']]['titleGroup'], "2");
+		$data['table']['title']['bradford'] = $indicador[$_POST['indicador']]['tableTitle'];
+		$data['table']['title']['group1'] = _sprintf($indicador[$_POST['indicador']]['tableTitleGroup'], "núcleo");
+		$data['table']['title']['group2'] = _sprintf($indicador[$_POST['indicador']]['tableTitleGroup'], "2");
+		$data['table']['title']['group3'] = _sprintf($indicador[$_POST['indicador']]['tableTitleGroup'], "3");
 		/*Opciones para la tabla*/
-		$result['tableOptions'] = array(
+		$data['tableOptions'] = array(
 				'allowHtml' => true,
 				'showRowNumber' => false,
 				'cssClassNames' => array(
-					'headerRow' => 'bold',
-					'tableRow'	=> ' ',
-					'oddTableRow' => ' ',
-					'selectedTableRow' => ' ',
-					'hoverTableRow' => ' ',
-					'headerCell' => ' ',
-					'tableCell' => ' ',
-					'rowNumberCell' => ' '
+					'headerCell' => 'text-center',
+					'tableCell' => 'text-left nowrap'
 					)
 			);
-		$result['tblGrpOpt'] = array(
+		$data['tblGrpOpt'] = array(
 				'allowHtml' => true,
 				'showRowNumber' => true,
 				'cssClassNames' => array(
@@ -743,126 +726,75 @@ class Indicadores extends CI_Controller {
 					)
 			);
 		header('Content-Type: application/json');
-		echo json_encode($result, true);
+		echo json_encode($data, true);
 	}
 
 	public function getChartDataPrattExogena($limit=10){
 		//$limit *= 2;
+		$data = array();
 		$this->output->enable_profiler(false);
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
 		$indicador['indice-concentracion'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", pratt AS indicador FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
 				'title' => _('Índice de concentración temática'), 
 				'chartTitle' => '<div id="chartTitle"><div class="text-center nowrap"><h4>'._('Índice de concentración (Índice de Pratt)').'</h4><br/>'._('Distribución decreciente de las revistas considerando su grado de concentración temática').'</div></div>',
-				'tooltip' => "<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">Nivel de especialización de la revista: %s</div>"
+				'tooltip' => "<b>{point.name}</b><br/>Nivel de especialización de la revista: <b>{point.y}</b>"
 			);
 		$indicador['productividad-exogena'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", exogena AS indicador FROM \"mvProductividadExogena\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
 				'title' => _('Proporción de autoría exógena'), 
 				'chartTitle' => '<div id="chartTitle" class="text-center nowrap"><h4>'._('Tasa de autoría exógena').'</h4><br/>'._('Distribución decreciente de las revistas considerando la proporción de autoría exógena').'</div>',
-				'tooltip' => "<div class=\"text-center nowrap\"><b>%s</b></div><div class=\"text-center nowrap\">Proporción de autores extranjeros: %s</div>"
+				'tooltip' => "<b>{point.name}</b><br/>Proporción de autores extranjeros: <b>{point.y}</b>"
 			);
 		$query = $indicador[$_POST['indicador']]['sql'];
 		$query = $this->db->query($query);
 		$offset = 0;
 		$grupo = 0;
 		$c = array();
-		$result['chart'] = array();
-		$result['journal'] = array();
+		$data['highchart'] = array();
 		$totalRows = $query->num_rows();
 		$first = current(array_slice($query->result_array(), 0));
 		$vAxisMax = round($first['indicador'], 1) + 1/10;
-		$result['table']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'string');
-		$result['table']['cols'][] = array('id' => '','label' => $indicador[$_POST['indicador']]['title'],'type' => 'number');
+		$data['table']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'string');
+		$data['table']['cols'][] = array('id' => '','label' => $indicador[$_POST['indicador']]['title'],'type' => 'number');
+		$series = array();
 		foreach ($query->result_array() as $row):
-			if(!isset($result['chart'][$grupo])):
-				$result['chart'][$grupo]['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'string');
-				$c = array();
-				$c[] = array('v' => '');
-				$result['journal'][$grupo]=array();
+			if(!isset($data['highchart'][$grupo])):
+				$data['highchart'][$grupo] = $this->highcharts['column'];
+				$data['highchart'][$grupo]['tooltip']['pointFormat'] = $indicador[$_POST['indicador']]['tooltip'];
+				$data['highchart'][$grupo]['yAxis']['max'] = $vAxisMax;
 			endif;
-			$result['journal'][$grupo][] = $row['revistaSlug'];
-			$result['chart'][$grupo]['cols'][] = array('id' => '','label' => $row['revista'],'type' => 'number');
-			$result['chart'][$grupo]['cols'][] = array('id' => '','label' => $row['revista'].'-tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
-			$c[] = array(
-					'v' => round($row['indicador'], 4)
+			$data['highchart'][$grupo]['series'][0]['data'][] = array(
+					'id' => $row['revistaSlug'],
+					'name' => $row['revista'],
+					'y' => round($row['indicador'], 4)
 				);
-			$c[] = array(
-					'v' => _sprintf($indicador[$_POST['indicador']]['tooltip'], $row['revista'], round($row['indicador'], 4))
-				);
+			$data['journal'][$grupo][] = $row['revistaSlug'];
 			$offset++;
 			/*Filas de la tabla*/
 			$cc = array();
 			$cc[] = array('v' => $row['revista']);
 			$cc[] = array('v' => number_format($row['indicador'], 4, '.', ''));
-			$result['table']['rows'][]['c'] = $cc;
+			$data['table']['rows'][]['c'] = $cc;
 			if($offset == $limit || $offset == $totalRows):
-				$result['chart'][$grupo]['rows'][]['c'] = $c;
 				$offset = 0;
 				$totalRows -= $limit;
 				$grupo++;
 			endif;
 		endforeach;
-		/*Opciones de la gráfica*/
-		$result['options'] = array(
-						'animation' => array(
-								'duration' => 1000
-							),
-						'bar' => array(
-								'groupWidth' => '85%'
-							),
-						'height' => '500',
-						'hAxis' => array(
-								'title' => _('Título de revista')
-							), 
-						'legend' => array(
-								'position' => 'right'
-							),
-						'pointSize' => 1, 
-						'tooltip' => array(
-								'isHtml' => true
-							),
-						'vAxis' => array(
-								'title' => $indicador[$_POST['indicador']]['title'],
-								'viewWindow' => array('max' => $vAxisMax),
-								'minValue' => 0
-							),
-						'width' => '1000',
-						'chartArea' => array(
-							'left' => 100,
-							'top' => 40,
-							'width' => "70%",
-							'height' => "80%"
-							),
-						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
-						'titlePosition' => 'in',
-						'titleTextStyle' => array(
-							'bold' => FALSE,
-							'italic' => TRUE
-							),
-						'backgroundColor' => array(
-							'fill' => 'transparent'
-							)
-						);
 		/*Opciones para la tabla*/
-		$result['tableOptions'] = array(
+		$data['tableOptions'] = array(
 				'allowHtml' => true,
 				'showRowNumber' => false,
 				'cssClassNames' => array(
-					'headerRow' => 'bold',
-					'tableRow'	=> ' ',
-					'oddTableRow' => ' ',
-					'selectedTableRow' => ' ',
-					'hoverTableRow' => ' ',
-					'headerCell' => ' ',
-					'tableCell' => ' ',
-					'rowNumberCell' => ' '
+					'headerCell' => 'text-center',
+					'tableCell' => 'text-left nowrap'
 					)
 			);
-		$result['chartTitle'] = $indicador[$_POST['indicador']]['chartTitle'];
-		$result['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]}</h4>";
+		$data['chartTitle'] = $indicador[$_POST['indicador']]['chartTitle'];
+		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]}</h4>";
 		header('Content-Type: application/json');	
-		echo json_encode($result, true);
+		echo json_encode($data, true);
 
 	}
 
@@ -876,14 +808,14 @@ class Indicadores extends CI_Controller {
 				$row = $query->row_array();
 				$descriptores = json_decode($row['descriptoresJSON']);
 				$frecuencias = json_decode($row['frecuenciaDescriptorJSON']);
-				$result = array();
-				$result['table']['cols'][] = array('id' => '','label' => _('Descriptor'),'type' => 'string');
-				$result['table']['cols'][] = array('id' => '','label' => _('Frecuencia'),'type' => 'number');
+				$data = array();
+				$data['table']['cols'][] = array('id' => '','label' => _('Descriptor'),'type' => 'string');
+				$data['table']['cols'][] = array('id' => '','label' => _('Frecuencia'),'type' => 'number');
 				foreach ($descriptores as $key => $value):
 					$c = array();
 					$c[] = array('v' => $value);
 					$c[] = array('v' => $frecuencias[$key]);
-					$result['table']['rows'][]['c'] = $c;
+					$data['table']['rows'][]['c'] = $c;
 				endforeach;
 				break;
 			
@@ -891,34 +823,28 @@ class Indicadores extends CI_Controller {
 				$query = "SELECT \"paisAutor\", \"autores\" FROM \"mvAutoresRevistaPais\" WHERE \"revistaSlug\"='{$revista}' ORDER BY autores DESC, \"paisAutor\"";
 				$query = $this->db->query($query);
 				$row = $query->row_array();
-				$result = array();
-				$result['table']['cols'][] = array('id' => '','label' => _('País'),'type' => 'string');
-				$result['table']['cols'][] = array('id' => '','label' => _('Frecuencia'),'type' => 'number');
+				$data = array();
+				$data['table']['cols'][] = array('id' => '','label' => _('País'),'type' => 'string');
+				$data['table']['cols'][] = array('id' => '','label' => _('Frecuencia'),'type' => 'number');
 				foreach ($query->result_array() as $row ):
 					$c = array();
 					$c[] = array('v' => $row['paisAutor']);
 					$c[] = array('v' => $row['autores']);
-					$result['table']['rows'][]['c'] = $c;
+					$data['table']['rows'][]['c'] = $c;
 				endforeach;
 				break;
 		endswitch;
 		/*Opciones para la tabla*/
-		$result['tableOptions'] = array(
+		$data['tableOptions'] = array(
 				'allowHtml' => true,
 				'showRowNumber' => false,
 				'cssClassNames' => array(
-					'headerRow' => 'bold',
-					'tableRow'	=> ' ',
-					'oddTableRow' => ' ',
-					'selectedTableRow' => ' ',
-					'hoverTableRow' => ' ',
-					'headerCell' => ' ',
-					'tableCell' => ' ',
-					'rowNumberCell' => ' '
+					'headerCell' => 'text-center',
+					'tableCell' => 'text-left nowrap'
 					)
 			);
 		header('Content-Type: application/json');
-		echo json_encode($result, true);
+		echo json_encode($data, true);
 	}
 	
 	public function getRevistasPaises(){
@@ -1087,32 +1013,26 @@ class Indicadores extends CI_Controller {
 			$query = "SELECT autor, documentos FROM \"mvAutorPais\" WHERE \"paisRevistaSlug\"='{$revistaPais}' AND anio='{$anio}' ORDER BY documentos DESC";
 		endif;
 		$query = $this->db->query($query);
-		$result = array();
-		$result['table']['cols'][] = array('id' => '','label' => _('Autor'),'type' => 'string');
-		$result['table']['cols'][] = array('id' => '','label' => _('Documentos'),'type' => 'number');
+		$data = array();
+		$data['table']['cols'][] = array('id' => '','label' => _('Autor'),'type' => 'string');
+		$data['table']['cols'][] = array('id' => '','label' => _('Documentos'),'type' => 'number');
 		foreach ($query->result_array() as $row):
 			$c = array();
 			$c[] = array('v' => "<a href='".site_url(sprintf('frecuencias/autor/%s/documento', slug($row['autor'])))."'>{$row['autor']}</a>");
 			$c[] = array('v' => $row['documentos']);
-			$result['table']['rows'][]['c'] = $c;
+			$data['table']['rows'][]['c'] = $c;
 		endforeach;
 		/*Opciones para la tabla*/
-		$result['tableOptions'] = array(
+		$data['tableOptions'] = array(
 				'allowHtml' => true,
 				'showRowNumber' => false,
 				'cssClassNames' => array(
-					'headerRow' => 'bold',
-					'tableRow'	=> ' ',
-					'oddTableRow' => ' ',
-					'selectedTableRow' => ' ',
-					'hoverTableRow' => ' ',
-					'headerCell' => ' ',
-					'tableCell' => ' ',
-					'rowNumberCell' => ' '
+					'headerCell' => 'text-center',
+					'tableCell' => 'text-left nowrap'
 					)
 			);
 		header('Content-Type: application/json');
-		echo json_encode($result, true);
+		echo json_encode($data, true);
 	}
 
 	public function bradfordDocumentos(){

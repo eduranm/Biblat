@@ -10,6 +10,11 @@ var paisRevistaURL="";
 var asyncAjax=false;
 var soloDisciplina = ['indice-concentracion', 'modelo-bradford-revista', 'modelo-bradford-institucion', 'productividad-exogena'];
 var soloPaisAutor = ['indice-coautoria', 'tasa-documentos-coautorados', 'indice-colaboracion'];
+var cloneToolTip = {};
+Highcharts.setOptions({
+	colors: ['#3366CC', '#DC3912', '#FF9900', '#109618', '#990099', '#0099C6', '#DD4477', '#66AA00', '#B82E2E', '#316395', '#22AA99', '#AAAA11', '#6633CC', '#E67300', '#8B0707', '#651067'],
+	lang: {decimalPoint: '.', thousandsSep: ','}
+});
 $(document).ready(function(){
 	$('.carousel').carousel({
 	  interval: false
@@ -355,19 +360,18 @@ $(document).ready(function(){
 					$("#tabs, #prattContainer").slideDown("slow");
 					$("#carousel-pratt .carousel-inner, #carousel-pratt .carousel-indicators").empty();
 					chart.pratt = new Array();
-					chart.data.pratt = new Array();
-					chart.data.prattJ = data.journal; 
-					$.each(data.chart, function(key, grupo) {
+					$.each(data.highchart, function(key, grupo) {
 						active='';
 						if(key == 0){
 							active='active';
 						}
 						$("#carousel-pratt .carousel-indicators").append('<li data-target="#carousel-pratt" data-slide-to="' + key + '" class="' + active + '"></li>');
 						$("#carousel-pratt .carousel-inner").append('<div class="item ' + active + '">' + data.chartTitle + ' <div id="chartPratt' + key +'" class="chart_data"></div></div>');
-						chart.data.pratt[key] = new google.visualization.DataTable(grupo);
-						chart.pratt[key] = new google.visualization.ColumnChart(document.getElementById('chartPratt' + key));
-						chart.pratt[key].draw(chart.data.pratt[key], data.options);
-						google.visualization.events.addListener(chart.pratt[key], 'select', function(){getFrecuencias(key)});
+						data.highchart[key].plotOptions.series.point.events = {click: function(){
+							getFrecuencias(this.id)
+						}};
+						$('#chartPratt' + key).highcharts(data.highchart[key]);
+						chart.pratt[key] = $('#highchartPratt' + key).highcharts();
 					});
 
 					var tableData = new google.visualization.DataTable(data.table);
@@ -380,13 +384,30 @@ $(document).ready(function(){
 					google.visualization.events.addListener(tables.pratt , 'sort', changeTableClass);
 					break;
 				default:
+					cloneToolTip['normal'] = {};
 					$("#tabs, #chartContainer").show("slow");
-					chart.data.normal = new google.visualization.DataTable(data.data);
-					if(chart.normal == null){
-						chart.normal = new google.visualization.LineChart(document.getElementById('chart'));
-					}
-					chart.normal.draw(chart.data.normal, data.options);
-					google.visualization.events.addListener(chart.normal, 'select', choosePoint);
+					data.highchart.plotOptions.series.point.events = {click: function(){
+						console.log(this);
+						if(indicadorValue === "modelo-elitismo"){
+							choosePoint(this.series.options.id, this.category);
+							return false;
+						}
+						var point = this.series.name+this.x+','+this.y;
+						if (cloneToolTip['normal'][point]){
+							cloneToolTip['normal'][point].remove();
+							delete cloneToolTip['normal'][point];
+						}else{
+							cloneToolTip['normal'][point] = this.series.chart.tooltip.label.element.cloneNode(true);
+							chart.normal.container.firstChild.appendChild(cloneToolTip['normal'][point]);
+						}
+
+					}};
+					data.highchart.plotOptions.series.events = {legendItemClick: function(e){
+								e.preventDefault();
+							}
+						};
+					$('#chart').highcharts(data.highchart);
+					chart.normal = $('#chart').highcharts();
 					$("#chartTitle").html(data.chartTitle);
 
 					var tableData = new google.visualization.DataTable(data.dataTable);
@@ -604,29 +625,22 @@ chooseZone = function () {
 	}
 }
 
-choosePoint = function () {
-	var selection = chart.normal.getSelection()[0];
-	indicadorValue = $("#indicador").val();
-	if (selection && indicadorValue == "modelo-elitismo"){
-		var revistaPais = chart.data.normal.getColumnId(selection.column);
-		var anio = chart.data.normal.getFormattedValue(selection.row, 0);
-		console.log(anio);
-		$.ajax({
-			url: '<?=site_url("indicadores/getAutoresPrice");?>/'+ revistaPais + '/' + anio,
-			type: 'POST',
-			dataType: 'json',
-			data: $("#generarIndicador").serialize(),
-			success: function(data){
-				console.log(data);
-				var tableData = new google.visualization.DataTable(data.table);
-				var table = new google.visualization.Table(document.getElementById('floatTable'));
-				table.draw(tableData, data.tableOptions);
-				changeTableClass();
-				google.visualization.events.addListener(table , 'sort', changeTableClass);
-				$.colorbox({inline: true, href: $('#floatTable'), height:"90%",});
-			}
-		});
-	}
+choosePoint = function (revistaPais, anio) {
+	$.ajax({
+		url: '<?=site_url("indicadores/getAutoresPrice");?>/'+ revistaPais + '/' + anio,
+		type: 'POST',
+		dataType: 'json',
+		data: $("#generarIndicador").serialize(),
+		success: function(data){
+			console.log(data);
+			var tableData = new google.visualization.DataTable(data.table);
+			var table = new google.visualization.Table(document.getElementById('floatTable'));
+			table.draw(tableData, data.tableOptions);
+			changeTableClass();
+			google.visualization.events.addListener(table , 'sort', changeTableClass);
+			$.colorbox({inline: true, href: $('#floatTable'), height:"90%",});
+		}
+	});
 }
 
 bradfordArticles = function (group) {
@@ -640,28 +654,21 @@ bradfordArticles = function (group) {
 }
 
 getFrecuencias = function (key) {
-	var selection = chart.pratt[key].getSelection();
-	if (selection[0] != null && selection[0].column != null){
-		disciplina=$('#disciplina').val();
-		revista=chart.data.prattJ[key][(selection[0].column+1)/2 -1];
-		$.ajax({
-			url: '<?=site_url("indicadores/getFrecuencias");?>/'+ revista,
-			type: 'POST',
-			dataType: 'json',
-			data: $("#generarIndicador").serialize(),
-			success: function(data){
-				console.log(data);
-				var tableData = new google.visualization.DataTable(data.table);
-				var table = new google.visualization.Table(document.getElementById('floatTable'));
-				table.draw(tableData, data.tableOptions);
-				changeTableClass();
-				google.visualization.events.addListener(table , 'sort', changeTableClass);
-				$.colorbox({inline: true, href: $('#floatTable'), height:"90%",});
-			}
-		});
-		
-		console.log(revista);
-	}
+	$.ajax({
+		url: '<?=site_url("indicadores/getFrecuencias");?>/'+ key,
+		type: 'POST',
+		dataType: 'json',
+		data: $("#generarIndicador").serialize(),
+		success: function(data){
+			console.log(data);
+			var tableData = new google.visualization.DataTable(data.table);
+			var table = new google.visualization.Table(document.getElementById('floatTable'));
+			table.draw(tableData, data.tableOptions);
+			changeTableClass();
+			google.visualization.events.addListener(table , 'sort', changeTableClass);
+			$.colorbox({inline: true, href: $('#floatTable'), height:"90%",});
+		}
+	});
 }
 changeTableClass = function (argument) {
 	$('.google-visualization-table-table')
@@ -677,6 +684,8 @@ $('.download-chart').on('click', function(e){
 	var imgData = '';
 	var fName = '';
 	var $elem = null;
+	$('<canvas id="canvas" width="1000px" height="550px" style="display:none;"></canvas>').appendTo('body');
+	var canvas = document.getElementById("canvas");
 	switch(indicador){
 		case "modelo-bradford-revista":
 		case "modelo-bradford-institucion":
@@ -690,13 +699,15 @@ $('.download-chart').on('click', function(e){
 		case "productividad-exogena":
 			var current_chart = $('#carousel-pratt').find('.item.active .chart_data').attr('id').replace('chartPratt', '');
 			$elem = $('#chartPratt'+current_chart).parent().clone(true);
-			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', chart.pratt[current_chart].getImageURI()));
+			canvg(canvas, $('#chartPratt'+current_chart+' div').html());
+			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
 			$elem.appendTo('#charts');
 			fName = indicador+'-group'+current_chart+'.png';
 			break;
 		default:
 			$elem = $('#chartContainer').clone(true);
-			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', chart.normal.getImageURI()));
+			canvg(canvas, $('#chart div').html());
+			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
 			$elem.appendTo('#charts');
 			fName = indicador+'.png';
 			break;
