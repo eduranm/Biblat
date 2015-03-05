@@ -24,6 +24,25 @@ class Indicadores extends CI_Controller {
 
 	public $soloPaisRevista = array('indice-coautoria', 'tasa-documentos-coautorados', 'grado-colaboracion', 'modelo-elitismo', 'indice-colaboracion');
 	public $soloPaisAutor = array('indice-coautoria', 'tasa-documentos-coautorados', 'indice-colaboracion');
+	public $colors = array(
+		'#3366CC',
+		'#DC3912',
+		'#FF9900',
+		'#109618',
+		'#990099',
+		'#0099C6',
+		'#DD4477',
+		'#66AA00',
+		'#B82E2E',
+		'#316395',
+		'#22AA99',
+		'#AAAA11',
+		'#6633CC',
+		'#E67300',
+		'#8B0707',
+		'#651067'
+	);
+	public $highcharts = array();
 
 	public function __construct()
 	{
@@ -31,6 +50,52 @@ class Indicadores extends CI_Controller {
 		$this->load->driver('minify');
 		/*Variables globles*/
 		$data = array();
+		/*Highcharts config*/
+		$this->highcharts['line'] = array(
+			'chart' => array(
+					'type' => 'line',
+					'width' => 1000,
+					'height' => 550,
+					'backgroundColor' => 'transparent'
+				),
+			'title' => array('text' => null),
+			'credits' => array(
+					'href' => site_url('/'),
+					'text' => _sprintf('Fuente: %s', 'biblat.unam.mx')
+				),
+			'yAxis' => array(
+					'allowDecimals' => TRUE,
+					'min' => 0,
+					'title' => NULL
+				),
+			'legend' => array(
+					'align' => 'right',
+					'verticalAlign' => 'top',
+					'highlightSeries' => array('enabled' => TRUE)
+				),
+			'plotOptions' => array(
+					'series' => array(
+						'events' => array(),
+						'point' => array('events' => array()),
+						'dataLabels' => array('enabled' => TRUE)
+					)
+				),
+			'xAxis' => array(
+					'categories' => array(),
+					'title' => array('text' => _('Año'))
+				),
+			'series' => array(),
+			'tooltip' => array('headerFormat' => '')
+		);
+		$this->highcharts['column'] = $this->highcharts['line'];
+		$this->highcharts['column']['chart']['type'] = "column";
+		$this->highcharts['column']['xAxis'] = array('type' => 'category', 'title' => array('text' => _('Título de revista')));
+		$this->highcharts['column']['legend'] = array('enabled' => FALSE);
+		$this->highcharts['column']['series'][] = array(
+						'name' => _('Revistas'),
+						'colorByPoint' => TRUE
+					);
+		$this->highcharts['column']['plotOptions']['series']['dataLabels']['format'] = "{y:.4f}";
 		/*Lista de indicadores*/
 		$this->indicadores = array(
 								'indice-coautoria' => _('Índice de coautoría'),
@@ -84,6 +149,12 @@ class Indicadores extends CI_Controller {
 		$this->template->js('js/colorbox.js');
 		$this->template->js('assets/js/html2canvas.js');
 		$this->template->js('//www.google.com/jsapi');
+		$this->template->js('assets/js/jquery.table2excel.min.js');
+		$this->template->js('assets/js/highcharts/highcharts.js');
+		$this->template->js('assets/js/highcharts-legend-highlighter.src.js');
+		$this->template->js('assets/js/rgbcolor.js');
+		$this->template->js('assets/js/StackBlur.js');
+		$this->template->js('assets/js/canvg.js');
 		$this->template->set_meta('description', $this->indicadores[$indicador]);
 		$this->template->set_breadcrumb(_('Indicadores bibliométricos'));
 		$this->template->build('indicadores/index', $data['main']);
