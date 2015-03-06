@@ -669,8 +669,6 @@ $('.download-chart').on('click', function(e){
 			var current_chart = $('#carousel-bradford').find('.item.active .chart_data').attr('id').replace('chart', '');
 			$elem = $('#chart'+current_chart).parent().clone(true);
 			canvg(canvas, $('#chart'+current_chart+' div').html());
-			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
-			$elem.appendTo('#charts');
 			fName = indicador+'-'+current_chart+'.png';
 			break;
 		case "indice-concentracion":
@@ -678,28 +676,27 @@ $('.download-chart').on('click', function(e){
 			var current_chart = $('#carousel-pratt').find('.item.active .chart_data').attr('id').replace('chartPratt', '');
 			$elem = $('#chartPratt'+current_chart).parent().clone(true);
 			canvg(canvas, $('#chartPratt'+current_chart+' div').html());
-			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
-			$elem.appendTo('#charts');
 			fName = indicador+'-group'+current_chart+'.png';
 			break;
 		default:
 			$elem = $('#chartContainer').clone(true);
 			canvg(canvas, $('#chart div').html());
-			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
-			$elem.appendTo('#charts');
 			fName = indicador+'.png';
 			break;
 	}
-	html2canvas($elem, {
-		background: '#FAFAFA',
-		onrendered: function(canvas) {
-			console.log("rendered");
-			var imgData = canvas.toDataURL("image/png");
-			$elem.remove();
-			tmp=$('<a></a>').attr('href', imgData).attr('download', fName);
-			$('body').append(tmp);
-			tmp.get(0).click();
-			tmp.remove();
-		}
+	$elem.find('svg').replaceWith($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
+	$elem.appendTo('#charts');
+	html2canvas($elem, {background: '#FAFAFA'}).then(function(canvas) {
+		console.log("rendered");
+		var ctx = canvas.getContext('2d');
+		ctx.webkitImageSmoothingEnabled = false;
+		ctx.mozImageSmoothingEnabled = false;
+		ctx.imageSmoothingEnabled = false;
+		var imgData = canvas.toDataURL("image/png");
+		$elem.remove();
+		tmp=$('<a></a>').attr('href', imgData).attr('download', fName);
+		$('body').append(tmp);
+		tmp.get(0).click();
+		tmp.remove();
 	});
 });
