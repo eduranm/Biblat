@@ -299,7 +299,7 @@ $(document).ready(function(){
 					data.highchart.bradford.plotOptions.series.point.events = {click: function(){
 						chooseZone(this.series.options.id);
 					}};
-					$('#highchartBradford').highcharts(data.highchart.bradford);
+					$('#chartBradford').highcharts(data.highchart.bradford);
 
 					$("#bradfordTitle").html(data.title.bradford);
 
@@ -668,7 +668,8 @@ $('.download-chart').on('click', function(e){
 		case "modelo-bradford-institucion":
 			var current_chart = $('#carousel-bradford').find('.item.active .chart_data').attr('id').replace('chart', '');
 			$elem = $('#chart'+current_chart).parent().clone(true);
-			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', chart[current_chart.toLowerCase()].getImageURI()));
+			canvg(canvas, $('#chart'+current_chart+' div').html());
+			$elem.find('.chart_data').html($('<img class="center-block"></img>').attr('src', canvas.toDataURL("image/png")));
 			$elem.appendTo('#charts');
 			fName = indicador+'-'+current_chart+'.png';
 			break;
