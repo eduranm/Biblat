@@ -2,7 +2,6 @@ google.load("visualization", "1", {packages:["corechart", "table"], 'language': 
 var chart = {normal: null, bradford:null, group1:null, group2:null, pratt:null, data:null};
 chart.data = {normal: null, bradford:null, group1:null, group2:null, pratt:null, prattJ:null};
 var tables = {normal: null, bradford:null, group1:null, group2:null, group3:null, pratt:null};
-var brfLim = null;
 var popState = {indicador:false, disciplina:false, revista:false, paisRevista:false, paisAutor:false, periodo:false};
 var rangoPeriodo="0-0";
 var dataPeriodo="0-0";
@@ -297,30 +296,24 @@ $(document).ready(function(){
 				case "modelo-bradford-institucion":
 					//$("#gridContainer").accordion("destroy");
 					$("#tabs, #bradfodContainer").slideDown("slow");
-					brfLim = data.grupos;
-					chart.data.bradford = new google.visualization.DataTable(data.chart.bradford);
-					if(chart.bradford == null){
-						chart.bradford = new google.visualization.ComboChart(document.getElementById('chartBradford'));
-					}
-					chart.bradford.draw(chart.data.bradford, data.options.bradford);
-					google.visualization.events.addListener(chart.bradford, 'select', chooseZone);
+					data.highchart.bradford.plotOptions.series.point.events = {click: function(){
+						chooseZone(this.series.options.id);
+					}};
+					$('#highchartBradford').highcharts(data.highchart.bradford);
 
 					$("#bradfordTitle").html(data.title.bradford);
 
-					chart.data.group1 = new google.visualization.DataTable(data.chart.group1);
-					if(chart.group1 == null){
-						chart.group1 = new google.visualization.ColumnChart(document.getElementById('chartGroup1'));
-					}
-					chart.group1.draw(chart.data.group1, data.options.groups);
-					google.visualization.events.addListener(chart.group1, 'select', function(){bradfordArticles('group1')});
+					data.highchart.group1.plotOptions.series.point.events = {click: function(){
+						bradfordArticles(this.id)
+					}};
+					$('#chartGroup1').highcharts(data.highchart.group1);
 					$("#group1Title").html(data.title.group1);
 
-					chart.data.group2 = new google.visualization.DataTable(data.chart.group2);
-					if(chart.group2 == null){
-						chart.group2 = new google.visualization.ColumnChart(document.getElementById('chartGroup2'));
-					}
-					chart.group2.draw(chart.data.group2, data.options.groups);
-					google.visualization.events.addListener(chart.group2, 'select', function(){bradfordArticles('group2')});
+					
+					data.highchart.group2.plotOptions.series.point.events = {click: function(){
+						bradfordArticles(this.id)
+					}};
+					$('#chartGroup2').highcharts(data.highchart.group2);
 					$("#group2Title").html(data.title.group2);
 					var tableData = new google.visualization.DataTable(data.table.bradford);
 					$("#gridContainer").empty();
@@ -599,29 +592,15 @@ updateData = function(data){
 	asyncAjax=true;
 };
 
-chooseZone = function () {
-	var selection = chart.bradford.getSelection();
-	console.log(selection);
-	if (selection[0] != null && selection[0].row != null){
-		var value = chart.data.bradford.getFormattedValue(selection[0].row, 0);
-		if (value <= brfLim[1].lim.x){
-			$("#carousel-bradford").carousel(1);
-		}
-		else if (value > brfLim[1].lim.x && value <= brfLim[2].lim.x) {
-			$("#carousel-bradford").carousel(2);
-		}else{
-			$("#tabs").tabs("option", "active", 1);
-			$("#gridContainer").accordion("option", "active", 3);
-		}
-	}else if  (selection[0] != null && selection[0].column != null){
-		if(selection[0].column == 2){
-			$("#carousel-bradford").carousel(1);
-		}else if (selection[0].column == 3){
-			$("#carousel-bradford").carousel(2);
-		}else{
-			$("#tabs").tabs("option", "active", 1);
-			$("#gridContainer").accordion("option", "active", 3);
-		}
+chooseZone = function (areaId) {
+	if (areaId == 0){
+		$("#carousel-bradford").carousel(1);
+	}
+	else if (areaId == 1) {
+		$("#carousel-bradford").carousel(2);
+	}else{
+		$("#tabs").tabs("option", "active", 1);
+		$("#gridContainer").accordion("option", "active", 3);
 	}
 }
 
@@ -643,11 +622,9 @@ choosePoint = function (revistaPais, anio) {
 	});
 }
 
-bradfordArticles = function (group) {
-	var selection = chart[group].getSelection()[0];
+bradfordArticles = function (revista) {
 	indicadorValue = $("#indicador").val();
-	if (selection && indicadorValue == "modelo-bradford-revista"){
-		var revista = chart.data[group].getColumnId(selection.column);
+	if (indicadorValue == "modelo-bradford-revista"){
 		var disciplina=$('#disciplina').val();
 		location.href = "<?=site_url("indicadores/modelo-bradford-revista/disciplina");?>/"+ disciplina + "/revista/"+ revista + "/documentos"
 	}

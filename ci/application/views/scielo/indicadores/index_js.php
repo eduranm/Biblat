@@ -1190,17 +1190,18 @@ $('.download-chart').on('click', function(e){
 	$elem.appendTo('#charts');
 	$('#canvas').remove();
 	console.log($elem);
-	html2canvas($elem, {
-		background: '#FAFAFA',
-		onrendered: function(canvas) {
-			console.log("rendered");
-			var imgData = canvas.toDataURL("image/png");
-			$elem.remove();
-			tmp=$('<a></a>').attr('href', imgData).attr('download', fName);
-			$('body').append(tmp);
-			tmp.get(0).click();
-			tmp.remove();
-		}
+	html2canvas($elem, {background: '#FAFAFA'}).then(function(canvas) {
+		console.log("rendered");
+		var ctx = canvas.getContext('2d');
+		ctx.webkitImageSmoothingEnabled = false;
+		ctx.mozImageSmoothingEnabled = false;
+		ctx.imageSmoothingEnabled = false;
+		var imgData = canvas.toDataURL("image/png");
+		$elem.remove();
+		tmp=$('<a></a>').attr('href', imgData).attr('download', fName);
+		$('body').append(tmp);
+		tmp.get(0).click();
+		tmp.remove();
 	});
 });
 $('.download-table').on('click', function(e){

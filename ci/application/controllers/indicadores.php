@@ -96,6 +96,12 @@ class Indicadores extends CI_Controller {
 						'colorByPoint' => TRUE
 					);
 		$this->highcharts['column']['plotOptions']['series']['dataLabels']['format'] = "{y:.4f}";
+		$this->highcharts['areaspline'] = $this->highcharts['line'];
+		$this->highcharts['areaspline']['chart']['type'] = "areaspline";
+		$this->highcharts['areaspline']['xAxis'] = array('allowDecimals' => TRUE);
+		$this->highcharts['areaspline']['plotOptions']['series']['dataLabels']['enabled'] = FALSE;
+		$this->highcharts['areaspline']['plotOptions']['series']['marker']['enabled'] = FALSE;
+		$this->highcharts['areaspline']['plotOptions']['series']['trackByArea'] = TRUE;
 		/*Lista de indicadores*/
 		$this->indicadores = array(
 								'indice-coautoria' => _('Índice de coautoría'),
@@ -399,7 +405,9 @@ class Indicadores extends CI_Controller {
 				'hAxisTitle' => _('Logaritmo de la cantidad acumulada de títulos de revista'),
 				'hAxisTitleGroup' => _('Títulos de revista'),
 				'titleGroup' => '<div class="text-center nowrap"><h4>'._('Modelo matemático de Bradford').'</h4><br/>'._('Zona %s de revistas más productivas').'</div>',
-				'tableTitleGroup' => '<h3>'._('Zona %s de revistas más productivas').'</h3>'
+				'tableTitleGroup' => '<h3>'._('Zona %s de revistas más productivas').'</h3>',
+				'tooltip' => "<b>{series.name}</b><br/>Artículos: <b>{series.options.articles}</b><br/>Títulos de revista: <b>{series.options.titles}</b>",
+				'tooltipGroup' => "<b>{point.name}</b><br/>Cantidad de artículos: <b>{point.y}</b>"
 			);
 		$indicador['modelo-bradford-institucion'] = array(
 				'sufix' => "Institucion",
@@ -408,7 +416,9 @@ class Indicadores extends CI_Controller {
 				'hAxisTitle' => _('Logaritmo de la cantidad acumulada de instituciones'),
 				'hAxisTitleGroup' => _('Institución'),
 				'titleGroup' => '<div class="text-center nowrap"><h4>'._('Modelo matemático de Bradford por institución (afiliación del autor)').'</h4><br/>'._('Zona %s de instituciones más productivas por disciplina').'</div>',
-				'tableTitleGroup' => '<h4>'._('Zona %s de instituciones más productivas por disciplina').'</h4>'
+				'tableTitleGroup' => '<h4>'._('Zona %s de instituciones más productivas por disciplina').'</h4>',
+				'tooltip' => "<b>{series.name}</b><br/>Artículos: <b>{series.options.articles}</b><br/>Instituciones: <b>{series.options.titles}</b>",
+				'tooltipGroup' => "<b>{point.name}</b><br/>Cantidad de artículos: <b>{point.y}</b>"
 			);
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
 		$query = "SELECT articulos, frecuencia, \"articulosXfrecuenciaAcumulado\", \"logFrecuenciaAcumulado\" FROM \"vBradford{$indicador[$_POST['indicador']]['sufix']}\" WHERE id_disciplina={$idDisciplina}";
@@ -419,13 +429,15 @@ class Indicadores extends CI_Controller {
 		$grupos = array();
 		/*Variables para las gráficas*/
 		$data = array();
-		$data['chart']['bradford'] = array();
-		/*Columnas*/
-		$data['chart']['bradford']['cols'][] = array('id' => '','label' => _('log(fx)'),'type' => 'number');
-		$data['chart']['bradford']['cols'][] = array('id' => '','label' => 'tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
-		$data['chart']['bradford']['cols'][] = array('id' => '','label' => _('Zona núcleo'),'type' => 'number');
-		$data['chart']['bradford']['cols'][] = array('id' => '','label' => _('Zona 2'),'type' => 'number');
-		$data['chart']['bradford']['cols'][] = array('id' => '','label' => _('Zona 3'),'type' => 'number');
+		$data['highchart']['bradford'] = $this->highcharts['areaspline'];
+		$data['highchart']['bradford']['xAxis']['title']['text'] = $indicador[$_POST['indicador']]['hAxisTitle'];
+		$data['highchart']['bradford']['yAxis']['title']['text'] = _('Cantidad acumulada de artículos');
+		$data['highchart']['bradford']['series'] = array(
+				array('name' => _('Zona núcleo'), 'id' => 0),
+				array('name' => _('Zona 2'), 'id' => 1),
+				array('name' => _('Zona 3'), 'id' => 3),
+			);
+		$data['highchart']['bradford']['tooltip']['pointFormat'] = $indicador[$_POST['indicador']]['tooltip'];;
 		/*Columnas de la tabla de bradford*/
 		$data['table']['bradford']['cols'][] = array('id' => '','label' => _('Logaritmo de la cantidad acumulada de títulos de revista'),'type' => 'number');
 		$data['table']['bradford']['cols'][] = array('id' => '','label' => _('Cantidad acumulada de artículos'),'type' => 'number');
@@ -441,133 +453,52 @@ class Indicadores extends CI_Controller {
 			$articuloXfrecuencia = $row['articulos'] * $row['frecuencia'];
 			if ($articulosXfrecuenciaAcumulado < $promedio):
 				$grupos['1']['lim']['y'] = $articulosXfrecuenciaAcumulado;
-				$grupos['1']['titulos']++;
-				$grupos['1']['articulos'] = $articulosXfrecuenciaAcumulado;
+				$data['highchart']['bradford']['series'][0]['titles'] += $row['frecuencia'];
+				$data['highchart']['bradford']['series'][0]['articles'] = $articulosXfrecuenciaAcumulado;
 			elseif ($articulosXfrecuenciaAcumulado > $promedio && ($articulosXfrecuenciaAcumulado - $promedio) < ($articuloXfrecuencia / 2)):
 				$grupos['1']['lim']['y'] = $articulosXfrecuenciaAcumulado;
-				$grupos['1']['titulos']++;
-				$grupos['1']['articulos'] = $articulosXfrecuenciaAcumulado;
+				$data['highchart']['bradford']['series'][0]['titles'] += $row['frecuencia'];
+				$data['highchart']['bradford']['series'][0]['articles'] = $articulosXfrecuenciaAcumulado;
 			elseif ($articulosXfrecuenciaAcumulado < ($promedio * 2)):
 				$grupos['2']['lim']['y'] = $articulosXfrecuenciaAcumulado;
-				$grupos['2']['titulos']++;
-				$grupos['2']['articulos'] = $articulosXfrecuenciaAcumulado - $grupos['1']['lim']['y'];
+				$data['highchart']['bradford']['series'][1]['titles'] += $row['frecuencia'];
+				$data['highchart']['bradford']['series'][1]['articles'] = $articulosXfrecuenciaAcumulado - $grupos['1']['lim']['y'];;
 			elseif ($articulosXfrecuenciaAcumulado > ($promedio * 2) && ($articulosXfrecuenciaAcumulado - ($promedio * 2)) < ($articuloXfrecuencia / 2)):
 				$grupos['2']['lim']['y'] = $articulosXfrecuenciaAcumulado;
-				$grupos['2']['titulos']++;
-				$grupos['2']['articulos'] = $articulosXfrecuenciaAcumulado - $grupos['1']['lim']['y'];
+				$data['highchart']['bradford']['series'][1]['titles'] += $row['frecuencia'];
+				$data['highchart']['bradford']['series'][1]['articles'] = $articulosXfrecuenciaAcumulado - $grupos['1']['lim']['y'];;
 			else:
 				$grupos['3']['lim']['y'] = $articulosXfrecuenciaAcumulado;
-				$grupos['3']['titulos']++;
-				$grupos['3']['articulos'] = $articulosXfrecuenciaAcumulado - $grupos['2']['lim']['y'];
+				$data['highchart']['bradford']['series'][2]['titles'] += $row['frecuencia'];
+				$data['highchart']['bradford']['series'][2]['articles'] = $articulosXfrecuenciaAcumulado - $grupos['2']['lim']['y'];
 			endif;
 		endforeach;
 		/*Agregado columnas a la fila*/
 		foreach ($query->result_array() as $row):
 			$articulosXfrecuenciaAcumulado = (int)$row['articulosXfrecuenciaAcumulado'];
-			$c = array();
-			$c[] = array('v' => round($row['logFrecuenciaAcumulado'], 4));
 			$ct = array();
 			$ct[] = array('v' => number_format($row['logFrecuenciaAcumulado'], 4, '.', ''));
 			$ct[] = array('v' => $articulosXfrecuenciaAcumulado);
 			if($articulosXfrecuenciaAcumulado <= $grupos['1']['lim']['y']):
-				$c[] = array('v' => '<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>'._('Zona núcleo').'<br/>'._sprintf('Artículos: %s', $grupos['1']['articulos']).'<br/>'._sprintf('Títulos de revista: %s', $grupos['1']['titulos']).' </div>');
-				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
-				$c[] = array('v' => null);
-				$c[] = array('v' => null);
-				$grupos['1']['lim']['x'] = $c[0]['v'];
+				$data['highchart']['bradford']['series'][0]['data'][] = array(round($row['logFrecuenciaAcumulado'], 4), $articulosXfrecuenciaAcumulado);
 			elseif ($articulosXfrecuenciaAcumulado <= $grupos['2']['lim']['y']):
 				if(!$firstGroup['2']):
-					$cc = array();
-					$cc[] = array('v' => round($row['logFrecuenciaAcumulado'], 4));
-					$cc[] = array('v' => '<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>'._('Zona núcleo').'<br/>'._sprintf('Artículos: %s', $grupos['1']['articulos']).'<br/>'._sprintf('Títulos de revista: %s', $grupos['1']['titulos']).' </div>');
-					$cc[] = array('v' => $articulosXfrecuenciaAcumulado);
-					$cc[] = array('v' => null);
-					$cc[] = array('v' => null);
-					$data['chart']['bradford']['rows'][]['c'] = $cc;
+					$data['highchart']['bradford']['series'][0]['data'][] = array(round($row['logFrecuenciaAcumulado'], 4), $articulosXfrecuenciaAcumulado);
 					$firstGroup['2'] = true;
 					$rowNumber++;
 				endif;
-				$c[] = array('v' => '<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>'._('Zona 2').'<br/>'._sprintf('Artículos: %s', $grupos['2']['articulos']).'<br/>'._sprintf('Títulos de revista: %s', $grupos['2']['titulos']).' </div>');
-				$c[] = array('v' => null);
-				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
-				$c[] = array('v' => null);
-				$grupos['2']['lim']['x'] = $c[0]['v'];
+				$data['highchart']['bradford']['series'][1]['data'][] = array(round($row['logFrecuenciaAcumulado'], 4), $articulosXfrecuenciaAcumulado);
 			else:
 				if(!$firstGroup['3']):
-					$cc = array();
-					$cc[] = array('v' => round($row['logFrecuenciaAcumulado'], 4));
-					$cc[] = array('v' => '<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>'._('Zona 2').'<br/>'._sprintf('Artículos: %s', $grupos['2']['articulos']).'<br/>'._sprintf('Títulos de revista: %s', $grupos['2']['titulos']).' </div>');
-					$cc[] = array('v' => null);
-					$cc[] = array('v' => $articulosXfrecuenciaAcumulado);
-					$cc[] = array('v' => null);
-					$data['chart']['bradford']['rows'][]['c'] = $cc;
+					$data['highchart']['bradford']['series'][1]['data'][] = array(round($row['logFrecuenciaAcumulado'], 4), $articulosXfrecuenciaAcumulado);
 					$firstGroup['3'] = true;
 					$rowNumber++;
 				endif;
-				$c[] = array('v' => '<div class="chartTootip"><span style="color:#3366cc;">&#9632; </span>'._('Zona 3').'<br/>'._sprintf('Artículos: %s', $grupos['3']['articulos']).'<br/>'._sprintf('Títulos de revista: %s', $grupos['3']['titulos']).' </div>');
-				$c[] = array('v' => null);
-				$c[] = array('v' => null);
-				$c[] = array('v' => $articulosXfrecuenciaAcumulado);
-				$grupos['3']['lim']['x'] = $c[0]['v'];
+				$data['highchart']['bradford']['series'][2]['data'][] = array(round($row['logFrecuenciaAcumulado'], 4), $articulosXfrecuenciaAcumulado);
 			endif;
-			$data['chart']['bradford']['rows'][]['c'] = $c;
 			$data['table']['bradford']['rows'][]['c'] = $ct;
 			$rowNumber++;
 		endforeach;
-		/*Opciones de la gráfica de bradford*/
-		$data['options']['bradford'] = array(
-						'animation' => array(
-								'duration' => 1000
-							), 
-						'curveType' => 'function',
-						'focusTarget' => 'category',
-						'height' => '500',
-						'hAxis' => array(
-								'title' => $indicador[$_POST['indicador']]['hAxisTitle'],
-							), 
-						'legend' => array(
-								'position' => 'right'
-							),
-						'pointSize' => 0, 
-						'tooltip' => array(
-								'isHtml' => true
-							),
-						'vAxis' => array(
-								'title' => _('Cantidad acumulada de artículos'),
-								'minValue' => 0
-							),
-						'width' => '1000',
-						'chartArea' => array(
-							'left' => 100,
-							'top' => 40,
-							'width' => "70%",
-							'height' => "80%"
-							),
-						'seriesType' => 'area',
-						'series' => array(
-								0 => array(
-									'color' => '#3366cc'
-									),
-								1 => array(
-									'color' => '#dc3912'
-									),
-								2 => array(
-									'color' => '#ff9900'
-									)
-							),
-						'tooltip' => array(
-								'isHtml' => true
-							),
-						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
-						'titlePosition' => 'in',
-						'titleTextStyle' => array(
-							'bold' => FALSE,
-							'italic' => TRUE
-							),
-						'backgroundColor' => array(
-							'fill' => 'transparent'
-							)
-						);
 		/*Creando lista de revistas con su total de articulos agrupados según los límites calculados anteriormente*/
 		$column = strtolower($indicador[$_POST['indicador']]['sufix']);
 		$query = "SELECT {$column}, \"{$column}Slug\" AS slug, articulos FROM \"mvArticulosDisciplina{$indicador[$_POST['indicador']]['sufix']}\" WHERE id_disciplina={$idDisciplina} ORDER BY articulos DESC";
@@ -590,21 +521,21 @@ class Indicadores extends CI_Controller {
 		//ksort($revistaInstitucion['2']);
 		//ksort($revistaInstitucion['3']);
 		/*Datos para la gráfica del grupo1*/
-		$data['chart']['group1']['cols'][] = array('id' => '','label' => _('Títulos de revista'),'type' => 'string');
-		$c = array();
-		$c[] = array('v' => '');
+		$data['highchart']['group1'] = $this->highcharts['column'];
+		$data['highchart']['group1']['plotOptions']['series']['dataLabels']['format'] = "{y}";
+		$data['highchart']['group1']['xAxis']['title'] = array('text' => $indicador[$_POST['indicador']]['hAxisTitleGroup']);
+		$data['highchart']['group1']['yAxis']['title'] = array('text' => _('Cantidad de artículos'));
+		$data['highchart']['group1']['tooltip']['pointFormat'] = $indicador[$_POST['indicador']]['tooltipGroup'];
+		$data['highchart']['group2'] = $data['highchart']['group1'];
 		/*Columnas de la tabla del grupo1*/
 		$data['table']['group1']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
 		$data['table']['group1']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
 		foreach ($revistaInstitucion['1'] as $label => $value):
-			$data['chart']['group1']['cols'][] = array('id' => $value['slug'],'label' => $label,'type' => 'number');
-			$data['chart']['group1']['cols'][] = array('id' => '','label' => 'tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
-			$c[] = array(
-					'v' => (int)$value['articulos']
-				);
-			$c[] = array(
-					'v' =>  sprintf('<div class="chartTootip"><b>%s</b><br/>', $label)._sprintf('Cantidad de artículos: %s', $value['articulos']).'</div>'
+			$data['highchart']['group1']['series'][0]['data'][] = array(
+					'id' => $value['slug'],
+					'name' => $label,
+					'y' => parse_number($value['articulos'])
 				);
 			/*Agregando filas a la tabla*/
 			$ct = array();
@@ -612,23 +543,16 @@ class Indicadores extends CI_Controller {
 			$ct[] = array('v' => (int)$value['articulos']);
 			$data['table']['group1']['rows'][]['c'] = $ct;
 		endforeach;
-		$data['chart']['group1']['rows'][]['c'] = $c;
 		/*Datos para la gráfica del grupo2*/
-		$data['chart']['group2']['cols'][] = array('id' => '','label' => _('Títulos de revista'),'type' => 'string');
-		$c = array();
-		$c[] = array('v' => '');
 		/*Columnas de la tabla del grupo2*/
 		$data['table']['group2']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
 		$data['table']['group2']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
 		foreach ($revistaInstitucion['2'] as $label => $value):
-			$data['chart']['group2']['cols'][] = array('id' => $value['slug'],'label' => $label,'type' => 'number');
-			$data['chart']['group2']['cols'][] = array('id' => '','label' => 'tooltip', 'type' => 'string', 'p' => array('role' => 'tooltip', 'html' => true));
-			$c[] = array(
-					'v' => (int)$value['articulos']
-				);
-			$c[] = array(
-					'v' => sprintf('<div class="chartTootip"><b>%s</b><br/>', $label)._sprintf('Cantidad de artículos: %s', $value['articulos']).'</div>'
+			$data['highchart']['group2']['series'][0]['data'][] = array(
+					'id' => $value['slug'],
+					'name' => $label,
+					'y' => parse_number($value['articulos'])
 				);
 			/*Agregando filas a la tabla*/
 			$ct = array();
@@ -636,64 +560,19 @@ class Indicadores extends CI_Controller {
 			$ct[] = array('v' => (int)$value['articulos']);
 			$data['table']['group2']['rows'][]['c'] = $ct;
 		endforeach;
-		$data['chart']['group2']['rows'][]['c'] = $c;
 		/*Columnas de la tabla del grupo3*/
 		$data['table']['group3']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
 		$data['table']['group3']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
-		foreach ($revistaInstitucion['3'] as $revista => $articulos):
+		foreach ($revistaInstitucion['3'] as $label => $value):
 			/*Agregando filas a la tabla*/
 			$ct = array();
-			$ct[] = array('v' => $revista);
-			$ct[] = array('v' => (int)$articulos);
+			$ct[] = array('v' => $label);
+			$ct[] = array('v' => (int)$value['articulos']);
 			$data['table']['group3']['rows'][]['c'] = $ct;
 		endforeach;
-		/*Opciones de la gráfica de los grupos*/
-		$data['options']['groups'] = array(
-						'animation' => array(
-								'duration' => 1000
-							),
-						'bar' => array(
-								'groupWidth' => '85%'
-							),
-						'height' => '500',
-						'hAxis' => array(
-								'title' => $indicador[$_POST['indicador']]['hAxisTitleGroup'],
-							), 
-						'legend' => array(
-								'position' => 'right'
-							),
-						'pointSize' => 1, 
-						'tooltip' => array(
-								'isHtml' => true
-							),
-						'vAxis' => array(
-								'title' => _('Cantidad de artículos'),
-								'minValue' => 0
-							),
-						'width' => '1000',
-						'chartArea' => array(
-							'left' => 100,
-							'top' => 40,
-							'width' => "70%",
-							'height' => "80%"
-							),
-						'tooltip' => array(
-								'isHtml' => true
-							),
-						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
-						'titlePosition' => 'in',
-						'titleTextStyle' => array(
-							'bold' => FALSE,
-							'italic' => TRUE
-							),
-						'backgroundColor' => array(
-							'fill' => 'transparent'
-							)
-						);
 
 		$data['last'] = $last;
-		$data['grupos'] = $grupos;
 		$data['revistaInstitucion'] = $revistaInstitucion;
 		$data['title']['bradford'] = $indicador[$_POST['indicador']]['title'];
 		$data['title']['group1'] = _sprintf($indicador[$_POST['indicador']]['titleGroup'], "núcleo");
@@ -715,14 +594,8 @@ class Indicadores extends CI_Controller {
 				'allowHtml' => true,
 				'showRowNumber' => true,
 				'cssClassNames' => array(
-					'headerRow' => 'bold',
-					'tableRow'	=> ' ',
-					'oddTableRow' => ' ',
-					'selectedTableRow' => ' ',
-					'hoverTableRow' => ' ',
-					'headerCell' => ' ',
-					'tableCell' => ' ',
-					'rowNumberCell' => ' '
+					'headerCell' => 'text-center',
+					'tableCell' => 'text-left nowrap'
 					)
 			);
 		header('Content-Type: application/json');
