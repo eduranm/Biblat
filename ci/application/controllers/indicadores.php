@@ -66,7 +66,8 @@ class Indicadores extends CI_Controller {
 			'yAxis' => array(
 					'allowDecimals' => TRUE,
 					'min' => 0,
-					'title' => NULL
+					'title' => NULL,
+					'labels' => array('format' => '{value}')
 				),
 			'legend' => array(
 					'align' => 'right',
