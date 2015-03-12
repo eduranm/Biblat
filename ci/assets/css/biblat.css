@@ -724,24 +724,41 @@ table.articulo{
 .panel-collapse ul.list-group li.list-group-item a {text-decoration: none; color: #555;}
 .panel-collapse ul.list-group li.list-group-item a:hover {color: #DF6521;}
 
-#collapseArea.panel-collapse .panel{
+#collapseArea.panel-collapse .panel {
 	border-bottom: 0 none;
     border-top: 1px solid #ddd;
     margin-top: 0px;
 }
 
-.download-chart, .download-table{
+.download-chart, .download-table {
 	cursor: pointer !important;
 }
 .scielo-update .bl-scielo{
 	vertical-align: middle;
 }
-.highcharts-subtitle .bl-conacyt{
+.highcharts-subtitle .bl-conacyt {
 	vertical-align: middle;
 	font-size: 20px;
 	font-weight: lighter;
 }
 
-.chart_data svg, .chart_data img{
+.chart_data svg, .chart_data img {
 	background: url('../img/watermark.png');
+}
+
+.list-main .list-group-item {
+	background: #FAFAFA;
+}
+
+.list-main .list-group-item {
+	border-left: 0 none;
+	border-right: 0 none;
+}
+
+.list-main .list-group-item:first-child {
+	border-top: 0 none;
+}
+
+.list-main .list-group-item:last-child {
+	border-bottom: 0 none;
 }
