@@ -1,6 +1,15 @@
 <div class="panel-group">
 	<div class="panel panel-default">
 		<div class="panel-heading">
+			<h5 class="panel-title">
+				<a href="{base_url('archivos/ppt/Sistemas_de_informacion_y_evaluacion_bibliometrica_de_la_ciencia_La_Salle_Bajio_Marzo_2015.pptx')}" target="_blank">
+					<span class="fa fa-file-powerpoint-o"></span> Sistemas de información y evaluación bibliométrica de la ciencia La Salle Bajío Marzo 2015
+				</a>
+			</h5>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
 		  <h5 class="panel-title">
 			<a data-toggle="collapse" data-parent="#accordion" href="#fil-xxxvi">
 				<span class="fa fa-plus-square-o"></span> XXXVI Feria Internacional del Libro del Palacio de Minería, México, D.F.
