@@ -2,8 +2,17 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h5 class="panel-title">
+				<a href="{base_url('archivos/ppt/Estudios_Fronterizos_19_Marzo_2015.pptx')}" target="_blank">
+					<span class="fa fa-file-powerpoint-o"></span> Sánchez Pereyra, Antonio (2015, marzo) Presentación en XXX Aniversario de revista Estudios Fronterizos
+				</a>
+			</h5>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h5 class="panel-title">
 				<a href="{base_url('archivos/ppt/Sistemas_de_informacion_y_evaluacion_bibliometrica_de_la_ciencia_La_Salle_Bajio_Marzo_2015.pptx')}" target="_blank">
-					<span class="fa fa-file-powerpoint-o"></span> Sistemas de información y evaluación bibliométrica de la ciencia La Salle Bajío Marzo 2015
+					<span class="fa fa-file-powerpoint-o"></span> Sánchez Pereyra, Antonio (2015, marzo) Sistemas de información y evaluación bibliométrica de la ciencia
 				</a>
 			</h5>
 		</div>
