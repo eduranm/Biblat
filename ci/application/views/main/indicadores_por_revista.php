@@ -32,6 +32,18 @@
 				<li class="list-group-item"><a href="{site_url('indicadores/tasa-documentos-coautorados/disciplina/$revista.disciplinaSlug/revista/$revista.revistaSlug')}"><span class="fa fa-line-chart"></span> {_('Tasa de documentos coautorados')}</a></li>
 				<li class="list-group-item"><a href="{site_url('indicadores/indice-colaboracion/disciplina/$revista.disciplinaSlug/revista/$revista.revistaSlug')}"><span class="fa fa-line-chart"></span> {_('Índice de colaboración (Índice de Lawani)')}</a></li>
 {/if}
+{if $revista.generalesrevista}
+				<li class="list-group-item"><a href="{site_url('scielo/indicadores/indicadores-generales-revista/coleccion/$revista.networkSlug/revista/$revista.revistaSlug')}"><span class="fa fa-line-chart"></span><span class="bl-scielo"></span> {_('Indicadores generales por revista')}</a></li>
+{/if}
+{if $revista.networkjournaldistribution}
+				<li class="list-group-item"><a href="{site_url('scielo/indicadores/distribucion-articulos-coleccion/coleccion/$revista.networkSlug/revista/$revista.revistaSlug')}"><span class="fa fa-line-chart"></span><span class="bl-scielo"></span> {_('Distribución de artículos por colección y revista')}</a></li>
+{/if}
+{foreach $revista.agedocjournalcitation edad}
+				<li class="list-group-item"><a href="{site_url('scielo/indicadores/citacion-articulos-edad/edad/$edad/revista/$revista.revistaSlug')}"><span class="fa fa-line-chart"></span><span class="bl-scielo"></span> {_sprintf('Distribución de artículos según edad del documento de %s años y revista citante', '<b>$edad</b>')}</a></li>
+{/foreach}
+{foreach $revista.doctypejournalcitation tipok tipov}
+				<li class="list-group-item"><a href="{site_url('scielo/indicadores/citacion-articulos-tipo/tipo-documento/$tipok/revista/$revista.revistaSlug')}"><span class="fa fa-line-chart"></span><span class="bl-scielo"></span> {_sprintf('Distribución de artículos done el tipo de documento citado es %s y revista citante', '<b>$tipok</b>')}</a></li>
+{/foreach}
 			</ul>
 		</div>
 	</div>
