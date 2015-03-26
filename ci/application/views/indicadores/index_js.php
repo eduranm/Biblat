@@ -380,19 +380,10 @@ $(document).ready(function(){
 					cloneToolTip['normal'] = {};
 					$("#tabs, #chartContainer").show("slow");
 					data.highchart.plotOptions.series.point.events = {click: function(){
-						console.log(this);
-						if(indicadorValue === "modelo-elitismo"){
+						if(indicadorValue === "modelo-elitismo")
 							choosePoint(this.series.options.id, this.category);
-							return false;
-						}
-						var point = this.series.name+this.x+','+this.y;
-						if (cloneToolTip['normal'][point]){
-							cloneToolTip['normal'][point].remove();
-							delete cloneToolTip['normal'][point];
-						}else{
-							cloneToolTip['normal'][point] = this.series.chart.tooltip.label.element.cloneNode(true);
-							chart.normal.container.firstChild.appendChild(cloneToolTip['normal'][point]);
-						}
+						else
+							cloneToolTipFn(this, 'normal')
 
 					}};
 					data.highchart.plotOptions.series.events = {legendItemClick: function(e){
@@ -653,6 +644,17 @@ changeTableClass = function (argument) {
 	.addClass('table table-bordered table-condensed table-striped')
 	.parent().addClass('table-responsive')
 	.parent().attr('style', 'position: relative;').removeClass('google-visualization-table content');
+}
+
+cloneToolTipFn = function(that, key) {
+	var point = that.series.name+that.x+','+that.y;
+	if (cloneToolTip[key][point]){
+		cloneToolTip[key][point].remove();
+		delete cloneToolTip[key][point];
+	}else{
+		cloneToolTip[key][point] = that.series.chart.tooltip.label.element.cloneNode(true);
+		chart.normal.container.firstChild.appendChild(cloneToolTip[key][point]);
+	}
 }
 
 $('.download-chart').on('click', function(e){

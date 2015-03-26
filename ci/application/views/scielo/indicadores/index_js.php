@@ -760,14 +760,7 @@ $(document).ready(function(){
 							}
 						};
 						data.highchart[key].plotOptions.series.point.events = {click: function(){
-							var point = this.series.name+this.x+','+this.y;
-							if (cloneToolTip[key][point]){
-								cloneToolTip[key][point].remove();
-								delete cloneToolTip['normal'][point];
-							}else{
-								cloneToolTip[key][point] = this.series.chart.tooltip.label.element.cloneNode(true);
-								chart.bargrp[key].container.firstChild.appendChild(cloneToolTip[key][point]);
-							}
+							cloneToolTipFn(this, key);
 						}};
 						$('#groupChart'+key).highcharts(data.highchart[key]);
 						chart.bargrp[key] = $('#groupChart'+key).highcharts();
@@ -834,15 +827,7 @@ $(document).ready(function(){
 							}
 						};
 						data.highchart[key].plotOptions.series.point.events = {click: function(){
-							var point = this.series.name+this.x+','+this.y;
-							console.log(cloneToolTip[key][point]);
-							if (cloneToolTip[key][point]){
-								cloneToolTip[key][point].remove();
-								delete cloneToolTip[key][point];
-							}else{
-								cloneToolTip[key][point] = this.series.chart.tooltip.label.element.cloneNode(true);
-								chart.bargrp[key].container.firstChild.appendChild(cloneToolTip[key][point]);
-							}
+							cloneToolTipFn(this, key);
 						}};
 						$('#groupChart'+key).highcharts(data.highchart[key]);
 						chart.bargrp[key] = $('#groupChart'+key).highcharts();
@@ -865,15 +850,7 @@ $(document).ready(function(){
 					cloneToolTip['normal'] = {};
 					$("#tabs, #chartContainer").show('slow');
 					data.highchart.plotOptions.series.point.events = {click: function(){
-						var point = this.series.name+this.x+','+this.y;
-						if (cloneToolTip['normal'][point]){
-							cloneToolTip['normal'][point].remove();
-							delete cloneToolTip['normal'][point];
-						}else{
-							cloneToolTip['normal'][point] = this.series.chart.tooltip.label.element.cloneNode(true);
-							chart.normal.container.firstChild.appendChild(cloneToolTip['normal'][point]);
-						}
-
+						cloneToolTipFn(this, 'normal');
 					}};
 					$('#chart').highcharts(data.highchart);
 					chart.normal = $('#chart').highcharts();
@@ -1163,6 +1140,20 @@ changeTableClass = function (argument) {
 	.addClass('table table-bordered table-condensed table-striped')
 	.parent().removeClass('top-level').addClass('table-responsive')
 	.parent().attr('style', 'position: relative;').removeClass('google-visualization-table content');
+}
+
+cloneToolTipFn = function(that, key) {
+	var point = that.series.name+that.x+','+that.y;
+	if (cloneToolTip[key][point]){
+		cloneToolTip[key][point].remove();
+		delete cloneToolTip[key][point];
+	}else{
+		cloneToolTip[key][point] = that.series.chart.tooltip.label.element.cloneNode(true);
+		if (key === "normal")
+			chart.normal.container.firstChild.appendChild(cloneToolTip[key][point]);
+		else
+			chart.bargrp[key].container.firstChild.appendChild(cloneToolTip[key][point]);
+	}
 }
 
 $('.download-chart').on('click', function(e){
