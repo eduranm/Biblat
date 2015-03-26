@@ -211,12 +211,16 @@ class Main extends CI_Controller{
 		$this->pagination->initialize($config);
 
 		$this->load->database();
-		$query = "SELECT * FROM \"vIndicadoresRevista\" WHERE substr(\"revistaSlug\", 1 , 1)='{$alpha}'";
+		$query = "SELECT * FROM \"vIndicadoresRevistaGeneral\" WHERE substr(\"revistaSlug\", 1 , 1)='{$alpha}'";
 		$query = $this->db->query($query);
 		$this->db->close();
 
 		$data = array();
-		$data['revistas'] = $query->result_array();
+		foreach ($query->result_array() as $row):
+			$row['agedocjournalcitation'] = json_decode($row['agedocjournalcitation'], TRUE);
+			$row['doctypejournalcitation'] = json_decode($row['doctypejournalcitation'], TRUE);
+			$data['revistas'][] = $row;
+		endforeach;
 		$data['alpha_links'] = $this->pagination->create_alpha_links();
 		$data['alpha'] = strtoupper($alpha);
 		$data['page_title'] = _('Indicadores por revista');
