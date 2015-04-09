@@ -21,7 +21,7 @@ class Revista extends CI_Controller{
 		$data = array();
 		/*Obteniendo articulos de la revista*/
 		$queryFields="SELECT 
-					DISTINCT sistema, 
+					sistema, 
 					articulo, 
 					\"articuloSlug\", 
 					revista, 
