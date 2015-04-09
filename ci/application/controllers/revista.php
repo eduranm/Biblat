@@ -196,7 +196,7 @@ class Revista extends CI_Controller{
 		endif;
 
 		/*Creando palabras clave HTML*/
-		$articulo['palabraClaveHTML'] = "";
+		$articulo['palabrasClaveHTML'] = "";
 		if(isset($articulo['palabraClave'])):
 			$totalPalabrasClave = count($articulo['palabraClave']);
 			$indexPalabraClave = 1;
@@ -269,7 +269,7 @@ class Revista extends CI_Controller{
 			$this->parser->parse('revista/articulo', $data['main']);
 			return;
 		endif;
-		if($uriVar['mail'] == "true"):
+		if(isset($uriVar['mail']) && $uriVar['mail'] == "true"):
 			$this->output->enable_profiler(FALSE);
 			$data['main']['mail'] = TRUE;
 			return $this->parser->parse('revista/articulo', $data['main'], TRUE);
@@ -287,13 +287,17 @@ class Revista extends CI_Controller{
 			$this->template->set_meta('citation_title', $articulo['articulo']);
 			$this->template->set_meta('eprints.title', $articulo['articulo']);
 			$this->template->set_meta('citation_journal_title', $articulo['revista']);
-			$this->template->set_meta('citation_issn', $articulo['issn']);
+			if(isset($articulo['issn'])):
+				$this->template->set_meta('citation_issn', $articulo['issn']);
+			endif;
 			$this->template->set_meta('eprints.type', "article");
 			$this->template->set_meta('eprints.ispublished', "pub");
 			$this->template->set_meta('eprints.date_type', "published");
 			$this->template->set_meta('eprints.publication', $articulo['revista']);
 			$this->template->set_meta('prism.publicationName', $articulo['revista']);
-			$this->template->set_meta('prism.issn', $articulo['issn']);
+			if(isset($articulo['issn'])):
+				$this->template->set_meta('prism.issn', $articulo['issn']);
+			endif;
 			$this->template->set_meta('dc.title', $articulo['articulo']);
 			if(isset($articulo['numero'])):
 				$this->template->set_meta('citation_issue', $articulo['numero']);

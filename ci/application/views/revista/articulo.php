@@ -3,7 +3,7 @@
 {if !$mai}
 		<caption class="text-center"> 
 			{if $ajax}{$articulo.articulo}{/if}
-			<div class="addthis_toolbox addthis_default_style center-block" addthis:url="{site_url("revista/$articulo.revistaSlug/articulo/$articulo.articuloSlug")}" addthis:title="{$title}">
+			<div class="addthis_toolbox addthis_default_style center-block" addthis:url="{site_url("revista/$articulo.revistaSlug/articulo/$articulo.articuloSlug")}" addthis:title="{$articulo.articulo}">
 				<a class="addthis_button_mendeley" style="cursor:pointer"></a>
 				<a class="addthis_button_facebook" style="cursor:pointer"></a>
 				<a class="addthis_button_twitter" style="cursor:pointer"></a>

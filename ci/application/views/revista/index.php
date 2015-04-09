@@ -24,7 +24,7 @@
 {/if}
           </td>
           <td class="nowrap text-right">
-            {$resultado.downloadLink} {$resultado.mendeleyLink}
+            {if $resultado.downloadLink}{$resultado.downloadLink}{/if} {$resultado.mendeleyLink}
           </td>
                 </tr>
 {/foreach}

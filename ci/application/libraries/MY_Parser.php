@@ -65,9 +65,9 @@ class MY_Parser extends CI_Parser {
 		/*$security = new MY_Security_Policy;
 
 		$security->setPhpHandling($this->_parser_allow_php_tags);
-		$security->allowPhpFunction($this->_parser_allowed_php_functions);*/
+		$security->allowPhpFunction($this->_parser_allowed_php_functions);
 
-		$dwoo->setSecurityPolicy($security);
+		$dwoo->setSecurityPolicy($security);*/
 
 		return $dwoo;
 	}
