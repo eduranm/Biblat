@@ -9,7 +9,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 {foreach $template.meta name content}
+{if $name == "keywords"}
+        <meta name="{$name}" content="{foreach $content keyword}{$keyword}, {/foreach}" />
+{else}
         <meta name="{$name}" content="{$content}" />
+{/if}
 {/foreach}
 {foreach $template.metadata key metadata }
         {$metadata}
