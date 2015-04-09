@@ -59,7 +59,7 @@ class Indice extends CI_Controller{
 		/*Vistas*/
 		$data['alfabetico']['page_title'] = sprintf('Revistas por orden alfabético: %s', strtoupper($letra));
 		$this->template->title($data['header']['title']);
-		$this->template->set_meta('description', $data['main']['page_title']);
+		$this->template->set_meta('description', $data['alfabetico']['page_title']);
 		$this->template->set_breadcrumb(_('Alfabético'));
 		$this->template->build('indice/alfabetico', $data['alfabetico']);
 	}
@@ -91,7 +91,7 @@ class Indice extends CI_Controller{
 		/*Vistas*/
 		$data['disciplina']['page_title'] = sprintf('Revistas del área de "%s"', $data['disciplina']['current']['disciplina']);
 		$this->template->title($data['header']['title']);
-		$this->template->set_meta('description', $data['main']['page_title']);
+		$this->template->set_meta('description', $data['disciplina']['page_title']);
 		$this->template->set_breadcrumb(_('Disciplina'));
 		$this->template->build('indice/disciplina', $data['disciplina']);
 	}
@@ -123,7 +123,7 @@ class Indice extends CI_Controller{
 		/*Vistas*/
 		$data['pais']['page_title'] = sprintf('Revistas por país: "%s"', $data['pais']['current']['paisRevista']);
 		$this->template->title($data['header']['title']);
-		$this->template->set_meta('description', $data['main']['page_title']);
+		$this->template->set_meta('description', $data['pais']['page_title']);
 		$this->template->set_breadcrumb(_('País'));
 		$this->template->build('indice/pais', $data['pais']);
 	}

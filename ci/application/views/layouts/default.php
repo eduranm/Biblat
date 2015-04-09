@@ -255,8 +255,12 @@
         <script src="{$file}"></script>
 {/foreach}
         <script>
+{if $template.partials.view_js}
             {$template.partials.biblat_js}
+{/if}
+{if $template.partials.view_js}
             {$template.partials.view_js}
+{/if}
         </script>
     </body>
 </html>

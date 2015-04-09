@@ -116,7 +116,7 @@ class Main extends CI_Controller{
 		foreach ($query->result_array() as $row):
 				$disciplina = array();
 				$disciplina['disciplina'] = $row['disciplinaRevista'];
-				$disciplina['slug'] = $row['slug'];
+				$disciplina['slug'] = $row['disciplinaSlug'];
    				$data[ 'disciplina' ][ $row[ 'base' ] ][] = $disciplina;	
 		endforeach;
 		$data['page_title'] = _('CLASE y PERIÓDICA');

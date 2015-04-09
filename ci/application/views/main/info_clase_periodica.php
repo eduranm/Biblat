@@ -21,7 +21,7 @@
 
     <ol>
 {foreach $disciplina.CLA01 item}
-    <li><a href="{site_url('indice/disciplina/'.$item['slug'])}">{$item.disciplina}</a></li>
+    <li><a href="{site_url('indice/disciplina/$item.slug')}">{$item.disciplina}</a></li>
 {/foreach}
 		</ol><br>
 
@@ -31,7 +31,7 @@
 
 		<ol>
 {foreach $disciplina.PER01 item}
-    <li><a href="{site_url('indice/disciplina/'.$item['slug'])}">{$item.disciplina}</a></li>
+    <li><a href="{site_url('indice/disciplina/$item.slug')}">{$item.disciplina}</a></li>
 {/foreach}
 	  </ol><br>
 

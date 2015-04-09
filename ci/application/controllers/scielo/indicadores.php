@@ -290,7 +290,7 @@ class Indicadores extends CI_Controller {
 		/*Vistas*/
 		$data['page_title'] = $this->indicadores[$indicador]['title'] == '' ? _('Indicadores bibliométricos') : $this->indicadores[$indicador]['title'];
 		$this->template->set_partial('view_js', 'scielo/indicadores/index_js', $data, TRUE, FALSE);
-		$this->template->title($data['header']['title']);
+		$this->template->title(_sprintf('Biblat - Indicadores bibliométricos - %s', $this->indicadores[$indicador]['title']));
 		$this->template->css('css/jquery.slider.min.css');
 		$this->template->css('css/colorbox.css');
 		$this->template->js('js/jquery.slider.min.js');
