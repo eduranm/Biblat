@@ -321,19 +321,11 @@ class Revista extends CI_Controller{
 				$this->template->set_meta('dc.date', $articulo['anioRevista']);
 			endif;
 			if(isset($articulo['autores'])):
-				$autoresTotal = count($articulo['autores']);
-				$autorIndex = 1;
-				$citation_authors = "";
 				foreach ($articulo['autores'] as $autor):
-					$citation_authors .= "{$autor}";
-					if($autorIndex < $autoresTotal):
-						$citation_authors .= "; ";
-					endif;
-					$autorIndex++;
-					$this->template->set_meta('eprints.creators_name', $autor);
-					$this->template->set_meta('dc.creator', $autor);
+					$this->template->append_metadata(sprintf('<meta name="eprints.creators_name" content="%s" />', $autor));
+					$this->template->append_metadata(sprintf('<meta name="dc.creator" content="%s" />', $autor));
+					$this->template->append_metadata(sprintf('<meta name="citation_author" content="%s" />', $autor));
 				endforeach;
-				$this->template->set_meta('citation_authors', $citation_authors);
 			endif;
 		endif;
 		/*Article meta*/
