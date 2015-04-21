@@ -33,6 +33,9 @@
         <link rel="stylesheet" href="{$file}" type="text/css" />
 {/foreach}
         <link rel="stylesheet" href="{base_url('assets/css/biblat.css')}" type="text/css" />
+{foreach supported_langs() key curlang}
+        {if lang_iso_code() != $curlang.iso}<link rel="alternate" href="{site_url($lang->switch_uri($key))}" hreflang="{$curlang.iso}" />{/if}
+{/foreach}
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <script src="http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
