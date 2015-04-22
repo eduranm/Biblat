@@ -85,7 +85,7 @@ class Buscar extends CI_Controller{
 		$data = array();
 
 		/*Header title*/
-		$data['header']['title'] = _sprintf('Biblat - Búsqueda %s: "%s"', strtolower($indiceArray[$indice]['descripcion']), slugSearchClean($slug));
+		$data['header']['title'] = _sprintf('Biblat - Búsqueda: "%s"', slugSearchClean($slug));
 		/*Result title*/
 		$data['main']['page_title'] = _sprintf('Resultados de la búsqueda: %s', slugSearchClean($slug));
 		/*Consultas*/
