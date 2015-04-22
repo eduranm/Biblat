@@ -288,9 +288,9 @@ class Indicadores extends CI_Controller {
 		$data = array();
 		$data['indicador'] = $indicador;
 		/*Vistas*/
-		$data['page_title'] = $this->indicadores[$indicador]['title'] == '' ? _('Indicadores bibliométricos') : $this->indicadores[$indicador]['title'];
+		$data['page_title'] = $indicador != "" ? $this->indicadores[$indicador]['title'] : _('Indicadores bibliométricos');
 		$this->template->set_partial('view_js', 'scielo/indicadores/index_js', $data, TRUE, FALSE);
-		$this->template->title(_sprintf('Biblat - Indicadores bibliométricos - %s', $this->indicadores[$indicador]['title']));
+		$this->template->title($indicador != "" ? _sprintf('Biblat - Indicadores bibliométricos - %s', $this->indicadores[$indicador]['title']): _('Biblat - Indicadores bibliométricos'));
 		$this->template->css('css/jquery.slider.min.css');
 		$this->template->css('css/colorbox.css');
 		$this->template->js('js/jquery.slider.min.js');
@@ -304,7 +304,7 @@ class Indicadores extends CI_Controller {
 		$this->template->js('assets/js/StackBlur.js');
 		$this->template->js('assets/js/canvg.js');
 		$this->template->js('//www.google.com/jsapi');
-		$this->template->set_meta('description', $this->indicadores[$indicador]['title']);
+		$this->template->set_meta('description', $data['page_title']);
 		$this->template->set_breadcrumb(_('Indicadores bibliométricos'));
 		$this->template->build('scielo/indicadores/index', $data);
 	}
