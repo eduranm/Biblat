@@ -277,13 +277,13 @@ class Revista extends CI_Controller{
 
 		$this->template->set_partial('view_js', 'revista/articulo_header', array(), TRUE);
 		$this->template->title($data['header']['title']);
-		$this->template->set_breadcrumb(_('Artículo'));
 		if(ENVIRONMENT === "production"):
 			$this->template->js('//s7.addthis.com/js/300/addthis_widget.js#pubid=herz');
 		endif;
 		$this->template->set_meta('description', $data['main']['page_title']);
 		/*Article meta*/
 		if(isset($articulo)):
+			$this->template->set_breadcrumb($articulo['revista'], site_url("revista/{$articulo['revistaSlug']}"));
 			$this->template->set_meta('citation_title', $articulo['articulo']);
 			$this->template->set_meta('eprints.title', $articulo['articulo']);
 			$this->template->set_meta('citation_journal_title', $articulo['revista']);
@@ -328,6 +328,7 @@ class Revista extends CI_Controller{
 				endforeach;
 			endif;
 		endif;
+		$this->template->set_breadcrumb(_('Artículo'));
 		/*Article meta*/
 		$this->template->build('revista/articulo', $data['main']);
 	}
