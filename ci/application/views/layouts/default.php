@@ -258,7 +258,7 @@
         <script src="{$file}"></script>
 {/foreach}
         <script>
-{if $template.partials.view_js}
+{if $template.partials.biblat_js}
             {$template.partials.biblat_js}
 {/if}
 {if $template.partials.view_js}
