@@ -173,9 +173,9 @@
                     <ol class="breadcrumb">
 {foreach $template.breadcrumbs breadcrumb}
 {if $breadcrumb.uri != ''}
-                        <li><a href="{$breadcrumb.uri}">{$breadcrumb.name}</a></li>
+                        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{$breadcrumb.uri}" itemprop="url"><span itemprop="title">{$breadcrumb.name}</span></a></li>
 {else}
-                        <li>{$breadcrumb.name}</li>
+                        <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><span itemprop="title">{$breadcrumb.name}</span></li>
 {/if}
 {/foreach}
                     </ol>
