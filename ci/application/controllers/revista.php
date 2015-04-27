@@ -280,7 +280,7 @@ class Revista extends CI_Controller{
 		if(ENVIRONMENT === "production"):
 			$this->template->js('//s7.addthis.com/js/300/addthis_widget.js#pubid=herz');
 		endif;
-		$this->template->set_meta('description', $data['main']['page_title']);
+		$this->template->set_meta('description', $articulo['articulo']);
 		/*Article meta*/
 		if(isset($articulo)):
 			$this->template->set_breadcrumb($articulo['revista'], site_url("revista/{$articulo['revistaSlug']}"));
