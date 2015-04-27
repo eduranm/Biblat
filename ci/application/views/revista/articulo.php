@@ -1,4 +1,5 @@
 {if $articulo}
+<div itemscope itemtype="http://schema.org/Article">
 	<table class="table table-striped {if $ajax}articulo{/if}" {if $mail} border="1" style="border-collapse:collapse; width:650px;"{/if}>
 {if !$mai}
 		<caption class="text-center"> 
@@ -180,4 +181,5 @@
 {/if}
 		</tbody>
 	</table>
+</div>
 {/if}

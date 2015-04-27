@@ -8,7 +8,7 @@ class Revista extends CI_Controller{
 		$this->template->set_partial('submenu', 'layouts/submenu');
 		$this->template->set_partial('search', 'layouts/search');
 		$this->template->set_breadcrumb(_('Inicio'), site_url('/'));
-		$this->template->set_breadcrumb(_('Revista'));
+		$this->template->set_breadcrumb(_('Revista'), site_url('revista'));
 		$this->template->set('class_method', $this->router->fetch_class().$this->router->fetch_method());
 	}
 
@@ -157,7 +157,7 @@ class Revista extends CI_Controller{
 			$totalAutores = count($articulo['autores']);
 			$indexAutor = 1;
 			foreach ($articulo['autores'] as $key => $autor):
-				$articulo['autoresHTML'] .= "{$autor}";
+				$articulo['autoresHTML'] .= "<span itemprop=\"author\" itemscope itemtype=\"http://schema.org/Person\"><span itemprop=\"name\">{$autor}</span></span>";
 				if ( isset($articulo['instituciones'][$articulo['autoresInstitucionSec'][$key]]) ):
 					$articulo['autoresHTML'] .= "<sup>{$articulo['autoresInstitucionSec'][$key]}</sup>";
 				endif;
@@ -260,7 +260,7 @@ class Revista extends CI_Controller{
 		$data['main']['articulo'] = $articulo;
 		$data['header']['articulo'] = $data['main']['articulo'];
 		$data['header']['title'] = _sprintf('Biblat - Revista: %s - Artículo: %s', $articulo['revista'], $articulo['articulo']);
-		$data['main']['page_title'] = $articulo['articulo'];
+		$data['main']['page_title'] = "<span itemprop=\"name\">{$articulo['articulo']}</span>";
 		$data['main']['mail'] = FALSE;
 		/*Vistas*/
 		if(isset($_POST['ajax'])):
@@ -328,7 +328,6 @@ class Revista extends CI_Controller{
 				endforeach;
 			endif;
 		endif;
-		$this->template->set_breadcrumb(_('Artículo'));
 		/*Article meta*/
 		$this->template->build('revista/articulo', $data['main']);
 	}
