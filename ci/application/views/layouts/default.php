@@ -251,7 +251,7 @@
         <script src="{base_url('js/jquery.autosize.min.js')}"></script>
         <script src="{base_url('js/jquery.validate.min.js')}"></script>
         <script src="{base_url('assets/js/pnotify/jquery.pnotify.min.js')}"></script>
-        <script src="{base_url('assets/js/select2/select2.js')}"></script>
+        <script src="{base_url('assets/js/select2/select2.min.js')}"></script>
         <script src="{base_url('js/jquery.blockUI.js')}"></script>
         <script src="{base_url('assets/js/advancedsearch/js/evol.advancedSearch.min.js')}"></script>
 {foreach $template.js file}
