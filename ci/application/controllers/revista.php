@@ -359,9 +359,9 @@ class Revista extends CI_Controller{
 			$this->email->send();
 			/*Almacenando registro en la bitácora*/
 			$database = ($data['database'] == "CLASE") ? 0 : 1;
-			$ip = (isset($_SERVER['GEOIP_ADDR'])) ? $_SERVER['GEOIP_ADDR'] : $_SERVER['REMOTE_ADDR'];
-			$pais = (isset($_SERVER['GEOIP_COUNTRY_NAME'])) ? "'{$_SERVER['GEOIP_COUNTRY_NAME']}'" : "NULL";
-			$ciudad = (isset($_SERVER['GEOIP_REGION_NAME'])) ? "'{$_SERVER['GEOIP_REGION_NAME']}'" : "NULL";
+			$ip = (isset($_SERVER['REDIRECT_GEOIP_ADDR'])) ? $_SERVER['REDIRECT_GEOIP_ADDR'] : $_SERVER['REMOTE_ADDR'];
+			$pais = (isset($_SERVER['REDIRECT_GEOIP_COUNTRY_NAME'])) ? "'{$_SERVER['REDIRECT_GEOIP_COUNTRY_NAME']}'" : "NULL";
+			$ciudad = (isset($_SERVER['REDIRECT_GEOIP_REGION_NAME'])) ? "'{$_SERVER['REDIRECT_GEOIP_REGION_NAME']}'" : "NULL";
 			$session_id = $this->session->userdata('session_id');
 			$query = "INSERT INTO \"logSolicitudDocumento\"(database, sistema, nombre, email, instituto, telefono, ip, pais, ciudad, session_id)
 				VALUES ({$database}, '{$data['sistema']}', '{$data['from']}', '{$data['email']}', '{$data['instituto']}', '{$data['telefono']}', '{$ip}', {$pais}, {$ciudad}, '{$session_id}');";
