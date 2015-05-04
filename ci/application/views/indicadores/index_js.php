@@ -7,7 +7,12 @@ var rangoPeriodo="0-0";
 var dataPeriodo="0-0";
 var paisRevistaURL="";
 var asyncAjax=false;
-var soloDisciplina = ['indice-concentracion', 'modelo-bradford-revista', 'modelo-bradford-institucion', 'productividad-exogena'];
+<?php 	if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
+var revistaHidden =  ['indice-concentracion', 'productividad-exogena'];
+<?php 	else:?>
+var revistaHidden =  [];
+<?php 	endif;?>
+var soloDisciplina = ['modelo-bradford-revista', 'modelo-bradford-institucion', 'indice-concentracion', 'productividad-exogena'];
 var soloPaisAutor = ['indice-coautoria', 'tasa-documentos-coautorados', 'indice-colaboracion'];
 var cloneToolTip = {};
 Highcharts.setOptions({
@@ -36,6 +41,8 @@ $(document).ready(function(){
 			$("#revista, #paisRevista, #paisAutor").empty().append('<option></option>');
 			$("#revista, #paisRevista, #paisAutor").select2("destroy");
 			$("#disciplina").select2("enable", true);
+			if($.inArray(value, revistaHidden) > -1)
+				$("#revista").select2({allowClear: true, closeOnSelect: true});
 			updateInfo(value);
 		}else{
 			$("#revista, #paisRevista, #paisAutor").select2({allowClear: true, closeOnSelect: true});
@@ -70,15 +77,19 @@ $(document).ready(function(){
 			$("#revista, #paisRevista, #paisAutor").select2("destroy");
 			$("#revista, #paisRevista, #paisAutor").select2({allowClear: true, closeOnSelect: true});
 			$("#revista, #paisRevista, #paisAutor").select2("enable", false);
-		} else if ($.inArray(indicadorValue, soloDisciplina) > -1) {
+		} else if ($.inArray(indicadorValue, soloDisciplina) > -1 && $.inArray(indicadorValue, revistaHidden) == -1) {
 			$("#generarIndicador").submit();
 		} else {
 			if(!loading.status && !popState.disciplina){
 				loading.start();
 			}
-			$("#orPaisRevistaColumn").show();
-			$("#paisRevistaDiv").removeClass("hidden").slideDown("slow");
-			$("#periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
+			if($.inArray(indicadorValue, revistaHidden) == -1){
+				$("#orPaisRevistaColumn").show();
+				$("#paisRevistaDiv").removeClass("hidden").slideDown("slow");
+				$("#periodos, #tabs, #chartContainer, #bradfodContainer, #prattContainer").hide("slow");
+			}else{
+				$("#paisRevistaDiv").removeClass("hidden").slideDown("slow");
+			}
 			$.ajax({
 				url: '<?=site_url("indicadores/getRevistasPaises");?>',
 				type: 'POST',
@@ -159,7 +170,11 @@ $(document).ready(function(){
 		if (value != "" && value != null) {
 			$("#paisRevista").select2("enable", false);
 			$("#paisAutor").select2("enable", false);
-			setPeridos();
+			if($.inArray(indicadorValue, revistaHidden) == -1){
+				setPeridos();
+			}else{
+				$("#generarIndicador").submit();
+			}
 		}else{
 			$("#periodos, #tabs, #chartContainer").hide("slow");
 			$("#paisRevista").select2("enable", true);

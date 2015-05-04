@@ -24,6 +24,7 @@ class Indicadores extends CI_Controller {
 
 	public $soloPaisRevista = array('indice-coautoria', 'tasa-documentos-coautorados', 'grado-colaboracion', 'modelo-elitismo', 'indice-colaboracion');
 	public $soloPaisAutor = array('indice-coautoria', 'tasa-documentos-coautorados', 'indice-colaboracion');
+	public $revistaHidden = array('indice-concentracion', 'productividad-exogena');
 	public $colors = array(
 		'#3366CC',
 		'#DC3912',
@@ -610,18 +611,32 @@ class Indicadores extends CI_Controller {
 		$this->output->enable_profiler(false);
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
 		$indicador['indice-concentracion'] = array(
-				'sql' => "SELECT revista, \"revistaSlug\", pratt AS indicador FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
+				'sql' => "SELECT revista, \"revistaSlug\", pratt AS indicador FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina}",
 				'title' => _('Índice de concentración temática'), 
 				'chartTitle' => '<div id="chartTitle"><div class="text-center nowrap"><h4>'._('Índice de concentración (Índice de Pratt)').'</h4><br/>'._('Distribución decreciente de las revistas considerando su grado de concentración temática').'</div></div>',
 				'tooltip' => "<b>{point.name}</b><br/>Nivel de especialización de la revista: <b>{point.y}</b>"
 			);
 		$indicador['productividad-exogena'] = array(
-				'sql' => "SELECT revista, \"revistaSlug\", exogena AS indicador FROM \"mvProductividadExogena\" WHERE id_disciplina={$idDisciplina} ORDER BY indicador DESC",
+				'sql' => "SELECT revista, \"revistaSlug\", exogena AS indicador FROM \"mvProductividadExogena\" WHERE id_disciplina={$idDisciplina}",
 				'title' => _('Proporción de autoría exógena'), 
 				'chartTitle' => '<div id="chartTitle" class="text-center nowrap"><h4>'._('Tasa de autoría exógena').'</h4><br/>'._('Distribución decreciente de las revistas considerando la proporción de autoría exógena').'</div>',
 				'tooltip' => "<b>{point.name}</b><br/>Proporción de autores extranjeros: <b>{point.y}</b>"
 			);
 		$query = $indicador[$_POST['indicador']]['sql'];
+		if (isset($_POST['revista'])):
+			$query .= " AND \"revistaSlug\" IN (";
+			$revistaOffset=1;
+			$revistaTotal= count($_POST['revista']);
+			foreach ($_POST['revista'] as $revista):
+				$query .= "'{$revista}'";
+				if($revistaOffset < $revistaTotal):
+					$query .=",";
+				endif;
+				$revistaOffset++;
+			endforeach;
+			$query .= ")";
+		endif;
+		$query .= " ORDER BY indicador DESC";
 		$query = $this->db->query($query);
 		$offset = 0;
 		$grupo = 0;
@@ -733,13 +748,17 @@ class Indicadores extends CI_Controller {
 		$indicadorTabla['modelo-elitismo']="CoautoriaPriceZakutina";
 		$indicadorTabla['indice-colaboracion']="TasaLawani";
 		$indicadorTabla['indice-densidad-documentos']="CoautoriaPriceZakutina";
-		$indicadorTabla['indice-concentracion']="";
+		$indicadorTabla['indice-concentracion']="mvPratt";
 		$indicadorTabla['modelo-bradford-revista']="";
 		$indicadorTabla['modelo-bradford-institucion']="";
-		$indicadorTabla['productividad-exogena']="";
+		$indicadorTabla['productividad-exogena']="mvProductividadExogena";
 
 		$this->load->database();
-		$query = "SELECT revista, \"revistaSlug\" FROM \"mvPeriodosRevista{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
+		if(in_array($_POST['indicador'], $this->revistaHidden)):
+			$query = "SELECT revista, \"revistaSlug\" FROM \"{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
+		else:
+			$query = "SELECT revista, \"revistaSlug\" FROM \"mvPeriodosRevista{$indicadorTabla[$_POST['indicador']]}\" WHERE id_disciplina='{$this->disciplinas[$_POST['disciplina']]['id_disciplina']}'";
+		endif;
 		$query = $this->db->query($query);
 		foreach ($query->result_array() as $row ):
 			$revista = array(
