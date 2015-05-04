@@ -835,16 +835,18 @@ $(document).ready(function(){
 					});
 					$('#carousel-chargrp').on('slid.bs.carousel', function () {
 						lastGeneralChart = $('#carousel-chargrp').find('.item.active').attr('id').replace('chartParent', '');
+						updateInfoRevista();
 						console.log(lastGeneralChart);
-					})
+					});
 					var tableData = new google.visualization.DataTable(data.dataTable);
 					$("#gridContainer").empty();
 					$("#gridContainer").append(data.tableTitle);
 					$("#gridContainer").append($('<div></div>').attr('id', 'table0'));
 					tables.normal = new google.visualization.Table(document.getElementById('table0'));
 					tables.normal.draw(tableData, data.tableOptions);
-					changeTableClass();
 					google.visualization.events.addListener(tables.normal , 'sort', changeTableClass);
+					changeTableClass();
+					updateInfoRevista();
 					break;
 				default:
 					cloneToolTip['normal'] = {};
@@ -981,6 +983,11 @@ setPeriodos = function(){
 updateInfo = function(){
 	$("#info").children(".infoBox").hide();
 	$("#info-" + realIndicator).show();
+}
+
+updateInfoRevista = function(){
+	$("#info-" + realIndicator).children("div").hide();
+	$("#info-" + realIndicator).children("#revista-" + lastGeneralChart).show();
 }
 
 updateData = function(){

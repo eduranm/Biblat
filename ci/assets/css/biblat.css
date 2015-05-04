@@ -465,6 +465,7 @@ footer a {
 	padding: 0.2em; 
 	}
 .fraction span.fdn {border-top: thin solid black;}
+.fraction span.fdnb {border-top: none;}
 .fraction span.bar {display: none;}
 
 .n-root {

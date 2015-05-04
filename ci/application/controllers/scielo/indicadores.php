@@ -94,15 +94,15 @@ class Indicadores extends CI_Controller {
 				'update' => '08/12/2014'
 				),
 			'citacion-articulos-edad-afiliacion' => array(
-				'title' => _('Distribución de artículos según edad del documento y país de afiliación citante'),
+				'title' => _('Distribución de artículos por edad del documento citado y país de afiliación citante'),
 				'update' => '08/12/2014'
 				),
 			'citacion-articulos-edad-area' => array(
-				'title' => _('Distribución de artículos según edad del documento y área citante'),
+				'title' => _('Distribución de artículos por edad del documento citado y área citante'),
 				'update' => '08/12/2014'
 				),
 			'citacion-articulos-edad-revista' => array(
-				'title' => _('Distribución de artículos según edad del documento y revista citante'),
+				'title' => _('Distribución de artículos por edad del documento citado y revista citante'),
 				'update' => '08/12/2014'
 				),
 			'distribucion-articulos-publicacion-afiliacion' => array(
@@ -118,15 +118,15 @@ class Indicadores extends CI_Controller {
 				'update' => '08/12/2014'
 				),
 			'citacion-articulos-tipo-afiliacion' => array(
-				'title' => _('Distribución de artículos según tipo de documento y país de afiliación citante'),
+				'title' => _('Distribución de artículos por tipo del documento citado y país de afiliación citante'),
 				'update' => '08/12/2014'
 				),
 			'citacion-articulos-tipo-area' => array(
-				'title' => _('Distribución de artículos según tipo de documento y área citante'),
+				'title' => _('Distribución de artículos por tipo del documento citado y área citante'),
 				'update' => '08/12/2014'
 				),
 			'citacion-articulos-tipo-revista' => array(
-				'title' => _('Distribución de artículos según tipo de documento y revista citante'),
+				'title' => _('Distribución de artículos por tipo del documento citado y revista citante'),
 				'update' => '08/12/2014'
 				),
 			'distribucion-coautor-area-afiliacion' => array(
