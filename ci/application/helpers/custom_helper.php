@@ -272,7 +272,7 @@ if ( ! function_exists('articulosResultado') ):
 				$indexAutor = 1;
 				foreach ($row['autores'] as $key => $autor):
 					$autorSlug = slug($autor);
-					$row['autoresHTML'] .= "<a href=\"".site_url("frecuencias/autor/$autorSlug")."\">{$autor}</a>";
+					$row['autoresHTML'] .= "<a href=\"".site_url("frecuencias/autor/$autorSlug")."\" title=\""._sprintf('Frecenias por autor: %s', $autor)."\">{$autor}</a>";
 					if ( isset($row['instituciones'][$row['autoresInstitucionSec'][$key]]) ):
 						$row['autoresHTML'] .= "<sup>{$row['autoresInstitucionSec'][$key]}</sup>";
 					endif;
