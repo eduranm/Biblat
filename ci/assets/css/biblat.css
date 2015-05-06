@@ -763,3 +763,8 @@ table.articulo{
 .list-main .list-group-item:last-child {
 	border-bottom: 0 none;
 }
+
+.article-tittle{
+	font-size: 1.3em;
+	font-weight: bold;
+}
