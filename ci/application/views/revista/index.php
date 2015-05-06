@@ -10,7 +10,6 @@
           <td>{$key}.-</td>
           <td>
             <span class="article-tittle">{$resultado.articuloLink}</span><br/>
-            <a href="{site_url('frecuencias/revista/$resultado.revistaSlug')}" title="{_sprintf('Frecuencias por revista: %s', $resultado.revista)}">{$resultado.revista}</a><br/>
 {if $resultado.autoresHTML}
            {$resultado.autoresHTML}<br/>
 {/if}

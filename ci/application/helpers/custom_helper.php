@@ -308,7 +308,7 @@ if ( ! function_exists('articulosResultado') ):
 			if(!empty($row['paginacion'])):
 				$row['paginacion'] = _sprintf('Pág. %s', $row['paginacion']);
 			endif;
-			$row['detalleRevista'] = "[{$row['revista']}, {$row['paisRevista']}, {$row['anioRevista']} {$row['volumen']} {$row['numero']} {$row['periodo']}, {$row['paginacion']}]";
+			$row['detalleRevista'] = "[<a href=\"".site_url("frecuencias/revista/{$row['revistaSlug']}")."\" title=\""._sprintf('Frecuencias por revista: %s', $row['revista'])."\">{$row['revista']}</a>, {$row['paisRevista']}, {$row['anioRevista']} {$row['volumen']} {$row['numero']} {$row['periodo']}, {$row['paginacion']}]";
 
 			$resultado['articulos'][++$offset] = $row;
 		endforeach;
