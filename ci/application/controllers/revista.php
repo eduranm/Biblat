@@ -157,7 +157,8 @@ class Revista extends CI_Controller{
 			$totalAutores = count($articulo['autores']);
 			$indexAutor = 1;
 			foreach ($articulo['autores'] as $key => $autor):
-				$articulo['autoresHTML'] .= "<span itemprop=\"author\" itemscope itemtype=\"http://schema.org/Person\"><span itemprop=\"name\">{$autor}</span></span>";
+				$autorSlug = slug($autor);
+				$articulo['autoresHTML'] .= "<span itemprop=\"author\" itemscope itemtype=\"http://schema.org/Person\"><span itemprop=\"name\"><a href=\"".site_url("frecuencias/autor/$autorSlug")."\">{$autor}</a></span></span>";
 				if ( isset($articulo['instituciones'][$articulo['autoresInstitucionSec'][$key]]) ):
 					$articulo['autoresHTML'] .= "<sup>{$articulo['autoresInstitucionSec'][$key]}</sup>";
 				endif;

@@ -271,7 +271,8 @@ if ( ! function_exists('articulosResultado') ):
 				$totalAutores = count($row['autores']);
 				$indexAutor = 1;
 				foreach ($row['autores'] as $key => $autor):
-					$row['autoresHTML'] .= "{$autor}";
+					$autorSlug = slug($autor);
+					$row['autoresHTML'] .= "<a href=\"".site_url("frecuencias/autor/$autorSlug")."\">{$autor}</a>";
 					if ( isset($row['instituciones'][$row['autoresInstitucionSec'][$key]]) ):
 						$row['autoresHTML'] .= "<sup>{$row['autoresInstitucionSec'][$key]}</sup>";
 					endif;
