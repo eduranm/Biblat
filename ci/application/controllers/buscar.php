@@ -145,10 +145,7 @@ class Buscar extends CI_Controller{
 			periodo, 
 			paginacion, 
 			url->>0 AS url, 
-			\"autoresSecJSON\",
-			\"autoresSecInstitucionJSON\",
 			\"autoresJSON\",
-			\"institucionesSecJSON\",
 			\"institucionesJSON\"";
 		$queryFrom="FROM \"vSearchFull\" s 
 				WHERE  {$slugQuerySearch['where']} {$whereTextoCompleto} {$whereDisciplina}";

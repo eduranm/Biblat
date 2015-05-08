@@ -234,19 +234,15 @@ if ( ! function_exists('articulosResultado') ):
 		$query = $ci->db->query($query);
 		foreach ($query->result_array() as $row):
 			/*Generando arreglo de autores*/
-			if($row['autoresSecJSON'] != NULL && $row['autoresJSON'] != NULL):
-				$row['autores'] = array_combine(json_decode($row['autoresSecJSON']), json_decode($row['autoresJSON']));
+			if($row['autoresJSON'] != NULL):
+				$row['autores'] = json_decode($row['autoresJSON'], TRUE);
 			endif;
-			/*Generando arreglo institucion de autores*/
-			if($row['autoresSecJSON'] != NULL && $row['autoresSecInstitucionJSON'] != NULL):
-				$row['autoresInstitucionSec'] = array_combine(json_decode($row['autoresSecJSON']), json_decode($row['autoresSecInstitucionJSON']));
-			endif;
-			unset($row['autoresSecJSON'], $row['autoresJSON'], $row['autoresSecInstitucionJSON']);
+			unset($row['autoresJSON']);
 			/*Generando arreglo de instituciones*/
-			if($row['institucionesSecJSON'] != NULL && $row['institucionesJSON'] != NULL):
-				$row['instituciones'] = array_combine(json_decode($row['institucionesSecJSON']), json_decode($row['institucionesJSON']));
+			if($row['institucionesJSON'] != NULL):
+				$row['instituciones'] = json_decode($row['institucionesJSON'], TRUE);
 			endif;
-			unset($row['institucionesSecJSON'], $row['institucionesJSON']);
+			unset($row['institucionesJSON']);
 			/*Limpiando caracteres html*/
 			$row = htmlspecialchars_deep($row);
 			/*Creando valores para el checkbox*/
@@ -270,11 +266,11 @@ if ( ! function_exists('articulosResultado') ):
 			if(isset($row['autores'])):
 				$totalAutores = count($row['autores']);
 				$indexAutor = 1;
-				foreach ($row['autores'] as $key => $autor):
-					$autorSlug = slug($autor);
-					$row['autoresHTML'] .= "<a href=\"".site_url("frecuencias/autor/$autorSlug")."\" title=\""._sprintf('Frecuencias por autor: %s', $autor)."\">{$autor}</a>";
-					if ( isset($row['instituciones'][$row['autoresInstitucionSec'][$key]]) ):
-						$row['autoresHTML'] .= "<sup>{$row['autoresInstitucionSec'][$key]}</sup>";
+				foreach ($row['autores'] as $autor):
+					$autorSlug = slug($autor['a']);
+					$row['autoresHTML'] .= anchor("frecuencias/autor/{$autorSlug}", $autor['a'], 'title="'._sprintf('Frecuencias por autor: %s', $autor['a']).'"');
+					if ( isset($autor['z']) ):
+						$row['autoresHTML'] .= "<sup>{$autor['z']}</sup>";
 					endif;
 					if($indexAutor < $totalAutores):
 						$row['autoresHTML'] .= "; ";
@@ -288,7 +284,9 @@ if ( ! function_exists('articulosResultado') ):
 				$totalInstituciones = count($row['instituciones']);
 				$indexInstitucion = 1;
 				foreach ($row['instituciones'] as $key => $institucion):
-					$row['institucionesHTML'] .= "<sup>{$key}</sup>{$institucion}";
+					$row['institucionesHTML'] .= sprintf('<sup>%s</sup>%s%s%s%s', $institucion['z'], empty($institucion['u'])?NULL:anchor("frecuencias/institucion/".slug($institucion['u']), $institucion['u'], 'title="'._sprintf('Frecuencias por intitución: %s', $institucion['u']).'"').", ", empty($institucion['v'])?NULL:"{$institucion['v']}, ", empty($institucion['w'])?NULL:"{$institucion['w']}. ", empty($institucion['x'])?NULL:anchor("frecuencias/pais-afiliacion/".slug($institucion['x']), $institucion['x'], 'title="'._sprintf('Frecuencias por país de afiliación: %s', $institucion['x']).'"'));
+
+					// $row['institucionesHTML'] .= "<sup>{$key}</sup>{$institucion}";
 					if($indexInstitucion < $totalInstituciones):
 						$row['institucionesHTML'] .= "; ";
 					endif;

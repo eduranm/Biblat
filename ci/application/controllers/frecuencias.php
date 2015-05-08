@@ -15,10 +15,7 @@ class Frecuencias extends CI_Controller {
 					periodo, 
 					paginacion, 
 					url->>0 AS url,
-					\"autoresSecJSON\",
-					\"autoresSecInstitucionJSON\",
 					\"autoresJSON\",
-					\"institucionesSecJSON\",
 					\"institucionesJSON\"";
 
 	public function __construct()
@@ -1892,23 +1889,19 @@ class Frecuencias extends CI_Controller {
 		echo "\n";
  		foreach ($query->result_array() as $row):
  			/*Generando arreglo de autores*/
-			if($row['autoresSecJSON'] != NULL && $row['autoresJSON'] != NULL):
-				$row['autores'] = array_combine(json_decode($row['autoresSecJSON']), json_decode($row['autoresJSON']));
+			if($row['autoresJSON'] != NULL):
+				$row['autores'] = json_decode($row['autoresJSON'], TRUE);
 			endif;
-			/*Generando arreglo institucion de autores*/
-			if($row['autoresSecJSON'] != NULL && $row['autoresSecInstitucionJSON'] != NULL):
-				$row['autoresInstitucionSec'] = array_combine(json_decode($row['autoresSecJSON']), json_decode($row['autoresSecInstitucionJSON']));
-			endif;
-			unset($row['autoresSecJSON'], $row['autoresJSON'], $row['autoresSecInstitucionJSON']);
+			unset($row['autoresJSON']);
 			/*Generando arreglo de instituciones*/
-			if($row['institucionesSecJSON'] != NULL && $row['institucionesJSON'] != NULL):
-				$row['instituciones'] = array_combine(json_decode($row['institucionesSecJSON']), json_decode($row['institucionesJSON']));
+			if($row['institucionesJSON'] != NULL):
+				$row['instituciones'] = json_decode($row['institucionesJSON'], TRUE);
 			endif;
-			unset($row['institucionesSecJSON'], $row['institucionesJSON']);
+			unset($row['institucionesJSON']);
 			$autores="";
 			$autorOffset=1;
-			foreach($row['autores'] as $key => $value):
-				$autores .= "{$value} ({$row['autoresInstitucionSec'][$key]})";
+			foreach($row['autores'] as $autor):
+				$autores .= "{$autor['a']} ({$autor['z']})";
 				if($autorOffset < count($row['autores'])):
 					$autores .= "; ";
  				endif;
@@ -1916,8 +1909,8 @@ class Frecuencias extends CI_Controller {
 			endforeach;
 			$instituciones="";
 			$institucionOffset=1;
-			foreach($row['instituciones'] as $key => $value):
-				$instituciones .= "({$key}) {$value}";
+			foreach($row['instituciones'] as $institucion):
+				$instituciones .= "({$institucion['z']}) {$institucion['u']}";
 				if($institucionOffset < count($row['instituciones'])):
 					$instituciones .= "; ";
  				endif;

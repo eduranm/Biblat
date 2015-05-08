@@ -16,10 +16,7 @@ class Indicadores extends CI_Controller {
 					periodo, 
 					paginacion, 
 					url, 
-					\"autoresSecJSON\",
-					\"autoresSecInstitucionJSON\",
 					\"autoresJSON\",
-					\"institucionesSecJSON\",
 					\"institucionesJSON\"";
 
 	public $soloPaisRevista = array('indice-coautoria', 'tasa-documentos-coautorados', 'grado-colaboracion', 'modelo-elitismo', 'indice-colaboracion');

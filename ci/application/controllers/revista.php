@@ -33,10 +33,7 @@ class Revista extends CI_Controller{
 					periodo, 
 					paginacion, 
 					url->>0 AS url, 
-					\"autoresSecJSON\",
-					\"autoresSecInstitucionJSON\",
 					\"autoresJSON\",
-					\"institucionesSecJSON\",
 					\"institucionesJSON\"";
 		$queryFrom = "FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$revistaSlug}'";
 		$query = "{$queryFields} 
@@ -99,10 +96,7 @@ class Revista extends CI_Controller{
 				s.idioma, 
 				s.\"tipoDocumento\", 
 				s.\"enfoqueDocumento\", 
-				s.\"autoresSecJSON\", 
-				s.\"autoresSecInstitucionJSON\", 
 				s.\"autoresJSON\", 
-				s.\"institucionesSecJSON\", 
 				s.\"institucionesJSON\", 
 				s.\"disciplinas\", 
 				s.\"palabraClave\",
@@ -117,36 +111,32 @@ class Revista extends CI_Controller{
 		$this->db->close();
 		/*Ordenando los datos del articulo*/
 		/*Generando arreglo de autores*/
-		if($articulo['autoresSecJSON'] != NULL && $articulo['autoresJSON'] != NULL):
-			$articulo['autores'] = array_combine(json_decode($articulo['autoresSecJSON']), json_decode($articulo['autoresJSON']));
+		if($articulo['autoresJSON'] != NULL):
+			$articulo['autores'] = json_decode($articulo['autoresJSON'], TRUE);
 		endif;
-		/*Generando arreglo institucion de autores*/
-		if($articulo['autoresSecJSON'] != NULL && $articulo['autoresSecInstitucionJSON'] != NULL):
-			$articulo['autoresInstitucionSec'] = array_combine(json_decode($articulo['autoresSecJSON']), json_decode($articulo['autoresSecInstitucionJSON']));
-		endif;
-		unset($articulo['autoresSecJSON'], $articulo['autoresJSON'], $articulo['autoresSecInstitucionJSON']);
+		unset($articulo['autoresJSON']);
 		/*Generando arreglo de instituciones*/
-		if($articulo['institucionesSecJSON'] != NULL && $articulo['institucionesJSON'] != NULL):
-			$articulo['instituciones'] = array_combine(json_decode($articulo['institucionesSecJSON']), json_decode($articulo['institucionesJSON']));
+		if($articulo['institucionesJSON'] != NULL):
+			$articulo['instituciones'] = json_decode($articulo['institucionesJSON'], TRUE);
 		endif;
-		unset($articulo['institucionesSecJSON'], $articulo['institucionesJSON']);
+		unset($articulo['institucionesJSON']);
 		/*Generando disciplinas*/
-		$articulo['disciplinas'] = json_decode($articulo['disciplinas']);
+		$articulo['disciplinas'] = json_decode($articulo['disciplinas'], TRUE);
 		/*Generando palabras clave*/
 		if($articulo['palabraClave'] != NULL):
-			$articulo['palabraClave'] = json_decode($articulo['palabraClave']);
+			$articulo['palabraClave'] = json_decode($articulo['palabraClave'], TRUE);
 		endif;
 		/*Generando keyword*/
 		if($articulo['keyword'] != NULL):
-			$articulo['keyword'] = json_decode($articulo['keyword']);
+			$articulo['keyword'] = json_decode($articulo['keyword'], TRUE);
 		endif;
 		/*Generando resumen*/
 		if($articulo['resumen'] != NULL):
-			$articulo['resumen'] = json_decode($articulo['resumen']);
+			$articulo['resumen'] = json_decode($articulo['resumen'], TRUE);
 		endif;
 		/*Generando ulr*/
 		if($articulo['url'] != NULL):
-			$articulo['url'] = json_decode($articulo['url']);
+			$articulo['url'] = json_decode($articulo['url'], TRUE);
 		endif;
 
 		/*Limpiando caracteres html*/
@@ -156,11 +146,11 @@ class Revista extends CI_Controller{
 		if(isset($articulo['autores'])):
 			$totalAutores = count($articulo['autores']);
 			$indexAutor = 1;
-			foreach ($articulo['autores'] as $key => $autor):
-				$autorSlug = slug($autor);
-				$articulo['autoresHTML'] .= "<span itemprop=\"author\" itemscope itemtype=\"http://schema.org/Person\"><span itemprop=\"name\"><a href=\"".site_url("frecuencias/autor/$autorSlug")."\" title=\""._sprintf('Frecuencias por autor: %s', $autor)."\">{$autor}</a></span></span>";
-				if ( isset($articulo['instituciones'][$articulo['autoresInstitucionSec'][$key]]) ):
-					$articulo['autoresHTML'] .= "<sup>{$articulo['autoresInstitucionSec'][$key]}</sup>";
+			foreach ($articulo['autores'] as $autor):
+				$autorSlug = slug($autor['a']);
+				$articulo['autoresHTML'] .= "<span itemprop=\"author\" itemscope itemtype=\"http://schema.org/Person\"><span itemprop=\"name\">".anchor("frecuencias/autor/{$autorSlug}", $autor['a'], 'title="'._sprintf('Frecuencias por autor: %s', $autor['a']).'"')."</span></span>";
+				if ( isset($autor['z']) ):
+					$articulo['autoresHTML'] .= "<sup>{$autor['z']}</sup>";
 				endif;
 				if($indexAutor < $totalAutores):
 					$articulo['autoresHTML'] .= "<br/>";
@@ -173,8 +163,8 @@ class Revista extends CI_Controller{
 		if(isset($articulo['instituciones'])):
 			$totalInstituciones = count($articulo['instituciones']);
 			$indexInstitucion = 1;
-			foreach ($articulo['instituciones'] as $key => $institucion):
-				$articulo['institucionesHTML'] .= "<sup>{$key}</sup>{$institucion}";
+			foreach ($articulo['instituciones'] as $institucion):
+				$articulo['institucionesHTML'] .= sprintf('<sup>%s</sup>%s%s%s%s', $institucion['z'], empty($institucion['u'])?NULL:anchor("frecuencias/institucion/".slug($institucion['u']), $institucion['u'], 'title="'._sprintf('Frecuencias por intitución: %s', $institucion['u']).'"').", ", empty($institucion['v'])?NULL:"{$institucion['v']}, ", empty($institucion['w'])?NULL:"{$institucion['w']}. ", empty($institucion['x'])?NULL:anchor("frecuencias/pais-afiliacion/".slug($institucion['x']), $institucion['x'], 'title="'._sprintf('Frecuencias por país de afiliación: %s', $institucion['x']).'"'));
 				if($indexInstitucion < $totalInstituciones):
 					$articulo['institucionesHTML'] .= "<br/>";
 				endif;
