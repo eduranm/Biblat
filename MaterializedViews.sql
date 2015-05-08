@@ -189,17 +189,14 @@ SELECT
     t.documento->>'b' AS "enfoqueDocumento",
     d.slug AS "disciplinaSlug",
     d.id_disciplina,
-    array_to_json(a."autoresSecArray")::text AS "autoresSecJSON",
-    array_to_json(a."autoresSecInstitucionArray")::text AS "autoresSecInstitucionJSON",
-    array_to_json(a."autoresArray")::text AS "autoresJSON",
+    a."autoresJSON",
     a."autoresSlug",
-    array_to_json(i."institucionesSecArray")::text AS "institucionesSecJSON",
-    array_to_json(i."institucionesArray")::text AS "institucionesJSON",
+    i."institucionesJSON",
     i."institucionesSlug",
     concat(json_slug(t."palabraClave"), json_slug(t.keyword)) AS "palabrasClaveSlug",
     concat(
-        json_slug(t."palabraClave"),
-        json_slug(t.keyword),
+        json_slug(t."palabraClave") || ' ',
+        json_slug(t.keyword) || ' ',
         slug_space(t.articulo) || ' | ',
         slug_space(t.revista) || ' | ',
         slug_space(t."paisRevista") || ' | ',
@@ -209,17 +206,14 @@ SELECT
 FROM article t
     LEFT JOIN (SELECT 
             sistema, 
-            array_agg(id ORDER BY id) AS "autoresSecArray",
-            array_agg("institucionId" ORDER BY id) AS "autoresSecInstitucionArray",
-            array_agg(nombre ORDER BY id) AS "autoresArray",
+            json_agg((SELECT row_to_json(data_row) from (SELECT id, "institucionId" AS z, nombre AS a, email as "6") as data_row) ORDER BY id) AS "autoresJSON",
             string_agg(slug_space(nombre), ' | ' ORDER BY id) || ' | ' AS "autoresSlug"
         FROM author
         GROUP BY sistema) a --Autores
     ON (t.sistema=a.sistema) 
     LEFT JOIN (SELECT 
             sistema, 
-            array_agg(id ORDER BY id) AS "institucionesSecArray",
-            array_agg(concat(institucion, ', '||dependencia, ', '||ciudad, '. '||pais) ORDER BY id) AS "institucionesArray",
+            json_agg((SELECT row_to_json(data_row) from (SELECT id AS z, institucion AS u, dependencia AS v, ciudad AS w, pais AS x) as data_row) ORDER BY id) AS "institucionesJSON",
             string_agg(slug_space(institucion), ' | ' ORDER BY id) || ' | ' AS "institucionesSlug"
         FROM institution 
         GROUP BY sistema) i --Instituciones
@@ -244,23 +238,23 @@ CREATE INDEX ON "mvSearch" USING gin("institucionesSlug" gin_trgm_ops);
 CREATE INDEX ON "mvSearch" USING gin("palabrasClaveSlug" gin_trgm_ops);
 
 
-CREATE INDEX "searchIdDatabase_idx" ON "mvSearch"(iddatabase);
-CREATE INDEX "searchTextoCompleto_idx" ON "mvSearch"(url);
+-- CREATE INDEX "searchIdDatabase_idx" ON "mvSearch"(iddatabase);
+-- CREATE INDEX "searchTextoCompleto_idx" ON "mvSearch"(url);
 
 
-CREATE INDEX "searchAlfabetico_idx" ON "mvSearch"(substring(LOWER(revista), 1, 1));
---CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin(("generalSlug"::tsvector));
-
-
-
+-- CREATE INDEX ON "mvSearch"(substring(LOWER(revista), 1, 1));
+-- CREATE INDEX "searchGeneralSlug_idx" ON "mvSearch" USING gin(("generalSlug"::tsvector));
 
 
 
 
 
 
---Vista con el contenido de la ficha del documento
---DROP VIEW "vSearchFull";
+
+
+
+-- Vista con el contenido de la ficha del documento
+-- DROP VIEW "vSearchFull";
 CREATE VIEW "vSearchFull" AS
 SELECT 
     a.*,
@@ -275,11 +269,8 @@ SELECT
     s."enfoqueDocumento",
     s."disciplinaSlug",
     s.id_disciplina,
-    s."autoresSecJSON",
-    s."autoresSecInstitucionJSON",
     s."autoresJSON",
     s."autoresSlug",
-    s."institucionesSecJSON",
     s."institucionesJSON",
     s."institucionesSlug",
     s."palabrasClaveSlug",
@@ -907,8 +898,8 @@ SELECT
   id_disciplina,
   max(revista) AS revista,
   "revistaSlug",
-  array_to_json(array_agg(descriptor)) AS "descriptoresJSON",
-  array_to_json(array_agg(frecuencia)) AS "frecuenciaDescriptorJSON",
+  json_agg(descriptor) AS "descriptoresJSON",
+  json_agg(frecuencia) AS "frecuenciaDescriptorJSON",
   --(count(*)::numeric + 0.5::numeric) AS "n+1/2",
   --(sum(frecuencia*rango)::numeric/sum(frecuencia))::numeric AS "q",
   --((count(*)::numeric + 0.5::numeric) - (sum(frecuencia*rango)::numeric/sum(frecuencia))::numeric) AS "(n+1/2)-q",
@@ -976,11 +967,8 @@ SELECT
   numero, 
   periodo, 
   paginacion, 
-  url,
-  "autoresSecJSON",
-  "autoresSecInstitucionJSON",
+  url
   "autoresJSON",
-  "institucionesSecJSON",
   "institucionesJSON" 
 FROM "mvDocumentosBradford" db 
 INNER JOIN "vSearchFull" s 
@@ -1140,10 +1128,7 @@ SELECT
   paginacion, 
   url,
   a.slug AS "autorSlug",
-  "autoresSecJSON",
-  "autoresSecInstitucionJSON",
   "autoresJSON",
-  "institucionesSecJSON",
   "institucionesJSON" 
 FROM author a 
 INNER JOIN "vSearchFull" s ON 
@@ -1209,10 +1194,7 @@ SELECT
   periodo, 
   paginacion, 
   url,
-  "autoresSecJSON",
-  "autoresSecInstitucionJSON",
   "autoresJSON",
-  "institucionesSecJSON",
   "institucionesJSON",
   ac."autorSlug",
   ac."autorCoSlug"
@@ -1409,10 +1391,7 @@ SELECT
   url, 
   "disciplinaSlug",
   i."institucionSlug",
-  "autoresSecJSON",
-  "autoresSecInstitucionJSON",
   "autoresJSON",
-  "institucionesSecJSON",
   "institucionesJSON" 
 FROM "mvInstitucionSI" i 
 INNER JOIN "vSearchFull" s ON i.sistema=s.sistema;
@@ -1449,10 +1428,7 @@ SELECT
   url, 
   ia."institucionSlug",
   ia."autorSlug",
-  "autoresSecJSON",
-  "autoresSecInstitucionJSON",
   "autoresJSON",
-  "institucionesSecJSON",
   "institucionesJSON"
   FROM "mvInstitucionAutorSI" ia
   INNER JOIN "vSearchFull" s ON ia.sistema=s.sistema;
@@ -1487,10 +1463,7 @@ SELECT
   periodo, 
   paginacion, 
   url, 
-  "autoresSecJSON",
-  "autoresSecInstitucionJSON",
   "autoresJSON",
-  "institucionesSecJSON",
   "institucionesJSON",
   ic."institucionSlug", 
   ic."institucionCoSlug"
@@ -1503,20 +1476,31 @@ CREATE MATERIALIZED VIEW "mvFrecuenciaPaisAfiliacion" AS
 SELECT
   pa.*,
   COALESCE(pc.coautorias, 0) AS coautorias
-FROM (SELECT 
-    max(pais) AS "paisInstitucion", 
-    "paisInstitucionSlug", 
-    count(DISTINCT i.slug) AS instituciones,
-    count(DISTINCT a.slug) AS autores,
-    count(DISTINCT i.sistema) AS documentos,
-    count(DISTINCT t.id_disciplina) AS disciplinas
-  FROM institution i
-  INNER JOIN "vSearchFull" t 
-    ON i.sistema=t.sistema
-  LEFT JOIN author a 
-    ON i.sistema=a.sistema 
-    AND i.id=a."institucionId"
-  WHERE i.slug IS NOT NULL AND i.pais IS NOT NULL GROUP BY "paisInstitucionSlug") pa
+FROM (SELECT
+        "paisInstitucionSlug", 
+        (array_agg(pais))[1] AS "paisInstitucion", 
+        sum(instituciones) AS instituciones,
+        sum(autores) AS autores,
+        sum(documentos) AS documentos,
+        sum(disciplinas) AS disciplinas
+      FROM
+        (SELECT 
+            pais, 
+            "paisInstitucionSlug", 
+            count(DISTINCT i.slug) AS instituciones,
+            count(DISTINCT a.slug) AS autores,
+            count(DISTINCT i.sistema) AS documentos,
+            count(DISTINCT t.id_disciplina) AS disciplinas
+          FROM institution i
+          INNER JOIN "vSearchFull" t 
+            ON i.sistema=t.sistema
+          LEFT JOIN author a 
+            ON i.sistema=a.sistema 
+            AND i.id=a."institucionId"
+          WHERE i.slug IS NOT NULL AND i.pais IS NOT NULL 
+          GROUP BY "paisInstitucionSlug", pais
+          ORDER BY "paisInstitucionSlug", pais, documentos DESC) t
+      GROUP BY "paisInstitucionSlug") pa
   LEFT JOIN (SELECT
     pa."paisInstitucionSlug",
     count(DISTINCT i."paisInstitucionSlug") AS coautorias
@@ -1618,10 +1602,7 @@ SELECT
   url, 
   "disciplinaSlug",
   pi."paisInstitucionSlug",
-  "autoresSecJSON",
-  "autoresSecInstitucionJSON",
   "autoresJSON",
-  "institucionesSecJSON",
   "institucionesJSON" 
 FROM "mvPaisAfiliacionSI" pi
 INNER JOIN "vSearchFull" s ON pi.sistema=s.sistema;
@@ -1658,10 +1639,7 @@ SELECT
   "disciplinaSlug",
   pi."paisInstitucionSlug",
   pi."institucionSlug",
-  "autoresSecJSON",
-  "autoresSecInstitucionJSON",
   "autoresJSON",
-  "institucionesSecJSON",
   "institucionesJSON" 
 FROM "mvPaisAfiliacionInstitucionSI" pi
 INNER JOIN "vSearchFull" s ON pi.sistema=s.sistema;
@@ -1703,10 +1681,7 @@ SELECT
   "disciplinaSlug",
   pi."paisInstitucionSlug",
   pi."autorSlug",
-  "autoresSecJSON",
-  "autoresSecInstitucionJSON",
   "autoresJSON",
-  "institucionesSecJSON",
   "institucionesJSON" 
 FROM "mvPaisAfiliacionAutorSI" pi
 INNER JOIN "vSearchFull" s ON pi.sistema=s.sistema;
@@ -1747,10 +1722,7 @@ SELECT
   periodo, 
   paginacion, 
   url, 
-  "autoresSecJSON",
-  "autoresSecInstitucionJSON",
   "autoresJSON",
-  "institucionesSecJSON",
   "institucionesJSON",
   pc."paisInstitucionSlug",
   pc."paisInstitucionCoSlug"
@@ -1951,23 +1923,86 @@ SELECT
   slug,
   (array_agg(institucion))[1] AS institucion,
   "paisInstitucionSlug",
+  alpha2,
   (array_agg(pais))[1] AS pais,
   ciudad,
   sum(registros) AS registros
 FROM
   (SELECT 
-    slug_space(i.institucion) AS slug,
-    i.institucion,
-    i."paisInstitucionSlug",
-    i.pais,
-    i.ciudad,
-    count(*) AS registros
-   FROM institution i
-  WHERE i.institucion IS NOT NULL
-  GROUP BY i.institucion, i.ciudad, i.pais, "paisInstitucionSlug"
-  ORDER BY slug, "paisInstitucionSlug", i.ciudad, registros DESC) t
-GROUP BY slug, "paisInstitucionSlug", ciudad;
+      slug_space(i.institucion) AS slug,
+      i.institucion,
+      CASE WHEN c.slug IS NULL THEN i."paisInstitucionSlug" ELSE c.slug END AS "paisInstitucionSlug",
+      c.alpha2,
+      CASE WHEN c.name IS NULL THEN i.pais ELSE c.name END AS pais,
+      i.ciudad,
+      count(*) AS registros
+  FROM institution i
+  LEFT JOIN country c
+    ON (i."paisInstitucionSlug"=c.slug AND c."subSlug"='')  OR i."paisInstitucionSlug"=c."subSlug"
+    WHERE i.institucion IS NOT NULL
+    GROUP BY i.institucion, c.name, i.pais, c.alpha2, c.slug, i."paisInstitucionSlug", i.ciudad
+    ORDER BY slug, "paisInstitucionSlug", i.ciudad, registros DESC) t
+GROUP BY slug, "paisInstitucionSlug", alpha2, ciudad;
 CREATE INDEX ON "mvInstitucion" USING gin(slug gin_trgm_ops);
+
+--DROP "vIndicadoresRevista";
+CREATE OR REPLACE VIEW "vIndicadoresRevista" AS 
+ SELECT t."revistaSlug",
+    t.revista,
+    t."disciplinaSlug",
+    t.coautoriapricezakutina,
+    t.subramayan,
+    t.tasalawani
+   FROM ( SELECT dr."revistaSlug",
+            dr.revista,
+            d.slug AS "disciplinaSlug",
+                CASE
+                    WHEN cpz.revista IS NULL THEN NULL::integer
+                    ELSE 1
+                END AS coautoriapricezakutina,
+                CASE
+                    WHEN s.revista IS NULL THEN NULL::integer
+                    ELSE 1
+                END AS subramayan,
+                CASE
+                    WHEN tl.revista IS NULL THEN NULL::integer
+                    ELSE 1
+                END AS tasalawani
+           FROM "mvDisciplinaRevistas" dr
+             LEFT JOIN "mvPeriodosRevistaCoautoriaPriceZakutina" cpz ON dr."revistaSlug"::text = cpz."revistaSlug"::text
+             LEFT JOIN "mvPeriodosRevistaSubramayan" s ON dr."revistaSlug"::text = s."revistaSlug"::text
+             LEFT JOIN "mvPeriodosRevistaTasaLawani" tl ON dr."revistaSlug"::text = tl."revistaSlug"::text
+             JOIN disciplinas d ON dr.id_disciplina = d.id_disciplina) t
+  WHERE t.coautoriapricezakutina = 1 OR t.subramayan = 1 OR t.tasalawani = 1
+  ORDER BY t."revistaSlug";
+
+CREATE OR REPLACE VIEW "vIndicadoresRevistaGeneral" AS 
+ SELECT
+        CASE
+            WHEN vir.revista IS NULL THEN svir.revista
+            ELSE vir.revista
+        END AS revista,
+        CASE
+            WHEN vir."revistaSlug" IS NULL THEN svir."revistaSlug"
+            ELSE vir."revistaSlug"
+        END AS "revistaSlug",
+    svir."revistaSiglum",
+    svir."networkSlug",
+    vir."disciplinaSlug",
+    vir.coautoriapricezakutina,
+    vir.subramayan,
+    vir.tasalawani,
+    svir.generalesrevista,
+    svir.networkjournaldistribution,
+    svir.agedocjournalcitation,
+    svir.doctypejournalcitation
+   FROM "vIndicadoresRevista" vir
+     FULL JOIN "scielo_mvIndicadoresRevista" svir ON vir."revistaSlug"::text = svir."revistaSlug"::text
+  ORDER BY
+        CASE
+            WHEN vir."revistaSlug" IS NULL THEN svir."revistaSlug"
+            ELSE vir."revistaSlug"
+        END;
   
 --Drops
 --SELECT drop_matview('"mvIndiceCoautoriaPricePais"');
