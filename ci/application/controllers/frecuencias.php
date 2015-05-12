@@ -1705,7 +1705,7 @@ class Frecuencias extends CI_Controller {
 		$this->db->close();
 		$data = array();
 		$data['header']['title'] = _sprintf('Biblat - Frecuencias por revista: %s, autores', $query['revista']);
-		$data['header']['gridTitle'] = _sprintf('Número de documentos publicados por autor en la revista:<br/> %s', $query['revista']);
+		$data['header']['gridTitle'] = _sprintf('Número de documentos publicados por institución de afiliación del autor en la revista:<br/> %s', $query['revista']);
 		$data['main']['breadcrumb'][] = array('title' => _('Revista'), 'link' => "frecuencias/revista");
 		$data['main']['breadcrumb'][] = array('title' => $query['revista'], 'link' => "frecuencias/revista/{$args['revistaSlug']}");
 		$data['main']['page_title'] = sprintf('%s / Institución', $query['revista']);
