@@ -63,4 +63,32 @@ class Conacyt extends REST_Controller {
 		
 		$this->response($data, 200);
 	}
+
+	public function datosFuente_get(){
+		$issn = $this->get('issn') ? $this->get('issn') : NULL;
+		$data = array();
+		$this->load->database();
+		$query = "SELECT * FROM \"vIndicadoresRevistasConacyt\"";
+		if(isset($issn))
+			$query = "{$query} WHERE issn='{$issn}'";
+		$query = $this->db->query($query);
+		foreach ($query->result_array() as $row):
+			$id = $row['areaConacytSlug'];
+			$revistaSlug = $row['slug'];
+			if ( ! isset($data[$id][$revistaSlug])):
+				$journal = array(
+						'areaConacytName' => $row['areaConacytName'],
+						'name' => $row['name'],
+						'slug' => $row['slug'],
+						'issn' => $row['issn']
+					);
+				$data[$id][$row['slug']] = $journal;
+			endif;
+			unset($row['networkId'], $row['areaConacytId'], $row['networkName'], $row['networkSlug'], $row['areaConacytSlug'], $row['neumonic'], $row['areaConacytName'], $row['name'], $row['slug'], $row['issn']);
+			$data[$id][$revistaSlug]['datos'][] = $row;
+		endforeach;
+		if(isset($issn))
+			$data = current(current($data));
+		$this->response($data, 200);
+	}
 }
