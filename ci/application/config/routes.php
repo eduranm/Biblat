@@ -46,6 +46,7 @@ $route['404_override'] = '';
 $route['api/([^/]+?)/([^/]+?)\.(xml|json|csv|html|php|serialize)(.*?$)'] = "api/$1/$2/format/$3$4";
 $route['api/([^/]+?)\.(xml|json|csv|html|php|serialize)(.*?$)'] = "api/$1/index/format/$2$3";
 
+
 $route[$langs.'$'] = $route['default_controller'];
 
 $route[$langs.'/creditos'] = 'main/creditos';
@@ -89,6 +90,9 @@ $route[$langs.'/revista/(.*)'] = "revista/index/$1";
 $route[$langs.'/indicadores/modelo-bradford-revista/disciplina/(.*)/revista/(.*)/documentos(.*)'] = "indicadores/bradfordDocumentos/$1$2";
 $route[$langs.'/indicadores/(indice-coautoria|tasa-documentos-coautorados|grado-colaboracion|modelo-elitismo|indice-colaboracion|indice-densidad-documentos|indice-concentracion|modelo-bradford-revista|modelo-bradford-institucion|productividad-exogena)(.*)'] = "indicadores/index/$1";
 /*≠≠≠≠≠≠≠≠ Indicadores scielo ≠≠≠≠≠≠≠≠*/
+$route[$langs.'/scielo/indicadores/((distribucion|citacion)-(articulos|revista|articulos-area|articulos-afiliacion)-(coleccion|area-revista|edad|tipo))(.*)/preview\.png$'] = "scielo/indicadores/preview/$1";
+$route[$langs.'/scielo/indicadores/(indicadores-generales-revista)(.*)/preview\.png$'] = "scielo/indicadores/preview/$1";
+
 $route[$langs.'/scielo/indicadores/((distribucion|citacion)-(articulos|revista|articulos-area|articulos-afiliacion)-(coleccion|area-revista|edad|tipo))(.*)'] = "scielo/indicadores/index/$1";
 $route[$langs.'/scielo/indicadores/(indicadores-generales-revista)(.*)'] = "scielo/indicadores/index/$1";
 

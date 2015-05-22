@@ -27,6 +27,7 @@ class Indicadores extends CI_Controller {
 		'#651067'
 	);
 	public $highcharts = array();
+	public $preview = FALSE;
 	
 	public function __construct()
 	{
@@ -354,7 +355,8 @@ class Indicadores extends CI_Controller {
 		$data['result'] = true;
 		$data['anioBase'] = (int)$anioBase;
 		$data['anioFinal'] = (int)$anioFinal;
-
+		if($this->preview)
+			return $data;
 		/*Generando escala*/
 		$scale = array();
 		$offset = $data['anioBase'];
@@ -389,7 +391,7 @@ class Indicadores extends CI_Controller {
 		$this->output->enable_profiler(false);
 		switch ($_POST['indicador']):
 			case 'distribucion-articulos-coleccion':
-				$this->getChartCollection();
+				return $this->getChartCollection();
 				break;
 			case 'distribucion-articulos-coleccion-area':
 			case 'distribucion-articulos-coleccion-area-revista':
@@ -404,10 +406,10 @@ class Indicadores extends CI_Controller {
 			case 'citacion-articulos-tipo-area':
 			case 'citacion-articulos-tipo-revista':
 			case 'citacion-articulos-tipo-afiliacion':
-				$this->getChartCollectionSub();
+				return $this->getChartCollectionSub();
 				break;
 			case 'indicadores-generales-revista':
-				$this->getChartGeneral();
+				return $this->getChartGeneral();
 				break;
 			default:
 				break;
@@ -542,6 +544,8 @@ class Indicadores extends CI_Controller {
 			);
 		$result['chartTitle'] = "<div class=\"text-center nowrap\"><h4>{$this->indicadores[$_POST['indicador']]['title']}</h4><h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5></div>";
 		$result['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]['title']}</h4>";
+		if($this->preview)
+			return $data;
 		header('Content-Type: application/json');	
 		echo json_encode($result, true);
 	}
@@ -783,6 +787,8 @@ class Indicadores extends CI_Controller {
 		/*Titulo de la gráfica*/
 		$data['chartTitle'] = "<div class=\"text-center nowrap\"><h4>{$this->indicadores[$_POST['indicador']]['title']}</h4><h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5></div>";
 		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]['title']}</h4>";
+		if($this->preview)
+			return $data;
 		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}
@@ -877,19 +883,23 @@ class Indicadores extends CI_Controller {
 				foreach ($indicadores as $kindicador => $vindicador):
 					$value = $vindicador[$periodo][$key];
 					$tooltipv = $value;
-					switch ($key):
-						case 'citas':
-							$porcentajeAutocita = $vindicador[$periodo]['porcentajeAutoCita'] != NULL ? $vindicador[$periodo]['porcentajeAutoCita'] : 0;
-							$citas = round($value * (1 - ($porcentajeAutocita / 100)));
-							$autocitas = round($value * ($porcentajeAutocita / 100));
-							$series[$key][$kindicador]['citas'][] = $citas;
-							$series[$key][$kindicador]['autocitas'][] = $autocitas;
-							break;
-						case 'vidaMedia':
-							$value = $value == '>10,0' ? 10.1 : $value;
-						default:
-							$series[$key][$kindicador][] = parse_number($value);
-					endswitch;
+					if(isset($series[$key][$kindicador]) || $value != NULL):
+						switch ($key):
+							case 'citas':
+								$porcentajeAutocita = $vindicador[$periodo]['porcentajeAutoCita'] != NULL ? $vindicador[$periodo]['porcentajeAutoCita'] : 0;
+								$citas = round($value * (1 - ($porcentajeAutocita / 100)));
+								$autocitas = round($value * ($porcentajeAutocita / 100));
+								$series[$key][$kindicador]['citas'][] = $citas;
+								$series[$key][$kindicador]['autocitas'][] = $autocitas;
+								break;
+							case 'vidaMedia':
+								$value = $value == '>10,0' ? 10.1 : $value;
+							default:
+									$series[$key][$kindicador][] = parse_number($value);
+						endswitch;
+					else:
+						$data['highchart'][$key]['xAxis']['categories']=array();
+					endif;
 				endforeach;
 			endforeach;
 		endforeach;
@@ -947,6 +957,8 @@ class Indicadores extends CI_Controller {
 					)
 			);
 		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]['title']}</h4>";
+		if($this->preview)
+			return $data;
 		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}
@@ -1237,6 +1249,73 @@ class Indicadores extends CI_Controller {
 		echo json_encode($data, true);
 	}
 
+	public function preview(){
+		$this->load->library('curl');
+		if (preg_match('%indicadores/(...+?)%', uri_string())):
+			if (preg_match('%indicadores/(.+?)(/.*|$)%', uri_string())):
+				$_POST['indicador']=preg_replace('%.+?/indicadores/(.+?)(/.*|$)%', '\1', uri_string());
+			endif;
+			if (preg_match('%.*?/coleccion/(.+?)(/.*|$)%', uri_string())):
+				$_POST['coleccion']=preg_split('/[\s\/]+/', preg_replace('%.*?/coleccion/(.+?)(/area.*|/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', uri_string()));
+			endif;
+			if (preg_match('%.*?/edad/(.+?)(/.*|$)%', uri_string())):
+				$_POST['edad']=preg_split('/[\s\/]+/', preg_replace('%.*?/edad/(.+?)(/area.*|/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', uri_string()));
+			endif;
+			if (preg_match('%.*?/tipo-documento/(.+?)(/.*|$)%', uri_string())):
+				$_POST['tipodoc']=preg_split('/[\s\/]+/', preg_replace('%.*?/tipo-documento/(.+?)(/area.*|/revista/.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', uri_string()));
+			endif;
+			if (preg_match('%.*?/area/(.+?)(/.*|$)%', uri_string())):
+				$_POST['area']=preg_split('/[\s\/]+/', preg_replace('%.*?/area/(.+?)(/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', uri_string()));
+			endif;
+			if (preg_match('%.*?/revista/(.+?)(/.*|$)%', uri_string())):
+				$_POST['revista']=preg_split('/[\s\/]+/',preg_replace('%.*?/revista/(.+?)(/area.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', uri_string()));
+			endif;
+			if (preg_match('%.*?/pais-revista/(.+?)(/.*|$)%', uri_string())):
+				$_POST['paisRevista']=preg_split('/[\s\/]+/', preg_replace('%.*?/pais-revista/(.+?)(/preview\.png|/.*|$)%', '\1', uri_string()));
+			endif;
+			if (preg_match('%.*?/pais-autor/(.+?)(/.*|$)%', uri_string())):
+				$_POST['paisAutor']=preg_split('/[\s\/]+/', preg_replace('%.*?/pais-autor/(.+?)(/area.*|/revista.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', uri_string()));
+			endif;
+			if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%', uri_string())):
+				$_POST['paisAutor']=preg_replace('%.*?/([0-9]{4})-([0-9]{4})%', '\1;\2', uri_string());
+			endif;
+			$this->preview = TRUE;
+		endif;
+		$periodos = $this->getPeriodos();
+		$_POST['periodo'] = "{$periodos['anioBase']};{$periodos['anioFinal']}";
+		$data = $this->getChartData();
+		/* Ajustando valores de la gráfica para la vista previa*/
+		$chartData = $data['highchart']['factorImpacto'];
+		unset($chartData['subtitle'], $chartData['xAxis']['title']);
+		foreach ($chartData['series'] as $key => $value):
+			$chartData['series'][$key]['showInLegend'] = FALSE;
+		endforeach;
+		$chartData['yAxis']['title'] = '';
+		$chartData['chart']['width'] = 400;
+		$chartData['chart']['height'] = 250;
+		// print_r($chartData); die();
+
+		$request = array(
+				'infile' => json_encode($chartData),
+				'type' => 'png'
+			);
+		$this->curl->post('http://127.0.0.1:3003', json_encode($request));
+
+		$this->curl->setHeader('Content-Type', 'application/json');
+		if ($this->curl->error) {
+			echo 'Error: ' . $this->curl->error_code . ': ' . $this->curl->error_message;
+		}else {
+			header("Content-type: image/png");
+			echo base64_decode($this->curl->response);
+			// echo 'data:image/png;base64,' . $this->curl->response;
+			// echo '<img src="data:image/png;base64,'.$this->curl->response.'">';
+			exit(0);
+		}
+		echo "<pre>";
+		var_dump($this->curl->request_headers);
+		var_dump($this->curl->response_headers);
+		$this->curl->close();
+	}
 }
 
 /* End of file indicadores.php */
