@@ -59,6 +59,18 @@ class Conacyt extends REST_Controller {
 						'img' => null
 					);
 			endif;
+			if($journal['redalycId']):
+				$data[$journal['revistaISSN']]['indicators'][] = array(
+						'title' => 'Indicadores de publicación (Redalyc)',
+						'url' => "http://www.redalyc.org/revista.oa?id={$journal['redalycId']}&tipo=produccion&perfil=publicacion",
+						'img' => null
+					);
+				$data[$journal['revistaISSN']]['indicators'][] = array(
+						'title' => 'Indicadores de coautoría (Redalyc)',
+						'url' => "http://www.redalyc.org/revista.oa?id={$journal['redalycId']}&tipo=produccion&perfil=coautoria",
+						'img' => null
+					);
+			endif;
 		endforeach;
 		
 		$this->response($data, 200);
