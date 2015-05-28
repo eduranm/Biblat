@@ -1014,7 +1014,7 @@ class Indicadores extends CI_Controller {
 		foreach ($chartData['series'] as $key => $value):
 			$chartData['series'][$key]['showInLegend'] = FALSE;
 		endforeach;
-		$chartData['subtitle'] = $chartData['yAxis']['title'];
+		$chartData['subtitle'] = array('text' => $this->indicadores[$_POST['indicador']]);
 		$chartData['yAxis']['title'] = '';
 		$chartData['chart']['width'] = 400;
 		$chartData['chart']['height'] = 250;

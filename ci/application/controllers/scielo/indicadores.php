@@ -509,10 +509,11 @@ class Indicadores extends CI_Controller {
 				$offset++;
 			endforeach;
 		endforeach;
+		$colors = $this->colors;
 		foreach ($series as $groupk => $group):
 			foreach ($group as $networkId => $serie):
-				$color = array_shift($this->colors);
-				array_push($this->colors, $color);
+				$color = array_shift($colors);
+				array_push($colors, $color);
 				$data['highchart'][$groupk]['series'][] = array(
 						'name' => "SciELO {$this->colecciones['id'][$networkId]['name']}-otros",
 						'data' => $serie['otroDocumento'],
@@ -903,11 +904,12 @@ class Indicadores extends CI_Controller {
 				endforeach;
 			endforeach;
 		endforeach;
+		$colors = $this->colors;
 		foreach ($series as $seriek => $chart):
 			foreach ($chart as $key => $value):
 				if($seriek == "citas"):
-					$color = array_shift($this->colors);
-					array_push($this->colors, $color);
+					$color = array_shift($colors);
+					array_push($colors, $color);
 					$data['highchart'][$seriek]['series'][] = array(
 							'name' => $key."-autocitas",
 							'data' => $value['autocitas'],
@@ -1298,18 +1300,37 @@ class Indicadores extends CI_Controller {
 			$_POST['periodo'] = "{$periodos['anioBase']};{$periodos['anioFinal']}";
 		endif;
 		$chartData = $this->getChartData();
-		if($_POST['indicador'] === "indicadores-generales-revista")
+		$title = array(
+			'distribucion-articulos-coleccion' => _('Distribución de artículos por colección'),
+			'distribucion-articulos-coleccion-area' => _('Distribución de artículos por colección y área'),
+			'distribucion-articulos-coleccion-revista' => _('Distribución de artículos por revista'),
+			'distribucion-articulos-coleccion-area-revista' => _('Distribución de artículos por revista'),
+			'distribucion-articulos-coleccion-afiliacion' => _('Distribución de artículos por colección y país de afiliación'),
+			'distribucion-revista-coleccion' => 'Distribución de revistas por colección',
+			'indicadores-generales-revista' => array(),
+			'citacion-articulos-edad' => _('Distribución de artículos por edad del documento citado'),
+			'citacion-articulos-edad-area' => _('Distribución de artículos por edad del documento citado y área citante'),
+			'citacion-articulos-edad-revista' => _('Distribución de artículos por edad del documento citado y revista citante'),
+			'citacion-articulos-tipo' => _('Distribución de artículos por tipo del documento citado'),
+			'citacion-articulos-tipo-area' => _('Distribución de artículos por tipo del documento citado y área citante'),
+			'citacion-articulos-tipo-revista' => _('Distribución de artículos por tipo del documento citado y revista citante'),
+			'citacion-articulos-tipo-afiliacion' => _('Distribución de artículos por tipo del documento citado y país de afiliación citante'),
+
+		);
+		if($_POST['indicador'] === "indicadores-generales-revista"):
 			$chartData = $chartData['factorImpacto'];
+			$title['indicadores-generales-revista'] = _('Indicadores generales (FI)');
+		endif;
 		/* Ajustando valores de la gráfica para la vista previa*/
 		unset($chartData['subtitle'], $chartData['xAxis']['title']);
 		foreach ($chartData['series'] as $key => $value):
 			$chartData['series'][$key]['showInLegend'] = FALSE;
 		endforeach;
-		$chartData['subtitle'] = $chartData['yAxis']['title'];
 		$chartData['yAxis']['title'] = '';
 		$chartData['chart']['width'] = 400;
 		$chartData['chart']['height'] = 250;
 		$chartData['colors'] = $this->colors;
+		$chartData['subtitle'] = array('text' => $title[$_POST['indicador']]);
 
 		$request = array(
 				'infile' => json_encode($chartData),
