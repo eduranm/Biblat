@@ -467,18 +467,18 @@ class Indicadores extends CI_Controller {
 		endif;
 		$limit = 4;
 		$queryOrder = ' ORDER BY position, anio';
-		$result['journal'] = array();
+		$data['journal'] = array();
 		$groups = array_chunk($colecciones, $limit, TRUE);
-		$result['table']['cols'][] = array('id' => 'year','label' => _('Colección'),'type' => 'string');
-		$result['table']['cols'][] = array('id' => 'year','label' => _('Tipo'),'type' => 'string');
+		$data['table']['cols'][] = array('id' => 'year','label' => _('Colección'),'type' => 'string');
+		$data['table']['cols'][] = array('id' => 'year','label' => _('Tipo'),'type' => 'string');
 		foreach ($periodos as $periodo):
-			$result['table']['cols'][] = array('id' => '','label' => $periodo, 'type' => 'number');
+			$data['table']['cols'][] = array('id' => '','label' => $periodo, 'type' => 'number');
 		endforeach;
 		$tableRows = array();
 		$series = array();
 		$this->highcharts['barstack']['yAxis']['title'] = array('text' =>$indicador[$_POST['indicador']]['vTitle']);
 		foreach ($groups as $key => $group):
-			$result['highchart'][$key] = $this->highcharts['barstack'];
+			$data['highchart'][$key] = $this->highcharts['barstack'];
 			$queryColeccion = " AND \"networkId\" IN (";
 			$coleccionOffset=1;
 			$coleccionTotal= count($group);
@@ -495,8 +495,8 @@ class Indicadores extends CI_Controller {
 			foreach ($queryRS->result_array() as $row):
 				$series[$key][$row['networkId']]['articulos'][] = parse_number($row['articulo']);
 				$series[$key][$row['networkId']]['otroDocumento'][] = parse_number($row['otroDocumento']);
-				if (!in_array($row['anio'], $result['highchart'][$key]['xAxis']['categories']))  
-					$result['highchart'][$key]['xAxis']['categories'][] = $row['anio'];
+				if (!in_array($row['anio'], $data['highchart'][$key]['xAxis']['categories']))  
+					$data['highchart'][$key]['xAxis']['categories'][] = $row['anio'];
 				if(!isset($tableRows[$row['networkId']])):
 					$tableRows[$row['networkId']] = array();
 					$tableRows[$row['networkId']]['ca'][] = array('v' => _sprintf('SciELO %s', $this->colecciones['id'][$row['networkId']]['name']));
@@ -513,14 +513,14 @@ class Indicadores extends CI_Controller {
 			foreach ($group as $networkId => $serie):
 				$color = array_shift($this->colors);
 				array_push($this->colors, $color);
-				$result['highchart'][$groupk]['series'][] = array(
+				$data['highchart'][$groupk]['series'][] = array(
 						'name' => "SciELO {$this->colecciones['id'][$networkId]['name']}-otros",
 						'data' => $serie['otroDocumento'],
 						'stack' => slug($networkId),
 						'showInLegend' => FALSE,
 						'color' => adjustColorLightenDarken($color, -75)
 					);
-				$result['highchart'][$groupk]['series'][] = array(
+				$data['highchart'][$groupk]['series'][] = array(
 						'name' => "SciELO {$this->colecciones['id'][$networkId]['name']}",
 						'data' => $serie['articulos'],
 						'stack' => slug($networkId),
@@ -529,11 +529,11 @@ class Indicadores extends CI_Controller {
 			endforeach;
 		endforeach;
 		foreach ($tableRows as $row):
-			$result['table']['rows'][]['c'] = $row['ca'];
-			$result['table']['rows'][]['c'] = $row['cb'];
+			$data['table']['rows'][]['c'] = $row['ca'];
+			$data['table']['rows'][]['c'] = $row['cb'];
 		endforeach;
 		/*Opciones para la tabla*/
-		$result['tableOptions'] = array(
+		$data['tableOptions'] = array(
 				'allowHtml' => true,
 				'showRowNumber' => false,
 				'sort' => 'disable',
@@ -542,12 +542,12 @@ class Indicadores extends CI_Controller {
 					'tableCell' => 'text-left nowrap',
 					)
 			);
-		$result['chartTitle'] = "<div class=\"text-center nowrap\"><h4>{$this->indicadores[$_POST['indicador']]['title']}</h4><h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5></div>";
-		$result['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]['title']}</h4>";
+		$data['chartTitle'] = "<div class=\"text-center nowrap\"><h4>{$this->indicadores[$_POST['indicador']]['title']}</h4><h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5></div>";
+		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]['title']}</h4>";
 		if($this->preview)
-			return $data;
+			return $data['highchart'][0];
 		header('Content-Type: application/json');	
-		echo json_encode($result, true);
+		echo json_encode($data, true);
 	}
 
 	public function getChartCollectionSub()
@@ -788,7 +788,7 @@ class Indicadores extends CI_Controller {
 		$data['chartTitle'] = "<div class=\"text-center nowrap\"><h4>{$this->indicadores[$_POST['indicador']]['title']}</h4><h5><a href=\"http://www.scielo.org\" target=\"_blank\" class=\"scielo-update\"><span class=\"bl-scielo fa-2x\"></span> {$this->indicadores[$_POST['indicador']]['update']}</a></i></h5></div>";
 		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]['title']}</h4>";
 		if($this->preview)
-			return $data;
+			return $data['highchart'];
 		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}
@@ -958,7 +958,7 @@ class Indicadores extends CI_Controller {
 			);
 		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]['title']}</h4>";
 		if($this->preview)
-			return $data;
+			return $data['highchart'];
 		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}
@@ -1250,65 +1250,80 @@ class Indicadores extends CI_Controller {
 	}
 
 	public function preview(){
-		$this->load->library('curl');
-		if (preg_match('%indicadores/(...+?)%', uri_string())):
-			if (preg_match('%indicadores/(.+?)(/.*|$)%', uri_string())):
-				$_POST['indicador']=preg_replace('%.+?/indicadores/(.+?)(/.*|$)%', '\1', uri_string());
+		$uri_string = uri_string();
+		if (preg_match('%indicadores/(...+?)%', $uri_string)):
+			if (preg_match('%indicadores/(.+?)(/.*|$)%', $uri_string)):
+				$_POST['indicador']=preg_replace('%.+?/indicadores/(.+?)(/.*|$)%', '\1', $uri_string);
 			endif;
-			if (preg_match('%.*?/coleccion/(.+?)(/.*|$)%', uri_string())):
-				$_POST['coleccion']=preg_split('/[\s\/]+/', preg_replace('%.*?/coleccion/(.+?)(/area.*|/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', uri_string()));
+			if (preg_match('%.*?/coleccion/(.+?)(/.*|$)%', $uri_string)):
+				$_POST['coleccion']=preg_split('/[\s\/]+/', preg_replace('%.*?/coleccion/(.+?)(/area.*|/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', $uri_string));
 			endif;
-			if (preg_match('%.*?/edad/(.+?)(/.*|$)%', uri_string())):
-				$_POST['edad']=preg_split('/[\s\/]+/', preg_replace('%.*?/edad/(.+?)(/area.*|/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', uri_string()));
+			if (preg_match('%.*?/edad/(.+?)(/.*|$)%', $uri_string)):
+				$_POST['edad']=preg_split('/[\s\/]+/', preg_replace('%.*?/edad/(.+?)(/area.*|/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', $uri_string));
 			endif;
-			if (preg_match('%.*?/tipo-documento/(.+?)(/.*|$)%', uri_string())):
-				$_POST['tipodoc']=preg_split('/[\s\/]+/', preg_replace('%.*?/tipo-documento/(.+?)(/area.*|/revista/.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', uri_string()));
+			if (preg_match('%.*?/tipo-documento/(.+?)(/.*|$)%', $uri_string)):
+				$_POST['tipodoc']=preg_split('/[\s\/]+/', preg_replace('%.*?/tipo-documento/(.+?)(/area.*|/revista/.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', $uri_string));
 			endif;
-			if (preg_match('%.*?/area/(.+?)(/.*|$)%', uri_string())):
-				$_POST['area']=preg_split('/[\s\/]+/', preg_replace('%.*?/area/(.+?)(/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', uri_string()));
+			if (preg_match('%.*?/area/(.+?)(/.*|$)%', $uri_string)):
+				$_POST['area']=preg_split('/[\s\/]+/', preg_replace('%.*?/area/(.+?)(/revista.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', $uri_string));
 			endif;
-			if (preg_match('%.*?/revista/(.+?)(/.*|$)%', uri_string())):
-				$_POST['revista']=preg_split('/[\s\/]+/',preg_replace('%.*?/revista/(.+?)(/area.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', uri_string()));
+			if (preg_match('%.*?/revista/(.+?)(/.*|$)%', $uri_string)):
+				$_POST['revista']=preg_split('/[\s\/]+/',preg_replace('%.*?/revista/(.+?)(/area.*|/pais.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', $uri_string));
 			endif;
-			if (preg_match('%.*?/pais-revista/(.+?)(/.*|$)%', uri_string())):
-				$_POST['paisRevista']=preg_split('/[\s\/]+/', preg_replace('%.*?/pais-revista/(.+?)(/preview\.png|/.*|$)%', '\1', uri_string()));
+			if (preg_match('%.*?/pais-revista/(.+?)(/.*|$)%', $uri_string)):
+				$_POST['paisRevista']=preg_split('/[\s\/]+/', preg_replace('%.*?/pais-revista/(.+?)(/preview\.png|/.*|$)%', '\1', $uri_string));
 			endif;
-			if (preg_match('%.*?/pais-autor/(.+?)(/.*|$)%', uri_string())):
-				$_POST['paisAutor']=preg_split('/[\s\/]+/', preg_replace('%.*?/pais-autor/(.+?)(/area.*|/revista.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', uri_string()));
+			if (preg_match('%.*?/pais-autor/(.+?)(/.*|$)%', $uri_string)):
+				$_POST['paisAutor']=preg_split('/[\s\/]+/', preg_replace('%.*?/pais-autor/(.+?)(/area.*|/revista.*|/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', $uri_string));
 			endif;
-			if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%', uri_string())):
-				$_POST['paisAutor']=preg_replace('%.*?/([0-9]{4})-([0-9]{4})%', '\1;\2', uri_string());
+			if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%', $uri_string)):
+				$_POST['periodo']=preg_replace('%.*?/([0-9]{4})-([0-9]{4})/preview\.png%', '\1;\2', $uri_string);
+			endif;
+			if(in_array($_POST['indicador'], array('distribucion-articulos-coleccion', 'citacion-articulos-edad', 'citacion-articulos-tipo'))):
+				$sufix="";
+				if(!empty($_POST['area']))
+					$sufix = "-area";
+				if(!empty($_POST['revista']))
+					$sufix = "-revista";
+				if(!empty($_POST['area']) && !empty($_POST['revista']))
+					$sufix['indicador'] = "-area-revista";
+				if(!empty($_POST['paisAutor']))
+					$sufix = "-afiliacion";
+				$_POST['indicador'] = "{$_POST['indicador']}{$sufix}";
 			endif;
 			$this->preview = TRUE;
 		endif;
-		$periodos = $this->getPeriodos();
-		$_POST['periodo'] = "{$periodos['anioBase']};{$periodos['anioFinal']}";
-		$data = $this->getChartData();
+		if(!isset($_POST['periodo'])):
+			$periodos = $this->getPeriodos();
+			$_POST['periodo'] = "{$periodos['anioBase']};{$periodos['anioFinal']}";
+		endif;
+		$chartData = $this->getChartData();
+		if($_POST['indicador'] === "indicadores-generales-revista")
+			$chartData = $chartData['factorImpacto'];
 		/* Ajustando valores de la gráfica para la vista previa*/
-		$chartData = $data['highchart']['factorImpacto'];
 		unset($chartData['subtitle'], $chartData['xAxis']['title']);
 		foreach ($chartData['series'] as $key => $value):
 			$chartData['series'][$key]['showInLegend'] = FALSE;
 		endforeach;
+		$chartData['subtitle'] = $chartData['yAxis']['title'];
 		$chartData['yAxis']['title'] = '';
 		$chartData['chart']['width'] = 400;
 		$chartData['chart']['height'] = 250;
-		// print_r($chartData); die();
+		$chartData['colors'] = $this->colors;
 
 		$request = array(
 				'infile' => json_encode($chartData),
 				'type' => 'png'
 			);
-		$this->curl->post('http://127.0.0.1:3003', json_encode($request));
 
+		$this->load->library('curl');
+		$this->curl->post('http://127.0.0.1:3003', json_encode($request));
 		$this->curl->setHeader('Content-Type', 'application/json');
 		if ($this->curl->error) {
 			echo 'Error: ' . $this->curl->error_code . ': ' . $this->curl->error_message;
 		}else {
 			header("Content-type: image/png");
 			echo base64_decode($this->curl->response);
-			// echo 'data:image/png;base64,' . $this->curl->response;
-			// echo '<img src="data:image/png;base64,'.$this->curl->response.'">';
 			exit(0);
 		}
 		echo "<pre>";

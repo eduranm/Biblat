@@ -41,6 +41,7 @@ class Indicadores extends CI_Controller {
 		'#651067'
 	);
 	public $highcharts = array();
+	public $preview = FALSE;
 
 	public function __construct()
 	{
@@ -168,6 +169,22 @@ class Indicadores extends CI_Controller {
 
 	public function getChartData(){
 		$this->output->enable_profiler(false);
+		switch ($_POST['indicador']):
+			case 'modelo-bradford-revista':
+			case 'modelo-bradford-institucion':
+				return $this->getChartDataBradford();
+				break;
+			case 'indice-concentracion':
+			case 'productividad-exogena':
+				return $this->getChartDataPrattExogena();
+				break;
+			default:
+				return $this->getChartDataLine();
+				break;
+		endswitch;
+	}
+
+	public function getChartDataLine(){
 		$series = array();
 		$this->load->database();
 		/*Convirtiendo el periodo en dos fechas*/
@@ -343,43 +360,6 @@ class Indicadores extends CI_Controller {
 				);
 		endforeach;
 
-		/*Opciones de la gráfica*/
-		$data['options'] = array(
-						'animation' => array(
-								'duration' => 1000
-							), 
-						'height' => '500',
-						'hAxis' => array(
-								'title' => $indicador[$_POST['indicador']]['hTitle']
-							), 
-						'legend' => array(
-								'position' => 'right'
-							),
-						'pointSize' => 3,
-						'tooltip' => array(
-								'isHtml' => true
-							),
-						'vAxis' => array(
-								'title' => $indicador[$_POST['indicador']]['vTitle'],
-								'minValue' => 0
-							),
-						'width' => '1000',
-						'chartArea' => array(
-							'left' => 100,
-							'top' => 40,
-							'width' => "70%",
-							'height' => "80%"
-							),
-						'title'=> _sprintf('Fuente: %s', 'biblat.unam.mx'),
-						'titlePosition' => 'in',
-						'titleTextStyle' => array(
-							'bold' => FALSE,
-							'italic' => TRUE
-							),
-						'backgroundColor' => array(
-							'fill' => 'transparent'
-							)
-						);
 		/*Opciones para la tabla*/
 		$data['tableOptions'] = array(
 				'allowHtml' => true,
@@ -392,12 +372,13 @@ class Indicadores extends CI_Controller {
 		/*Titulo de la gráfica*/
 		$data['chartTitle'] = $indicador[$_POST['indicador']]['title'][$selection];
 		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]}</h4>";
+		if($this->preview)
+			return $data['highchart'];
 		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}
 
 	public function getChartDataBradford(){
-		$this->output->enable_profiler(false);
 		$indicador['modelo-bradford-revista'] = array(
 				'sufix' => "Revista",
 				'title' => '<div class="text-center nowrap"><h4>'._('Modelo matemático de Bradford').'</h4><br/>'._('Distribución de artículos por revista').'</div>',
@@ -598,6 +579,8 @@ class Indicadores extends CI_Controller {
 					'tableCell' => 'text-left nowrap'
 					)
 			);
+		if($this->preview)
+			return $data['highchart'];
 		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}
@@ -605,7 +588,6 @@ class Indicadores extends CI_Controller {
 	public function getChartDataPrattExogena($limit=10){
 		//$limit *= 2;
 		$data = array();
-		$this->output->enable_profiler(false);
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
 		$indicador['indice-concentracion'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", pratt AS indicador FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina}",
@@ -680,6 +662,8 @@ class Indicadores extends CI_Controller {
 			);
 		$data['chartTitle'] = $indicador[$_POST['indicador']]['chartTitle'];
 		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]}</h4>";
+		if($this->preview)
+			return $data['highchart'];
 		header('Content-Type: application/json');	
 		echo json_encode($data, true);
 
@@ -864,7 +848,8 @@ class Indicadores extends CI_Controller {
 		$data['result'] = true;
 		$data['anioBase'] = (int)$anioBase;
 		$data['anioFinal'] = (int)$anioFinal;
-
+		if($this->preview)
+			return $data;
 		/*Generando escala*/
 		$scale = array();
 		$scaleOffset = $data['anioBase'];
@@ -978,6 +963,82 @@ class Indicadores extends CI_Controller {
 		endif;
 		$this->template->set_meta('description', _('Frecuencias'));
 		$this->template->build('revista/index', $data['main']);
+	}
+
+	public function preview(){
+		$uri_string = uri_string();
+		if (preg_match('%indicadores/(...+?)%', $uri_string)):
+			if (preg_match('%indicadores/(.+?)(/.*|$)%', $uri_string)):
+				$_POST['indicador']=preg_replace('%.+?/indicadores/(.+?)(/.*|$)%', '\1', $uri_string);
+			endif;
+			if (preg_match('%.*?/disciplina/(.+?)(/.*|$)%', $uri_string)):
+				$_POST['disciplina']=preg_replace('%.*?/disciplina/(.+?)(/.*|$)%', '\1', $uri_string);
+			endif;
+			if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', $uri_string)):
+				$_POST['revista']=preg_split('/[\s\/]+/', preg_replace('%.*?/revista/(.+?)(/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', $uri_string));
+			endif;
+			if (preg_match('%.*?/pais-revista/(.+?)(/[0-9]{4}-[0-9]{4}|$)%', $uri_string)):
+				$_POST['paisRevista']=preg_split('/[\s\/]+/', preg_replace('%.*?/pais-revista/(.+?)(/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', $uri_string));
+			endif;
+			if (preg_match('%.*?/pais-autor/(.+?)(/[0-9]{4}-[0-9]{4}|$)%', $uri_string)):
+				$_POST['paisAutor']=preg_split('/[\s\/]+/', preg_replace('%.*?/pais-autor/(.+?)(/[0-9]{4}-[0-9]{4}|/preview\.png|$)%', '\1', $uri_string));
+			endif;
+			if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%', $uri_string)):
+				$_POST['periodo']=preg_replace('%.*?/([0-9]{4})-([0-9]{4})/preview\.png%', '\1;\2', $uri_string);
+			endif;
+			if(in_array($_POST['indicador'], array('distribucion-articulos-coleccion', 'citacion-articulos-edad', 'citacion-articulos-tipo'))):
+				$sufix="";
+				if(!empty($_POST['area']))
+					$sufix = "-area";
+				if(!empty($_POST['revista']))
+					$sufix = "-revista";
+				if(!empty($_POST['area']) && !empty($_POST['revista']))
+					$sufix['indicador'] = "-area-revista";
+				if(!empty($_POST['paisAutor']))
+					$sufix = "-afiliacion";
+				$_POST['indicador'] = "{$_POST['indicador']}{$sufix}";
+			endif;
+			$this->preview = TRUE;
+		endif;
+		if(!isset($_POST['periodo']) && !preg_match('/(modelo-bradford-revista|modelo-bradford-institucion|indice-concentracion|productividad-exogena)/', $_POST['indicador'])):
+			$periodos = $this->getPeriodos();
+			$_POST['periodo'] = "{$periodos['anioBase']};{$periodos['anioFinal']}";
+		endif;
+		$chartData = $this->getChartData();
+		if(preg_match('/(indice-concentracion|productividad-exogena)/', $_POST['indicador']))
+			$chartData = $chartData[0];
+		if(preg_match('/modelo-bradford-(revista|institucion)/', $_POST['indicador']))
+			$chartData = $chartData['bradford'];
+		/* Ajustando valores de la gráfica para la vista previa*/
+		unset($chartData['subtitle'], $chartData['xAxis']['title']);
+		foreach ($chartData['series'] as $key => $value):
+			$chartData['series'][$key]['showInLegend'] = FALSE;
+		endforeach;
+		$chartData['subtitle'] = $chartData['yAxis']['title'];
+		$chartData['yAxis']['title'] = '';
+		$chartData['chart']['width'] = 400;
+		$chartData['chart']['height'] = 250;
+		$chartData['colors'] = $this->colors;
+
+		$request = array(
+				'infile' => json_encode($chartData),
+				'type' => 'png'
+			);
+		$this->load->library('curl');
+		$this->curl->post('http://127.0.0.1:3003', json_encode($request));
+		$this->curl->setHeader('Content-Type', 'application/json');
+		if ($this->curl->error) {
+			echo 'Error: ' . $this->curl->error_code . ': ' . $this->curl->error_message;
+		}else {
+			header("Content-type: image/png");
+			echo base64_decode($this->curl->response);
+			exit(0);
+		}
+		echo "<pre>";
+		var_dump($this->curl->request_headers);
+		var_dump($this->curl->response_headers);
+		$this->curl->close();
+
 	}
 
 }
