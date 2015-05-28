@@ -26,7 +26,7 @@ class Conacyt extends REST_Controller {
 				$data[$journal['issn']]['indicators'][] = array(
 						'title' => 'Reporte bibliométrico CONACYT',
 						'url' => site_url("conacyt/revista/{$journal['slug']}"),
-						'img' => null
+						'img' => NULL
 					);
 			endif;
 		endforeach;
@@ -42,33 +42,33 @@ class Conacyt extends REST_Controller {
 				$data[$journal['revistaISSN']]['indicators'][] = array(
 						'title' => 'Índice de concentración Pratt (Biblat)',
 						'url' => site_url("indicadores/indice-concentracion/disciplina/{$journal['disciplinaSlug']}/revista/{$journal['revistaSlug']}"),
-						'img' => null
+						'img' => site_url("indicadores/indice-concentracion/disciplina/{$journal['disciplinaSlug']}/revista/{$journal['revistaSlug']}/preview.png")
 					);
 			endif;
 			if($journal['exogena']):
 				$data[$journal['revistaISSN']]['indicators'][] = array(
 						'title' => 'Tasa de autoría exógena (Biblat)',
 						'url' => site_url("indicadores/productividad-exogena/disciplina/{$journal['disciplinaSlug']}/revista/{$journal['revistaSlug']}"),
-						'img' => null
+						'img' => site_url("indicadores/productividad-exogena/disciplina/{$journal['disciplinaSlug']}/revista/{$journal['revistaSlug']}/preview.png")
 					);
 			endif;
 			if($journal['generalesrevista']):
 				$data[$journal['revistaISSN']]['indicators'][] = array(
 						'title' => 'Indicadores generales por revista (SciELO)',
 						'url' => site_url("scielo/indicadores/indicadores-generales-revista/coleccion/{$journal['networkSlug']}/revista/acta-botanica-mexicana{$journal['revistaSlug']}"),
-						'img' => null
+						'img' => site_url("scielo/indicadores/indicadores-generales-revista/coleccion/{$journal['networkSlug']}/revista/acta-botanica-mexicana{$journal['revistaSlug']}/preview.png")
 					);
 			endif;
 			if($journal['redalycId']):
 				$data[$journal['revistaISSN']]['indicators'][] = array(
 						'title' => 'Indicadores de publicación (Redalyc)',
 						'url' => "http://www.redalyc.org/revista.oa?id={$journal['redalycId']}&tipo=produccion&perfil=publicacion",
-						'img' => null
+						'img' => NULL
 					);
 				$data[$journal['revistaISSN']]['indicators'][] = array(
 						'title' => 'Indicadores de coautoría (Redalyc)',
 						'url' => "http://www.redalyc.org/revista.oa?id={$journal['redalycId']}&tipo=produccion&perfil=coautoria",
-						'img' => null
+						'img' => NULL
 					);
 			endif;
 		endforeach;
