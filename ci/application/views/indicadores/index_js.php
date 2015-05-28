@@ -287,19 +287,8 @@ $(document).ready(function(){
 			loading.start();
 		}
 		indicadorValue = $("#indicador").val();
-		urlRequest = '<?=site_url("indicadores/getChartData");?>';
-		switch(indicadorValue){
-			case "modelo-bradford-revista":
-			case "modelo-bradford-institucion":
-				urlRequest = '<?=site_url("indicadores/getChartDataBradford");?>';
-				break;
-			case "indice-concentracion":
-			case "productividad-exogena":
-				urlRequest = '<?=site_url("indicadores/getChartDataPrattExogena");?>';
-				break;
-		}
 		$.ajax({
-		  url: urlRequest,
+		  url: '<?=site_url("indicadores/getChartData");?>',
 		  type: 'POST',
 		  dataType: 'json',
 		  data: $(this).serialize(),
@@ -435,14 +424,14 @@ $(document).ready(function(){
 <?php 	if (preg_match('%.*?/disciplina/(.+?)(/.*|$)%', uri_string())):?>
 		disciplina:"<?=preg_replace('%.*?/disciplina/(.+?)(/.*|$)%', '\1', uri_string());?>",
 <?php 	endif;?>
-<?php 	if (preg_match('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-		revista:"<?=preg_replace('%.*?/revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
+<?php 	if (preg_match('%.*?/revista/(.+?)(/[0-9]{4}-[0-9]{4}|$)%', uri_string())):?>
+		revista:"<?=preg_replace('%.*?/revista/(.+?)(/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
-<?php 	if (preg_match('%.*?/pais-revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-		paisRevista:"<?=preg_replace('%.*?/pais-revista/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
+<?php 	if (preg_match('%.*?/pais-revista/(.+?)(/[0-9]{4}-[0-9]{4}|$)%', uri_string())):?>
+		paisRevista:"<?=preg_replace('%.*?/pais-revista/(.+?)(/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
-<?php 	if (preg_match('%.*?/pais-autor/(.+?)($|/[0-9]{4}-[0-9]{4})%', uri_string())):?>
-		paisAutor:"<?=preg_replace('%.*?/pais-autor/(.+?)($|/[0-9]{4}-[0-9]{4})%', '\1', uri_string());?>".split('/'),
+<?php 	if (preg_match('%.*?/pais-autor/(.+?)(/[0-9]{4}-[0-9]{4}|$)%', uri_string())):?>
+		paisAutor:"<?=preg_replace('%.*?/pais-autor/(.+?)(/[0-9]{4}-[0-9]{4}|$)%', '\1', uri_string());?>".split('/'),
 <?php 	endif;?>
 <?php 	if (preg_match('%.*?/([0-9]{4})-([0-9]{4})%', uri_string())):?>
 		periodo:"<?=preg_replace('%.*?/([0-9]{4})-([0-9]{4})%', '\1;\2', uri_string());?>"
