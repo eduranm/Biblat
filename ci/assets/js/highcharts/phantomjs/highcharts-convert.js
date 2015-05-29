@@ -117,7 +117,15 @@
 		window.callbackParsed = false;
         
 		page.onConsoleMessage = function (msg) {
-			console.log(msg);
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+			var hh = today.getHours();
+			var mms = today.getMinutes();
+			var ss = today.getSeconds();
+			today = mm+'/'+dd+'/'+yyyy+' '+hh+':'+mms+':'+ss;
+			console.log(today+' '+msg);
             
 			/*
 			 * Ugly hack, but only way to get messages out of the 'page.evaluate()'
