@@ -1019,10 +1019,11 @@ class Indicadores extends CI_Controller {
 		$chartData['chart']['width'] = 400;
 		$chartData['chart']['height'] = 250;
 		$chartData['colors'] = $this->colors;
-
+		$hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 		$request = array(
 				'infile' => json_encode($chartData),
-				'type' => 'png'
+				'type' => 'png',
+				'rhost' => "{$_SERVER['REMOTE_ADDR']} ({$hostname})"
 			);
 		$this->load->library('curl');
 		$this->curl->post('http://127.0.0.1:3003', json_encode($request));
