@@ -1335,7 +1335,8 @@ class Indicadores extends CI_Controller {
 		$request = array(
 				'infile' => json_encode($chartData),
 				'type' => 'png',
-				'rhost' => "{$_SERVER['REMOTE_ADDR']} ({$hostname})"
+				'rhost' => "{$_SERVER['REMOTE_ADDR']} ({$hostname})",
+				'rurl'	=> $uri_string
 			);
 
 		$this->load->library('curl');

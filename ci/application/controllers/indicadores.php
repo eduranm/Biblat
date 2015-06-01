@@ -1023,7 +1023,8 @@ class Indicadores extends CI_Controller {
 		$request = array(
 				'infile' => json_encode($chartData),
 				'type' => 'png',
-				'rhost' => "{$_SERVER['REMOTE_ADDR']} ({$hostname})"
+				'rhost' => "{$_SERVER['REMOTE_ADDR']} ({$hostname})",
+				'rurl'	=> $uri_string
 			);
 		$this->load->library('curl');
 		$this->curl->post('http://127.0.0.1:3003', json_encode($request));

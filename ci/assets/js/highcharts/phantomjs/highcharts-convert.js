@@ -125,7 +125,7 @@
 			var mms = today.getMinutes();
 			var ss = today.getSeconds();
 			today = mm+'/'+dd+'/'+yyyy+' '+hh+':'+mms+':'+ss;
-			console.log(params.rhost+' '+today+' '+msg);
+			console.log(params.rhost+' ['+today+'] "'+params.rurl+'" '+msg);
             
 			/*
 			 * Ugly hack, but only way to get messages out of the 'page.evaluate()'
