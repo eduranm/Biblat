@@ -1370,8 +1370,13 @@ class Indicadores extends CI_Controller {
 			if (!$this->curl->error):
 				$data['result'] = TRUE;
 				$data['html_content'] = "";
-				foreach ($this->curl->response->{$issn}->indicators as $indicator):
-					if(!preg_match('/Redalyc/', $indicator->title)):
+				$indicators = (array)$this->curl->response->{$issn}->indicators;
+				if(preg_match('/CONACYT/', $indicators[0]->title)):
+					$indicator = array_shift($indicators);
+					array_push($indicators, $indicator);
+				endif;
+				foreach ($indicators as $indicator):
+					if(!preg_match('/(Redalyc)/', $indicator->title)):
 						$htmlImg = "";
 						if($indicator->img != NULL)
 							$htmlImg = "<br/><img width='185' border='0' src='{$indicator->img}'/>";
