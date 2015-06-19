@@ -38,6 +38,13 @@ class Conacyt extends REST_Controller {
 		$this->db->close();
 		foreach ($query->result_array() as $journal):
 			$data[$journal['revistaISSN']]['name'] = $journal['revista'];
+			if($journal['generalesrevista']):
+				$data[$journal['revistaISSN']]['indicators'][] = array(
+						'title' => 'Indicadores generales por revista (SciELO)',
+						'url' => site_url("scielo/indicadores/indicadores-generales-revista/coleccion/{$journal['networkSlug']}/revista/{$journal['revistaSlug']}"),
+						'img' => site_url("scielo/indicadores/indicadores-generales-revista/coleccion/{$journal['networkSlug']}/revista/{$journal['revistaSlug']}/preview.png")
+					);
+			endif;
 			if($journal['pratt']):
 				$data[$journal['revistaISSN']]['indicators'][] = array(
 						'title' => 'Índice de concentración Pratt (Biblat)',
@@ -50,13 +57,6 @@ class Conacyt extends REST_Controller {
 						'title' => 'Tasa de autoría exógena (Biblat)',
 						'url' => site_url("indicadores/productividad-exogena/disciplina/{$journal['disciplinaSlug']}/revista/{$journal['revistaSlug']}"),
 						'img' => site_url("indicadores/productividad-exogena/disciplina/{$journal['disciplinaSlug']}/revista/{$journal['revistaSlug']}/preview.png")
-					);
-			endif;
-			if($journal['generalesrevista']):
-				$data[$journal['revistaISSN']]['indicators'][] = array(
-						'title' => 'Indicadores generales por revista (SciELO)',
-						'url' => site_url("scielo/indicadores/indicadores-generales-revista/coleccion/{$journal['networkSlug']}/revista/acta-botanica-mexicana{$journal['revistaSlug']}"),
-						'img' => site_url("scielo/indicadores/indicadores-generales-revista/coleccion/{$journal['networkSlug']}/revista/acta-botanica-mexicana{$journal['revistaSlug']}/preview.png")
 					);
 			endif;
 			if($journal['redalycId']):
