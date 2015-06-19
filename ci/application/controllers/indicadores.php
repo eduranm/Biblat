@@ -1016,8 +1016,8 @@ class Indicadores extends CI_Controller {
 		endforeach;
 		$chartData['subtitle'] = array('text' => $this->indicadores[$_POST['indicador']]);
 		$chartData['yAxis']['title'] = '';
-		$chartData['chart']['width'] = 400;
-		$chartData['chart']['height'] = 250;
+		$chartData['chart']['width'] = 300;
+		$chartData['chart']['height'] = 200;
 		$chartData['colors'] = $this->colors;
 		$hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 		$request = array(
