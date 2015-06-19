@@ -1318,8 +1318,13 @@ class Indicadores extends CI_Controller {
 
 		);
 		if($_POST['indicador'] === "indicadores-generales-revista"):
-			$chartData = $chartData['factorImpacto'];
-			$title['indicadores-generales-revista'] = _('Indicadores generales (FI)');
+			if(count($chartData['factorImpacto']['series']) > 0):
+				$chartData = $chartData['factorImpacto'];
+				$title['indicadores-generales-revista'] = _('Indicadores generales (FI)');
+			else:
+				$chartData = $chartData['articulos'];
+				$title['indicadores-generales-revista'] = _('Número de artículos');
+			endif;
 		endif;
 		/* Ajustando valores de la gráfica para la vista previa*/
 		unset($chartData['subtitle'], $chartData['xAxis']['title']);
