@@ -1016,8 +1016,13 @@ class Indicadores extends CI_Controller {
 		endforeach;
 		$chartData['subtitle'] = array('text' => $this->indicadores[$_POST['indicador']]);
 		$chartData['yAxis']['title'] = '';
-		$chartData['chart']['width'] = 300;
-		$chartData['chart']['height'] = 200;
+		$chartData['chart']['width'] = 400;
+		$chartData['chart']['height'] = 250;
+		if(isset($_GET['width'])):
+			$wpercent = $_GET['width']/$chartData['chart']['width'];
+			$chartData['chart']['width'] = $chartData['chart']['width']*$wpercent;
+			$chartData['chart']['height'] = $chartData['chart']['height']*$wpercent;
+		endif;
 		$chartData['colors'] = $this->colors;
 		$hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 		$request = array(

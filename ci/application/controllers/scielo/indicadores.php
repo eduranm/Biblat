@@ -1334,6 +1334,11 @@ class Indicadores extends CI_Controller {
 		$chartData['yAxis']['title'] = '';
 		$chartData['chart']['width'] = 300;
 		$chartData['chart']['height'] = 200;
+		if(isset($_GET['width'])):
+			$wpercent = $_GET['width']/$chartData['chart']['width'];
+			$chartData['chart']['width'] = 300*$wpercent;
+			$chartData['chart']['height'] = 200*$wpercent;
+		endif;
 		$chartData['colors'] = $this->colors;
 		$chartData['subtitle'] = array('text' => $title[$_POST['indicador']]);
 		$hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
@@ -1379,7 +1384,7 @@ class Indicadores extends CI_Controller {
 					if(!preg_match('/(Redalyc)/', $indicator->title)):
 						$htmlImg = "";
 						if($indicator->img != NULL)
-							$htmlImg = "<br/><img width='185' border='0' src='{$indicator->img}'/>";
+							$htmlImg = "<br/><img width='185' border='0' src='{$indicator->img}?width=250'/>";
 						$data['html_content'] .= "<a href='{$indicator->url}'>{$indicator->title}{$htmlImg}</a><br/><br/>";
 					endif;
 				endforeach;
