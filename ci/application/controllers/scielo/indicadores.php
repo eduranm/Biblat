@@ -1332,8 +1332,8 @@ class Indicadores extends CI_Controller {
 			$chartData['series'][$key]['showInLegend'] = FALSE;
 		endforeach;
 		$chartData['yAxis']['title'] = '';
-		$chartData['chart']['width'] = 300;
-		$chartData['chart']['height'] = 200;
+		$chartData['chart']['width'] = 400;
+		$chartData['chart']['height'] = 250;
 		if(isset($_GET['width'])):
 			$wpercent = $_GET['width']/$chartData['chart']['width'];
 			$chartData['chart']['width'] = 300*$wpercent;
