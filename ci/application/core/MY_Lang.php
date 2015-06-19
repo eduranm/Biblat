@@ -108,6 +108,8 @@ class MY_Lang extends CI_Lang {
       //OPB - modification to use i18n also without changing the .htaccess (without pretty url) 
       $index_url = empty($CFG->config['index_page']) ? '' : $CFG->config['index_page']."/";
       $new_url = $CFG->config['base_url'].$index_url.$this->default_lang().'/'.$uri;
+      if(!empty($_SERVER['QUERY_STRING']))
+        $new_url = "{$new_url}?{$_SERVER['QUERY_STRING']}";
       header("Location: " . $new_url, TRUE, 302);
       exit;
     }
