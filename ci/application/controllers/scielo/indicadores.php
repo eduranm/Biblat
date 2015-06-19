@@ -1354,6 +1354,29 @@ class Indicadores extends CI_Controller {
 		var_dump($this->curl->response_headers);
 		$this->curl->close();
 	}
+
+	public function exportjs($issn=NULL){
+		$this->output->enable_profiler(FALSE);
+		header('Content-Type: application/javascript');
+		$data = array('result' => FALSE);
+		if ($issn != NULL):
+			$this->load->library('curl');
+			$this->curl->get(site_url("api/conacyt/indicadores.json/issn/{$issn}"));
+			if (!$this->curl->error):
+				$data['result'] = TRUE;
+				$data['html_content'] = "";
+				foreach ($this->curl->response->{$issn}->indicators as $indicator):
+					if(!preg_match('/Redalyc/', $indicator->title)):
+						$htmlImg = "";
+						if($indicator->img != NULL)
+							$htmlImg = "<br/><img width='185' border='0' src='{$indicator->img}'/>";
+						$data['html_content'] .= "<a href='{$indicator->url}'>{$indicator->title}{$htmlImg}</a><br/><br/>";
+					endif;
+				endforeach;
+			endif;
+		endif;
+		$this->load->view('scielo/indicadores/exportjs', $data);
+	}
 }
 
 /* End of file indicadores.php */
