@@ -194,7 +194,7 @@
 						</div>
 						<p class="text-left ident1">
 							{_('Donde:')}<br/>
-							<i>E</i> = {_('Elite de autores que publican el 50% de los trabajos.')}<br/>
+							<i>E</i> = {_sprintf('Elite de autores que publican el 50%% de los trabajos.')}<br/>
 							<i>N</i> = {_('Población total de autores.')}
 						</p>					
 					</div>

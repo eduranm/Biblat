@@ -224,7 +224,7 @@
 		</div>
 		<p>
 			{_('Donde:')}<br/>
-			<i>E</i> = {_('Elite de autores que publican el 50% de los trabajos.')}<br/>
+			<i>E</i> = {_sprintf('Elite de autores que publican el 50%% de los trabajos.')}<br/>
 			<i>N</i> = {_('Población total de autores.')}
 		</p>
 		<p>{_('Es uno de los indicadores más importantes para medir la productividad científica de los autores ya que identifica la elite de autores más productivos por título de revista o país de publicación de la revista.')}</p>				

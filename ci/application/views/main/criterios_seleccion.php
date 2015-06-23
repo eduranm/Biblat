@@ -67,7 +67,7 @@
 				</tr>
 				<tr>
 					<td>7</td>
-					<td><b>{_('60% de contenido indizable.')}</b> {_('Al menos el 60% de los documentos publicados en un fascículo, deben ser: artículos originales, ensayos, reseñas de libro, revisiones bibliográficas, notas de más de una cuartilla, informes técnicos o cartas al editor.')}</td>
+					<td><b>{_sprintf('60%% de contenido indizable.')}</b> {_sprintf('Al menos el 60%% de los documentos publicados en un fascículo, deben ser: artículos originales, ensayos, reseñas de libro, revisiones bibliográficas, notas de más de una cuartilla, informes técnicos o cartas al editor.')}</td>
 					<td>(1 pt)</td>
 				</tr>
 				<tr>
@@ -172,7 +172,7 @@
 				</tr>
 				<tr>
 					<td>28</td>
-					<td><b>{_('Apertura institucional del consejo, comité o cuerpo editorial.')}</b> {_('Para calificar positivamente, los cuerpos editoriales deberán contar con evaluadores externos a la entidad editora, por lo que deberá constar su afiliación institucional. Al menos el 50% de los miembros del consejo editorial deberán pertenecer a instituciones diferentes a la editora, de lo contrario no calificará positivamente.')}</td>
+					<td><b>{_('Apertura institucional del consejo, comité o cuerpo editorial.')}</b> {_sprintf('Para calificar positivamente, los cuerpos editoriales deberán contar con evaluadores externos a la entidad editora, por lo que deberá constar su afiliación institucional. Al menos el 50%% de los miembros del consejo editorial deberán pertenecer a instituciones diferentes a la editora, de lo contrario no calificará positivamente.')}</td>
 					<td>(2 pt)</td>
 				</tr>
 			</tbody>

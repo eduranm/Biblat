@@ -230,18 +230,18 @@
 							</p>
 							<div class="text-center">
 								<div class="fraction">
-									<span class="fup"><i>Factor de impacto de la revista X</i></span>
-									<span class="fdnb"><i>en el año 2011</i></span>
+									<span class="fup"><i>{_('Factor de impacto de la revista X')}</i></span>
+									<span class="fdnb"><i>{_('en el año 2011')}</i></span>
 								</div> = 
 								<div class="fraction">
-									<span class="fup"><i>Citas recibidas en 2011 de art. publ. en 2010+2009</i></span>
+									<span class="fup"><i>{_('Citas recibidas en 2011 de art. publ. en 2010+2009')}</i></span>
 									<span class="bar">/</span>
-									<span class="fdn"><i>Número de artículos publicados en 2010+2009</i></span>
+									<span class="fdn"><i>{_('Número de artículos publicados en 2010+2009')}</i></span>
 								</div> = 
 								<div class="fraction">
-									<span class="fup"><i>117 citas recibidas en 2011 de art. publ. en 2010+2009</i></span>
+									<span class="fup"><i>{_('117 citas recibidas en 2011 de art. publ. en 2010+2009')}</i></span>
 									<span class="bar">/</span>
-									<span class="fdn"><i>212 artículos publicados en 2010+2009</i></span>
+									<span class="fdn"><i>{_('212 artículos publicados en 2010+2009')}</i></span>
 								</div> = <b>0.5519</b>
 							</div>
 						</div>
@@ -258,34 +258,34 @@
 							</p>
 							<div class="text-center">
 								<div class="fraction">
-									<span class="fup"><i>Índice de inmediatez de la revista X</i></span>
-									<span class="fdnb"><i>en el año 2014</i></span>
+									<span class="fup"><i>{_('Índice de inmediatez de la revista X')}</i></span>
+									<span class="fdnb"><i>{_('en el año 2014')}</i></span>
 								</div> = 
 								<div class="fraction">
-									<span class="fup"><i>Citas recibidas por artículos publicados 2014</i></span>
+									<span class="fup"><i>{_('Citas recibidas por artículos publicados 2014')}</i></span>
 									<span class="bar">/</span>
-									<span class="fdn"><i>Número de artículos publicados en 2014</i></span>
+									<span class="fdn"><i>{_('Número de artículos publicados en 2014')}</i></span>
 								</div> = 
 								<div class="fraction">
-									<span class="fup"><i>16 citas recibidas por artículos publicados 2014</i></span>
+									<span class="fup"><i>{_('16 citas recibidas por artículos publicados 2014')}</i></span>
 									<span class="bar">/</span>
-									<span class="fdn"><i>70 artículos publicados en 2014</i></span>
+									<span class="fdn"><i>{_('70 artículos publicados en 2014')}</i></span>
 								</div> = <b>0.2286</b>
 							</div>
 						</div>
 						<div id="revista-vidaMedia">
 							<h4 class="text-center">{_('Vida media de las citas')}</h4>
 							<p class="text-left">
-								{_('Este indicador muestra la edad del 50% de los artículos citados de la revista en un año determinado.')}
+								{_('Este indicador muestra la edad del 50%% de los artículos citados de la revista en un año determinado.')}
 							</p>
 							<p class="text-left">
 								{_('Ejemplo')}:
 							</p>
 							<p class="text-left">
-								{_('La revista X obtuvo en 2011 un valor de Vida Media de 7 años. Significa que el 50% de las citas que recibió en 2011 son para documentos publicados en los últimos 7 años, es decir del periodo 2005-2011. El otro 50% de las citas son de documentos publicados en años anteriores a 2005.')}
+								{_sprintf('La revista X obtuvo en 2011 un valor de Vida Media de 7 años. Significa que el 50%% de las citas que recibió en 2011 son para documentos publicados en los últimos 7 años, es decir del periodo 2005-2011. El otro 50%% de las citas son de documentos publicados en años anteriores a 2005.')}
 							</p>
 							<p class="text-left">
-								{_('Un valor de Vida Media >10 años significa que el 50% de las citas recibidas por la revista rebasan los 10 años desde su publicación.')}
+								{_sprintf('Un valor de Vida Media >10 años significa que el 50%% de las citas recibidas por la revista rebasan los 10 años desde su publicación.')}
 							</p>
 						</div>
 					</div>
