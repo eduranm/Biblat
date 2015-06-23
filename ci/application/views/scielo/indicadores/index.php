@@ -276,7 +276,7 @@
 						<div id="revista-vidaMedia">
 							<h4 class="text-center">{_('Vida media de las citas')}</h4>
 							<p class="text-left">
-								{_('Este indicador muestra la edad del 50%% de los artículos citados de la revista en un año determinado.')}
+								{_sprintf('Este indicador muestra la edad del 50%% de los artículos citados de la revista en un año determinado.')}
 							</p>
 							<p class="text-left">
 								{_('Ejemplo')}:
