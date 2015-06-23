@@ -1372,7 +1372,7 @@ class Indicadores extends CI_Controller {
 		if ($issn != NULL):
 			$this->load->library('curl');
 			$this->curl->get(site_url("api/conacyt/indicadores.json/issn/{$issn}"));
-			if (!$this->curl->error):
+			if (!$this->curl->error && !empty($this->curl->response)):
 				$data['result'] = TRUE;
 				$data['html_content'] = "";
 				$indicators = (array)$this->curl->response->{$issn}->indicators;
@@ -1381,10 +1381,12 @@ class Indicadores extends CI_Controller {
 					array_push($indicators, $indicator);
 				endif;
 				foreach ($indicators as $indicator):
-					if(!preg_match('/(Redalyc)/', $indicator->title)):
+					if(!preg_match('/Redalyc/', $indicator->title)):
 						$htmlImg = "";
 						if($indicator->img != NULL)
 							$htmlImg = "<br/><img width='185' border='0' src='{$indicator->img}?width=250'/>";
+						if(preg_match('/SciELO/', $indicator->title))
+							$htmlImg = "<br/><img width='185' border='0' src='{$indicator->img}?width=300'/>";
 						$data['html_content'] .= "<a href='{$indicator->url}'>{$indicator->title}{$htmlImg}</a><br/><br/>";
 					endif;
 				endforeach;
