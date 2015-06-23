@@ -597,49 +597,49 @@ class Indicadores extends CI_Controller {
 			'sql' => "SELECT \"rango\"||' "._('Años')."' AS title, anio, articulos as valor FROM \"ageDocCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
+			'tooltip' => _('Edad del documento citado: <b>{series.name}</b><br/>Número de artículos publicados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-edad-area'] = array(
-			'sql' => "SELECT \"areaName\"||' ('||rango||' "._('Años').")' AS title, anio, articulos as valor FROM \"vAgeDocAreaCitation\"",
+			'sql' => "SELECT '"._('Área citante').": <b>'||\"areaName\"||'</b><br/>"._('Edad del documento citado').": <b>'||rango||' "._('Años')."</b>' AS title, anio, articulos as valor FROM \"vAgeDocAreaCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
+			'tooltip' => _('{series.name}<br/>Número de artículos publicados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-edad-revista'] = array(
-			'sql' => "SELECT revista||' ('||rango||' "._('Años').")' AS title, anio, articulos as valor FROM \"ageDocJournalCitation\"",
+			'sql' => "SELECT '"._('Revista citante').": <b>'||revista||'</b><br/>"._('Edad del documento citado').": <b>'||rango||' "._('Años')."</b>' AS title, anio, articulos as valor FROM \"ageDocJournalCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
+			'tooltip' => _('{series.name}<br/>Número de artículos publicados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-edad-afiliacion'] = array(
-			'sql' => "SELECT pais||' ('||rango||' "._('Años').")' AS title, anio, articulos as valor FROM \"ageDocAffiliationCitation\"",
+			'sql' => "SELECT '"._('País de afiliación citante').": <b>'||pais||'</b><br/>"._('Edad del documento citado').": <b>'||rango||' "._('Años')."</b>' AS title, anio, articulos as valor FROM \"ageDocAffiliationCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
+			'tooltip' => _('{series.name}<br/>Número de artículos publicados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-tipo'] = array(
 			'sql' => "SELECT \"docTypeName\" AS title, anio, articulos as valor FROM \"vDocTypeDistribution\"",
 			'vTitle' => _('Artículos citados por tipo de documento'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
+			'tooltip' => _('<b>Tipo de documento citado: {series.name}</b><br/>Número de artículos publicados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-tipo-area'] = array(
-			'sql' => "SELECT \"areaName\"||' ('||\"docTypeName\"||')' AS title, anio, articulos as valor FROM \"vDocTypeAreaCitation\"",
+			'sql' => "SELECT '"._('Área citante').": <b>'||\"areaName\"||'</b><br/>"._('Tipo de documento citado').": <b>'||\"docTypeName\"||'</b>' AS title, anio, articulos as valor FROM \"vDocTypeAreaCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
+			'tooltip' => _('{series.name}<br/>Número de artículos publicados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-tipo-revista'] = array(
-			'sql' => "SELECT revista||' ('||\"docTypeName\"||')' AS title, anio, articulos as valor FROM \"vDocTypeJournalCitation\"",
+			'sql' => "SELECT '"._('Revista citante').": <b>'||revista||'</b><br/>"._('Tipo de documento citado').": <b>'||\"docTypeName\"||'</b>' AS title, anio, articulos as valor FROM \"vDocTypeJournalCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
+			'tooltip' => _('{series.name}<br/>Número de artículos publicados en el año {point.category}: <b>{point.y}</b>')
 			);
 		$indicador['citacion-articulos-tipo-afiliacion'] = array(
-			'sql' => "SELECT pais||' ('||\"docTypeName\"||')' AS title, anio, articulos as valor FROM \"vDocTypeAffiliationCitation\"",
+			'sql' => "SELECT "._('País de afiliación citante').": <b>'||pais||'</b><br/>"._('Tipo de documento citado').": <b>'||\"docTypeName\"||'</b>' AS title, anio, articulos as valor FROM \"vDocTypeAffiliationCitation\"",
 			'vTitle' => _('Número de artículos'),
 			'hTitle' => _('Año'),
-			'tooltip' => _('<b>{series.name}</b><br/>Número de artículos citados en el año {point.category}: <b>{point.y}</b>')
+			'tooltip' => _('{series.name}<br/>Número de artículos publicados en el año {point.category}: <b>{point.y}</b>')
 			);
 
 		$query = $indicador[$_POST['indicador']]['sql'];
