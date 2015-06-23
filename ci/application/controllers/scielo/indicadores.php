@@ -884,7 +884,7 @@ class Indicadores extends CI_Controller {
 				foreach ($indicadores as $kindicador => $vindicador):
 					$value = $vindicador[$periodo][$key];
 					$tooltipv = $value;
-					if(isset($series[$key][$kindicador]) || $value != NULL):
+					if(isset($series[$key][$kindicador]) || $value != NULL || count($_POST['revista']) > 1):
 						switch ($key):
 							case 'citas':
 								$porcentajeAutocita = $vindicador[$periodo]['porcentajeAutoCita'] != NULL ? $vindicador[$periodo]['porcentajeAutoCita'] : 0;
