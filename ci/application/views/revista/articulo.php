@@ -150,8 +150,8 @@
 				</tr>
 				<tr class="solicitudDocumento">
 					<td colspan="2">
-						{if strtotime('now') > strtotime('2015-03-26 23:59:59.0') AND strtotime('now') < strtotime('2015-04-06')}
-						<p class="temporal">{_('Debido al período vacacional, el servicio de solicitud de documentos se suspenderá a partir del día 5 de diciembre de 2014 y se reanudará el día 5 de enero de 2015.')}</p>
+						{if strtotime('now') > strtotime('2015-06-26 23:59:59.0') AND strtotime('now') < strtotime('2015-07-27')}
+						<p class="temporal">{_('Debido al período vacacional, el servicio de solicitud de documentos se suspenderá a partir del día 26 de junio de 2015 y se reanudará el día 27 de julio de 2015.')}</p>
 						{else}
 						<form id="formSolicitudDocumento" action="{site_url('revista/solicitud/documento')}" method="POST" class="contacto">
 							<fieldset>
