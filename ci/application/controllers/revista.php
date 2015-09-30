@@ -313,9 +313,9 @@ class Revista extends CI_Controller{
 			endif;
 			if(isset($articulo['autores'])):
 				foreach ($articulo['autores'] as $autor):
-					$this->template->append_metadata(sprintf('<meta name="eprints.creators_name" content="%s" />', $autor));
-					$this->template->append_metadata(sprintf('<meta name="dc.creator" content="%s" />', $autor));
-					$this->template->append_metadata(sprintf('<meta name="citation_author" content="%s" />', $autor));
+					$this->template->append_metadata(sprintf('<meta name="eprints.creators_name" content="%s" />', $autor['a']));
+					$this->template->append_metadata(sprintf('<meta name="dc.creator" content="%s" />', $autor['a']));
+					$this->template->append_metadata(sprintf('<meta name="citation_author" content="%s" />', $autor['a']));
 				endforeach;
 			endif;
 		endif;
