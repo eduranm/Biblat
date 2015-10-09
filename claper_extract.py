@@ -21,7 +21,7 @@ registro = {}
 current = ""
 tags = ['008', '022', '024', '035', '036', '039', '041', '100', '110', '120', '222', '245', '260', '300', '504', '520', '546', '590', '650', '653', '654', '698', '856', 'CAT']
 jsonTags = ('100', '110', '120', '300', '520', '590')
-fieldsArticle = [
+tagsArticle = [
 	('sistema', '035'),
 	('revista', '222'),
 	('titulo', '245'),
@@ -104,8 +104,8 @@ def add_record():
 
 	'''Agregamos los registros de documentos'''
 	tagOffset=1
-	lenFields = len(fieldsArticle)
-	for key, tag in fieldsArticle:
+	lenFields = len(tagsArticle)
+	for key, tag in tagsArticle:
 		if tag in registro:
 			'''Si el tamaño de la etiqueta es 1 asignamos el primer elemento de la lista a la etiqueta'''
 			if len(registro[tag]) > 1 and tag not in ('100', '110', '120', '520', '650', '653', '654', '856'):
@@ -273,7 +273,7 @@ def parse_database(database):
 def set_progress(path, dlib):
 	global pbar, progress
 	progress = 0
-	widgets = ['Parsing %s: ' % dlib, Percentage(), ' ', Bar(), ' ', ETA(), ' ', ' ']
+	widgets = ['Parsing %-9s: ' % dlib, Percentage(), ' ', Bar(), ' ', ETA(), ' ', ' ']
 	tail = subprocess.Popen(["tail", "-1", path],
 		shell=False,
 		stdout=subprocess.PIPE,
@@ -296,7 +296,7 @@ if arguments.periodica:
 if arguments.scielo:
 	dlib = "SciELO"
 	path = './database/scielo_valid.txt'
-	set_progress(path)
+	set_progress(path, "SciELO")
 	parse_database(path)
 
 print sorted(tags)
