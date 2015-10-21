@@ -2,6 +2,24 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h5 class="panel-title">
+				<a href="{base_url('archivos/ppt/Mesa_Acceso_Abierto_Calidad_Seminario_Editores_octubre_2015.pptx')}" target="_blank">
+					<span class="fa fa-file-powerpoint-o"></span> Sánchez Pereyra, Antonio (2015, octubre) El acceso abierto y la calidad de las revistas científicas. 2° ciclo del Seminario Permanente de Editores, UNAM
+				</a>
+			</h5>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h5 class="panel-title">
+				<a href="{base_url('archivos/ppt/Reunion_Revistas_INECOL_octubre_2015.pptx')}" target="_blank">
+					<span class="fa fa-file-powerpoint-o"></span> Sánchez Pereyra, Antonio (2015, octubre) Sistemas de información y evaluación bibliométrica de la ciencia. INECOL-Xalapa
+				</a>
+			</h5>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h5 class="panel-title">
 				<a href="{base_url('archivos/ppt/Estudios_Fronterizos_19_Marzo_2015.pptx')}" target="_blank">
 					<span class="fa fa-file-powerpoint-o"></span> Sánchez Pereyra, Antonio (2015, marzo) Presentación en XXX Aniversario de revista Estudios Fronterizos
 				</a>
