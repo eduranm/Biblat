@@ -316,6 +316,19 @@ class Revista extends CI_Controller{
 					$this->template->append_metadata(sprintf('<meta name="eprints.creators_name" content="%s" />', $autor['a']));
 					$this->template->append_metadata(sprintf('<meta name="dc.creator" content="%s" />', $autor['a']));
 					$this->template->append_metadata(sprintf('<meta name="citation_author" content="%s" />', $autor['a']));
+					if((int)$autor['z'] > 0):
+						$institucion = $articulo['instituciones'][(int)$autor['z']-1];
+						$this->template->append_metadata(sprintf('<meta name="citation_author_institution" content="%s, %s, %s, %s" />', $institucion['u'], $institucion['v'], $institucion['w'], $institucion['x']));
+					endif;
+				endforeach;
+			endif;
+			if(isset($articulo["url"])):
+				foreach ($articulo["url"] as $url):
+					if(preg_match('/.*pdf.*/', $url)):
+						$this->template->set_meta('citation_pdf_url', $url);
+					else:
+						$this->template->set_meta('citation_fulltext_html_url', $url);
+					endif;
 				endforeach;
 			endif;
 		endif;
