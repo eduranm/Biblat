@@ -20,7 +20,7 @@
 {if $mail}
 				<tr>
 					<td class="nowrap"><strong>{_('Título del documento:')}</strong></td>
-					<td><a href="{site_url("revista/$articulo.revistaSlug/articulo/$articulo.articuloSlug")}" title="{$articulo.revista}">{$articulo.articulo}</a></td>
+					<td><a href="{site_url("revista/$articulo.revistaSlug/articulo/$articulo.articuloSlug")}" title="{$articulo.revista}"><span itemprop="name">{$articulo.articulo}</span></a></td>
 				</tr>
 {/if}
 {if $articulo.revista}
@@ -58,7 +58,7 @@
 {if $articulo.anioRevista}
 				<tr>
 					<td class="nowrap"><strong>{_('Año:')}</strong></td>
-					<td>{$articulo.anioRevista}</td>
+					<td> <span itemprop="datePublished">{$articulo.anioRevista}</span></td>
 				</tr>
 {/if}
 {if $articulo.periodo}
@@ -82,7 +82,7 @@
 {if $articulo.paginacion}
 				<tr>
 					<td class="nowrap"><strong>{_('Paginación:')}</strong></td>
-					<td>{$articulo.paginacion}</td>
+					<td><span itemprop="pageStart">{$articulo.paginacionFirst}</span>{if $articulo.paginacionLast}-<span itemprop="pageEnd">{$articulo.paginacionLast}</span>{/if}</td>
 				</tr>
 {/if}
 {if $articulo.paisRevista}
@@ -113,7 +113,7 @@
 			{foreach $articulo.resumenHTML resumen}
 				<tr>
 					<td class="nowrap"><strong>{$resumen.title}</strong></td>
-					<td class="text-justify">{$resumen.body}</td>
+					<td class="text-justify"><span itemprop="description">{$resumen.body}</span></td>
 				</tr>
 			{/foreach}
 {/if}
