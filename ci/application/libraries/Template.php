@@ -224,6 +224,7 @@ class Template
 
 		// Assign by reference, as all loaded views will need access to partials
 		$this->_data['template'] =& $template;
+		$this->_data['ENVIRONMENT'] = ENVIRONMENT;
 
 		foreach ($this->_partials as $name => $partial)
 		{
