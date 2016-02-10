@@ -768,3 +768,7 @@ table.articulo{
 	font-size: 1.1em;
 	font-weight: bold;
 }
+
+#floatTable {
+	padding: 0px 20px;
+}
