@@ -51,6 +51,20 @@
           ga('send', 'pageview');
         </script>
 {/literal}{/if}
+{if $class_method == "mainindex"}{literal}
+        <script type="application/ld+json">
+        {
+          "@context": "http://schema.org",
+          "@type": "WebSite",
+          "url": "http://biblat.unam.mx/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "http://biblat.unam.mx/buscar/?slug={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
+        </script>
+{/literal}{/if}
     </head>
       <body>
         <header>

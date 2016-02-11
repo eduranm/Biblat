@@ -22,22 +22,22 @@ class Buscar extends CI_Controller{
 		$indiceArray['pais'] = array('sql' => 'paisRevistaSlug', 'descripcion' => _('País'));
 		$indiceArray['disciplina'] = array('sql' => 'id_disciplina', 'descripcion' => _('Disciplina'));
 		/*Si se hizo una consulta con POST redirigimos a una url correcta*/
-		if(isset($_POST['disciplina']) && isset($_POST['slug'])):
-			if(isset($_POST['textoCompleto'])):
+		if($this->input->get_post('slug')):
+			if($this->input->get_post('textoCompleto')):
 				$textoCompleto="texto-completo";
 			endif;
 			//print_r($_POST); die();
-			if($_POST['filtro'] === "todos"):
+			if($this->input->get_post('filtro') === "todos"):
 				$_POST['filtro'] = "";
 			endif;
-			if($_POST['filtro'] === "avanzada"):
+			if($this->input->get_post('filtro') === "avanzada"):
 				$biblatDB = $this->load->database('biblat', TRUE);
-				if($_POST['slug'] == "[]" || empty($_POST['slug'])):
+				if($this->input->get_post('slug') == "[]" || $this->input->get_post('slug') == NULL):
 					$this->output->enable_profiler(false);
 					echo site_url('buscar');
 					return;
 				endif;
-				$filters=json_decode($_POST['slug'], TRUE);
+				$filters=json_decode($this->input->get_post('slug'), TRUE);
 				$where = "";
 				foreach ($filters as $filter):
 					if(isset($filter['andor'])):
@@ -60,17 +60,17 @@ class Buscar extends CI_Controller{
 							break;
 					endswitch;
 				endforeach;
-				$hash = md5($_POST['slug']);
+				$hash = md5($this->input->get_post('slug'));
 				$session['search'] = $filters;
 				$session['query'] = $where;
 				$this->session->set_userdata('search{'.$hash.'}', json_encode($session));
 				$where = str_replace("'", "\\'", $where);
-				$query="SELECT \"advancedSearchHashInsert\"('{$hash}', '{$_POST['slug']}', E'{$where}')";
+				$query="SELECT \"advancedSearchHashInsert\"('{$hash}', '{$this->input->get_post('slug')}', E'{$where}')";
 				$biblatDB->query($query);
 				$_POST['slug'] = $hash;
 			endif;
-			$returnURL = site_url(preg_replace('%[/]+%', '/', "buscar/{$_POST['filtro']}/{$_POST['disciplina']}/".slugSearch($_POST['slug'])."/{$textoCompleto}"));
-			if(isset($_POST['ajax'])):
+			$returnURL = site_url(preg_replace('%[/]+%', '/', "buscar/{$this->input->get_post('filtro')}/{$this->input->get_post('disciplina')}/".slugSearch($this->input->get_post('slug'))."/{$textoCompleto}"));
+			if($this->input->get_post('ajax')):
 				$this->output->enable_profiler(false);
 				echo $returnURL;
 				return;
