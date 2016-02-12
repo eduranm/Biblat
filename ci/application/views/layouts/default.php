@@ -65,6 +65,15 @@
         }
         </script>
 {/literal}{/if}
+        {literal}<script type="application/ld+json">
+        {
+          "@context" : "http://schema.org",
+          "@type" : "WebSite",
+          "name" : "Biblat",
+          "alternateName" : "Bibliografía Latinoamericana",
+          "url" : "http://biblat.unam.mx/"
+        }
+        </script>{/literal}
     </head>
       <body>
         <header>
