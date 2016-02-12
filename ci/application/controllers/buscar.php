@@ -85,7 +85,7 @@ class Buscar extends CI_Controller{
 		$data = array();
 
 		/*Header title*/
-		$data['header']['title'] = _sprintf('Biblat - Búsqueda: "%s"', slugSearchClean($slug));
+		$data['header']['title'] = _sprintf('Búsqueda: "%s"', slugSearchClean($slug));
 		/*Result title*/
 		$data['main']['page_title'] = _sprintf('Resultados de la búsqueda: %s', slugSearchClean($slug));
 		/*Consultas*/
@@ -111,7 +111,7 @@ class Buscar extends CI_Controller{
 		$slugQuerySearch = slugQuerySearch($slug);
 		if( $filtro != "null"):
 			$slugQuerySearch = slugQuerySearch($slug, $indiceArray[$filtro]['sql']);
-			$data['header']['title'] = _sprintf('Biblat - Búsqueda por %s: "%s"', strtolower($indiceArray[$filtro]['descripcion']), slugSearchClean($slug));
+			$data['header']['title'] = _sprintf('Búsqueda por %s: "%s"', strtolower($indiceArray[$filtro]['descripcion']), slugSearchClean($slug));
 			$data['main']['page_title'] = _sprintf('Resultados de la búsqueda por %s: %s', strtolower($indiceArray[$filtro]['descripcion']), slugSearchClean($slug));
 		endif;
 		if($filtro == "avanzada"):
@@ -128,7 +128,7 @@ class Buscar extends CI_Controller{
 			$advancedSearch = json_decode($this->session->userdata('search{'.$slug.'}'), TRUE);
 			$slugQuerySearch['where'] = $advancedSearch['query'];
 			$data['main']['search']['json'] = json_encode($advancedSearch['search']);
-			$data['header']['title'] = _('Biblat - Búsqueda avanzada');
+			$data['header']['title'] = _('Búsqueda avanzada');
 			$data['main']['page_title'] = _('Resultados de la búsqueda');
 		endif;
 		$data['main']['search']['filtro'] = $filtro;

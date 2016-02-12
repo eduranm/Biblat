@@ -53,7 +53,7 @@ class Revista extends CI_Controller{
 		$data['main']['revista'] = current($articulosResultado['articulos']);
 		$data['main']['revista'] = $data['main']['revista']['revista'];
 		/*Vistas*/
-		$data['header']['title'] = _sprintf('Biblat - Revista: %s', $data['main']['revista']);
+		$data['header']['title'] = _sprintf('%s', $data['main']['revista']);
 		$breadcrumb = sprintf('%s (%%d documentos)', $data['main']['revista']);
 		$data['main']['page_title'] = sprintf($breadcrumb, $articulosResultado['totalRows']);
 
@@ -250,7 +250,7 @@ class Revista extends CI_Controller{
 
 		$data['main']['articulo'] = $articulo;
 		$data['header']['articulo'] = $data['main']['articulo'];
-		$data['header']['title'] = _sprintf('Biblat - Revista: %s - Artículo: %s', $articulo['revista'], $articulo['articulo']);
+		$data['header']['title'] = _sprintf('%s', $articulo['articulo']);
 		$data['main']['page_title'] = "<span itemprop=\"name\">{$articulo['articulo']}</span>";
 		$data['main']['mail'] = FALSE;
 		/*Vistas*/

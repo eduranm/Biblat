@@ -148,7 +148,7 @@ class Indicadores extends CI_Controller {
 		/*Vistas*/
 		$data['page_title'] = $indicador != "" ? $this->indicadores[$indicador] : _('Indicadores bibliométricos');
 		$this->template->set_partial('view_js', 'indicadores/index_js', $data, TRUE, FALSE);
-		$this->template->title($indicador != "" ? _sprintf('Biblat - Indicadores bibliométricos - %s', $this->indicadores[$indicador]) : _('Biblat - Indicadores bibliométricos'));
+		$this->template->title($indicador != "" ? _sprintf('Indicadores bibliométricos - %s', $this->indicadores[$indicador]) : _('Indicadores bibliométricos'));
 		$this->template->css('css/jquery.slider.min.css');
 		$this->template->css('css/colorbox.css');
 		$this->template->js('js/jquery.slider.min.js');
@@ -930,7 +930,7 @@ class Indicadores extends CI_Controller {
 		$args['breadcrumb'][] = array('title' => _('Modelo de Bradford por revista'), 'link' => 'indicadores/modelo-bradford-revista');
 		$args['breadcrumb'][] = array('title' => $this->disciplinas[$uri_args['disciplina']]['disciplina'], 'link' => "indicadores/modelo-bradford-revista/disciplina/{$uri_args['disciplina']}");
 		$args['page_title'] = sprintf('%s (%%d documentos)', $queryRevista['revista']);
-		$args['title'] = _sprintf('Biblat - %s (%%d documentos)', $queryRevista['revista']);
+		$args['title'] = _sprintf('%s (%%d documentos)', $queryRevista['revista']);
 		return $this->_renderDocuments($args);
 	}
 

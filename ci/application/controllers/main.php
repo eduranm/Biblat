@@ -66,7 +66,7 @@ class Main extends CI_Controller{
 	public function creditos(){
 		$data = array();
 		$data['page_title'] = _('Créditos');
-		$this->template->title(_('Biblat - Créditos'));
+		$this->template->title(_('Créditos'));
 		$this->template->set_meta('description', _('Créditos'));
 		$this->template->build('main/creditos', $data);
 	}
@@ -74,7 +74,7 @@ class Main extends CI_Controller{
 	public function bibliografia(){
 		$data = array();
 		$data['page_title'] = _('Bibliografía');
-		$this->template->title(_('Biblat - Bibliografía'));
+		$this->template->title(_('Bibliografía'));
 		$this->template->set_breadcrumb(_('Documentos'));
 		$this->template->set_meta('description', _('Bibliografía'));
 		$this->template->build('main/bibliografia', $data);
@@ -83,7 +83,7 @@ class Main extends CI_Controller{
 		public function presentaciones(){
 		$data = array();
 		$data['page_title'] = _('Presentaciones PPT');
-		$this->template->title(_('Biblat - Presentaciones PPT'));
+		$this->template->title(_('Presentaciones PPT'));
 		$this->template->set_breadcrumb(_('Documentos'));
 		$this->template->set_meta('description', _('Presentaciones PPT'));
 		$this->template->build('main/presentaciones', $data);
@@ -92,7 +92,7 @@ class Main extends CI_Controller{
 	public function multimedia(){
 		$data = array();
 		$data['page_title'] = _('Multimedia');
-		$this->template->title(_('Biblat - Multimedia'));
+		$this->template->title(_('Multimedia'));
 		$this->template->set_breadcrumb(_('Documentos'));
 		$this->template->set_meta('description', _('Multimedia'));
 		$this->template->build('main/multimedia', $data);
@@ -101,7 +101,7 @@ class Main extends CI_Controller{
 	public function sobreBiblat(){
 		$data = array();
 		$data['page_title'] = _('¿Qué es Biblat?');
-		$this->template->title(_('Biblat - ¿Qué es Biblat?'));
+		$this->template->title(_('¿Qué es Biblat?'));
 		$this->template->set_breadcrumb(_('Sobre Biblat'));
 		$this->template->set_meta('description', _('¿Qué es Biblat?'));
 		$this->template->build('main/info_biblat', $data);
@@ -120,7 +120,7 @@ class Main extends CI_Controller{
    				$data[ 'disciplina' ][ $row[ 'base' ] ][] = $disciplina;	
 		endforeach;
 		$data['page_title'] = _('CLASE y PERIÓDICA');
-		$this->template->title(_('Biblat - CLASE y PERIÓDICA'));
+		$this->template->title(_('CLASE y PERIÓDICA'));
 		$this->template->set_breadcrumb(_('Sobre Biblat'));
 		$this->template->set_meta('description', _('CLASE y PERIÓDICA'));
 		$this->template->build('main/info_clase_periodica', $data);
@@ -129,7 +129,7 @@ class Main extends CI_Controller{
 	public function scielo(){
 		$data = array();
 		$data['page_title'] = _('Sobre SciELO');
-		$this->template->title(_('Biblat - Sobre SciELO'));
+		$this->template->title(_('Sobre SciELO'));
 		$this->template->set_breadcrumb(_('Sobre Biblat'));
 		$this->template->set_meta('description', _('Sobre SciELO'));
 		$this->template->build('main/info_scielo', $data);
@@ -139,7 +139,7 @@ class Main extends CI_Controller{
 		$data = array();
 		$data['page_title'] = _('Manual de indización');
 		$this->template->set_partial('view_js', 'main/header_metodologia', array(), TRUE);
-		$this->template->title(_('Biblat - Manual de indización'));
+		$this->template->title(_('Manual de indización'));
 		$this->template->css('assets/css/colorbox.css');
 		$this->template->js('assets/js/colorbox.js');
 		$this->template->set_breadcrumb(_('Sobre Biblat'));
@@ -150,7 +150,7 @@ class Main extends CI_Controller{
 	public function materialesDifusion(){
 		$data = array();
 		$data['page_title'] = _('Materiales de difusión');
-		$this->template->title(_('Biblat - Materiales de difusión'));
+		$this->template->title(_('Materiales de difusión'));
 		$this->template->set_breadcrumb(_('Sobre Biblat'));
 		$this->template->set_meta('description', _('Materiales de difusión'));
 		$this->template->build('main/materiales_difusion', $data);
@@ -159,7 +159,7 @@ class Main extends CI_Controller{
 	public function descripcionBiblat(){
 		$data = array();
 		$data['page_title'] = _('Descripción');
-		$this->template->title(_('Biblat - Descripción'));
+		$this->template->title(_('Descripción'));
 		$this->template->set_breadcrumb(_('Bibliometría'));
 		$this->template->set_meta('description', _('Descripción'));
 		$this->template->build('main/descripcion_biblat', $data);
@@ -169,7 +169,7 @@ class Main extends CI_Controller{
 		$data = array();
 		$data['page_title'] = _('Metodología');
 		$this->template->set_partial('view_js', 'main/header_metodologia', array(), TRUE);
-		$this->template->title(_('Biblat - Metodología'));
+		$this->template->title(_('Metodología'));
 		$this->template->css('assets/css/colorbox.css');
 		$this->template->js('assets/js/colorbox.js');
 		$this->template->set_breadcrumb(_('Bibliometría'));
@@ -179,7 +179,7 @@ class Main extends CI_Controller{
 
 	public function indicadoresScielo(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - Indicadores por revista");
+		$data['header']['title'] = _("Indicadores por revista");
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu');
 		$this->load->view('main/indicadores_scielo');
@@ -225,7 +225,7 @@ class Main extends CI_Controller{
 		$data['alpha'] = strtoupper($alpha);
 		$data['page_title'] = _('Indicadores por revista');
 		$this->template->set_partial('view_js', 'main/indicadores_por_revista_js', array(), TRUE);
-		$this->template->title(_('Biblat - Indicadores por revista'));
+		$this->template->title(_('Indicadores por revista'));
 		$this->template->set_breadcrumb(_('Bibliometría'));
 		$this->template->set_meta('description', _('Metodología'));
 		$this->template->build('main/indicadores_por_revista', $data);
@@ -234,7 +234,7 @@ class Main extends CI_Controller{
 	public function criteriosSeleccion(){
 		$data = array();
 		$data['page_title'] = _('Criterios de selección');
-		$this->template->title(_('Biblat - Criterios de selección'));
+		$this->template->title(_('Criterios de selección'));
 		$this->template->set_breadcrumb(_('Postular una revista'));
 		$this->template->set_meta('description', _('Criterios de selección'));
 		$this->template->build('main/criterios_seleccion', $data);
@@ -242,7 +242,7 @@ class Main extends CI_Controller{
 
 	public function sitemap(){
 		$data = array();
-		$data['header']['title'] = _("Biblat - Mapa del sitio");
+		$data['header']['title'] = _("Mapa del sitio");
 		$this->load->view('header', $data['header']);
 		$this->load->view('menu');
 		$this->load->view('main/sitemap');

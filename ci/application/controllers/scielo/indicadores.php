@@ -291,7 +291,7 @@ class Indicadores extends CI_Controller {
 		/*Vistas*/
 		$data['page_title'] = $indicador != "" ? $this->indicadores[$indicador]['title'] : _('Indicadores bibliométricos');
 		$this->template->set_partial('view_js', 'scielo/indicadores/index_js', $data, TRUE, FALSE);
-		$this->template->title($indicador != "" ? _sprintf('Biblat - Indicadores bibliométricos - %s', $this->indicadores[$indicador]['title']): _('Biblat - Indicadores bibliométricos'));
+		$this->template->title($indicador != "" ? _sprintf('Indicadores bibliométricos SciELO - %s', $this->indicadores[$indicador]['title']): _('Indicadores bibliométricos SciELO'));
 		$this->template->css('css/jquery.slider.min.css');
 		$this->template->css('css/colorbox.css');
 		$this->template->js('js/jquery.slider.min.js');

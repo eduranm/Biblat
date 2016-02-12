@@ -31,7 +31,7 @@ class Conacyt extends CI_Controller {
 			endif;
 		endforeach;
 		//print_r($query->result_array());
-		$this->template->title(_('Biblat - Reporte bibliométrico CONACYT'));
+		$this->template->title(_('Reporte bibliométrico CONACYT'));
 		$this->template->set_meta('description', _('Reporte bibliométrico CONACYT'));
 		$this->template->build('conacyt/index', $data);
 	}
@@ -90,7 +90,7 @@ class Conacyt extends CI_Controller {
 		endforeach;
 
 		$this->template->set_partial('view_js', 'javascript/pdf_viewer', $data, TRUE, FALSE);
-		$this->template->title(_('Biblat - Reporte bibliométrico CONACYT').$data['name']);
+		$this->template->title(_('Reporte bibliométrico CONACYT').$data['name']);
 		$this->template->set_meta('description', _('Reporte bibliométrico CONACYT'));
 		$this->template->set_meta('google', _('notranslate'));
 		$this->template->set_metadata('resource', base_url('assets/js/pdfjs/locale/locale.properties'), 'application/l10n');
