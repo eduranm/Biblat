@@ -45,8 +45,10 @@
 		</div>
 		<div id="fil-xxxvi" class="panel-collapse collapse">
 			<ul class="list-group">
-				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/La_importancia_de_escribir_bien_las_referencias_para_recuperar_la informacion_en_las_bases_de_datos.pptx')}" target="_blank"><span class="fa fa-file-powerpoint-o" ></span> Falfán Sánchez, Eugenia (2015, febrero) La importancia de escribir bien las referencias para recuperar la información en las bases de datos</a></li>
+				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/BIBLAT_nuevo_recurso_bibliometrico_latinoamericano_oralia.pptx')}" target="_blank"><span class="fa fa-file-powerpoint-o" ></span> Carrillo Romero, Oralia (2015, febrero) BIBLAT nuevo recurso bibliométrico latinoamericano</a></li>
 				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/SciELO_Mexico_y_sus_indicadores_de_impacto_Como_utilizarlos.pptx')}" target="_blank"><span class="fa fa-file-powerpoint-o" ></span> Cortés Valtierra, América A. (2015, febrero) SciELO México y sus indicadores de impacto ¿Cómo utilizarlos?</a></li>
+				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/La_importancia_de_escribir_bien_las_referencias_para_recuperar_la informacion_en_las_bases_de_datos.pptx')}" target="_blank"><span class="fa fa-file-powerpoint-o" ></span> Falfán Sánchez, Eugenia (2015, febrero) La importancia de escribir bien las referencias para recuperar la información en las bases de datos</a></li>
+				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/BIBLAT_nuevo_recurso_bibliometrico_latinoamericano.pptx')}" target="_blank"><span class="fa fa-file-powerpoint-o" ></span> Rendón Cruz, Arturo (2015, febrero) BIBLAT nuevo recurso bibliométrico latinoamericano</a></li>
 				<li class="list-group-item"><a href="{base_url('archivos/ppt/fil-xxxvi/Modulo_de_indicadores_bibliometricos_de_la_produccion_cientifica_en_america_latina_y_el_caribe_BIBLAT.pdf')}" target="_blank"><span class="fa fa-file-pdf-o" ></span> Quintero León, Karla Vanesa  (2015, febrero) Módulo de indicadores bibliométricos de la producción científica en américa latina y el caribe: BIBLAT</a></li>
 			</ul>
 		</div>
