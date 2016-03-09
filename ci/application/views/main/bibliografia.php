@@ -1,6 +1,8 @@
 <table class="table table-striped">
 	<tr><td><cite>Alonso Gamboa, J. O. & Reyna Espinosa, F. R. (2015). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/AlonsoGamboa_ReynaEspinosa_2015.pdf" target="blank">Revistas académicas mexicanas. Panorama y prospectiva</a>. Ciencia ergo sum, 22(3), 181-191.</cite></td></tr>
 
+	<tr><td><cite>Reyna Espinosa, F. R. (2015). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/ReynaEspinosa_2015%282%29.pdf" target="_blank">CLASE. Perfil de una base de datos bibliográfica</a>. Biblioteca Universitaria 18 (2), 144-153.</cite></td></tr>
+
 	<tr><td><cite>Reyna Espinosa, F. R. (2015). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/ReynaEspinosa_2015.pdf" target="_blank">La Bibliografía Latinoamericana de la UNAM, a propósito de los 350 años de la primera revista científica</a>. Ibersid: revista de sistemas de información y documentación, 9 (2015) 47-52.</cite></td></tr>
 
 	<tr><td><cite>Rodríguez Yunta, L.  (2014, abril) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/RodriguezYunta_2014.pdf" target="_blank">Indicadores bibliométricos sobre revistas: más allá de los índices de citas.</a> Ponencia presentada en el XI Seminario Hispano-Mexicano de Investigación en Bibliotecología y Documentación: La información y sus contextos en el cambio social.  México: UNAM, Instituto de Investigaciones Bibliotecológicas y de la Información.</cite></td></tr>

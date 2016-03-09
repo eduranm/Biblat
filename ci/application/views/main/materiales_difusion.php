@@ -53,3 +53,16 @@
     </a>
   </div>
 </div>
+
+<div class="page_title">
+    <hr/>
+    <h4><a href="https://goo.gl/photos/srzQKFoAufU4UkgB8">{_('Logotipos')}</a></h4>
+    <hr/>
+</div>
+<div class="row">
+  <div class="col-xs-6 col-md-3">
+    <a href="https://goo.gl/photos/srzQKFoAufU4UkgB8" class="thumbnail">
+      <img src="{base_url('assets/img/biblat_2x.png')}" alt="CLASE">
+    </a>
+  </div>
+</div>
