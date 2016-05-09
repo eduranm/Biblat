@@ -509,7 +509,7 @@ class Indicadores extends CI_Controller {
 		$data['highchart']['group1']['tooltip']['pointFormat'] = $indicador[$_POST['indicador']]['tooltipGroup'];
 		$data['highchart']['group2'] = $data['highchart']['group1'];
 		/*Columnas de la tabla del grupo1*/
-		$data['table']['group1']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
+		$data['table']['group1']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'string');
 		$data['table']['group1']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
 		foreach ($revistaInstitucion['1'] as $label => $value):
@@ -526,7 +526,7 @@ class Indicadores extends CI_Controller {
 		endforeach;
 		/*Datos para la gráfica del grupo2*/
 		/*Columnas de la tabla del grupo2*/
-		$data['table']['group2']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
+		$data['table']['group2']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'string');
 		$data['table']['group2']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
 		foreach ($revistaInstitucion['2'] as $label => $value):
@@ -542,7 +542,7 @@ class Indicadores extends CI_Controller {
 			$data['table']['group2']['rows'][]['c'] = $ct;
 		endforeach;
 		/*Columnas de la tabla del grupo3*/
-		$data['table']['group3']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'number');
+		$data['table']['group3']['cols'][] = array('id' => '','label' => _('Título de revista'),'type' => 'string');
 		$data['table']['group3']['cols'][] = array('id' => '','label' => _('Cantidad de artículos'),'type' => 'number');
 		/*Agregado filas y columnas*/
 		foreach ($revistaInstitucion['3'] as $label => $value):
