@@ -324,6 +324,8 @@ class Revista extends CI_Controller{
 			endif;
 			if(isset($articulo["url"])):
 				foreach ($articulo["url"] as $url):
+					if (is_array($url))
+						$url = $url['u'];
 					if(preg_match('/.*pdf.*/', $url)):
 						$this->template->set_meta('citation_pdf_url', $url);
 					else:

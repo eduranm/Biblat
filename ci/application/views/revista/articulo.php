@@ -140,7 +140,11 @@
 					<td class="nowrap"><strong>{_('Texto completo:')}</strong></td>
 					<td>
 {foreach $articulo.url url}
+{if is_array($url)}
+						<a href="{$url['u']}" target="_blank">{$url['y']}</a>
+{else}
 						<a href="{$url}" target="_blank">{$url}</a>
+{/if}
 {/foreach}
 					</td>
 				</tr>

@@ -243,6 +243,7 @@ if ( ! function_exists('articulosResultado') ):
 				$row['instituciones'] = json_decode($row['institucionesJSON'], TRUE);
 			endif;
 			unset($row['institucionesJSON']);
+			$row['url'] = json_decode($row['url'], TRUE);
 			/*Limpiando caracteres html*/
 			$row = htmlspecialchars_deep($row);
 			/*Creando valores para el checkbox*/
@@ -253,6 +254,8 @@ if ( ! function_exists('articulosResultado') ):
 			/*Creando link en caso de que exista texto completo*/
 			$row['articuloLink'] = anchor("revista/{$row['revistaSlug']}/articulo/{$row['articuloSlug']}", $row['articulo'], array('title' => $row['articulo'], 'class' => 'registro'));
 			if( $row['url'] != NULL):
+				if (is_array($row['url']))
+					$row['url'] = $row['url']['u'];
 				$img = '<i class="fa fa-file-text-o fa-lg"></i>';
 				if(preg_match('/.*pdf.*/', $row['url'])):
 					$img = '<span class="fa fa-file-pdf-o fa-lg"></span>';
