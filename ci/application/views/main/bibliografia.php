@@ -30,6 +30,8 @@
 	<tr><td><cite>Michán, L. (2011). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Michan_2011.pdf" target="_blank">Análisis bibliométrico de la producción sistemática en América Latina.</a> Acta Biológica Colombiana, 16(2), 33–46.</cite></td></tr>
 
 	<tr><td><cite>Rodríguez León, R. (2011) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/RodriguezLeon_2011.pdf" target="_blank">Fueron expuestos en la XXXII FILPM los indicadores bibliométricos BIBLAT, ECUM y SciELO.</a> Biblioteca Universitaria, 14(1), 101–105.</cite></td></tr>
+
+	<tr><td><cite>Pire Cordero, R. (2010) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/PireCordero_2010.pdf" target="_blank">Disponibilidad de bases de datos oficiales como soporte a la investigación</a>. COMPENDIUM 25, 65-63.</cite></td></tr>
 			
 	<tr><td><cite><a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Libera_la_UNAM_Biblat.pdf" target="_blank">Libera la UNAM el portal Biblat, valiosa fuente bibliográfica para conocer la productividad científica de América Latina y el Caribe.</a> (2009). Humanidades y Ciencias Sociales, 44, 17.</cite></td></tr>
 			
