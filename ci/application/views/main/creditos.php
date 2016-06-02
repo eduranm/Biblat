@@ -1,5 +1,5 @@
-    <b>{_('Director General')}</b><br/>
-    Dr. Adolfo Rodríguez Gallardo<br/><br/>
+    <b>{_('Directora General')}</b><br/>
+    Dra. Elsa Margarita Ramírez Leyva<br/><br/>
 
     <b>{_('Subdirectora de Servicios de Información Especializada')}</b><br/>
     Mtra. Margarita Lugo Hubp<br/><br/>
