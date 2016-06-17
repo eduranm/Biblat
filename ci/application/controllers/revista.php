@@ -352,7 +352,7 @@ class Revista extends CI_Controller{
 		$verify_email = verifyEmail($_POST['email'], $this->config->item('valitation_email'), true);
 		if($verify_email[0] == 'invalid'):
 			$send_email =FALSE;
-			$result['title'] .= '<br/>'._('Correo electrónico no valido');
+			$result['title'] .= '<br/>'._('Correo electrónico no válido');
 		endif;
 
 		$captcha_answer = $this->input->post('g-recaptcha-response');
