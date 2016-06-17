@@ -179,10 +179,13 @@ $(document).on('click', '.translate', function(e) {
 			success: function(data) {
 				console.log(data)
 				loading.end();
-				$('input:text').each(function(){
-					$(this).val('');
-				});
-				$('.solicitudDocumento, #sd-disable, #sd-enable').toggle();
+				if(data.type == 'success'){
+					$('input:text').each(function(){
+						$(this).val('');
+					});
+					$('.solicitudDocumento, #sd-disable, #sd-enable').toggle();
+				}
+				grecaptcha.reset();
 				$.pnotify({
 					title: data.title,
 					icon: true,
