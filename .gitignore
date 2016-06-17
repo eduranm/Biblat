@@ -1,2 +1,6 @@
 cache/
 .DS_Store
+database/*
+node_modules/*
+.po
+logs

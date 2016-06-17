@@ -180,7 +180,7 @@ $config['directory_trigger']	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 1;
+$config['log_threshold'] = 0;
 
 /*
 |--------------------------------------------------------------------------
@@ -358,5 +358,8 @@ $config['rewrite_short_tags'] = TRUE;
 $config['proxy_ips'] = '';
 
 $config['enable_profiler'] = ENVIRONMENT === "production" ? FALSE : TRUE;
+$config['valitation_email'] = '';
+
+
 /* End of file config.php */
 /* Location: ./application/config/config.php */

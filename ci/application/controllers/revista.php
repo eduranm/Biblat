@@ -339,16 +339,39 @@ class Revista extends CI_Controller{
 	}
 
 	public function solicitudDocumento(){
-		$this->output->enable_profiler(false);
-		if(!empty($_POST['email']) && !empty($_POST['from']) && !empty($_POST['revista']) && !empty($_POST['articulo'])):
+		$this->output->enable_profiler(FALSE);
+		$send_email = TRUE;
+		$result = array(
+					'type' => 'error',
+					'title' => _('No se pudo enviar la solicitud')
+				);
+		if(empty($_POST['email']) || empty($_POST['from']) || empty($_POST['revista']) || empty($_POST['articulo'])):
+			$send_email =FALSE;
+		endif;
+
+		$verify_email = verifyEmail($_POST['email'], $this->config->item('valitation_email'), true);
+		if($verify_email[0] == 'invalid'):
+			$send_email =FALSE;
+			$result['title'] = _('Correo electrónico no valido');
+		endif;
+
+		$captcha_answer = $this->input->post('g-recaptcha-response');
+		$response = $this->recaptcha->verifyResponse($captcha_answer);
+
+		if(!$response['success']):
+			$send_email =FALSE;
+			$result['title'] = _('Verificación incorrecta');
+		endif;
+
+		if ($send_email):
 			$biblatDB = $this->load->database('biblat', TRUE);
 			$config['mailtype'] = 'html';
 			$this->load->library('email');
 			$this->email->initialize($config);
 			$this->email->from('solicitud@biblat.unam.mx', 'Solicitud Biblat');
 			$this->email->to('sinfo@dgb.unam.mx');
-			//$this->email->to('achwazer@gmail.com');
-			//$this->email->cc('anoguez@dgb.unam.mx');
+			// $this->email->to('achwazer@gmail.com');
+			// $this->email->cc('anoguez@dgb.unam.mx');
 			$this->email->subject('Solicitud de documento Biblat');
 			$data = $_POST;
 			$data['fichaDocumento'] = $this->articulo($data['revista'], $data['articulo'], 'true');
@@ -375,11 +398,6 @@ class Revista extends CI_Controller{
 			$result = array(
 					'type' => 'success',
 					'title' => _('La solicitud ha sido enviada')
-				);
-		else:
-			$result = array(
-					'type' => 'error',
-					'title' => _('No se pudo enviar la solicitud')
 				);
 		endif;
 		echo json_encode($result);

@@ -175,7 +175,10 @@
 								<input type="hidden" name="url" value="{current_url()}"/>
 								<div class="text-justify">
 								{_('Los documentos originales pueden ser consultados en el Departamento de Información y Servicios Documentales, ubicado en el Anexo de la Dirección General de Bibliotecas (DGB), circuito de la Investigación Científica a un costado del Auditorio Nabor Carrillo, zona de Institutos entre Física y Astronomía. Ciudad Universitaria UNAM.')} <a id="showmap" href="javascript:;">{_('Ver mapa')}</a><br/><img id="mapa-anexo" style="display:none" src="{base_url('img/mapa-anexo.jpg')}" border="0" width="100%"/>{_('Mayores informes: Departamento de Información y Servicios Documentales, Tels. (5255) 5622-3960, 5622-3964, e-mail: sinfo@dgb.unam.mx, Horario: Lunes a viernes (8 a 16 hrs.)')}<br/><br/></div>
-								<div class="text-center"><input class="fa btn btn-default" type="submit" value="{_('Enviar')}   &#xf0e0;"/></div>
+								<div class="text-center">
+								<div id='recaptcha'>{$recaptcha->render()}<div>
+								<input class="fa btn btn-default" type="submit" value="{_('Enviar')}   &#xf0e0;"/>
+								</div>
 								
 							</fieldset>
 						</form>

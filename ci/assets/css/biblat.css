@@ -772,3 +772,5 @@ table.articulo{
 #floatTable {
 	padding: 0px 20px;
 }
+
+.g-recaptcha div { margin-left: auto; margin-right: auto;}
