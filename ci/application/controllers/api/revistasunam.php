@@ -185,7 +185,7 @@ class Revistasunam extends REST_Controller {
                         'img' => site_url("indicadores/tasa-documentos-coautorados/disciplina/{$journal['disciplinaSlug']}/revista/{$journal['revistaSlug']}/preview.png")
                     );
                 $data[$journal['revistaISSN']]['indicators']['biblat'][] = array(
-                        'title' => 'Tasa de documentos coautorados',
+                        'title' => 'Índice de colaboración (Índice de Lawani)',
                         'url' => site_url("indicadores/indice-colaboracion/disciplina/{$journal['disciplinaSlug']}/revista/{$journal['revistaSlug']}"),
                         'img' => site_url("indicadores/indice-colaboracion/disciplina/{$journal['disciplinaSlug']}/revista/{$journal['revistaSlug']}/preview.png")
                     );
