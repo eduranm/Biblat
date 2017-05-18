@@ -2,6 +2,15 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h5 class="panel-title">
+				<a href="{base_url('archivos/ppt/Indicadores_y_evaluacion_bibliometrica_de_las_publicaciones_cientificas_MAYO_2017.pptx')}" target="_blank">
+					<span class="fa fa-file-powerpoint-o"></span> Sánchez Pereyra, Antonio (2017, mayo) Indicadores y evaluación bibliométrica de las publicaciones científicas. Jornada de formación sobre métricas en investigación, INFOTEC
+				</a>
+			</h5>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h5 class="panel-title">
 				<a href="{base_url('archivos/ppt/BIBLAT_LATINDEX_ASFA_SciELOMX_en_cifras_2016.pptx')}" target="_blank">
 					<span class="fa fa-file-powerpoint-o"></span> Cifras a 2016: BIBLAT, CLASE, PERIÓDICA, LATINDEX, ASFA y SciELO-México (agosto 2016)
 				</a>
