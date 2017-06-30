@@ -157,17 +157,18 @@ LANGUAGE plpgsql;
 --DROP MATERIALIZED VIEW "mvRevistaDisciplina";
 CREATE MATERIALIZED VIEW "mvRevistaDisciplina" AS 
 SELECT
-  base, "revistaSlug", (array_agg(revista))[1] AS revista, (array_agg("disciplinaRevista"))[1] AS "disciplinaRevista", sum(documentos)
+  base, "revistaSlug", (array_agg(revista))[1] AS revista, (array_agg(issn))[1] AS issn, (array_agg("disciplinaRevista"))[1] AS "disciplinaRevista", sum(documentos)
 --base, "revistaSlug", array_agg(revista), array_agg("disciplinaRevista"), array_agg(documentos)
 FROM
   (SELECT 
     substr(sistema, 1, 5) AS base, 
     slug(revista) AS "revistaSlug",
     revista,
+    issn,
     "disciplinaRevista", 
     count(*) AS documentos
   FROM article
-  GROUP BY substr(sistema, 1, 5), slug(revista), revista, "disciplinaRevista"
+  GROUP BY substr(sistema, 1, 5), slug(revista), revista, issn, "disciplinaRevista"
   ORDER BY base, "revistaSlug", documentos DESC) t
 WHERE "revistaSlug" IS NOT NULL
 GROUP BY base, "revistaSlug"
@@ -306,21 +307,35 @@ ORDER BY d.disciplina;
 --Vista para las revistas por disciplina
 --DROP MATERIALIZED VIEW "mvDisciplinaRevistas";
 CREATE MATERIALIZED VIEW "mvDisciplinaRevistas" AS
-SELECT
+SELECT 
   "revistaSlug",
   (array_agg(revista))[1] AS revista,
+  (array_agg(issn))[1] AS issn,
+  (array_agg(id_disciplina))[1] AS id_disciplina,
+  sum(documentos) AS documentos 
+FROM
+(SELECT
+  "revistaSlug",
+  (array_agg(revista))[1] AS revista,
+  (array_agg(issn))[1] AS issn,
   id_disciplina, 
   sum(documentos) AS documentos 
 FROM
   (SELECT 
     "revistaSlug",
     revista,
+    issn,
     id_disciplina, 
     count(*) AS documentos 
   FROM "vSearchFull" 
-  GROUP BY id_disciplina, "revistaSlug", revista 
-  ORDER BY id_disciplina, "revistaSlug", revista, documentos DESC) t
-GROUP BY id_disciplina, "revistaSlug";
+  GROUP BY id_disciplina, "revistaSlug", revista, issn 
+  ORDER BY id_disciplina, "revistaSlug", documentos DESC) t
+GROUP BY id_disciplina, "revistaSlug"
+ORDER BY "revistaSlug", documentos DESC) t2
+GROUP BY "revistaSlug";
+
+CREATE INDEX ON "mvDisciplinaRevistas"(substring("revistaSlug", 1, 1));
+CREATE INDEX ON "mvDisciplinaRevistas"("revistaSlug");
 
 
 --Vista para mostrar solo los documentos que sean artículos y mostrando el año en una cadena de 4 digitos
@@ -504,6 +519,9 @@ FROM
 INNER JOIN "mvDisciplinaRevistas" dr ON ac."revistaSlug"=dr."revistaSlug"
 WHERE anios_continuos > 4;
 
+CREATE INDEX ON "mvPeriodosRevistaCoautoriaPriceZakutina"(substring("revistaSlug", 1, 1));
+CREATE INDEX ON "mvPeriodosRevistaCoautoriaPriceZakutina"("revistaSlug");
+
 --Vista para paises con años continuos mayores a 4
 CREATE MATERIALIZED VIEW "mvPeriodosPaisRevistaCoautoriaPriceZakutina" AS
 SELECT *
@@ -623,6 +641,8 @@ FROM
    GROUP BY "revistaSlug") AS ac --Años continuos por revista
 INNER JOIN "mvDisciplinaRevistas" dr ON ac."revistaSlug"=dr."revistaSlug"
 WHERE anios_continuos > 4;
+CREATE INDEX ON "mvPeriodosRevistaTasaLawani"(substring("revistaSlug", 1, 1));
+CREATE INDEX ON "mvPeriodosRevistaTasaLawani"("revistaSlug");
 
 -- Vista para periodos en paises para los indicadores Tasa de coautoría e Indice Lawani
 CREATE MATERIALIZED VIEW "mvPeriodosPaisRevistaTasaLawani" AS
@@ -821,6 +841,8 @@ FROM
    GROUP BY "revistaSlug") AS ac --Años continuos por revista
 INNER JOIN "mvDisciplinaRevistas" dr ON ac."revistaSlug"=dr."revistaSlug"
 WHERE anios_continuos > 4;
+CREATE INDEX ON "mvPeriodosRevistaSubramayan"(substring("revistaSlug", 1, 1));
+CREATE INDEX ON "mvPeriodosRevistaSubramayan"("revistaSlug");
 
 --Vista para periodos en paises para el indicador subramayan
 CREATE MATERIALIZED VIEW "mvPeriodosPaisRevistaSubramayan" AS
@@ -943,6 +965,9 @@ FROM
     GROUP BY "revistaSlug", id_disciplina, p.descpalabraclave) fd --Frecuencia del descriptor
   ON ad."revistaSlug"=fd."revistaSlug" AND ad.id_disciplina=fd.id_disciplina) fdr
 GROUP BY id_disciplina, "revistaSlug";
+
+CREATE INDEX ON "mvPratt"(substring("revistaSlug", 1, 1));
+CREATE INDEX ON "mvPratt"("revistaSlug");
 
 --Bradford
 
@@ -1069,19 +1094,34 @@ SELECT
   sum(autores) AS autores,
   sum(autores)/documentos AS exogena
 FROM 
-  (SELECT ar.id_disciplina,
-    max(ar.revista) AS revista,
-         ar."revistaSlug",
-         count(*) AS documentos,
-         max("paisRevistaSlug") AS "paisRevistaSlug"
-  FROM "vAutoresDocumento" au
-  INNER JOIN "vArticulos" ar ON au.sistema=ar.sistema
-  GROUP BY ar.id_disciplina, "revistaSlug" HAVING count(*) > 25
-  ORDER BY "revistaSlug") dr --Documentos por revista
+  (SELECT
+    id_disciplina,
+    "revistaSlug",
+    (array_agg(revista))[1] AS revista,
+    (array_agg("paisRevistaSlug"))[1] AS "paisRevistaSlug",
+    sum(documentos) AS documentos
+FROM 
+    (SELECT ar.id_disciplina,
+           ar.revista,
+           ar."revistaSlug",
+           count(*) AS documentos,
+           ar."paisRevistaSlug"
+    FROM "vAutoresDocumento" au
+    INNER JOIN "vArticulos" ar ON au.sistema=ar.sistema
+    GROUP BY ar.id_disciplina,
+             "revistaSlug",
+             ar."paisRevistaSlug",
+             ar.revista HAVING count(*) > 25
+    ORDER BY "revistaSlug",
+             documentos DESC) t
+GROUP BY id_disciplina, "revistaSlug") dr --Documentos por revista
 INNER JOIN 
   "mvAutoresRevistaPais" arp ON dr."revistaSlug"=arp."revistaSlug" AND dr."paisRevistaSlug"!=arp."paisAutorSlug"
 GROUP BY dr.id_disciplina, dr."revistaSlug", documentos
 ORDER BY dr.id_disciplina, dr."revistaSlug";
+
+CREATE INDEX ON "mvProductividadExogena"(substring("revistaSlug", 1, 1));
+CREATE INDEX ON "mvProductividadExogena"("revistaSlug");
 
 --Frecuencias--
 --Documentos por autor
@@ -1107,6 +1147,7 @@ LEFT JOIN (
     INNER JOIN author a ON aa.sistema=a.sistema AND aa.slug<>a.slug
     GROUP BY aa.slug) ac
 ON a."autorSlug" = ac."autorSlug"
+WHERE a."autorSlug" IS NOT NULL AND a."autorSlug" !~ '^[0-9]$'
 ORDER BY documentos DESC, "autorSlug";
 
 CREATE INDEX ON "mvFrecuenciaAutorDocumentos"(autor);
@@ -1245,7 +1286,7 @@ FROM
        FROM institution i
        INNER JOIN "vSearchFull" s ON i.sistema=s.sistema
        GROUP BY i.slug, institucion
-       ORDER BY i.slug, institucion, documentos DESC) t
+       ORDER BY i.slug, documentos DESC) t
   GROUP BY "institucionSlug") irpd --Institucion revistas, documentos, paises
 INNER JOIN 
   (SELECT
@@ -1289,7 +1330,7 @@ FROM
   INNER JOIN "vSearchFull" s 
     ON i.sistema=s.sistema
   GROUP BY "institucionSlug", "paisRevistaSlug", "paisRevista"
-  ORDER BY "institucionSlug", "paisRevistaSlug", "paisRevista", documentos DESC) t
+  ORDER BY "institucionSlug", "paisRevistaSlug", documentos DESC) t
 GROUP BY "institucionSlug", "paisRevistaSlug";
 
 
@@ -1312,7 +1353,7 @@ FROM
   INNER JOIN "vSearchFull" s 
     ON i.sistema=s.sistema
   GROUP BY "institucionSlug", "revistaSlug", revista
-  ORDER BY "institucionSlug", "revistaSlug", revista, documentos DESC) t
+  ORDER BY "institucionSlug", "revistaSlug", documentos DESC) t
 GROUP BY "institucionSlug", "revistaSlug";
 
 
@@ -1499,7 +1540,7 @@ FROM (SELECT
             AND i.id=a."institucionId"
           WHERE i.slug IS NOT NULL AND i.pais IS NOT NULL 
           GROUP BY "paisInstitucionSlug", pais
-          ORDER BY "paisInstitucionSlug", pais, documentos DESC) t
+          ORDER BY "paisInstitucionSlug", documentos DESC) t
       GROUP BY "paisInstitucionSlug") pa
   LEFT JOIN (SELECT
     pa."paisInstitucionSlug",
@@ -1734,6 +1775,11 @@ INNER JOIN "vSearchFull" s
 --DROP MATERIALIZED VIEW "mvFrecuenciaRevista";
 CREATE MATERIALIZED VIEW "mvFrecuenciaRevista" AS
 SELECT
+  fr.*,
+  ae.autoresext,
+  ie.institucionesext
+FROM
+(SELECT
   "revistaSlug",
   (array_agg(revista))[1] AS revista,
   sum(autores) AS autores,
@@ -1753,8 +1799,21 @@ FROM
   LEFT JOIN institution i ON s.sistema=i.sistema AND i.slug IS NOT NULL
   WHERE "revistaSlug" IS NOT NULL 
   GROUP BY "revistaSlug", revista
-  ORDER BY "revistaSlug", revista, documentos DESC) t
-GROUP BY "revistaSlug";
+  ORDER BY "revistaSlug", documentos DESC) t
+GROUP BY "revistaSlug") fr
+LEFT JOIN (SELECT 
+  s."revistaSlug",
+  count(DISTINCT a.slug) AS autoresext
+  FROM author a 
+  INNER JOIN institution i ON a.sistema=i.sistema AND a."institucionId"=i.id
+  INNER JOIN "vSearchFull" s ON a.sistema=s.sistema AND i."paisInstitucionSlug" != s."paisRevistaSlug"
+  GROUP BY s."revistaSlug") ae ON fr."revistaSlug"=ae."revistaSlug"
+LEFT JOIN(SELECT 
+  s."revistaSlug",
+  count(DISTINCT i.slug) AS institucionesext
+  FROM institution i
+  INNER JOIN "vSearchFull" s ON i.sistema=s.sistema AND i."paisInstitucionSlug" != s."paisRevistaSlug" AND i.slug IS NOT NULL
+  GROUP BY s."revistaSlug") ie ON fr."revistaSlug"=ie."revistaSlug";
 
 --Frecuencia de documentos, autores por revista
 --DROP MATERIALIZED VIEW "mvFrecuenciaRevistaAutor";
@@ -1774,19 +1833,54 @@ FROM
   INNER JOIN author a ON s.sistema=a.sistema AND a.slug IS NOT NULL
   WHERE "revistaSlug" IS NOT NULL 
   GROUP BY "revistaSlug", "autorSlug", nombre
-  ORDER BY "revistaSlug", "autorSlug", nombre, documentos DESC) t
+  ORDER BY "revistaSlug", "autorSlug", documentos DESC) t
 GROUP BY "revistaSlug", "autorSlug";
 
 --Frecuencia de documentos por revista -> años
 --DROP MATERIALIZED VIEW "mvFrecuenciaRevistaAnio";
 CREATE MATERIALIZED VIEW "mvFrecuenciaRevistaAnio" AS
-SELECT 
-  "revistaSlug",
-  substr("anioRevista", 1, 4) AS anio,
-  count(DISTINCT s.sistema) AS documentos
-FROM "vSearchFull" s 
-WHERE "revistaSlug" IS NOT NULL
-GROUP BY "revistaSlug", anio;
+  SELECT
+    fr.*,
+    ae.autoresext,
+    ie.institucionesext
+  FROM
+  (SELECT
+    "revistaSlug",
+    (array_agg(revista))[1] AS revista,
+    anio,
+    sum(autores) AS autores,
+    sum(instituciones) AS instituciones,
+    sum(documentos) AS documentos
+  FROM
+    (SELECT 
+      "revistaSlug",
+      revista,
+      CASE WHEN "anioRevista"='199?' THEN 1990 WHEN "anioRevista"='19??' THEN 1900 WHEN "anioRevista"='S/a' THEN NULL ELSE substr("anioRevista", 1, 4)::integer END AS anio,
+      count(DISTINCT a.slug) AS autores,
+      count(DISTINCT i.slug) AS instituciones,
+      count(DISTINCT s.sistema) AS documentos
+    FROM "vSearchFull" s 
+    LEFT JOIN author a ON s.sistema=a.sistema
+    LEFT JOIN institution i ON s.sistema=i.sistema AND i.slug IS NOT NULL
+    WHERE "revistaSlug" IS NOT NULL 
+    GROUP BY "revistaSlug", revista, "anioRevista"
+    ORDER BY "revistaSlug", documentos DESC) t
+  GROUP BY "revistaSlug", anio) fr
+  LEFT JOIN (SELECT 
+    s."revistaSlug",
+    CASE WHEN "anioRevista"='199?' THEN 1990 WHEN "anioRevista"='19??' THEN 1900 WHEN "anioRevista"='S/a' THEN NULL ELSE substr("anioRevista", 1, 4)::integer END AS anio,
+    count(DISTINCT a.slug) AS autoresext
+    FROM author a 
+    INNER JOIN institution i ON a.sistema=i.sistema AND a."institucionId"=i.id
+    INNER JOIN "vSearchFull" s ON a.sistema=s.sistema AND i."paisInstitucionSlug" != s."paisRevistaSlug"
+    GROUP BY s."revistaSlug", anio) ae ON fr."revistaSlug"=ae."revistaSlug" AND fr.anio=ae.anio
+  LEFT JOIN(SELECT 
+    s."revistaSlug",
+    CASE WHEN "anioRevista"='199?' THEN 1990 WHEN "anioRevista"='19??' THEN 1900 WHEN "anioRevista"='S/a' THEN NULL ELSE substr("anioRevista", 1, 4)::integer END AS anio,
+    count(DISTINCT i.slug) AS institucionesext
+    FROM institution i
+    INNER JOIN "vSearchFull" s ON i.sistema=s.sistema AND i."paisInstitucionSlug" != s."paisRevistaSlug" AND i.slug IS NOT NULL
+    GROUP BY s."revistaSlug", anio) ie ON fr."revistaSlug"=ie."revistaSlug" AND fr.anio=ie.anio;
 
 --Frecuencia de documentos por revista -> años
 --DROP MATERIALIZED VIEW "mvFrecuenciaRevistaInstitucion";
@@ -1806,7 +1900,7 @@ FROM
   LEFT JOIN institution i ON s.sistema=i.sistema
   WHERE "revistaSlug" IS NOT NULL AND i.slug IS NOT NULL 
   GROUP BY "revistaSlug", i.slug, institucion
-  ORDER BY "revistaSlug", i.slug, institucion, documentos DESC) t
+  ORDER BY "revistaSlug", i.slug, documentos DESC) t
 GROUP BY "revistaSlug", "institucionSlug";
 
 
@@ -1866,7 +1960,7 @@ FROM
     ON i.sistema=s.sistema
   WHERE i.slug IS NOT NULL
   GROUP BY s."disciplinaSlug", i.slug, institucion
-  ORDER BY s."disciplinaSlug", i.slug, institucion, documentos DESC) t
+  ORDER BY s."disciplinaSlug", i.slug, documentos DESC) t
 GROUP BY "disciplinaSlug", "institucionSlug";
 
 --Vista materializada de frecuencia disciplina/país
@@ -1885,7 +1979,7 @@ FROM
     count(DISTINCT sistema) AS documentos
   FROM "vSearchFull"
   GROUP BY "disciplinaSlug", "paisRevistaSlug", "paisRevista"
-  ORDER BY "disciplinaSlug", "paisRevistaSlug", "paisRevista", documentos DESC) t
+  ORDER BY "disciplinaSlug", "paisRevistaSlug", documentos DESC) t
 GROUP BY "disciplinaSlug", "paisRevistaSlug";
 
 --Vista materializada de frecuencia disciplina/revista
@@ -1904,7 +1998,7 @@ FROM
     count(DISTINCT sistema) AS documentos
   FROM "vSearchFull"
   GROUP BY "disciplinaSlug", "revistaSlug", revista
-  ORDER BY "disciplinaSlug", "revistaSlug", revista, documentos DESC) t
+  ORDER BY "disciplinaSlug", "revistaSlug", documentos DESC) t
 GROUP BY "disciplinaSlug", "revistaSlug";
 
 --Vista para totales
@@ -1945,16 +2039,20 @@ FROM
 GROUP BY slug, "paisInstitucionSlug", alpha2, ciudad;
 CREATE INDEX ON "mvInstitucion" USING gin(slug gin_trgm_ops);
 
---DROP "vIndicadoresRevista";
+--DROP VIEW "vIndicadoresRevista";
 CREATE OR REPLACE VIEW "vIndicadoresRevista" AS 
  SELECT t."revistaSlug",
     t.revista,
+    t."revistaISSN",
     t."disciplinaSlug",
     t.coautoriapricezakutina,
     t.subramayan,
-    t.tasalawani
+    t.tasalawani,
+    t.pratt,
+    t.exogena
    FROM ( SELECT dr."revistaSlug",
             dr.revista,
+            dr.issn AS "revistaISSN",
             d.slug AS "disciplinaSlug",
                 CASE
                     WHEN cpz.revista IS NULL THEN NULL::integer
@@ -1967,21 +2065,36 @@ CREATE OR REPLACE VIEW "vIndicadoresRevista" AS
                 CASE
                     WHEN tl.revista IS NULL THEN NULL::integer
                     ELSE 1
-                END AS tasalawani
+                END AS tasalawani,
+                CASE
+                    WHEN pr.revista IS NULL THEN NULL::integer
+                    ELSE 1
+                END AS pratt,
+                CASE
+                    WHEN pe.revista IS NULL THEN NULL::integer
+                    ELSE 1
+                END AS exogena
            FROM "mvDisciplinaRevistas" dr
              LEFT JOIN "mvPeriodosRevistaCoautoriaPriceZakutina" cpz ON dr."revistaSlug"::text = cpz."revistaSlug"::text
              LEFT JOIN "mvPeriodosRevistaSubramayan" s ON dr."revistaSlug"::text = s."revistaSlug"::text
              LEFT JOIN "mvPeriodosRevistaTasaLawani" tl ON dr."revistaSlug"::text = tl."revistaSlug"::text
+             LEFT JOIN "mvPratt" pr ON dr."revistaSlug"::text = pr."revistaSlug"::text
+             LEFT JOIN "mvProductividadExogena" pe ON dr."revistaSlug"::text = pe."revistaSlug"::text
              JOIN disciplinas d ON dr.id_disciplina = d.id_disciplina) t
   WHERE t.coautoriapricezakutina = 1 OR t.subramayan = 1 OR t.tasalawani = 1
   ORDER BY t."revistaSlug";
 
 CREATE OR REPLACE VIEW "vIndicadoresRevistaGeneral" AS 
+-- CREATE MATERIALIZED VIEW "mvIndicadoresRevistaGeneral" AS 
  SELECT
         CASE
             WHEN vir.revista IS NULL THEN svir.revista
             ELSE vir.revista
         END AS revista,
+        CASE
+            WHEN vir."revistaISSN" IS NULL THEN svir."revistaISSN"
+            ELSE vir."revistaISSN"
+        END AS "revistaISSN",
         CASE
             WHEN vir."revistaSlug" IS NULL THEN svir."revistaSlug"
             ELSE vir."revistaSlug"
@@ -1992,6 +2105,8 @@ CREATE OR REPLACE VIEW "vIndicadoresRevistaGeneral" AS
     vir.coautoriapricezakutina,
     vir.subramayan,
     vir.tasalawani,
+    vir.pratt,
+    vir.exogena,
     svir.generalesrevista,
     svir.networkjournaldistribution,
     svir.agedocjournalcitation,
@@ -2003,7 +2118,54 @@ CREATE OR REPLACE VIEW "vIndicadoresRevistaGeneral" AS
             WHEN vir."revistaSlug" IS NULL THEN svir."revistaSlug"
             ELSE vir."revistaSlug"
         END;
-  
+
+CREATE INDEX ON "mvIndicadoresRevistaGeneral"(substring("revistaSlug", 1, 1));
+
+CREATE OR REPLACE VIEW "vIndicadoresRevistaGeneralConacyt" AS
+SELECT 
+  ig.revista,
+  ig."revistaISSN",
+  jc."redalycId",
+  ig."revistaSlug",
+  ig."revistaSiglum",
+  ig."networkSlug",
+  (array_agg(ig."disciplinaSlug"))[1] AS "disciplinaSlug",
+  ig.pratt,
+  ig.exogena,
+  ig.generalesrevista
+FROM "scielo_vJournalConacyt" jc 
+INNER JOIN "vIndicadoresRevistaGeneral" ig
+ON jc.slug=ig."revistaSlug" AND ig."networkSlug"='mexico'
+GROUP BY  
+  ig.revista,
+  ig."revistaISSN",
+  jc."redalycId",
+  ig."revistaSlug",
+  ig."revistaSiglum",
+  ig."networkSlug",
+  ig.pratt,
+  ig.exogena,
+  ig.generalesrevista;
+
+CREATE OR REPLACE VIEW "vIndicadoresRevistasConacyt" AS 
+SELECT 
+  jc.*,
+  gr.anio,
+  gr.fasciculos,
+  gr.articulos,
+  gr.referencias,
+  gr.citas,
+  gr."porcentajeAutoCita",
+  gr."factorImpacto",
+  gr."indiceInmediatez",
+  gr."vidaMedia",
+  fra.autores,
+  fra.autoresext,
+  fra.instituciones,
+  fra.institucionesext
+FROM "scielo_vJournalConacyt" jc
+LEFT JOIN "scielo_indicadoresGeneralesRevista" gr  ON jc.slug=gr."revistaSlug"
+LEFT JOIN "mvFrecuenciaRevistaAnio" fra ON jc.slug=fra."revistaSlug" AND gr.anio=fra.anio;
 --Drops
 --SELECT drop_matview('"mvIndiceCoautoriaPricePais"');
 --SELECT drop_matview('"mvTasaCoautoriaPais"');
@@ -2016,3 +2178,5 @@ CREATE OR REPLACE VIEW "vIndicadoresRevistaGeneral" AS
 
 --DROP VIEW "vIndiceCoautoriaPricePais" CASCADE;
 --DROP VIEW "vSubramayanPais" CASCADE;
+
+CREATE INDEX ON articulo(substring("revistaSlug", 1, 1));
