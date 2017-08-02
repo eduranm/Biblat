@@ -17,12 +17,10 @@
 		</caption>
 {/if}
 		<tbody>
-{if $mail}
-				<tr>
+				<tr {if !$mail}style="display:none;"{/if}>
 					<td class="nowrap"><strong>{_('Título del documento:')}</strong></td>
 					<td><a href="{site_url("revista/$articulo.revistaSlug/articulo/$articulo.articuloSlug")}" title="{$articulo.revista}"><span itemprop="name">{$articulo.articulo}</span></a></td>
 				</tr>
-{/if}
 {if $articulo.revista}
 				<tr>
 					<td class="nowrap"><strong>{_('Revista:')}</strong></td>
