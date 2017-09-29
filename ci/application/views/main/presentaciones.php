@@ -2,6 +2,15 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h5 class="panel-title">
+				<a href="{base_url('archivos/ppt/Situacion_Acceso_Abierto_PUCP_Lima_Peru_septiembre_2017.pptx')}" target="_blank">
+					<span class="fa fa-file-powerpoint-o"></span> Sánchez Pereyra, Antonio (2017, septiembre) Publicación en acceso abierto y evaluación bibliomética de la ciencia en la era electrónica y neoliberal. IV Congreso Nacional de Gestión de la Investigación, Pontificia Universidad Católica del Perú (PUCP), Lima.
+				</a>
+			</h5>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h5 class="panel-title">
 				<a href="{base_url('archivos/ppt/Indicadores_y_evaluacion_bibliometrica_de_las_publicaciones_cientificas_MAYO_2017.pptx')}" target="_blank">
 					<span class="fa fa-file-powerpoint-o"></span> Sánchez Pereyra, Antonio (2017, mayo) Indicadores y evaluación bibliométrica de las publicaciones científicas. Jornada de formación sobre métricas en investigación, INFOTEC
 				</a>
@@ -91,7 +100,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 		  <h5 class="panel-title">
-			<a href="{base_url('archivos/ppt/El _futuro_de_las_revistas_de_ciencias_sociales_IIS_noviembre_2014.pptx')}" target="_blank">
+			<a href="{base_url('archivos/ppt/El_futuro_de_las_revistas_de_ciencias_sociales_IIS_noviembre_2014.pptx')}" target="_blank">
 				<span class="fa fa-file-powerpoint-o"></span> Ponencia en Mesa Redonda "El futuro de las revistas de Ciencias Sociales" 75 Aniversario de la Revista Mexicana de Sociología IIS-UNAM, 12 nov. 2014
 			</a>
 		  </h5>
