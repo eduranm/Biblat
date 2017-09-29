@@ -3,7 +3,7 @@
 		<div class="panel-heading">
 			<h5 class="panel-title">
 				<a href="{base_url('archivos/ppt/Situacion_Acceso_Abierto_PUCP_Lima_Peru_septiembre_2017.pptx')}" target="_blank">
-					<span class="fa fa-file-powerpoint-o"></span> Sánchez Pereyra, Antonio (2017, septiembre) Publicación en acceso abierto y evaluación bibliomética de la ciencia en la era electrónica y neoliberal. IV Congreso Nacional de Gestión de la Investigación, Pontificia Universidad Católica del Perú (PUCP), Lima.
+					<span class="fa fa-file-powerpoint-o"></span> Sánchez Pereyra, Antonio (2017, septiembre) Publicación en acceso abierto y evaluación bibliométrica de la ciencia en la era electrónica y neoliberal. IV Congreso Nacional de Gestión de la Investigación, Pontificia Universidad Católica del Perú (PUCP), Lima.
 				</a>
 			</h5>
 		</div>
