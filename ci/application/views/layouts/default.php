@@ -6,8 +6,8 @@
         <meta name="robots" content="all, index, follow"/>
         <meta name="googlebot" content="all, index, follow" />
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
 {foreach $template.meta name content}
 {if $name == "keywords"}
         <meta name="{$name}" content="{foreach $content keyword}{$keyword}, {/foreach}" />
