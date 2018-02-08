@@ -40,8 +40,7 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <script src="http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-{if $ENVIRONMENT == "production"}{literal}
-        <script>
+        {if $ENVIRONMENT == "production"}{literal}<script>
           (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
           (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -49,10 +48,8 @@
 
           ga('create', 'UA-33940112-1', 'auto');
           ga('send', 'pageview');
-        </script>
-{/literal}{/if}
-{if $class_method == "mainindex"}{literal}
-        <script type="application/ld+json">
+        </script>{/literal}{/if}
+        {if $class_method == "mainindex"}{literal}<script type="application/ld+json">
         {
           "@context": "http://schema.org",
           "@type": "WebSite",
@@ -63,8 +60,7 @@
             "query-input": "required name=search_term_string"
           }
         }
-        </script>
-{/literal}{/if}
+        </script>{/literal}{/if}
         {literal}<script type="application/ld+json">
         {
           "@context" : "http://schema.org",
