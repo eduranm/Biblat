@@ -253,7 +253,7 @@ if ($childMenus.length) {
 var $DoNotCloseThisOne = false;
 $childMenus.each(function(){
 if ($($(this).find(':first-child')[0]).is(e)) $DoNotCloseThisOne = true;
-})
+});
 if ($DoNotCloseThisOne) return;
 }
 var relatedTarget = { relatedTarget: this };
