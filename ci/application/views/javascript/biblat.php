@@ -215,7 +215,7 @@ $('<div class="dropdown-backdrop"/>').insertAfter($(this)).on('click', clearMenu
 }
 var relatedTarget = { relatedTarget: this }
 $parent.trigger(e = $.Event('show.bs.dropdown', relatedTarget))
-if (e.isDefaultPrevented()) return
+if (e.isDefaultPrevented()) return;
 $parent
 .toggleClass('open')
 .trigger('shown.bs.dropdown', relatedTarget)
@@ -224,11 +224,11 @@ $this.focus()
 return false;
 }
 Dropdown.prototype.keydown = function (e) {
-if (!/(38|40|27)/.test(e.keyCode)) return
+if (!/(38|40|27)/.test(e.keyCode)) return;
 var $this = $(this);
 e.preventDefault();
 e.stopPropagation();
-if ($this.is('.disabled, :disabled')) return
+if ($this.is('.disabled, :disabled')) return;
 var $parent = getParent($this);
 var isActive = $parent.hasClass('open');
 if (!isActive || (isActive && e.keyCode == 27)) {
@@ -239,9 +239,9 @@ var desc = ' li:not(.divider):visible a';
 var $items = $parent.find('[role=menu]' + desc + ', [role=listbox]' + desc);
 if (!$items.length) return;
 var index = $items.index($items.filter(':focus'));
-if (e.keyCode == 38 && index > 0) index-- // up
-if (e.keyCode == 40 && index < $items.length - 1) index++ // down
-if (!~index) index = 0
+if (e.keyCode == 38 && index > 0) index--; // up
+if (e.keyCode == 40 && index < $items.length - 1) index++; // down
+if (!~index) index = 0;
 $items.eq(index).focus();
 }
 function clearMenus(e) {
@@ -259,7 +259,7 @@ if ($DoNotCloseThisOne) return;
 var relatedTarget = { relatedTarget: this };
 if (!$parent.hasClass('open')) return;
 $parent.trigger(e = $.Event('hide.bs.dropdown', relatedTarget))
-if (e.isDefaultPrevented()) return
+if (e.isDefaultPrevented()) return;
 $parent.removeClass('open').trigger('hidden.bs.dropdown', relatedTarget)
 })
 }
@@ -283,7 +283,7 @@ if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
 if (typeof option == 'string') data[option].call($this)
 })
 }
-$.fn.dropdown.Constructor = Dropdown
+$.fn.dropdown.Constructor = Dropdown;
 // DROPDOWN NO CONFLICT
 // ====================
 $.fn.dropdown.noConflict = function () {
@@ -292,7 +292,7 @@ return this;
 }
 $(document)
 .off('click.bs.dropdown.data-api', "**")
-.off('keydown.bs.dropdown.data-api', "**")
+.off('keydown.bs.dropdown.data-api', "**");
 // APPLY TO STANDARD DROPDOWN ELEMENTS
 // ===================================
 $(document)
