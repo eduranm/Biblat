@@ -5,7 +5,7 @@
         <meta name="resource-type" content="document" />
         <meta name="robots" content="all, index, follow"/>
         <meta name="googlebot" content="all, index, follow" />
-        <meta charset="utf-8">
+        <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 {foreach $template.meta name content}
@@ -261,17 +261,16 @@
                       <li><a href="#">{_('Archivos multimedia')}</a></li>
                     </ul>
                 </div>
-            </div><!--row-->
+            </div><!--sitemap-->
             <div class="row">
                 <div id="copyright" class="text-center">
                     {_sprintf('® Derechos reservados. 2009 - %d. Dirección General de Bibliotecas, Universidad Nacional Autónoma de México (UNAM). Esta página y sus contenidos pueden ser utilizados y reproducidos con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica. De otra forma, requiere permiso previo por escrito de la institución.', date('Y'))} <a href="{site_url('creditos')}">{_('CRÉDITOS')}</a>
                 </div>
             </div>
-        </div><!--sitemap-->
         </footer>
         <div id="loading" style="display:none;">
             <h2 style="white-space:nowrap;">
-                <img src="<?=base_url('img/loading.gif');?>" /><br/>{_('Espere un momento...')}
+                <img src="{base_url('img/loading.gif')}" /><br/>{_('Espere un momento...')}
             </h2>
         </div>
         <script src="{base_url('assets/js/jquery.js')}"></script>
