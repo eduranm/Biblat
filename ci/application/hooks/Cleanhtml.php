@@ -13,15 +13,8 @@ class Cleanhtml {
 		/*Remove debug console log in production*/
 		if(ENVIRONMENT === "production"):
 			$buffer = preg_replace('/console.log\(.+?\);/', "", $buffer);
-			$buffer = preg_replace('/<!--.+?-->/', "", $buffer);
-			$re = '%(?>[^\S ]\s*|\s{2,})(?=[^<]*+(?:<(?!/?(?:textarea|pre|script)\b)[^<]*+)*+(?:<(?>textarea|pre|script)\b|\z))%Six';
-			$new_buffer = preg_replace($re, " ", $buffer);
-			if ($new_buffer === null)
-				$new_buffer = $buffer;
-			$CI->output->set_output($new_buffer);
-		else:
-			$CI->output->set_output($buffer);
 		endif;
+		$CI->output->set_output($buffer);
 		$CI->output->_display();
 	}
 }
