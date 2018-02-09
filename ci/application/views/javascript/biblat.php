@@ -222,7 +222,7 @@ $parent
 $this.focus();
 }
 return false;
-}
+};
 Dropdown.prototype.keydown = function (e) {
 if (!/(38|40|27)/.test(e.keyCode)) return;
 var $this = $(this);
@@ -243,7 +243,7 @@ if (e.keyCode == 38 && index > 0) index--; // up
 if (e.keyCode == 40 && index < $items.length - 1) index++; // down
 if (!~index) index = 0;
 $items.eq(index).focus();
-}
+};
 function clearMenus(e) {
 $(backdrop).remove();
 $(toggle).each(function () {
@@ -282,14 +282,14 @@ var data = $this.data('bs.dropdown');
 if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)));
 if (typeof option == 'string') data[option].call($this);
 })
-}
+};
 $.fn.dropdown.Constructor = Dropdown;
 // DROPDOWN NO CONFLICT
 // ====================
 $.fn.dropdown.noConflict = function () {
 //$.fn.dropdown = old
 return this;
-}
+};
 $(document)
 .off('click.bs.dropdown.data-api', "**")
 .off('keydown.bs.dropdown.data-api', "**");
