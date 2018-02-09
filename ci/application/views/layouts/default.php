@@ -40,14 +40,13 @@
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
             <script src="http://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        {if $ENVIRONMENT == "production"}{literal}<script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-          ga('create', 'UA-33940112-1', 'auto');
-          ga('send', 'pageview');
+        {if $ENVIRONMENT == "production"}{literal}<!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-33940112-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-33940112-1');
         </script>{/literal}{/if}
         {if $class_method == "mainindex"}{literal}<script type="application/ld+json">
         {
@@ -74,7 +73,7 @@
       <body>
         <header>
             <div class="container">
-                <div class="row">
+                <div class="row">   
                     <div id="biblat-logo" class="col-md-4 hidden-xs hidden-sm{if $class_method == "mainindex"} biblat-logo-main{/if}">
                         <a href="{site_url('/')}" title="{_('Bibliografía Latinoamericana')}">
                             <span class="bl-single"></span><br/>
