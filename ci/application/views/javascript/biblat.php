@@ -1,3 +1,27 @@
+<?php if(ENVIRONMENT === "production"):?>
+var logger = function()
+{
+    var oldConsoleLog = null;
+    var pub = {};
+
+    pub.enableLogger =  function enableLogger() 
+                        {
+                            if(oldConsoleLog == null)
+                                return;
+
+                            window['console']['log'] = oldConsoleLog;
+                        };
+
+    pub.disableLogger = function disableLogger()
+                        {
+                            oldConsoleLog = console.log;
+                            window['console']['log'] = function() {};
+                        };
+
+    return pub;
+}();
+$(document).ready(function(){logger.disableLogger();});
+<?php endif;?>
 var addthis_config = addthis_config||{};
 addthis_config.data_track_addressbar = false;
 addthis_config.data_track_clickback = false;
