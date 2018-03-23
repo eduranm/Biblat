@@ -613,6 +613,7 @@ choosePoint = function (revistaPais, anio) {
 			changeTableClass();
 			google.visualization.events.addListener(table , 'sort', changeTableClass);
 			$.colorbox({inline: true, href: $('#floatTable'), height:"90%",});
+			$.colorbox.resize();
 		}
 	});
 }
@@ -639,6 +640,7 @@ getFrecuencias = function (key) {
 			changeTableClass();
 			google.visualization.events.addListener(table , 'sort', changeTableClass);
 			$.colorbox({inline: true, href: $('#floatTable'), height:"90%",});
+			$.colorbox.resize();
 		}
 	});
 }
