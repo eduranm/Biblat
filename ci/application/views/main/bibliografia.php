@@ -31,6 +31,8 @@
 
 	<tr><td><cite>Cetto, A. M., Alonso Gamboa, J. O. &amp; Córdoba González, S. (2010) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Cetto_AlonsoGamboa_Cordoba_2010.pdf" target="_blank">Ibero-American Systems for the Dissemination of Scholarly Journals: A Contribution to Public Knowledge Worldwide.</a> Scholarly and Research Communication [on-line], 1(1). Disponible en: <a href="http://journals.sfu.ca/src/index.php/src/issue/view/1" target="_blank">http://journals.sfu.ca/src/index.php/src/issue/view/1</a></cite></td></tr>
 
+	<tr><td><cite>Sánchez Pereyra, A. (2010, septiembre). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/SanchezPereyra_Ponencia_2010.pdf" target="_blank">Latin American Scientific Journals from "Lost Science" to Open Access"</a>, ponencia presentada en el Panel Ciencia: Acceso Abierto y Visibilidad de la Ciencia del Encuentro de Mexicanistas 2010, Educación, Ciencia y Cultura. Amberes, Bélgica</cite></td></tr>
+
 	<tr><td><cite>Pire Cordero, R. (2010) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/PireCordero_2010.pdf" target="_blank">Disponibilidad de bases de datos oficiales como soporte a la investigación</a>. COMPENDIUM 25, 65-63.</cite></td></tr>
 			
 	<tr><td><cite>Reséndiz Cansino, G., Sánchez Pereyra, A., Sánchez, M. &amp; García Bravo, I. (2010). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/ResendizCansino_2010.pdf" target="_blank">Portal de indicadores bibliométricos BIBLAT.</a> Biblioteca Universitaria 13(2), 175–188.</cite></td></tr>
@@ -72,6 +74,8 @@
 	<tr><td><cite>Reyna Espinosa, F. R. &amp; Alonso Gamboa, J. O. (1997, octubre). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/ReynaEspinosa_AlonsoGamboa_1997.pdf" target="_blank">Retos y prospectiva de las bases de datos latinoamericanas: la experiencia de BLAT, CLASE y PERIODICA.</a> Ponencia presentada en el Congreso Internacional de Informacion INFO 97. Habana, Cuba: Instituto de Información Científica y Tecnológica.</cite></td></tr>
 			
 	<tr><td><cite>Alonso Gamboa, J. O. (1993). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/AlonsoGamboa_1993.pdf" target="_blank">Servicios, productos, docencia e investigación en información. La experiencia del Centro de Información Científica y Humanística de la Universidad Nacional Autónoma de México.</a> Ciencias de la Información24(4), 201-209.</b></cite></td></tr>
+
+	<tr><td><cite>Dirección General de Planeación. (1996). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/MemoriaUNAM_1996.pdf" target="_blank">Centro de Información Científica y Humanística. En Memoria UNAM 1996.</a> Universidad Nacional Autónoma de México.</cite></td></tr>
 			
 	<tr><td><cite>Reyna Espinosa, F. R. (1992) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/ReynaEspinosa_1992.pdf" target="_blank">Algunos aspectos referentes al análisis de información en el Centro de Información Científica y Humanística de la UNAM.</a> Ponencia presentada en el Primer Foro de Información: bases de datos y perspectivas  LatinBase 92. Guadalajara, México.</cite></td></tr>
 			
@@ -90,6 +94,8 @@
 	<tr><td><cite>Pérez-Vitoria, A. (1982). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Perez-Vitoria_1982_1.pdf" target="_blank">La información en el marco de la cooperación científica internacional</a>. Inforum, 1, 1-31.</cite></td></tr>
 	
 	<tr><td><cite>Pérez-Vitoria, A. (1982) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Perez-Vitoria_1982.pdf" target="_blank">Los primeros diez años del CICH-UNAM</a>. RUCIBA, 4(3), 195-206</cite></td></tr>
+
+	<tr><td><cite>Buttenkleppler, A. (1978?). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/B%fcttenkleppler_1978.pdf" target="_blank">Centro de Información Científica y Humanística. Vol. 5.</a>. México : UNAM, CICH, p. 439-519</cite></td></tr>
 			
 	<tr><td><cite>Sandoval, A. (1978). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Sandoval_1978.pdf" target="_blank">Centro de información Científica y Humanística: un centro de información universitario del tercer mundo</a>. Boletín de la Unesco para las Bibliotecas, 32(1), 45-52</cite></td></tr>
 			
