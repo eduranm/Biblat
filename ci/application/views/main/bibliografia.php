@@ -72,11 +72,11 @@
 	<tr><td><cite>Cetto, A. M. &amp; Alonso Gamboa, J. O. (1998) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Cetto_AlonsoGamboa_1998.pdf" target="_blank">Scientific periodicals in Latin America and the Caribbean: a perspective</a>. Interciencia, 23(2), 84-93.</cite></td></tr>
 			
 	<tr><td><cite>Reyna Espinosa, F. R. &amp; Alonso Gamboa, J. O. (1997, octubre). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/ReynaEspinosa_AlonsoGamboa_1997.pdf" target="_blank">Retos y prospectiva de las bases de datos latinoamericanas: la experiencia de BLAT, CLASE y PERIODICA.</a> Ponencia presentada en el Congreso Internacional de Informacion INFO 97. Habana, Cuba: Instituto de Información Científica y Tecnológica.</cite></td></tr>
-			
-	<tr><td><cite>Alonso Gamboa, J. O. (1993). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/AlonsoGamboa_1993.pdf" target="_blank">Servicios, productos, docencia e investigación en información. La experiencia del Centro de Información Científica y Humanística de la Universidad Nacional Autónoma de México.</a> Ciencias de la Información24(4), 201-209.</b></cite></td></tr>
 
 	<tr><td><cite>Dirección General de Planeación. (1996). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/MemoriaUNAM_1996.pdf" target="_blank">Centro de Información Científica y Humanística. En Memoria UNAM 1996.</a> Universidad Nacional Autónoma de México.</cite></td></tr>
 			
+	<tr><td><cite>Alonso Gamboa, J. O. (1993). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/AlonsoGamboa_1993.pdf" target="_blank">Servicios, productos, docencia e investigación en información. La experiencia del Centro de Información Científica y Humanística de la Universidad Nacional Autónoma de México.</a> Ciencias de la Información24(4), 201-209.</b></cite></td></tr>
+
 	<tr><td><cite>Reyna Espinosa, F. R. (1992) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/ReynaEspinosa_1992.pdf" target="_blank">Algunos aspectos referentes al análisis de información en el Centro de Información Científica y Humanística de la UNAM.</a> Ponencia presentada en el Primer Foro de Información: bases de datos y perspectivas  LatinBase 92. Guadalajara, México.</cite></td></tr>
 			
 	<tr><td><cite>Guerra, R. (1992) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Guerra_1992.pdf" target="_blank">La bibliografía Latinoamericana en el CICH. Balance de 20 años.</a> Ponencia presentada en el Primer Foro de Información: bases de datos y perspectivas LatinBase 92, Guadalajara, México.</cite></td></tr>
