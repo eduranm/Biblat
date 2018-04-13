@@ -88,6 +88,8 @@
 	<tr><td><cite>Sandoval, A.; Buttenklepper, A.; Villamichel, M. &amp; Ruiz, J. (1983). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Sandoval_Buttenklepper_Villamichel_Ruiz_1983.pdf" target="_blank">The vehicles of the results of Latin American research. A bibliometric approach</a>. Inforum, 3, 25-31.</cite></td></tr>
 
 	<tr><td><cite>Sandoval, A.; Pérez, A. &amp; Franco, C. (1983). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Sandoval_Perez_Franco_1983.pdf" target="_blank">A current Latin American Bibliography compiled from non-Latin American journals. A Bibliometric study</a>. Inforum, 3, 33-39.</cite></td></tr>
+
+	<tr><td><cite>Garfield, E (1983) <a href="http://132.248.9.34/hevila/Inforum/1983/no2/2.pdf" target="_blank">Las universidades como productoras y consumidoras de información</a> &lt;Conferencia presentada el 24 de septiembre de 1976 en la UNAM&gt;. Inforum, 2, 1-15</cite></td></tr>
 	
 	<tr><td><cite>Maffey, L., Arana Mendoza, C., Deschamps, I. &amp; Sosa, V. (1982). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/Maffey_Arana_Deschamps_1982.pdf" target="_blank">Periódica : un índice de revistas latinoamericanas en ciencia y tecnología.</a> Revista Española de Documentación Cientifíca, 6(2), 137–156.</cite></td></tr>
 			
