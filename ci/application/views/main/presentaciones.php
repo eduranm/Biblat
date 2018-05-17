@@ -2,6 +2,14 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h5 class="panel-title">
+					<a href="{base_url('archivos/pdf/Poster_BIBLAT_CRECS_2018.pdf')}" target="_blank"><span class="fa fa-file-pdf-o"></span></a> <a href="{base_url('archivos/img/Poster_BIBLAT_CRECS_2018.jpg')}" target="_blank"><span class="fa fa-file-image-o"></span></a> BIBLAT Indicadores bibliométricos para la ciencia de América Latina, poster ganador de la modalidad de diseño en la 8ª Conferencia Internacional sobre Revistas Científicas CRECS 2018, Barranquilla, Colombia, 2-4 mayo de 2018
+
+			</h5>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h5 class="panel-title">
 				<a href="{base_url('archivos/ppt/Situacion_Acceso_Abierto_PUCP_Lima_Peru_septiembre_2017.pptx')}" target="_blank">
 					<span class="fa fa-file-powerpoint-o"></span> Sánchez Pereyra, Antonio (2017, septiembre) Publicación en acceso abierto y evaluación bibliométrica de la ciencia en la era electrónica y neoliberal. IV Congreso Nacional de Gestión de la Investigación, Pontificia Universidad Católica del Perú (PUCP), Lima.
 				</a>
@@ -80,7 +88,7 @@
 			</ul>
 		</div>
 	</div>
-	
+
 	<div class="panel panel-default">
 		<div class="panel-heading">
 		  <h5 class="panel-title">

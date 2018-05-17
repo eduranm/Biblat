@@ -1,5 +1,18 @@
 <div class="page_title">
     <hr/>
+    <h4>{_('Poster 2018')}</h4>
+    <hr/>
+</div>
+<div class="row">
+  <div class="col-xs-6 col-md-3">
+    <a href="{base_url('archivos/pdf/Poster_BIBLAT_CRECS_2018.pdf')}" class="thumbnail">
+      <img src="{base_url('assets/img/Poster_BIBLAT_CRECS_2018.png')}" alt="CLASE">
+    </a>
+  </div>
+</div>
+
+<div class="page_title">
+    <hr/>
     <h4>{_('Hojas informativas 2018')}</h4>
     <hr/>
 </div>
