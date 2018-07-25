@@ -1,4 +1,6 @@
 <table class="table table-striped">
+    <tr><td><cite>Chong-Carrillo, O., Vega-Villasante, F., Maciel, C., Álvarez-González, C.A., Michán-Aguirre, L. & Arencibia-Jorge, R. (2018). <a href="{base_url('archivos/pdf/Scientometrics-of-the-genus-Macrobrachium-by-using-the-regional-PERIODICA-database.pdf')}" target="blank">Scientometrics of the genus Macrobrachium by using the regional PERIODICA database.</a> Latin American Journal of Aquatic Research, 46(3), 581-588</cite></td></tr>
+
 	<tr><td><cite>Rosas Rivera, Paola Vanesa (2018). <a href="{base_url('archivos/pdf/CLASE_Y_PERIODICA_tesis_de_licenciatura_Paola_Vanesa_Rosas_2018.pdf')}" target="blank">CLASE y PERIÓDICA: Análisis y propuesta de ampliación en la organización del conocimiento en las tablas de disciplinas para la indización de documentos (Tesis de Licenciatura)</a>. México, Ciudad de México, Universidad Nacional Autónoma de México, Facultad de Filosofía y Letras, Colegio de Bibliotecología</cite></td></tr>
 
 	<tr><td><cite>Alonso Gamboa, J. O. & Reyna Espinosa, F. R. (2015). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/AlonsoGamboa_ReynaEspinosa_2015.pdf" target="blank">Revistas académicas mexicanas. Panorama y prospectiva</a>. Ciencia ergo sum, 22(3), 181-191.</cite></td></tr>
