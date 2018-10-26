@@ -4,16 +4,16 @@ class Frecuencias extends CI_Controller {
 
 	public $disciplinas = array();
 	public $queryFields="sistema,
-					articulo, 
-					\"articuloSlug\", 
-					revista, 
-					\"revistaSlug\", 
-					\"paisRevista\", 
-					\"anioRevista\", 
-					volumen, 
-					numero, 
-					periodo, 
-					paginacion, 
+					articulo,
+					\"articuloSlug\",
+					revista,
+					\"revistaSlug\",
+					\"paisRevista\",
+					\"anioRevista\",
+					volumen,
+					numero,
+					periodo,
+					paginacion,
 					url->>0 AS url,
 					\"autoresJSON\",
 					\"institucionesJSON\"";
@@ -1365,7 +1365,7 @@ class Frecuencias extends CI_Controller {
 		$args['title'] = _sprintf('%s (%%d documentos)', $disciplina['disciplina']);
 		return $this->_renderDocuments($args);
 	}
-	
+
 	private function _renderFrecuency($args, $data){
 		$where = "";
 		if ($args['export'] == "excel"):
@@ -1601,7 +1601,7 @@ class Frecuencias extends CI_Controller {
 		$args['page_title'] = sprintf('%s (%%d documentos)', $autor['autor']);
 		$args['title'] = _sprintf('Revista: %s/%s (%%d documentos)', $revista['revista'], $autor['autor']);
 		return $this->_renderDocuments($args);
-	}	
+	}
 
 	public function revistaAnio(){
 		$args = $this->uri->ruri_to_assoc();
@@ -1753,7 +1753,7 @@ class Frecuencias extends CI_Controller {
 
 	private function _renderDocuments($args){
 		/*Obtniendo los registros con paginación*/
-		$query = "{$args['query']} ORDER BY \"anioRevista\" DESC, volumen DESC, numero DESC, \"articuloSlug\"";
+		$query = "{$args['query']} ORDER BY \"anioRevista\" DESC, regexp_replace(volumen, '([0-9]+?)[^0-9].+?$', '\1') DESC, regexp_replace(numero, '([0-9]+?)[^0-9].+?$', '\1') DESC, \"articuloSlug\"";
 		if($args['firstPageNumber']):
 			$articulosResultado = articulosResultado($query, $args['queryCount'], $args['paginationURL'], $resultados=20, FALSE, TRUE);
 		else:
@@ -1802,7 +1802,7 @@ class Frecuencias extends CI_Controller {
 			$query = $this->db->query("{$xls['query']} LIMIT {$sheetLimit} OFFSET {$offset}");
 			$this->output->enable_profiler(false);
 			header('Content-Type: application/vnd.ms-excel; charset=utf-8');
-			header('Content-Disposition: attachment;filename="'.$xls['fileName'].'"'); 
+			header('Content-Disposition: attachment;filename="'.$xls['fileName'].'"');
 			header('Cache-Control: max-age=0');
 			$colsTotal=1;
 			foreach ($xls['cols'] as $col):
@@ -1832,7 +1832,7 @@ class Frecuencias extends CI_Controller {
 						echo ", \n";
 					endif;
 					$colsTotal++;
-				endforeach;	
+				endforeach;
 			endforeach;
 			$query->free_result();
 		endfor;
@@ -1841,13 +1841,13 @@ class Frecuencias extends CI_Controller {
 
 	public function test(){
 		$this->load->database();
-		$query="SELECT s.* FROM 
+		$query="SELECT s.* FROM
  (SELECT DISTINCT ON(sistema) sistema FROM \"vPaisAfiliacionDocumentos\" WHERE \"paisInstitucionSlug\"='republica-dominicana') t
  INNER JOIN \"vSearchFull\" s on t.sistema=s.sistema";
  		$query = $this->db->query($query);
 
  		header('Content-Type: application/vnd.ms-excel; charset=utf-8');
-		header('Content-Disposition: attachment;filename="republica-dominicana.csv"'); 
+		header('Content-Disposition: attachment;filename="republica-dominicana.csv"');
 		header('Cache-Control: max-age=0');
 		echo '"articulo", "revista", "pais", "issn", "idioma", "anio", "volumen", "numero", "periodo", "paginacion", "url", "tipoDocumento", "enfoqueDocumento", "autores", "instituciones", "disciplinas", "palabrasClave"';
 		echo "\n";
@@ -1901,7 +1901,7 @@ class Frecuencias extends CI_Controller {
 				$palabraClaveOffset++;
 			endforeach;
 			$result = "\"{$row['articulo']}\", \"{$row['revista']}\", \"{$row['paisRevista']}\", \"{$row['issn']}\", \"{$row['idioma']}\", \"{$row['anioRevista']}\", \"{$row['volumen']}\", \"{$row['numero']}\", \"{$row['periodo']}\", \"{$row['paginacion']}\", \"{$row['url']}\", \"{$row['tipoDocumento']}\", \"{$row['enfoqueDocumento']}\", \"{$autores}\", \"{$instituciones}\", \"{$disciplinas}\", \"{$palabrasClave}\"\n";
- 			echo $result; 
+ 			echo $result;
  		endforeach;
 	}
 

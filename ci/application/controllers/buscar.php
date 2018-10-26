@@ -11,7 +11,7 @@ class Buscar extends CI_Controller{
 		$this->template->set_breadcrumb(_('Buscar'));
 		$this->template->set('class_method', $this->router->fetch_class().$this->router->fetch_method());
 	}
-	
+
 	public function index($filtro="", $disciplina="", $slug="", $textoCompleto=""){
 		/*Arrego con descripcion y sql para cada indice*/
 		$indiceArray['palabra-clave'] = array('sql' => 'palabrasClaveSlug', 'descripcion' => _('Palabras clave'));
@@ -42,7 +42,7 @@ class Buscar extends CI_Controller{
 				foreach ($filters as $filter):
 					if(isset($filter['andor'])):
 						$filter['andor']['value'] = strtoupper($filter['andor']['value']);
-						$where .= " 
+						$where .= "
 						{$filter['andor']['value']} ";
 					endif;
 					switch ($filter['operator']['value']):
@@ -53,7 +53,7 @@ class Buscar extends CI_Controller{
 							$paises = implode("','", explode(',', $filter['value']['value']));
 							$where .= " \"{$indiceArray[$filter['field']['value']]['sql']}\" IN ('{$paises}')";
 							break;
-						
+
 						default:
 							$slugQuerySearch = slugQuerySearch(slugSearch($filter['value']['value']), $indiceArray[$filter['field']['value']]['sql']);
 							$where .= $slugQuerySearch['where'];
@@ -134,28 +134,28 @@ class Buscar extends CI_Controller{
 		$data['main']['search']['filtro'] = $filtro;
 
 		$queryFields="SELECT s.sistema,
-			articulo, 
-			\"articuloSlug\", 
-			revista, 
-			\"revistaSlug\", 
-			\"paisRevista\", 
-			\"anioRevista\", 
-			volumen, 
-			numero, 
-			periodo, 
-			paginacion, 
-			url->>0 AS url, 
+			articulo,
+			\"articuloSlug\",
+			revista,
+			\"revistaSlug\",
+			\"paisRevista\",
+			\"anioRevista\",
+			volumen,
+			numero,
+			periodo,
+			paginacion,
+			url->>0 AS url,
 			\"autoresJSON\",
 			\"institucionesJSON\"";
-		$queryFrom="FROM \"vSearchFull\" s 
+		$queryFrom="FROM \"vSearchFull\" s
 				WHERE  {$slugQuerySearch['where']} {$whereTextoCompleto} {$whereDisciplina}";
-		$query = "{$queryFields} 
-		{$queryFrom} 
-				ORDER BY \"anioRevista\" DESC, volumen DESC, numero DESC, \"articuloSlug\"";
-		
+		$query = "{$queryFields}
+		{$queryFrom}
+				ORDER BY \"anioRevista\" DESC, regexp_replace(volumen, '([0-9]+?)[^0-9].+?$', '\1') DESC, regexp_replace(numero, '([0-9]+?)[^0-9].+?$', '\1') DESC, \"articuloSlug\"";
+
 
 		$queryCount = "SELECT count (*) as total {$queryFrom}";
-		
+
 		/*Creando paginacion*/
 		if($disciplina == "null"):
 			$disciplina = array();
@@ -222,7 +222,7 @@ class Buscar extends CI_Controller{
 			$row['id'] = $pais['paisRevistaSlug'];
 			$row['label'] = $pais['paisRevista'];
 			$result[] = $row;
-		endforeach; 
+		endforeach;
 		return $result;
 	}
 	public function getDisciplinas(){

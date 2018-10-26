@@ -4,18 +4,18 @@ class Indicadores extends CI_Controller {
 
 	public $indicadores = array();
 	public $disciplinas = array();
-	public $queryFields="sistema, 
-					articulo, 
-					\"articuloSlug\", 
-					revista, 
-					\"revistaSlug\", 
-					\"paisRevista\", 
-					\"anioRevista\", 
-					volumen, 
-					numero, 
-					periodo, 
-					paginacion, 
-					url, 
+	public $queryFields="sistema,
+					articulo,
+					\"articuloSlug\",
+					revista,
+					\"revistaSlug\",
+					\"paisRevista\",
+					\"anioRevista\",
+					volumen,
+					numero,
+					periodo,
+					paginacion,
+					url,
 					\"autoresJSON\",
 					\"institucionesJSON\"";
 
@@ -113,7 +113,7 @@ class Indicadores extends CI_Controller {
 								'indice-concentracion' => _('Índice de concentración (Índice Pratt)'),
 								'modelo-bradford-revista' => _('Modelo de Bradford por revista'),
 								'modelo-bradford-institucion' => _('Modelo de Bradford por institución (Afiliación del autor)'),
-								'productividad-exogena' => _('Tasa de autoría exógena') 
+								'productividad-exogena' => _('Tasa de autoría exógena')
 							);
 		/*Disciplinas*/
 		$this->load->database();
@@ -191,7 +191,7 @@ class Indicadores extends CI_Controller {
 		$_POST['periodo'] = explode(";", $_POST['periodo']);
 		/*Generamos el arreglo de periodos*/
 		$periodos = $this->getPeriodos($_POST);
-		
+
 		/*Consulta para cada indicador*/
 		$indicador['indice-coautoria'] = array(
 			'campoTabla' => "coautoria AS valor FROM \"mvIndiceCoautoriaPrice",
@@ -276,7 +276,7 @@ class Indicadores extends CI_Controller {
 				)
 			);
 
-		$selection = 'revista'; 
+		$selection = 'revista';
 		if (isset($_POST['revista'])):
 			$data['dataTable']['cols'][] = array('id' => '', 'label' => _('Revista/Año'), 'type' => 'string');
 			$query = "SELECT revista AS title, anio, {$indicador[$_POST['indicador']]['campoTabla']}Revista\" WHERE \"revistaSlug\" IN (";
@@ -591,13 +591,13 @@ class Indicadores extends CI_Controller {
 		$idDisciplina=$this->disciplinas[$_POST['disciplina']]['id_disciplina'];
 		$indicador['indice-concentracion'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", pratt AS indicador FROM \"mvPratt\" WHERE id_disciplina={$idDisciplina}",
-				'title' => _('Índice de concentración temática'), 
+				'title' => _('Índice de concentración temática'),
 				'chartTitle' => '<div id="chartTitle"><div class="text-center nowrap"><h4>'._('Índice de concentración (Índice de Pratt)').'</h4><br/>'._('Distribución decreciente de las revistas considerando su grado de concentración temática').'</div></div>',
 				'tooltip' => "<b>{point.name}</b><br/>Nivel de especialización de la revista: <b>{point.y}</b>"
 			);
 		$indicador['productividad-exogena'] = array(
 				'sql' => "SELECT revista, \"revistaSlug\", exogena AS indicador FROM \"mvProductividadExogena\" WHERE id_disciplina={$idDisciplina}",
-				'title' => _('Proporción de autoría exógena'), 
+				'title' => _('Proporción de autoría exógena'),
 				'chartTitle' => '<div id="chartTitle" class="text-center nowrap"><h4>'._('Tasa de autoría exógena').'</h4><br/>'._('Distribución decreciente de las revistas considerando la proporción de autoría exógena').'</div>',
 				'tooltip' => "<b>{point.name}</b><br/>Proporción de autores extranjeros: <b>{point.y}</b>"
 			);
@@ -664,7 +664,7 @@ class Indicadores extends CI_Controller {
 		$data['tableTitle'] = "<h4 class=\"text-center\">{$this->indicadores[$_POST['indicador']]}</h4>";
 		if($this->preview)
 			return $data['highchart'];
-		header('Content-Type: application/json');	
+		header('Content-Type: application/json');
 		echo json_encode($data, true);
 
 	}
@@ -689,7 +689,7 @@ class Indicadores extends CI_Controller {
 					$data['table']['rows'][]['c'] = $c;
 				endforeach;
 				break;
-			
+
 			case 'productividad-exogena':
 				$query = "SELECT \"paisAutor\", \"autores\" FROM \"mvAutoresRevistaPais\" WHERE \"revistaSlug\"='{$revista}' ORDER BY autores DESC, \"paisAutor\"";
 				$query = $this->db->query($query);
@@ -717,7 +717,7 @@ class Indicadores extends CI_Controller {
 		header('Content-Type: application/json');
 		echo json_encode($data, true);
 	}
-	
+
 	public function getRevistasPaises(){
 		$this->output->enable_profiler(false);
 		$data = array();
@@ -853,7 +853,7 @@ class Indicadores extends CI_Controller {
 		/*Generando escala*/
 		$scale = array();
 		$scaleOffset = $data['anioBase'];
-		while ( $scaleOffset < $data['anioFinal']):	
+		while ( $scaleOffset < $data['anioFinal']):
 			$scale[] = $scaleOffset;
 			if($scaleOffset % 5 > 0):
 				$scaleOffset += (5 - $scaleOffset % 5);
@@ -936,7 +936,7 @@ class Indicadores extends CI_Controller {
 
 	private function _renderDocuments($args){
 		/*Obtniendo los registros con paginación*/
-		$query = "{$args['query']} ORDER BY \"anioRevista\" DESC, volumen DESC, numero DESC, \"articuloSlug\"";
+		$query = "{$args['query']} ORDER BY \"anioRevista\" DESC, regexp_replace(volumen, '([0-9]+?)[^0-9].+?$', '\1') DESC, regexp_replace(numero, '([0-9]+?)[^0-9].+?$', '\1') DESC, \"articuloSlug\"";
 		$articulosResultado = articulosResultado($query, $args['queryCount'], $args['paginationURL'], $resultados=20);
 		/*Vistas*/
 		$data = array();

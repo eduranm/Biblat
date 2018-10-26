@@ -20,28 +20,28 @@ class Revista extends CI_Controller{
 	public function index($revistaSlug){
 		$data = array();
 		/*Obteniendo articulos de la revista*/
-		$queryFields="SELECT 
-					sistema, 
-					articulo, 
-					\"articuloSlug\", 
-					revista, 
-					\"revistaSlug\",  
-					\"paisRevista\", 
-					\"anioRevista\", 
-					volumen, 
-					numero, 
-					periodo, 
-					paginacion, 
-					url->>0 AS url, 
+		$queryFields="SELECT
+					sistema,
+					articulo,
+					\"articuloSlug\",
+					revista,
+					\"revistaSlug\",
+					\"paisRevista\",
+					\"anioRevista\",
+					volumen,
+					numero,
+					periodo,
+					paginacion,
+					url->>0 AS url,
 					\"autoresJSON\",
 					\"institucionesJSON\"";
 		$queryFrom = "FROM \"vSearchFull\" WHERE \"revistaSlug\"='{$revistaSlug}'";
-		$query = "{$queryFields} 
-				{$queryFrom} 
-				ORDER BY \"anioRevista\" DESC, volumen DESC, numero DESC, \"articuloSlug\"";
-		
+		$query = "{$queryFields}
+				{$queryFrom}
+				ORDER BY \"anioRevista\" DESC, regexp_replace(volumen, '([0-9]+?)[^0-9].+?$', '\1') DESC, regexp_replace(numero, '([0-9]+?)[^0-9].+?$', '\1') DESC, \"articuloSlug\"";
+
 		$queryCount = "SELECT count (DISTINCT sistema) as total {$queryFrom}";
-		
+
 		/*Paginación y resultados*/
 		$paginationURL = site_url("/revista/{$revistaSlug}");
 		$perPage = 20;
@@ -80,25 +80,25 @@ class Revista extends CI_Controller{
 
 		/*Consultas*/
 		$this->load->database();
-		$query = "SELECT 
-				s.sistema, 
-				s.articulo, 
+		$query = "SELECT
+				s.sistema,
+				s.articulo,
 				s.\"articuloSlug\",
-				s.revista, 
-				s.\"revistaSlug\", 
-				s.issn, 
-				s.\"anioRevista\", 
-				s.volumen, 
-				s.numero, 
-				s.periodo, 
-				s.paginacion, 
-				s.\"paisRevista\", 
-				s.idioma, 
-				s.\"tipoDocumento\", 
-				s.\"enfoqueDocumento\", 
-				s.\"autoresJSON\", 
-				s.\"institucionesJSON\", 
-				s.\"disciplinas\", 
+				s.revista,
+				s.\"revistaSlug\",
+				s.issn,
+				s.\"anioRevista\",
+				s.volumen,
+				s.numero,
+				s.periodo,
+				s.paginacion,
+				s.\"paisRevista\",
+				s.idioma,
+				s.\"tipoDocumento\",
+				s.\"enfoqueDocumento\",
+				s.\"autoresJSON\",
+				s.\"institucionesJSON\",
+				s.\"disciplinas\",
 				s.\"palabraClave\",
 				s.\"keyword\",
 				s.\"resumen\",
