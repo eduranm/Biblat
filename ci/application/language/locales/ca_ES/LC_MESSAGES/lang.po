@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-22 17:38-0600\n"
-"PO-Revision-Date: 2014-02-04 23:59-0600\n"
+"PO-Revision-Date: 2018-10-26 08:53-0500\n"
 "Last-Translator: allorens <allorens@dgb.unam.mx>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/biblat/language/"
 "ca/)\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-Basepath: /home/herz/Sites/biblat/public_html/ci\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;_sprintf;_printf\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SearchPath-0: application\n"
 
 #: application/views/buscar_index.php:14
@@ -1435,7 +1435,7 @@ msgstr "Afegir aquest article a la seva biblioteca Mendeley "
 
 #: application/helpers/custom_helper.php:288
 #, php-format
-msgid "Vól. %s"
+msgid "Vol. %s"
 msgstr "Vol. %s"
 
 #: application/helpers/custom_helper.php:291

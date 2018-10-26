@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-06-24 09:57-0600\n"
-"PO-Revision-Date: 2015-06-30 17:23-0600\n"
+"PO-Revision-Date: 2018-10-26 08:54-0500\n"
 "Last-Translator: Arturo Rendón Cruz <herzmx@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/biblat/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.1\n"
-"X-Poedit-Basepath: ../../../../\n"
+"X-Generator: Poedit 2.1.1\n"
+"X-Poedit-Basepath: ../../../..\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;_sprintf;_printf\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -1252,8 +1252,8 @@ msgstr ""
 
 #: helpers/custom_helper.php:298
 #, php-format
-msgid "Vól. %s"
-msgstr "Vól. %s"
+msgid "Vol. %s"
+msgstr "Vol. %s"
 
 #: helpers/custom_helper.php:301
 #, php-format

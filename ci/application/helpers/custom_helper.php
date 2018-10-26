@@ -156,7 +156,7 @@ if ( ! function_exists('slugHighLight') ):
 		$sname = preg_replace("/b/", "[þÞßb]", $sname);
 		$sname = preg_replace("/-+/", "[\\\\\\s.,+&-()\\\\\"]+", $sname);
 		$sname = str_replace("%22", "\\\\b", $sname);
-		
+
 		return $sname;
 	}
 endif;
@@ -222,7 +222,7 @@ if ( ! function_exists('articulosResultado') ):
 		$config['full_tag_close'] = '</ul>';
 		$config['use_page_numbers'] = TRUE;
 		$ci->pagination->initialize($config);
-		
+
 		$resultado['links'] = $ci->pagination->create_links();
 		$resultado['totalRows'] = $totalRows;
 
@@ -298,7 +298,7 @@ if ( ! function_exists('articulosResultado') ):
 			endif;
 			/*Creando el detalle de la revista*/
 			if(!empty($row['volumen'])):
-				$row['volumen'] = _sprintf('Vól. %s', $row['volumen']);
+				$row['volumen'] = _sprintf('Vol. %s', $row['volumen']);
 			endif;
 			if(!empty($row['numero'])):
 				$row['numero'] = _sprintf('Núm. %s', $row['numero']);
@@ -362,7 +362,7 @@ if ( ! function_exists('htmlspecialchars_deep') ):
 			$mixed = htmlspecialchars(htmlspecialchars_decode($mixed, $quote_style), $quote_style, $charset);
 		endif;
 		return $mixed;
-	} 
+	}
 endif;
 
 if ( ! function_exists('pqgrid_args') ):

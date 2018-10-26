@@ -1,11 +1,11 @@
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-22 17:38-0600\n"
-"PO-Revision-Date: 2013-12-02 10:37-0600\n"
+"PO-Revision-Date: 2018-10-26 08:53-0500\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/biblat/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -14,10 +14,9 @@ msgstr ""
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-Basepath: /home/herz/Sites/biblat/public_html/ci\n"
-"X-Poedit-Country: MEXICO\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;_sprintf;_printf\n"
-"X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SearchPath-0: application\n"
 
 #: application/views/buscar_index.php:14
@@ -40,8 +39,7 @@ msgstr ""
 msgid "mostrar %s resultados en texto completo"
 msgstr ""
 
-#: application/views/buscar_index.php:34
-#: application/views/buscar_index.php:55
+#: application/views/buscar_index.php:34 application/views/buscar_index.php:55
 #: application/views/frecuencias_documentos.php:11
 #: application/views/frecuencias_documentos.php:32
 #, php-format
@@ -161,8 +159,7 @@ msgstr ""
 msgid "País de afiliación"
 msgstr ""
 
-#: application/views/menu.php:59
-#: application/views/indice_pais.php:20
+#: application/views/menu.php:59 application/views/indice_pais.php:20
 #: application/views/indice_alfabetico.php:20
 #: application/views/indice_disciplina.php:20
 msgid "Revista"
@@ -232,8 +229,7 @@ msgstr ""
 msgid "Modelo de Bradford por institución"
 msgstr ""
 
-#: application/views/menu.php:74
-#: application/views/indicadores_index.php:284
+#: application/views/menu.php:74 application/views/indicadores_index.php:284
 #: application/views/indicadores_index.php:300
 msgid "Tasa de autoría exógena"
 msgstr ""
@@ -246,8 +242,7 @@ msgstr "Proposer une revue"
 msgid "Criterios de selección de revistas"
 msgstr ""
 
-#: application/views/menu.php:83
-#: application/views/menu.php:113
+#: application/views/menu.php:83 application/views/menu.php:113
 msgid "Contacto"
 msgstr "Nous contacter"
 
@@ -255,8 +250,7 @@ msgstr "Nous contacter"
 msgid "Políticas de acceso"
 msgstr "Politique d'accès"
 
-#: application/views/menu.php:88
-#: application/views/indice_pais.php:21
+#: application/views/menu.php:88 application/views/indice_pais.php:21
 #: application/views/indice_alfabetico.php:21
 #: application/views/indice_disciplina.php:21
 msgid "Documentos"
@@ -310,8 +304,7 @@ msgstr ""
 msgid "Búsqueda avanzada"
 msgstr ""
 
-#: application/views/menu.php:144
-#: application/views/menu.php:146
+#: application/views/menu.php:144 application/views/menu.php:146
 #: application/views/menu.php:148
 msgid "Buscar en Biblat"
 msgstr ""
@@ -1334,7 +1327,7 @@ msgstr ""
 
 #: application/helpers/custom_helper.php:288
 #, php-format
-msgid "Vól. %s"
+msgid "Vol. %s"
 msgstr ""
 
 #: application/helpers/custom_helper.php:291
@@ -1356,145 +1349,65 @@ msgstr ""
 #~ msgid "<div class=\"chartTootip\"><b>%s</b><br/>Cantidad de artículos: %s</div>"
 #~ msgstr "<div class=\"chartTootip\"><b>%s</b><br/>Cantidad de artículos: %s</div>"
 
-#~ msgid ""
-#~ "<div id=\"chartTitle\"><div class=\"centrado\"><b>Índice de concentración "
-#~ "(Índice de Pratt)</b><br/>Distribución decreciente de las revistas "
-#~ "considerando su grado de concentración temática</div></div>"
-#~ msgstr ""
-#~ "<div id=\"chartTitle\"><div class=\"centrado\"><b>Índice de concentración "
-#~ "(Índice de Pratt)</b><br/>Distribución decreciente de las revistas "
-#~ "considerando su grado de concentración temática</div></div>"
+#~ msgid "<div id=\"chartTitle\"><div class=\"centrado\"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de concentración temática</div></div>"
+#~ msgstr "<div id=\"chartTitle\"><div class=\"centrado\"><b>Índice de concentración (Índice de Pratt)</b><br/>Distribución decreciente de las revistas considerando su grado de concentración temática</div></div>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de "
-#~ "Bradford</b><br/>Distribución de artículos por revista</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de "
-#~ "Bradford</b><br/>Distribución de artículos por revista</div>"
+#~ msgid "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por revista</div>"
+#~ msgstr "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por revista</div>"
 
 #~ msgid "<h3>Modelo matemático de Bradford</h3>"
 #~ msgstr "<h3>Modelo matemático de Bradford</h3>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Zona %s de "
-#~ "revistas más productivas</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Zona %s de "
-#~ "revistas más productivas</div>"
+#~ msgid "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Zona %s de revistas más productivas</div>"
+#~ msgstr "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Zona %s de revistas más productivas</div>"
 
 #~ msgid "<h3>Zona %s de revistas más productivas</h3>"
 #~ msgstr "<h3>Zona %s de revistas más productivas</h3>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de "
-#~ "Bradford</b><br/>Distribución de artículos por instituciones.</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de "
-#~ "Bradford</b><br/>Distribución de artículos por instituciones.</div>"
+#~ msgid "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por instituciones.</div>"
+#~ msgstr "<div class=\"centrado\"><b>Modelo matemático de Bradford</b><br/>Distribución de artículos por instituciones.</div>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford por institución "
-#~ "(afiliación del autor)</b><br/>Zona %s de instituciones más productivas por "
-#~ "disciplina</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Modelo matemático de Bradford por institución "
-#~ "(afiliación del autor)</b><br/>Zona %s de instituciones más productivas por "
-#~ "disciplina</div>"
+#~ msgid "<div class=\"centrado\"><b>Modelo matemático de Bradford por institución (afiliación del autor)</b><br/>Zona %s de instituciones más productivas por disciplina</div>"
+#~ msgstr "<div class=\"centrado\"><b>Modelo matemático de Bradford por institución (afiliación del autor)</b><br/>Zona %s de instituciones más productivas por disciplina</div>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Índice de Densidad de Documentos Zakutina y "
-#~ "Priyenikova</b><br/>Títulos con mayor cantidad de artículos</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Índice de Densidad de Documentos Zakutina y "
-#~ "Priyenikova</b><br/>Títulos con mayor cantidad de artículos</div>"
+#~ msgid "<div class=\"centrado\"><b>Índice de Densidad de Documentos Zakutina y Priyenikova</b><br/>Títulos con mayor cantidad de artículos</div>"
+#~ msgstr "<div class=\"centrado\"><b>Índice de Densidad de Documentos Zakutina y Priyenikova</b><br/>Títulos con mayor cantidad de artículos</div>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por "
-#~ "artículo en la revista</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por "
-#~ "artículo en la revista</div>"
+#~ msgid "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por artículo en la revista</div>"
+#~ msgstr "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por artículo en la revista</div>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por "
-#~ "articulo en las revistas del país</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por "
-#~ "articulo en las revistas del país</div>"
+#~ msgid "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por articulo en las revistas del país</div>"
+#~ msgstr "<div class=\"centrado\"><b>Índice de Coautoría</b><br/>Media de autores por articulo en las revistas del país</div>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de "
-#~ "documentos con autoría múltiple por revista</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de "
-#~ "documentos con autoría múltiple por revista</div>"
+#~ msgid "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de documentos con autoría múltiple por revista</div>"
+#~ msgstr "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de documentos con autoría múltiple por revista</div>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de "
-#~ "documentos con autoría múltiple en las revistas del país</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de "
-#~ "documentos con autoría múltiple en las revistas del país</div>"
+#~ msgid "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de documentos con autoría múltiple en las revistas del país</div>"
+#~ msgstr "<div class=\"centrado\"><b>Tasa de Documentos Coautorados</b><br/>Media de documentos con autoría múltiple en las revistas del país</div>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de "
-#~ "Subramayan)</b><br/>Proporción de artículos con autoría múltiple</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de "
-#~ "Subramayan)</b><br/>Proporción de artículos con autoría múltiple</div>"
+#~ msgid "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</b><br/>Proporción de artículos con autoría múltiple</div>"
+#~ msgstr "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</b><br/>Proporción de artículos con autoría múltiple</div>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de "
-#~ "Subramayan)</b><br/>Proporción de artículos con autoría múltiple en las "
-#~ "revistas del país</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Grado de Colaboración (Índice de "
-#~ "Subramayan)</b><br/>Proporción de artículos con autoría múltiple en las "
-#~ "revistas del país</div>"
+#~ msgid "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</b><br/>Proporción de artículos con autoría múltiple en las revistas del país</div>"
+#~ msgstr "<div class=\"centrado\"><b>Grado de Colaboración (Índice de Subramayan)</b><br/>Proporción de artículos con autoría múltiple en las revistas del país</div>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Modelo de Elitismo (Price)</b><br/>Grupo de "
-#~ "autores más productivos por revista</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Modelo de Elitismo (Price)</b><br/>Grupo de "
-#~ "autores más productivos por revista</div>"
+#~ msgid "<div class=\"centrado\"><b>Modelo de Elitismo (Price)</b><br/>Grupo de autores más productivos por revista</div>"
+#~ msgstr "<div class=\"centrado\"><b>Modelo de Elitismo (Price)</b><br/>Grupo de autores más productivos por revista</div>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de "
-#~ "Lawani)</b><br/>Peso promedio de autores por artículo.</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de "
-#~ "Lawani)</b><br/>Peso promedio de autores por artículo.</div>"
+#~ msgid "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio de autores por artículo.</div>"
+#~ msgstr "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio de autores por artículo.</div>"
 
-#~ msgid ""
-#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de "
-#~ "Lawani)</b><br/>Peso promedio del número de autores por artículo en las "
-#~ "revistas del país</div>"
-#~ msgstr ""
-#~ "<div class=\"centrado\"><b>Índice de Colaboración (Índice de "
-#~ "Lawani)</b><br/>Peso promedio del número de autores por artículo en las "
-#~ "revistas del país</div>"
+#~ msgid "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio del número de autores por artículo en las revistas del país</div>"
+#~ msgstr "<div class=\"centrado\"><b>Índice de Colaboración (Índice de Lawani)</b><br/>Peso promedio del número de autores por artículo en las revistas del país</div>"
 
-#~ msgid ""
-#~ "<div class=\"chartTootip\"><span style=\"color:#3366cc;\">&#9632; "
-#~ "</span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
-#~ msgstr ""
-#~ "<div class=\"chartTootip\"><span style=\"color:#3366cc;\">&#9632; "
-#~ "</span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ msgid "<div class=\"chartTootip\"><span style=\"color:#3366cc;\">&#9632; </span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ msgstr "<div class=\"chartTootip\"><span style=\"color:#3366cc;\">&#9632; </span>Zona núcleo<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
 
-#~ msgid ""
-#~ "<div class=\"chartTootip\"><span style=\"color:#dc3912;\">&#9632; "
-#~ "</span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
-#~ msgstr ""
-#~ "<div class=\"chartTootip\"><span style=\"color:#dc3912;\">&#9632; "
-#~ "</span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ msgid "<div class=\"chartTootip\"><span style=\"color:#dc3912;\">&#9632; </span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ msgstr "<div class=\"chartTootip\"><span style=\"color:#dc3912;\">&#9632; </span>Zona 2<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
 
-#~ msgid ""
-#~ "<div class=\"chartTootip\"><span style=\"color:#ff9900;\">&#9632; "
-#~ "</span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
-#~ msgstr ""
-#~ "<div class=\"chartTootip\"><span style=\"color:#ff9900;\">&#9632; "
-#~ "</span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ msgid "<div class=\"chartTootip\"><span style=\"color:#ff9900;\">&#9632; </span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
+#~ msgstr "<div class=\"chartTootip\"><span style=\"color:#ff9900;\">&#9632; </span>Zona 3<br/>Artículos: %s <br/> Títulos de revista: %s</div>"
 
 #~ msgid "AutorSlug"
 #~ msgstr "Author"

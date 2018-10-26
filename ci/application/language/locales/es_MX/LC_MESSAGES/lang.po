@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-27 11:33-0600\n"
-"PO-Revision-Date: 2018-02-27 11:35-0600\n"
+"PO-Revision-Date: 2018-10-26 08:52-0500\n"
 "Last-Translator: Herz <achwazer@gmail.com>\n"
 "Language-Team: Biblat <achwazer@gmail.com>\n"
 "Language: es_MX\n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;_sprintf;_printf\n"
 "X-Poedit-Basepath: ../../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: libraries\n"
 "X-Poedit-SearchPathExcluded-1: cache\n"
@@ -1554,8 +1554,8 @@ msgstr "Agregue este artículo a su biblioteca Mendeley"
 
 #: helpers/custom_helper.php:301
 #, php-format
-msgid "Vól. %s"
-msgstr "Vól. %s"
+msgid "Vol. %s"
+msgstr "Vol. %s"
 
 #: helpers/custom_helper.php:304
 #, php-format

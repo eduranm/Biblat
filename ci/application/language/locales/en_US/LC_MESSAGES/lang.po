@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Biblat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-01 17:15-0600\n"
-"PO-Revision-Date: 2015-07-01 17:27-0600\n"
+"PO-Revision-Date: 2018-10-26 08:53-0500\n"
 "Last-Translator: Arturo Rendón Cruz <herzmx@gmail.com>\n"
 "Language-Team: English (http://www.transifex.com/projects/p/biblat/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.1\n"
-"X-Poedit-Basepath: ../../../../\n"
+"X-Generator: Poedit 2.1.1\n"
+"X-Poedit-Basepath: ../../../..\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_e;_sprintf;_printf\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -1240,7 +1240,7 @@ msgstr "Add this article to your Mendely library"
 
 #: helpers/custom_helper.php:298
 #, php-format
-msgid "Vól. %s"
+msgid "Vol. %s"
 msgstr "Vol. %s"
 
 #: helpers/custom_helper.php:301
@@ -4264,7 +4264,7 @@ msgstr "Best regards:"
 
 #: /var/folders/wl/clvy9zxs7xb1csskbf_z67q80000gn/T/poedit_Dwoo_120304585bae55dfb1927585004bf6b8.php:64
 msgid "Dra. Araceli Noguez O."
-msgstr "Dra. Araceli Noguez"
+msgstr "Dra. Araceli Noguez O."
 
 #: /var/folders/wl/clvy9zxs7xb1csskbf_z67q80000gn/T/poedit_Dwoo_120304585bae55dfb1927585004bf6b8.php:66
 msgid "Departamento de Información y Servicios Documentales- Subdirección de Servicios de Información Especializada-DGB-UNAM"
