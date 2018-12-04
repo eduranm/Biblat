@@ -2,6 +2,14 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h5 class="panel-title">
+					<a href="{base_url('archivos/pdf/Aniversario_40_PERIODICA_nov_2018.pdf')}" target="_blank"><span class="fa fa-file-pdf-o"></span></a> PERIODICA - 40 Aniversario
+
+			</h5>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h5 class="panel-title">
 					<a href="{base_url('archivos/pdf/Poster_BIBLAT_CRECS_2018.pdf')}" target="_blank"><span class="fa fa-file-pdf-o"></span></a> <a href="{base_url('archivos/img/Poster_BIBLAT_CRECS_2018.jpg')}" target="_blank"><span class="fa fa-file-image-o"></span></a> BIBLAT Indicadores bibliométricos para la ciencia de América Latina, poster ganador de la modalidad de diseño en la 8ª Conferencia Internacional sobre Revistas Científicas CRECS 2018, Barranquilla, Colombia, 2-4 mayo de 2018
 
 			</h5>
