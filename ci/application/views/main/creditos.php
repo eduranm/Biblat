@@ -1,22 +1,19 @@
     <b>{_('Directora General')}</b><br/>
     Dra. Elsa Margarita Ramírez Leyva<br/><br/>
 
-    <b>{_('Subdirectora de Servicios de Información Especializada')}</b><br/>
-    Mtra. Margarita Lugo Hubp<br/><br/>
-
-    <b>{_('Subdirector de Informática')}</b><br/>
-    Lic. Gonzalo Reséndiz Cansino<br/><br/>
-
-    <b>{_('Secretario Técnico de Informática y Telecomunicaciones')}</b><br/>
-    Ing. Mauricio Sánchez Reséndiz<br/><br/>
-
-    <b>{_('Departamento de Bibliografía Latinoamericana')}</b><br/>
+    <b>{_('Subdirector de Servicios de Información Especializada')}</b><br/>
     Dr. Antonio Sánchez Pereyra<br/><br/>
 
+    <b>{_('Subdirector de Informática')}</b><br/>
+    Ing. Miguel Ángel Jiménez Bernal<br/><br/>
+
+    <b>{_('Secretario Técnico de Informática y Telecomunicaciones')}</b><br/>
+    Mtro. Israel Duran Martínez<br/><br/>
+
     <b>{_('Diseño y programación de frecuencias e indicadores bibliométricos')}:</b><br/>
+    L.I. Arturo Rendón Cruz<br/>
     Ing. Isela García Bravo<br/>
     Lic. Karla Quintero León<br/>
-    L.I. Arturo Rendón Cruz<br/>
     Dr. Antonio Sánchez Pereyra<br/>
     L.I. Alfredo Batta Albertos<br/><br/>
 
