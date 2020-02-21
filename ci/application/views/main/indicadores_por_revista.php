@@ -85,6 +85,7 @@
                                     <button class="btn copy-code">
                                     <div id="code">Copiar código</div>
                                     </button>
+                                    </div>
                                 </div>
 				<div style="display:none">
                                     <div id="tae-{$revista.revistaSlug}">
@@ -100,6 +101,7 @@
                                     <button class="btn copy-code">
                                     <div id="code">Copiar código</div>
                                     </button>
+                                    </div>
                                 </div>
 				<div style="display:none">
                                     <div id="ic-{$revista.revistaSlug}">
@@ -115,6 +117,7 @@
                                     <button class="btn copy-code">
                                     <div id="code">Copiar código</div>
                                     </button>
+                                    </div>
                                 </div>
 			</ul>
 		</div>
