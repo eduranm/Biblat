@@ -79,7 +79,7 @@
 
 	<tr><td><cite>Dirección General de Planeación. (1996). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/MemoriaUNAM_1996.pdf" target="_blank">Centro de Información Científica y Humanística. En Memoria UNAM 1996.</a> Universidad Nacional Autónoma de México.</cite></td></tr>
 
-	<tr><td><cite>Alonso Gamboa, J. O. (1993). <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/AlonsoGamboa_1993.pdf" target="_blank">Servicios, productos, docencia e investigación en información. La experiencia del Centro de Información Científica y Humanística de la Universidad Nacional Autónoma de México.</a> Ciencias de la Información24(4), 201-209.</b></cite></td></tr>
+	<tr><td><cite>Alonso Gamboa, J. O. (1993). <a href="https://biblat.unam.mx/hevila/Cienciasdelainformacion/1993/vol24/no4/3.pdf" target="_blank">Servicios, productos, docencia e investigación en información. La experiencia del Centro de Información Científica y Humanística de la Universidad Nacional Autónoma de México.</a> Ciencias de la Información24(4), 201-209.</b></cite></td></tr>
 
 	<tr><td><cite>Reyna Espinosa, F. R. (1992) <a href="http://132.248.9.34/hevila/e-BIBLAT/Biblio/ReynaEspinosa_1992.pdf" target="_blank">Algunos aspectos referentes al análisis de información en el Centro de Información Científica y Humanística de la UNAM.</a> Ponencia presentada en el Primer Foro de Información: bases de datos y perspectivas  LatinBase 92. Guadalajara, México.</cite></td></tr>
 
